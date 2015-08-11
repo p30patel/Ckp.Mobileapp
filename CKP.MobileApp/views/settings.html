@@ -1,0 +1,91 @@
+<kendo-mobile-view k-transition="'slide'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
+            <kendo-view-title>Notification Settings</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <kendo-mobile-content>
+        <div class="km-listview-wrapper">
+            <ul id="custom-listview" data-role="listview" class="km-widget km-listview km-listgroup">
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-recieved icon-setting"></i>
+                            <h4 class="km-bold km-red">Order Received</h4>
+                            <p class="km-set-fix">Notify if a new stage order is available</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-approval icon-setting"></i>
+                            <h4 class="km-bold km-red">Order Approval</h4>
+                            <p class="km-set-fix">Notify if a newly placed order is waiting for approval from you.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-cart icon-setting"></i>
+                            <h4 class="km-bold km-red">Approved/Declined Order</h4>
+                            <p class="km-set-fix">Notify whether an order you placed was approved or declined.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-shipment icon-setting"></i>
+                            <h4 class="km-bold km-red">Shipment</h4>
+                            <p class="km-set-fix">Notify if an order you placed was shipped.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-delivery icon-setting"></i>
+                            <h4 class="km-bold km-red">Delivery</h4>
+                            <p class="km-set-fix">Notify if an order you placed was delivered.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-printshop icon-setting"></i>
+                            <h4 class="km-bold km-red">Printshop Holiday</h4>
+                            <p class="km-set-fix">Notify for any upcoming printshop closures due to holidays.</p>
+                        </li>
+                    </ul>
+                </li>
+                   <li class="km-group-container">
+                    <div class="km-group-title"></div>
+                    <ul class="km-list">
+                        <li>
+                            <input kendo-mobile-switch class="switch-fix" k-checked="checked" />
+                            <i class="checknet-icon icon-maintance icon-setting"></i>
+                            <h4 class="km-bold km-red">Maintenance</h4>
+                            <p class="km-set-fix">Notify whenever a new message or maintenance information.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </kendo-mobile-content>
+</kendo-mobile-view>

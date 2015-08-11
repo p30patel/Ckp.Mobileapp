@@ -1,68 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title></title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <title>CheckNet Mobile</title>
     <link rel="stylesheet" href="styles/kendo.mobile.nova.min.css">
     <link rel="stylesheet" href="styles/checknet.custom.css">
-
-    <script src="cordova.js"></script>
-    <script src="kendo/js/jquery.min.js"></script>
-
-    <script src="bower_components/everlive/min/everlive.all.min.js"></script>
-
-    <script src="src/vendor/angular.js"></script>
-    <script src="kendo/js/kendo.all.min.js"></script>
-    <script src="src/vendor/jszip.min.js"></script>
-    <!--    <script src="src/vendor/angular-route.js"></script>-->
-    <script src="src/vendor/angular-local-storage.js"></script>
-
-
-    <!-- services and directives scripts -->
-    <script src="scripts/app.js"></script>
-    <script src="src/app/common/services/authInterceptorService.js"></script>
-    <script src="src/app/common/services/authService.js"></script>
-    <script src="src/app/common/services/messageDataService.js"></script>
-    <script src="src/app/common/services/homeDataService.js"></script>
-    <script src="src/app/common/services/orderDataService.js"></script>
-    <script src="src/app/common/services/parameterService.js"></script>
-    <script src="src/app/common/services/indexDataService.js"></script>
-    <script src="src/app/common/services/loginDataService.js"></script>
-    <script src="src/app/common/services/translateService.js"></script>
-    <script src="src/app/common/services/alerting.js"></script>
-    <script src="src/app/common/services/faqDataService.js"></script>
-    <script src="src/app/common/services/policyDataService.js"></script>
-    <script src="src/app/common/services/termsConditionDataService.js"></script>
-    <script src="src/app/common/services/feedbackDataService.js"></script>
-
-    <script src="src/app/common/directives/alerting.js"></script>
-    <script src="src/app/common/directives/components.js"></script>
-
-    <!-- app scripts -->
-
-    <script src="src/app/menu/menuController.js"></script>
-    <script src="src/app/login/loginController.js"></script>
-    <script src="src/app/home/homeController.js"></script>
-    <script src="src/app/order/orderDetailController.js"></script>
-    <script src="src/app/order/orderlistController.js"></script>
-    <script src="src/app/order/approveController.js"></script>
-    <script src="src/app/contactus/contactusController.js"></script>
-    <script src="src/app/faq/faqController.js"></script>
-    <script src="src/app/message/messageController.js"></script>
-
-    <script src="src/app/feedback/feedbackController.js"></script>
-    <script src="src/app/help/helpController.js"></script>
-    <script src="src/app/notification/notificationController.js"></script>
-    <script src="src/app/policy/policyController.js"></script>
-    <script src="src/app/termsCondition/termsConditionController.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="js/jszip.min.js"></script>
+    <script src="js/kendo.timezones.min.js"></script>
+    <script src="js/checknet.angular.js"></script>
 </head>
-<body kendo-mobile-application ng-app="app" k-initial="'src/app/home/home.html'" k-hash-bang="true" k-skin="'nova'">
-    <!-- login page layout -->
-    <kendo-mobile-layout k-id="'login'" ng-controller="menuController">
-              <kendo-mobile-header>
+
+<body kendo-mobile-application k-hash-bang="true" ng-app="checkApp" k-skin="'nova'">
+    <kendo-mobile-layout k-id="'default'">
+        <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-light">
-                
-                <kendo-mobile-button k-align="'left'" href="src/app/menu/menu.html"><span class="km-icon km-drawer-icon km-notext"></span>
+                <kendo-mobile-button k-align="'left'" href="views/main-menu.html"><span class="km-icon km-drawer-icon km-notext"></span>
                 </kendo-mobile-button>
                 <select kendo-drop-down-list class="checknet-icon icon-globe" style="float:right; height: 20%; width:35%;">
                     <option>English</option>
@@ -71,31 +27,80 @@
                     <option>French</option>
                     <option>Japanese</option>
                 </select>
-             
+                <!--  <label class="km-icon-label k-i-globe" style="float:right; height: 20%; width:35%;">
+                        <select kendo-drop-down-list id="dropdown">
+                            <option>English</option>
+                            <option>Spanish</option>
+                            <option>Korean</option>
+                            <option>French</option>
+                            <option>Japanese</option>
+                        </select>
+                    </label>-->
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-        </kendo-mobile-layout>
-
-
-    <!-- application drawer and contents -->
-
-
-
-    <kendo-mobile-layout k-id="'default'" ng-controller="menuController">
-           <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
-           
-            <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
-            <kendo-view-title></kendo-view-title>
-        </kendo-mobile-nav-bar>
-    </kendo-mobile-header>
+        <!-- End Header -->
+    </kendo-mobile-layout>
+    <!-- End Layout -->
+    <kendo-mobile-view id="login" k-title="'Login'" k-layout="'default'">
+        <img src="styles/images/Checknet-Logo.png" style="width: 14em; height: 4.5em; margin: .5em auto 1.5em; display: block; float: none;" />
+        <form>
+            <ul kendo-mobile-list-view k-style="'inset'" class="km-grey-box">
+                <li> <span class="custom-right"><p>Remember Me</p></span>
+                    <input kendo-mobile-switch k-id="email-switch" k-checked="checked" />
+                </li>
+                <li class="input-white">
+                    <label class=" km-state-active km-label-above">Username
+                        <input value="BrandonZ76" type="text" />
+                    </label>
+                </li>
+                <li class="input-white">
+                    <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview" onclick="focusTextbox()" href="#modalview-password" id="modalview-open-button"></kendo-mobile-button>
+                    <label class="km-label-above">Password
+                        
+                        <input value="Password123" type="password" />
+                    </label>
+                </li>
+                <li>
+                     <p class="custom-right"><a href="#">Show Password Hint</a></p>
+                    
+                </li>
+                <li>
+                    <i></i>
+                    <kendo-mobile-button class="km-primary km-large km-justified">Log In</kendo-mobile-button>
+                </li>
+            </ul>
+        </form>
+        <!-- End Form Area -->
+        <p class="km-style-info" style="text-align: center; padding-top:1em;">This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution. </p>
+        <p class="km-style-info km-bold-font" style="text-align: center; padding-top:1em;">Material contained on this app is Copyright ©2001-2015 Checkpoint Systems, Inc.</p>
+        <!-- End Login View -->
+        <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" style="width: 90%;">
+            <ul kendo-mobile-list-view k-style="'inset'" class="km-module-wrap">
+                <li>
+                <h2 class="km-bold-font">Forgot Your Password?</h2>
+                    <p>
+                        Please enter your email address to receive a new password.
+                    </p>
+                </li>
+                <li class="input-white">
+                    <label class=" km-state-active km-label-above">Email
+                        <input id="input" value="your@email.com" type="text" />
+                    </label>
+                </li>
+                <li>
+                   <i></i>
+                    <kendo-mobile-button class="km-primary km-large km-justified">Send New Password</kendo-mobile-button>
+                </li>
+            </ul>
+            <kendo-mobile-footer>
+                <div kendo-mobile-nav-bar class="km-transparent">
+                    <a kendo-mobile-button href="#login" k-transition="'overlay:down reverse'"><img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></a>
+                </div>
+            </kendo-mobile-footer>
+    
+    </kendo-mobile-view>
+    <!-- End Forgot Password View -->
         
-        </kendo-mobile-layout>
-
-    <script>document.addEventListener('deviceready', function () {
-    feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
-});
-    </script>
 </body>
 
 </html>

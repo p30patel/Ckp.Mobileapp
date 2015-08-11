@@ -10,14 +10,14 @@ var app = angular.module('app',
       clientId: clientId
   });
 
-//app.run(['authService', function (authService) {
-//    authService.fillAuthData();
+app.run(['authService', function (authService) {
+authService.fillAuthData();
   
-//}]);
+}]);
 
-//app.config(function ($httpProvider) {
-//    $httpProvider.interceptors.push('authInterceptorService');
-//});
+app.config(function ($httpProvider) {
+   $httpProvider.interceptors.push('authInterceptorService');
+});
   (function (g) {
 
 	var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
@@ -55,4 +55,5 @@ var app = angular.module('app',
 		return window.plugins.EqatecAnalytics.Monitor;
 	}
 })(window);
-window.analytics.Start();
+  window.analytics.Start();
+  feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
