@@ -77,17 +77,16 @@
 
 
     <!-- application drawer and contents -->
-  
- 
+
+
 
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController">
-            <kendo-mobile-header >
-              <kendo-mobile-nav-bar class="km-light">
-                <kendo-mobile-button k-align="'left'" href="src/app/menu/menu.html"><span class="km-icon km-drawer-icon km-notext"></span>
-                </kendo-mobile-button>
-            </kendo-mobile-nav-bar>
-
-            </kendo-mobile-header>
+           <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
+            <kendo-view-title></kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
         
         </kendo-mobile-layout>
 
