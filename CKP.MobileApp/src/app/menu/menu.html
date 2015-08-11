@@ -1,51 +1,65 @@
 <kendo-mobile-view k-transition="'slide'">
-
-<kendo-mobile-drawer id="right-drawer" style="width: 270px" k-title="'{{menu.title}}'" ng-controller="menuController">
-          <kendo-mobile-header>
+    <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
             <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
             </kendo-mobile-button>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
-
-            <ul kendo-mobile-list-view>
+    <kendo-mobile-content>
+        <ul kendo-mobile-list-view>
+                 
                 <li>
 
-                    <a href="src/app/contactus/contactus.html" data-icon="info">
+                    <a href="src/app/contactus/contactus.html" data-icon="check-icon icon-contact">
                         {{menu.contactus}}
                     </a>
                 </li>
                 <li>
-                    <a href="src/app/faq/faq.html" data-icon="home">
+                    <a href="src/app/faq/faq.html" data-icon="check-icon icon-faq">
                         {{menu.faq}}
                     </a>
                 </li>
                 <li>
-                    <a href="src/app/termsCondition/termsCondition.html" data-icon="home">
+                    <a href="src/app/termsCondition/termsCondition.html" data-icon="check-icon icon-terms">
                         {{menu.termsCondition}}
                     </a>
                 </li>
                 <li>
-                    <a href="src/app/policy/policy.html" data-icon="home">
+                    <a href="src/app/policy/policy.html" data-icon="check-icon icon-policy">
                         {{menu.policies}}
                     </a>
                 </li>
                 <li>
-                    <a href="src/app/help/help.html" data-icon="home">
+                    <a href="src/app/help/help.html" data-icon="check-icon icon-help">
                         {{menu.help}}
                     </a>
                 </li>
                 <li ng-show="authentication.isAuth">
-                    <a href="src/app/notification/notification.html" data-icon="settings">
+                    <a href="src/app/notification/notification.html" data-icon="check-icon icon-settings">
                         {{menu.notificationSettings}}
                     </a>
                 </li>
                 <li ng-show="authentication.isAuth">
-                    <a href="src/app/feedback/feedback.html" data-icon="home">
+                    <a href="src/app/feedback/feedback.html" data-icon="check-icon icon-feedback">
                         {{menu.feedback}}
                     </a>
                 </li>
 
             </ul>
-        </kendo-mobile-drawer></kendo-mobile-view>
+            
+        </ul>
+        <ul kendo-mobile-list-view class="km-grey-box">
+            <li>
+                <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
+                <img src="styles/images/Checknet-Logo.png" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />
+                <h5>TJ MAXX 4000 OLDFIELD BLVD</h5>
+                <h5>PITTSTON, PA, 18640</h5>
+                <h5>US Phone : 000-000-0000</h5>
+                <h5>Email : <a href="#">testuser@email.com</a> </h5>
+                </div>
+            </li>
+        </ul>
+    </kendo-mobile-content>
+</kendo-mobile-view>
+
