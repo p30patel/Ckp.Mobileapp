@@ -77,55 +77,7 @@
 
 
     <!-- application drawer and contents -->
-    <kendo-mobile-drawer id="right-drawer" style="width: 270px" k-title="'{{menu.title}}'" ng-controller="menuController">
-          <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
-            <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
-            <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
-            </kendo-mobile-button>
-        </kendo-mobile-nav-bar>
-    </kendo-mobile-header>
-
-            <ul kendo-mobile-list-view>
-                <li>
-
-                    <a href="src/app/contactus/contactus.html" data-icon="info">
-                        {{menu.contactus}}
-                    </a>
-                </li>
-                <li>
-                    <a href="src/app/faq/faq.html" data-icon="home">
-                        {{menu.faq}}
-                    </a>
-                </li>
-                <li>
-                    <a href="src/app/termsCondition/termsCondition.html" data-icon="home">
-                        {{menu.termsCondition}}
-                    </a>
-                </li>
-                <li>
-                    <a href="src/app/policy/policy.html" data-icon="home">
-                        {{menu.policies}}
-                    </a>
-                </li>
-                <li>
-                    <a href="src/app/help/help.html" data-icon="home">
-                        {{menu.help}}
-                    </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/notification/notification.html" data-icon="settings">
-                        {{menu.notificationSettings}}
-                    </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/feedback/feedback.html" data-icon="home">
-                        {{menu.feedback}}
-                    </a>
-                </li>
-
-            </ul>
-        </kendo-mobile-drawer>
+  
  
 
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController">
