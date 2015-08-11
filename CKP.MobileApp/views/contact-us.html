@@ -1,0 +1,68 @@
+<kendo-mobile-view k-transition="'slide'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
+            <kendo-view-title>Contact Us</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <kendo-mobile-content>
+        <kendo-mobile-list-view class="km-no-border km-grey-box">
+            <li>
+                <kendo-mobile-button-group k-id="buttongroup-home" k-data-show="mobileSalesViewInit">
+                    <kendo-mobile-button class="km-state-active">United States</kendo-mobile-button>
+                    <kendo-mobile-button class="">Europe</kendo-mobile-button>
+                    <kendo-mobile-button class="">Asia</kendo-mobile-button>
+                </kendo-mobile-button-group>
+            </li>
+            <li>
+                <i></i>
+                <kendo-mobile-button class="km-primary km-justified">Write Email</kendo-mobile-button>
+            </li>
+        </kendo-mobile-list-view>
+        <kendo-mobile-list-view>
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                <h3>Checkpoint Systems
+                    Corporate Headquarters USA</h3>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">Address:</h4>
+                            <h4 class="km-light-font">101 Wolf Dr.</h4>
+                            <h4 class="km-light-font">P.O. Box 188</h4>
+                            <h4 class="km-light-font">Thorofare, NJ 08086</h4>
+                            <h4 class="km-bold-font"> Phone:</h4>
+                            <h4 class="km-light-font">+1 (800) 257-5540</h4>
+                            <h4 class="km-light-font">+1 (856) 848-1800</h4>
+                            <h4 class="km-bold-font"> Fax:</h4>
+                            <h4 class="km-light-font">+1 (856) 848-0937</h4>
+                            <h4 class="km-bold-font"> E-Mail:</h4>
+                            <p><a href="#">Checknet@checkpt.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h3>Checknet Order Information/Order Status</h3>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.</p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+   
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h3>Help Desk</h3>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.</p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+        </kendo-mobile-list-view>
+    </kendo-mobile-content>
+</kendo-mobile-view>
