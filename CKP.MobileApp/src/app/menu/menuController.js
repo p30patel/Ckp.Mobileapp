@@ -21,7 +21,7 @@ app.controller('menuController', [
                        }
 
                        $scope.closeMenu = function () {
-                           kendo.mobile.application.navigate("src/app/home/home.html");
+                           kendo.mobile.application.navigate("#:back");
                        }
                        $scope.mnuClick = function(viewName) {
      
