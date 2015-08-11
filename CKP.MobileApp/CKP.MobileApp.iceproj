@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>9f5b4aad-2a66-44ce-8c28-3377a9371c1b</ProjectGuid>
+    <ProjectName>CKP.MobileApp</ProjectName>
+    <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectHome />
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <ItemGroup>
+    <Content Include=".abignore" />
+    <Content Include=".abproject" />
+    <Content Include="bower_components\everlive\.bower.json" />
+    <Content Include="bower_components\everlive\.gitattributes" />
+    <Content Include="bower_components\everlive\min\everlive.all.min.js" />
+    <Content Include="bower_components\everlive\min\everlive.min.js" />
+    <Content Include="bower_components\everlive\min\expandProcessor.min.js" />
+    <Content Include="bower_components\everlive\min\jstimezonedetect.min.js" />
+    <Content Include="bower_components\everlive\min\mingo.min.js" />
+    <Content Include="bower_components\everlive\min\mongoQuery.min.js" />
+    <Content Include="bower_components\everlive\min\reqwest.min.js" />
+    <Content Include="bower_components\everlive\min\rsvp.min.js" />
+    <Content Include="bower_components\everlive\min\underscore.min.js" />
+    <Content Include="bower_components\everlive\min\uuid.min.js" />
+    <Content Include="bower_components\everlive\src\everlive.all.js" />
+    <Content Include="bower_components\everlive\src\everlive.debug.all.js" />
+    <Content Include="bower_components\everlive\src\everlive.js" />
+    <Content Include="bower_components\everlive\src\expandProcessor.js" />
+    <Content Include="bower_components\everlive\src\jstimezonedetect.js" />
+    <Content Include="bower_components\everlive\src\mingo.js" />
+    <Content Include="bower_components\everlive\src\mongoQuery.js" />
+    <Content Include="bower_components\everlive\src\reqwest.js" />
+    <Content Include="bower_components\everlive\src\rsvp.js" />
+    <Content Include="bower_components\everlive\src\underscore.js" />
+    <Content Include="bower_components\everlive\src\uuid.js" />
+    <Content Include="cordova.android.js" />
+    <Content Include="cordova.ios.js" />
+    <Content Include="cordova.wp8.js" />
+    <Content Include="index.html" />
+    <Content Include="kendo\js\jquery.min.js" />
+    <Content Include="kendo\js\kendo.all.min.js" />
+    <Content Include="kendo\js\kendo.mobile.min.js" />
+    <Content Include="kendo\styles\images\back.png" />
+    <Content Include="kendo\styles\images\kendoui.ttf" />
+    <Content Include="kendo\styles\images\kendoui.woff" />
+    <Content Include="kendo\styles\images\wp8_icons.png" />
+    <Content Include="kendo\styles\images\wp8_inverseicons.png" />
+    <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\app.js" />
+    <Content Include="src\app\common\directives\alerting.js" />
+    <Content Include="src\app\common\directives\alerts.html" />
+    <Content Include="src\app\common\directives\components.js" />
+    <Content Include="src\app\common\directives\loader.js" />
+    <Content Include="src\app\common\services\alerting.js" />
+    <Content Include="src\app\common\services\authInterceptorService.js" />
+    <Content Include="src\app\common\services\authService.js" />
+    <Content Include="src\app\common\services\faqDataService.js" />
+    <Content Include="src\app\common\services\feedbackDataService.js" />
+    <Content Include="src\app\common\services\homeDataService.js" />
+    <Content Include="src\app\common\services\indexDataService.js" />
+    <Content Include="src\app\common\services\loginDataService.js" />
+    <Content Include="src\app\common\services\messageDataService.js" />
+    <Content Include="src\app\common\services\orderDataService.js" />
+    <Content Include="src\app\common\services\parameterService.js" />
+    <Content Include="src\app\common\services\policyDataService.js" />
+    <Content Include="src\app\common\services\termsConditionDataService.js" />
+    <Content Include="src\app\common\services\translateService.js" />
+    <Content Include="src\app\contactus\contactus.html" />
+    <Content Include="src\app\contactus\contactusController.js" />
+    <Content Include="src\app\faq\faq.html" />
+    <Content Include="src\app\faq\faqController.js" />
+    <Content Include="src\app\feedback\feedback.html" />
+    <Content Include="src\app\feedback\feedbackController.js" />
+    <Content Include="src\app\help\help.html" />
+    <Content Include="src\app\help\helpController.js" />
+    <Content Include="src\app\home\home.html" />
+    <Content Include="src\app\home\homeController.js" />
+    <Content Include="src\app\login\login.html" />
+    <Content Include="src\app\login\loginController.js" />
+    <Content Include="src\app\menu\menu.html" />
+    <Content Include="src\app\menu\menuController.js" />
+    <Content Include="src\app\message\message.html" />
+    <Content Include="src\app\message\messageController.js" />
+    <Content Include="src\app\notification\notification.html" />
+    <Content Include="src\app\notification\notificationController.js" />
+    <Content Include="src\app\order\approve.html" />
+    <Content Include="src\app\order\approveController.js" />
+    <Content Include="src\app\order\detail.html" />
+    <Content Include="src\app\order\list.html" />
+    <Content Include="src\app\order\order.html" />
+    <Content Include="src\app\order\orderDetailController.js" />
+    <Content Include="src\app\order\orderlistController.js" />
+    <Content Include="src\app\policy\policy.html" />
+    <Content Include="src\app\policy\policyController.js" />
+    <Content Include="src\app\termsCondition\termsCondition.html" />
+    <Content Include="src\app\termsCondition\termsConditionController.js" />
+    <Content Include="src\vendor\angular-local-storage.js" />
+    <Content Include="src\vendor\angular-route.js" />
+    <Content Include="src\vendor\angular.js" />
+    <Content Include="src\vendor\jszip.min.js" />
+    <Content Include="kendo\js\kendo.timezones.min.js" />
+    <Content Include="styles\checknet.custom.css" />
+    <Content Include="styles\images\back.png" />
+    <Content Include="styles\images\checknet-icons.svg" />
+    <Content Include="styles\images\Checknet-Logo.png" />
+    <Content Include="styles\images\Checknet-title.png" />
+    <Content Include="styles\images\close-button.png" />
+    <Content Include="styles\images\fontello.eot" />
+    <Content Include="styles\images\fontello.svg" />
+    <Content Include="styles\images\fontello.ttf" />
+    <Content Include="styles\images\fontello.woff" />
+    <Content Include="styles\images\kendoui.svg" />
+    <Content Include="styles\images\kendoui.ttf" />
+    <Content Include="styles\images\kendoui.woff" />
+    <Content Include="styles\images\wp8_icons.png" />
+    <Content Include="styles\images\wp8_inverseicons.png" />
+    <Content Include="styles\kendo.mobile.nova.min.css" />
+    <Content Include="styles\nova.reference.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="App_Resources\Android\drawable-hdpi\icon.png" />
+    <Resource Include="App_Resources\Android\drawable-ldpi\icon.png" />
+    <Resource Include="App_Resources\Android\drawable-mdpi\icon.png" />
+    <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
+    <Resource Include="App_Resources\iOS\Default-568h@2x.png" />
+    <Resource Include="App_Resources\iOS\Default-Landscape.png" />
+    <Resource Include="App_Resources\iOS\Default-Landscape@2x.png" />
+    <Resource Include="App_Resources\iOS\Default-Portrait.png" />
+    <Resource Include="App_Resources\iOS\Default-Portrait@2x.png" />
+    <Resource Include="App_Resources\iOS\Default.png" />
+    <Resource Include="App_Resources\iOS\Default@2x.png" />
+    <Resource Include="App_Resources\iOS\icon-40.png" />
+    <Resource Include="App_Resources\iOS\icon-40@2x.png" />
+    <Resource Include="App_Resources\iOS\icon-60.png" />
+    <Resource Include="App_Resources\iOS\icon-60@2x.png" />
+    <Resource Include="App_Resources\iOS\icon-72.png" />
+    <Resource Include="App_Resources\iOS\icon-72@2x.png" />
+    <Resource Include="App_Resources\iOS\icon-76.png" />
+    <Resource Include="App_Resources\iOS\icon-76@2x.png" />
+    <Resource Include="App_Resources\iOS\Icon-Small-50.png" />
+    <Resource Include="App_Resources\iOS\Icon-Small-50@2x.png" />
+    <Resource Include="App_Resources\iOS\Icon-Small.png" />
+    <Resource Include="App_Resources\iOS\Icon-Small@2x.png" />
+    <Resource Include="App_Resources\iOS\icon.png" />
+    <Resource Include="App_Resources\iOS\icon@2x.png" />
+    <Resource Include="App_Resources\WP8\ApplicationIcon.png" />
+    <Resource Include="App_Resources\WP8\Assets\BadgeLogo.png" />
+    <Resource Include="App_Resources\WP8\Assets\Logo.png" />
+    <Resource Include="App_Resources\WP8\Assets\SplashScreen.png" />
+    <Resource Include="App_Resources\WP8\Assets\SquareTile150x150.png" />
+    <Resource Include="App_Resources\WP8\Assets\SquareTile71x71.png" />
+    <Resource Include="App_Resources\WP8\Assets\StoreLogo.png" />
+    <Resource Include="App_Resources\WP8\Assets\WideLogo.png" />
+    <Resource Include="App_Resources\WP8\SplashScreenImage.jpg" />
+    <Resource Include="App_Resources\WP8\Tiles\Iconic\110x110.png" />
+    <Resource Include="App_Resources\WP8\Tiles\Iconic\202x202.png" />
+    <Resource Include="App_Resources\WP8\WMAppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Resources\" />
+    <Folder Include="App_Resources\Android\" />
+    <Folder Include="App_Resources\Android\drawable-hdpi\" />
+    <Folder Include="App_Resources\Android\drawable-ldpi\" />
+    <Folder Include="App_Resources\Android\drawable-mdpi\" />
+    <Folder Include="App_Resources\Android\drawable-nodpi\" />
+    <Folder Include="App_Resources\iOS\" />
+    <Folder Include="App_Resources\WP8\" />
+    <Folder Include="App_Resources\WP8\Assets\" />
+    <Folder Include="App_Resources\WP8\Tiles\" />
+    <Folder Include="App_Resources\WP8\Tiles\Iconic\" />
+    <Folder Include="bower_components\" />
+    <Folder Include="bower_components\everlive\" />
+    <Folder Include="bower_components\everlive\min\" />
+    <Folder Include="bower_components\everlive\src\" />
+    <Folder Include="kendo\" />
+    <Folder Include="kendo\js\" />
+    <Folder Include="kendo\styles\" />
+    <Folder Include="kendo\styles\images\" />
+    <Folder Include="Plugins\" />
+    <Folder Include="scripts\" />
+    <Folder Include="src\" />
+    <Folder Include="src\app\" />
+    <Folder Include="src\app\common\" />
+    <Folder Include="src\app\common\directives\" />
+    <Folder Include="src\app\common\services\" />
+    <Folder Include="src\app\contactus\" />
+    <Folder Include="src\app\faq\" />
+    <Folder Include="src\app\feedback\" />
+    <Folder Include="src\app\help\" />
+    <Folder Include="src\app\home\" />
+    <Folder Include="src\app\login\" />
+    <Folder Include="src\app\menu\" />
+    <Folder Include="src\app\message\" />
+    <Folder Include="src\app\notification\" />
+    <Folder Include="src\app\order\" />
+    <Folder Include="src\app\policy\" />
+    <Folder Include="src\app\termsCondition\" />
+    <Folder Include="src\assests\" />
+    <Folder Include="src\vendor\" />
+    <Folder Include="styles\" />
+    <Folder Include="styles\images\" />
+  </ItemGroup>
+  <Import Project="$(IceniumTargets)Build.targets" />
+</Project>

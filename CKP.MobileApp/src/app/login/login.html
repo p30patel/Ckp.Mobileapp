@@ -1,0 +1,173 @@
+
+<kendo-mobile-view k-title="'{{title}}'" k-layout="'login'" ng-controller="loginController">
+      <img src="styles/images/Checknet-Logo.png" style="width: 14em; height: 4.5em; margin: .5em auto 1.5em; display: block; float: none;" />
+ 
+        <form>
+            <ul kendo-mobile-list-view k-style="'inset'" class="km-grey-box">
+                <li> <span class="custom-right"><p>Remember Me</p></span>
+                    <input kendo-mobile-switch k-id="email-switch" k-checked="checked" />
+                </li>
+                <li class="input-white">
+                    <label class=" km-state-active km-label-above">Username
+                        <input value="BrandonZ76" type="text" />
+                    </label>
+                </li>
+                <li class="input-white">
+                    <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview" onclick="focusTextbox()" href="#modalview-password" id="modalview-open-button"></kendo-mobile-button>
+                    <label class="km-label-above">Password
+                        
+                        <input value="Password123" type="password" />
+                    </label>
+                </li>
+                <li>
+                     <p class="custom-right"><a href="#">Show Password Hint</a></p>
+                    
+                </li>
+                <li>
+                    <i></i>
+                    <kendo-mobile-button class="km-primary km-large km-justified">Log In</kendo-mobile-button>
+                </li>
+            </ul>
+        </form>
+        <!-- End Form Area -->
+        <p class="km-style-info" style="text-align: center; padding-top:1em;">This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution. </p>
+        <p class="km-style-info km-bold-font" style="text-align: center; padding-top:1em;">Material contained on this app is Copyright ©2001-2015 Checkpoint Systems, Inc.</p>
+        <!-- End Login View -->
+        <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" style="width: 90%;">
+            <ul kendo-mobile-list-view k-style="'inset'" class="km-module-wrap">
+                <li>
+                <h2 class="km-bold-font">Forgot Your Password?</h2>
+                    <p>
+                        Please enter your email address to receive a new password.
+                    </p>
+                </li>
+                <li class="input-white">
+                    <label class=" km-state-active km-label-above">Email
+                        <input id="input" value="your@email.com" type="text" />
+                    </label>
+                </li>
+                <li>
+                   <i></i>
+                    <kendo-mobile-button class="km-primary km-large km-justified">Send New Password</kendo-mobile-button>
+                </li>
+            </ul>
+            <kendo-mobile-footer>
+                <div kendo-mobile-nav-bar class="km-transparent">
+                    <a kendo-mobile-button href="#login" k-transition="'overlay:down reverse'"><img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></a>
+                </div>
+            </kendo-mobile-footer>
+    
+    </kendo-mobile-view>
+
+<!--<kendo-mobile-view k-title="'{{title}}'" k-layout="'main'" ng-controller="loginController">
+   
+        <div class="container">
+            <br>
+           
+            <select ng-model="selectedLanague"  ng-change="translatePage()" ng-options="language.Culture as language.Name for language in languages" ng-init="selectedLanague = selectedLanague || 'en-US'">
+            </select>
+            {{selectedLanague}}
+
+            <form class="form-horizontal" name="loginForm" novalidate>
+                <div class="form-group">
+                    <hr />
+                    <label for="inputEmail3" class="col-sm-2 control-label">{{form.username.resoruceValue}}</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="userName" ng-model="loginData.userName" required placeholder="User Name" autofocus/>
+                        <div ng-show="loginForm.userName.$invalid && loginForm.userName.$touched">
+                            <br />
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                User name is required!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">{{form.password.resoruceValue}}</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" ng-model="loginData.password" required placeholder="Password" >
+                        <div ng-show="loginForm.password.$invalid && loginForm.password.$touched">
+                            <br />
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                Password is required!
+                            </div>
+                        </div>
+
+                        <p>
+                            <a class="text-right" ng-click="showPasswordHint()"> {{form.passwordHint.resoruceValue}}</a>
+                        </p>
+                        <div ng-show="passwordHint">
+                            <br/>
+                            <div class="alert alert-success" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-ok" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                Password hint is : <b>{{passwordHint}}</b>
+                            </div>
+                        </div>
+                         <kendo-mobile-button k-rel="'modalview'"  k-on-click="forgotPasswordModalOpen()" style="width: 100%;" k-float="'center'"  id="modalview-open-button">{{form.forgotPassword.resoruceValue}}</kendo-mobile-button>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-ng-model="loginData.useRefreshTokens">
+                                {{form.remmberMe.resoruceValue}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <kendo-mobile-button ng-click="login()" style="width: 100%;" k-float="'center'"  ng-disabled="loginForm.$invalid || loginForm.$pending">{{form.signin.resoruceValue}}</kendo-mobile-button>
+                        <div ng-show="message">
+                            <br />
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                {{message}}
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </form>
+
+        </div>
+       
+        <kendo-mobile-modal-view id="modalview-forgotpassword" style="width: 90%; height:25%">
+            <kendo-mobile-header>
+                <kendo-mobile-nav-bar>
+                    <span>Login</span>
+                    <kendo-mobile-button k-on-click="closeModalViewForgotPassword()" k-align="'right'">Cancel</kendo-mobile-button>
+                </kendo-mobile-nav-bar>
+            </kendo-mobile-header>
+
+            <kendo-mobile-list-view k-style="'inset'">
+                
+                <li>
+                    <label for="email">
+                        Email Address:
+                        <input type="email" id="email" ng-model="loginData.email" />
+                    </label>
+                </li>
+            </kendo-mobile-list-view>
+
+            <kendo-mobile-button k-on-click="sendPassword()" id="modalview-login-button"
+                ng-disabled="!loginData.email"
+                style="width: 100%;" k-float="'center'" >Send Password</kendo-mobile-button>
+        </kendo-mobile-modal-view>
+
+  
+
+</kendo-mobile-view>
+-->

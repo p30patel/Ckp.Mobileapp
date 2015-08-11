@@ -1,0 +1,510 @@
+/* Checknet Custom Styles
+* primary red #D52B1E rgb(213, 43, 30)
+* primary grey #5E6A71 rgb(94, 106, 113)
+* text black #111111 rgb(17, 17, 17)
+* secondary dark grey #DEDEDE rgb(222, 222, 222)
+* secondary medium grey #E9E9E9 rgb(233, 233, 233)
+* secondary light grey #F8F8F8 rgb(248, 248, 248)
+* 
+*/
+
+.km-nova {
+    font: normal 1em "Arial", "Helvetica Neue", "Helvetica", "Roboto Light", "Verdana", "sans-serif";
+    line-height: 1.2
+}
+/* CUSTOM FONTELLO CHECKNET FONT */
+
+@font-face {
+    font-family: 'fontello';
+    src: url('images/fontello.eot?84161452');
+    src: url('images/fontello.eot?84161452#iefix') format('embedded-opentype'), url('images/fontello.woff?84161452') format('woff'), url('images/fontello.ttf?84161452') format('truetype'), url('images/fontello.svg?84161452#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('.imagesfontello.svg?98318189#fontello') format('svg');
+  }
+}
+*/
+
+.check-icon {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+    /* For safety - reset parent styles, that can break glyph codes*/
+    
+    font-variant: normal;
+    text-transform: none;
+    /* fix buttons height, for twitter bootstrap */
+    
+    line-height: 1em;
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    
+    margin-left: .2em;
+    /* You can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+    /* Font smoothing. That was taken from TWBS */
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+    /* For safety - reset parent styles, that can break glyph codes*/
+    
+    font-variant: normal;
+    text-transform: none;
+    /* fix buttons height, for twitter bootstrap */
+    
+    line-height: 1em;
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    /* margin-left: .2em;*/
+    /* you can be more comfortable with increased icons size */
+    
+    font-size: 115%;
+    /* Font smoothing. That was taken from TWBS */
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+/* CUSTOM CHECKNET ICONS */
+
+.icon-alert:before {
+    content: '\e800';
+}
+/* '' */
+
+.icon-terms:before {
+    content: '\e801';
+}
+/* '' */
+
+.icon-approval:before {
+    content: '\e802';
+}
+/* '' */
+
+.icon-cart:before {
+    content: '\e803';
+}
+/* '' */
+
+.icon-collaspe:before {
+    content: '\e804';
+}
+/* '' */
+
+.icon-contact:before {
+    content: '\e805';
+}
+/* '' */
+
+.icon-delivery:before {
+    content: '\e806';
+}
+/* '' */
+
+.icon-expand:before {
+    content: '\e807';
+}
+/* '' */
+
+.icon-faq:before {
+    content: '\e808';
+}
+/* '' */
+
+.icon-feedback:before {
+    content: '\e809';
+}
+/* '' */
+
+.icon-globe:before {
+    content: '\e80a';
+}
+/* '' */
+
+.icon-help:before {
+    content: '\e80b';
+}
+/* '' */
+
+.icon-location:before {
+    content: '\e80c';
+}
+/* '' */
+
+.icon-lock:before {
+    content: '\e80d';
+}
+/* '' */
+
+.icon-maintance:before {
+    content: '\e80e';
+}
+/* '' */
+
+.icon-messages-alt:before {
+    content: '\e80f';
+}
+/* '' */
+
+.icon-messages:before {
+    content: '\e810';
+}
+/* '' */
+
+.icon-news:before {
+    content: '\e811';
+}
+/* '' */
+
+.icon-password:before {
+    content: '\e812';
+}
+/* '' */
+
+.icon-policy:before {
+    content: '\e813';
+}
+/* '' */
+
+.icon-printshop:before {
+    content: '\e814';
+}
+/* '' */
+
+.icon-signout:before {
+    content: '\e815';
+}
+/* '' */
+
+.icon-shipment:before {
+    content: '\e816';
+}
+/* '' */
+
+.icon-settings:before {
+    content: '\e817';
+}
+/* '' */
+
+.icon-recieved:before {
+    content: '\e818';
+}
+/* '' */
+
+.icon-track:before {
+    content: '\e819';
+}
+/* '' */
+
+/* Login */
+.input-white{background:#fff!important}
+.custom-right {
+    float: right;
+    margin-right:4em;
+}
+
+.icon-setting {
+    font-size: 150%;
+    color: #5E6A71;
+    float: left;
+    margin: .4rem 0 1.5rem 0
+}
+.icon-forgot {
+    color: #D52B1E!important;
+    float: right;
+    padding: 0!important;
+    border-radius: 0;
+    border-width: none!important;
+    border-style: none!important;
+    line-height: 0!important;
+    vertical-align: middle;
+    background:none!important
+}
+
+.km-nova .km-list>li {
+    font-size: 1.2em;
+    padding-left: .89em;
+    background: transparent;
+    border-radius: 0;
+    border-width: 1px 0 0;
+    border-style: solid;
+    line-height: 1.5em;
+    border-color:#9CA3A8;
+    padding: .84em .84em .84em .84em;
+}
+.km-nova .km-set-fix {
+    margin-right: 5rem;
+    font-size: .52em
+}
+.km-nova .km-listview-link::after, .km-nova .km-listview-label::after {border-color:#D52B1E}
+.km-nova .km-group-title {
+    background-color: rgb(233, 233, 233);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(248, 248, 248, 0)), color-stop(1, rgba(248, 248, 248, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+    border-color: #dee0e0;
+    color: #32364c;
+}
+.km-nova .km-group-title {
+    font-size: 1.2em;
+    position: -webkit-sticky;
+    text-indent: 0;
+    margin-top: 0;
+    font-weight: normal;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: .42em .84em .39em;
+}
+.km-nova .password-button {
+    float: right;
+    background: none;
+    border: 0;
+    font: 2em/2em;
+    color: #D52B1E !important;
+}
+.km-nova h1,
+.km-nova h2,
+.km-nova h3,
+.km-nova h4,
+.km-nova h5,
+.km-nova h6,
+.km-nova p {
+    color: #111;
+}
+.km-nova .km-red {
+    color: #D52B1E
+}
+.km-nova .km-transparent.km-navbar,
+.km-nova .km-transparent.k-toolbar,
+.km-nova .km-transparent.km-tabstrip {
+    background: none;
+    border: none;
+}
+.km-nova .km-content {
+    color: #111111;
+    background-color: #fff
+}
+/*.switch-fix {
+    margin:1rem;
+}*/
+/* accent primary red override */
+
+.km-nova .km-accent.km-navbar,
+.km-nova .km-accent.k-toolbar,
+.km-nova .km-accent.km-tabstrip,
+.km-nova .km-vertical-tabstrip .km-button.km-state-active:before,
+.km-nova .km-drawer .km-listview li.km-state-active:before {
+    background-color: rgb(213, 43, 30);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(210, 67, 39, .1)), color-stop(1, rgba(210, 67, 39, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(210, 67, 39, .1), rgba(210, 67, 39, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(210, 67, 39, .1), rgba(210, 67, 39, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+.km-nova .km-light .km-view-title {
+    color: #D52B1E
+}
+/* gradient overrides */
+
+.km-nova .km-primary {
+    color: #fff;
+    background-color: rgb(213, 43, 30);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(210, 67, 39, .1)), color-stop(1, rgba(210, 67, 39, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(210, 67, 39, .1), rgba(210, 67, 39, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(210, 67, 39, .1), rgba(210, 67, 39, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+    border: 0;
+}
+.km-nova .km-grey-box {
+    background-color: rgb(233, 233, 233);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(248, 248, 248, 0)), color-stop(1, rgba(248, 248, 248, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+.km-nova .km-dark-col {
+    background-color: rgb(146, 146, 146);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(102, 102, 102, 0)), color-stop(1, rgba(102, 102, 102, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(102, 102, 102, 0), rgba(102, 102, 102, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(102, 102, 102, 0), rgba(102, 102, 102, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+/* collapsable overrides */
+
+.km-collapsible-header .km-plus,
+.km-collapsible-header .km-minus {
+    position: absolute;
+    top: .5em
+}
+.km-icon-left .km-plus,
+.km-icon-left .km-minus {
+    left: .2em
+}
+.km-icon-right .km-plus,
+.km-icon-right .km-minus {
+    left: auto !important;
+    right: .2em !important
+}
+.km-nova .km-collapsible-header {
+    line-height: 4.125em;
+    padding: 0 2.4em 0 1.16em;
+    font-size: 1.087em;
+    height: auto;
+    background-color: rgb(102, 102, 102);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(146, 146, 146, 0)), color-stop(1, rgba(146, 146, 146, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(146, 146, 146, 0), rgba(146, 146, 146, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(146, 146, 146, 0), rgba(146, 146, 146, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+.km-nova .km-collapsible-header h1,
+.km-nova .km-collapsible-header h2,
+.km-nova .km-collapsible-header h3,
+.km-nova .km-collapsible-header h4,
+.km-nova .km-collapsible-header h5,
+.km-nova .km-collapsible-header h6 {
+    color: #ffffff;
+    line-height: 1.2em;
+    padding: .8em 0 .8em 0;
+}
+.km-nova .km-collapsible-header .km-icon,
+.km-nova .km-expanded .km-collapsible-header .km-icon {
+    color: #ffffff;
+}
+.km-nova .km-collapsible-content {
+    padding: 1em
+}
+.km-nova .km-collapsible-header h1 {
+    line-height: 2.85em
+}
+}
+/* module overrides */
+
+.km-shim {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    height: 100% !important;
+    background-color: rgb(112, 112, 112, 0.9);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+    z-index: 10001;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+.km-nova .km-popup,
+.km-nova .km-shim,
+.km-phone .km-nova .km-actionsheet-wrapper,
+.km-nova .km-actionsheet-root {
+    background-color: rgb(112, 112, 112, 0.9);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+.km-nova .km-module-wrap {
+    background-color: rgb(233, 233, 233);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(248, 248, 248, 0)), color-stop(1, rgba(248, 248, 248, .9)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(248, 248, 248, 0), rgba(248, 248, 248, .9));
+    background-repeat: repeat;
+    background-position: 0 0;
+    border: .1rem #5E6A71 solid
+}
+/* accent box shadow override */
+
+.km-nova .km-light.km-navbar,
+.km-nova .km-light.k-toolbar,
+.km-nova .km-light.km-tabstrip {
+    background: #fff;
+    box-shadow: none;
+    -webkit-box-shadow: none
+}
+/* switch green override */
+
+.km-nova .km-switch-wrapper {
+    border-color: #7ED321;
+    background-color: #7ED321
+}
+.km-nova span.km-switch {
+    color: #7ED321
+}
+/* link & Icon red override */
+
+.km-nova .km-link-button {
+    color: #D52B1E;
+    border-color: transparent
+}
+.km-nova .km-light.km-navbar .km-back:before,
+.km-nova .km-light.k-toolbar .km-back:before,
+.km-nova .km-light.km-navbar .km-button {
+    color: #D52B1E
+}
+.km-nova .km-list>li>.km-listview-link {
+    color: #D52B1E!important;
+}
+.km-nova .km-buttongroup .km-button {
+    color: #D52B1E;
+    border-color: #DEDEDE
+}
+.km-nova .km-buttongroup .km-state-active {
+    color: #fff;
+    background-color: #D52B1E
+}
+/* list  overrides */
+
+.km-nova .km-list>li>.km-listview-link .km-icon {
+    color: #5E6A71;
+}
+.km-nova .km-no-border>li {
+    border-width: none;
+    border-style: none;
+    padding: 0 .84em .84em .84em
+}
+.km-nova a:not([class]),
+.km-nova .km-external-link {
+    color: #D52B1E
+}
+span.k-icon.k-i-arrow-s {
+    display: none
+}
