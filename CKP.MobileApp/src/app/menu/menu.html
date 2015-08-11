@@ -1,4 +1,6 @@
-   <kendo-mobile-drawer id="right-drawer" style="width: 270px" k-title="'{{menu.title}}'" ng-controller="menuController">
+<kendo-mobile-view k-transition="'slide'">
+
+<kendo-mobile-drawer id="right-drawer" style="width: 270px" k-title="'{{menu.title}}'" ng-controller="menuController">
           <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
@@ -46,4 +48,4 @@
                 </li>
 
             </ul>
-        </kendo-mobile-drawer>
+        </kendo-mobile-drawer></kendo-mobile-view>
