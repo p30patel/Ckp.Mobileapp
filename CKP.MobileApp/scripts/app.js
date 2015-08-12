@@ -2,22 +2,13 @@ var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
 
-var app = angular.module('app',
-['LocalStorageModule', 'kendo.directives'])
-  .constant('ngAuthSettings', {
-      authServiceBaseUri: authServiceBase,
-     
-      clientId: clientId
-  });
+var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
+app.constant('ngAuthSettings', {
+    authServiceBaseUri: authServiceBase,
 
-app.run(['authService', function (authService) {
-authService.fillAuthData();
-  
-}]);
-
-app.config(function ($httpProvider) {
-   $httpProvider.interceptors.push('authInterceptorService');
+    clientId: clientId
 });
+
   (function (g) {
 
 	var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
