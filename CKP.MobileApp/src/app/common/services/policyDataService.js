@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("policyDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "$location",
-                function ($http, $q, localStorageService, ngAuthSettings, authService, $location) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var policyDataServiceFactory = {};
 
                     var forceGetPolicies = function () {

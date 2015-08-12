@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                   '$scope', '$http', '$location', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter',
-                   function($scope, $http, $location, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter) {
+                   '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter',
+                   function($scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter) {
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();

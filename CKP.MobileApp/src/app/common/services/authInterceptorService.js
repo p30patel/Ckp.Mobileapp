@@ -1,7 +1,7 @@
 'use strict';
 app.factory('authInterceptorService', [
-                '$q', '$location','$injector',
-                'localStorageService', function ($q, $location, $injector, localStorageService) {
+                '$q', '$injector',
+                'localStorageService', function ($q, $injector, localStorageService) {
                     
                     var authInterceptorServiceFactory = {};
     

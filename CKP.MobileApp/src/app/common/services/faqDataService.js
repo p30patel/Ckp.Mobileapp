@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("faqDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "$location",
-                function ($http, $q, localStorageService, ngAuthSettings, authService, $location) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var faqDataServiceFactory = {};
 
                     var forceGetFaqs = function () {

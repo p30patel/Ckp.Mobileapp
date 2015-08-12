@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("termsConditionDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "$location",
-                function ($http, $q, localStorageService, ngAuthSettings, authService, $location) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var termsConditionDataServiceFactory = {};
 
                     var forceGetTermsCondition = function () {

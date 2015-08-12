@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("feedbackDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "$location",
-                function ($http, $q, localStorageService, ngAuthSettings, authService, $location) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var feedbackDataServiceFactory = {};
 
                     var postFeedback = function (feedbackData) {

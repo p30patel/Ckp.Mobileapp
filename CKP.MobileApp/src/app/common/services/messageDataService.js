@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("messageDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "$location",
-                function ($http, $q, localStorageService, ngAuthSettings, authService, $location) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var messageDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd");
                     
