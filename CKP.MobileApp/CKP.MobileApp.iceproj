@@ -50,12 +50,6 @@
     <Content Include="cordova.ios.js" />
     <Content Include="cordova.wp8.js" />
     <Content Include="index.html" />
-    <Content Include="js\angular.min.js" />
-    <Content Include="js\checknet.angular.js" />
-    <Content Include="js\jquery.min.js" />
-    <Content Include="js\jszip.min.js" />
-    <Content Include="js\kendo.all.min.js" />
-    <Content Include="js\kendo.timezones.min.js" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
@@ -198,7 +192,6 @@
     <Folder Include="bower_components\everlive\" />
     <Folder Include="bower_components\everlive\min\" />
     <Folder Include="bower_components\everlive\src\" />
-    <Folder Include="js\" />
     <Folder Include="kendo\" />
     <Folder Include="kendo\js\" />
     <Folder Include="kendo\styles\" />

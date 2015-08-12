@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', '$location', 'authService', 'translateService', 'localStorageService',  'loginDataService', '$q','$timeout','alerting','$filter',
-                   function ($scope, $http, $location, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
+                   '$scope', '$http',  'authService', 'translateService', 'localStorageService',  'loginDataService', '$q','$timeout','alerting','$filter',
+                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
                        $scope.title = '';
                        alerting.addDanger("Please Login");
                      
