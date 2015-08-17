@@ -70,14 +70,15 @@
         <kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" style="width: 90%;">
             <ul kendo-mobile-list-view k-style="'inset'" class="km-module-wrap">
                 <li>
-                <h2 class="km-bold-font">Forgot Your Password?</h2>
+                <h2 class="km-bold-font"> {{form.forgotYourPassword.resoruceValue}}?</h2>
                     <p>
-                        Please enter your email address to receive a new password.
+                        {{form.receiveNewPasswordText.resoruceValue}}.
+                       
                     </p>
                 </li>
                 <li class="input-white">
-                    <label class=" km-state-active km-label-above">Email
-                        <input id="input" value="your@email.com" type="text" />
+                    <label class=" km-state-active km-label-above">{{form.email.resoruceValue}}
+                        <input id="input" value="" type="text" ng-model="loginData.email" placeholder="{{form.email.resoruceValue}}" />
                     </label>
                 </li>
                 <li>
@@ -85,7 +86,7 @@
                     <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
                                         ng-disabled="!loginData.email" 
-                                        class="km-primary km-large km-justified">Send New Password</kendo-mobile-button>
+                                        class="km-primary km-large km-justified">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
                 </li>
                   <li><alerts></alerts></li>
             </ul>

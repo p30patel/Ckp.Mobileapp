@@ -32,6 +32,28 @@ app.controller('loginController', [
                        $scope.form.remmberMe = {};
                        $scope.form.remmberMe.resoruceName = "remmber me";
                        $scope.form.remmberMe.resoruceValue = "remmber me";
+
+
+                       $scope.form.email = {};
+                       $scope.form.email.resoruceName = "Email";
+                       $scope.form.email.resoruceValue = "Email";
+
+                       $scope.form.receiveNewPasswordText = {};
+                       $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
+                       $scope.form.receiveNewPasswordText.resoruceValue = "Please enter your email address to receive a new password";
+
+                       $scope.form.forgotYourPassword = {};
+                       $scope.form.forgotYourPassword.resoruceName = "Forgot Your Password";
+                       $scope.form.forgotYourPassword.resoruceValue = "Forgot Your Password";
+
+
+                       $scope.form.sendNewPassword = {};
+                       $scope.form.sendNewPassword.resoruceName = "Send New Password";
+                       $scope.form.sendNewPassword.resoruceValue = "Send New Password";
+
+
+                       
+                       
                        //end page html 
 
                        $scope.languages = {};
