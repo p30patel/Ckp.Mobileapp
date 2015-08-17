@@ -112,6 +112,7 @@
     <Content Include="src\vendor\angular.js" />
     <Content Include="src\vendor\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
+    <Content Include="src\assests\styles\main.css" />
     <Content Include="styles\checknet.custom.css" />
     <Content Include="styles\images\back.png" />
     <Content Include="styles\images\checknet-icons.svg" />
@@ -216,6 +217,7 @@
     <Folder Include="src\app\policy\" />
     <Folder Include="src\app\termsCondition\" />
     <Folder Include="src\assests\" />
+    <Folder Include="src\assests\styles\" />
     <Folder Include="src\vendor\" />
     <Folder Include="styles\" />
     <Folder Include="styles\images\" />

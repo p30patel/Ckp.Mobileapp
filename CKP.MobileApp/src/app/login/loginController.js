@@ -130,6 +130,7 @@ app.controller('loginController', [
                                pageName : 'Login',
                                selectedLanague: $scope.selectedLanague
                            };
+                         
                            localStorageService.set('selectedLanguage', $scope.selectedLanague);
                            
                            translateService.getTranslation(translateData).then(function() {
