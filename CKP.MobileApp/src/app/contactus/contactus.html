@@ -5,9 +5,9 @@
         <kendo-mobile-list-view class="km-no-border km-grey-box">
             <li>
                 <kendo-mobile-button-group k-id="buttongroup-home">
-                    <kendo-mobile-button class="km-state-active" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
-                    <kendo-mobile-button class="" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
-                    <kendo-mobile-button class="" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader km-state-active" id="us" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="eu" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="hk" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-button-group>
             </li>
             <li>
@@ -38,7 +38,7 @@
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>{{form.subTitileUSStatus.resoruceValue}}} </h3>
+                <h3>{{form.subTitileUSStatus.resoruceValue}} </h3>
                 <table class="match-details">
                     <tr>
                         <td>
@@ -82,9 +82,9 @@
                     </tr>
                 </table>
             </kendo-mobile-collapsible>
-
+  </kendo-mobile-list-view>
                <!--    EU-->
-        <kendo-mobile-list-view class="eu contactus">
+        <kendo-mobile-list-view class="eu contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h3>Europe</h3>
                 <table class="match-details">
@@ -151,9 +151,9 @@
                     </tr>
                 </table>
             </kendo-mobile-collapsible>
-
+ </kendo-mobile-list-view>
            <!-- Hk--->
-                <kendo-mobile-list-view class="hk contactus">
+                <kendo-mobile-list-view class="hk contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h3>Hong Kong</h3>
                 <table class="match-details">

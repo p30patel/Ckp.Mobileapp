@@ -64,15 +64,18 @@ app.controller('contactusController', ['$scope', '$http', 'authService',
         $scope.form.toFaxApplication = {};
         $scope.form.toFaxApplication.resoruceName = "To fax applications";
         $scope.form.toFaxApplication.resoruceValue = "To fax applications";
-        
+
         $scope.form.forSetupStatus = {};
         $scope.form.forSetupStatus.resoruceName = "For set-up status";
         $scope.form.forSetupStatus.resoruceValue = "For set-up status";
-        
-        
-        $scope.onSelect = function (e) {
+
+
+        $scope.onSelect = function (selectedClass) {
             $('.contactus').hide();
-            $('.' + e).show();
+            $('.' + selectedClass).show();
+            $('.contactusHeader').removeClass('km-state-active');
+            $('#' + selectedClass).addClass('km-state-active');
+
         }
     }
 ]);
