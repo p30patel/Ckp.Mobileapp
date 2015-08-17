@@ -1,5 +1,5 @@
    
-<kendo-mobile-view id="login" k-title="'Login'" k-layout="'login'">
+<kendo-mobile-view id="login" k-title="'Login'" ng-Controller="loginController">
           <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-light">
                     <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="km-widget km-button" data-rel="drawer" data-align="left">
@@ -7,16 +7,18 @@
                     </a>
                  <!-- <kendo-mobile-button k-align="'left'" href="#right-drawer"><span class="km-icon km-drawer-icon km-notext"></span>-->
                 </kendo-mobile-button>
-                <select kendo-drop-down-list class="checknet-icon icon-globe" style="float:right; height: 20%; width:35%;">
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>Korean</option>
-                    <option>French</option>
-                    <option>Japanese</option>
-                </select>
+
+             <select kendo-drop-down-list class="checknet-icon icon-globe" style="float:right; height: 20%; width:35%;"
+                     ng-model="selectedLanague"  
+                     ng-change="translatePage()" 
+                     ng-options="language.Culture as language.Name for language in languages" 
+                     ng-init="selectedLanague = selectedLanague || 'en-US'">
+            </select>
+
              
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
+
         <img src="styles/images/Checknet-Logo.png" style="width: 14em; height: 4.5em; margin: .5em auto 1.5em; display: block; float: none;" />
         <form>
             <ul kendo-mobile-list-view k-style="'inset'" class="km-grey-box">
