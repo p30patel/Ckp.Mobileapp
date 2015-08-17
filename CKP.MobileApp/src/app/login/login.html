@@ -29,7 +29,7 @@
                 
                 <li class="input-white">
                     <label class=" km-state-active km-label-above">{{form.username.resoruceValue}}
-                        <input value="" type="text"  ng-model="loginData.userName" required placeholder="User Name" autofocus placeholder="{{form.username.resoruceValue}}"/>
+                        <input value="" type="text"  ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}"/>
                     </label>
                 </li>
 
@@ -42,7 +42,7 @@
                     </label>
                 </li>
                 <li>
-                     <p class="custom-right"><a ng-href="" 
+                     <p class="custom-right"><a href="" 
                            ng-click="showPasswordHint()"
                            ng-disabled="!loginData.userName"
                           class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a></p>
