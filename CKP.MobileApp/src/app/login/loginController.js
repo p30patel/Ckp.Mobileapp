@@ -8,30 +8,30 @@ app.controller('loginController', [
                        //login page html lables
                        $scope.form = {};
                        $scope.form.login = {};
-                       $scope.form.login.resoruceName = "login";
-                       $scope.form.login.resoruceValue = "login";
+                       $scope.form.login.resoruceName = "Login";
+                       $scope.form.login.resoruceValue = "Login";
                        $scope.form.username = {};
-                       $scope.form.username.resoruceName = "user name";
-                       $scope.form.username.resoruceValue = "user name";
+                       $scope.form.username.resoruceName = "User name";
+                       $scope.form.username.resoruceValue = "User name";
                        $scope.form.password = {};
-                       $scope.form.password.resoruceName = "password";
-                       $scope.form.password.resoruceValue = "password";
+                       $scope.form.password.resoruceName = "Password";
+                       $scope.form.password.resoruceValue = "Password";
 
                        $scope.form.forgotPassword = {};
-                       $scope.form.forgotPassword.resoruceName = "forgot password";
-                       $scope.form.forgotPassword.resoruceValue = "forgot password";
+                       $scope.form.forgotPassword.resoruceName = "Forgot Password";
+                       $scope.form.forgotPassword.resoruceValue = "Forgot Password";
 
                        $scope.form.passwordHint = {};
-                       $scope.form.passwordHint.resoruceName = "password hint";
-                       $scope.form.passwordHint.resoruceValue = "password hint";
+                       $scope.form.passwordHint.resoruceName = "Password Hint";
+                       $scope.form.passwordHint.resoruceValue = "Password Hint";
 
                        $scope.form.signin = {};
-                       $scope.form.signin.resoruceName = "signin";
-                       $scope.form.signin.resoruceValue = "signin";
+                       $scope.form.signin.resoruceName = "loh In";
+                       $scope.form.signin.resoruceValue = "Log In";
 
                        $scope.form.remmberMe = {};
-                       $scope.form.remmberMe.resoruceName = "remmber me";
-                       $scope.form.remmberMe.resoruceValue = "remmber me";
+                       $scope.form.remmberMe.resoruceName = "Remmber me";
+                       $scope.form.remmberMe.resoruceValue = "Remmber me";
 
 
                        $scope.form.email = {};
