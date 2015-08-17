@@ -93,7 +93,7 @@ app.controller('loginController', [
                            $("#modalview-forgotpassword").kendoMobileModalView("open"); 
                        };
                        $scope.closeModalViewForgotPassword = function() {
-                           $("#modalview-forgotpassword").kendoMobileModalView("close"); 
+                           $("#modalview-password").kendoMobileModalView("close");
                        };
                        
                        $scope.sendPassword = function () {
