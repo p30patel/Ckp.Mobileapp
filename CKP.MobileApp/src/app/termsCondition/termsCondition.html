@@ -1,12 +1,15 @@
 <kendo-mobile-view k-title="'Terms and Condition'" k-layout="'default'" ng-controller="termsConditionController" >
+     <kendo-mobile-content>
+  
+        <kendo-mobile-list-view ng-show="termsCondition">
+            <li>
+                <p ng-bind-html="renderHtml(termsCondition)"></p>
 
-    <div ng-show="termsCondition">
-        <ul>
-            <span ng-bind-html="renderHtml(termsCondition)"></span>
-        </ul>
-
-    </div>
+            </li>              
+        </kendo-mobile-list-view>
+  
     <div ng-show="!termsCondition">
         No data found
     </div>
+         </kendo-mobile-content>
 </kendo-mobile-view>

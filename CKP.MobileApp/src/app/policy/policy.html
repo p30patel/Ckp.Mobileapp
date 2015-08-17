@@ -1,19 +1,26 @@
 <kendo-mobile-view k-title="'Policy'" k-layout="'default'" ng-controller="policyController">
-   <div ng-show="policies" ng-repeat="policy in policies">
-
-        <ul kendo-panel-bar k-options="panelBarOptions">
+  
+   <kendo-mobile-content>
+        <kendo-mobile-list-view class="km-grey-box">
             <li>
-                <span ng-bind-html="renderHtml(policy.ResourceName)"></span>
-                <ul>
-                    <li>
-                        <span ng-bind-html="renderHtml(policy.ResourceValue)"></span>
-                    </li>
-
-                </ul>
+                <p>Please click to view detail description</p>
             </li>
-        </ul>
-    </div>
+        </kendo-mobile-list-view>
+
+
+      <div ng-show="policies" ng-repeat="policy in policies">
+        <kendo-mobile-list-view>
+           
+       <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                <h3>{{policy.ResourceName}}</h3>
+               
+                    <p ng-bind-html="renderHtml(policy.ResourceValue)"></p>
+                  
+      </kendo-mobile-collapsible>
+             </kendo-mobile-list-view>
+          </div>
      <div ng-show="!policies">
          No data found
      </div>
-</kendo-mobile-view>
+               
+    </kendo-mobile-content></kendo-mobile-view>

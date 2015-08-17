@@ -10,13 +10,15 @@
 
     <div ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
         <kendo-mobile-list-view>
+           
        <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3 ng-bind-html="renderHtml(faq.Question)"></h3>
-               <p>
-                        <span ng-bind-html="renderHtml(faq.Answer)"></span>
-                   </p>
+                <h3>{{faq.Question}}</h3>
+               
+                        <p>{{faq.Answer}}</p>
+                  
       </kendo-mobile-collapsible>
-             </kendo-mobile-list-view></div>
+             </kendo-mobile-list-view>
+          </div>
      <div ng-show="!faqs">
          No data found
      </div>
