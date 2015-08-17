@@ -106,7 +106,7 @@ app.controller('loginController', [
                                $("#modalview-forgotpassword").kendoMobileModalView("close"); 
                            },
                                                                                 function (err) {
-                                                                                    alerting.addSuccess(err.error_description);
+                                                                                    alerting.addWarning(err.error_description);
                                                                                     kendo.mobile.application.pane.loader.hide();
                                                                                     $("#modalview-forgotpassword").kendoMobileModalView("close"); 
                                                                                 });
@@ -160,7 +160,7 @@ app.controller('loginController', [
                                kendo.mobile.application.navigate("src/app/home/home.html");
                            }).catch(function(err) {
                                $scope.message = err.error_description;
-                               alerting.addDanger(err.error_description);                     
+                               alerting.addWarning(err.error_description);
                                kendo.mobile.application.pane.loader.hide();
                            });
                        };
@@ -174,7 +174,7 @@ app.controller('loginController', [
                                kendo.mobile.application.pane.loader.hide();
                            }).catch(function(err) {
                                $scope.message = 'Error while getting the Hint!';
-                               alerting.addDanger('Error while getting the Hint!');                     
+                               alerting.addWarning('Error while getting the Hint!');
                                kendo.mobile.application.pane.loader.hide();
                            });
                        };
