@@ -1,5 +1,6 @@
-<div ng-repeat="alert in currentAlerts | limitTo: -1"> 
-<div>{{ alert.message }}</div></div>
+<div ng-repeat="alert in currentAlerts | limitTo: -1">
+    <div class="alert-box small {{alert.type}}">&nbsp;&nbsp;{{ alert.message }}</div>
+</div>
 <!-- 
 <div ng-repeat="alert in currentAlerts">
 <div class="alert alert-{{alert.type}} alert-dismissible" role="alert">
