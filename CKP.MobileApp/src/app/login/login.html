@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="input-white">
-                    <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview" href="" id="modalview-open-button"></kendo-mobile-button>
+                    <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview" k-on-click="forgotPasswordModalOpen()"  id="modalview-open-button"></kendo-mobile-button>
                     <label class="km-label-above">{{form.password.resoruceValue}}
                         
                         <input value="" type="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
