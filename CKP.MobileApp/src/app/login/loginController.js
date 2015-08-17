@@ -4,7 +4,7 @@ app.controller('loginController', [
                    function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
                        $scope.title = '';
                        alerting.addDanger("Please Login");
-                     
+                    
                        //login page html lables
                        $scope.form = {};
                        $scope.form.login = {};
@@ -43,6 +43,49 @@ app.controller('loginController', [
                        };
                        $scope.translations = {};
                        $scope.message = "";
+
+
+
+                       var languages = function () {
+                           $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
+
+                           var languageData = localStorageService.get('languageData');
+
+                           if (languageData) {
+                               $scope.languages = languageData;
+                               loginDataService.getLanguages().then(function (response) {
+                                   $scope.languages = response;
+                               });
+                           } else {
+                               loginDataService.forceGetLanguages().then(function (result) {
+                                   $scope.languages = result;
+                               });
+                           }
+                           var selectedLanguage = localStorageService.get('selectedLanguage');
+
+                           if (selectedLanguage) {
+                               $scope.selectedLanague = selectedLanguage;
+                           } else {
+                               $scope.selectedLanague = 'en-US';
+                           }
+                           $scope.selectedLanague = 'string:' + $scope.selectedLanague;
+                          
+                           //set user name pass if set remmber on.
+                           var loginData = localStorageService.get('loginData');
+
+                           if (loginData) {
+                               if (loginData.remmberme) {
+                                   $scope.loginData.userName = loginData.userName;
+                                   $scope.loginData.password = loginData.password;
+                                   $scope.loginData.useRefreshTokens = loginData.remmberme
+                               }
+                           } else {
+                               $scope.loginData.userName = ""
+                               $scope.loginData.password = "";
+                               $scope.loginData.useRefreshTokens = false;
+                           }
+                       };
+                       languages(); //init languages
                        //forgot password 
                        
                        $scope.forgotPasswordModalOpen = function () {
@@ -77,44 +120,7 @@ app.controller('loginController', [
                            
                        };
 
-                       var languages = function () {
-                           $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
-       
-                           var languageData = localStorageService.get('languageData');
-        
-                           if (languageData) {
-                               $scope.languages = languageData;
-                               loginDataService.getLanguages().then(function(response) {
-                                   $scope.languages = response;
-                               });
-                           } else {
-                               loginDataService.forceGetLanguages().then(function (result) {
-                                   $scope.languages = result;
-                               });
-                           }
-                           var selectedLanguage = localStorageService.get('selectedLanguage');
-        
-                           if (selectedLanguage) {
-                               $scope.selectedLanague = selectedLanguage;
-                           } else {
-                               $scope.selectedLanague = 'en-US';
-                           }
-                           //set user name pass if set remmber on.
-                           var loginData = localStorageService.get('loginData');
-     
-                           if (loginData) {
-                               if (loginData.remmberme) {
-                                   $scope.loginData.userName = loginData.userName;
-                                   $scope.loginData.password = loginData.password;
-                                   $scope.loginData.useRefreshTokens = loginData.remmberme
-                               }
-                           } else {
-                               $scope.loginData.userName = ""
-                               $scope.loginData.password = "";
-                               $scope.loginData.useRefreshTokens = false;
-                           }
-                       };
-                       languages(); //init languages
+                    
                                         
                        //trsnasaltion
                        var data = [{ resourceName: "login", resourceValue: "" }];
