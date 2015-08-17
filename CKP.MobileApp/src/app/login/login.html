@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="input-white">
-                     <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview"  href="#modalview-password" id="modalview-open-button"></kendo-mobile-button>
+                     <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview"  ng-disabled="!loginData.userName" href="#modalview-password" id="modalview-open-button"></kendo-mobile-button>
                 
                     <label class="km-label-above">{{form.password.resoruceValue}}
                         
@@ -42,7 +42,7 @@
                     </label>
                 </li>
                 <li>
-                     <p class="custom-right"><a href="" 
+                     <p class="custom-right"><a ng-href="" 
                            ng-click="showPasswordHint()"
                            ng-disabled="!loginData.userName"
                           class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a></p>
