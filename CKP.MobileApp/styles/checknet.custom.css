@@ -8,10 +8,7 @@
 * 
 */
 
-.km-nova {
-    font: normal 1em "Arial", "Helvetica Neue", "Helvetica", "Roboto Light", "Verdana", "sans-serif";
-    line-height: 1.2
-}
+
 /* CUSTOM FONTELLO CHECKNET FONT */
 
 @font-face {
@@ -97,138 +94,58 @@
 }
 /* CUSTOM CHECKNET ICONS */
 
-.icon-alert:before {
-    content: '\e800';
-}
-/* '' */
-
-.icon-terms:before {
-    content: '\e801';
-}
-/* '' */
-
-.icon-approval:before {
-    content: '\e802';
-}
-/* '' */
-
-.icon-cart:before {
-    content: '\e803';
-}
-/* '' */
-
-.icon-collaspe:before {
-    content: '\e804';
-}
-/* '' */
-
-.icon-contact:before {
-    content: '\e805';
-}
-/* '' */
-
-.icon-delivery:before {
-    content: '\e806';
-}
-/* '' */
-
-.icon-expand:before {
-    content: '\e807';
-}
-/* '' */
-
-.icon-faq:before {
-    content: '\e808';
-}
-/* '' */
-
-.icon-feedback:before {
-    content: '\e809';
-}
-/* '' */
-
-.icon-globe:before {
-    content: '\e80a';
-}
-/* '' */
-
-.icon-help:before {
-    content: '\e80b';
-}
-/* '' */
-
-.icon-location:before {
-    content: '\e80c';
-}
-/* '' */
-
-.icon-lock:before {
-    content: '\e80d';
-}
-/* '' */
-
-.icon-maintance:before {
-    content: '\e80e';
-}
-/* '' */
-
-.icon-messages-alt:before {
-    content: '\e80f';
-}
-/* '' */
-
-.icon-messages:before {
-    content: '\e810';
-}
-/* '' */
-
-.icon-news:before {
-    content: '\e811';
-}
-/* '' */
-
-.icon-password:before {
-    content: '\e812';
-}
-/* '' */
-
-.icon-policy:before {
-    content: '\e813';
-}
-/* '' */
-
-.icon-printshop:before {
-    content: '\e814';
-}
-/* '' */
-
-.icon-signout:before {
-    content: '\e815';
-}
-/* '' */
-
-.icon-shipment:before {
-    content: '\e816';
-}
-/* '' */
-
-.icon-settings:before {
-    content: '\e817';
-}
-/* '' */
-
-.icon-recieved:before {
-    content: '\e818';
-}
-/* '' */
-
-.icon-track:before {
-    content: '\e819';
-}
-/* '' */
+.icon-alert:before { content: '\e800'; } /* '' */
+.icon-terms:before { content: '\e801'; } /* '' */
+.icon-approval:before { content: '\e802'; } /* '' */
+.icon-cart:before { content: '\e803'; } /* '' */
+.icon-collaspe:before { content: '\e804'; } /* '' */
+.icon-contact:before { content: '\e805'; } /* '' */
+.icon-delivery:before { content: '\e806'; } /* '' */
+.icon-expand:before { content: '\e807'; } /* '' */
+.icon-faq:before { content: '\e808'; } /* '' */
+.icon-feedback:before { content: '\e809'; } /* '' */
+.icon-globe:before { content: '\e80a'; } /* '' */
+.icon-help:before { content: '\e80b'; } /* '' */
+.icon-location:before { content: '\e80c'; } /* '' */
+.icon-lock:before { content: '\e80d'; } /* '' */
+.icon-maintance:before { content: '\e80e'; } /* '' */
+.icon-messages-alt:before { content: '\e80f'; } /* '' */
+.icon-messages:before { content: '\e810'; } /* '' */
+.icon-news:before { content: '\e811'; } /* '' */
+.icon-menu:before { content: '\e812'; } /* '' */
+.icon-policy:before { content: '\e813'; } /* '' */
+.icon-printshop:before { content: '\e814'; } /* '' */
+.icon-signout:before { content: '\e815'; } /* '' */
+.icon-shipment:before { content: '\e816'; } /* '' */
+.icon-settings:before { content: '\e817'; } /* '' */
+.icon-recieved:before { content: '\e818'; } /* '' */
+.icon-track:before { content: '\e819'; } /* '' */
+.icon-password:before { content: '\e81a'; } /* '' */
+.icon-x-close:before { content: '\e81b'; } /* '' */
+.icon-close:before { content: '\e81c'; } /* '' */
+.icon-left-open:before { content: '\e81d'; } /* '' */
 
 /* Login */
-.input-white{background:#fff!important}
+
+
+
+.login-inputs>input {
+    border-radius: .5rem;
+      margin:.4em 0;
+}
+.login-no-pad {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+.km-nova .km-list fieldset{
+    border: 0;
+padding: 0 1.61em;
+margin: 0 -1.61em;
+}
+.km-nova .km-list fieldset>input[type=password], .km-nova .km-list fieldset>input[type=search], .km-nova .km-list fieldset>input[type=number], .km-nova .km-list fieldset>input[type=tel], .km-nova .km-list fieldset>input[type=url], .km-nova .km-list fieldset>input[type=email], .km-nova .km-list fieldset>input[type=month], .km-nova .km-list fieldset>input[type=color], .km-nova .km-list fieldset>input[type=week], .km-nova .km-list fieldset>input[type=date], .km-nova .km-list fieldset>input[type=time], .km-nova .km-list fieldset>input[type=datetime], .km-nova .km-list fieldset>input[type=datetime-local], .km-nova .km-list fieldset>input[type=text]:not(.k-input), .km-nova .km-list fieldset>select:not([multiple]), .km-nova .km-list fieldset>.k-dropdown-wrap {
+    padding:.6em;
+    color:#111;
+}
 .custom-right {
     float: right;
     margin-right:4em;
@@ -252,6 +169,76 @@
     background:none!important
 }
 
+
+
+.km-nova {
+    font: normal 1em "Arial", "Helvetica Neue", "Helvetica", "Roboto Light", "Verdana", "sans-serif";
+    line-height: 1.2
+}
+
+.km-nova .km-list input[type=password],
+.km-nova .km-list input[type=search],
+.km-nova .km-list input[type=number],
+.km-nova .km-list input[type=tel],
+.km-nova .km-list input[type=url],
+.km-nova .km-list input[type=email],
+.km-nova .km-list input[type=month],
+.km-nova .km-list input[type=color],
+.km-nova .km-list input[type=week],
+.km-nova .km-list input[type=date],
+.km-nova .km-list input[type=time],
+.km-nova .km-list input[type=datetime],
+.km-nova .km-list input[type=datetime-local],
+.km-nova .km-list input[type=text]:not(.k-input),
+.km-nova .km-list select:not([multiple]),
+.km-nova .km-list .k-dropdown-wrap,
+.km-nova .km-list textarea {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    font-size: 1.2rem;
+    min-width: 6em;
+    border: 1px solid #DEDEDE;
+    outline: 0;
+    background: #fff;
+    margin-top: 0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%)
+}
+
+.km-list input[type=text]:not(.k-input),
+.km-list input[type=password],
+.km-list input[type=search],
+.km-list input[type=number],
+.km-list input[type=tel],
+.km-list input[type=url],
+.km-list input[type=email],
+.km-list input[type=file],
+.km-list input[type=month],
+.km-list input[type=color],
+.km-list input[type=week],
+.km-list input[type=date],
+.km-list input[type=time],
+.km-list input[type=datetime],
+.km-list input[type=datetime-local],
+.km-list select:not([multiple]),
+.km-list .k-dropdown,
+.km-list textarea {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    line-height: normal;
+    z-index: 1;
+    right: 0;
+    margin-top: -1em
+}
+
+
+
 .km-nova .km-list>li {
     font-size: 1.2em;
     padding-left: .89em;
@@ -267,6 +254,7 @@
     margin-right: 5rem;
     font-size: .52em
 }
+
 .km-nova .km-listview-link::after, .km-nova .km-listview-label::after {border-color:#D52B1E}
 .km-nova .km-group-title {
     background-color: rgb(233, 233, 233);
@@ -496,14 +484,19 @@
 .km-nova .km-list>li>.km-listview-link .km-icon {
     color: #5E6A71;
 }
-.km-nova .km-no-border>li {
+
+.km-nova .km-no-li-border>li {
     border-width: none;
     border-style: none;
-    padding: 0 .84em .84em .84em
 }
+.km-nova .km-div-border{border:1px solid #DEDEDE;}
+
 .km-nova a:not([class]),
 .km-nova .km-external-link {
     color: #D52B1E
+}
+.km-nova .km-text{
+    font-size: 1rem;
 }
 span.k-icon.k-i-arrow-s {
     display: none
