@@ -51,11 +51,19 @@ app.controller('loginController', [
                        $scope.form.sendNewPassword.resoruceName = "Send New Password";
                        $scope.form.sendNewPassword.resoruceValue = "Send New Password";
 
+                       $scope.form.copyRightsText = {};
+                       $scope.form.copyRightsText.resoruceName = "Material contained on this app is Copyright";
+                       $scope.form.copyRightsText.resoruceValue = "Material contained on this app is Copyright";
+
+                       $scope.form.copyRightsDescription = {};
+                       $scope.form.copyRightsDescription.resoruceName = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
+                       $scope.form.copyRightsDescription.resoruceValue = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
+
 
                        
-                       
                        //end page html 
-                       $scope.year = new Date().getYear();
+                       var d = new Date();
+                       $scope.year = d.getFullYear();
                        $scope.languages = {};
                        $scope.passwordHint = "";
                        
