@@ -55,7 +55,7 @@ app.controller('loginController', [
                        
                        
                        //end page html 
-
+                       $scope.year = new Date().getYear();
                        $scope.languages = {};
                        $scope.passwordHint = "";
                        
