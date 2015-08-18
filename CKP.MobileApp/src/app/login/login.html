@@ -18,57 +18,48 @@
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
 
-        <img src="styles/images/Checknet-Logo.png" style="width: 14em; height: 4.5em; margin: .5em auto 1.5em; display: block; float: none;" />
+     
+        <img src="styles/images/Checknet-Logo.png" style="width: 16em; height: 5em; margin: .5em auto 1.5em; display: block; float: none;" />
 
         <form>
-            <ul kendo-mobile-list-view k-style="'inset'" class="km-grey-box">   
+            <ul kendo-mobile-list-view k-style="'inset'" ng-controller="test" class="km-grey-box km-no-li-border km-div-border">
                              
                 <li> <span class="custom-right"><p>   {{form.remmberMe.resoruceValue}}</p></span>
                     <input kendo-mobile-switch k-id="email-switch" k-checked="checked" data-ng-model="loginData.useRefreshTokens" />
                 </li>
                 
-                <li class="input-white">
-                    <label class=" km-state-active km-label-above">{{form.username.resoruceValue}}
-                        <input value="" type="text"  ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}"/>
-                    </label>
-                </li>
+                   <li class="login-no-pad">
+                    <fieldset class="login-inputs">
+                       <input value="" type="text"  ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}"/>
 
-                <li class="input-white">
-                     <kendo-mobile-button class="check-icon icon-help icon-forgot" data-rel="modalview"  ng-disabled="!loginData.userName" href="#modalview-password" id="modalview-open-button"></kendo-mobile-button>
-                
-                    <label class="km-label-above">{{form.password.resoruceValue}}
-                        
-                        <input value="" type="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
-                    </label>
-                </li>
-                <li>
-                     <p class="custom-right"><a href="" 
+                         <input value="" type="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
+                     
+                        <kendo-mobile-button class="check-icon icon-password icon-forgot" ng-disabled="!loginData.userName" id="modalview-open-button"  style="margin-top:-2.2em; margin-right:.7em; z-index: 1;" k-rel="'modalview'" href="#modalview-password"></kendo-mobile-button>
+                        <p class="custom-right"><a href="" 
                            ng-click="showPasswordHint()"
                            ng-disabled="!loginData.userName"
-                          class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a></p>
-                    
+                          class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a></a>
+                        </p>
+                    </fieldset>
                 </li>
-                <li>
                     <i></i>
                  
                     <kendo-mobile-button  class="km-primary km-large km-justified"
                                           ng-click="login()"
                                           ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
 
-                    </kendo-mobile-button>
-                </li>
-                <li><alerts></alerts></li>
-                  
+                    </kendo-mobile-button>              
+            
             </ul>
+                <alerts></alerts>
         </form>
 
         <!-- End Form Area -->
-        <p class="km-style-info" style="text-align: center; padding-top:1em;">This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution. </p>
-        <p class="km-style-info km-bold-font" style="text-align: center; padding-top:1em;">Material contained on this app is Copyright ©2001-2015 Checkpoint Systems, Inc.</p>
-        
+         <p class="km-style-info" style="text-align: center; padding-top:1em; font-size: .6rem;">This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution. </p>
+        <p class="km-style-info km-bold-font" style="text-align: center; padding-top:1em; font-size: .6rem;">Material contained on this app is Copyright ©2001-2015 Checkpoint Systems, Inc.</p>
     <!-- End Login View -->
         <kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" style="width: 90%;">
-            <ul kendo-mobile-list-view k-style="'inset'" class="km-module-wrap">
+           <ul kendo-mobile-list-view style="padding-bottom: -3em;" class="km-grey-box km-no-li-border km-div-border" k-style="'inset'" class="km-module-wrap">
                 <li>
                 <h2 class="km-bold-font"> {{form.forgotYourPassword.resoruceValue}}?</h2>
                     <p>
@@ -76,27 +67,23 @@
                        
                     </p>
                 </li>
-                <li class="input-white">
-                    <label class=" km-state-active km-label-above">{{form.email.resoruceValue}}
-                        <input id="input" value="" type="text" ng-model="loginData.email" placeholder="{{form.email.resoruceValue}}" />
-                    </label>
-                </li>
-                <li>
-                   <i></i>
-                    <kendo-mobile-button 
+                 <li class="login-no-pad">
+                    <fieldset class="login-inputs">
+                        <input value="" placeholder="{{form.email.resoruceValue}}" type="email" />
+                    </fieldset>
+                    <i></i>
+                      <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
                                         ng-disabled="!loginData.email" 
                                         class="km-primary km-large km-justified">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
+
+                    <a kendo-mobile-button href=""id="closeModalViewForgotPassword" k-transition="'overlay:down reverse'" style="text-align:center; padding: 0; border: 0; background: none;"><img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" />
+                    </a>
                 </li>
+
                   <li><alerts></alerts></li>
             </ul>
-            <kendo-mobile-footer>
-                <div kendo-mobile-nav-bar class="km-transparent">
-                    <a kendo-mobile-button href="" 
-                                            k-on-click="closeModalViewForgotPassword()"  
-                                            k-transition="'overlay:down reverse'">
-                                            <img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></a>
-            </kendo-mobile-footer></kendo-mobile-modal-view>
+         </kendo-mobile-modal-view>
 
   
     </kendo-mobile-view>
