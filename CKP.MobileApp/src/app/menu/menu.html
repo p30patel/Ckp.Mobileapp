@@ -1,9 +1,9 @@
 <kendo-mobile-view k-transition="'slide:right'" ng-controller="menuController">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
-             <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
+              <kendo-mobile-button class="checknet-icon icon-x-close" k-transition="'fade'" href="#:back" k-align="'left'"></kendo-mobile-button>
             <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
-            </kendo-mobile-button>
+           <kendo-mobile-button k-align="'right'" k-transition="'fade'" ng-show="authentication.isAuth" ng-click="logout()" class="checknet-icon icon-signout">Logout</kendo-mobile-button>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
