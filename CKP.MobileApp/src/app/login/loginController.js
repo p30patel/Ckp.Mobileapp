@@ -156,14 +156,13 @@ app.controller('loginController', [
                        var data = [{ resourceName: "login", resourceValue: "" }];
 
                        $scope.translatePage = function() {
-                           var translateData = {
-                               pageName : 'Login',
-                               selectedLanague: $scope.selectedLanague
-                           };
                          
+                           var selectedLanague = $scope.selectedLanague;
+                           var rowVersion = "";
+                          
                            localStorageService.set('selectedLanguage', $scope.selectedLanague);
                            
-                           translateService.getTranslation(translateData).then(function() {
+                           translateService.getResourceUpdates(selectedLanague, rowVersion).then(function () {
                                $scope.form.login.resoruceValue = translateService.getTranslationByName($scope.form.login.resoruceName);
                                $scope.form.username.resoruceValue = translateService.getTranslationByName($scope.form.username.resoruceName);
                                $scope.form.password.resoruceValue = translateService.getTranslationByName($scope.form.password.resoruceName);
