@@ -1,10 +1,10 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http',  'authService', 'translateService', 'localStorageService',  'loginDataService', '$q','$timeout','alerting','$filter',
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter',
                    function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
                        $scope.title = '';
                        alerting.addDanger("Please Login");
-                    
+
                        //login page html lables
                        $scope.form = {};
                        $scope.form.login = {};
@@ -26,7 +26,7 @@ app.controller('loginController', [
                        $scope.form.passwordHint.resoruceValue = "Password Hint";
 
                        $scope.form.signin = {};
-                       $scope.form.signin.resoruceName = "loh In";
+                       $scope.form.signin.resoruceName = "LogIn";
                        $scope.form.signin.resoruceValue = "Log In";
 
                        $scope.form.remmberMe = {};
@@ -60,13 +60,13 @@ app.controller('loginController', [
                        $scope.form.copyRightsDescription.resoruceValue = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
 
 
-                       
+
                        //end page html 
                        var d = new Date();
                        $scope.year = d.getFullYear();
                        $scope.languages = {};
                        $scope.passwordHint = "";
-                       
+
                        $scope.loginData = {
                            userName: "",
                            password: "",
@@ -99,7 +99,7 @@ app.controller('loginController', [
                                $scope.selectedLanague = 'en-US';
                            }
                            $scope.selectedLanague = 'string:' + $scope.selectedLanague;
-                          
+
                            //set user name pass if set remmber on.
                            var loginData = localStorageService.get('loginData');
 
@@ -117,77 +117,79 @@ app.controller('loginController', [
                        };
                        languages(); //init languages
                        //forgot password 
-                       
+
                        $scope.forgotPasswordModalOpen = function () {
                            $scope.loginData.email = "";
-                           $("#modalview-forgotpassword").kendoMobileModalView("open"); 
+                           $("#modalview-forgotpassword").kendoMobileModalView("open");
                        };
-                       $scope.closeModalViewForgotPassword = function() {
+                       $scope.closeModalViewForgotPassword = function () {
                            $("#modalview-password").kendoMobileModalView("close");
                        };
-                       
+
                        $scope.sendPassword = function () {
                            kendo.mobile.application.pane.loader.show();
                            var username = 'rjmarshallca'; //for test - else use  $scope.loginData.userName;
                            var email = $scope.loginData.email;
-                           loginDataService.resetPassword(username, email).then(function(result) {
+                           loginDataService.resetPassword(username, email).then(function (result) {
                                alerting.addSuccess(result);
                                kendo.mobile.application.pane.loader.hide();
-                               $("#modalview-forgotpassword").kendoMobileModalView("close"); 
+                               $("#modalview-forgotpassword").kendoMobileModalView("close");
                            },
                                                                                 function (err) {
                                                                                     alerting.addWarning(err.error_description);
                                                                                     kendo.mobile.application.pane.loader.hide();
-                                                                                    $("#modalview-forgotpassword").kendoMobileModalView("close"); 
+                                                                                    $("#modalview-forgotpassword").kendoMobileModalView("close");
                                                                                 });
                        };
                        //end forgot password
-                       
+
                        var loginData = {
-                           userName : '',
+                           userName: '',
                            password: '',
-                           remmberme : false                        
-                           
+                           remmberme: false
+
                        };
 
-                    
-                                        
-                       //trsnasaltion
-                       var data = [{ resourceName: "login", resourceValue: "" }];
 
-                       $scope.translatePage = function() {
-                         
+
+                       //trsnasaltion
+
+                       var translatePage = function () {
+
                            var selectedLanague = $scope.selectedLanague;
                            var rowVersion = "";
-                          
+
                            localStorageService.set('selectedLanguage', $scope.selectedLanague);
-                           
+
                            translateService.getResourceUpdates(selectedLanague, rowVersion).then(function () {
-                               $scope.form.login.resoruceValue = translateService.getTranslationByName($scope.form.login.resoruceName);
-                               $scope.form.username.resoruceValue = translateService.getTranslationByName($scope.form.username.resoruceName);
-                               $scope.form.password.resoruceValue = translateService.getTranslationByName($scope.form.password.resoruceName);
-                               $scope.form.passwordHint.resoruceValue = translateService.getTranslationByName($scope.form.passwordHint.resoruceName);
-                               $scope.form.signin.resoruceValue = translateService.getTranslationByName($scope.form.signin.resoruceName);
-                               $scope.form.remmberMe.resoruceValue = translateService.getTranslationByName($scope.form.remmberMe.resoruceName);
+                               $scope.form.login.resoruceValue = translateService.getResourceValue($scope.form.login.resoruceName);
+                               $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);
+                               $scope.form.password.resoruceValue = translateService.getResourceValue($scope.form.password.resoruceName);
+                               $scope.form.passwordHint.resoruceValue = translateService.getResourceValue($scope.form.passwordHint.resoruceName);
+                               $scope.form.signin.resoruceValue = translateService.getResourceValue($scope.form.signin.resoruceName);
+                               $scope.form.remmberMe.resoruceValue = translateService.getResourceValue($scope.form.remmberMe.resoruceName);
                            });
                        }
-
+                       translatePage();
+                       $scope.translatePage = function () {
+                           translatePage();
+                       }
                        //loign event
                        $scope.login = function () {
                            var loginData = {
-                               userName : $scope.loginData.userName,
-                               password:  $scope.loginData.password,
-                               remmberme : $scope.loginData.useRefreshTokens               
+                               userName: $scope.loginData.userName,
+                               password: $scope.loginData.password,
+                               remmberme: $scope.loginData.useRefreshTokens
                            }
                            localStorageService.set('loginData', loginData);
-                           
+
                            kendo.mobile.application.pane.loader.show();
-                           
+
                            $scope.passwordHint = "";
                            authService.login($scope.loginData).then(function (response) {
                                kendo.mobile.application.pane.loader.hide();
                                kendo.mobile.application.navigate("src/app/home/home.html");
-                           }).catch(function(err) {
+                           }).catch(function (err) {
                                $scope.message = err.error_description;
                                alerting.addWarning(err.error_description);
                                kendo.mobile.application.pane.loader.hide();
@@ -201,11 +203,11 @@ app.controller('loginController', [
                                $scope.passwordHint = result;
                                alerting.addSuccess('Hint is : ' + result);
                                kendo.mobile.application.pane.loader.hide();
-                           }).catch(function(err) {
+                           }).catch(function (err) {
                                $scope.message = 'Error while getting the Hint!';
                                alerting.addWarning('Error while getting the Hint!');
                                kendo.mobile.application.pane.loader.hide();
                            });
                        };
                    }
-               ]);
+]);
