@@ -24,6 +24,9 @@ app.run(['authService', function (authService) {
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
+
+
+
   (function (g) {
 
 	var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
@@ -60,46 +63,61 @@ app.config(function ($httpProvider) {
 	analytics.Monitor = function () {
 		return window.plugins.EqatecAnalytics.Monitor;
 	}
-})(window);
+  })(window);
+
+
   window.analytics.Start();
   feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
 
-  var el = new Everlive({
-      apiKey: baasApiKey,
-      scheme: baasScheme
-  });
-  //register for push
-  var registerForPush = function () {
+  // This is your Telerik Backend Services API key.
+  var baasApiKey = 'uTM7cVvTTvlfDZsu';
 
-      // This is your Telerik Backend Services API key.
+  // This is the scheme (http or https) to use for accessing Telerik Backend Services.
+  var baasScheme = 'https';
 
+  //This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
+  var androidProjectNumber = '1018275522168';
 
-      var pushSettings = {
-          android: {
-              senderID: androidProjectNumber
-          },
-          iOS: {
-              badge: "true",
-              sound: "true",
-              alert: "true"
-          },
-          wp8: {
-              channelName: 'EverlivePushChannel'
-          },
-          //notificationCallbackAndroid: onAndroidPushReceived,
-          //notificationCallbackIOS: onIosPushReceived,
-          //notificationCallbackWP8: onWP8PushReceived,
-          customParameters: {
-              Age: 21
-          }
-      };
-      el.push.register(pushSettings)
-          .then(
-              function (e) { alert('registred'); },
-              function (err) {
-                  alert('REGISTER ERROR: ' + JSON.stringify(err));
+  //Set this to true in order to test push notifications in the emulator. Note, that you will not be able to actually receive 
+  //push notifications because we will generate fake push tokens. But you will be able to test your other push-related functionality without getting errors.
+  var emulatorMode = true;
+
+      //Initialize the Telerik Backend Services SDK
+      var el = new Everlive({
+          apiKey: baasApiKey,
+          scheme: baasScheme
+      });
+
+    
+
+    
+      function registerForPush() {
+          alert('In');
+          var pushSettings = {
+              android: {
+                  senderID: androidProjectNumber
+              },
+              iOS: {
+                  badge: "true",
+                  sound: "true",
+                  alert: "true"
+              },
+              wp8: {
+                  channelName: 'EverlivePushChannel'
+              },
+              notificationCallbackAndroid: onAndroidPushReceived,
+              notificationCallbackIOS: onIosPushReceived,
+              notificationCallbackWP8: onWP8PushReceived,
+              customParameters: {
+                  Age: 21
               }
-              );
-  };
-
+          };
+          el.push.register(pushSettings)
+              .then(
+                  _onDeviceIsRegistered,
+                  function (err) {
+                      alert('REGISTER ERROR: ' + JSON.stringify(err));
+                  }
+                  );
+      };
   registerForPush();
