@@ -3,7 +3,7 @@ app.controller('loginController', [
                    '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter',
                    function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
                        $scope.title = '';
-                       alerting.addDanger("Please Login");
+                       alerting.addDanger("User name and password are required!");
 
                        //login page html lables
                        $scope.loginData = {};
@@ -60,8 +60,7 @@ app.controller('loginController', [
                        $scope.form.copyRightsDescription.resoruceName = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
                        $scope.form.copyRightsDescription.resoruceValue = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
 
-
-
+                      
                        //end page html 
                        var d = new Date();
                        $scope.year = d.getFullYear();
@@ -83,23 +82,22 @@ app.controller('loginController', [
                            var languageData = localStorageService.get('languageData');
 
                            if (languageData) {
-                               $scope.languages = languageData;
-                               loginDataService.getLanguages().then(function (response) {
-                                   $scope.languages = response;
-                               });
+                               $scope.languages = languageData;                             
                            } else {
                                loginDataService.forceGetLanguages().then(function (result) {
                                    $scope.languages = result;
                                });
                            }
+                        
                            var selectedLanguage = localStorageService.get('selectedLanguage');
 
                            if (selectedLanguage) {
                                $scope.selectedLanague = selectedLanguage;
                            } else {
                                $scope.selectedLanague = 'en-US';
+                               localStorageService.set('selectedLanguage', $scope.selectedLanague);                          
                            }
-                           $scope.selectedLanague = 'string:' + $scope.selectedLanague;
+                          
 
                            //set user name pass if set remmber on.
                            var loginData = localStorageService.get('loginData');
@@ -117,6 +115,7 @@ app.controller('loginController', [
                            }
                        };
                        languages(); //init languages
+                      
                        //forgot password 
                        $scope.loginData.email = "";
                        $scope.forgotPasswordModalOpen = function () {
