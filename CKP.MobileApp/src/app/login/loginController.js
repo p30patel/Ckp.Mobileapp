@@ -6,6 +6,7 @@ app.controller('loginController', [
                        alerting.addDanger("Please Login");
 
                        //login page html lables
+                       $scope.loginData = {};
                        $scope.form = {};
                        $scope.form.login = {};
                        $scope.form.login.resoruceName = "Login";
@@ -117,7 +118,7 @@ app.controller('loginController', [
                        };
                        languages(); //init languages
                        //forgot password 
-
+                       $scope.loginData.email = "";
                        $scope.forgotPasswordModalOpen = function () {
                            $scope.loginData.email = "";
                            $("#modalview-password").kendoMobileModalView("open");
@@ -128,8 +129,9 @@ app.controller('loginController', [
 
                        $scope.sendPassword = function () {
                            kendo.mobile.application.pane.loader.show();
-                           var username = 'rjmarshallca'; //for test - else use  $scope.loginData.userName;
+                           var username = $scope.loginData.userName;
                            var email = $scope.loginData.email;
+                         
                            loginDataService.resetPassword(username, email).then(function (result) {
                                alerting.addSuccess(result);
                                kendo.mobile.application.pane.loader.hide();

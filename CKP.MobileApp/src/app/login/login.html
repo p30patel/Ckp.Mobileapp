@@ -42,9 +42,7 @@
                 ng-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>
-            <li>
-                <alerts></alerts>
-            </li>
+           
         </ul>
 
     </form>
@@ -75,13 +73,12 @@
                 <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()" k-transition="'overlay:down reverse'" style="text-align:center; padding: 0; border: 0; background: none;">
                     <img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></kendo-mobile-button>
             </li>
-
-            <li>
-                <alerts></alerts>
-            </li>
         </ul>
     </kendo-mobile-modal-view>
 
-
+     <kendo-mobile-footer>
+        <kendo-mobile-nav-bar class="km-light" style="text-align: center; padding-top:1em; font-size: .6rem;">   
+             <alerts></alerts>  </kendo-mobile-nav-bar></kendo-mobile-footer>     
+      
 </kendo-mobile-view>
 <!-- End Forgot Password View -->
