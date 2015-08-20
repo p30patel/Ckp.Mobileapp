@@ -41,15 +41,18 @@
   "FrameworkVersion": "3.7.0",
   "CorePlugins": [
     "com.phonegap.plugins.PushPlugin@2.5.6",
+    "com.telerik.feedback",
+    "com.telerik.plugin.eqatecanalytics",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
+    "org.apache.cordova.dialogs",
     "org.apache.cordova.globalization",
     "org.apache.cordova.splashscreen"
   ],
   "WP8SupportedResolutions": [
-    "ID_RESOLUTION_HD720P",
     "ID_RESOLUTION_WVGA",
-    "ID_RESOLUTION_WXGA"
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
   ],
   "Framework": "Cordova",
   "DisplayName": "sample-push-hybrid",
@@ -64,5 +67,6 @@
   "WP8TileTitle": "Push Sample",
   "WP8WindowsPublisherName": "CN=Telerik",
   "WP8PackageIdentityName": "1234Telerik.com.telerik.PushNotificationApp",
-  "WPSdk": "8.0"
+  "WPSdk": "8.0",
+  "iOSDeploymentTarget": "6.0"
 }
