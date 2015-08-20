@@ -30,7 +30,7 @@
 
                     <input value="" type="password" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
 
-                    <kendo-mobile-button class="check-icon icon-password icon-forgot" ng-disabled="!loginData.userName" id="modalview-open-button" style="margin-top:-2.2em; margin-right:.7em; z-index: 1;" k-rel="'modalview'" href="#modalview-password"></kendo-mobile-button>
+                    <kendo-mobile-button class="check-icon icon-password icon-forgot" ng-disabled="!loginData.userName" id="modalview-open-button" style="margin-top:-2.2em; margin-right:.7em; z-index: 1;" k-rel="'modalview'" k-on-click="forgotPasswordModalOpen()"></kendo-mobile-button>
                     <p class="custom-right"><a href="" ng-click="showPasswordHint()" ng-disabled="!loginData.userName" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
                 </fieldset>

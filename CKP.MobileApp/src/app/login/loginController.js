@@ -120,7 +120,7 @@ app.controller('loginController', [
 
                        $scope.forgotPasswordModalOpen = function () {
                            $scope.loginData.email = "";
-                           $("#modalview-forgotpassword").kendoMobileModalView("open");
+                           $("#modalview-password").kendoMobileModalView("open");
                        };
                        $scope.closeModalViewForgotPassword = function () {
                            $("#modalview-password").kendoMobileModalView("close");
