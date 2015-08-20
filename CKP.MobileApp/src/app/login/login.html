@@ -67,6 +67,11 @@
                     <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" />
                 </fieldset>
                 <i></i>
+                  <kendo-mobile-button 
+                                        k-on-click="sendPassword()" 
+                                        ng-disabled="!loginData.email" 
+                                        class="km-primary km-large km-justified">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
+
                 <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()" k-transition="'overlay:down reverse'" style="text-align:center; padding: 0; border: 0; background: none;">
                     <img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></kendo-mobile-button>
             </li>
