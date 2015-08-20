@@ -3,8 +3,7 @@ app.controller('loginController', [
                    '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter',
                    function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
                        $scope.title = '';
-                       alerting.addDanger("User name and password are required!");
-
+                      
                        //login page html lables
                        $scope.loginData = {};
                        $scope.form = {};
@@ -12,8 +11,8 @@ app.controller('loginController', [
                        $scope.form.login.resoruceName = "Login";
                        $scope.form.login.resoruceValue = "Login";
                        $scope.form.username = {};
-                       $scope.form.username.resoruceName = "User name";
-                       $scope.form.username.resoruceValue = "User name";
+                       $scope.form.username.resoruceName = "User Name";
+                       $scope.form.username.resoruceValue = "User Name";
                        $scope.form.password = {};
                        $scope.form.password.resoruceName = "Password";
                        $scope.form.password.resoruceValue = "Password";
@@ -27,7 +26,7 @@ app.controller('loginController', [
                        $scope.form.passwordHint.resoruceValue = "Password Hint";
 
                        $scope.form.signin = {};
-                       $scope.form.signin.resoruceName = "LogIn";
+                       $scope.form.signin.resoruceName = "[Not Set]";
                        $scope.form.signin.resoruceValue = "Log In";
 
                        $scope.form.remmberMe = {};
@@ -210,5 +209,49 @@ app.controller('loginController', [
                                kendo.mobile.application.pane.loader.hide();
                            });
                        };
+                    
+                       //register for push
+                       var registerForPush = function () {
+
+                           // This is your Telerik Backend Services API key.
+                           var baasApiKey = 'uTM7cVvTTvlfDZsu';
+                           // This is the scheme (http or https) to use for accessing Telerik Backend Services.
+                           var baasScheme = 'http';
+                           //This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
+                           var androidProjectNumber = '1018275522168';
+                           //Initialize the Telerik Backend Services SDK
+                           var el = new Everlive({
+                               apiKey: baasApiKey,
+                               scheme: baasScheme
+                           });
+                           var pushSettings = {
+                               android: {
+                                   senderID: androidProjectNumber
+                               },
+                               iOS: {
+                                   badge: "true",
+                                   sound: "true",
+                                   alert: "true"
+                               },
+                               wp8: {
+                                   channelName: 'EverlivePushChannel'
+                               },
+                               //notificationCallbackAndroid: onAndroidPushReceived,
+                               //notificationCallbackIOS: onIosPushReceived,
+                               //notificationCallbackWP8: onWP8PushReceived,
+                               customParameters: {
+                                   Age: 21
+                               }
+                           };
+                           el.push.register(pushSettings)
+                               .then(
+                                   function (e) { alert('registred');},
+                                   function (err) {
+                                       alert('REGISTER ERROR: ' + JSON.stringify(err));
+                                   }
+                                   );
+                       };
+
+                       registerForPush();
                    }
 ]);
