@@ -1,27 +1,25 @@
-<kendo-mobile-view k-title="'FAQ'" ng-controller="faqController" k-layout="'default'">
-  
-      <kendo-mobile-content>
-        <kendo-mobile-list-view class="km-grey-box">
+<kendo-mobile-view k-title="'FAQ'" ng-controller="faqController" k-layout="'default'" k-transition="'slide'">
+
+    <kendo-mobile-content>
+
+        <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
             <li>
                 <p>The following list is meant as a guide for new and existing CheckNet users. The list is not exhaustive and will be updated periodically to address common questions and to accommodate the addition of functionality.</p>
             </li>
+
+            <div ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
+
+                <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                    <h3>{{faq.Question}}</h3>
+                    <p ng-bind-html="renderHtml(faq.Answer)"></p>
+
+                </kendo-mobile-collapsible>
+                     </div>
         </kendo-mobile-list-view>
+   
+        <div ng-show="!faqs">
+            No data found
+        </div>
 
-
-    <div ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
-        <kendo-mobile-list-view>
-           
-       <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3>{{faq.Question}}</h3>
-               
-                        <p>{{faq.Answer}}</p>
-                  
-      </kendo-mobile-collapsible>
-             </kendo-mobile-list-view>
-          </div>
-     <div ng-show="!faqs">
-         No data found
-     </div>
-               
     </kendo-mobile-content>
 </kendo-mobile-view>

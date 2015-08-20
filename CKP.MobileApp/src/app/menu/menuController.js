@@ -19,7 +19,7 @@ app.controller('menuController', [
                            $scope.authentication.isAuth = false;
 
 
-                           kendo.mobile.application.navigate("src/app/login/login.html");
+                           kendo.mobile.application.navigate("src/app/login/login.html", "slide");
 
                        }
 
@@ -37,7 +37,7 @@ app.controller('menuController', [
                                    kendo.mobile.application.navigate("src/app/home/home.html");
                                    break;
                                default:
-                                   kendo.mobile.application.navigate("src/app/login/login.html");
+                                   kendo.mobile.application.navigate("src/app/login/login.html","slide");
                                    break;
                            }
                        }
