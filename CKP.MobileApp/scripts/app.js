@@ -1,4 +1,9 @@
-
+var baasApiKey = 'uTM7cVvTTvlfDZsu';
+// This is the scheme (http or https) to use for accessing Telerik Backend Services.
+var baasScheme = 'http';
+//This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
+var androidProjectNumber = '1018275522168';
+//Initialize the Telerik Backend Services SDK
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
@@ -58,3 +63,43 @@ app.config(function ($httpProvider) {
 })(window);
   window.analytics.Start();
   feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
+
+  var el = new Everlive({
+      apiKey: baasApiKey,
+      scheme: baasScheme
+  });
+  //register for push
+  var registerForPush = function () {
+
+      // This is your Telerik Backend Services API key.
+
+
+      var pushSettings = {
+          android: {
+              senderID: androidProjectNumber
+          },
+          iOS: {
+              badge: "true",
+              sound: "true",
+              alert: "true"
+          },
+          wp8: {
+              channelName: 'EverlivePushChannel'
+          },
+          //notificationCallbackAndroid: onAndroidPushReceived,
+          //notificationCallbackIOS: onIosPushReceived,
+          //notificationCallbackWP8: onWP8PushReceived,
+          customParameters: {
+              Age: 21
+          }
+      };
+      el.push.register(pushSettings)
+          .then(
+              function (e) { alert('registred'); },
+              function (err) {
+                  alert('REGISTER ERROR: ' + JSON.stringify(err));
+              }
+              );
+  };
+
+  registerForPush();
