@@ -19,6 +19,7 @@ var clientId = 'Ckp.PoC1';
 
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
+
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
 
@@ -35,46 +36,41 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
+var el = new Everlive({
+    apiKey: baasApiKey,
+    scheme: baasScheme
+});
 
 
 function onDeviceReady() {
-    alert(device.uuid);
-    var el = new Everlive({
-        apiKey: baasApiKey,
-        scheme: baasScheme
-    });
+   
 
-
-    function registerForPush() {
-        alert('In' + baasScheme);
-        var pushSettings = {
-            android: {
-                senderID: androidProjectNumber
-            },
-            iOS: {
-                badge: "true",
-                sound: "true",
-                alert: "true"
-            },
-            wp8: {
-                channelName: 'EverlivePushChannel'
-            },
-
+    alert('ready');
+      
+    var pushSettings = {
+        android: {
+            senderID: androidProjectNumber
+        },
+        iOS: {
+            badge: "true",
+            sound: "true",
+            alert: "true"
+        },
+        wp8: {
+            channelName: 'EverlivePushChannel'
+        },     
+        customParameters: {
             Age: 21
-        };
-
-
-        el.push.register(pushSettings)
-            .then(
-                function (result) { alert('done'); },
-                function (err) {
-                    alert('REGISTER ERROR: ' + JSON.stringify(err));
-                });
+        }
     };
-
-
-    registerForPush();
-}
+    el.push.register(pushSettings)
+        .then(
+            _onDeviceIsRegistered,
+            function (err) {
+                alert('REGISTER ERROR: ' + JSON.stringify(err));
+            }
+            );
+    }
 
 
 
