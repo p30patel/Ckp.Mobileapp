@@ -42,36 +42,7 @@ var el = new Everlive({
 });
 
 
-function onDeviceReady() {
-   
-
-    alert('ready');
-      
-    var pushSettings = {
-        android: {
-            senderID: androidProjectNumber
-        },
-        iOS: {
-            badge: "true",
-            sound: "true",
-            alert: "true"
-        },
-        wp8: {
-            channelName: 'EverlivePushChannel'
-        },     
-        customParameters: {
-            Age: 21
-        }
-    };
-    el.push.register(pushSettings)
-        .then(
-            _onDeviceIsRegistered,
-            function (err) {
-                alert('REGISTER ERROR: ' + JSON.stringify(err));
-            }
-            );
-    }
-
+// device APIs are available
 
 
   (function (g) {

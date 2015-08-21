@@ -67,6 +67,43 @@ app.factory('loginDataService',
         };
 
 
+        var registerForPush = function () {
+            var deferred = $q.defer();
+            var status = "faild";
+            var pushSettings = {
+                android: {
+                    senderID: androidProjectNumber
+                },
+                iOS: {
+                    badge: "true",
+                    sound: "true",
+                    alert: "true"
+                },
+                wp8: {
+                    channelName: 'EverlivePushChannel'
+                },
+                customParameters: {
+                    Age: 21
+                }
+            };
+            el.push.register(pushSettings)
+                .then(
+                    function (result) {
+                        alert(result.length);
+                        status = "success";
+                        localStorageService.set('deviceId', device.uuid);
+                        deferred.reject(result);
+
+                    },
+                    function (err) {
+                        status = "faild";
+                    }
+                    );
+           
+            return deferred.promise;
+        }
+
+        loginDataFactory.registerForPush = registerForPush;
         loginDataFactory.getLanguages = getLanguages;
         loginDataFactory.forceGetLanguages = forceGetLanguages;
         loginDataFactory.getPasswordHint = getPasswordHint;

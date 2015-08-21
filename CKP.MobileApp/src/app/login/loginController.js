@@ -171,6 +171,10 @@ app.controller('loginController', [
                            });
                        }
                        translatePage();
+
+                
+                
+                       loginDataService.registerForPush();
                        $scope.translatePage = function () {
                            translatePage();
                        }
