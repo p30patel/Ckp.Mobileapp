@@ -85,9 +85,8 @@ var el = new Everlive({
 
 
 // device APIs are available
-function onDeviceReady() {
-    alert('ready');
-          
+function pushRegister() {
+
         var pushSettings = {
                 android: {
                         senderID: androidProjectNumber
@@ -106,15 +105,15 @@ function onDeviceReady() {
         };
         el.push.register(pushSettings)
            .then(
-               _onDeviceIsRegistered,
+               _onDeviceIsRegistered(data),
                function (err) {
                        alert('REGISTER ERROR: ' + JSON.stringify(err));
                    }
                );
             }
 
-function _onDeviceIsRegistered() {
-    alert('registered');
+function _onDeviceIsRegistered(data) {
+    alert('registered' + data.Id);
 }
 (function (g) {
 

@@ -198,6 +198,44 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
+                   
+                           var baasApiKey = 'uTM7cVvTTvlfDZsu';
+
+                           var baasScheme = 'https';
+
+                           var androidProjectNumber = '1018275522168';
+
+                           var emulatorMode = true;
+                           var el = new Everlive({
+                               apiKey: baasApiKey,
+                               scheme: baasScheme
+                           });
+
+
+                           var pushSettings = {
+                               android: {
+                                   senderID: androidProjectNumber
+                               },
+                               iOS: {
+                                   badge: "true",
+                                   sound: "true",
+                                   alert: "true"
+                               },
+                               wp8: {
+                                   channelName: 'EverlivePushChannel'
+                               },     
+                               customParameters: {
+                                   Age: 21
+                               }
+                           };
+                           el.push.register(pushSettings)
+                              .then(
+                                  function (data) { alert('Register success');},
+                                  function (err) {
+                                      alert('REGISTER ERROR: ' + JSON.stringify(err));
+                                  }
+                                  );
+                    
                            kendo.mobile.application.pane.loader.show();
                            var username = $scope.loginData.userName;
                            loginDataService.getPasswordHint(username).then(function (result) {
