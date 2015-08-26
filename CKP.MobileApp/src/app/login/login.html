@@ -1,38 +1,41 @@
 <kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController" k-transition="'slide'">
 
     <kendo-mobile-header>
+
         <kendo-mobile-nav-bar class="km-light">
-            <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="checknet-icon icon-menu" data-rel="drawer" data-align="left">
+              <kendo-view-title style="display: none;"></kendo-view-title>
+
+            <a kendo-mobile-button k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="ck-icon ck-menu" data-rel="drawer" data-align="left">
                 <span class="km-text"><i class="icon ion-navicon-round"></i> </span>
             </a>
            
-     <select kendo-drop-down-list ng-model="selectedLanague" class="checknet-icon icon-globe" style="float:right; height: 20%; width:35%;"  
+     <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
               k-data-source="languages"
               k-data-text-field="'Name'" k-data-value-field="'Culture'"
-              ng-change="translatePage()" 
-         >
+              ng-change="translatePage()">
       </select>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
 
 
-    <img src="styles/images/Checknet-Logo.png" style="width: 16em; height: 5em; margin: .5em auto 1.5em; display: block; float: none;" />
+  <img src="styles/images/Checknet-Logo.png" class="ck-login-logo" />
 
     <form>
-        <ul kendo-mobile-list-view k-style="'inset'" class="km-grey-box km-no-li-border km-div-border">
+        <ul kendo-mobile-list-view k-style="'inset'" class="ck-grey-wrap ck-no-border">
 
-            <li> <span class="custom-right"><p>   {{form.remmberMe.resoruceValue}}</p></span>
+            <li> <span class="ck-switchpad-right"><p>   {{form.remmberMe.resoruceValue}}</p></span>
                 <input kendo-mobile-switch k-id="email-switch" k-checked="checked" data-ng-model="loginData.useRefreshTokens" />
             </li>
 
-            <li class="login-no-pad">
-                <fieldset class="login-inputs">
+            <li class="ck-no-pad">
+                <fieldset class="ck-login">
                     <input value="" type="text" ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" />
 
                     <input value="" type="password" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
 
-                    <kendo-mobile-button class="check-icon icon-password icon-forgot" ng-disabled="!loginData.userName" id="modalview-open-button" style="margin-top:-2.2em; margin-right:.7em; z-index: 1;" k-rel="'modalview'" k-on-click="forgotPasswordModalOpen()"></kendo-mobile-button>
-                    <p class="custom-right"><a href="" ng-click="showPasswordHint()" ng-disabled="!loginData.userName" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
+                    <kendo-mobile-button class="ck-input-btn" ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"><i style="font-size: 150%;" class="ck-icon ck-password" k-on-click="forgotPasswordModalOpen()"></i></kendo-mobile-button>
+                  
+                    <p class="ck-align-right"><a href="" ng-click="showPasswordHint()" ng-disabled="!loginData.userName" id="touchSurface"  data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
                 </fieldset>
             </li>
@@ -49,11 +52,11 @@
     </form>
 
     <!-- End Form Area -->
-    <p class="km-style-info" style="text-align: center; padding-top:1em; font-size: .6rem;">{{form.copyRightsDescription.resoruceValue}}. </p>
-    <p class="km-style-info km-bold-font" style="text-align: center; padding-top:1em; font-size: .6rem;">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
+    <p class="ck-disclamier km-style-info">{{form.copyRightsDescription.resoruceValue}}. </p>
+    <p class="ck-disclamier km-style-info">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
     <!-- End Login View -->
-    <kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" style="width: 90%;">
-        <ul kendo-mobile-list-view style="padding-bottom: -3em;" class="km-grey-box km-no-li-border km-div-border" k-style="'inset'" class="km-module-wrap">
+    <kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" class="km-moduleview" style="width: 90%; background:rgba(255, 255, 255, 0);">
+        <ul kendo-mobile-list-view style="padding-bottom: 1em;" class="ck-module-wrap ck-no-border" k-style="'inset'">
             <li>
                 <h2 class="km-bold-font"> {{form.forgotYourPassword.resoruceValue}}?</h2>
                 <p>
@@ -61,20 +64,24 @@
 
                 </p>
             </li>
-            <li class="login-no-pad">
-                <fieldset class="login-inputs">
+            <li class="ck-no-pad">
+                <fieldset class="ck-login">
                     <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" />
                 </fieldset>
                 <i></i>
                   <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
                                         ng-disabled="!loginData.email" 
-                                        class="km-primary km-large km-justified">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
+                                        class="km-primary km-large km-justifie" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
 
                 <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()" k-transition="'overlay:down reverse'" style="text-align:center; padding: 0; border: 0; background: none;">
                     <img src="styles/images/close-button.png" style="width: 3em; height: 3em;display: block;" /></kendo-mobile-button>
             </li>
         </ul>
+             <div kendo-mobile-footer>
+                <kendo-mobile-button href="#login" k-transition="'overlay:down'" class="ck-close-btn km-justified"><img src="styles/images/close-button.png" style="width: 3.5em; height: 3.5em;" />
+                </kendo-mobile-button>
+            </div>
     </kendo-mobile-modal-view>
   
      <kendo-mobile-footer>

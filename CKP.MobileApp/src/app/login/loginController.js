@@ -198,7 +198,8 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
-                   
+                           var username = $scope.loginData.userName;
+
                            var baasApiKey = 'uTM7cVvTTvlfDZsu';
 
                            var baasScheme = 'https';
@@ -225,19 +226,21 @@ app.controller('loginController', [
                                    channelName: 'EverlivePushChannel'
                                },     
                                customParameters: {
-                                   Age: 21
+                                   Name: username,
+                                   LastLoginDate: new Date()
+
                                }
                            };
                            el.push.register(pushSettings)
                               .then(
-                                  function (data) { alert('Register success');},
+                                  function (data) { alert('Register success' );},
                                   function (err) {
                                       alert('REGISTER ERROR: ' + JSON.stringify(err));
                                   }
                                   );
                     
                            kendo.mobile.application.pane.loader.show();
-                           var username = $scope.loginData.userName;
+                        
                            loginDataService.getPasswordHint(username).then(function (result) {
                                $scope.passwordHint = result;
                                alerting.addSuccess('Hint is : ' + result);

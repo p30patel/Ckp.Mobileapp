@@ -110,7 +110,7 @@
     <Content Include="src\vendor\angular-local-storage.js" />
     <Content Include="src\vendor\angular-route.js" />
     <Content Include="src\vendor\angular.js" />
-    <Content Include="src\vendor\jszip.min.js" />
+    <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
     <Content Include="src\assests\styles\main.css" />
     <Content Include="styles\checknet.custom.css" />
