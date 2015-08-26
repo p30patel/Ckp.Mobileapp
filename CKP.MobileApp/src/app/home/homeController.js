@@ -16,7 +16,7 @@ app.controller('homeController', [
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
-                       
+                       $scope.isAuth = authService.authentication.isAuth;
                       $scope.selectParamter = function() {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;

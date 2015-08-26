@@ -1,7 +1,7 @@
 <kendo-mobile-view k-title="'{{title}}'"  k-layout="'default'" ng-controller="homeController" k-transition="'slide'">
 
     <div kendo-mobile-scroller="scroller" k-pull-to-refresh="true" k-pull="refresh" style="height: 900px">
-        <div class="container">
+        <div class="container" ng-show="isAuth">
             <br>
 
             <div class="search">
