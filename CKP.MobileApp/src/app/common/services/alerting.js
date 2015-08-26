@@ -27,7 +27,7 @@
 
             $timeout(function () {
                 removeAlert(alert);
-            }, 10000);
+            }, 5000);
         };
 
         var removeAlert = function (alert) {
