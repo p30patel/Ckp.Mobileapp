@@ -1,7 +1,9 @@
 .ckp-a-link{
     color: #D52B1E !important;
 }
-
+.km-nova .km-drawer .km-content{
+    background-color : rgb(233, 233, 233)!important;
+}
 .alert-box {
   background: #f7f7f7;
   color: #333;
