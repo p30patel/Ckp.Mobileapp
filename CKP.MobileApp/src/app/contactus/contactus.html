@@ -72,12 +72,13 @@
    
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
-                ng-show="authentication.isAuth && helpDesk && helpDeskRegion == 'USA'">
+                ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'USA'">
                 <h3>{{form.helpDesk.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
-                           <p>{{helpDesk}}</p>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        
                         </td>
                     </tr>
                 </table>

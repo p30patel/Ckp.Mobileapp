@@ -1,6 +1,6 @@
 app.controller('menuController', [
-                   '$scope', 'authService',
-                   function ($scope, authService) {
+                   '$scope', 'authService', 'localStorageService',
+                   function ($scope, authService, localStorageService) {
                        $scope.menu = {};
                        $scope.menu.title = 'Check-Net';
                        $scope.menu.contactus = "Contact Us";
@@ -13,6 +13,24 @@ app.controller('menuController', [
 
                        $scope.authentication = authService.authentication;
 
+                       $scope.organizationDetail = {};
+                       $scope.hasAddress = false;
+                       //address
+                       var getOrganizationDetail = function () {
+                         
+                           var organizationDetail = localStorageService.get("organizationDetail");
+                           if (organizationDetail)
+                           {
+                               $scope.organizationDetail = organizationDetail;
+
+                               $scope.hasAddress = true;
+                           }
+                           else {
+                               $scope.hasAddress = false;
+                           }
+                       
+                       }
+                       getOrganizationDetail();
                        //logout
                        $scope.logout = function () {
                            authService.logout();

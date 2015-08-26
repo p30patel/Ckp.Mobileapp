@@ -1,6 +1,6 @@
 
-app.controller('contactusController', ['$scope', '$http', 'authService',
-    function ($scope, $http, authService) {
+app.controller('contactusController', ['$scope', '$http','$sce', 'authService', 'localStorageService',
+    function ($scope, $http, $sce, authService, localStorageService) {
         $scope.form = {};
         $scope.authentication = authService.authentication;
         $scope.helpDesk = ""; //need to set help des
@@ -69,6 +69,16 @@ app.controller('contactusController', ['$scope', '$http', 'authService',
         $scope.form.forSetupStatus.resoruceName = "For set-up status";
         $scope.form.forSetupStatus.resoruceValue = "For set-up status";
 
+        $scope.HelpDesk = {};      
+        //address
+        var getHelpDesk = function () {
+
+            var helpDesk = localStorageService.get("organizationDetail");
+            if (helpDesk) {
+                $scope.helpDesk = helpDesk.HelpDesk;
+            }
+        }
+        getHelpDesk();
 
         $scope.onSelect = function (selectedClass) {
             $('.contactus').hide();
@@ -77,5 +87,9 @@ app.controller('contactusController', ['$scope', '$http', 'authService',
             $('#' + selectedClass).addClass('km-state-active');
 
         }
+
+        $scope.renderHtml = function (content) {
+            return $sce.trustAsHtml(content);
+        };
     }
 ]);

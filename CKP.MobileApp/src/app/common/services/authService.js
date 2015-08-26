@@ -40,7 +40,7 @@ app.factory('authService', [
                                 deferred.resolve(response);
                             }
 
-                            _forceGetPrincipalData().then(function (result) {
+                            forceGetOrganizationData().then(function (result) {
                             }).catch(function (err, status) {
                                 loggedIn = false;
                                 _logout();
@@ -57,6 +57,7 @@ app.factory('authService', [
                     var _logout = function () {
                         localStorageService.remove('authorizationData');
                         localStorageService.remove('userProfileData');
+                        localStorageService.remove('organizationDetail');
                         _authentication.isAuth = false;
                         _authentication.userName = "";
                         _authentication.useRefreshTokens = false;
@@ -66,6 +67,19 @@ app.factory('authService', [
                         if (!_authentication.isAuth || _authentication.userName === "") {
                             _forceGetPrincipalData();  
                         }
+                    };
+
+                    var forceGetOrganizationData = function () {
+                        var deferred = $q.defer();
+                        var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail?userName=" + _authentication.userName + "&deviceId=" + 1;
+                        $http.post(url).success(function (result) {                        
+                            localStorageService.add('organizationDetail', result);
+                            deferred.resolve(result);
+                        }).error(function (err, status) {
+                            deferred.reject(err);
+                        });
+
+                        return deferred.promise;
                     };
 
                     var _forceGetPrincipalData = function () {
@@ -168,6 +182,9 @@ app.factory('authService', [
                     authServiceFactory.login = _login;
                     authServiceFactory.logout = _logout;
                     authServiceFactory.getPrincipalData = _getPrincipalData;
+
+                    authServiceFactory.forceGetOrganizationData = forceGetOrganizationData;
+
                     authServiceFactory.forceGetPrincipalData = _forceGetPrincipalData;
                     authServiceFactory.fillAuthData = _fillAuthData;
        
