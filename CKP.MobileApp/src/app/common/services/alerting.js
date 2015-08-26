@@ -23,12 +23,11 @@
 
         var addAlert = function (type, message, timeout) {
             var alert = { type: type, message: message, timeout: timeout };
-            currentAlerts.push(alert);
-            if (timeout > 0) {
+            currentAlerts.push(alert);           
+            var timeoutPeriod  = (timeout > 0) ? timeout : 3000;
                 $timeout(function () {
                     removeAlert(alert);
-                }, timeout);
-            }
+                }, timeoutPeriod);
         };
 
         var removeAlert = function (alert) {

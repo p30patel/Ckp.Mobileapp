@@ -10,8 +10,10 @@ app.factory("faqDataService", [
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;                        
                         var cultureName = "en-US";
+                        var rowVersion = '';
 
-                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName).success(function (result) {
+                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName + '&rowVersion=' + rowVersion
+                            ).success(function (result) {
                           
                             localStorageService.set('faqs', result);
                             deferred.resolve(result);
@@ -25,7 +27,7 @@ app.factory("faqDataService", [
                         var deferred = $q.defer();
 
                         var faqs = localStorageService.get("faqs");
-                       
+                        faqs = '';
                         if (faqs) {
                             deferred.resolve(faqs);
                         } else {

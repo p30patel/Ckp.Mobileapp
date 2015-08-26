@@ -135,7 +135,7 @@ app.controller('loginController', [
                            loginDataService.resetPassword(username, email).then(function (result) {
                                message = (result === 'success') ? "Password sent to your email address!" : "User name and email combination does not match!";
 
-                               alerting.addSuccess(message, -1);
+                               alerting.addSuccess(message, 0);
                            
                                $scope.forgotPassworMessage = result;
                                kendo.mobile.application.pane.loader.hide();
@@ -143,7 +143,7 @@ app.controller('loginController', [
                            },
                                                                                 function (err) {
                                                                                     message =  "User name and email combination does not match!";
-                                                                                    alerting.addWarning(message, -1);
+                                                                                    alerting.addWarning(message, 0);
                                                                                     kendo.mobile.application.pane.loader.hide();
                                                                                     $scope.forgotPassworMessage = err;
                                                                                    // $("#modalview-password").kendoMobileModalView("close");

@@ -5,10 +5,10 @@ app.controller('faqController', [
                        $scope.faqs = {};
                        var init = function() {
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Getting Faqs list..");
+                        
                            faqDataService.getFaqs().then(function (result) {
                                $scope.faqs = result;
-                               alerting.addSuccess("Completed loading faqs list.");
+                            
                            }).catch(function(error) {
                                $scope.faqs = {};
                            }).finally(function() {

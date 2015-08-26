@@ -8,7 +8,7 @@ app.controller('feedbackController', [
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                               alerting.addSuccess("Please Login!");
+                               alerting.addSuccess("Please Login!", 0);
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                            
@@ -17,14 +17,14 @@ app.controller('feedbackController', [
                     
                        $scope.send = function() {
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Sending feedback data to server..");
+                          
                          
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
-                                   alerting.addSuccess("Thank you for your feedback!");
+                                   alerting.addSuccess("Thank you for your feedback!", 10000);
                                    $scope.feedbackData.comment = "";
                                } else {
-                                   alerting.addSuccess("Faild to post feedback!");
+                                   alerting.addSuccess("Faild to post feedback!", 10000);
                                }
                            }).catch(function(error) {
                                $scope.policies = {};

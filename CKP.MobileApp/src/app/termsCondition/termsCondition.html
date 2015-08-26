@@ -1,8 +1,8 @@
 <kendo-mobile-view k-title="'Terms and Condition'" k-layout="'default'" ng-controller="termsConditionController" k-transition="'slide'">
      <kendo-mobile-content>
-        <kendo-mobile-list-view ng-show="termsCondition">
+        <kendo-mobile-list-view ng-show="termsCondition" ng-repeat="terms in termsCondition.Resources" ng-if="$index == 2">
             <li>
-                <p ng-bind-html="renderHtml(termsCondition)"></p>
+                <p ng-bind-html="renderHtml(terms.ResourceValue.ResourceValue)"></p>
 
             </li>              
         </kendo-mobile-list-view>

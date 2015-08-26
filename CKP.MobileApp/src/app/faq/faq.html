@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'FAQ'" ng-controller="faqController" k-layout="'default'" k-transition="'slide'">
+<kendo-mobile-view k-title="'FAQ'" ng-controller="faqController" k-layout="'default'">
 
     <kendo-mobile-content>
 
@@ -7,14 +7,14 @@
                 <p>The following list is meant as a guide for new and existing CheckNet users. The list is not exhaustive and will be updated periodically to address common questions and to accommodate the addition of functionality.</p>
             </li>
 
-            <div ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
 
-                <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
+                    ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
                     <h3>{{faq.Question}}</h3>
                     <p ng-bind-html="renderHtml(faq.Answer)"></p>
 
                 </kendo-mobile-collapsible>
-                     </div>
+                  
         </kendo-mobile-list-view>
    
         <div ng-show="!faqs">

@@ -1,14 +1,14 @@
 
 app.controller('policyController', [
-                   '$scope', '$http', '$sce', 'policyDataService', 'alerting',
-                   function ($scope, $http, $sce, policyDataService, alerting) {
+                   '$scope', '$http', '$sce', 'policyTermsDataService', 'alerting',
+                   function ($scope, $http, $sce, policyTermsDataService, alerting) {
                        $scope.policies = {};
                        var init = function() {
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Getting Policies...");
-                           policyDataService.getPolicies().then(function (result) {
+                       
+                           policyTermsDataService.getPolicyTerms().then(function (result) {
                                $scope.policies = result;
-                               alerting.addSuccess("Completed loading Policies.");
+                         
                            }).catch(function(error) {
                                $scope.policies = {};
                            }).finally(function() {

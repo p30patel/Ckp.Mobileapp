@@ -6,7 +6,7 @@ app.controller('messageController', [
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                               alerting.addSuccess("Please Login!");
+                               alerting.addSuccess("Please Login!", 0);
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                            
@@ -17,10 +17,10 @@ app.controller('messageController', [
                        
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Getting Messages..");
+                         
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
-                               alerting.addSuccess("Completed loading messages.");
+                               
                            }).catch(function(error) {
                                $scope.mesages = {};
                            }).finally(function() {

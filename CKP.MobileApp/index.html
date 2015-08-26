@@ -32,8 +32,8 @@
     <script src="src/app/common/services/translateService.js"></script>
     <script src="src/app/common/services/alerting.js"></script>
     <script src="src/app/common/services/faqDataService.js"></script>
-    <script src="src/app/common/services/policyDataService.js"></script>
-    <script src="src/app/common/services/termsConditionDataService.js"></script>
+    
+    <script src="src/app/common/services/policyTermsDataService.js"></script>
     <script src="src/app/common/services/feedbackDataService.js"></script>
 
     <script src="src/app/common/directives/alerting.js"></script>
@@ -89,7 +89,7 @@
             <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
            
 
-               <kendo-mobile-button k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()">Logout</kendo-mobile-button>
+                 <kendo-mobile-button k-align="'right'" k-transition="'flip'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout"></kendo-mobile-button>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
         
