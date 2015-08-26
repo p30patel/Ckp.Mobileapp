@@ -119,6 +119,7 @@ app.controller('loginController', [
                        $scope.loginData.email = "";
                        $scope.forgotPasswordModalOpen = function () {
                            $scope.loginData.email = "";
+                           $scope.forgotPassworMessage = "";
                            $("#modalview-password").kendoMobileModalView("open");
                        };
                        $scope.closeModalViewForgotPassword = function () {
@@ -132,13 +133,15 @@ app.controller('loginController', [
                          
                            loginDataService.resetPassword(username, email).then(function (result) {
                                alerting.addSuccess(result);
+                               $scope.forgotPassworMessage = result;
                                kendo.mobile.application.pane.loader.hide();
-                               $("#modalview-forgotpassword").kendoMobileModalView("close");
+                               $("#modalview-password").kendoMobileModalView("close");
                            },
                                                                                 function (err) {
                                                                                     alerting.addWarning(err.error_description);
                                                                                     kendo.mobile.application.pane.loader.hide();
-                                                                                    $("#modalview-forgotpassword").kendoMobileModalView("close");
+                                                                                    $scope.forgotPassworMessage = result;
+                                                                                   // $("#modalview-password").kendoMobileModalView("close");
                                                                                 });
                        };
                        //end forgot password

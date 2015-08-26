@@ -73,7 +73,9 @@
                                         k-on-click="sendPassword()" 
                                         ng-disabled="!loginData.email" 
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
-              
+               <span ng-show="forgotPassworMessage">
+                      <alerts></alerts> 
+               </span>
             </li>
         </ul>
              <div kendo-mobile-footer>
