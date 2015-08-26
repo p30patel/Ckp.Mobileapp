@@ -5,29 +5,30 @@
         var currentAlerts = [];
         var alertTypes = ["success", "info", "warning", "danger"];
 
-        var addWarning = function (message) {
-            addAlert("warning", message);
+        var addWarning = function (message, timeout) {
+            addAlert("warning", message, timeout);
         };
 
-        var addDanger = function (message) {
-            addAlert("danger", message);
+        var addDanger = function (message, timeout) {
+            addAlert("danger", message, timeout);
         };
 
-        var addInfo = function (message) {
-            addAlert("info", message);
+        var addInfo = function (message, timeout) {
+            addAlert("info", message, timeout);
         };
 
-        var addSuccess = function (message) {
-            addAlert("success", message);
+        var addSuccess = function (message, timeout) {
+            addAlert("success", message, timeout);
         };
 
-        var addAlert = function (type, message) {
-            var alert = { type: type, message: message };
+        var addAlert = function (type, message, timeout) {
+            var alert = { type: type, message: message, timeout: timeout };
             currentAlerts.push(alert);
-
-            $timeout(function () {
-                removeAlert(alert);
-            }, 5000);
+            if (timeout > 0) {
+                $timeout(function () {
+                    removeAlert(alert);
+                }, timeout);
+            }
         };
 
         var removeAlert = function (alert) {
