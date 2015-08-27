@@ -41,6 +41,9 @@ app.factory('authService', [
                             }
 
                             forceGetOrganizationData().then(function (result) {
+                                var logo = (result.Logo !== '') ? authServiceBase  +  "/Images/" + result.Logo : "";
+                                result.Logo = logo;
+                                localStorageService.set('organizationDetail', result);
                             }).catch(function (err, status) {
                                 loggedIn = false;
                                 _logout();

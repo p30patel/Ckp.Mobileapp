@@ -29,7 +29,7 @@
                 <div ng-repeat="orderCount in orderCounts">
                     <ul kendo-mobile-button-group>
                         <li  class="km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.HasApproval">
-                            <a href id="approvalDetail-{{orderCount.RetailerId}}" ng-click="approvalDetail(orderCount.RetailerId)">Approval ({{ orderCount.ApprovalCount}})</a>
+                            <a href id="approvalDetail-{{orderCount.RetailerId}}" class="ele-{{$index}}" ng-click="approvalDetail(orderCount.RetailerId)">Approval ({{ orderCount.ApprovalCount}})</a>
                         </li>
                         <li class="km-button retailer retailer-{{retailer.RetailerId}}"  ng-show="orderCount.NewOrderCount">
                             <a href id="newOrderDetail-{{orderCount.RetailerId}}" ng-click="newOrderDetail(orderCount.RetailerId)" >New ({{ orderCount.NewOrderCount}})</a>

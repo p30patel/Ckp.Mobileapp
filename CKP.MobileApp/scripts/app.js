@@ -17,7 +17,6 @@ var emulatorMode = true;
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
-
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
 
 app.constant('ngAuthSettings', {

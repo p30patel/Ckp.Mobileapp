@@ -75,7 +75,7 @@ app.controller('contactusController', ['$scope', '$http','$sce', 'authService', 
 
             var helpDesk = localStorageService.get("organizationDetail");
             if (helpDesk) {
-                $scope.helpDesk = helpDesk.HelpDesk;
+                $scope.helpDesk = helpDesk.HelpDesk.he;
             }
         }
         getHelpDesk();

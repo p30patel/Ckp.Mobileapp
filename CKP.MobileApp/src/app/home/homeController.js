@@ -5,7 +5,7 @@ app.controller('homeController', [
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                               alerting.addSuccess("Please Login!");
+                           
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
@@ -17,9 +17,10 @@ app.controller('homeController', [
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
-                      $scope.selectParamter = function() {
+                       $scope.selectParamter = function() {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
+
                        }
                        $scope.languages =parameterService.getSearchParameters();
                        $scope.clearSearch = function() {
@@ -32,7 +33,7 @@ app.controller('homeController', [
 
                        homeDataService.getOrderHeaderData().then(function (result) {
                            $scope.orders = result;
-                           alerting.addSuccess("Completed Order Data Header Request!");
+                          
                        });
                       
                        $scope.approvalDetail = function (id) {
@@ -41,24 +42,30 @@ app.controller('homeController', [
                            $('#approval-' + id).show();
 
                            $scope.activeTabId = '#approvalDetail-' + id;
+                        
                        };
 
                        var getOrderCounts = function () {
-                           alerting.addSuccess("Getting Order Counts!");
+                           
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
                                $scope.orderCounts = result;
-                               alerting.addSuccess("Completed Order Counts Request!");
+                               
                              
-                               angular.element($scope.activeTabId).trigger('click');
+                               $scope.activeTabId = '#approvalDetail-' + 6884;
                                if ($scope.activeTabId !== "") {
                                    angular.element($scope.activeTabId).trigger('click');
+                               }
+                               else {
+                                   angular.element(".ele-0").trigger('click');
+                               
                                }
                            }
                                ).finally(function() {
                                    kendo.mobile.application.pane.loader.hide();
                                });
                        }
+                      
                        getOrderCounts();
 
                        $scope.newOrderDetail = function (id) {
@@ -98,7 +105,7 @@ app.controller('homeController', [
 
                            if ($event.keyCode === 13) {
                                //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
-                               alerting.addSuccess("Searching ....");
+                              
                                $timeout(function () {
                                    getOrderCounts();
                                }, 1000);

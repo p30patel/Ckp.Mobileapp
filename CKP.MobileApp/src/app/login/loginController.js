@@ -127,6 +127,7 @@ app.controller('loginController', [
                        };
 
                        $scope.sendPassword = function () {
+                           $('#btnSendPassword').focus();
                            kendo.mobile.application.pane.loader.show();
                            var username = $scope.loginData.userName;
                            var email = $scope.loginData.email;
@@ -185,6 +186,7 @@ app.controller('loginController', [
                        }
                        //loign event
                        $scope.login = function () {
+                           $('#btnLogin').focus();
                            var loginData = {
                                userName: $scope.loginData.userName,
                                password: $scope.loginData.password,

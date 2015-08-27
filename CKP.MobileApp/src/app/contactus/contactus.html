@@ -142,12 +142,13 @@
    
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
-                ng-show="authentication.isAuth && helpDesk && helpDeskRegion == 'Europe'">
+        
+                ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Europe'">
                 <h3>{{form.helpDesk.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
-                           <p>{{helpDesk}}</p>
+                                <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
                         </td>
                     </tr>
                 </table>
@@ -185,12 +186,13 @@
           
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
-                ng-show="authentication.isAuth && helpDesk && helpDeskRegion == 'Asia'">
+            
+                   ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Asia'">
                 <h3>{{form.helpDesk.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
-                           <p>{{helpDesk}}</p>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
                         </td>
                     </tr>
                 </table>

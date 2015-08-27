@@ -4,6 +4,25 @@
 .km-nova .km-drawer .km-content{
     background-color : rgb(233, 233, 233)!important;
 }
+
+ .ck-i-signin:after,
+    .ck-i-signin:before
+    {
+        content: "\e0b2";      
+    }
+
+ .ck-i-email:after,
+    .ck-i-email:before
+    {
+        content: "\e099";
+          color:gray;
+    }
+ .ck-i-phone:after,
+    .ck-i-phone:before
+    {
+        content: "\e326";
+          color:gray;
+    }
 .alert-box {
   background: #f7f7f7;
   color: #333;
