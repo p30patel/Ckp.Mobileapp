@@ -1,9 +1,16 @@
 <kendo-mobile-view k-title="'Feedback'" k-layout="'default'" ng-controller="feedbackController">
-   <div style="margin:10px;">
-    <textarea rows="4" style="width: 90%;" ng-model="feedbackData.comment"></textarea><br>
-       <hr>
-
-        <kendo-button ng-click="send()" style="width: 90%;" k-float="'center'"  ng-disabled="!feedbackData.comment">Send Feedback</kendo-button>
-      
-    </div>
+    
+    <kendo-mobile-content>
+        <kendo-mobile-list-view k-style="'inset'" class="ck-drkgrey-wrap ck-no-border">
+            <li> 
+              <fieldset>
+                    <textarea placeholder="Have something to share? Let us know here" ng-model="feedbackData.comment" style="height: 150px;"></textarea>
+                </fieldset>
+            </li>
+            <li>
+            <i></i>
+                <kendo-mobile-button class="km-primary km-large km-justified" ng-click="send()">SEND</kendo-mobile-button>
+            </li>
+        </kendo-mobile-list-view>
+    </kendo-mobile-content>
 </kendo-mobile-view>

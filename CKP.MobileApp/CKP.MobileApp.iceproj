@@ -111,7 +111,6 @@
     <Content Include="src\vendor\angular.js" />
     <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
-    <Content Include="src\assests\styles\main.css" />
     <Content Include="styles\checknet.custom.css" />
     <Content Include="styles\images\back.png" />
     <Content Include="styles\images\checknet-icons.svg" />

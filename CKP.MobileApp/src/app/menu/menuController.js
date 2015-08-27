@@ -37,7 +37,7 @@ app.controller('menuController', [
                            $scope.authentication.isAuth = false;
 
 
-                           kendo.mobile.application.navigate("src/app/login/login.html", "slide");
+                           kendo.mobile.application.navigate("src/app/login/login.html");
 
                        }
 
