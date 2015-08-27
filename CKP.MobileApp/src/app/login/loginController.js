@@ -69,6 +69,7 @@ app.controller('loginController', [
                        $scope.loginData = {
                            userName: "",
                            password: "",
+                           useRefreshTokens : true
                        };
                        $scope.translations = {};
                        $scope.message = "";
