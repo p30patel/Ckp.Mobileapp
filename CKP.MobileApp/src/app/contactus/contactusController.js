@@ -1,10 +1,16 @@
 
-app.controller('contactusController', ['$scope', '$http','$sce', 'authService', 'localStorageService',
-    function ($scope, $http, $sce, authService, localStorageService) {
+app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService',
+    function ($scope, $http, $sce, authService, translateService, localStorageService) {
+
         $scope.form = {};
         $scope.authentication = authService.authentication;
         $scope.helpDesk = ""; //need to set help des
+
         $scope.helpDeskRegion = "USA";
+
+        $scope.form.title = {};
+        $scope.form.title.resoruceName = "Contact US";
+        $scope.form.title.resoruceValue = "Contact US";
 
         $scope.form.titleUS = {};
         $scope.form.titleUS.resoruceName = "United States";
@@ -69,7 +75,41 @@ app.controller('contactusController', ['$scope', '$http','$sce', 'authService', 
         $scope.form.forSetupStatus.resoruceName = "For set-up status";
         $scope.form.forSetupStatus.resoruceValue = "For set-up status";
 
-        $scope.HelpDesk = {};      
+        $scope.HelpDesk = {};
+
+
+        $scope.form.contactus = {};
+        $scope.form.contactus.resoruceName = "Contact Us";
+        $scope.form.contactus.resoruceValue = "Contact Us";
+
+        var translate = function () {
+            $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+            $scope.form.titleUS.resoruceValue = translateService.getResourceValue($scope.form.titleUS.resoruceName);
+            $scope.form.titleEU.resoruceValue = translateService.getResourceValue($scope.form.titleEU.resoruceName);
+            $scope.form.titleEU.resoruceValue = translateService.getResourceValue($scope.form.titleEU.resoruceName);
+            $scope.form.titleAsia.resoruceValue = translateService.getResourceValue($scope.form.titleAsia.resoruceName);
+
+            $scope.form.writeEmail.resoruceValue = translateService.getResourceValue($scope.form.writeEmail.resoruceName);
+            $scope.form.subTitileUS.resoruceValue = translateService.getResourceValue($scope.form.subTitileUS.resoruceName);
+            $scope.form.subTitileUSStatus.resoruceValue = translateService.getResourceValue($scope.form.subTitileUSStatus.resoruceName);
+            $scope.form.subTitileUSCollection.resoruceValue = translateService.getResourceValue($scope.form.subTitileUSCollection.resoruceName);
+
+
+            $scope.form.helpDesk.resoruceValue = translateService.getResourceValue($scope.form.helpDesk.resoruceName);
+            $scope.form.address.resoruceValue = translateService.getResourceValue($scope.form.address.resoruceName);
+            $scope.form.phone.resoruceValue = translateService.getResourceValue($scope.form.phone.resoruceName);
+
+            $scope.form.fax.resoruceValue = translateService.getResourceValue($scope.form.fax.resoruceName);
+            $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
+            $scope.form.toFaxApplication.resoruceValue = translateService.getResourceValue($scope.form.toFaxApplication.resoruceName);
+
+            $scope.form.forSetupStatus.resoruceValue = translateService.getResourceValue($scope.form.forSetupStatus.resoruceName);
+
+
+        }
+        translate();
+
         //address
         var getHelpDesk = function () {
 

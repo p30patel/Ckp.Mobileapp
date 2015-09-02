@@ -34,11 +34,10 @@ app.controller('loginController', [
 
                        $scope.form.email = {};
                        $scope.form.email.resoruceName = "Email";
-                       $scope.form.email.resoruceValue = "Email";
-
+                   
                        $scope.form.receiveNewPasswordText = {};
                        $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
-                       $scope.form.receiveNewPasswordText.resoruceValue = "Please enter your email address to receive a new password";
+                       $scope.form.receiveNewPasswordText.resoruceValue = "";
 
                        $scope.form.forgotYourPassword = {};
                        $scope.form.forgotYourPassword.resoruceName = "Forgot Your Password";
@@ -176,9 +175,13 @@ app.controller('loginController', [
                                $scope.form.passwordHint.resoruceValue = translateService.getResourceValue($scope.form.passwordHint.resoruceName);
                                $scope.form.signin.resoruceValue = translateService.getResourceValue($scope.form.signin.resoruceName);
                                $scope.form.remmberMe.resoruceValue = translateService.getResourceValue($scope.form.remmberMe.resoruceName);
+
+                               $scope.form.receiveNewPasswordText.resoruceValue = translateService.getResourceValue($scope.form.receiveNewPasswordText.resoruceName);
+                             
                            });
                        }
-                       translatePage();
+                       translatePage(); // translate page first time
+
 
                        $scope.translatePage = function () {
                            translatePage();

@@ -1,9 +1,16 @@
 app.controller('menuController', [
-                   '$scope', 'authService', 'localStorageService',
-                   function ($scope, authService, localStorageService) {
+                   '$scope', 'authService', 'translateService', 'localStorageService',
+                   function ($scope, authService, translateService, localStorageService) {
+                       $scope.form = {};
+
                        $scope.menu = {};
+
                        $scope.menu.title = 'Check-Net';
-                       $scope.menu.contactus = "Contact Us";
+
+                       $scope.form.contactus = {};
+                       $scope.form.contactus.resoruceName = "Contact Us";
+                       $scope.form.contactus.resoruceValue = "Contact Us";
+
                        $scope.menu.faq = "FAQ's";
                        $scope.menu.termsCondition = "Terms \& Conditions";
                        $scope.menu.policies = "Policies";
@@ -15,6 +22,15 @@ app.controller('menuController', [
 
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
+
+
+                    
+                       var translate = function () {                          
+                           $scope.form.contactus.resoruceValue = translateService.getResourceValue($scope.form.contactus.resoruceName);
+                          
+                       }
+                       translate();
+
                        //address
                        var getOrganizationDetail = function () {
                          
