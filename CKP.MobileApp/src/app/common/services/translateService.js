@@ -218,7 +218,7 @@ app.factory('translateService',
             //    console.log('Update Version' + data.CultureName + data.RowVersion)
             
             }
-           
+            console.log('ref' + data.RefereshPeriod);
             return data;
         }
 
@@ -229,25 +229,29 @@ app.factory('translateService',
 
             //localStorage.clear();
 
-            var versionData = getVersion(cultureName, version, false);
-            version = versionData.RowVersion;
-            forceReferesh = false;
+            var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
 
+            version = versionData.RowVersion;
+
+            var forceReferesh = false; // refresh the page once a day
+        
             if (versionData) {
                 version = versionData.RowVersion;
                 var resources = versionData.ResourceList;
-
-                if (resources.length > 0) {
+              
+                if (resources.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
                     resourceData = resources;
 
                     deferred.resolve(resources);
                 }
                 else {
+                    
                     forceReferesh = true;
                 }
 
             }
             if (forceReferesh) {
+                console.log('force server refrrsh' + forceReferesh);
                 forceGetResourceUpdates(cultureName, version).then(function (result) {
                 
                     resourceData = result;
