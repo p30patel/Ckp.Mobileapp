@@ -56,7 +56,7 @@ app.controller('loginController', [
                        $scope.form.copyRightsDescription.resoruceName = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
                        $scope.form.copyRightsDescription.resoruceValue = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
 
-                      
+                       
                        //end page html 
                        var d = new Date();
                        $scope.year = d.getFullYear();
@@ -205,9 +205,11 @@ app.controller('loginController', [
                                kendo.mobile.application.pane.loader.hide();
                              
                            }).catch(function (err) {
-                              
-                               $scope.message = err.error_description;
-                               alerting.addWarning(err.error_description, 5000);
+                             
+                               
+                                   $scope.message = err.error_description;
+                                   alerting.addWarning(err.error_description, 5000);
+                             
                                kendo.mobile.application.pane.loader.hide();
                            });
                        };
