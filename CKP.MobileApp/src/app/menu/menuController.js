@@ -9,27 +9,44 @@ app.controller('menuController', [
 
                        $scope.form.contactus = {};
                        $scope.form.contactus.resoruceName = "Contact Us";
-                       $scope.form.contactus.resoruceValue = "Contact Us";
+                       $scope.form.contactus.resoruceValue = translateService.getResourceValue($scope.form.contactus.resoruceName);
+                     
+                       $scope.form.faq = {};
+                       $scope.form.faq.resoruceName = "FAQ";
+                       $scope.form.faq.resoruceValue = translateService.getResourceValue($scope.form.faq.resoruceName);
 
-                       $scope.menu.faq = "FAQ's";
-                       $scope.menu.termsCondition = "Terms \& Conditions";
-                       $scope.menu.policies = "Policies";
-                       $scope.menu.help = "Help";
-                       $scope.menu.notificationSettings = "Notification Settings";
-                       $scope.menu.feedback = "Feedback";
+                
+                       $scope.menu.termsCondition = "Terms & Conditions";
+
+                       $scope.form.termsCondition = {};
+                       $scope.form.termsCondition.resoruceName = "Terms & Conditions";
+                       $scope.form.termsCondition.resoruceValue = translateService.getResourceValue($scope.form.termsCondition.resoruceName);
+
+              
+                       $scope.form.policies = {};
+                       $scope.form.policies.resoruceName = "Policies";
+                       $scope.form.policies.resoruceValue = translateService.getResourceValue($scope.form.policies.resoruceName);
+
+
+                       $scope.form.help = {};
+                       $scope.form.help.resoruceName = "Help";
+                       $scope.form.help.resoruceValue = translateService.getResourceValue($scope.form.help.resoruceName);
+
+                      
+                       $scope.form.notificationSettings = {};
+                       $scope.form.notificationSettings.resoruceName = "Notification Settings";
+                       $scope.form.notificationSettings.resoruceValue = translateService.getResourceValue($scope.form.notificationSettings.resoruceName);
+
+                   
+                       $scope.form.feedback = {};
+                       $scope.form.feedback.resoruceName = "Feedback";
+                       $scope.form.feedback.resoruceValue = translateService.getResourceValue($scope.form.feedback.resoruceName);
 
                        $scope.authentication = authService.authentication;
 
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
 
-
-                    
-                       var translate = function () {                          
-                           $scope.form.contactus.resoruceValue = translateService.getResourceValue($scope.form.contactus.resoruceName);
-                          
-                       }
-                       translate();
 
                        //address
                        var getOrganizationDetail = function () {

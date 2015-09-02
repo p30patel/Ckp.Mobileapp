@@ -1,15 +1,15 @@
-<kendo-mobile-view k-title="'Feedback'" k-layout="'default'" ng-controller="feedbackController">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="feedbackController">
     
     <kendo-mobile-content>
         <kendo-mobile-list-view k-style="'inset'" class="ck-drkgrey-wrap ck-no-border">
             <li> 
               <fieldset>
-                    <textarea placeholder="Have something to share? Let us know here" ng-model="feedbackData.comment" style="height: 150px;"></textarea>
+                    <textarea placeholder="{{form.feedback.resoruceValue}}" ng-model="feedbackData.comment" style="height: 150px;"></textarea>
                 </fieldset>
             </li>
             <li>
             <i></i>
-                <kendo-mobile-button class="km-primary km-large km-justified" ng-click="send()">SEND</kendo-mobile-button>
+                <kendo-mobile-button class="km-primary km-large km-justified" ng-click="send()">{{form.send.resoruceValue}}</kendo-mobile-button>
             </li>
         </kendo-mobile-list-view>
     </kendo-mobile-content>

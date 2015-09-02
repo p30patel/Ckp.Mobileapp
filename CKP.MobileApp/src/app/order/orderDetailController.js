@@ -1,7 +1,21 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService','$sce', 'alerting',
-                   function($scope, authService, orderDataService, $sce, alerting) {   
+                   '$scope', 'authService', 'orderDataService','$sce', 'alerting', 'translateService',
+                   function ($scope, authService, orderDataService, $sce, alerting, translateService) {
+
+                       $scope.form = {};
+
+                       $scope.form.title = {};
+                       $scope.form.title.resoruceName = "Order Detail";
+                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+
+                       $scope.form.noData = {};
+                       $scope.form.noData.resoruceName = "No Data are found";
+                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
+
+
                        $scope.order = {};
                   
                        $scope.order.hasApproval = false;

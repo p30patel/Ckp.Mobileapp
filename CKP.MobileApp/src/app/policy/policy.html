@@ -1,26 +1,23 @@
-<kendo-mobile-view k-title="'Policy'" k-layout="'default'" ng-controller="policyController">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="policyController">
   
-   <kendo-mobile-content>
-        <kendo-mobile-list-view class="km-grey-box">
+   
+    <kendo-mobile-content>
+        <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
             <li>
-                <p>Please click to view detail description</p>
+                <p>{{form.policyInstructions.resoruceValue}}</p>
             </li>
         </kendo-mobile-list-view>
 
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
+                    ng-show="policies" ng-repeat="policy in policies.Resources" ng-if="$index != 2">
+                   <h3>{{policy.ResourceName}}</h3>
+                  <p ng-bind-html="renderHtml(policy.ResourceValue.ResourceValue)"></p>
 
-      <div ng-show="policies" ng-repeat="policy in policies.Resources" ng-if="$index != 2">
-        <kendo-mobile-list-view>
-           
-       <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3>{{policy.ResourceName}}</h3>
-          
-                    <p ng-bind-html="renderHtml(policy.ResourceValue.ResourceValue)"></p>
-                  
-      </kendo-mobile-collapsible>
-             </kendo-mobile-list-view>
-          </div>
+                </kendo-mobile-collapsible>
      <div ng-show="!policies">
-         No data found
+           <p>{{form.noData.resoruceValue}}</p>
      </div>
+
+
                
     </kendo-mobile-content></kendo-mobile-view>

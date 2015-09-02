@@ -1,7 +1,20 @@
 
 app.controller('approveController', [
-                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce', 'alerting',
-                   function($scope, authService, orderDataService, homeDataService, $sce, alerting) {   
+                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce', 'alerting', 'translateService',
+function ($scope, authService, orderDataService, homeDataService, $sce, alerting, translateService) {
+
+                       $scope.form = {};
+
+                       $scope.form.title = {};
+                       $scope.form.title.resoruceName = "Apporval";
+                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+
+                       $scope.form.noData = {};
+                       $scope.form.noData.resoruceName = "No Data are found";
+                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
+
                        $scope.order = {};
                        
                        $scope.order.hasApproval = false;

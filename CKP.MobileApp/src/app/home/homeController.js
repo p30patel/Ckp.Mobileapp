@@ -11,7 +11,13 @@ app.controller('homeController', [
                        };
                        init();
                        
-                       $scope.title = 'Home';
+                       $scope.form = {};
+
+                       $scope.form.title = {};
+                       $scope.form.title.resoruceName = "Home";
+                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+
                        $scope.message = "";
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";

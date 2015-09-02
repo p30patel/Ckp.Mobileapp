@@ -200,10 +200,12 @@ app.controller('loginController', [
 
                            $scope.passwordHint = "";
                            authService.login($scope.loginData).then(function (response) {
+                               
                                kendo.mobile.application.navigate("src/app/home/home.html");
                                kendo.mobile.application.pane.loader.hide();
                              
                            }).catch(function (err) {
+                              
                                $scope.message = err.error_description;
                                alerting.addWarning(err.error_description, 5000);
                                kendo.mobile.application.pane.loader.hide();

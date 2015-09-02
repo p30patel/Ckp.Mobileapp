@@ -1,10 +1,10 @@
-<kendo-mobile-view k-title="'FAQ'" ng-controller="faqController" k-layout="'default'">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="faqController" k-layout="'default'">
 
     <kendo-mobile-content>
 
         <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
             <li>
-                <p>The following list is meant as a guide for new and existing CheckNet users. The list is not exhaustive and will be updated periodically to address common questions and to accommodate the addition of functionality.</p>
+                <p>{{form.faqInstructions.resoruceValue}}</p>
             </li>
 
 
@@ -18,7 +18,7 @@
         </kendo-mobile-list-view>
    
         <div ng-show="!faqs">
-            No data found
+          <p>{{form.noData.resoruceValue}}</p>
         </div>
 
     </kendo-mobile-content>

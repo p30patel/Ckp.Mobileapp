@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'Terms and Condition'" k-layout="'default'" ng-controller="termsConditionController">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="termsConditionController">
      <kendo-mobile-content>
         <kendo-mobile-list-view ng-show="termsCondition" ng-repeat="terms in termsCondition.Resources" ng-if="$index == 2">
             <li>
@@ -8,7 +8,7 @@
         </kendo-mobile-list-view>
   
     <div ng-show="!termsCondition">
-        No data found
+          <p>{{form.noData.resoruceValue}}</p>
     </div>
          </kendo-mobile-content>
 </kendo-mobile-view>
