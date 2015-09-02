@@ -5,6 +5,8 @@ app.factory("policyTermsDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var policyTermsDataService = {};
+                    var refereshPeriod = new Date().getDay() % 2 == 0;
+                   
 
                     var forceGetpolicyTerms = function () {
                         var deferred = $q.defer();
@@ -16,7 +18,7 @@ app.factory("policyTermsDataService", [
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetResourceCultureTextUpdate?cultureName=' + cultureName
                             + '&rowVersionTerms=' + rowVersionTerms + '&rowVersionPrivacy=' + rowVersionPrivacy + '&rowVersionReturn=' + rowVersionReturn
                             ).success(function (result) {
-                                localStorageService.set('policyTerms' + new Date().getDay , result);
+                                localStorageService.set('policyTerms' + refereshPeriod, result);
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -26,13 +28,20 @@ app.factory("policyTermsDataService", [
                     };
                     var getPolicyTerms = function () {
                         var deferred = $q.defer();
-
-                        var policyTerms = localStorageService.get('policyTerms' + new Date().getDay);
+                       
+                        var policyTerms = localStorageService.get('policyTerms' + refereshPeriod);
                        
                         if (policyTerms) {
+                            
                             deferred.resolve(policyTerms);
                         } else {
+
+                            var previous = localStorageService.get('policyTerms' + !refereshPeriod);
+                            if (previous) {
+                                localStorageService.remove('policyTerms' + !refereshPeriod);                               
+                            }                            
                             forceGetpolicyTerms().then(function (result) {
+                           
                                 deferred.resolve(result);
                             });
                         }

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles/kendo.mobile.nova.min.css">
     <link rel="stylesheet" href="styles/checknet.custom.css">
-     <link rel="stylesheet" href="src/assests/styles/main.css">
+    <link rel="stylesheet" href="src/assests/styles/main.css">
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
@@ -32,7 +32,7 @@
     <script src="src/app/common/services/translateService.js"></script>
     <script src="src/app/common/services/alerting.js"></script>
     <script src="src/app/common/services/faqDataService.js"></script>
-    
+
     <script src="src/app/common/services/policyTermsDataService.js"></script>
     <script src="src/app/common/services/feedbackDataService.js"></script>
 
@@ -58,10 +58,10 @@
     <script src="src/app/termsCondition/termsConditionController.js"></script>
 </head>
 <body kendo-mobile-application ng-app="app" k-initial="'src/app/home/home.html'" k-hash-bang="true" k-skin="'nova'">
-  
+
     <!-- layout default -->
 
-    <kendo-mobile-layout k-id="'default'" ng-controller="menuController"  k-transition="'slide'">
+    <kendo-mobile-layout k-id="'default'" ng-controller="menuController" k-transition="'slide'">
           <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
                 <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="ck-icon ck-menu" data-rel="drawer" data-align="left">
@@ -80,7 +80,7 @@
     <!-- application drawer and contents -->
 
 
-    <kendo-mobile-drawer id="right-drawer" style="width: 270px" ng-controller="menuController" >
+    <kendo-mobile-drawer id="right-drawer" style="width: 270px" ng-controller="menuController">
            <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
                <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="checknet-icon icon-menu" data-rel="drawer" data-align="left">
@@ -139,9 +139,10 @@
      <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress">
             <li>
                <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;" >
-                <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />
+               <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
                 <h5>{{organizationDetail.Address.Name}}</h5> 
-                <h5>{{organizationDetail.Address.Street1}}{{organizationDetail.Address.Street2}}</h5>
+                <h5>{{organizationDetail.Address.Street1}}</h5>
+                <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
                 <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
                 <h5><span class="km-icon ck-i-phone"></span> {{organizationDetail.Address.Phone}}</h5>
                 <h5><span class="km-icon ck-i-email" style="background-color: black;"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
@@ -150,8 +151,8 @@
             </li>
         </ul>
         </kendo-mobile-drawer>
-  
+
 
 </body>
- 
+
 </html>

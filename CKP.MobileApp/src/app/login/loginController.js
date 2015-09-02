@@ -7,9 +7,7 @@ app.controller('loginController', [
                        //login page html lables
                        $scope.loginData = {};
                        $scope.form = {};
-                       $scope.form.login = {};
-                       $scope.form.login.resoruceName = "Login";
-                       $scope.form.login.resoruceValue = "Login";
+                
                        $scope.form.username = {};
                        $scope.form.username.resoruceName = "User Name";
                        $scope.form.username.resoruceValue = "User Name";
@@ -26,7 +24,7 @@ app.controller('loginController', [
                        $scope.form.passwordHint.resoruceValue = "Password Hint";
 
                        $scope.form.signin = {};
-                       $scope.form.signin.resoruceName = "[Not Set]";
+                       $scope.form.signin.resoruceName = "Log In";
                        $scope.form.signin.resoruceValue = "Log In";
 
                        $scope.form.remmberMe = {};
@@ -171,8 +169,8 @@ app.controller('loginController', [
 
                            localStorageService.set('selectedLanguage', $scope.selectedLanague);
 
-                           translateService.getResourceUpdates(selectedLanague, rowVersion).then(function () {
-                               $scope.form.login.resoruceValue = translateService.getResourceValue($scope.form.login.resoruceName);
+                           translateService.getResourceUpdates(selectedLanague, rowVersion).then(function (result) {
+                           
                                $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);
                                $scope.form.password.resoruceValue = translateService.getResourceValue($scope.form.password.resoruceName);
                                $scope.form.passwordHint.resoruceValue = translateService.getResourceValue($scope.form.passwordHint.resoruceName);
