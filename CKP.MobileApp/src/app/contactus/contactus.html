@@ -1,5 +1,4 @@
-
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController" >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController">
      
       <kendo-mobile-content>
         <kendo-mobile-list-view class="km-no-border km-grey-box">
@@ -87,11 +86,11 @@
                <!--    EU-->
         <kendo-mobile-list-view class="eu contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3>Europe</h3>
+                  <h3>{{form.subTitileEU.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
-                            <h4 class="km-bold-font">Checkpoint Systems Europe:</h4>
+                      
                             <h4 class="km-light-font">Akkermansbeekweg 12</h4>
                             <h4 class="km-light-font">7061 ZA Terborg</h4>
                             <h4 class="km-light-font">Nederland</h4>
@@ -109,7 +108,7 @@
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>Global Printing Set-Up/Credit Applications Europe</h3>
+                <h3>{{form.subTitileEUSetup.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
@@ -126,7 +125,7 @@
             </kendo-mobile-collapsible>
 
              <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>CheckNet Global Printing Order Information/Order Status USA</h3>
+                 <h3>{{form.subTitileEUStatus.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
@@ -157,11 +156,11 @@
            <!-- Hk--->
                 <kendo-mobile-list-view class="hk contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3>Hong Kong</h3>
+               <h3>{{form.subTitileHK.resoruceValue}}</h3>
                 <table class="match-details">
                     <tr>
                         <td>
-                            <h4 class="km-bold-font">CheckNet Global Printing Order Information/Order Status HK :</h4>
+                        
                             <h4 class="km-light-font">Checkpoint Systems Hong Kong Ltd.</h4>
                             <h4 class="km-light-font">4/F., Blk.A, Shatin Industrial Centre</h4>
                             <h4 class="km-light-font">5-7 Yuen Shun Circuit</h4>

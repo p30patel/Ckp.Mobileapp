@@ -46,6 +46,27 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.subTitileUSCollection.resoruceName = "Credit and Collections Department";
         $scope.form.subTitileUSCollection.resoruceValue = "Credit and Collections Department";
 
+        $scope.form.subTitileEU = {};
+        $scope.form.subTitileEU.resoruceName = "Checkpoint Systems Europe";
+        $scope.form.subTitileEU.resoruceValue = "Checkpoint Systems Europe";
+
+
+        $scope.form.subTitileEUSetup = {};
+        $scope.form.subTitileEUSetup.resoruceName = "Global Printing Set-Up/Credit Applications Europe";
+        $scope.form.subTitileEUSetup.resoruceValue = "Global Printing Set-Up/Credit Applications Europe";
+
+
+
+        $scope.form.subTitileEUStatus = {};
+        $scope.form.subTitileEUStatus.resoruceName = "CheckNet Global Printing Order Information/Order Status USA";
+        $scope.form.subTitileEUStatus.resoruceValue = "CheckNet Global Printing Order Information/Order Status USA";
+
+
+        $scope.form.subTitileHK = {};
+        $scope.form.subTitileHK.resoruceName = "CheckNet Global Printing Order Information/Order Status HK";
+        $scope.form.subTitileHK.resoruceValue = "CheckNet Global Printing Order Information/Order Status HK";
+
+
         $scope.form.helpDesk = {};
         $scope.form.helpDesk.resoruceName = "Help Desk";
         $scope.form.helpDesk.resoruceValue = "Help Desk";
@@ -94,6 +115,11 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             $scope.form.subTitileUS.resoruceValue = translateService.getResourceValue($scope.form.subTitileUS.resoruceName);
             $scope.form.subTitileUSStatus.resoruceValue = translateService.getResourceValue($scope.form.subTitileUSStatus.resoruceName);
             $scope.form.subTitileUSCollection.resoruceValue = translateService.getResourceValue($scope.form.subTitileUSCollection.resoruceName);
+
+            $scope.form.subTitileEU.resoruceValue = translateService.getResourceValue($scope.form.subTitileEU.resoruceName);
+            $scope.form.subTitileEUSetup.resoruceValue = translateService.getResourceValue($scope.form.subTitileEUSetup.resoruceName);
+            $scope.form.subTitileEUStatus.resoruceValue = translateService.getResourceValue($scope.form.subTitileEUStatus.resoruceName);
+            $scope.form.subTitileHK.resoruceValue = translateService.getResourceValue($scope.form.subTitileHK.resoruceName);
 
 
             $scope.form.helpDesk.resoruceValue = translateService.getResourceValue($scope.form.helpDesk.resoruceName);
