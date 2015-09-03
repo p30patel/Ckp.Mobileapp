@@ -136,7 +136,7 @@ app.factory('translateService',
             //update version
             var oldItems = JSON.parse(localStorage.getItem(cultureName)) || [];
 
-            var version = getVersion(cultureName, rowVersion, oldItems, refereshPeriod, true);
+            var version = getVersion(cultureName, rowVersion, oldItems, !refereshPeriod, true);
         
             //retruns the resources
            

@@ -140,7 +140,7 @@ app.factory("faqDataService", [
                         //update version
                         var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
 
-                        var version = getFaqData(cultureName, rowVersion, oldItems, refereshPeriod, true);
+                        var version = getFaqData(cultureName, rowVersion, oldItems, !refereshPeriod, true);
 
                         return oldItems;
                     }
