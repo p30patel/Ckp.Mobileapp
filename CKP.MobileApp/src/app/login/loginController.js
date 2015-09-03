@@ -168,9 +168,9 @@ app.controller('loginController', [
                            var rowVersion = "";
                        
                            localStorageService.set('selectedLanguage', selectedLanague);
-                          
+                           kendo.mobile.application.pane.loader.show();
                            translateService.getResourceUpdates(selectedLanague, rowVersion).then(function (result) {
-                           
+                              
                                $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);
                                $scope.form.password.resoruceValue = translateService.getResourceValue($scope.form.password.resoruceName);
                                $scope.form.passwordHint.resoruceValue = translateService.getResourceValue($scope.form.passwordHint.resoruceName);
@@ -178,7 +178,14 @@ app.controller('loginController', [
                                $scope.form.remmberMe.resoruceValue = translateService.getResourceValue($scope.form.remmberMe.resoruceName);
 
                                $scope.form.receiveNewPasswordText.resoruceValue = translateService.getResourceValue($scope.form.receiveNewPasswordText.resoruceName);
-                             
+
+
+                               $scope.form.copyRightsDescription.resoruceValue = translateService.getResourceValue($scope.form.copyRightsDescription.resoruceName);
+                               $scope.form.copyRightsText.resoruceValue = translateService.getResourceValue($scope.form.copyRightsText.resoruceName);
+                               $scope.form.sendNewPassword.resoruceValue = translateService.getResourceValue($scope.form.sendNewPassword.resoruceName);
+                               $scope.form.forgotYourPassword.resoruceValue = translateService.getResourceValue($scope.form.forgotYourPassword.resoruceName);
+                               $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
+                               kendo.mobile.application.pane.loader.hide();
                            });
                        }
                        translatePage(); // translate page first time
