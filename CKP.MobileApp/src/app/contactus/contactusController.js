@@ -9,7 +9,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.helpDeskRegion = "USA";
 
         $scope.form.title = {};
-        $scope.form.title.resoruceName = "Contact US";
+        $scope.form.title.resoruceName = "Contact Us";
         $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
         $scope.form.titleUS = {};

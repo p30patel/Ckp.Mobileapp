@@ -185,6 +185,7 @@ app.controller('loginController', [
                                $scope.form.sendNewPassword.resoruceValue = translateService.getResourceValue($scope.form.sendNewPassword.resoruceName);
                                $scope.form.forgotYourPassword.resoruceValue = translateService.getResourceValue($scope.form.forgotYourPassword.resoruceName);
                                $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
+
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
