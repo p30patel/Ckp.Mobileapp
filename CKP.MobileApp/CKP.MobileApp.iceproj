@@ -59,6 +59,9 @@
     <Content Include="kendo\styles\images\wp8_icons.png" />
     <Content Include="kendo\styles\images\wp8_inverseicons.png" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\app.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="src\app\app.js" />
     <Content Include="src\app\common\directives\alerting.js" />
     <Content Include="src\app\common\directives\alerts.html" />

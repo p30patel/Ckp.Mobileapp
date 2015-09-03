@@ -10,14 +10,12 @@ app.factory("faqDataService", [
 
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
                     var cultureName = 'en-US';
-                    
+                    var faqData = {};
                     var forceGetFaqs = function (cultureName, rowVersion) {
                         var deferred = $q.defer();
                       
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName + '&rowVersion=' + rowVersion
                             ).success(function (result) {
-
-                              
                                 var resources = addFaqs(cultureName, result.RowVersion, result);
                                 deferred.resolve(resources);
                              
@@ -56,18 +54,21 @@ app.factory("faqDataService", [
                         var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
 
                         var newItem = {
-                            'ResourceName': '',
-                            'ResourceValue': ''
+                            'Question': '',
+                            'Answer': '',
+                            'DisplayOrder' : 0,
+                            
                         };
                         if (oldItems.length == 0) { //add blank entry
                             oldItems.push(newItem);
                         }
 
                         var newResources = []; // storiing resource name and values in Array
-                        angular.forEach(resourceList, function (item) {
+                        angular.forEach(faqList.FaqLists, function (item) {
                             var item = {
-                                "ResourceName": item.ResourceName,
-                                "ResourceValue": item.ResourceValue
+                                "Question": item.Question,
+                                "Answer": item.Answer,
+                                'DisplayOrder': item.DisplayOrder
                             }
                             newResources.push(item);
                         });
@@ -86,10 +87,10 @@ app.factory("faqDataService", [
                                 }
                                 else {
                                     var itemExisted = false;
-                                    angular.forEach(engItems, function (newitem) {
+                                    angular.forEach(newResources, function (newitem) {
                                         if (!itemExisted) {
                                             angular.forEach(engItems, function (olditem) {
-                                                if (engItems.ResourceName === newitem.ResourceName) {
+                                                if (olditem.DisplayOrder === newitem.DisplayOrder) {
                                                     // item exist - no actions 
                                                     itemExisted = true;
                                                 }
@@ -97,15 +98,15 @@ app.factory("faqDataService", [
 
                                             if (!itemExisted) {
                                                 var ritem = {
-                                                    "ResourceName": newitem.ResourceName,
-                                                    "ResourceValue": newitem.ResourceValue
+                                                    "Question": newitem.Question,
+                                                    "Answer": newitem.Answer,
+                                                    'DisplayOrder': newitem.DisplayOrder
                                                 }
                                                 newResources.push(ritem);
 
                                                 itemExisted = false;
                                             }
                                         }
-
                                     });
                                     localStorage.setItem('faq-' + cultureName, JSON.stringify(newResources));
                                     console.log('set new list - no old - updated with eng ' + newResources.length);
@@ -128,17 +129,19 @@ app.factory("faqDataService", [
                                 angular.forEach(newResources, function (newitem) {
                                     if (!itemExisted) {
                                         angular.forEach(oldItems, function (olditem) {
-                                            if (olditem.ResourceName === newitem.ResourceName && olditem.resourceValue != newitem.ResourceValue) {
+                                            if (olditem.DisplayOrder === newitem.DisplayOrder && newitem.Question.length > 0 ) {
                                                 // item exist - no actions 
-                                                olditem.ResourceValue = newitem.ResourceValue;
+                                                olditem.Answer = newitem.Answer;
+                                                olditem.Question = newitem.Question;
                                                 itemExisted = true;
                                             }
                                         });
 
                                         if (!itemExisted) {
                                             var ritem = {
-                                                "ResourceName": newitem.ResourceName,
-                                                "ResourceValue": newitem.ResourceValue
+                                                "Question": newitem.Question,
+                                                "Answer": newitem.Answer,
+                                                'DisplayOrder': newitem.DisplayOrder
                                             }
                                             oldItems.push(ritem);
 
@@ -160,7 +163,10 @@ app.factory("faqDataService", [
 
                         var version = getFaqData(cultureName, rowVersion, oldItems, refereshPeriod, true);
 
-                       
+                        angular.forEach(oldItems, function (item) {
+                            console.log(item.Question);
+
+                        });
                         return oldItems;
                     }
                     var getFaqData = function (cultureName, rowVersion, faqList, refereshPeriod, hasUpdate) {
@@ -171,11 +177,11 @@ app.factory("faqDataService", [
                             "CultureName": cultureName,
                             "RowVersion": '',
                             "RefereshPeriod": refereshPeriod,
-                            "FaqList": ''
+                            "FaqLists": ''
 
                         };
 
-                        hasExitedItem = false;
+                        var hasExitedItem = false;
                         if (versions.length > 0) {
                             //existed then retruns the values 
                             angular.forEach(versions, function (item) {
@@ -185,16 +191,16 @@ app.factory("faqDataService", [
                                     if (hasUpdate) {
                                         item.RowVersion = rowVersion;
                                         item.RefereshPeriod = refereshPeriod
-                                        item.ResourceList = resouceList
+                                        item.FaqList = faqList
                                         data.RowVersion = rowVersion;
                                         data.RefereshPeriod = refereshPeriod;
-                                        data.ResourceList = resouceList;
+                                        data.FaqList = faqList;
                                     }
                                     else {
                                         data.CultureName = cultureName;
                                         data.RowVersion = item.RowVersion;
                                         data.RefereshPeriod = item.RefereshPeriod;
-                                        data.ResourceList = item.ResourceList;
+                                        data.FaqList = item.FaqList;
                                     }
                                 }
 
@@ -217,26 +223,25 @@ app.factory("faqDataService", [
 
                     var getFaqs = function () {
 
-                        currentCultureName = cultureName;
-
                         var deferred = $q.defer();
-
-                        //localStorage.clear();
-
+                        cultureName = translateService.getCurrentCultureName();
+                     
+                        var version = '';
                         var versionData = getFaqData(cultureName, version, [], refereshPeriod, false);
 
                         version = versionData.RowVersion;
 
-                        var forceReferesh = false; // refresh the page once a day
-
+                        var forceReferesh = faqData; // refresh the page once a day
+                      
+                       
                         if (versionData) {
                             version = versionData.RowVersion;
-                            var resources = versionData.ResourceList;
+                            var faqs = versionData.FaqList;
 
-                            if (resources.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
-                                resourceData = resources;
+                            if (faqs.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
+                                faqData = faqs;
 
-                                deferred.resolve(resources);
+                                deferred.resolve(faqs);
                             }
                             else {
 
@@ -248,7 +253,7 @@ app.factory("faqDataService", [
                             console.log('force server refrrsh' + forceReferesh);
                             forceGetFaqs(cultureName, version).then(function (result) {
 
-                                resourceData = result;
+                                faqData = result;
                                 deferred.resolve(result);
 
                             });

@@ -6,10 +6,8 @@
             <li>
                 <p>{{form.faqInstructions.resoruceValue}}</p>
             </li>
-
-
                 <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
-                    ng-show="faqs" ng-repeat="faq in faqs.FaqLists | orderBy : 'DisplayOrder'">
+                    ng-show="faqs" ng-repeat="faq in faqs | orderBy : 'DisplayOrder'">
                     <h3>{{faq.Question}}</h3>
                     <p ng-bind-html="renderHtml(faq.Answer)"></p>
 

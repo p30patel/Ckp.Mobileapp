@@ -63,10 +63,10 @@ app.factory('translateService',
                     }
                     else {
                         var itemExisted = false;
-                        angular.forEach(engItems, function (newitem) {
+                        angular.forEach(newResources, function (newitem) {
                             if (!itemExisted) {
                                 angular.forEach(engItems, function (olditem) {
-                                    if (engItems.ResourceName === newitem.ResourceName) {
+                                    if (olditem.ResourceName === newitem.ResourceName) {
                                         // item exist - no actions 
                                         itemExisted = true;
                                     }
@@ -149,14 +149,6 @@ app.factory('translateService',
             var resources = JSON.parse(localStorage.getItem(cultureName));
             var hasForceRefresh = true;
          
-            //if (resources.length > 0  && !hasForceRefresh)
-            //{
-            //    alert('ger resoruce local : ' + resources.length);
-            //    return (resources); 
-            //}
-            //else {
-            //    hasForceRefresh = true;
-            //}
             if (hasForceRefresh)
             {
             
