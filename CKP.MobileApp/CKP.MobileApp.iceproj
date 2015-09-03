@@ -110,6 +110,9 @@
     <Content Include="src\app\policy\policyController.js" />
     <Content Include="src\app\termsCondition\termsCondition.html" />
     <Content Include="src\app\termsCondition\termsConditionController.js" />
+    <Content Include="src\assests\styles\main.css">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="src\vendor\angular-local-storage.js" />
     <Content Include="src\vendor\angular-route.js" />
     <Content Include="src\vendor\angular.js" />
@@ -132,13 +135,6 @@
     <Content Include="styles\images\wp8_inverseicons.png" />
     <Content Include="styles\kendo.mobile.nova.min.css" />
     <Content Include="styles\nova.reference.css" />
-    <Content Include="views\contact-us.html" />
-    <Content Include="views\faqs.html" />
-    <Content Include="views\feedback.html" />
-    <Content Include="views\main-menu.html" />
-    <Content Include="views\policies.html" />
-    <Content Include="views\settings.html" />
-    <Content Include="views\terms.html" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App_Resources\Android\drawable-hdpi\icon.png" />
@@ -223,7 +219,6 @@
     <Folder Include="src\vendor\" />
     <Folder Include="styles\" />
     <Folder Include="styles\images\" />
-    <Folder Include="views\" />
   </ItemGroup>
   <Import Project="$(IceniumTargets)Build.targets" />
 </Project>
