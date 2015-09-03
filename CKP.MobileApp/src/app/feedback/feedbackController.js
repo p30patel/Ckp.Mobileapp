@@ -14,7 +14,7 @@ app.controller('feedbackController', [
                        $scope.form.feedback.resoruceValue = translateService.getResourceValue($scope.form.feedback.resoruceName);
 
                        $scope.form.send = {};
-                       $scope.form.send.resoruceName = "Have something to share? Let us know here";
+                       $scope.form.send.resoruceName = "Send";
                        $scope.form.send.resoruceValue = translateService.getResourceValue($scope.form.send.resoruceName);
 
 

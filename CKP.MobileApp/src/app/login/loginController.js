@@ -37,7 +37,7 @@ app.controller('loginController', [
                    
                        $scope.form.receiveNewPasswordText = {};
                        $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
-                       $scope.form.receiveNewPasswordText.resoruceValue = "";
+                       $scope.form.receiveNewPasswordText.resoruceValue = "Please enter your email address to receive a new password";
 
                        $scope.form.forgotYourPassword = {};
                        $scope.form.forgotYourPassword.resoruceName = "Forgot Your Password";
@@ -53,8 +53,8 @@ app.controller('loginController', [
                        $scope.form.copyRightsText.resoruceValue = "Material contained on this app is Copyright";
 
                        $scope.form.copyRightsDescription = {};
-                       $scope.form.copyRightsDescription.resoruceName = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
-                       $scope.form.copyRightsDescription.resoruceValue = "This app contains confidential and proprietary information. This information is provided for the benefit of authorized users only. Unauthorized access to information on this system may result in criminal and/or civil prosecution. All accesses are logged and this information will be used to support any prosecution";
+                       $scope.form.copyRightsDescription.resoruceName = "Unauthorized access disclaimer";
+                       $scope.form.copyRightsDescription.resoruceValue = "Unauthorized access disclaimer";
 
                        
                        //end page html 
