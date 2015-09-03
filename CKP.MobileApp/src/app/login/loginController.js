@@ -87,14 +87,15 @@ app.controller('loginController', [
                            }
                         
                            var selectedLanguage = localStorageService.get('selectedLanguage');
-
+                        
                            if (selectedLanguage) {
                                $scope.selectedLanague = selectedLanguage;
                            } else {
                                $scope.selectedLanague = 'en-US';
-                               localStorageService.set('selectedLanguage', $scope.selectedLanague);                          
+                               localStorageService.set('selectedLanguage', $scope.selectedLanague);
+                                   
                            }
-                          
+                         
 
                            //set user name pass if set remmber on.
                            var loginData = localStorageService.get('loginData');
@@ -153,7 +154,7 @@ app.controller('loginController', [
                        var loginData = {
                            userName: '',
                            password: '',
-                           remmberme: false
+                           remmberme: true
 
                        };
 
@@ -165,9 +166,9 @@ app.controller('loginController', [
 
                            var selectedLanague = $scope.selectedLanague;
                            var rowVersion = "";
-
-                           localStorageService.set('selectedLanguage', $scope.selectedLanague);
-
+                       
+                           localStorageService.set('selectedLanguage', selectedLanague);
+                          
                            translateService.getResourceUpdates(selectedLanague, rowVersion).then(function (result) {
                            
                                $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);

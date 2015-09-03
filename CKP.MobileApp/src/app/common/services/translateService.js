@@ -225,6 +225,7 @@ app.factory('translateService',
         var getResourceUpdates = function (cultureName, version) {
 
             currentCultureName = cultureName;
+           
             var deferred = $q.defer();
 
             //localStorage.clear();
@@ -265,20 +266,35 @@ app.factory('translateService',
 
   
         var getResourceValue = function (resourceName) {
+
+
             var resourceValue =  resourceName + '.';
        
             angular.forEach(resourceData, function (item) {
               
                 if (item.ResourceName === resourceName) {
                     console.log(item.ResourceName   + '=>' + item.ResourceValue + ' Len:' + resourceData.length);
-                    resourceValue = item.ResourceValue;
+                    resourceValue = item.ResourceValue ;
                     return resourceValue;
                 }
             });
             return resourceValue;
         }
 
+        var getCurrentCultureName = function () {
+            var selectedLanguage = localStorageService.get('selectedLanguage');
+       
+            if (selectedLanguage)
+            {
+                currentCultureName = selectedLanguage;
+            }
+            else {
+                currentCultureName = 'en-US';
+            }
+            return currentCultureName;
+        }
 
+        translateFactory.getCurrentCultureName = getCurrentCultureName
         translateFactory.addResources = addResources;
         translateFactory.getResourceUpdates = getResourceUpdates;
         translateFactory.forceGetResourceUpdates = forceGetResourceUpdates;

@@ -63,7 +63,7 @@ app.factory('authService', [
                         localStorageService.remove('organizationDetail');
                         _authentication.isAuth = false;
                         _authentication.userName = "";
-                        _authentication.useRefreshTokens = false;
+                        _authentication.useRefreshTokens = true;
                     };
 
                     var _getPrincipalData = function (loginData) {
