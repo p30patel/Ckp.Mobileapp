@@ -11,6 +11,7 @@ app.factory("faqDataService", [
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
                     var cultureName = 'en-US';
                     var faqData = {};
+
                     var forceGetFaqs = function (cultureName, rowVersion) {
                         var deferred = $q.defer();
                       
@@ -25,29 +26,7 @@ app.factory("faqDataService", [
                             });
                         return deferred.promise;
                     };
-                    //var getFaqs = function () {
-
-                    //    var deferred = $q.defer();
-
-                    //    cultureName = translateService.getCurrentCultureName();
-                    //    var faqs = localStorageService.get("faqs" + cultureName + refereshPeriod);
-                     
-
-                    //    if (faqs) {
-                    //        deferred.resolve(faqs);
-                    //    } else {
-
-                    //        var previous = localStorageService.get('faqs' + !refereshPeriod);
-                    //        if (previous) {
-                    //            localStorageService.remove('faqs' + !refereshPeriod);
-                    //        }
-                    //        forceGetFaqs().then(function (result) {
-                    //            deferred.resolve(result);
-                    //        });
-                    //    }
-
-                    //    return deferred.promise;
-                    //}
+                 
 
                     var addFaqs = function (cultureName, rowVersion, faqList) {
 
@@ -163,21 +142,18 @@ app.factory("faqDataService", [
 
                         var version = getFaqData(cultureName, rowVersion, oldItems, refereshPeriod, true);
 
-                        angular.forEach(oldItems, function (item) {
-                            console.log(item.Question);
-
-                        });
                         return oldItems;
                     }
+
                     var getFaqData = function (cultureName, rowVersion, faqList, refereshPeriod, hasUpdate) {
 
-                        var versions = JSON.parse(localStorage.getItem('faqs')) || [];
+                        var versions = JSON.parse(localStorage.getItem('faqs-version')) || [];
 
                         var data = {
                             "CultureName": cultureName,
                             "RowVersion": '',
                             "RefereshPeriod": refereshPeriod,
-                            "FaqLists": ''
+                            "FaqList": ''
 
                         };
 
@@ -209,11 +185,11 @@ app.factory("faqDataService", [
 
                         if (!hasExitedItem) {
                             versions.push(data);
-                            localStorage.setItem('faqs', JSON.stringify(versions));
+                            localStorage.setItem('faqs-version', JSON.stringify(versions));
                             //  console.log('New Version' + data.CultureName + data.RowVersion);
                         }
                         if (hasUpdate && hasExitedItem) {
-                            localStorage.setItem('faqs', JSON.stringify(versions));
+                            localStorage.setItem('faqs-version', JSON.stringify(versions));
                             //    console.log('Update Version' + data.CultureName + data.RowVersion)
 
                         }
@@ -231,16 +207,16 @@ app.factory("faqDataService", [
 
                         version = versionData.RowVersion;
 
-                        var forceReferesh = faqData; // refresh the page once a day
+                        var forceReferesh = false; // refresh the page once a day
                       
-                       
+                    
                         if (versionData) {
                             version = versionData.RowVersion;
                             var faqs = versionData.FaqList;
-
+                      
                             if (faqs.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
                                 faqData = faqs;
-
+                              
                                 deferred.resolve(faqs);
                             }
                             else {
