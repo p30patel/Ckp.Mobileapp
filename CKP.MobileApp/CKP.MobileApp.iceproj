@@ -89,6 +89,7 @@
     <Content Include="src\app\feedback\feedbackController.js" />
     <Content Include="src\app\help\help.html" />
     <Content Include="src\app\help\helpController.js" />
+    <Content Include="src\app\home\home - Copy.html" />
     <Content Include="src\app\home\home.html" />
     <Content Include="src\app\home\homeController.js" />
     <Content Include="src\app\login\login.html" />
@@ -119,11 +120,14 @@
     <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
     <Content Include="styles\checknet.custom.css" />
+    <Content Include="styles\images\Alert.png" />
     <Content Include="styles\images\back.png" />
+    <Content Include="styles\images\blank.png" />
     <Content Include="styles\images\checknet-icons.svg" />
     <Content Include="styles\images\Checknet-Logo.png" />
     <Content Include="styles\images\Checknet-title.png" />
     <Content Include="styles\images\close-button.png" />
+    <Content Include="styles\images\down-arrow.png" />
     <Content Include="styles\images\fontello.eot" />
     <Content Include="styles\images\fontello.svg" />
     <Content Include="styles\images\fontello.ttf" />
@@ -131,6 +135,7 @@
     <Content Include="styles\images\kendoui.svg" />
     <Content Include="styles\images\kendoui.ttf" />
     <Content Include="styles\images\kendoui.woff" />
+    <Content Include="styles\images\search.png" />
     <Content Include="styles\images\wp8_icons.png" />
     <Content Include="styles\images\wp8_inverseicons.png" />
     <Content Include="styles\kendo.mobile.nova.min.css" />

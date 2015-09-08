@@ -97,7 +97,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.forSetupStatus.resoruceValue = translateService.getResourceValue($scope.form.forSetupStatus.resoruceName);
 
         $scope.HelpDesk = {};
-
+       
         //address
         var getHelpDesk = function () {
 
@@ -107,7 +107,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             }
         }
         getHelpDesk();
-
+       
         $scope.onSelect = function (selectedClass) {
             $('.contactus').hide();
             $('.' + selectedClass).show();

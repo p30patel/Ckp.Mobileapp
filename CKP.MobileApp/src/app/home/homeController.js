@@ -1,8 +1,9 @@
 
 app.controller('homeController', [
-                   '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter', 'translateService',
-                   function ($scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService) {
-                       var init = function() {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter', 'translateService',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService) {
+                       var init = function () {
+                        
                            if (!authService.authentication.isAuth) {
                                authService.logout();
                            
@@ -10,9 +11,9 @@ app.controller('homeController', [
                            }
                        };
                        init();
-                       
+                   
                        $scope.form = {};
-
+                       
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -141,6 +142,24 @@ app.controller('homeController', [
                            });
                            kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
                        }
+                       //alerts & news
+                       $scope.showAlertModel = function () {
+                         
+                           $("#modalview-alerts").kendoMobileModalView("open");
+                       };
+                       $scope.hideAlertModel = function () {
+                           $("#modalview-alerts").kendoMobileModalView("close");
+                       };
+
+                       //credit lock
+                       $scope.showCreditModel = function () {
+
+                           $("#modalview-credit").kendoMobileModalView("open");
+                       };
+                       $scope.hideCreditModel = function () {
+                           $("#modalview-credit").kendoMobileModalView("close");
+                       };
+
 
                        //pull to refresh
                        $scope.refresh = function() {

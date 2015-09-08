@@ -8,7 +8,7 @@
             </li>
                 <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
                     ng-show="faqs" ng-repeat="faq in faqs | orderBy : 'DisplayOrder'">
-                    <h3>{{faq.Question}}</h3>
+                    <h4>{{faq.Question}}</h4>
                     <p ng-bind-html="renderHtml(faq.Answer)"></p>
 
                 </kendo-mobile-collapsible>

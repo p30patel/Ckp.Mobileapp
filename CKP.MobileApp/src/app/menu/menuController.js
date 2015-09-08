@@ -2,7 +2,7 @@ app.controller('menuController', [
                    '$scope', 'authService', 'translateService', 'localStorageService',
                    function ($scope, authService, translateService, localStorageService) {
                        $scope.form = {};
-
+                     
                        $scope.menu = {};
 
                        $scope.menu.title = 'Check-Net';
@@ -46,8 +46,6 @@ app.controller('menuController', [
 
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
-
-
                        //address
                        var getOrganizationDetail = function () {
                          
@@ -73,6 +71,7 @@ app.controller('menuController', [
                            kendo.mobile.application.navigate("src/app/login/login.html");
 
                        }
+                       
 
                        $scope.mnuClick = function (viewName) {
 

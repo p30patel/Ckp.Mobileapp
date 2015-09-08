@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title></title>
     <meta charset="utf-8" />
@@ -57,108 +58,120 @@
     <script src="src/app/policy/policyController.js"></script>
     <script src="src/app/termsCondition/termsConditionController.js"></script>
 </head>
+
 <body kendo-mobile-application ng-app="app" k-initial="'src/app/home/home.html'" k-hash-bang="true" k-skin="'nova'">
 
     <!-- layout default -->
 
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController" k-transition="'slide'">
-          <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-accent">
                 <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="ck-icon ck-menu" data-rel="drawer" data-align="left">
-                        <span class="km-text"><i class="icon ion-navicon-round"></i></span>
-                    </a>
-         <!--   <kendo-mobile-back-button k-align="'left'" style="padding-left:25px;">Back</kendo-mobile-back-button>-->
-            <kendo-view-title>Contact Us</kendo-view-title>
-        </kendo-mobile-nav-bar>
-    </kendo-mobile-header>
+                    <span class="km-text"><i class="icon ion-navicon-round"></i></span>
+                </a>
+                <!--   <kendo-mobile-back-button k-align="'left'" style="padding-left:25px;">Back</kendo-mobile-back-button>-->
+                <kendo-view-title>Contact Us</kendo-view-title>
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
 
-         <kendo-mobile-footer>
-        <kendo-mobile-nav-bar class="km-light" style="text-align: center; padding-top:1em; font-size: .6rem;">   
-             <alerts></alerts> <br /> </kendo-mobile-nav-bar></kendo-mobile-footer>     
-      
-        </kendo-mobile-layout>
+        <kendo-mobile-footer>
+            <kendo-mobile-nav-bar class="km-light" style="text-align: center; padding-top:1em; font-size: .6rem;">
+                <alerts></alerts>
+                <br /> </kendo-mobile-nav-bar>
+        </kendo-mobile-footer>
+
+    </kendo-mobile-layout>
+    <!-- end of layout default -->
+
+   
     <!-- application drawer and contents -->
 
 
     <kendo-mobile-drawer id="right-drawer" style="width: 270px" ng-controller="menuController">
-           <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
-               <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="checknet-icon icon-menu" data-rel="drawer" data-align="left">
-                        <span class="km-text"><i class="icon ion-navicon-round"></i> </span>
-                    </a>
-            <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
-            
-             <a data-align="left" data-role="button" class="nav-button km-widget km-button"  ng-show="authentication.isAuth" href="src/app/home/home.html" style="margin-left:-20px;"><span class="km-icon km-home km-notext"></span></a>
-                
-                <a data-align="left" data-role="button" class="nav-button km-widget km-button"  ng-show="!authentication.isAuth" href="src/app/login/login.html" style="margin-left:-20px;"><span class="km-icon ck-i-signin"></span></a>
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-accent">
+                <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="checknet-icon icon-menu" data-rel="drawer" data-align="left">
+                    <span class="km-text"><i class="icon ion-navicon-round"></i> </span>
+                </a>
+                <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
+                </kendo-view-title>
 
-                 <kendo-mobile-button k-align="'right'"  ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
-              
-        </kendo-mobile-nav-bar>
-    </kendo-mobile-header>
-        
-           <ul kendo-mobile-list-view>
-                <li>
+                <a data-align="left" data-role="button" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" style="margin-left:-20px;"><span class="km-icon km-home km-notext"></span></a>
 
-                    <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact">
+                <a data-align="left" data-role="button" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" style="margin-left:-20px;"><span class="km-icon ck-i-signin"></span></a>
+
+                <kendo-mobile-button k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
+
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+
+        <ul kendo-mobile-list-view>
+            <li>
+
+                <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact">
                         
                         {{form.contactus.resoruceValue}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq">
+            </li>
+            <li>
+                <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq">
                           
                         {{form.faq.resoruceValue}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms">
+            </li>
+            <li>
+                <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms">
                           
                         {{form.termsCondition.resoruceValue}}
                    
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy">
+            </li>
+            <li>
+                <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy">
                          {{form.policies.resoruceValue}}
                       
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/help/help.html" data-icon="ck-icon ck-help">
+            </li>
+            <li>
+                <a href="src/app/help/help.html" data-icon="ck-icon ck-help">
                              {{form.help.resoruceValue}}
                    
                     </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings">
+            </li>
+            <li ng-show="authentication.isAuth">
+                <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings">
                              {{form.notificationSettings.resoruceValue}}
                    
                     </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback">
+            </li>
+            <li ng-show="authentication.isAuth">
+                <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback">
                              {{form.feedback.resoruceValue}}
                      
                     </a>
-                </li>
-            </ul>
-     
-     <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress">
-            <li>
-               <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;" >
-               <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
-                <h5>{{organizationDetail.Address.Name}}</h5> 
-                <h5>{{organizationDetail.Address.Street1}}</h5>
-                <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
-                <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
-                <h5><span class="km-icon ck-i-phone"></span> {{organizationDetail.Address.Phone}}</h5>
-                <h5><span class="km-icon ck-i-email" style="background-color: black;"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
-                </div>
-              
             </li>
         </ul>
-        </kendo-mobile-drawer>
+
+        <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress">
+            <li>
+                <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
+                    <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
+                    <h5>{{organizationDetail.Address.Name}}</h5>
+                    <h5>{{organizationDetail.Address.Street1}}</h5>
+                    <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
+                    <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
+                    <h5><span class="km-icon ck-i-phone"></span> {{organizationDetail.Address.Phone}}</h5>
+                    <h5><span class="km-icon ck-i-email" style="background-color: black;"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
+                </div>
+
+            </li>
+        </ul>
+
+        <span style="padding:1em 0;" ng-show="!authentication.isAuth && !hasAddress">
+            <br /><br /><br />   <br /><br /><br />
+        </span>
+    </kendo-mobile-drawer>
+    <!-- end application drawer and contents -->
 
 
 </body>
