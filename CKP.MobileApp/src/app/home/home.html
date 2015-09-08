@@ -257,15 +257,27 @@
             <kendo-mobile-nav-bar class="km-dark">News & Alerts</kendo-mobile-nav-bar>
         </kendo-mobile-header>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
-            <li>
+            <li ng-show="mesages" ng-repeat="message in mesages.PartnerHolidayList">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
-                <h3 class="km-bold-font">Closed</h3>
+                <h3 class="km-bold-font">{{message.Name}}</h3>
                 <h3 class="km-font">
-                        Checkpoint DG Laser (Spring Break)
+                       {{message.HolidayDescription}}
                     </h3>
             </li>
             <li class="ck-module-date">
-                12:15 PM - 05/01/2015 - 05/02/2015
+                {{ message.StartDate | date}} - {{message.EndDate | date}} 
+            </li>
+
+
+              <li ng-show="mesages" ng-repeat="message in mesages.AnnouncementList">
+                <i class="ck-icon ck-alert ck-module-icon"></i>
+                <h3 class="km-bold-font">{{message.RetailerName}}</h3>
+                <h3 class="km-font">
+                       {{message.Title}}
+                    </h3>
+            </li>
+            <li class="ck-module-date">
+              <!--  {{ message.StartDate | date}} - {{message.EndDate | date}} -->
             </li>
         </ul>
    

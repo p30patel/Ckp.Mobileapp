@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter', 'translateService',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter', 'translateService', 'messageDataService',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService, messageDataService) {
                        var init = function () {
                         
                            if (!authService.authentication.isAuth) {
@@ -13,7 +13,7 @@ app.controller('homeController', [
                        init();
                    
                        $scope.form = {};
-                       
+                       $scope.mesages = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -142,14 +142,30 @@ app.controller('homeController', [
                            });
                            kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
                        }
-                       //alerts & news
+                       //alerts & news - messages
+                       var getMessages = function () {
+                           kendo.mobile.application.pane.loader.show();
+
+                           messageDataService.getMessages().then(function (result) {
+                               $scope.mesages = result;
+
+                           }).catch(function (error) {
+                               $scope.mesages = {};
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+                       }; // end message
+
+
                        $scope.showAlertModel = function () {
                          
                            $("#modalview-alerts").kendoMobileModalView("open");
+                           getMessages();
                        };
                        $scope.hideAlertModel = function () {
                            $("#modalview-alerts").kendoMobileModalView("close");
                        };
+                       
 
                        //credit lock
                        $scope.showCreditModel = function () {
