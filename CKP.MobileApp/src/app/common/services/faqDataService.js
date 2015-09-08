@@ -95,6 +95,7 @@ app.factory("faqDataService", [
                                 if (cultureName !== 'en-US') // no old - no new - not a en-US culture then copy en-US
                                 {
                                     localStorage.setItem('faq-' + cultureName, JSON.stringify(engItems));
+
                                     console.log('set default - eng:' + engItems.length);
                                 }
                             }
@@ -227,8 +228,7 @@ app.factory("faqDataService", [
                         }
                         if (forceReferesh) {
                             console.log('force server refrrsh' + forceReferesh);
-                            forceGetFaqs(cultureName, version).then(function (result) {
-
+                            forceGetFaqs(cultureName, version).then(function (result) {                               
                                 faqData = result;
                                 deferred.resolve(result);
 

@@ -1,34 +1,36 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController">
      
       <kendo-mobile-content>
-        <kendo-mobile-list-view class="km-no-border km-grey-box">
-            <li>
-                <kendo-mobile-button-group k-id="buttongroup-home">
+        <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
+            <li class="ck-no-pad">
+                <kendo-mobile-button-group k-id="buttongroup-home" class="ck-group-full">
                     <kendo-mobile-button class="contactusHeader km-state-active" id="us" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
                     <kendo-mobile-button class="contactusHeader" id="eu" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
                     <kendo-mobile-button class="contactusHeader" id="hk" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-button-group>
             </li>
-            <li>
+         <li class="ck-center-li">
                 <i></i>
-                <kendo-mobile-button class="km-primary km-justified">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
+                <kendo-mobile-button class="km-primary km-large" style="width:90%;">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
             </li>
         </kendo-mobile-list-view>
                <kendo-mobile-list-view class="us contactus">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h3>{{form.subTitileUS.resoruceValue}}</h3>
+                <h4>{{form.subTitileUS.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                             <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">101 Wolf Dr.</h4>
-                            <h4 class="km-light-font">P.O. Box 188</h4>
-                            <h4 class="km-light-font">Thorofare, NJ 08086</h4>
+                           <p>101 Wolf Dr.</br>
+                            P.O. Box 188</br>
+                            Thorofare, NJ 08086</br>
+                               </p>
                             <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+1 (800) 257-5540</h4>
-                            <h4 class="km-light-font">+1 (856) 848-1800</h4>
+                            <p>+1 (800) 257-5540<br />
+                             +1 (856) 848-1800
+                                </p>
                             <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+1 (856) 848-0937</h4>
+                            <p class="km-light-font">+1 (856) 848-0937</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
                             <p><a href="">Checknet@checkpt.com</a>
                             </p>
@@ -37,13 +39,13 @@
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>{{form.subTitileUSStatus.resoruceValue}} </h3>
+                <h4>{{form.subTitileUSStatus.resoruceValue}} </h4>
                 <table class="match-details">
                     <tr>
                         <td>
                             <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+1 (800) 775-1802</h4>
-                            <h4 class="km-light-font">Option 7 for CheckNet Help Desk</h4>
+                            <p>+1 (800) 775-1802</p>
+                            <p>Option 7 for CheckNet Help Desk</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
                             <p><a href="">Checknet@checkpt.com</a>
                             </p>
@@ -53,14 +55,14 @@
             </kendo-mobile-collapsible>
 
              <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>{{form.subTitileUSCollection.resoruceValue}}</h3>
+                <h4>{{form.subTitileUSCollection.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+1 (800) 257-5540</h4>
-                            <h4 class="km-light-font">Option 9 for Accounting</h4>
-                             <h4 class="km-light-font">Option 1 for Accounts Receivable</h4>
+                            <p>+1 (800) 257-5540</p>
+                            <p>Option 9 for Accounting</p>
+                             <p>Option 1 for Accounts Receivable</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
                             <p><a href="">Checknet@checkpt.com</a>
                             </p>
@@ -72,7 +74,7 @@
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
                 ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'USA'">
-                <h3>{{form.helpDesk.resoruceValue}}</h3>
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
@@ -86,20 +88,20 @@
                <!--    EU-->
         <kendo-mobile-list-view class="eu contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                  <h3>{{form.subTitileEU.resoruceValue}}</h3>
+                  <h4>{{form.subTitileEU.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                       
-                            <h4 class="km-light-font">Akkermansbeekweg 12</h4>
-                            <h4 class="km-light-font">7061 ZA Terborg</h4>
-                            <h4 class="km-light-font">Nederland</h4>
+                            <p>Akkermansbeekweg 12</p>
+                            <p>7061 ZA Terborg</p>
+                            <p>Nederland</p>
 
                             <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+31 (0)88008 2400</h4>
+                            <p>+31 (0)88008 2400</p>
                           
                             <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+31 (0)315 341161</h4>
+                            <p>+31 (0)315 341161</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
                             <p><a href="">cs.checknet@checknet-europe.com</a>
                             </p>
@@ -108,14 +110,14 @@
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h3>{{form.subTitileEUSetup.resoruceValue}}</h3>
+                <h4>{{form.subTitileEUSetup.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                             <h4 class="km-bold-font">{{form.toFaxApplication.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+31 (0)315 341161</h4>
+                            <p>+31 (0)315 341161</p>
                            <h4 class="km-bold-font">{{form.forSetupStatus.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+31 (0)88008 2313</h4>
+                            <p>+31 (0)88008 2313</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
                             <p><a href="">operations@checknet-europe.com</a>
                             </p>
@@ -125,14 +127,14 @@
             </kendo-mobile-collapsible>
 
              <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                 <h3>{{form.subTitileEUStatus.resoruceValue}}</h3>
+                 <h4>{{form.subTitileEUStatus.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+1 (800) 233-6215</h4>
+                            <p>+1 (800) 233-6215</p>
                          
-                             <h4 class="km-light-font">+1 (800) 645-3290 Toestel 251</h4>
+                             <p>+1 (800) 645-3290 Toestel 251</p>
                            
                         </td>
                     </tr>
@@ -143,7 +145,7 @@
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
         
                 ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Europe'">
-                <h3>{{form.helpDesk.resoruceValue}}</h3>
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
@@ -156,27 +158,27 @@
            <!-- Hk--->
                 <kendo-mobile-list-view class="hk contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-               <h3>{{form.subTitileHK.resoruceValue}}</h3>
+               <h4>{{form.subTitileHK.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
                         
                             <h4 class="km-light-font">Checkpoint Systems Hong Kong Ltd.</h4>
-                            <h4 class="km-light-font">4/F., Blk.A, Shatin Industrial Centre</h4>
-                            <h4 class="km-light-font">5-7 Yuen Shun Circuit</h4>
-                              <h4 class="km-light-font">Siu Lek Yuen</h4>
-                              <h4 class="km-light-font">Shatin, N.T. Hongkong</h4>
+                            <p>4/F., Blk.A, Shatin Industrial Centre</p>
+                            <p>5-7 Yuen Shun Circuit</p>
+                              <p>Siu Lek Yuen</p>
+                              <p>Shatin, N.T. Hongkong</p>
                             <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+852 2527-2327</h4>
+                            <p>+852 2527-2327</p>
                            
                               <h4 class="km-bold-font">ALS - US:</h4>
-                            <h4 class="km-light-font">+852 2275-8488</h4>
+                            <p>+852 2275-8488</p>
 
                               <h4 class="km-bold-font"> ALS - EUR :</h4>
-                            <h4 class="km-light-font">+852 2995-8283</h4>
+                            <p>+852 2995-8283</p>
 
                             <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
-                            <h4 class="km-light-font">+852 2527-8408</h4>
+                            <p>+852 2527-8408</p>
                            
                         </td>
                     </tr>
@@ -187,7 +189,7 @@
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
             
                    ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Asia'">
-                <h3>{{form.helpDesk.resoruceValue}}</h3>
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
                         <td>
