@@ -20,9 +20,12 @@ var clientId = 'Ckp.PoC1';
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
 
 app.constant('ngAuthSettings', {
-    authServiceBaseUri: authServiceBase,
+    authServiceBaseUri: authServiceBase,    
+    clientId: clientId,
+    baasApiKey: baasApiKey,
+    baasScheme: baasScheme,
+    androidProjectNumber: androidProjectNumber
 
-    clientId: clientId
 });
 
 app.run(['authService', function (authService) {
@@ -39,43 +42,7 @@ var el = new Everlive({
     apiKey: baasApiKey,
     scheme: baasScheme
 });
-// This is your Telerik Backend Services API key.
-var baasApiKey = 'uTM7cVvTTvlfDZsu';
 
-// This is the scheme (http or https) to use for accessing Telerik Backend Services.
-var baasScheme = 'https';
-
-//This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
-var androidProjectNumber = '1018275522168';
-
-//Set this to true in order to test push notifications in the emulator. Note, that you will not be able to actually receive 
-//push notifications because we will generate fake push tokens. But you will be able to test your other push-related functionality without getting errors.
-var emulatorMode = true;
-
-//Initialize the Telerik Backend Services SDK
-
-
-var authServiceBase = 'https://qachecknet.checkpt.com/';
-var clientId = 'Ckp.PoC1';
-
-
-var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
-
-app.constant('ngAuthSettings', {
-    authServiceBaseUri: authServiceBase,
-
-    clientId: clientId
-});
-
-app.run(['authService', function (authService) {
-    authService.fillAuthData();
-
-}]);
-
-app.config(function ($httpProvider) {
-
-    $httpProvider.interceptors.push('authInterceptorService');
-});
 
 
 function onDeviceReady() {

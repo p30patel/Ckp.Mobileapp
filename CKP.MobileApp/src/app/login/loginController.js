@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter',
-                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter', 'ngAuthSettings',
+                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter, ngAuthSettings) {
                        $scope.title = '';
                       
                        //login page html lables
@@ -72,7 +72,14 @@ app.controller('loginController', [
                        $scope.message = "";
 
                        
-                       var getDeviceInfo = function(){
+                       var getDeviceInfo = function () {
+
+                           var el = new Everlive({
+                               apiKey: ngAuthSettings.baasApiKey,
+                               scheme: ngAuthSettings.baasScheme
+                           });
+
+
                            el.push.getRegistration().then(function (result)
                            { alert(result); },
                                      function (e) {
