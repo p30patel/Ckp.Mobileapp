@@ -7,6 +7,7 @@
                     <kendo-mobile-button class="contactusHeader km-state-active" id="us" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
                     <kendo-mobile-button class="contactusHeader" id="eu" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
                     <kendo-mobile-button class="contactusHeader" id="hk" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="au" ng-click="onSelect('au')">{{form.titleAU.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-button-group>
             </li>
          <li class="ck-center-li">
@@ -32,7 +33,7 @@
                             <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
                             <p class="km-light-font">+1 (856) 848-0937</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
-                            <p><a href="">Checknet@checkpt.com</a>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
                             </p>
                         </td>
                     </tr>
@@ -47,7 +48,7 @@
                             <p>+1 (800) 775-1802</p>
                             <p>Option 7 for CheckNet Help Desk</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
-                            <p><a href="">Checknet@checkpt.com</a>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
                             </p>
                         </td>
                     </tr>
@@ -64,7 +65,7 @@
                             <p>Option 9 for Accounting</p>
                              <p>Option 1 for Accounts Receivable</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
-                            <p><a href="">Checknet@checkpt.com</a>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
                             </p>
                         </td>
                     </tr>
@@ -92,7 +93,7 @@
                 <table class="match-details">
                     <tr>
                         <td>
-                      
+                          <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
                             <p>Akkermansbeekweg 12</p>
                             <p>7061 ZA Terborg</p>
                             <p>Nederland</p>
@@ -103,7 +104,7 @@
                             <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
                             <p>+31 (0)315 341161</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
-                            <p><a href="">cs.checknet@checknet-europe.com</a>
+                            <p><a href="mailto:cs.checknet@checknet-europe.com">cs.checknet@checknet-europe.com</a>
                             </p>
                         </td>
                     </tr>
@@ -119,7 +120,7 @@
                            <h4 class="km-bold-font">{{form.forSetupStatus.resoruceValue}} :</h4>
                             <p>+31 (0)88008 2313</p>
                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
-                            <p><a href="">operations@checknet-europe.com</a>
+                            <p><a href="mailto:operations@checknet-europe.com">operations@checknet-europe.com</a></a>
                             </p>
                         </td>
                     </tr>
@@ -135,6 +136,19 @@
                             <p>+1 (800) 233-6215</p>
                          
                              <p>+1 (800) 645-3290 Toestel 251</p>
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+
+                  <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                 <h4>{{form.EuropeMasTabTitle.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:eucatalog.checknet@checkpt.com">eucatalog.checknet@checkpt.com</a></p>                        
                            
                         </td>
                     </tr>
@@ -185,10 +199,60 @@
                 </table>
             </kendo-mobile-collapsible>
           
-   
+        <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                 <h4>{{form.AsiaMasTabTitle.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:hkcatalog.checknet@checkpt.com">hkcatalog.checknet@checkpt.com</a></p>                        
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
             
                    ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Asia'">
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+        </kendo-mobile-list-view>
+
+
+             <!-- AU--->
+                <kendo-mobile-list-view class="au contactus" style="display: none;">
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+               <h4>{{form.AUTabTitle1.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
+                            <p>80 Lewis Road</p>
+                            <p>Wantima South, Victoria</p>
+                              <p>Australia</p>
+                           
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+61 1300 369 338</p>
+
+                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:aus.smscustomerservice@checkpt.com">aus.smscustomerservice@checkpt.com</a></p>                        
+                           
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+      
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
+            
+                   ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Austraila'">
                 <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>

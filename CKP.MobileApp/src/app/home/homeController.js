@@ -18,6 +18,10 @@ app.controller('homeController', [
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       $scope.form.attentionUser = {};
+                       $scope.form.attentionUser.resoruceName = "Attension User";
+                       $scope.form.attentionUser.resoruceValue = translateService.getResourceValue($scope.form.attentionUser.resoruceName);
+
 
                        $scope.message = "";
                        $scope.searchParameterId = 1;

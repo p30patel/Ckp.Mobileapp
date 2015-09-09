@@ -5,7 +5,7 @@ app.factory("messageDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var messageDataServiceFactory = {};
-                    var date = kendo.toString(new Date(), "yyyy-MM-dd");
+                    var refereshPeriod = new Date().getDay() % 2 == 0;
                     
                     var forceGetMessages = function () {
                         var deferred = $q.defer();
@@ -15,7 +15,7 @@ app.factory("messageDataService", [
                         var userId = authData.userId;
                       
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetMessageListTaskAsync?userId=' + userId).success(function (result) {
-                            localStorageService.set('messages' + date, result);
+                            localStorageService.set('messages' + refereshPeriod, result);
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -25,14 +25,20 @@ app.factory("messageDataService", [
                     };
                     var getMessages = function () {
                         var deferred = $q.defer();
-                        
-                        var messages = localStorageService.get("messages" + date);
+                        var forceReferesh = false; // refresh the page once a day
+                        var messages = localStorageService.get("messages" + refereshPeriod);
+                        messages = '';
                         if (messages) {
                             deferred.resolve(messages);
                         } else {
+                            forceReferesh = true;
+                        }
+
+                        if (forceReferesh)
+                        {
                             forceGetMessages().then(function (result) {
                                 deferred.resolve(result);
-                            });
+                        });
                         }
 
                         return deferred.promise;

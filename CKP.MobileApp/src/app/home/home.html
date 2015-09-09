@@ -257,7 +257,7 @@
             <kendo-mobile-nav-bar class="km-dark">News & Alerts</kendo-mobile-nav-bar>
         </kendo-mobile-header>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
-            <li ng-show="mesages" ng-repeat="message in mesages.PartnerHolidayList">
+            <li ng-show="mesages.PartnerHolidayList.length > 0" ng-repeat="message in mesages.PartnerHolidayList">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
                 <h3 class="km-bold-font">{{message.Name}}</h3>
                 <h3 class="km-font">
@@ -271,7 +271,7 @@
 
               <li ng-show="mesages" ng-repeat="message in mesages.AnnouncementList">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
-                <h3 class="km-bold-font">{{message.RetailerName}}</h3>
+                <h3 class="km-bold-font">{{message.RetailerName}}{{message.SpecificRetailerId}}</h3>
                 <h3 class="km-font">
                        {{message.Title}}
                     </h3>
@@ -292,14 +292,14 @@
 
           <kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
             <kendo-mobile-header>
-                <kendo-mobile-nav-bar class="km-dark">Credit Lock</kendo-mobile-nav-bar>
+                <kendo-mobile-nav-bar class="km-dark">{{form.creditLock.resoruceValue}}</kendo-mobile-nav-bar>
             </kendo-mobile-header>
             <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
                 <li>
                     <i class="ck-icon ck-lock ck-module-icon"></i>
-                    <h3 class="km-bold-font">Attention User</h3>
+                    <h3 class="km-bold-font">{{form.attentionUser.resoruceValue}}</h3>
                     <h3 class="km-font">
-                        Your Account is on credit lock.
+                       {{form.creditLockMessage.resoruceValue}}
                     </h3>
                 </li>
                 <li class="ck-module-date">

@@ -259,7 +259,14 @@ app.controller('loginController', [
                            };
                            el.push.register(pushSettings)
                               .then(
-                                  function (data) { alert('Register success' );},
+                                  function (data) {
+                                      alert('Register success');
+
+                                      el.getRegistration().then(function (result)
+                                      {
+                                         alert('Current Device : ' + JSON.stringify(result));
+                                      });
+                                  },
                                   function (err) {
                                       alert('REGISTER ERROR: ' + JSON.stringify(err));
                                   }

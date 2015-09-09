@@ -96,8 +96,6 @@
     <Content Include="src\app\login\loginController.js" />
     <Content Include="src\app\menu\menu.html" />
     <Content Include="src\app\menu\menuController.js" />
-    <Content Include="src\app\message\message.html" />
-    <Content Include="src\app\message\messageController.js" />
     <Content Include="src\app\notification\notification.html" />
     <Content Include="src\app\notification\notificationController.js" />
     <Content Include="src\app\order\approve.html" />
@@ -214,7 +212,6 @@
     <Folder Include="src\app\home\" />
     <Folder Include="src\app\login\" />
     <Folder Include="src\app\menu\" />
-    <Folder Include="src\app\message\" />
     <Folder Include="src\app\notification\" />
     <Folder Include="src\app\order\" />
     <Folder Include="src\app\policy\" />

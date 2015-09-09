@@ -96,6 +96,25 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.forSetupStatus.resoruceName = "For set-up status";
         $scope.form.forSetupStatus.resoruceValue = translateService.getResourceValue($scope.form.forSetupStatus.resoruceName);
 
+
+        $scope.form.titleAU = {};
+        $scope.form.titleAU.resoruceName = "Austraila";
+        $scope.form.titleAU.resoruceValue = translateService.getResourceValue($scope.form.titleAU.resoruceName);
+
+
+        $scope.form.AUTabTitle1 = {};
+        $scope.form.AUTabTitle1.resoruceName = "CheckNet MAS Catalog Order Austraila";
+        $scope.form.AUTabTitle1.resoruceValue = translateService.getResourceValue($scope.form.AUTabTitle1.resoruceName);
+
+        $scope.form.AsiaMasTabTitle = {};
+        $scope.form.AsiaMasTabTitle.resoruceName = "CheckNet MAS Catalog Order Asia";
+        $scope.form.AsiaMasTabTitle.resoruceValue = translateService.getResourceValue($scope.form.AsiaMasTabTitle.resoruceName);
+
+        $scope.form.EuropeMasTabTitle = {};
+        $scope.form.EuropeMasTabTitle.resoruceName = "CheckNet MAS Catalog Order Europe";
+        $scope.form.EuropeMasTabTitle.resoruceValue = translateService.getResourceValue($scope.form.EuropeMasTabTitle.resoruceName);
+
+        
         $scope.HelpDesk = {};
        
         //address
