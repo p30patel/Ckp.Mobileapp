@@ -73,18 +73,48 @@ app.controller('loginController', [
 
                        
                        var getDeviceInfo = function () {
-
+                        
                            var el = new Everlive({
                                apiKey: ngAuthSettings.baasApiKey,
                                scheme: ngAuthSettings.baasScheme
                            });
 
+                          var pushSettings = {
+                                   android: {
+                                       senderID: ngAuthSettings.androidProjectNumber
+                                   },
+                                   iOS: {
+                                       badge: "true",
+                                       sound: "true",
+                                       alert: "true"
+                                   },
+                                   wp8: {
+                                       channelName: 'EverlivePushChannel'
+                                   },
+                                   customParameters: {
+                                       LastLoginDate: new Date()
+                                   }
+                          };
 
-                           el.push.getRegistration().then(function (result)
-                           { alert(result); },
-                                     function (e) {
-                                         alert(e);
-                                     });
+                               el.push.register(pushSettings)
+                                  .then(
+                                      function (data) {
+                                                      alert('Register success');
+
+                                          el.push.getRegistration().then(function (result)
+                                          {
+                                              alert(result); 
+                                          },
+                                          function (e) {
+                                              alert(e);
+                                          });
+
+
+                                      },
+                                      function (err) {
+                                          //          alert('REGISTER ERROR: ' + JSON.stringify(err));
+                                      }
+                                      );
                        };
 
                        getDeviceInfo();

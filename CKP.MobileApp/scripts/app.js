@@ -38,55 +38,7 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-var el = new Everlive({
-    apiKey: baasApiKey,
-    scheme: baasScheme
-});
 
-
-
-function onDeviceReady() {
-
-    pushRegister();
-}
-
-function pushRegister() {
-
-    var pushSettings = {
-        android: {
-            senderID: androidProjectNumber
-        },
-        iOS: {
-            badge: "true",
-            sound: "true",
-            alert: "true"
-        },
-        wp8: {
-            channelName: 'EverlivePushChannel'
-        },
-        customParameters: {
-            LastLoginDate: new Date()
-        }
-    };
-    el.push.register(pushSettings)
-       .then(
-           function (data) {
-               //            alert('Register success');
-
-               //el.push.getRegistration().then(function (result)
-               //{ alert(result); },
-               //function (e) {
-               //    alert(e);
-               //});
-
-
-           },
-           function (err) {
-               //          alert('REGISTER ERROR: ' + JSON.stringify(err));
-           }
-           );
-
-};
 
 
 (function (g) {
@@ -135,48 +87,6 @@ feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with you
 
 // device APIs are available
 
-
-(function (g) {
-
-    var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
-
-    // Make analytics available via the window.analytics variable
-    // Start analytics by calling window.analytics.Start()
-    var analytics = g.analytics = g.analytics || {};
-
-    analytics.Start = function () {
-
-        // Handy shortcuts to the analytics api
-        var factory = window.plugins.EqatecAnalytics.Factory;
-        var monitor = window.plugins.EqatecAnalytics.Monitor;
-        // Create the monitor instance using the unique product key for Analytics
-        var settings = factory.CreateSettings(productId);
-        settings.LoggingInterface = factory.CreateTraceLogger();
-        factory.CreateMonitorWithSettings(settings,
-		  function () {
-		      console.log("Monitor created");
-		      // Start the monitor inside the success-callback
-		      monitor.Start(function () {
-		          console.log("Monitor started");
-		      });
-		  },
-		  function (msg) {
-
-		      console.log("Error creating monitor: " + msg);
-		  });
-    }
-    analytics.Stop = function () {
-        var monitor = window.plugins.EqatecAnalytics.Monitor;
-        monitor.Stop();
-    }
-    analytics.Monitor = function () {
-        return window.plugins.EqatecAnalytics.Monitor;
-    }
-})(window);
-
-
-window.analytics.Start();
-feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
 
 
 
