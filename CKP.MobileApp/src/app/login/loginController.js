@@ -262,7 +262,7 @@ app.controller('loginController', [
                                   function (data) {
                                       alert('Register success');
 
-                                      el.getRegistration().then(function (result)
+                                      el.push.currentDevice.getRegistration().then(function (result)
                                       {
                                          alert('Current Device : ' + JSON.stringify(result));
                                       });
