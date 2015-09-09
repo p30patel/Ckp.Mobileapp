@@ -261,7 +261,8 @@ app.controller('loginController', [
                               .then(
                                   function (data) {
                                       alert('Register success');
-
+                                      var currentDevice = el.push.currentDevice();
+                                      alert(currentDevice);
                                       el.push.currentDevice.getRegistration(onDeviceSuccess, onDeviceError);
                                       var onDeviceSuccess = function (r) {
                                           alert('s' + r);
