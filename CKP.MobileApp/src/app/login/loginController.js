@@ -71,8 +71,16 @@ app.controller('loginController', [
                        $scope.translations = {};
                        $scope.message = "";
 
+                       
+                       var getDeviceInfo = function(){
+                           el.push.getRegistration().then(function (result)
+                           { alert(result); },
+                                     function (e) {
+                                         alert(e);
+                                     });
+                       };
 
-
+                       getDeviceInfo();
                        var languages = function () {
                            $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
@@ -224,56 +232,56 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
-                           var username = $scope.loginData.userName;
+                           //var username = $scope.loginData.userName;
 
-                           var baasApiKey = 'uTM7cVvTTvlfDZsu';
+                           //var baasApiKey = 'uTM7cVvTTvlfDZsu';
 
-                           var baasScheme = 'https';
+                           //var baasScheme = 'https';
 
-                           var androidProjectNumber = '1018275522168';
+                           //var androidProjectNumber = '1018275522168';
 
-                           var emulatorMode = true;
-                           var el = new Everlive({
-                               apiKey: baasApiKey,
-                               scheme: baasScheme
-                           });
+                           //var emulatorMode = true;
+                           //var el = new Everlive({
+                           //    apiKey: baasApiKey,
+                           //    scheme: baasScheme
+                           //});
 
 
-                           var pushSettings = {
-                               android: {
-                                   senderID: androidProjectNumber
-                               },
-                               iOS: {
-                                   badge: "true",
-                                   sound: "true",
-                                   alert: "true"
-                               },
-                               wp8: {
-                                   channelName: 'EverlivePushChannel'
-                               },     
-                               customParameters: {
-                                   Name: username,
-                                   LastLoginDate: new Date()
+                           //var pushSettings = {
+                           //    android: {
+                           //        senderID: androidProjectNumber
+                           //    },
+                           //    iOS: {
+                           //        badge: "true",
+                           //        sound: "true",
+                           //        alert: "true"
+                           //    },
+                           //    wp8: {
+                           //        channelName: 'EverlivePushChannel'
+                           //    },     
+                           //    customParameters: {
+                           //        Name: username,
+                           //        LastLoginDate: new Date()
 
-                               }
-                           };
-                           el.push.register(pushSettings)
-                              .then(
-                                  function (data) {
-                                      alert('Register success');
+                           //    }
+                           //};
+                           //el.push.register(pushSettings)
+                           //   .then(
+                           //       function (data) {
+                           //           alert('Register success');
                                      
-                                      el.push.getRegistration().then(function (result)
-                                      { alert(result); },
-                                      function (e) {
-                                          alert(e);
-                                      });
+                           //           el.push.getRegistration().then(function (result)
+                           //           { alert(result); },
+                           //           function (e) {
+                           //               alert(e);
+                           //           });
 
 
-                                  },
-                                  function (err) {
-                                      alert('REGISTER ERROR: ' + JSON.stringify(err));
-                                  }
-                                  );
+                           //       },
+                           //       function (err) {
+                           //           alert('REGISTER ERROR: ' + JSON.stringify(err));
+                           //       }
+                           //       );
                     
                            kendo.mobile.application.pane.loader.show();
                         

@@ -77,43 +77,51 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-var el = new Everlive({
-    apiKey: baasApiKey,
-    scheme: baasScheme
-});
 
+function onDeviceReady() {
 
-// device APIs are available
+    pushRegister();
+}
+
 function pushRegister() {
 
-        var pushSettings = {
-                android: {
-                        senderID: androidProjectNumber
-                    },
-            iOS: {
-                    badge: "true",
-                    sound: "true",
-                    alert: "true"
-                },
-            wp8: {
-                    channelName: 'EverlivePushChannel'
-                },     
-            customParameters: {
-                Age: 21
-            }
-        };
-        el.push.register(pushSettings)
-           .then(
-               _onDeviceIsRegistered(data),
-               function (err) {
-                       alert('REGISTER ERROR: ' + JSON.stringify(err));
-                   }
-               );
-            }
+    var pushSettings = {
+        android: {
+            senderID: androidProjectNumber
+        },
+        iOS: {
+            badge: "true",
+            sound: "true",
+            alert: "true"
+        },
+        wp8: {
+            channelName: 'EverlivePushChannel'
+        },
+        customParameters: {
+            LastLoginDate: new Date()
+        }
+    };
+    el.push.register(pushSettings)
+       .then(
+           function (data) {
+               //            alert('Register success');
 
-function _onDeviceIsRegistered(data) {
-    alert('registered' + data.Id);
-}
+               //el.push.getRegistration().then(function (result)
+               //{ alert(result); },
+               //function (e) {
+               //    alert(e);
+               //});
+
+
+           },
+           function (err) {
+               //          alert('REGISTER ERROR: ' + JSON.stringify(err));
+           }
+           );
+
+};
+
+
 (function (g) {
 
     var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
