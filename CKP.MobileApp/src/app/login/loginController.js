@@ -263,14 +263,14 @@ app.controller('loginController', [
                                       alert('Register success');
                                       var currentDevice = el.push.currentDevice();
                                       alert(currentDevice);
-                                      el.push.currentDevice.getRegistration(onDeviceSuccess, onDeviceError);
+                                      el.push.getRegistration(onDeviceSuccess, onDeviceError);
                                       var onDeviceSuccess = function (r) {
-                                          alert('s' + r);
+                                          alert('s' + JSON.stringify(r));
                                       };
 
                                       var onDeviceError = function(e)
                                       {
-                                          alert('e' + e);
+                                          alert('e' + JSON.stringify(e));
                                       }
 
                                   },
