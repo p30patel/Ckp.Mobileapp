@@ -25,7 +25,7 @@ app.constant('ngAuthSettings', {
     baasApiKey: baasApiKey,
     baasScheme: baasScheme,
     androidProjectNumber: androidProjectNumber,
-    emulatorMode: emulatorMode
+    emulatorMode : emulatorMode
 });
 
 app.run(['authService', function (authService) {
@@ -38,6 +38,64 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
+function onDeviceReady() {
+    getDeviceInfo();
+}
+
+function getDeviceInfo() {
+  
+
+    var baasApiKey = baasApiKey;
+
+    var baasScheme = baasScheme;
+
+    var androidProjectNumber = androidProjectNumber;
+
+    var emulatorMode = true;
+    var el = new Everlive({
+        apiKey: baasApiKey,
+        scheme: baasScheme
+    });
+
+    var pushSettings = {
+        android: {
+            senderID: androidProjectNumber
+        },
+        iOS: {
+            badge: "true",
+            sound: "true",
+            alert: "true"
+        },
+        wp8: {
+            channelName: 'EverlivePushChannel'
+        },
+        customParameters: {
+          
+            LastLoginDate: new Date()
+
+        }
+    };
+    el.push.register(pushSettings)
+       .then(
+           function (data) {
+
+               el.push.getRegistration().then(function (result) {
+                   var deviceData = localStorage.setItem('deviceData', JSON.stringify(result));
+                   var deviceData = localStorage.getItem('deviceData');
+
+                   alert(deviceData.Id);
+               },
+               function (e) {
+                   //error register
+               });
+
+
+           },
+           function (err) {
+               //  alert('REGISTER ERROR: ' + JSON.stringify(err));
+           }
+           );
+}
 
 (function (g) {
 
