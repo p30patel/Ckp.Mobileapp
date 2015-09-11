@@ -232,18 +232,22 @@ app.controller('loginController', [
                            el.push.register(pushSettings)
                               .then(
                                   function (data) {
-                                      alert('Register success');
 
                                       el.push.getRegistration().then(function (result)
-                                      { alert(JSON.stringify(result)); },
+                                      {
+                                          var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
+                                          var deviceData = localStorageService.get('deviceData');
+                                       
+                                          alert(deviceData.Id);
+                                      },
                                       function (e) {
-                                          alert(e);
+                                      //error register
                                       });
 
 
                                   },
                                   function (err) {
-                                      alert('REGISTER ERROR: ' + JSON.stringify(err));
+                                    //  alert('REGISTER ERROR: ' + JSON.stringify(err));
                                   }
                                   );
                        };
