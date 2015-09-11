@@ -196,14 +196,14 @@ app.controller('loginController', [
                     
 
                        var getDeviceInfo = function () {
-                           var username = $scope.loginData.userName;
+                           var username = $scope.loginData.userName || "";
 
                            var baasApiKey = ngAuthSettings.baasApiKey;
 
                            var baasScheme = ngAuthSettings.baasScheme;
 
                            var androidProjectNumber = ngAuthSettings.androidProjectNumber;
-                           alert(username + '\n' + baasApiKey);
+                         
                            var emulatorMode = true;
                            var el = new Everlive({
                                apiKey: baasApiKey,
