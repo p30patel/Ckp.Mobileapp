@@ -114,10 +114,7 @@ app.controller('loginController', [
                        };
                        languages(); //init languages
 
-                       $scope.intShow = function (e) {
-                           getDeviceInfo();
-                           translatePage(); 
-                       }
+                     
                        //forgot password 
                        $scope.loginData.email = "";
                        $scope.forgotPasswordModalOpen = function () {
@@ -238,7 +235,7 @@ app.controller('loginController', [
                                           var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
                                           var deviceData = localStorageService.get('deviceData');
                                        
-                                          alert(deviceData.Id);
+                                          alert(deviceData);
                                       },
                                       function (e) {
                                       //error register
@@ -251,6 +248,11 @@ app.controller('loginController', [
                                   }
                                   );
                        };
+
+                       $scope.intShow = function (e) {
+                           getDeviceInfo();
+                           translatePage();
+                       }
                      
 
                        $scope.translatePage = function () {
