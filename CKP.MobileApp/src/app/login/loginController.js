@@ -236,6 +236,11 @@ app.controller('loginController', [
                                           var deviceData = localStorageService.get('deviceData');
                                        
                                           alert(deviceData);
+                                          alert(deviceData.res.Id);
+                                          var r = JSON.parse(deviceData);
+                                          alert(r);
+                                          alert(r.result.Id);
+                                          alert(r.Id);
                                       },
                                       function (e) {
                                       //error register
@@ -252,7 +257,7 @@ app.controller('loginController', [
                        $scope.intShow = function (e) {
                            getDeviceInfo();
                            translatePage();
-                       }
+                       };
                      
 
                        $scope.translatePage = function () {
