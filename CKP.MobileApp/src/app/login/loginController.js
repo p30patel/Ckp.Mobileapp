@@ -203,7 +203,7 @@ app.controller('loginController', [
                            var baasScheme = ngAuthSettings.baasScheme;
 
                            var androidProjectNumber = ngAuthSettings.androidProjectNumber;
-
+                           alert(username + '\n' + baasApiKey);
                            var emulatorMode = true;
                            var el = new Everlive({
                                apiKey: baasApiKey,
@@ -246,12 +246,12 @@ app.controller('loginController', [
                                       alert('REGISTER ERROR: ' + JSON.stringify(err));
                                   }
                                   );
-                       }
+                       };
                      
 
                        $scope.translatePage = function () {
                            translatePage();
-                       }
+                       };
                        //loign event
                        $scope.login = function () {
                            $('#btnLogin').focus();
