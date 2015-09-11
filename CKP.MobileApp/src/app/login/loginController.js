@@ -193,7 +193,7 @@ app.controller('loginController', [
                     
 
                        var getDeviceInfo = function () {
-                           var username =  ($scope.loginData.userName === '') ?  "" : $scope.loginData.userName;
+                           var username =  ($scope.loginData.userName === '') ?  " " : $scope.loginData.userName;
 
                            var baasApiKey = ngAuthSettings.baasApiKey;
 
