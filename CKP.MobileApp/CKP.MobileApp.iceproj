@@ -23,6 +23,19 @@
   <ItemGroup>
     <Content Include=".abignore" />
     <Content Include=".abproject" />
+    <Content Include="App_Resources\Android\drawable-xhdpi\icon.png" />
+    <Content Include="App_Resources\Android\drawable-xxhdpi\icon.png" />
+    <Content Include="App_Resources\Android\drawable-xxxhdpi\icon.png" />
+    <Content Include="App_Resources\iOS\icon-40%403x.png" />
+    <Content Include="App_Resources\iOS\icon-60%403x.png" />
+    <Content Include="App_Resources\iOS\watch-172x172.png" />
+    <Content Include="App_Resources\iOS\watch-196x196.png" />
+    <Content Include="App_Resources\iOS\watch-48x48.png" />
+    <Content Include="App_Resources\iOS\watch-55x55.png" />
+    <Content Include="App_Resources\iOS\watch-58x58.png" />
+    <Content Include="App_Resources\iOS\watch-80x80.png" />
+    <Content Include="App_Resources\iOS\watch-87x87.png" />
+    <Content Include="App_Resources\iOS\watch-88x88.png" />
     <Content Include="bower_components\everlive\.bower.json" />
     <Content Include="bower_components\everlive\.gitattributes" />
     <Content Include="bower_components\everlive\min\everlive.all.min.js" />
@@ -184,6 +197,9 @@
     <Folder Include="App_Resources\Android\drawable-ldpi\" />
     <Folder Include="App_Resources\Android\drawable-mdpi\" />
     <Folder Include="App_Resources\Android\drawable-nodpi\" />
+    <Folder Include="App_Resources\Android\drawable-xhdpi\" />
+    <Folder Include="App_Resources\Android\drawable-xxhdpi\" />
+    <Folder Include="App_Resources\Android\drawable-xxxhdpi\" />
     <Folder Include="App_Resources\iOS\" />
     <Folder Include="App_Resources\WP8\" />
     <Folder Include="App_Resources\WP8\Assets\" />

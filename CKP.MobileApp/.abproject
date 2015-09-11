@@ -1,7 +1,7 @@
 {
   "ProjectGuid": "9f5b4aad-2a66-44ce-8c28-3377a9371c1b",
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
-  "AppIdentifier": "com.telerik.PushNotificationApp",
+  "AppIdentifier": "com.telerik.CheckNetApplication",
   "ProjectName": "CKP.MobileApp",
   "AndroidPermissions": [
     "android.permission.ACCESS_COARSE_LOCATION",
@@ -53,9 +53,9 @@
     "ID_RESOLUTION_HD720P"
   ],
   "Framework": "Cordova",
-  "DisplayName": "Check-Net App - DEV",
+  "DisplayName": "Checknet Application",
   "Author": "",
-  "Description": "Check-Net App - DEV",
+  "Description": "Checknet Application",
   "projectVersion": "1",
   "WP8PublisherID": "{15da2ddb-6326-4e60-b258-d8b49ce3d0fd}",
   "WP8ProductID": "{6deca108-14fa-4ba9-8001-d32225ff55c4}",
