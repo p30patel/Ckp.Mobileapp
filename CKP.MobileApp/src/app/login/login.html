@@ -57,7 +57,10 @@
     <!-- End Login View -->
 
     <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" class="km-moduleview" style="width: 90%; background:rgba(255, 255, 255, 0);">
-        <ul kendo-mobile-list-view style="padding-bottom: 1em;" class="ck-module-wrap ck-no-border" k-style="'inset'">
+           <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-dark"><img src="styles/images/blank.png" style="width: 5em; height: .9em;" /></kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+         <ul kendo-mobile-list-view style="padding-bottom: 1em;" class="ck-module-wrap ck-no-border" k-style="'inset'">
             <li>
                 <h2 class="km-bold-font"> {{form.forgotYourPassword.resoruceValue}}?</h2>
                 <p>

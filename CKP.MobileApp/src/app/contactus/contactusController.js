@@ -121,9 +121,8 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         var getHelpDesk = function () {
 
             var helpDesk = localStorageService.get("organizationDetail");
-            console.log(helpDesk.HelpDesk);
-            if (helpDesk) {
 
+            if (helpDesk) {
                 $scope.helpDesk = helpDesk.HelpDesk;
             }
         }
@@ -138,7 +137,9 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }
 
         $scope.renderHtml = function (content) {
-            content = content.replace(/<b>/g, '<br><b>');
+            if (typeof content !== 'undefined') {
+                content = content.replace(/<b>/g, '<br><b>');
+            }
             return $sce.trustAsHtml(content);
         };
     }
