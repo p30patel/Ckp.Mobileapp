@@ -25,7 +25,7 @@ app.constant('ngAuthSettings', {
     baasApiKey: baasApiKey,
     baasScheme: baasScheme,
     androidProjectNumber: androidProjectNumber,
-    emulatorMode : emulatorMode
+    emulatorMode: emulatorMode
 });
 
 app.run(['authService', function (authService) {
@@ -39,7 +39,7 @@ app.config(function ($httpProvider) {
 });
 
 function onDeviceReady() {
-  
+
 }
 
 (function (g) {

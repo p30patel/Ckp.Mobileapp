@@ -232,10 +232,10 @@ app.controller('loginController', [
 
                                       el.push.getRegistration().then(function (result)
                                       {
-                                          //var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
-                                          //var deviceData = localStorageService.get('deviceData');
+                                          localStorageService.set('deviceData', JSON.stringify(result));
+                                          var deviceData = localStorageService.get('deviceData');
                                        
-                                          alert( JSON.stringify(result));
+                                          alert(deviceData.result.Id);
                                       },
                                       function (e) {
                                       //error register
