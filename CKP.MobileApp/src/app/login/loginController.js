@@ -235,7 +235,7 @@ app.controller('loginController', [
                                           localStorageService.set('deviceData', JSON.stringify(result));
                                           var deviceData = localStorageService.get('deviceData');
                                        
-                                          alert(deviceData.result.Id);
+                                          alert(deviceData);
                                       },
                                       function (e) {
                                       //error register
@@ -287,6 +287,7 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
+                           var username = $scope.loginData.userName;
                            kendo.mobile.application.pane.loader.show();
                         
                            loginDataService.getPasswordHint(username).then(function (result) {
