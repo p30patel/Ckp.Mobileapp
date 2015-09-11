@@ -21,8 +21,11 @@ var app = angular.module('app', ['kendo.directives', 'LocalStorageModule']);
 
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
-
-    clientId: clientId
+    clientId: clientId,
+    baasApiKey: baasApiKey,
+    baasScheme: baasScheme,
+    androidProjectNumber: androidProjectNumber,
+    emulatorMode: emulatorMode
 });
 
 app.run(['authService', function (authService) {
@@ -35,43 +38,7 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-var el = new Everlive({
-    apiKey: baasApiKey,
-    scheme: baasScheme
-});
 
-
-// device APIs are available
-function pushRegister() {
-
-        var pushSettings = {
-                android: {
-                        senderID: androidProjectNumber
-                    },
-            iOS: {
-                    badge: "true",
-                    sound: "true",
-                    alert: "true"
-                },
-            wp8: {
-                    channelName: 'EverlivePushChannel'
-                },     
-            customParameters: {
-                Age: 21
-            }
-        };
-        el.push.register(pushSettings)
-           .then(
-               _onDeviceIsRegistered(data),
-               function (err) {
-                       alert('REGISTER ERROR: ' + JSON.stringify(err));
-                   }
-               );
-            }
-
-function _onDeviceIsRegistered(data) {
-    alert('registered' + data.Id);
-}
 (function (g) {
 
     var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key

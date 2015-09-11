@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter',
-                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter', 'ngAuthSettings',
+                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter, ngAuthSettings) {
                        $scope.title = '';
                       
                        //login page html lables
@@ -113,7 +113,11 @@ app.controller('loginController', [
                            }
                        };
                        languages(); //init languages
-                      
+
+                       $scope.intShow = function (e) {
+                           getDeviceInfo();
+                           translatePage(); 
+                       }
                        //forgot password 
                        $scope.loginData.email = "";
                        $scope.forgotPasswordModalOpen = function () {
@@ -189,16 +193,16 @@ app.controller('loginController', [
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
-                       translatePage(); // translate page first time
+                    
 
                        var getDeviceInfo = function () {
                            var username = $scope.loginData.userName;
 
-                           var baasApiKey = 'uTM7cVvTTvlfDZsu';
+                           var baasApiKey = ngAuthSettings.baasApiKey;
 
-                           var baasScheme = 'https';
+                           var baasScheme = ngAuthSettings.baasScheme;
 
-                           var androidProjectNumber = '1018275522168';
+                           var androidProjectNumber = ngAuthSettings.androidProjectNumber;
 
                            var emulatorMode = true;
                            var el = new Everlive({
@@ -243,7 +247,7 @@ app.controller('loginController', [
                                   }
                                   );
                        }
-                       getDeviceInfo();
+                     
 
                        $scope.translatePage = function () {
                            translatePage();
