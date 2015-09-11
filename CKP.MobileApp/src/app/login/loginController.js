@@ -191,40 +191,7 @@ app.controller('loginController', [
                        }
                        translatePage(); // translate page first time
 
-
-                       $scope.translatePage = function () {
-                           translatePage();
-                       }
-                       //loign event
-                       $scope.login = function () {
-                           $('#btnLogin').focus();
-                           var loginData = {
-                               userName: $scope.loginData.userName,
-                               password: $scope.loginData.password,
-                               remmberme: $scope.loginData.useRefreshTokens
-                           }
-                           localStorageService.set('loginData', loginData);
-
-                           kendo.mobile.application.pane.loader.show();
-
-                           $scope.passwordHint = "";
-                           authService.login($scope.loginData).then(function (response) {
-                               
-                               kendo.mobile.application.navigate("src/app/home/home.html");
-                               kendo.mobile.application.pane.loader.hide();
-                             
-                           }).catch(function (err) {
-                             
-                               
-                                   $scope.message = err.error_description;
-                                   alerting.addWarning(err.error_description, 5000);
-                             
-                               kendo.mobile.application.pane.loader.hide();
-                           });
-                       };
-
-                       $scope.showPasswordHint = function () {
-
+                       var getDeviceInfo = function () {
                            var username = $scope.loginData.userName;
 
                            var baasApiKey = 'uTM7cVvTTvlfDZsu';
@@ -251,7 +218,7 @@ app.controller('loginController', [
                                },
                                wp8: {
                                    channelName: 'EverlivePushChannel'
-                               },     
+                               },
                                customParameters: {
                                    Name: username,
                                    LastLoginDate: new Date()
@@ -262,7 +229,7 @@ app.controller('loginController', [
                               .then(
                                   function (data) {
                                       alert('Register success');
-                                     
+
                                       el.push.getRegistration().then(function (result)
                                       { alert(JSON.stringify(result)); },
                                       function (e) {
@@ -275,14 +242,46 @@ app.controller('loginController', [
                                       alert('REGISTER ERROR: ' + JSON.stringify(err));
                                   }
                                   );
-                    
+                       }
+                       getDeviceInfo();
+
+                       $scope.translatePage = function () {
+                           translatePage();
+                       }
+                       //loign event
+                       $scope.login = function () {
+                           $('#btnLogin').focus();
+                           var loginData = {
+                               userName: $scope.loginData.userName,
+                               password: $scope.loginData.password,
+                               remmberme: $scope.loginData.useRefreshTokens
+                           }
+                           localStorageService.set('loginData', loginData);
+
+                           kendo.mobile.application.pane.loader.show();
+
+                           $scope.passwordHint = "";
+                           authService.login($scope.loginData).then(function (response) {
+                               
+                               kendo.mobile.application.navigate("src/app/home/home.html");
+                               kendo.mobile.application.pane.loader.hide();
+                             
+                           },function (err) {                               
+                                   $scope.message = err.error_description;
+                                   alerting.addWarning(err.error_description, 5000);
+                             
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+                       };
+
+                       $scope.showPasswordHint = function () {
                            kendo.mobile.application.pane.loader.show();
                         
                            loginDataService.getPasswordHint(username).then(function (result) {
                                $scope.passwordHint = result;
                                alerting.addSuccess('Hint is : ' + result, 5000);
                                kendo.mobile.application.pane.loader.hide();
-                           }).catch(function (err) {
+                           }, function (err) {
                                $scope.message = 'Error while getting the Hint!';
                                alerting.addWarning('Error while getting the Hint!', 5000);
                                kendo.mobile.application.pane.loader.hide();
