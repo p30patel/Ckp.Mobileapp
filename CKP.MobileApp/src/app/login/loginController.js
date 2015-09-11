@@ -266,7 +266,9 @@ app.controller('loginController', [
                                kendo.mobile.application.navigate("src/app/home/home.html");
                                kendo.mobile.application.pane.loader.hide();
                              
-                           },function (err) {                               
+                           }).catch(function (err) {
+                             
+                               
                                    $scope.message = err.error_description;
                                    alerting.addWarning(err.error_description, 5000);
                              
@@ -281,7 +283,7 @@ app.controller('loginController', [
                                $scope.passwordHint = result;
                                alerting.addSuccess('Hint is : ' + result, 5000);
                                kendo.mobile.application.pane.loader.hide();
-                           }, function (err) {
+                           }).catch(function (err) {
                                $scope.message = 'Error while getting the Hint!';
                                alerting.addWarning('Error while getting the Hint!', 5000);
                                kendo.mobile.application.pane.loader.hide();
