@@ -193,7 +193,7 @@ app.controller('loginController', [
                     
 
                        var getDeviceInfo = function () {
-                           var username = $scope.loginData.userName || "";
+                           var username =  ($scope.loginData.userName === '') ?  "" : $scope.loginData.userName;
 
                            var baasApiKey = ngAuthSettings.baasApiKey;
 
@@ -232,10 +232,10 @@ app.controller('loginController', [
 
                                       el.push.getRegistration().then(function (result)
                                       {
-                                          var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
-                                          var deviceData = localStorageService.get('deviceData');
+                                          //var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
+                                          //var deviceData = localStorageService.get('deviceData');
                                        
-                                          alert(deviceData);
+                                          alert( JSON.stringify(result));
                                       },
                                       function (e) {
                                       //error register
