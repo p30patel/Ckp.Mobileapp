@@ -224,6 +224,7 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
+
                            var username = $scope.loginData.userName;
 
                            var baasApiKey = 'uTM7cVvTTvlfDZsu';
@@ -263,7 +264,7 @@ app.controller('loginController', [
                                       alert('Register success');
                                      
                                       el.push.getRegistration().then(function (result)
-                                      { alert(result); },
+                                      { alert(JSON.stringify(result)); },
                                       function (e) {
                                           alert(e);
                                       });

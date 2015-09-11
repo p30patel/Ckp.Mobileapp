@@ -74,7 +74,7 @@
    
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
-                ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'USA'">
+                ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'USA'">
                 <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
@@ -158,7 +158,7 @@
    
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
         
-                ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Europe'">
+                ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Europe'">
                 <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
@@ -213,7 +213,7 @@
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
             
-                   ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Asia'">
+                   ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Asia'">
                 <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>
@@ -252,7 +252,7 @@
       
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
             
-                   ng-show="authentication.isAuth && helpDesk && helpDesk.Region == 'Austraila'">
+                   ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Austraila'">
                 <h4>{{form.helpDesk.resoruceValue}}</h4>
                 <table class="match-details">
                     <tr>

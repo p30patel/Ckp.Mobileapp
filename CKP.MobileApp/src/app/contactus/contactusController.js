@@ -13,7 +13,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
         $scope.form.titleUS = {};
-        $scope.form.titleUS.resoruceName = "United States";
+        $scope.form.titleUS.resoruceName = "USA";
         $scope.form.titleUS.resoruceValue = translateService.getResourceValue($scope.form.titleUS.resoruceName);
 
 
@@ -114,19 +114,21 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.EuropeMasTabTitle.resoruceName = "CheckNet MAS Catalog Order Europe";
         $scope.form.EuropeMasTabTitle.resoruceValue = translateService.getResourceValue($scope.form.EuropeMasTabTitle.resoruceName);
 
-        
+
         $scope.HelpDesk = {};
-       
+
         //address
         var getHelpDesk = function () {
 
             var helpDesk = localStorageService.get("organizationDetail");
+            console.log(helpDesk.HelpDesk);
             if (helpDesk) {
-                $scope.helpDesk = helpDesk.HelpDesk.he;
+
+                $scope.helpDesk = helpDesk.HelpDesk;
             }
         }
         getHelpDesk();
-       
+
         $scope.onSelect = function (selectedClass) {
             $('.contactus').hide();
             $('.' + selectedClass).show();
@@ -136,6 +138,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }
 
         $scope.renderHtml = function (content) {
+            content = content.replace(/<b>/g, '<br><b>');
             return $sce.trustAsHtml(content);
         };
     }

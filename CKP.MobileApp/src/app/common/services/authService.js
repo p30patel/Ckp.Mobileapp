@@ -76,7 +76,7 @@ app.factory('authService', [
                         var deferred = $q.defer();
                         var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail?userName=" + _authentication.userName + "&deviceId=" + 1;
                         $http.post(url).success(function (result) {                        
-                            localStorageService.add('organizationDetail', result);
+                            localStorageService.set('organizationDetail', result);
                             deferred.resolve(result);
                         }).error(function (err, status) {
                             deferred.reject(err);
