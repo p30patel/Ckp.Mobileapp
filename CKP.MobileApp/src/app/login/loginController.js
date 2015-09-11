@@ -115,7 +115,7 @@ app.controller('loginController', [
                        languages(); //init languages
 
                        $scope.intShow = function (e) {
-                         
+                           getDeviceInfo();
                            translatePage(); 
                        }
                        //forgot password 
@@ -194,6 +194,65 @@ app.controller('loginController', [
                            });
                        }
                     
+
+                       var getDeviceInfo = function () {
+                           var username = $scope.loginData.userName || "";
+
+                           var baasApiKey = ngAuthSettings.baasApiKey;
+
+                           var baasScheme = ngAuthSettings.baasScheme;
+
+                           var androidProjectNumber = ngAuthSettings.androidProjectNumber;
+                         
+                           var emulatorMode = true;
+                           var el = new Everlive({
+                               apiKey: baasApiKey,
+                               scheme: baasScheme
+                           });
+
+
+                           var pushSettings = {
+                               android: {
+                                   senderID: androidProjectNumber
+                               },
+                               iOS: {
+                                   badge: "true",
+                                   sound: "true",
+                                   alert: "true"
+                               },
+                               wp8: {
+                                   channelName: 'EverlivePushChannel'
+                               },
+                               customParameters: {
+                                   Name: username,
+                                   LastLoginDate: new Date()
+
+                               }
+                           };
+                           el.push.register(pushSettings)
+                              .then(
+                                  function (data) {
+
+                                      el.push.getRegistration().then(function (result)
+                                      {
+                                          var deviceData = localStorageService.set('deviceData', JSON.stringify(result));
+                                          var deviceData = localStorageService.get('deviceData');
+                                       
+                                          alert(deviceData.Id);
+                                      },
+                                      function (e) {
+                                      //error register
+                                      });
+
+
+                                  },
+                                  function (err) {
+                                    //  alert('REGISTER ERROR: ' + JSON.stringify(err));
+                                  }
+                                  );
+                       };
+                     
+
                        $scope.translatePage = function () {
                            translatePage();
                        };
@@ -226,10 +285,6 @@ app.controller('loginController', [
                        };
 
                        $scope.showPasswordHint = function () {
-                           var deviceData = localStorage.getItem('deviceData');
-
-                           alert(deviceData.Id);
-
                            kendo.mobile.application.pane.loader.show();
                         
                            loginDataService.getPasswordHint(username).then(function (result) {
