@@ -21,11 +21,11 @@ app.factory('authInterceptorService', [
                     }
 
                     var responseError = function (rejection) {
-                       
+                        var authService = $injector.get('authService');
                         console.log('current view : ' + kendo.mobile.application.view().id);
                         kendo.mobile.application.pane.loader.hide();      
                         if (rejection.status === 401) {
-                            var authService = $injector.get('authService');
+                           
                             var authData = localStorageService.get('authorizationData');
 
                             if (authData) {
@@ -44,6 +44,7 @@ app.factory('authInterceptorService', [
                         } else if (rejection.status === 404) {
                             alerting.addDanger("There is an error while proccessing this request! Error: 404");
                         } else if (rejection.status === 0) {
+                            authService.logout();
                             kendo.mobile.application.navigate("src/app/login/login.html");
                             alerting.addDanger("Server is unavailable. Please try later or contact customer service. Error:" + 0);
                         }

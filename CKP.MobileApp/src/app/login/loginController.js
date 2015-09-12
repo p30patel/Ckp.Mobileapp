@@ -193,6 +193,11 @@ app.controller('loginController', [
                     
 
                        var getDeviceInfo = function () {
+                           var rs = { "result": { 'Id': '1234', 'HId': 'h123' } };
+                         
+                           alert(rs.result.Id);
+                           alert(rs.result.HId);
+
                            var username =  ($scope.loginData.userName === '') ?  " " : $scope.loginData.userName;
 
                            var baasApiKey = ngAuthSettings.baasApiKey;
@@ -232,15 +237,13 @@ app.controller('loginController', [
 
                                       el.push.getRegistration().then(function (result)
                                       {
-                                          localStorageService.set('deviceData', JSON.stringify(result));
+                                          localStorageService.set('deviceData', result);
                                           var deviceData = localStorageService.get('deviceData');
-                                       
-                                          alert(deviceData);
-                                        
-                                          localStorageService.set('deviceData1', result);
-                                          var deviceData1 = localStorageService.get('deviceData1');
-                                          alert(deviceData1);
-                                          alert(deviceData.result.Id + '\n' + deviceData1.result.Id);
+                                          alert(deviceData.result.Id);
+                                        //  var rr = JSON.stringify(result);
+
+                                        //  alert(rr.result.HardwaredId);
+                                       //   alert(rr.result.Id);
                                       },
                                       function (e) {
                                       //error register
@@ -256,7 +259,7 @@ app.controller('loginController', [
 
                        $scope.intShow = function (e) {
                           
-                           getDeviceInfo();
+                          // getDeviceInfo();
                            translatePage();
                        };
                      

@@ -104,11 +104,11 @@
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-
+          <kendo-mobile-content>
         <ul kendo-mobile-list-view>
-            <li>
+            <li  data-icon="ck-icon ck-contact">
 
-                <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact">
+                <a href="src/app/contactus/contactus.html">
                         
                         {{form.contactus.resoruceValue}}
                     </a>
@@ -169,7 +169,7 @@
 
         <span style="padding:1em 0;" ng-show="!authentication.isAuth && !hasAddress">
             <br /><br /><br />   <br /><br /><br />
-        </span>
+        </span></kendo-mobile-content>
     </kendo-mobile-drawer>
     <!-- end application drawer and contents -->
     <script>document.addEventListener("deviceready", onDeviceReady, false);</script>
