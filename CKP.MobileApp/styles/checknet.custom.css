@@ -385,7 +385,7 @@ span.k-icon.k-i-arrow-s {
 }
 .km-nova .km-collapsible-header {
     line-height: 4.125em;
-    padding: 0 1.16em 0 1.16em;
+    padding: 0 1.6em 0 .8em;
     font-size: 1.087em;
     height: auto;
     background-color: rgb(0, 0, 0);
@@ -405,7 +405,7 @@ span.k-icon.k-i-arrow-s {
     color: #ffffff;
 }
 .km-nova .km-collapsible-content {
-    padding: 1em
+    padding: .8em
 }
 .km-nova .km-collapsible-header h1 {
     line-height: 2.85em
@@ -537,10 +537,10 @@ span.k-icon.k-i-arrow-s {
     margin-right:.5em; 
     z-index: 1;
 }
-.ck-login-logo {width: 16em; height: 5em; margin: 1em auto 2em; display: block; float: none;}
+.ck-login-logo {width: 19em; height: 6em; margin: 2em auto 3em; display: block; float: none;}
 .ck-switchpad-right {float: right; margin-right:4.7rem;}
-.ck-disclamier {text-align: center; padding-top:1em; font-size: .7em!important;}
-.ck-lang-select {float:right; width:40%; line-height:3em;}
+.ck-disclamier {text-align: center; padding-top:2em; font-size: .8em!important;}
+.ck-lang-select {float:right; width:35%; line-height:3em;}
 .ck-close-btn {background: none!important; border: 0!important; padding: 0!important; margin-top: -1.9rem;}
 
 .ck-module-wrap {
@@ -703,6 +703,18 @@ span.k-icon.k-i-arrow-s {
 .ck-btn-left {width:45%!important; float:left!important; color:#fff!important;}
 .ck-btn-right {width:45%!important; float:right!important; color:#fff!important;}
 
+/* ORDER DETAILS */
+
+.km-nova .ck-details .km-collapsible-content { padding: 0; background: #F8F8F8;}
+.km-nova .ck-inquiry .km-collapsible-content { 
+    background-color: rgb(0, 0, 0, 0.2);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0, color-stop(0, rgba(233, 233, 233, .95)), color-stop(1, rgba(248, 248, 248, .95)));
+    background-image: -moz-linear-gradient(50% 100%, 50% 0, rgba(233, 233, 233, .95), rgba(248, 248, 248, .95));
+    background-image: -ms-linear-gradient(50% 100%, 50% 0, rgba(233, 233, 233, .95), rgba(248, 248, 248, .95));
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+
 /* TABLE STYLES */
 
 .ck-table {
@@ -725,10 +737,23 @@ span.k-icon.k-i-arrow-s {
     border: 0;
     
 }
+.ck-table.pad td {padding: .7em 1.2em;}
+.ck-table .r-align {text-align:right;}
+.ck-table .c-align {text-align:center;}
+.ck-table .med-grey {background: #E9E9E9}
 .ck-table .pipe {border-bottom: 1px solid #DEDEDE;}
 .ck-table .spacer {padding: .8em 0; vertical-align:top;}
 .ck-table .v-align {vertical-align:top;}
-.ck-table .red {color: #D52B1E; position:relative; left:1em; top:.7em;}
+.ck-table .red {color: #D52B1E; float: right; top:1.25em;}
+.ck-table .page {width: 1em; height: 1.4em; margin: .6em 0 .6em 1em;}
+.ck-table .status {color:#fff; padding:.5em; border-radius:4px; text-align: center;}
+.ck-table .status.open {background:#7ED321}
+.ck-table .status.closed {background:#E9E9E9; color:#5E6A71}
+.ck-table .status.waiting {background:#5E6A71}
+.ck-table .km-switch {margin-top:-.1em!important; margin-right:.3em;}
+.ck-table .notify {margin-top:4.5em; text-align:center;}
+
+
 
 .ck-table .data-btn {
     padding: .5em 0!important;
@@ -742,7 +767,7 @@ span.k-icon.k-i-arrow-s {
 .ck-table .data-btn .km-text {
  font-size: .8rem;
 }
-
+ 
 
 
 

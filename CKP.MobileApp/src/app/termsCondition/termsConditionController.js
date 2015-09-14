@@ -6,7 +6,7 @@ app.controller('termsConditionController', [
                        $scope.form = {};
 
                        $scope.form.title = {};
-                       $scope.form.title.resoruceName = "Terms & Condition";
+                       $scope.form.title.resoruceName = "Terms & Conditions";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
 

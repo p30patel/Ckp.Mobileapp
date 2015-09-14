@@ -179,8 +179,7 @@ app.controller('homeController', [
                        $scope.hideCreditModel = function () {
                            $("#modalview-credit").kendoMobileModalView("close");
                        };
-
-
+                     
                        //pull to refresh
                        $scope.refresh = function() {
                            var currentDate = $filter('date')(new Date(), 'dd-MMM-yy HH:mm:ss');

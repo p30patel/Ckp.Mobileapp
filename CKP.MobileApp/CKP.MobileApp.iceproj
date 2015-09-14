@@ -81,6 +81,7 @@
     <Content Include="cordova.ios.js" />
     <Content Include="cordova.wp8.js" />
     <Content Include="index.html" />
+    <Content Include="kendo\js\angular.min.js" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.all.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
@@ -147,6 +148,7 @@
     <Content Include="src\vendor\angular.js" />
     <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
+    <Content Include="src\vendor\angular.min.js" />
     <Content Include="styles\checknet.custom.css" />
     <Content Include="styles\images\Alert.png" />
     <Content Include="styles\images\back.png" />
@@ -163,6 +165,7 @@
     <Content Include="styles\images\kendoui.svg" />
     <Content Include="styles\images\kendoui.ttf" />
     <Content Include="styles\images\kendoui.woff" />
+    <Content Include="styles\images\page.png" />
     <Content Include="styles\images\search.png" />
     <Content Include="styles\images\wp8_icons.png" />
     <Content Include="styles\images\wp8_inverseicons.png" />

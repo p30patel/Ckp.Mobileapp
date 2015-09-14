@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController"  k-transition="'slide'">
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
 
@@ -16,42 +16,65 @@
 
 
        <kendo-mobile-content>
-        <kendo-mobile-list-view class="ck-no-border">
+       <kendo-mobile-list-view class="ck-no-border">
             <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
-                    <select class="ck-po-select" id="dropdown" style="background: url(styles/images/down-arrow.png) no-repeat scroll 115px 12px; background-size: 10px 5px; background-color: #7F7F7F;">
-                        <option value="First Option">Purchase Orders</option>
-                        <option value="Second Option">PO 1</option>
-                        <option value="Third Option">PO 2</option>
-                        <option value="Third Option">PO 3</option>
-                        <option value="Third Option">PO 4</option>
-                        <option value="Third Option">PO 5</option>
-                        <option value="Third Option">PO 6</option>
+
+                     <select class="ck-po-select" 
+                         style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;"
+                         ng-model="selectedPara" 
+                         ng-change="selectParamter()" 
+                         ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'">
                     </select>
-                    <input class="ck-po-search" style="background: url(styles/images/search.png) no-repeat scroll 140px 7px; background-size: 12px 12px; background-color: #fff;" value="" placeholder="Search" type="text" />
+
+                    <input class="ck-po-search" 
+                        style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF;" 
+                        value="" placeholder="Search" type="text" />
                 </fieldset>
                 <!--<i class="km-icon km-arrowdown" style="position:relative; bottom: 25px; left:115px; z-index: 1; color:#fff; float:left;"></i>
                 <i class="km-icon km-search" style="position:relative; bottom: 25px; float:right; z-index: 1; font-size:80%; color:#D52B1E;"></i>-->
             </li>
        
-            <kendo-mobile-collapsible class="ck-home" style="margin-top:-.1em;" k-id="'collapsible'" k-collapsed="'false'" k-on-expand="OpenExpand()">
+            <kendo-mobile-collapsible 
+                class="ck-home" 
+                style="margin-top:-.1em;" k-id="'collapsible'" k-collapsed="'false'" k-on-expand="OpenExpand()"
+                ng-repeat="orderCount in orderCounts">
                 <h3>
                 <kendo-mobile-button class="ck-title">TJMAXX</kendo-mobile-button>
-                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'" k-on-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" /></kendo-mobile-button>
-                <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home" k-data-show="mobileSalesViewInit">
-                                <kendo-mobile-button class="ck-button km-state-active">
-                                    <div class="ck-button-number">4</div>
+                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'" href="#modalview-credit"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" /></kendo-mobile-button>
+                <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home">
+
+                                <kendo-mobile-button class="ck-button km-state-active km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.HasApproval" 
+                                    ng-click="approvalDetail(orderCount.RetailerId)">
+                                    <div class="ck-button-number">{{ orderCount.ApprovalCount}}</div>
                                     <div class="ck-button-text">Approvals</div>
                                 </kendo-mobile-button>
-                                <kendo-mobile-button class="ck-button">
-                                    <div class="ck-button-number">5</div>
+
+                                <kendo-mobile-button class="ck-button km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.NewOrderCount"
+                                    ng-click="newOrderDetail(orderCount.RetailerId)">
+                                    <div class="ck-button-number">{{ orderCount.NewOrderCount}}</div>
                                     <div class="ck-button-text">News</div>
                                </kendo-mobile-button>
-                               <kendo-mobile-button class="ck-button">
-                                   <div class="ck-button-number">2</div>
+
+                               <kendo-mobile-button class="ck-button km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.HasReleased"
+                                   ng-click="releaseOrderDetail(orderCount.RetailerId)">
+                                   <div class="ck-button-number">{{ orderCount.ReleasedOrderCount}}</div>
                                    <div class="ck-button-text">Released</div>
                                </kendo-mobile-button>
-                            </kendo-mobile-button-group></span>
+                            </kendo-mobile-button-group>
+
+
+<!--                     <ul kendo-mobile-button-group>
+                        <li class="km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.HasApproval">
+                            <a href id="approvalDetail-{{orderCount.RetailerId}}" class="ele-{{$index}}" ng-click="approvalDetail(orderCount.RetailerId)">Approval ({{ orderCount.ApprovalCount}})</a>
+                        </li>
+                        <li class="km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.NewOrderCount">
+                            <a href id="newOrderDetail-{{orderCount.RetailerId}}" ng-click="newOrderDetail(orderCount.RetailerId)">New ({{ orderCount.NewOrderCount}})</a>
+                        </li>
+                        <li class="km-button retailer retailer-{{retailer.RetailerId}}" ng-show="orderCount.HasReleased">
+                            <a href id="releaseOrderDetail-{{orderCount.RetailerId}}" ng-click="releaseOrderDetail(orderCount.RetailerId)">Released ({{ orderCount.ReleasedOrderCount}})</a>
+                        </li>
+                    </ul>-->
                 </h3>
                 <table class="ck-table">
                     <tr class="header">
@@ -67,16 +90,16 @@
                             <input type="checkbox" class="km-checkbox" id="chocolate" />
                             <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="chocolate"></label>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                             GEM Trading Co. LLc
                             <div>5555534219381872</div>
                             </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                            123456789
                            </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">0000</a><i class="km-icon km-details red"></i>
                         </td>
                     </tr>
                     <tr class="pipe">
@@ -84,16 +107,16 @@
                             <input type="checkbox" class="km-checkbox" id="test7" />
                             <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test7"></label>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                             Marshalls-1
                             <div>5555534219381872</div>
                             </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                            123456789
                            </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">0000</a><i class="km-icon km-details red"></i>
                         </td>
                     </tr>
                     <tr class="pipe">
@@ -101,16 +124,16 @@
                             <input type="checkbox" class="km-checkbox" id="test6" />
                             <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test6"></label>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                             Marshalls-1
                             <div>5555534219381872</div>
                             </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                            123456789
                            </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">0000</a><i class="km-icon km-details red"></i>
                         </td>
                     </tr>
                     <tr class="pipe">
@@ -118,16 +141,16 @@
                             <input type="checkbox" class="km-checkbox" id="test5" />
                             <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test5"></label>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                             Marshalls-1
                             <div>5555534219381872</div>
                             </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">
                            123456789
                            </a>
                         </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/shopping-cart-details.html">0000</a><i class="km-icon km-details red"></i>
                         </td>
                     </tr>
                     <tr>
@@ -140,113 +163,6 @@
                     </tr>
                 </table>
             </kendo-mobile-collapsible>
-            <kendo-mobile-collapsible class="ck-home" style="margin-top:.5em;" k-id="'collapsible'" k-collapsed="'false'" k-on-expand="OpenExpand()">
-                <h3>
-                <kendo-mobile-button class="ck-title">HomeGoods</kendo-mobile-button>
-                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'" href="#modalview-credit"></kendo-mobile-button>
-                <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home" k-data-show="mobileSalesViewInit">
-                                <kendo-mobile-button class="ck-button km-state-active">
-                                    <div class="ck-button-number">4</div>
-                                    <div class="ck-button-text">Approvals</div>
-                                </kendo-mobile-button>
-                                <kendo-mobile-button class="ck-button">
-                                    <div class="ck-button-number">5</div>
-                                    <div class="ck-button-text">News</div>
-                               </kendo-mobile-button>
-                               <kendo-mobile-button class="ck-button">
-                                   <div class="ck-button-number">2</div>
-                                   <div class="ck-button-text">Released</div>
-                               </kendo-mobile-button>
-                            </kendo-mobile-button-group></span>
-                </h3>
-                <table class="ck-table">
-                    <tr class="header">
-                        <td></td>
-                        <td class="spacer">Purchase Order</td>
-                        <td>Sales Order</td>
-                        <td>Date</td>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr class="pipe">
-                        <td>
-                            <input type="checkbox" class="km-checkbox" id="Checkbox1" />
-                            <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="chocolate"></label>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                           123456789
-                           </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
-                        </td>
-                    </tr>
-                    <tr class="pipe">
-                        <td>
-                            <input type="checkbox" class="km-checkbox" id="test0" />
-                            <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test0"></label>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                            Marshalls-1
-                            <div>5555534219381872</div>
-                            </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                           123456789
-                           </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
-                        </td>
-                    </tr>
-                    <tr class="pipe">
-                        <td>
-                            <input type="checkbox" class="km-checkbox" id="test2" />
-                            <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test2"></label>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                            Marshalls-1
-                            <div>5555534219381872</div>
-                            </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                           123456789
-                           </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
-                        </td>
-                    </tr>
-                    <tr class="pipe">
-                        <td>
-                            <input type="checkbox" class="km-checkbox" id="test3" />
-                            <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="test3"></label>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                            Marshalls-1
-                            <div>5555534219381872</div>
-                            </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">
-                           123456789
-                           </a>
-                        </td>
-                        <td class="v-align"><a class="data-btn" kendo-mobile-button href="views/approval-waiting.html">0000</a><i class="km-icon km-details red"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" style="padding: 1em;">
-                            <i></i>
-                            <kendo-mobile-button class="km-secondary ck-btn-left">View All</kendo-mobile-button>
-                            <i></i>
-                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" href="#modalview-approve">Bulk Approve</kendo-mobile-button>
-                        </td>
-                    </tr>
-                </table>
-            </kendo-mobile-collapsible>
-     </kendo-mobile-list-view>
         
         <!-- End Home View -->
     </kendo-mobile-content>
