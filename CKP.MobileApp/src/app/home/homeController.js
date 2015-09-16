@@ -195,10 +195,11 @@ app.controller('homeController', [
 
                        //credit lock
                        $scope.showCreditModel = function () {
-
+                           $('.order').hide();
                            $("#modalview-credit").kendoMobileModalView("open");
                        };
                        $scope.hideCreditModel = function () {
+                           $('.order').hide();
                            $("#modalview-credit").kendoMobileModalView("close");
                        };
                        //approve modal
