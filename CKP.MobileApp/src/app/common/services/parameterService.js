@@ -1,12 +1,30 @@
 app.factory('parameterService', [
-                '$http', '$q', 'localStorageService', 'ngAuthSettings',
-                function ($http, $q, localStorageService, ngAuthSettings) {
+                '$http', '$q', 'localStorageService', 'ngAuthSettings', 'translateService',
+                function ($http, $q, localStorageService, ngAuthSettings, translateService) {
                     var service = {};
+
+                    var salesOrder = {};
+                    salesOrder.resoruceName = "Sales Order";
+                    salesOrder.resoruceValue = translateService.getResourceValue(salesOrder.resoruceName);
+
+
+                    var orderNumber = {};
+                    orderNumber.resoruceName = "Order Number";
+                    orderNumber.resoruceValue = translateService.getResourceValue(orderNumber.resoruceName);
+
+                    var shoppingCart = {};
+                    shoppingCart.resoruceName = "Shopping Cart";
+                    shoppingCart.resoruceValue = translateService.getResourceValue(shoppingCart.resoruceName);
+
+                    var vendorRef = {};
+                    vendorRef.resoruceName = "Vendor Ref";
+                    vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
+
                     var searchParameters = [
-                        { id: '1', name : "Purchase Order"},
-                        { id: '2', name : "Sales Order"},
-                        { id: '3', name : "Shopping Cart"},
-                        { id: '4', name : "Vendor Ref"},
+                        { id: '1', name: orderNumber.resoruceValue, value: "Purchase Order" },
+                        { id: '2', name: salesOrder.resoruceValue, value: "Sales Orderr" },
+                        { id: '3', name: shoppingCart.resoruceValue, value: "Shopping Cart" },
+                        { id: '4', name: vendorRef.resoruceName, value: "Vendor Ref" },
             
                     ];
                     
@@ -26,7 +44,7 @@ app.factory('parameterService', [
                         var paramterName = "Purchase Order";
                         angular.forEach(searchParameters, function (item) {
                             if (item.id === id) {
-                                paramterName = item.name;
+                                paramterName = item.value;
                                 return paramterName;
                             }
                         });
