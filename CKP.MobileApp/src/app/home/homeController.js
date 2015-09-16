@@ -2,9 +2,16 @@
 app.controller('homeController', [
                   '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', 'alerting', '$filter', 'translateService', 'messageDataService',
                    function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService, messageDataService) {
+                       var init = function () {
 
-                       //alerts & news - messages
-                     
+                           if (!authService.authentication.isAuth) {
+                               authService.logout();
+
+                               kendo.mobile.application.navigate("src/app/login/login.html");
+                           }
+                        
+                       };
+                       init();
 
                        $scope.form = {};
                        $scope.mesages = {};
@@ -28,7 +35,7 @@ app.controller('homeController', [
 
 
                        $scope.message = "";
-                     
+                       $scope.messageCount = 0;
 
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";
@@ -40,34 +47,6 @@ app.controller('homeController', [
 
                        }
                        $scope.languages = parameterService.getSearchParameters();
-
-                       $scope.messageCount = 0;
-                       var getMessages = function () {
-                           kendo.mobile.application.pane.loader.show();
-
-                           messageDataService.getMessages().then(function (result) {
-                               $scope.mesages = result;
-                               $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
-                               alert($scope.messageCount);
-
-                           }).catch(function (error) {
-                               $scope.mesages = {};
-                               $scope.messageCount = 0;
-                           }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
-                           });
-                       }; // end message
-                     
-                       var init = function () {
-
-                           if (!authService.authentication.isAuth) {
-                               authService.logout();
-
-                               kendo.mobile.application.navigate("src/app/login/login.html");
-                           }
-                       };
-                       init();
-                       getMessages();
                        $scope.clearSearch = function () {
                            $scope.searchValue = "";
                        }
@@ -89,7 +68,7 @@ app.controller('homeController', [
                        };
 
                        var getOrderCounts = function () {
-                         
+                           alerting.addSuccess("Getting Order Counts!");
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
 
@@ -112,10 +91,26 @@ app.controller('homeController', [
                                });
                            
                        }
-                   
-                      
-                       getOrderCounts();
+                       //alerts & news - messages
+                  
+                       var getMessages = function () {
+                           kendo.mobile.application.pane.loader.show();
 
+                           messageDataService.getMessages().then(function (result) {
+                               $scope.mesages = result;
+                               $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
+
+                           }).catch(function (error) {
+                               $scope.mesages = {};
+                               $scope.messageCount = 0;
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+                       }; // end message
+
+                       getMessages();
+                       getOrderCounts();
+                      
                        $scope.newOrderDetail = function (id) {
                            $('.order').hide();
                            $('#new-' + id).show();
