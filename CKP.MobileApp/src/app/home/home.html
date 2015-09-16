@@ -44,17 +44,17 @@
                 <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home">
                                 <kendo-mobile-button class="ck-button km-state-active km-button retailer retailer-{{orderCount.RetailerId}}" ng-show="orderCount.HasApproval"
                                     ng-click="approvalDetail(orderCount.RetailerId)">
-                                    <div class="ck-button-number">4</div>
+                                    <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                                     <div class="ck-button-text">Approvals</div>
                                 </kendo-mobile-button>
                                 <kendo-mobile-button class="ck-button km-button retailer retailer-{{orderCount.RetailerId}}"  ng-show="orderCount.NewOrderCount"
                                     ng-click="newOrderDetail(orderCount.RetailerId)">
-                                    <div class="ck-button-number">5</div>
+                                    <div class="ck-button-number">{{ orderCount.NewOrderCount}}</div>
                                     <div class="ck-button-text">News</div>
                                </kendo-mobile-button>
                                <kendo-mobile-button class="ck-button km-button retailer retailer-{{orderCount.RetailerId}}"  ng-show="orderCount.HasReleased"
                                    ng-click="releaseOrderDetail(orderCount.RetailerId)">
-                                   <div class="ck-button-number">2</div>
+                                   <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
                                    <div class="ck-button-text">Released</div>
                                </kendo-mobile-button>
                             </kendo-mobile-button-group>
@@ -66,10 +66,10 @@
                             <table class="ck-table order" id="approval-{{orderCount.RetailerId}}">
                                
                                     <tr class="header">
-
+                                        <td></td>
                                         <td ng-if="searchParameterId == '1'" class="spacer">Order Number</td>
-                                        <td ng-if="searchParameterId == '2' " class="spacer">Sales Order</td>
                                         <td ng-if="searchParameterId == '1' " class="spacer">Sales Order</td>
+                                        <td ng-if="searchParameterId == '2' " class="spacer">Sales Order</td>
                                         <td ng-if="searchParameterId == '2'" class="spacer">Order Number</td>
                                         <td ng-if="searchParameterId == '3'" class="spacer">Shopping Cart</td>
                                         <td ng-if="searchParameterId == '3'" class="spacer">Order Number</td>
@@ -78,42 +78,68 @@
                                         <td>Date In System</td>
                                     </tr>
                           
+                                 <tr class="pipe" ng-repeat="order in orders">
 
-                                    <tr class="pipe" ng-repeat="order in orders">
-                                        <td ng-if="searchParameterId == '1'">
-                                            <input id="{{order.SalesOrderNo}}" type="checkbox" class="km-checkbox" value="{{order.SalesOrderNo}}" 
-                                                   ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                                            <a href="" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '2' ">
-                                            <input id="Checkbox1" type="checkbox" value="{{order.SalesOrderNo}}" 
-                                                   ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                                            <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '1'">
-                                            {{order.SalesOrderNo}}
-                                        </td>
-                                        <td ng-if="searchParameterId == '2'">{{order.OrderNumber}}</td>
-                                        <td ng-if="searchParameterId == '3'">
-                                            <input id="Checkbox2" type="checkbox" value="{{order.SalesOrderNo}}" 
-                                                   ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                                            <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '3'">{{order.OrderNumber}}</td>
-                                        <td ng-if="searchParameterId == '4'">
-                                            <input id="Checkbox3" type="checkbox" value="{{order.SalesOrderNo}}" 
-                                                   ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                                            <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '4'">{{order.OrderNumber}}</td>
-                                        <td>{{order.DateInSystem | date}}</td>
-                                    </tr>
+                        <td>
+                            <input type="checkbox" class="km-checkbox" id="chocolate" value="{{order.SalesOrderNo}}" ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)"/>
+                            <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="chocolate"></label>
+                        </td>
+                        
+                        <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                           {{order.OrderNumber}}
+                           </a></td>
+                        <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                           {{order.SalesOrderNo}}
+                           </a>
+                        </td>
+
+                                     
+                        <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                              {{order.SalesOrderNo}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+                                     
+                        <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">
+                              {{order.OrderNumber}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                      <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                              {{order.ShoppingCart}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+                                     
+                        <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                              {{order.OrderNumber}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                             <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                              {{order.VendorRef}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+                                     
+                        <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
+                              {{order.OrderNumber}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+                                     
+                           
+                        <td class="v-align"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.DateInSystem | date}}</a><i class="km-icon km-details red"></i>
+                        </td></tr>
+
                                  <tr>
                         <td colspan="5" style="padding: 1em;">
                             <i></i>
                             <kendo-mobile-button class="km-secondary ck-btn-left" k-on-click="viewAll(1, searchParameterId)">View All</kendo-mobile-button>
                             <i></i>
-                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'"  k-on-click="approve()">Bulk Approve</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" k-on-click="showApprovalModel()">Bulk Approve</kendo-mobile-button>
                         </td>
                     </tr>
                             </table>
@@ -121,6 +147,7 @@
                       
                             <table class="ck-table order" id="new-{{orderCount.RetailerId}}">
                                    <tr class="header">
+                                       <td></td>
                                 <td ng-if="searchParameterId == '1'" class="spacer">Order Number</td>
                                 <td ng-if="searchParameterId == '2' " class="spacer">Sales Order</td>
                                 <td ng-if="searchParameterId == '3'" class="spacer">Shopping Cart</td>
@@ -129,21 +156,37 @@
                                 <td>Order Date</td>
                               </tr>
                                     <tr class="pipe" ng-repeat="order in orders">
-                                        <td ng-if="searchParameterId == '1'">
-                                            <a href="" ng-click="orderDetail(2, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '2'">
-                                            <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
-                                        </td>
+                                        <td></td>
+                                            <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.OrderNumber)" >
+                              {{order.OrderNumber}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
 
-                                        <td ng-if="searchParameterId == '3'">
-                                            <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '4'">
-                                            <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
-                                        </td>
+                                            <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)" >
+                              {{order.SalesOrderNo}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                        
+                                            <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)" >
+                              {{order.ShoppingCart}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                        
+                                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)" >
+                              {{order.VendorRef}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+                                 
+                                       
+
                                         <td>{{order.Status}}</td>
-                                        <td>{{order.OrderDate | date}}</td>
+                                        <td>{{order.OrderDate | date}}<i class="km-icon km-details red"></i></td>
                                     </tr>
                               
                          
@@ -157,7 +200,7 @@
                   
                             <table class="ck-table order" id="released-{{orderCount.RetailerId}}">
                                  <tr class="header">
-
+                                     <td></td>
                                         <td ng-if="searchParameterId == '1'" class="spacer">Order Number</td>
                                         <td ng-if="searchParameterId == '2' " class="spacer">Sales Order</td>
 
@@ -168,22 +211,35 @@
                                     </tr>
                              
                              
-                                    <tr class="pipe" ng-repeat="order in orders">
-                                        <td ng-if="searchParameterId == '1'">
-                                            <a href="" ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '2'">
-                                            <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
-                                        </td>
+                                        <tr class="pipe" ng-repeat="order in orders">
+                                            <td></td>
+                                            <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)" >
+                              {{order.OrderNumber}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
 
-                                        <td ng-if="searchParameterId == '3'">
-                                            <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
-                                        </td>
-                                        <td ng-if="searchParameterId == '4'">
-                                            <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
-                                        </td>
+                                            <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)" >
+                              {{order.SalesOrderNo}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                        
+                                            <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)" >
+                              {{order.ShoppingCart}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
+
+                                        
+                                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)" >
+                              {{order.VendorRef}}
+                          <!--  <div>5555534219381872</div>-->
+                            </a>
+                        </td>
                                         <td>{{order.Status}}</td>
-                                        <td>{{order.OrderDate | date}}</td>
+                                        <td>{{order.OrderDate | date}}<i class="km-icon km-details red"></i></td>
                                     </tr>
                                  <tr>
                  <td colspan="5" style="padding: 1em;">

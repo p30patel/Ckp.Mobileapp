@@ -1,21 +1,153 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" >
-    <br>
-    <div>
-        {{order.detail.OrderNumber}}<br>
-        {{order.detail.OrderDate}}
-        <br>
-     
-            <span ng-show="order.hasApproval">Waiting<br></span>
-            <span ng-show="!order.hasApproval">{{order.detail.Stauts}}<br></span>
-             {{order.detail.SalesOrderNo}}<br>
-            {{order.detail.VendorRef}}<br>
-
-    </div>
-    <br>
-    <div class="apporval" ng-show="order.hasApproval">
-        Comment<br>
-        <input type="text" ng-modal="order.detail.comment"/>
-        <button ng-click="apporve(true)">YES</button>
-        <button ng-click="apporve(false)">No</button>
-    </div>
+   
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-button k-align="'right'"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
+            </kendo-mobile-button>
+            <kendo-mobile-button k-align="'left'" href="#:back"><i class="ck-icon ck-barrow"></i>
+            </kendo-mobile-button>
+            <kendo-view-title>Order Details</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <kendo-mobile-content>
+        <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
+            <li>
+                <h2 class="km-bold-font">GEM Trading Co. LLC</h2>
+                <table class="ck-table">
+                    <tr>
+                        <td class="v-align">
+                            <h3 class="km-bold-font">Order Date</h3>
+                            <h3 class="km-bold-font">Shopping Cart</h3>
+                            <h3 class="km-bold-font">Order No</h3>
+                            <h3 class="km-bold-font">Sales No</h3>
+                            <h3 class="km-bold-font">Cust PO No</h3>
+                        </td>
+                        <td class="v-align">
+                            <h3>:24/03/2015</h3>
+                            <h3>:092883450</h3>
+                            <h3>:CAT144893</h3>
+                            <h3>:070018975</h3>
+                            <h3>:5555534219381872</h3>
+                        </td>
+                        <td class="v-align c-align">
+                           
+                            <div class="status open">OPEN</div>
+                             <input kendo-mobile-switch k-checked="checked" />
+                            <h3 class="notify">Notify Me</h3>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                <h4>Bill To Information</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.
+                </p>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>Ship To Information</h4>
+                <p> 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.
+                </p>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible class="ck-inquiry" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>Order Inquiry</h4>
+                <table class="ck-table">
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <textarea placeholder="Have a question or comment about this order?" style="height: 125px;"></textarea>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i></i>
+                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;">SEND INQUIRY</kendo-mobile-button>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible class="ck-details" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>Order Details</h4>
+                <table class="ck-table pad">
+                    <tr class="med-grey pipe">
+                        <td>
+                            <h4 class="km-bold-font">Item</h4></td>
+                        <td>
+                            <h4 class="km-bold-font">Price</h4>
+                       </td>
+                    </tr>
+                    <tr class="pipe">
+                        <td>
+                            <h4 class="km-bold-font">T.J.Maxx Big & Tall Special HTgs 10m/40</h4>
+                            <h5>T.J. Maxx Big & Tall (CASE)</h5>
+                            <h5>1 X USD 18.00 per 1000 pcs</h5>
+                            <h5>Production Location:DAYTON OHIO LASER</h5>
+                        </td>
+                        <td class="v-align">
+                            <h4 class="km-bold-font">$180.00</h4>
+                        </td>
+                    </tr>
+                    <tr class="pipe">
+                        <td>
+                            <h4 class="km-bold-font r-align">Sub Total:</h4>
+                        </td>
+                        <td>
+                            <h4 class="km-bold-font">$180.00</h4>
+                       </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <h4 class="km-bold-font r-align">Taxes VAT (6.00%):</h4>
+                        </td>
+                        <td>
+                            <h4 class="km-bold-font">$10.80</h4>
+                       </td>
+                    </tr>
+                     <tr>
+                        <td colspan="2" class="pipe r-align">
+                            <p style="font-style:italic;">Shipping and tax charges are estimated at time of checkout. The final shipping and tax amount will be reflected on your invoice.</em>
+                        </td>
+                    </tr>
+                    <tr class="med-grey pipe">
+                        <td>
+                            <h4 class="km-bold-font r-align">Grand Total:</h4></td>
+                        <td>
+                            <h4 class="km-bold-font">$190.80</h4>
+                       </td>
+                    </tr>
+                </table>
+                <table class="ck-table pad">
+                     <tr class="pipe" style="background:#fff;">
+                        <td>
+                            <h4>Released by</h4>
+                            <h4>Email</h4>
+                            <h4>Phone</h4>
+                         </td>
+                        <td>
+                            <h4>:Greg Sendi</h4>
+                            <h4>:gsendi@premierlogic.com</h4>
+                            <h4>:000-000-000</h4>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <textarea placeholder="Comments" style="height: 125px;"></textarea>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                             <i></i>
+                            <kendo-mobile-button class="km-secondary km-large ck-btn-left">DENY</kendo-mobile-button>
+                            <i></i>
+                            <kendo-mobile-button class="km-primary km-large ck-btn-right">APPROVE</kendo-mobile-button>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+        </kendo-mobile-list-view>
+    </kendo-mobile-content>
 </kendo-mobile-view>
