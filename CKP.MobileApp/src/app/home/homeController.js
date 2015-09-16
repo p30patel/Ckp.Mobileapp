@@ -114,16 +114,27 @@ app.controller('homeController', [
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
+                    
                        $scope.selectParamter = function () {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
+                        
+                       }
 
+                       var setSelectPara = function () {
+                           parameterService.getSearchParameterName($scope.selectedPara)
+                           $scope.searchParameterId = $scope.selectedPara;
+                       }
+                       setSelectPara();
+
+                       $scope.intShow = function (e) {
+                           setSelectPara();
                        }
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
                            $scope.searchValue = "";
                        }
-                       //translation
+                     
                        //retailers with count
                        $scope.orderCounts = {};
 
@@ -147,18 +158,6 @@ app.controller('homeController', [
 
                                $scope.orderCounts = result;
 
-                               //    if ($scope.activeTabId.length > 0)
-                               //    {
-                               //        angular.element($scope.activeTabId).trigger('click');
-                               //        if ($scope.activeTabId !== "") {
-                               //            angular.element($scope.activeTabId).trigger('click');
-                               //        }
-                               //    }
-                               //    else {
-                               //        $('.order').hide();
-                               //        angular.element('.order').hide();
-                               //    }
-                               //}
                            }).finally(function () {
                                    kendo.mobile.application.pane.loader.hide();
                                });
@@ -172,7 +171,7 @@ app.controller('homeController', [
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
                                $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
-
+                             
                            }).catch(function (error) {
                                $scope.mesages = {};
                                $scope.messageCount = 0;
@@ -297,8 +296,7 @@ app.controller('homeController', [
                            orderApprovalByStatus(status);
                        
                        }
-                       $scope.testData = [1, 2, 3, 4, 5];
-
+                      
                        //appprove order
                        var orderApprovalByStatus = function (statusUpdate) {
                            var salesorders = [];
