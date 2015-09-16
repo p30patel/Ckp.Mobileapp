@@ -63,10 +63,8 @@
            
                     <!-- Tab panes -->
 
-                    <br />
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane order" id="approval-{{orderCount.RetailerId}}">
-                            <table class="ck-table">
+                   
+                            <table class="ck-table tab-pane order" id="approval-{{orderCount.RetailerId}}">
                                
                                     <tr class="header">
 
@@ -111,15 +109,18 @@
                                         <td ng-if="searchParameterId == '4'">{{order.OrderNumber}}</td>
                                         <td>{{order.DateInSystem | date}}</td>
                                     </tr>
-                               
+                                 <tr>
+                        <td colspan="5" style="padding: 1em;">
+                            <i></i>
+                            <kendo-mobile-button class="km-secondary ck-btn-left" k-on-click="viewAll(1, searchParameterId)">View All</kendo-mobile-button>
+                            <i></i>
+                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'"  k-on-click="approve()">Bulk Approve</kendo-mobile-button>
+                        </td>
+                    </tr>
                             </table>
 
-                            <kendo-mobile-button k-on-click="viewAll(1, searchParameterId)" k-align="'right'">View All</kendo-mobile-button>
-                            <kendo-mobile-button k-on-click="approve()" k-align="'right'">Bulk Approve</kendo-mobile-button>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane order" id="new-{{orderCount.RetailerId}}">
-                            <table class="ck-table">
+                      
+                            <table class="ck-table tab-pane order" id="new-{{orderCount.RetailerId}}">
                                    <tr class="header">
                                 <td ng-if="searchParameterId == '1'">Order Number</td>
                                 <td ng-if="searchParameterId == '2' ">Sales Order</td>
@@ -146,12 +147,16 @@
                                         <td>{{order.OrderDate | date}}</td>
                                     </tr>
                               
-                            </table>
-                            <kendo-mobile-button k-on-click="viewAll(2, searchParameterId)" k-align="'right'">View All</kendo-mobile-button>
-                        </div>
-                        <div role="tabpanel" class="tab-pane order" id="released-{{orderCount.RetailerId}}">
-
-                            <table class="ck-table">
+                         
+                <tr>
+                 <td colspan="5" style="padding: 1em;">
+                            <i></i>
+                            <kendo-mobile-button class="km-large km-secondary km-justified" k-on-click="viewAll(2, searchParameterId)">View All</kendo-mobile-button>
+                        </td></tr>
+                         
+                       </table>
+                  
+                            <table class="ck-table order" id="released-{{orderCount.RetailerId}}">
                                  <tr class="header">
 
                                         <th ng-if="searchParameterId == '1'">Order Number</th>
@@ -181,13 +186,17 @@
                                         <td>{{order.Status}}</td>
                                         <td>{{order.OrderDate | date}}</td>
                                     </tr>
-                               
+                                 <tr>
+                 <td colspan="5" style="padding: 1em;">
+                            <i></i>
+                            <kendo-mobile-button class="km-large km-secondary km-justified" k-on-click="viewAll(3, searchParameterId)">View All</kendo-mobile-button>
+                            <i></i>
+                           
+                        </td></tr>
+                         
                             </table>
-                            <kendo-mobile-button k-on-click="viewAll(3, searchParameterId)" k-align="'right'">View All</kendo-mobile-button>
-                        </div>
+                           
 
-                    </div>
-                   
 
         </kendo-mobile-list-view>
         <!-- End Home View -->
