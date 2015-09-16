@@ -86,7 +86,7 @@
                         </td>
                         
                         <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
-                           {{order.OrderNumber}}
+                           {{order.OrderNumber}}   <div>&nbsp;</div>
                            </a></td>
                         <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
                            {{order.SalesOrderNo}}
@@ -95,13 +95,13 @@
 
                                      
                         <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
-                              {{order.SalesOrderNo}}
+                              {{order.SalesOrderNo}} 
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
                                      
                         <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">
-                              {{order.OrderNumber}}
+                              {{order.OrderNumber}}  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
@@ -113,7 +113,7 @@
                         </td>
                                      
                         <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
-                              {{order.OrderNumber}}
+                              {{order.OrderNumber}}  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
@@ -125,7 +125,7 @@
                         </td>
                                      
                         <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(1, searchParameterId, order.OrderNumber)" >
-                              {{order.OrderNumber}}
+                              {{order.OrderNumber}}  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
@@ -147,7 +147,7 @@
                       
                             <table class="ck-table order" id="new-{{orderCount.RetailerId}}">
                                    <tr class="header">
-                                       <td></td>
+                                       <td>&nbsp;</td>
                                 <td ng-if="searchParameterId == '1'" class="spacer">Order Number</td>
                                 <td ng-if="searchParameterId == '2' " class="spacer">Sales Order</td>
                                 <td ng-if="searchParameterId == '3'" class="spacer">Shopping Cart</td>
@@ -160,25 +160,27 @@
                                             <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.OrderNumber)" >
                               {{order.OrderNumber}}
                           <!--  <div>5555534219381872</div>-->
+                                                 <div>&nbsp;</div>
                             </a>
                         </td>
 
                                             <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)" >
                               {{order.SalesOrderNo}}
+                                                  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)" >
-                              {{order.ShoppingCart}}
+                              {{order.ShoppingCart}}  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
 
                                         
-                                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)" >
-                              {{order.VendorRef}}
+                                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">
+                              {{order.VendorRef}}  <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
@@ -186,14 +188,15 @@
                                        
 
                                         <td>{{order.Status}}</td>
-                                        <td>{{order.OrderDate | date}}<i class="km-icon km-details red"></i></td>
+                                        <td><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)" >{{order.OrderDate | date}}</a><i class="km-icon km-details red"></i></td>
                                     </tr>
                               
                          
                 <tr>
                  <td colspan="5" style="padding: 1em;">
                             <i></i>
-                            <kendo-mobile-button class="km-large km-secondary km-justified" k-on-click="viewAll(2, searchParameterId)">View All</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary km-justified" k-on-click="viewAll(2, searchParameterId)">View All</kendo-mobile-button>
+                         <i></i>
                         </td></tr>
                          
                        </table>
@@ -212,39 +215,41 @@
                              
                              
                                         <tr class="pipe" ng-repeat="order in orders">
-                                            <td></td>
+                                            <td>&nbsp;</td>
                                             <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)" >
                               {{order.OrderNumber}}
+                                                   <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
 
                                             <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)" >
                               {{order.SalesOrderNo}}
+                                                       <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)" >
-                              {{order.ShoppingCart}}
+                              {{order.ShoppingCart}}     <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)" >
-                              {{order.VendorRef}}
+                              {{order.VendorRef}}         <div>&nbsp;</div>
                           <!--  <div>5555534219381872</div>-->
                             </a>
                         </td>
                                         <td>{{order.Status}}</td>
-                                        <td>{{order.OrderDate | date}}<i class="km-icon km-details red"></i></td>
+                                        <td><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)" >{{order.OrderDate | date}}</a><i class="km-icon km-details red"></i></td>
                                     </tr>
                                  <tr>
                  <td colspan="5" style="padding: 1em;">
                             <i></i>
-                            <kendo-mobile-button class="km-large km-secondary km-justified" k-on-click="viewAll(3, searchParameterId)">View All</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary km-justified" k-on-click="viewAll(3, searchParameterId)">View All</kendo-mobile-button>
                             <i></i>
                            
                         </td></tr>

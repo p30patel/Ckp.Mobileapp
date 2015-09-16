@@ -1,4 +1,13 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" >
+     <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-button k-align="'right'"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
+            </kendo-mobile-button>
+       
+                <kendo-mobile-back-button k-align="'left'"><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
+            <kendo-view-title>Order List</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
    <div ng-repeat="order in order.list">
        <p>{{order.OrderNumber}}</p>
    </div>
