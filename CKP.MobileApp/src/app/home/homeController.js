@@ -213,7 +213,7 @@ app.controller('homeController', [
                        };
 
                        $scope.approved = function (status) {
-                           alert('approved:' + status);
+                           //alert('approved:' + status);
                            $("#modalview-approve").kendoMobileModalView("close");
                        }
 

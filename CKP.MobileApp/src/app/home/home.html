@@ -336,11 +336,11 @@
 
 
                   <!--  approve modal -->
-
-               <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
-                <div kendo-mobile-header>
-                    <div kendo-mobile-nav-bar class="km-dark">Approve Orders</div>
-                </div>
+        
+         <kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
+                <kendo-mobile-header>
+                    <kendo-mobile-nav-bar class="km-dark">Approve Orders</kendo-mobile-nav-bar>
+                </kendo-mobile-header>
                 <ul kendo-mobile-list-view k-style="'inset'">
                     <li class="ck-module-solid">
                         <h3 class="km-bold-font">Purchase Orders:</h3>
@@ -355,11 +355,12 @@
                     </li>
                </ul>
                 
-                <div kendo-mobile-footer>
-                         <kendo-mobile-button k-on-click="approved(true)" k-transition="'fade'" class="km-primary km-large ck-btn-left">YES</kendo-mobile-button>
-                        <kendo-mobile-button k-on-click="approved(false)" k-transition="'fade'" class="km-secondary km-large ck-btn-right">NO</kendo-mobile-button>
-         
-                </div>
-              </div>
+                <kendo-mobile-footer>
+                     
+                        <kendo-mobile-button class="km-primary km-large ck-btn-left"  k-on-click="approved(true)">YES</kendo-mobile-button>
+                        
+                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" k-on-click="approved(false)">NO</kendo-mobile-button>
+                </kendo-mobile-footer>
+                </kendo-mobile-modal-view>
 
 </kendo-mobile-view>
