@@ -4,7 +4,9 @@
 .km-nova .km-drawer .km-list .km-listview-link:after, .km-nova .km-drawer .km-list .km-listview-label:after{
     border-color: rgb(213, 43, 30) !important;
 }
-
+.km-collapsible-content.km-animated {
+    height: auto !important;
+}
 .km-nova .km-drawer .km-content {
     background-color: rgb(233, 233, 233)!important;
 }

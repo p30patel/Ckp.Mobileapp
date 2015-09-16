@@ -1,17 +1,17 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', 'alerting', '$filter', 'translateService', 'messageDataService',
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService','parameterService', 'alerting', '$filter', 'translateService', 'messageDataService',
                    function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService, messageDataService) {
                        var init = function () {
-
+                        
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-
+                           
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
                        init();
-
+                   
                        $scope.form = {};
                        $scope.mesages = {};
                        $scope.form.title = {};
@@ -28,56 +28,55 @@ app.controller('homeController', [
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
-                       $scope.selectParamter = function () {
+                       $scope.selectParamter = function() {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
 
                        }
-                       $scope.languages = parameterService.getSearchParameters();
-                       $scope.clearSearch = function () {
+                       $scope.languages =parameterService.getSearchParameters();
+                       $scope.clearSearch = function() {
                            $scope.searchValue = "";
                        }
                        //translation
+
                        //retailers with count
                        $scope.orderCounts = {};
 
                        homeDataService.getOrderHeaderData().then(function (result) {
                            $scope.orders = result;
-                        
+                          
                        });
-
+                     
                        $scope.approvalDetail = function (id) {
-                           $('.order').hide();
-
+                         //  $('.order').hide();
+                         
                            $('#approval-' + id).show();
 
                            $scope.activeTabId = '#approvalDetail-' + id;
+                        
                        };
 
                        var getOrderCounts = function () {
-                           alerting.addSuccess("Getting Order Counts!");
+                           
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
-
                                $scope.orderCounts = result;
-
-                               //    if ($scope.activeTabId.length > 0)
-                               //    {
-                               //        angular.element($scope.activeTabId).trigger('click');
-                               //        if ($scope.activeTabId !== "") {
-                               //            angular.element($scope.activeTabId).trigger('click');
-                               //        }
-                               //    }
-                               //    else {
-                               //        $('.order').hide();
-                               //        angular.element('.order').hide();
-                               //    }
-                               //}
-                           }).finally(function () {
+                               
+                             
+                               //$scope.activeTabId = '#approvalDetail-' + 6884;
+                               if ($scope.activeTabId !== "") {
+                                   angular.element($scope.activeTabId).trigger('click');
+                               }
+                               else {
+                                   angular.element(".ele-0").trigger('click');
+                               
+                               }
+                           }
+                               ).finally(function() {
                                    kendo.mobile.application.pane.loader.hide();
                                });
-                           
                        }
+                      
                        getOrderCounts();
 
                        $scope.newOrderDetail = function (id) {
@@ -92,63 +91,61 @@ app.controller('homeController', [
                            $('#released-' + id).show();
                            $scope.activeTabId = '#releaseOrderDetail-' + id;
                        };
-                       $scope.collapse = function (id) {
-                           $('.order').hide();
-                           $('.retailer').removeClass('active');
-                           $('.retailer-' + id).removeClass('active');
-                           $scope.activeTabId = "";
-                       };
+                       //$scope.collapse = function (id) {
+                       //    $('.order').hide();
+                       //    $('.retailer').removeClass('km-state-active');
+                       //    $('.retailer-' + id).removeClass('km-state-active');
+                       //    $scope.activeTabId = "";
+                       //};
 
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
-
+                         
                            $scope.searchParameterId = para;
                        }
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
-
+                       
                        $scope.orderList = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
-
+                       
                        $scope.key = function ($event) {
                            console.log($event.keyCode);
 
                            if ($event.keyCode === 13) {
                                //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
-                             
-                               forceGetData = true;
-                               $("#icon-right").blur();
-                               getOrderCounts();
-
+                              
+                               $timeout(function () {
+                                   getOrderCounts();
+                               }, 1000);
                            }
                        }
-
+                       
                        //
                        $scope.selection = [];
                        $scope.toggleSelection = function toggleSelection(so) {
                            var idx = $scope.selection.indexOf(so);
                            // is currently selected                          
-                           if (idx > -1) {
-                               $scope.selection.splice(idx, 1);
-                           } else {
-                               $scope.selection.push(so);
-                           }
+                           if (idx > -1) {                           
+                               $scope.selection.splice(idx, 1);                           
+                           } else {                           
+                               $scope.selection.push(so);                           
+                           }                           
                        };
-                       $scope.viewAll = function (orderType, parameterId) {
+                       $scope.viewAll = function(orderType, parameterId) {
                            kendo.mobile.application.navigate("src/app/order/order.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
-                       }
-                       $scope.approve = function () {
+                       } 
+                       $scope.approve = function() {
                            var salesorders = "";
 
                            var salesorderList = $scope.selection;
-                           angular.forEach(salesorderList, function (value, key) {
+                           angular.forEach(salesorderList, function(value, key) {                               
                                salesorders += value + ',';
                            });
                            kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
                        }
-
                        //alerts & news - messages
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();
@@ -163,16 +160,16 @@ app.controller('homeController', [
                            });
                        }; // end message
 
-                     
+                       $scope.selected = 0;
                        $scope.showAlertModel = function () {
-
+                         
                            $("#modalview-alerts").kendoMobileModalView("open");
                            getMessages();
                        };
                        $scope.hideAlertModel = function () {
                            $("#modalview-alerts").kendoMobileModalView("close");
                        };
-
+                       
 
                        //credit lock
                        $scope.showCreditModel = function () {
@@ -196,7 +193,7 @@ app.controller('homeController', [
                            alert('approved:' + status);
                            $("#modalview-approve").kendoMobileModalView("close");
                        }
-
+                     
                    }
 
-]);
+               ]);

@@ -38,66 +38,68 @@ app.controller('homeController', [
                            $scope.searchValue = "";
                        }
                        //translation
+
                        //retailers with count
                        $scope.orderCounts = {};
 
                        homeDataService.getOrderHeaderData().then(function (result) {
                            $scope.orders = result;
-                        
+
                        });
-
-                       $scope.approvalDetail = function (id) {
-                           $('.order').hide();
-
-                           $('#approval-' + id).show();
-
-                           $scope.activeTabId = '#approvalDetail-' + id;
-                       };
-
+                     
                        var getOrderCounts = function () {
-                           alerting.addSuccess("Getting Order Counts!");
+
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
-
                                $scope.orderCounts = result;
 
-                               //    if ($scope.activeTabId.length > 0)
-                               //    {
-                               //        angular.element($scope.activeTabId).trigger('click');
-                               //        if ($scope.activeTabId !== "") {
-                               //            angular.element($scope.activeTabId).trigger('click');
-                               //        }
-                               //    }
-                               //    else {
-                               //        $('.order').hide();
-                               //        angular.element('.order').hide();
-                               //    }
-                               //}
-                           }).finally(function () {
+                            
+                               //$scope.activeTabId = '#approvalDetail-' + 6884;
+                               if ($scope.activeTabId !== "") {
+                                  
+                                   angular.element($scope.activeTabId).trigger('click');
+                               }
+                               else {
+                                  
+                                  // angular.element(".ele-0").trigger('click');
+
+                               }
+                           }
+                               ).finally(function () {
                                    kendo.mobile.application.pane.loader.hide();
                                });
-                           
                        }
+
                        getOrderCounts();
+                       angular.element(".order").hide();
+                       $scope.approvalDetail = function (id) {
+
+                           angular.element(".order").hide();
+                           angular.element('#approval-' + id).show();
+                         //  $('#approval-' + id).show();
+
+                           $scope.activeTabId = '#approvalDetail-' + id;
+
+                       };
+
 
                        $scope.newOrderDetail = function (id) {
-                           $('.order').hide();
-                           $('#new-' + id).show();
+                           angular.element(".order").hide();
+                           angular.element('#new-' + id).show();
+                         //  $('.order').hide();
+                         //  $('#new-' + id).show();
                            $scope.activeTabId = '#newOrderDetail-' + id;
                        };
 
                        $scope.releaseOrderDetail = function (id) {
-                           $('.order').hide();
+                           angular.element(".order").hide();
+                           angular.element('#released-' + id).show();
 
-                           $('#released-' + id).show();
+                           //$('.order').hide();
+                           //$('#released-' + id).show();
                            $scope.activeTabId = '#releaseOrderDetail-' + id;
                        };
-                       $scope.collapse = function (id) {
-                           $('.order').hide();
-                           $('.retailer').removeClass('active');
-                           $('.retailer-' + id).removeClass('active');
-                           $scope.activeTabId = "";
-                       };
+                     
 
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
@@ -117,11 +119,10 @@ app.controller('homeController', [
 
                            if ($event.keyCode === 13) {
                                //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
-                             
-                               forceGetData = true;
-                               $("#icon-right").blur();
-                               getOrderCounts();
 
+                               $timeout(function () {
+                                   getOrderCounts();
+                               }, 1000);
                            }
                        }
 
@@ -148,7 +149,6 @@ app.controller('homeController', [
                            });
                            kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
                        }
-
                        //alerts & news - messages
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();

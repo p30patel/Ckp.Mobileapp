@@ -231,4 +231,32 @@
             </kendo-mobile-footer>
             </kendo-mobile-module-view>
 
+               <!--  approve modal -->
+
+               <kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
+                <kendo-mobile-header>
+                    <kendo-mobile-nav-bar class="km-dark">Approve Orders</kendo-mobile-nav-bar>
+                </kendo-mobile-header>
+                <ul kendo-mobile-list-view k-style="'inset'">
+                    <li class="ck-module-solid">
+                        <h3 class="km-bold-font">Purchase Orders:</h3>
+                        <h4 class="km-font">
+                        555534219381872, 555534219381872, 555534219381872, 555534219381872, 
+                    </h4>
+                    </li>
+                    <li class="ck-no-pad-side" style="border:0;">
+                       <fieldset>
+                            <textarea placeholder="Comments (optional)" style="height: 150px; border: .1em solid #5E6A71; border-radius:0;"></textarea>
+                        </fieldset>
+                    </li>
+               </ul>
+                
+                <kendo-mobile-footer>
+                     
+                        <kendo-mobile-button class="km-primary km-large ck-btn-left" href="#login">YES</kendo-mobile-button>
+                        
+                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" href="#login">NO</kendo-mobile-button>
+                </kendo-mobile-footer>
+                </kendo-mobile-module-view>
+
 </kendo-mobile-view>
