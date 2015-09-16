@@ -232,6 +232,7 @@ app.controller('homeController', [
                        //
                        $scope.selection = [];
                        $scope.orderApprovalComment = "";
+                       $scope.salesorderList = "";
                      
                        $scope.toggleSelection = function toggleSelection(so) {
                            var idx = $scope.selection.indexOf(so);
@@ -277,10 +278,17 @@ app.controller('homeController', [
                        //approve modal
 
                        $scope.showApprovalModel = function () {
+                           var salesorders = "";
 
+                               var salesorderList = $scope.selection;
+                               angular.forEach(salesorderList, function (value, key) {
+                                   salesorders += value + ',';
+                               });
+                               $scope.salesorderList = salesorders;
                            $("#modalview-approve").kendoMobileModalView("open");
                        };
                        $scope.hideApporvalModel = function () {
+                           $scope.salesorderList = "";
                            $("#modalview-approve").kendoMobileModalView("close");
                        };
 
@@ -312,7 +320,7 @@ app.controller('homeController', [
                                RetailerId: 6884,
                                ApproveOrdersListData: salesorders
                            }
-
+                           kendo.mobile.application.pane.loader.show();
                            orderDataService.approveDecline(jsonIn).then(function (result) {
                                kendo.mobile.application.pane.loader.hide();
                                $("#modalview-approve").kendoMobileModalView("close");
