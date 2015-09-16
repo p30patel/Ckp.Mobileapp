@@ -1,8 +1,8 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController">
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
-
-                   <kendo-mobile-button k-align="'right'" k-transition="'fade'" k-rel="'modalview'"  k-on-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
+            
+                   <kendo-mobile-button k-align="'right'" k-transition="'fade'" k-rel="'modalview'" data-badge="{{messageCount}}"  k-on-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
               
 
                 <a kendo-mobile-button="" k-align="'left'" href="#right-drawer" k-rel="'drawer'" data-role="button" class="ck-icon ck-menu" data-rel="drawer" data-align="left">
@@ -212,12 +212,13 @@
 
 
               <li ng-show="mesages" ng-repeat="message in mesages.AnnouncementList">
+                
                 <i class="ck-icon ck-alert ck-module-icon"></i>
                 <h3 class="km-bold-font">{{message.RetailerName}}{{message.SpecificRetailerId}}</h3>
                 <h3 class="km-font">
-                       {{message.Title}}
+                       {{message.Message}}
                     </h3>
-            </li>
+          
             <li class="ck-module-date">
               <!--  {{ message.StartDate | date}} - {{message.EndDate | date}} -->
             </li>
@@ -232,14 +233,17 @@
 
       <!--  credit lock modal  -->
 
-          <kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
-            <kendo-mobile-header>
-                <kendo-mobile-nav-bar class="km-dark">
+          <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+            <div kendo-mobile-header>
+                <div kendo-mobile-nav-bar class="km-dark">
                     {{form.creditLock.resoruceValue}}
-                </kendo-mobile-nav-bar>
+                </div>
 
-            </kendo-mobile-header>
+            </div>
             <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+                 <li class="ck-module-date">
+                   {{form.creditLock.resoruceValue}}
+                </li>
                 <li>
                     <i class="ck-icon ck-lock ck-module-icon"></i>
                     <h3 class="km-bold-font">{{form.attentionUser.resoruceValue}}</h3>
@@ -247,24 +251,24 @@
                        {{form.creditLockMessage.resoruceValue}}
                     </h3>
                 </li>
-                <li class="ck-module-date">
+                <!--<li class="ck-module-date">
                     12:15 PM - 05/01/2015 - 05/02/2015
-                </li>
+                </li>-->
             </ul>
-            <kendo-mobile-footer>
-                <kendo-mobile-button k-on-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
-                </kendo-mobile-button>
-            </kendo-mobile-footer>
+            <div kendo-mobile-footer>
+                <div kendo-mobile-button k-on-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                </div>
+            </div>
 
-            </kendo-mobile-module-view>
+          </div>
 
 
                   <!--  approve modal -->
 
-               <kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
-                <kendo-mobile-header>
-                    <kendo-mobile-nav-bar class="km-dark">Approve Orders</kendo-mobile-nav-bar>
-                </kendo-mobile-header>
+               <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
+                <div kendo-mobile-header>
+                    <div kendo-mobile-nav-bar class="km-dark">Approve Orders</div>
+                </div>
                 <ul kendo-mobile-list-view k-style="'inset'">
                     <li class="ck-module-solid">
                         <h3 class="km-bold-font">Purchase Orders:</h3>
@@ -279,11 +283,11 @@
                     </li>
                </ul>
                 
-                <kendo-mobile-footer>
+                <div kendo-mobile-footer>
                          <kendo-mobile-button k-on-click="approved(true)" k-transition="'fade'" class="km-primary km-large ck-btn-left">YES</kendo-mobile-button>
                         <kendo-mobile-button k-on-click="approved(false)" k-transition="'fade'" class="km-secondary km-large ck-btn-right">NO</kendo-mobile-button>
          
-                </kendo-mobile-footer>
-                </kendo-mobile-module-view>
+                </div>
+              </div>
 
 </kendo-mobile-view>

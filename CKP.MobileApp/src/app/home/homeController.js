@@ -22,6 +22,16 @@ app.controller('homeController', [
                        $scope.form.attentionUser.resoruceName = "Attension User";
                        $scope.form.attentionUser.resoruceValue = translateService.getResourceValue($scope.form.attentionUser.resoruceName);
 
+                       $scope.form.creditLock = {};
+                       $scope.form.creditLock.resoruceName = "Credit Lock";
+                       $scope.form.creditLock.resoruceValue = translateService.getResourceValue($scope.form.creditLock.resoruceName);
+
+
+                       $scope.form.creditLockMessage = {};
+                       $scope.form.creditLockMessage.resoruceName = "Credit Lock Message";
+                       $scope.form.creditLockMessage.resoruceValue = translateService.getResourceValue($scope.form.creditLockMessage.resoruceName);
+                       
+
 
                        $scope.message = "";
                        $scope.searchParameterId = 1;
@@ -150,24 +160,28 @@ app.controller('homeController', [
                        }
 
                        //alerts & news - messages
+                       $scope.messageCount = 0;
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();
 
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
+                               $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
 
                            }).catch(function (error) {
                                $scope.mesages = {};
+                               $scope.messageCount = 0;
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }; // end message
 
-                     
+                       getMessages();
+                       
                        $scope.showAlertModel = function () {
 
                            $("#modalview-alerts").kendoMobileModalView("open");
-                           getMessages();
+                          
                        };
                        $scope.hideAlertModel = function () {
                            $("#modalview-alerts").kendoMobileModalView("close");
