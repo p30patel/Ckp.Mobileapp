@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter', 'ngAuthSettings',
-                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter, ngAuthSettings) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter', 'ngAuthSettings', '$sce',
+                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter, ngAuthSettings, $sce) {
                        $scope.title = '';
                       
                        //login page html lables
@@ -56,6 +56,10 @@ app.controller('loginController', [
                        $scope.form.copyRightsDescription.resoruceName = "Unauthorized access disclaimer";
                        $scope.form.copyRightsDescription.resoruceValue = "Unauthorized access disclaimer";
 
+
+                       $scope.form.hint = {};
+                       $scope.form.hint.resoruceName = "Hint";
+                       $scope.form.hint.resoruceValue = "Hint";
                        
                        //end page html 
                        var d = new Date();
@@ -187,6 +191,8 @@ app.controller('loginController', [
                                $scope.form.forgotYourPassword.resoruceValue = translateService.getResourceValue($scope.form.forgotYourPassword.resoruceName);
                                $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
 
+                               $scope.form.hint.resoruceValue = translateService.getResourceValue($scope.form.hint.resoruceName);
+
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
@@ -286,10 +292,10 @@ app.controller('loginController', [
                                kendo.mobile.application.pane.loader.hide();
                              
                            }).catch(function (err) {
-                             
-                               
-                                   $scope.message = err.error_description;
-                                   alerting.addWarning(err.error_description, 5000);
+                               $scope.passwordHint = "<b>" +  err.error_description + "</b>";
+                                   $timeout(function () {
+                                       $scope.passwordHint = "";
+                                   }, 5000);
                              
                                kendo.mobile.application.pane.loader.hide();
                            });
@@ -300,14 +306,22 @@ app.controller('loginController', [
                            kendo.mobile.application.pane.loader.show();
                         
                            loginDataService.getPasswordHint(username).then(function (result) {
-                               $scope.passwordHint = result;
-                               alerting.addSuccess('Hint is : ' + result, 5000);
+                               $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" +  result;
+                               $timeout(function () {
+                                   $scope.passwordHint = "";
+                               }, 5000);
                                kendo.mobile.application.pane.loader.hide();
                            }).catch(function (err) {
                                $scope.message = 'Error while getting the Hint!';
-                               alerting.addWarning('Error while getting the Hint!', 5000);
+                               $timeout(function () {
+                                   $scope.passwordHint = "";
+                               }, 5000);
                                kendo.mobile.application.pane.loader.hide();
                            });
+                       };
+
+                       $scope.renderHtml = function (content) {
+                           return $sce.trustAsHtml(content);
                        };
                     
                   

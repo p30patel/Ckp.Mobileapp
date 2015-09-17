@@ -35,8 +35,13 @@
 
                     <kendo-mobile-button class="ck-input-btn" ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  k-on-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
                   
-                    <p class="ck-align-right"><a href="" ng-click="showPasswordHint()" ng-disabled="!loginData.userName" id="touchSurface"  data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
+                    <p class="ck-align-right"  ng-hide="passwordHint" >
+                        <a href="" ng-click="showPasswordHint()"                            
+                            ng-disabled="!loginData.userName" 
+                            id="touchSurface"  
+                            data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
+                     <p ng-show="passwordHint" class="text-center ckp-a-link" ng-bind-html="renderHtml(passwordHint)"></p>
                 </fieldset>
             </li>
              <li>
