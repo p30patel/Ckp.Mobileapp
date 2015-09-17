@@ -41,13 +41,13 @@
                             id="touchSurface"  
                             data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
-                     <p ng-show="passwordHint" class="text-center ckp-a-link" ng-bind-html="renderHtml(passwordHint)"></p>
+                     <p ng-show="passwordHint" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(passwordHint)"></p>
                 </fieldset>
             </li>
              <li>
             <i></i>
 
-            <kendo-mobile-button class="km-primary km-large km-justified"    id="btnLogin"
+            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin"
                 ng-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>

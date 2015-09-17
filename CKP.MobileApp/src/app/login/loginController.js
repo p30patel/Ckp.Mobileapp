@@ -295,7 +295,7 @@ app.controller('loginController', [
                                $scope.passwordHint = "<b>" +  err.error_description + "</b>";
                                    $timeout(function () {
                                        $scope.passwordHint = "";
-                                   }, 5000);
+                                   }, 7000);
                              
                                kendo.mobile.application.pane.loader.hide();
                            });

@@ -143,13 +143,6 @@ app.controller('homeController', [
                         
                        });
 
-                       $scope.approvalDetail = function (id) {
-                           $('.order').hide();
-
-                           $('#approval-' + id).show();
-
-                           $scope.activeTabId = '#approvalDetail-' + id;
-                       };
 
                        var getOrderCounts = function () {
                            alerting.addSuccess("Getting Order Counts!");
@@ -191,25 +184,35 @@ app.controller('homeController', [
 
                        getMessages();
                        getOrderCounts();
-                      
+
+                       $scope.approvalDetail = function (id) {
+                           $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnApporval-' + id).addClass('km-state-active');
+                           $('#approval-' + id).show();
+
+                           $scope.activeTabId = '#approvalDetail-' + id;
+                       };
+
                        $scope.newOrderDetail = function (id) {
                            $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnNew-' + id).addClass('km-state-active');
+
                            $('#new-' + id).show();
                            $scope.activeTabId = '#newOrderDetail-' + id;
                        };
 
                        $scope.releaseOrderDetail = function (id) {
                            $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnReleased-' + id).addClass('km-state-active');
 
                            $('#released-' + id).show();
+                       
                            $scope.activeTabId = '#releaseOrderDetail-' + id;
                        };
-                       $scope.collapse = function (id) {
-                           $('.order').hide();
-                           $('.retailer').removeClass('active');
-                           $('.retailer-' + id).removeClass('active');
-                           $scope.activeTabId = "";
-                       };
+                      
 
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);

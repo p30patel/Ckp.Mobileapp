@@ -42,17 +42,17 @@
                 <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  k-on-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
                       ng-show="$first"/></kendo-mobile-button>
                 <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home">
-                                <kendo-mobile-button class="ck-button km-state-active km-button retailer retailer-{{orderCount.RetailerId}}" ng-show="orderCount.HasApproval"
+                                <kendo-mobile-button class="ck-button km-state-active km-button retailer btnApporval-{{orderCount.RetailerId}}" ng-show="orderCount.HasApproval"
                                     ng-click="approvalDetail(orderCount.RetailerId)">
                                     <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                                     <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
                                 </kendo-mobile-button>
-                                <kendo-mobile-button class="ck-button km-button retailer retailer-{{orderCount.RetailerId}}"  ng-show="orderCount.NewOrderCount"
+                                <kendo-mobile-button class="ck-button km-button retailer btnNew-{{orderCount.RetailerId}}"  ng-show="orderCount.NewOrderCount"
                                     ng-click="newOrderDetail(orderCount.RetailerId)">
                                     <div class="ck-button-number">{{ orderCount.NewOrderCount}}</div>
                                     <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div>
                                </kendo-mobile-button>
-                               <kendo-mobile-button class="ck-button km-button retailer retailer-{{orderCount.RetailerId}}"  ng-show="orderCount.HasReleased"
+                               <kendo-mobile-button class="ck-button km-button retailer btnReleased-{{orderCount.RetailerId}}"  ng-show="orderCount.HasReleased"
                                    ng-click="releaseOrderDetail(orderCount.RetailerId)">
                                    <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
                                    <div class="ck-button-text">{{form.releasedOrder.resoruceValue}}</div>
