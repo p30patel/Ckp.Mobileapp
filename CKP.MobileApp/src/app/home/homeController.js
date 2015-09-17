@@ -9,7 +9,7 @@ app.controller('homeController', [
 
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
-                        
+                         
                        };
                        init();
 
@@ -109,7 +109,7 @@ app.controller('homeController', [
 
                        $scope.message = "";
                        $scope.messageCount = 0;
-
+                   
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
@@ -167,7 +167,12 @@ app.controller('homeController', [
                   
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();
-                  
+                           var btnBadge = $("#btn_message").data("kendoMobileButton");
+                           if (typeof btnBadge !== 'undefined') {
+                            
+                               btnBadge.badge(false);
+                           }
+
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
                                $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;                            

@@ -350,7 +350,9 @@
         
          <kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
                 <kendo-mobile-header>
-                    <kendo-mobile-nav-bar class="km-dark">{{form.approval.resoruceValue}}</kendo-mobile-nav-bar>
+                    <kendo-mobile-nav-bar class="km-dark">
+                            <kendo-mobile-button k-align="'left'" k-on-click="hideApporvalModel()"><i class="ck-icon ck-barrow" style="color: rgb(213, 43, 30);"></i></kendo-mobile-button>
+                        {{form.approval.resoruceValue}}</kendo-mobile-nav-bar>
                 </kendo-mobile-header>
                 <ul kendo-mobile-list-view k-style="'inset'">
                     <li class="ck-module-solid">
