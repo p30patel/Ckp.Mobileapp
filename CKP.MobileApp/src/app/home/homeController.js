@@ -171,13 +171,17 @@ app.controller('homeController', [
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
                                $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
-                             
+                            
+                               $("#btn_message").kendoMobileButton({ badge: $scope.messageCount });
                            }).catch(function (error) {
                                $scope.mesages = {};
                                $scope.messageCount = 0;
+                               $("#btn_message").kendoMobileButton({ badge: $scope.messageCount });
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });
+                           
+                          
                        }; // end message
 
                        getMessages();
