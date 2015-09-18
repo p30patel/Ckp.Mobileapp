@@ -115,8 +115,24 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.EuropeMasTabTitle.resoruceValue = translateService.getResourceValue($scope.form.EuropeMasTabTitle.resoruceName);
 
 
-        $scope.HelpDesk = {};
+        $scope.form.send = {};
+        $scope.form.send.resoruceName = "Send";
+        $scope.form.send.resoruceValue = translateService.getResourceValue($scope.form.send.resoruceName);
 
+        $scope.form.name = {};
+        $scope.form.name.resoruceName = "Name";
+        $scope.form.name.resoruceValue = translateService.getResourceValue($scope.form.name.resoruceName);
+
+        $scope.form.order = {};
+        $scope.form.order.resoruceName = "Order Number";
+        $scope.form.order.resoruceValue = translateService.getResourceValue($scope.form.order.resoruceName);
+
+        $scope.form.messageBody = {};
+        $scope.form.messageBody.resoruceName = "Message";
+        $scope.form.messageBody.resoruceValue = translateService.getResourceValue($scope.form.messageBody.resoruceName);
+
+        $scope.HelpDesk = {};
+        $scope.contact = {};
         //address
         var getHelpDesk = function () {
 
@@ -127,6 +143,14 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             }
         }
         getHelpDesk();
+
+        $scope.showSendEmailmodal = function () {
+       
+            $("#modalview-email").kendoMobileModalView("open");
+        };
+        $scope.hideSendEmailmodal = function () {
+            $("#modalview-email").kendoMobileModalView("close");
+        };
 
         $scope.onSelect = function (selectedClass) {
             $('.contactus').hide();

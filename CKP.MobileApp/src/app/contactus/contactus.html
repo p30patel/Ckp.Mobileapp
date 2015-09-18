@@ -12,7 +12,7 @@
             </li>
          <li class="ck-center-li">
                 <i></i>
-                <kendo-mobile-button class="km-primary km-large" style="width:90%;">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
+                <kendo-mobile-button class="km-primary km-large" style="width:90%;" k-rel="'modalview'">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
             </li>
         </kendo-mobile-list-view>
                <kendo-mobile-list-view class="us contactus">
@@ -264,4 +264,55 @@
             </kendo-mobile-collapsible>
         </kendo-mobile-list-view>
     </kendo-mobile-content>
+
+   <!-- write email modal-->
+    
+          <div kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+            <div kendo-mobile-header>
+                <div kendo-mobile-nav-bar class="km-dark">
+                  Write Email
+                </div>
+
+            </div>
+            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+            
+                <li>
+                  
+                    
+                    <h3>
+                       {{form.creditLockMessage.resoruceValue}}
+                    </h3>
+                </li>
+               <li class="ck-no-pad">
+                <fieldset class="ck-login">
+                   
+                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name" />
+
+                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" />
+
+                     <input value="" placeholder="{{form.phone.resoruceValue}}" type="text" ng-model="contact.phone" />
+
+                     <input value="" placeholder="{{form.order.resoruceValue}}" type="email" ng-model="contact.orderNumber" />
+
+                     <input value="" placeholder="{{form.messageBody.resoruceValue}}" type="email" ng-model="contact.message" />
+
+                </fieldset>
+                <i></i>
+                  <kendo-mobile-button 
+                                        k-on-click="sendEmail()" 
+                                        ng-disabled="!loginData.email" 
+                                        id="btnSendPassword"
+                                        class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.send.resoruceValue}}</kendo-mobile-button>
+               
+                     <p ng-show="forgotPassworMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(forgotPassworMessage)"></p>
+               
+            </li>
+            </ul>
+            <kendo-mobile-footer>
+                <div kendo-mobile-button k-on-click="hideSendEmailmodal()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                </div>
+            </kendo-mobile-footer>
+
+          </div>
+
 </kendo-mobile-view>
