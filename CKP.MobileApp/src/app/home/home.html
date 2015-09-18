@@ -16,7 +16,7 @@
 
 
        <kendo-mobile-content>
-       
+      
        <kendo-mobile-list-view class="ck-no-border">
             <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
@@ -41,6 +41,7 @@
                 <kendo-mobile-button class="ck-title">{{orderCount.RetailerName}}</kendo-mobile-button>
                 <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  k-on-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
                       ng-show="$first"/></kendo-mobile-button>
+
                 <kendo-mobile-button-group class="ck-button-group" k-id="buttongroup-home">
                                 <kendo-mobile-button class="ck-button km-state-active km-button retailer btnApporval-{{orderCount.RetailerId}}" ng-show="orderCount.HasApproval"
                                     ng-click="approvalDetail(orderCount.RetailerId)">
