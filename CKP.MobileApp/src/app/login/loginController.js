@@ -56,10 +56,14 @@ app.controller('loginController', [
                        $scope.form.copyRightsDescription.resoruceName = "Unauthorized access disclaimer";
                        $scope.form.copyRightsDescription.resoruceValue = "Unauthorized access disclaimer";
 
-
+                       
                        $scope.form.hint = {};
                        $scope.form.hint.resoruceName = "Hint";
                        $scope.form.hint.resoruceValue = "Hint";
+
+                       $scope.form.passwordSentText = {};
+                       $scope.form.passwordSentText.resoruceName = "Password sent to your email address";
+                       $scope.form.passwordSentText.resoruceValue = "Password sent to your email address";
                        
                        //end page html 
                        var d = new Date();
@@ -139,7 +143,7 @@ app.controller('loginController', [
                          
                            loginDataService.resetPassword(username, email).then(function (result) {
                            
-                               message = (result === 'success') ? "Password sent to your email address!" : "User name and email combination does not match!";
+                               message = $scope.form.passwordSentText.resoruceValue + ".";
 
                                alerting.addSuccess(message, 0);
                            
@@ -200,6 +204,7 @@ app.controller('loginController', [
                                $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
 
                                $scope.form.hint.resoruceValue = translateService.getResourceValue($scope.form.hint.resoruceName);
+                               $scope.form.passwordSentText.resoruceValue = translateService.getResourceValue($scope.form.passwordSentText.resoruceName);
 
                                kendo.mobile.application.pane.loader.hide();
                            });
