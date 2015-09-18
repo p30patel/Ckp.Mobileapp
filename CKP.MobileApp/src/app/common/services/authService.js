@@ -39,6 +39,12 @@ app.factory('authService', [
                  
                                 deferred.resolve(response);
                             }
+                            _forceGetPrincipalData().then(function (result) {
+                            }).catch(function (err, status) {
+                                loggedIn = false;
+                                _logout();
+                                deferred.reject(err);
+                            });
 
                             forceGetOrganizationData().then(function (result) {
                                 var logo = (result.Logo !== '') ? authServiceBase  +  "/Images/" + result.Logo : "";
@@ -49,6 +55,8 @@ app.factory('authService', [
                                 _logout();
                                 deferred.reject(err);
                             });
+
+                         
                         }).error(function (err, status, headers, config) {
                             _logout();
                             deferred.reject(err);
