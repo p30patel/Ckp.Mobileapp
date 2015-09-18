@@ -23,7 +23,9 @@ app.factory('authInterceptorService', [
                     var responseError = function (rejection) {
                         var authService = $injector.get('authService');
                         console.log('current view : ' + kendo.mobile.application.view().id);
-                        kendo.mobile.application.pane.loader.hide();      
+                        kendo.mobile.application.pane.loader.hide();
+                        authService.logout();
+                   
                         if (rejection.status === 401) {
                            
                             var authData = localStorageService.get('authorizationData');
@@ -35,7 +37,7 @@ app.factory('authInterceptorService', [
                                     return $q.reject(rejection);
                                 }
                             }
-                            authService.logout();
+                           
              
                             //$location.path('/login');
                             kendo.mobile.application.navigate("src/app/login/login.html");

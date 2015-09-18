@@ -43,7 +43,7 @@ app.controller('menuController', [
                        $scope.form.feedback.resoruceValue = translateService.getResourceValue($scope.form.feedback.resoruceName);
 
                        $scope.authentication = authService.authentication;
-
+                     
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
                        //address
