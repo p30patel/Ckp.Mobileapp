@@ -61,11 +61,11 @@
     <p class="ck-disclamier km-style-info">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
     <!-- End Login View -->
 
-    <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" class="km-moduleview" style="width: 90%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
            <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark"><img src="styles/images/blank.png" style="width: 5em; height: .9em;" /></kendo-mobile-nav-bar>
         </kendo-mobile-header>
-         <ul kendo-mobile-list-view style="padding-bottom: 1em;" class="ck-module-wrap ck-no-border" k-style="'inset'">
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
             <li>
                 <h2 class="km-bold-font"> {{form.forgotYourPassword.resoruceValue}}?</h2>
                 <p>
@@ -83,20 +83,15 @@
                                         ng-disabled="!loginData.email" 
                                         id="btnSendPassword"
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
-               <span ng-show="forgotPassworMessage">
-                      <alerts></alerts> 
-               </span>
+               
+                     <p ng-show="forgotPassworMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(forgotPassworMessage)"></p>
+               
             </li>
         </ul>
-             <div kendo-mobile-footer>
-                <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()"  k-transition="'overlay:down'" class="ck-close-btn km-justified"><img src="styles/images/close-button.png" style="width: 3.5em; height: 3.5em;" />
+             <kendo-mobile-footer>
+                <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()"  k-transition="'overlay:down'" class="km-justified"style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
                 </kendo-mobile-button>
-            </div>
+            </kendo-mobile-footer>
     </div>
-  
-     <div kendo-mobile-footer>
-        <kendo-mobile-nav-bar class="km-light" style="text-align: center; padding-top:1em; font-size: .6rem;">   
-             <alerts></alerts> <br /> </kendo-mobile-nav-bar></div>     
-      
 </kendo-mobile-view>
 <!-- End Forgot Password View -->
