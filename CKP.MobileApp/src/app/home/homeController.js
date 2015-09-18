@@ -272,15 +272,7 @@ app.controller('homeController', [
                            $("#modalview-alerts").kendoMobileModalView("open");
                           
                        };
-                       $scope.myOptions = {
-                           select: function (e) {
-                               //debugger;
-                               var listviews = $("ul.km-listview");
-                               listviews.hide()
-                               .eq(e.index)
-                               .show();
-                           }
-                       }
+                     
                        $scope.hideAlertModel = function () {
                            $("#modalview-alerts").kendoMobileModalView("close");
                        };

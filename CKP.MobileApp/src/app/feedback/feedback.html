@@ -12,5 +12,6 @@
                 <kendo-mobile-button class="km-primary km-large km-justified" ng-click="send()">{{form.send.resoruceValue}}</kendo-mobile-button>
             </li>
         </kendo-mobile-list-view>
+        <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
     </kendo-mobile-content>
 </kendo-mobile-view>

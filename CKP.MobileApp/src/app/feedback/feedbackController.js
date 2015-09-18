@@ -1,7 +1,7 @@
 
 app.controller('feedbackController', [
-                   '$scope', '$http', '$sce', 'feedbackDataService', 'alerting', 'authService', 'translateService',
-                   function ($scope, $http, $sce, feedbackDataService, alerting, authService, translateService) {
+                   '$scope', '$http', '$sce', 'feedbackDataService', 'alerting', 'authService', 'translateService', '$timeout',
+function ($scope, $http, $sce, feedbackDataService, alerting, authService, translateService, $timeout) {
 
                        $scope.form = {};
 
@@ -22,6 +22,8 @@ app.controller('feedbackController', [
                        $scope.feedbackData = {};                       
                        $scope.feedbackData.webpage = "Mobile App";
                        $scope.feedbackData.comment = "";
+
+                       $scope.message = "";
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -31,6 +33,9 @@ app.controller('feedbackController', [
                            
                        };
                        init();
+                       $scope.renderHtml = function (content) {
+                           return $sce.trustAsHtml(content);
+                       };
                     
                        $scope.send = function() {
                            kendo.mobile.application.pane.loader.show();
@@ -39,12 +44,26 @@ app.controller('feedbackController', [
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
                                    alerting.addSuccess("Thank you for your feedback!", 10000);
+                                   $scope.message = "Thank you for your feedback!";
+                                   $timeout(function () {
+                                       $scope.message = "";
+                                   }, 7000);
+
                                    $scope.feedbackData.comment = "";
                                } else {
                                    alerting.addSuccess("Faild to post feedback!", 10000);
+                                   $scope.message = "Faild to post feedback, Please try later";
+                                   $timeout(function () {
+                                       $scope.message = "";
+                                   }, 7000);
                                }
-                           }).catch(function(error) {
-                               $scope.policies = {};
+                           }).catch(function (error) {
+
+                               $scope.message = "Faild to post feedback, Please try later";
+                               $timeout(function () {
+                                   $scope.message = "";
+                               }, 7000);
+
                            }).finally(function() {
                                kendo.mobile.application.pane.loader.hide();
                            });
