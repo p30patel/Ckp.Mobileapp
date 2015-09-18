@@ -138,19 +138,27 @@ app.controller('loginController', [
                            var message = "";
                          
                            loginDataService.resetPassword(username, email).then(function (result) {
+                           
                                message = (result === 'success') ? "Password sent to your email address!" : "User name and email combination does not match!";
 
                                alerting.addSuccess(message, 0);
                            
-                               $scope.forgotPassworMessage = result;
+                               $scope.forgotPassworMessage = message;
+                               $timeout(function () {
+                                   $scope.forgotPassworMessage = "";
+                                   $("#modalview-password").kendoMobileModalView("close");
+                               }, 7000);
                                kendo.mobile.application.pane.loader.hide();
-                              // $("#modalview-password").kendoMobileModalView("close");
+                              // 
                            },
                                                                                 function (err) {
                                                                                     message =  "User name and email combination does not match!";
                                                                                     alerting.addWarning(message, 0);
                                                                                     kendo.mobile.application.pane.loader.hide();
-                                                                                    $scope.forgotPassworMessage = err;
+                                                                                    $scope.forgotPassworMessage = message;
+                                                                                    $timeout(function () {
+                                                                                        $scope.forgotPassworMessage = "";
+                                                                                    }, 7000);
                                                                                    // $("#modalview-password").kendoMobileModalView("close");
                                                                                 });
                        };

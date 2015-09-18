@@ -12,7 +12,7 @@
      <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
               k-data-source="languages"
               k-data-text-field="'Name'" k-data-value-field="'Culture'"
-              ng-change="translatePage()">
+              k-on-change="translatePage()">
       </select>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
@@ -48,7 +48,7 @@
             <i></i>
 
             <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin"
-                ng-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
+                k-on-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>
            
