@@ -1,135 +1,137 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderlistController" k-on-show="intShow(kendoEvent)"  >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" >
+    <!-- <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-button k-align="'right'"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
+            </kendo-mobile-button>
+       
+                <kendo-mobile-back-button k-align="'left'"><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
+            <kendo-view-title>Order List</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+   <div ng-repeat="order in order.list">
+       <p>{{order.OrderNumber}}</p>
+   </div>-->
 
-    <br>
-    
-    
-    <div id="approval" ng-if="order.orderType =='1' ">
-     
-        <table class="table table-condensed table-striped">
-            <thead>
-                <tr>
-
-                    <th ng-if="searchParameterId == '1'">Order Number</th>
-                    <th ng-if="searchParameterId == '2' ">Sales Order</th>
-                    <th ng-if="searchParameterId == '1' ">Sales Order</th>
-                    <th ng-if="searchParameterId == '2'">Order Number</th>
-                    <th ng-if="searchParameterId == '3'">Shopping Cart</th>
-                    <th ng-if="searchParameterId == '3'">Order Number</th>
-                    <th ng-if="searchParameterId == '4'">Vendor Ref</th>
-                    <th ng-if="searchParameterId == '4'">Order Number</th>
-                    <th>Date In System</th>
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar class="km-accent">
+               <kendo-mobile-back-button k-align="'left'"><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
+         
+            <kendo-view-title>Shopping Cart Details</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <kendo-mobile-content>
+        <kendo-mobile-list-view class="ck-no-border">
+            <li class="ck-po-container ck-grey-wrap">
+                <fieldset class="ck-login">
+                    <select class="ck-po-select" id="dropdown" style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;">
+                        <option value="First Option">Purchase Orders</option>
+                        <option value="Second Option">PO 1</option>
+                        <option value="Third Option">PO 2</option>
+                        <option value="Third Option">PO 3</option>
+                        <option value="Third Option">PO 4</option>
+                        <option value="Third Option">PO 5</option>
+                        <option value="Third Option">PO 6</option>
+                    </select>
+                    <input class="ck-po-search" style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF;" value="" placeholder="Search" type="text" />
+                </fieldset>
+                <!--<i class="km-icon km-arrowdown" style="position:relative; bottom: 25px; left:115px; z-index: 1; color:#fff; float:left;"></i>
+                <i class="km-icon km-search" style="position:relative; bottom: 25px; float:right; z-index: 1; font-size:80%; color:#D52B1E;"></i>-->
+            </li>
+            <li class="ck-grey-wrap">
+                <h2>Shopping Cart - 092883450</h2>
+            </li>
+            <table class="ck-table">
+                <tr class="header">
+                    <td></td>
+                    <td class="spacer">Purchase Order</td>
+                    <td>Status</td>
+                    <td>Date</td>
+                    <td>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="order in order.orders">
-                    <td ng-if="searchParameterId == '1'">
-                        <input id="{{order.SalesOrderNo}}" type="checkbox" value="{{order.SalesOrderNo}}" 
-                               ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                        <a href="" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
                     </td>
-                    <td ng-if="searchParameterId == '2' ">
-                        <input id="{{order.SalesOrderNo}}" type="checkbox" value="{{order.SalesOrderNo}}" 
-                               ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                        <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
                     </td>
-                    <td ng-if="searchParameterId == '1'">
-                        {{order.SalesOrderNo}}
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
                     </td>
-                    <td ng-if="searchParameterId == '2'">{{order.OrderNumber}}</td>
-                    <td ng-if="searchParameterId == '3'">
-                        <input id="{{order.SalesOrderNo}}" type="checkbox" value="{{order.SalesOrderNo}}" 
-                               ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                        <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
                     </td>
-                    <td ng-if="searchParameterId == '3'">{{order.OrderNumber}}</td>
-                    <td ng-if="searchParameterId == '4'">
-                        <input id="{{order.SalesOrderNo}}" type="checkbox" value="{{order.SalesOrderNo}}" 
-                               ng-checked="selection.indexOf(order.SalesOrderNo) > -1" ng-click="toggleSelection(order.SalesOrderNo)" />
-                        <a href="" ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
-                    </td>
-                    <td ng-if="searchParameterId == '4'">{{order.OrderNumber}}</td>
-                    <td>{{order.DateInSystem | date}}</td>
                 </tr>
-            </tbody>
-        </table>
-        <kendo-mobile-button k-on-click="ViewNext('1')" k-align="'right'">View Next 5</kendo-mobile-button>
-        <div class="apporval" ng-show="order.hasApproval">
-            Comment<br>
-            <input type="text" ng-modal="order.detail.comment"/>
-            <button ng-click="apporve(true)">YES</button>
-            <button ng-click="apporve(false)">No</button>
-        </div>
-
-    </div>
-
-    <div id="new"  ng-if="order.orderType == '2' ">
-        <table class="table table-condensed table-striped">
-            <th ng-if="searchParameterId == '1'">Order Number</th>
-            <th ng-if="searchParameterId == '2' ">Sales Order</th>
-            <th ng-if="searchParameterId == '3'">Shopping Cart</th>
-            <th ng-if="searchParameterId == '4'">Vendor Ref</th>
-            <th>Status</th>
-            <th>Order Date</th>
-            <tbody>
-                <tr ng-repeat="order in orders">
-                    <td ng-if="searchParameterId == '1'">
-                        <a href="" ng-click="orderDetail(2, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
                     </td>
-                    <td ng-if="searchParameterId == '2'">
-                        <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
                     </td>
-
-                    <td ng-if="searchParameterId == '3'">
-                        <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
                     </td>
-                    <td ng-if="searchParameterId == '4'">
-                        <a href="" ng-click="orderList(2, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
                     </td>
-                    <td>{{order.Status}}</td>
-                    <td>{{order.OrderDate | date}}</td>
                 </tr>
-            </tbody>
-        </table>
-        <kendo-mobile-button k-on-click="viewAll('2')" k-align="'right'">View All</kendo-mobile-button>
-    </div>
-
-    <div id="released"  ng-if="order.orderType =='3' ">
-
-        <table class="table table-condensed table-striped">
-            <thead>
-                <tr>
-
-                    <th ng-if="searchParameterId == '1'">Order Number</th>
-                    <th ng-if="searchParameterId == '2' ">Sales Order</th>
-
-                    <th ng-if="searchParameterId == '3'">Shopping Cart</th>
-                    <th ng-if="searchParameterId == '4'">Vendor Ref</th>
-                    <th>Status</th>
-                    <th>Order Date</th>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="order in order.orders">
-                    <td ng-if="searchParameterId == '1'">
-                        <a href="" ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">{{order.OrderNumber}}</a>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
                     </td>
-                    <td ng-if="searchParameterId == '2'">
-                        <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.SalesOrderNo}}</a>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
                     </td>
-
-                    <td ng-if="searchParameterId == '3'">
-                        <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.ShoppingCart}}</a>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                           Open
+                           </a>
                     </td>
-                    <td ng-if="searchParameterId == '4'">
-                        <a href="" ng-click="orderList(3, searchParameterId, order.SalesOrderNo)">{{order.VendorRef}}</a>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
                     </td>
-                    <td>{{order.Status}}</td>
-                    <td>{{order.OrderDate | date}}</td>
                 </tr>
-            </tbody>
-        </table>
-        <kendo-mobile-button k-on-click="viewAll('3')" k-align="'right'">View All</kendo-mobile-button>
-    </div>
-
-    <br>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+            </table>
+            <li class="ck-grey-wrap">
+           </li>
+        </kendo-mobile-list-view>
+    </kendo-mobile-content>
 </kendo-mobile-view>
