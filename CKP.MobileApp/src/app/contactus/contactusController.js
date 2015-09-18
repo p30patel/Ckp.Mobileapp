@@ -1,6 +1,6 @@
 
-app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService',
-    function ($scope, $http, $sce, authService, translateService, localStorageService) {
+app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout',
+    function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout) {
 
         $scope.form = {};
         $scope.authentication = authService.authentication;
@@ -160,6 +160,43 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         }
 
+        $scope.send = function () {
+
+            $scope.message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
+            $timeout(function () {
+                $scope.message = "";
+            }, 7000);
+
+            //kendo.mobile.application.pane.loader.show();
+
+
+            //feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
+            //    if (result === 'success') {
+            //        alerting.addSuccess("Thank you for your feedback!", 10000);
+            //        $scope.message = "Thank you for your feedback!";
+            //        $timeout(function () {
+            //            $scope.message = "";
+            //        }, 7000);
+
+            //        $scope.feedbackData.comment = "";
+            //    } else {
+            //        alerting.addSuccess("Faild to post feedback!", 10000);
+            //        $scope.message = "Faild to post feedback, Please try later";
+            //        $timeout(function () {
+            //            $scope.message = "";
+            //        }, 7000);
+            //    }
+            //}).catch(function (error) {
+
+            //    $scope.message = "Faild to post feedback, Please try later";
+            //    $timeout(function () {
+            //        $scope.message = "";
+            //    }, 7000);
+
+            //}).finally(function () {
+            //    kendo.mobile.application.pane.loader.hide();
+            //});
+        }
         $scope.renderHtml = function (content) {
             if (typeof content !== 'undefined') {
                 content = content.replace(/<b>/g, '<br><b>');

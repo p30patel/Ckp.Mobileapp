@@ -33,11 +33,11 @@
 
                     <input value="" type="password" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
 
-                    <kendo-mobile-button class="ck-input-btn" ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  k-on-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
+                    <kendo-mobile-button class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  k-on-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
                   
                     <p class="ck-align-right"  ng-hide="passwordHint" >
                         <a href="" ng-click="showPasswordHint()"                            
-                            ng-disabled="!loginData.userName" 
+                            k-ng-disabled="!loginData.userName" 
                             id="touchSurface"  
                             data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
@@ -80,7 +80,7 @@
                 <i></i>
                   <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
-                                        ng-disabled="!loginData.email" 
+                                        k-ng-disabled="!loginData.email" 
                                         id="btnSendPassword"
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
                
