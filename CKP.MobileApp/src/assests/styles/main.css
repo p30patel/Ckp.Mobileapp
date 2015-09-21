@@ -4,7 +4,7 @@
   width: 0;
   height: 100%;
   background: #3B3B3B;
-
+  overflow-y: hidden;
   transition: width 0.3s ease;
 }
 .main-nav:after {
@@ -13,10 +13,9 @@
   top: 0;
   right: 0;
   height: 100%;
-  width: 34px;
+  width: 24px;
   background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-
 .ck-disclamier {text-align: center; padding-top:1em; font-size: .7em!important;}
 .ck-login-logo {
     width: 16em;
