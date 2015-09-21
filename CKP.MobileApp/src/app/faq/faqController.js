@@ -8,6 +8,17 @@ app.controller('faqController', [
                        $scope.form.title.resoruceName = "FAQ";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       var setTitle = function () {
+                           var view = kendo.mobile.application.view();
+                           if (view !== null) {
+                               var navbar = kendo.mobile.application.view()
+                                            .header
+                                            .find(".km-navbar")
+                                            .data("kendo-mobile-nav-bar");
+                               navbar.title($scope.form.title.resoruceValue);
+                           }
+                       };
+                       setTitle();
                        $scope.form.faqInstructions = {};
                        $scope.form.faqInstructions.resoruceName = "Faq Instructions";
                        $scope.form.faqInstructions.resoruceValue = translateService.getResourceValue($scope.form.faqInstructions.resoruceName);
@@ -18,7 +29,8 @@ app.controller('faqController', [
 
                        $scope.faqs = {};
 
-                       $scope.intShow = function (e) {                      
+                       $scope.intShow = function (e) {                    
+                       
                        }
 
                        var getFaqs = function(selectedCultureName) {

@@ -183,10 +183,10 @@ app.factory('translateService',
                         hasExitedItem = true;
                         if (hasUpdate) {
                             item.RowVersion = rowVersion;
-                            item.RefereshPeriod = refereshPeriod
+                            item.RefereshPeriod = false
                             item.ResourceList  = resouceList
                             data.RowVersion = rowVersion;
-                            data.RefereshPeriod = refereshPeriod;
+                            data.RefereshPeriod = false;
                             data.ResourceList = resouceList;
                         }
                         else {
