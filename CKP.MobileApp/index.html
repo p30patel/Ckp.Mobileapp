@@ -93,9 +93,9 @@
                 <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
                 </kendo-view-title>
 
-                <a data-align="left" data-role="button" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" ><span class="km-icon km-home"></span></a>
+                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" style="margin-left:-20px;"><span class="km-icon km-home"></span></kendo-mobile-button>
 
-                <a data-align="left" data-role="button" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html"><span class="km-icon ck-i-signin"></span></a>
+                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" style="margin-left:-20px;"><span class="km-icon ck-i-signin"></span></kendo-mobile-button>
 
                 <kendo-mobile-button k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
 
