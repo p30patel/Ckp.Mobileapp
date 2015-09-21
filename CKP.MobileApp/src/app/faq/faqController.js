@@ -18,10 +18,14 @@ app.controller('faqController', [
 
                        $scope.faqs = {};
 
-                       var init = function() {
+                       $scope.intShow = function (e) {                      
+                       }
+
+                       var getFaqs = function(selectedCultureName) {
+                           
                            kendo.mobile.application.pane.loader.show();
                         
-                           faqDataService.getFaqs().then(function (result) {
+                           faqDataService.getFaqs(selectedCultureName).then(function (result) {
                                $scope.faqs = result;
                             
                            }).catch(function(error) {
@@ -30,7 +34,29 @@ app.controller('faqController', [
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
-                       init();
+
+                       var loadFaqs = function () {
+                           var cultureName = translateService.getCurrentCultureName();
+                          
+                           if (cultureName != 'en-US')
+                           {
+                               kendo.mobile.application.pane.loader.show();
+
+                               faqDataService.getFaqs('en-US').then(function (result) {
+                                   getFaqs(cultureName);
+
+                               }).catch(function (error) {
+                                   $scope.faqs = {};
+                               }).finally(function () {
+                                   kendo.mobile.application.pane.loader.hide();
+                               });
+                           }
+                           else {
+                               getFaqs(cultureName);
+                           }
+                       }
+                       loadFaqs();
+
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
                        };

@@ -142,7 +142,7 @@ app.factory("faqDataService", [
                         var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
 
                         var version = getFaqData(cultureName, rowVersion, oldItems, !refereshPeriod, true);
-
+                        console.log('update version:' + refereshPeriod + "new" + refereshPeriod);
                         return oldItems;
                     }
 
@@ -166,11 +166,12 @@ app.factory("faqDataService", [
                                 if (item.CultureName === cultureName && !hasExitedItem) {
                                     hasExitedItem = true;
                                     if (hasUpdate) {
+                                      
                                         item.RowVersion = rowVersion;
-                                        item.RefereshPeriod = refereshPeriod
+                                        item.RefereshPeriod = false;
                                         item.FaqList = faqList
                                         data.RowVersion = rowVersion;
-                                        data.RefereshPeriod = refereshPeriod;
+                                        data.RefereshPeriod = false;
                                         data.FaqList = faqList;
                                     }
                                     else {
@@ -198,11 +199,17 @@ app.factory("faqDataService", [
                         return data;
                     }
 
-                    var getFaqs = function () {
-
+                    var getFaqs = function (selectedCultureName) {
+                        //localStorageService.clearAll();
+                        //localStorage.clear();
                         var deferred = $q.defer();
-                        cultureName = translateService.getCurrentCultureName();
-                     
+                        if (cultureName != '') {
+                            cultureName = selectedCultureName;
+                        }
+                        else {
+                            cultureName = translateService.getCurrentCultureName();
+                        }
+                        
                         var version = '';
                         var versionData = getFaqData(cultureName, version, [], refereshPeriod, false);
 
@@ -237,6 +244,7 @@ app.factory("faqDataService", [
 
                         return deferred.promise;
                     }
+
                     faqDataServiceFactory.getFaqs = getFaqs;
                     faqDataServiceFactory.forceGetFaqs = forceGetFaqs;
 
