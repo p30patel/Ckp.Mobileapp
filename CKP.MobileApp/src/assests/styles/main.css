@@ -1,3 +1,9 @@
+  .km-arrow-e:after,
+    .km-arrow-e:before
+    {
+        content: "\e000";
+    }
+
 .main-nav {
   position: fixed;
   top: 0;
