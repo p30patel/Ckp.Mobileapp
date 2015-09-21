@@ -1,3 +1,11 @@
+.ck-disclamier {text-align: center; padding-top:1em; font-size: .7em!important;}
+.ck-login-logo {
+    width: 16em;
+    height: 5em;
+    margin: 1em auto 2em;
+    display: block;
+    float: none;
+}
 .text-center{text-align:center;}
 .ckp-a-link {
     color: rgb(213, 43, 30) !important;
