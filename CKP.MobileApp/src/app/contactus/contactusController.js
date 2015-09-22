@@ -11,6 +11,18 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.title = {};
         $scope.form.title.resoruceName = "Contact Us";
         $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+        $scope.afterShow = function (e) {
+
+            var view = kendo.mobile.application.view();
+            if (view !== null) {
+                var navbar = kendo.mobile.application.view()
+                             .header
+                             .find(".km-navbar")
+                             .data("kendo-mobile-nav-bar");
+                navbar.title($scope.form.title.resoruceValue);
+
+            }
+        }
 
         $scope.form.titleUS = {};
         $scope.form.titleUS.resoruceName = "USA";

@@ -8,6 +8,18 @@ app.controller('policyController', [
                        $scope.form.title.resoruceName = "Policies";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       $scope.afterShow = function (e) {
+
+                           var view = kendo.mobile.application.view();
+                           if (view !== null) {
+                               var navbar = kendo.mobile.application.view()
+                                            .header
+                                            .find(".km-navbar")
+                                            .data("kendo-mobile-nav-bar");
+                               navbar.title($scope.form.title.resoruceValue);
+
+                           }
+                       }
                        $scope.form.policyInstructions = {};
                        $scope.form.policyInstructions.resoruceName = "Policy Instructions";
                        $scope.form.policyInstructions.resoruceValue = translateService.getResourceValue($scope.form.policyInstructions.resoruceName);

@@ -9,6 +9,18 @@ app.controller('termsConditionController', [
                        $scope.form.title.resoruceName = "Terms & Conditions";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       $scope.afterShow = function (e) {
+
+                           var view = kendo.mobile.application.view();
+                           if (view !== null) {
+                               var navbar = kendo.mobile.application.view()
+                                            .header
+                                            .find(".km-navbar")
+                                            .data("kendo-mobile-nav-bar");
+                               navbar.title($scope.form.title.resoruceValue);
+
+                           }
+                       }
 
                        $scope.form.noData = {};
                        $scope.form.noData.resoruceName = "No Data are found";

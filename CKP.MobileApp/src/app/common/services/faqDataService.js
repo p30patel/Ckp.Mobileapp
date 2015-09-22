@@ -173,7 +173,7 @@ app.factory("faqDataService", [
                                         data.RowVersion = rowVersion;
                                         data.RefereshPeriod = refereshPeriod;
                                         data.FaqList = faqList;
-                                        alert(item.RefereshPeriod);
+                                      
                                     }
                                     else {
                                         data.CultureName = cultureName;

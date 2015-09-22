@@ -19,6 +19,19 @@ app.controller('homeController', [
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       $scope.afterShow = function (e) {
+
+                           var view = kendo.mobile.application.view();
+                           if (view !== null) {
+                               var navbar = kendo.mobile.application.view()
+                                            .header
+                                            .find(".km-navbar")
+                                            .data("kendo-mobile-nav-bar");
+                               navbar.title($scope.form.title.resoruceValue);
+
+                           }
+                       }
+
                        $scope.form.attentionUser = {};
                        $scope.form.attentionUser.resoruceName = "Attension User";
                        $scope.form.attentionUser.resoruceValue = translateService.getResourceValue($scope.form.attentionUser.resoruceName);
