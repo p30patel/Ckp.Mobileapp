@@ -142,7 +142,7 @@ app.factory("faqDataService", [
                         var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
 
                         var version = getFaqData(cultureName, rowVersion, oldItems, !refereshPeriod, true);
-                        console.log('update version:' + refereshPeriod + "new" + refereshPeriod);
+                        console.log('update version:' + refereshPeriod + "new" + !refereshPeriod);
                         return oldItems;
                     }
 
@@ -168,11 +168,12 @@ app.factory("faqDataService", [
                                     if (hasUpdate) {
                                       
                                         item.RowVersion = rowVersion;
-                                        item.RefereshPeriod = false;
+                                        item.RefereshPeriod = refereshPeriod;
                                         item.FaqList = faqList
                                         data.RowVersion = rowVersion;
-                                        data.RefereshPeriod = false;
+                                        data.RefereshPeriod = refereshPeriod;
                                         data.FaqList = faqList;
+                                        alert(item.RefereshPeriod);
                                     }
                                     else {
                                         data.CultureName = cultureName;
@@ -216,13 +217,12 @@ app.factory("faqDataService", [
                         version = versionData.RowVersion;
 
                         var forceReferesh = false; // refresh the page once a day
-                      
-                    
+                       
                         if (versionData) {
                             version = versionData.RowVersion;
                             var faqs = versionData.FaqList;
-                      
-                            if (faqs.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
+                          
+                            if (faqs.length > 0 && versionData.RefereshPeriod != refereshPeriod) {
                                 faqData = faqs;
                               
                                 deferred.resolve(faqs);

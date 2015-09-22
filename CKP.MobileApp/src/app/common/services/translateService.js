@@ -183,10 +183,10 @@ app.factory('translateService',
                         hasExitedItem = true;
                         if (hasUpdate) {
                             item.RowVersion = rowVersion;
-                            item.RefereshPeriod = false
+                            item.RefereshPeriod = refereshPeriod
                             item.ResourceList  = resouceList
                             data.RowVersion = rowVersion;
-                            data.RefereshPeriod = false;
+                            data.RefereshPeriod = refereshPeriod;
                             data.ResourceList = resouceList;
                         }
                         else {
@@ -232,7 +232,7 @@ app.factory('translateService',
                 version = versionData.RowVersion;
                 var resources = versionData.ResourceList;
               
-                if (resources.length > 0 && versionData.RefereshPeriod == refereshPeriod) {
+                if (resources.length > 0 && versionData.RefereshPeriod !== refereshPeriod) {
                     resourceData = resources;
 
                     deferred.resolve(resources);
