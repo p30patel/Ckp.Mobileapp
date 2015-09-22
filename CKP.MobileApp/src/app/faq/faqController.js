@@ -18,15 +18,17 @@ app.controller('faqController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
+
+                               $scope.form.faqInstructions = {};
+                               $scope.form.faqInstructions.resoruceName = "Faq Instructions";
+                               $scope.form.faqInstructions.resoruceValue = translateService.getResourceValue($scope.form.faqInstructions.resoruceName);
+
+                               $scope.form.noData = {};
+                               $scope.form.noData.resoruceName = "No Data are found";
+                               $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
                            }
                        }
-                       $scope.form.faqInstructions = {};
-                       $scope.form.faqInstructions.resoruceName = "Faq Instructions";
-                       $scope.form.faqInstructions.resoruceValue = translateService.getResourceValue($scope.form.faqInstructions.resoruceName);
-
-                       $scope.form.noData = {};
-                       $scope.form.noData.resoruceName = "No Data are found";
-                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+                      
 
                        $scope.faqs = {};
 
