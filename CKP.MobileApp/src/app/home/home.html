@@ -368,9 +368,9 @@
                         </fieldset>
                     </li>
                </ul>
-                
+                <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                 <kendo-mobile-footer>
-                        <alerts></alerts>
+                      
                         <kendo-mobile-button class="km-primary km-large ck-btn-left"  k-on-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
                         
                         <kendo-mobile-button class="km-secondary km-large ck-btn-right" k-on-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>

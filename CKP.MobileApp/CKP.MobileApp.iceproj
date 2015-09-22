@@ -94,11 +94,6 @@
     <Content Include="scripts\app.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="src\app\common\directives\alerting.js" />
-    <Content Include="src\app\common\directives\alerts.html" />
-    <Content Include="src\app\common\directives\components.js" />
-    <Content Include="src\app\common\directives\loader.js" />
-    <Content Include="src\app\common\services\alerting.js" />
     <Content Include="src\app\common\services\authInterceptorService.js" />
     <Content Include="src\app\common\services\authService.js" />
     <Content Include="src\app\common\services\faqDataService.js" />

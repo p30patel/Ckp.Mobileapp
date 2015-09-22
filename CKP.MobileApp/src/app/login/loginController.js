@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', 'alerting', '$filter', 'ngAuthSettings', '$sce',
-                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, alerting, $filter, ngAuthSettings, $sce) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout',  '$filter', 'ngAuthSettings', '$sce',
+                   function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce) {
                        $scope.title = '';
                       
                        //login page html lables
@@ -145,8 +145,6 @@ app.controller('loginController', [
                            
                                message = $scope.form.passwordSentText.resoruceValue + ".";
 
-                               alerting.addSuccess(message, 0);
-                           
                                $scope.forgotPassworMessage = message;
                                $timeout(function () {
                                    $scope.forgotPassworMessage = "";
@@ -157,7 +155,7 @@ app.controller('loginController', [
                            },
                                                                                 function (err) {
                                                                                     message =  "User name and email combination does not match!";
-                                                                                    alerting.addWarning(message, 0);
+                                                                                  
                                                                                     kendo.mobile.application.pane.loader.hide();
                                                                                     $scope.forgotPassworMessage = message;
                                                                                     $timeout(function () {

@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', 'alerting', '$filter', 'translateService', 'messageDataService', 'orderDataService',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, alerting, $filter, translateService, messageDataService, orderDataService) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce) {
                        var init = function () {
 
                            if (!authService.authentication.isAuth) {
@@ -158,7 +158,7 @@ app.controller('homeController', [
 
 
                        var getOrderCounts = function () {
-                           alerting.addSuccess("Getting Order Counts!");
+                         
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
 
@@ -342,16 +342,29 @@ app.controller('homeController', [
                            }
                            kendo.mobile.application.pane.loader.show();
                            orderDataService.approveDecline(jsonIn).then(function (result) {
+                               $scope.message = "Approve / Decliend Successfully";
+                               $timeout(function () {
+                                   $scope.message = "";
+                                   $("#modalview-approve").kendoMobileModalView("close");
+                               }, 5000);
+
                                kendo.mobile.application.pane.loader.hide();
-                               $("#modalview-approve").kendoMobileModalView("close");
-                               alerting.addSuccess("Completed Approved/ Declined");                            
-                           }).catch(function (error) {
-                               alerting.addSuccess("Faild to Approve or Decline!");
                              
+                                   
+                           }).catch(function (error) {
+                               $scope.message = "Approve / Decliend failed";
+                               $timeout(function () {
+                                   $scope.message = "";
+                               }, 7000);
+
                                kendo.mobile.application.pane.loader.hide();
                                //$("#modalview-approve").kendoMobileModalView("close");
                            });
                        }
+
+                       $scope.renderHtml = function (content) {
+                           return $sce.trustAsHtml(content);
+                       };
 
                    }
 
