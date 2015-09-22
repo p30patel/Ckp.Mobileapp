@@ -40,7 +40,7 @@ app.factory('authInterceptorService', [
                             //$location.path('/login');
                             kendo.mobile.application.navigate("src/app/login/login.html");
 
-                            aconsole.log("Un-Authorized Access, Please login to access! Error: 401");
+                            console.log("Un-Authorized Access, Please login to access! Error: 401");
                         } else if (rejection.status === 404) {
                             console.log("There is an error while proccessing this request! Error: 404");
                         } else if (rejection.status === 0) {
