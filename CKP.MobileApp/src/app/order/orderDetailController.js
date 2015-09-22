@@ -1,7 +1,7 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService','$sce', 'alerting', 'translateService',
-                   function ($scope, authService, orderDataService, $sce, alerting, translateService) {
+                   '$scope', 'authService', 'orderDataService','$sce', 'translateService',
+                   function ($scope, authService, orderDataService, $sce, translateService) {
 
                        $scope.form = {};
 
@@ -35,7 +35,7 @@ app.controller('orderDetailController', [
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                               alerting.addSuccess("Please Login!");
+                             
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
@@ -57,10 +57,10 @@ app.controller('orderDetailController', [
                        
                        var getOrderDetail = function () {
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Getting Order Detail..");
+                          
                            orderDataService.getOrderDetail().then(function (result) {
                                $scope.order.detail = result;
-                               alerting.addSuccess("Completed laoding order Details.");
+                           
                            }).catch(function(error) {
                                $scope.mesages = {};
                            }).finally(function() {
@@ -93,9 +93,9 @@ app.controller('orderDetailController', [
                            }
                            
                            orderDataService.approveDecline(jsonIn).then(function (result) {
-                               alert('Approval' + result.success);
+                             
                                $scope.order.detail = result;
-                               alerting.addSuccess("Completed laoding order Details.");
+                             
                            }).catch(function(error) {
                                $scope.mesages = {};
                            }).finally(function() {

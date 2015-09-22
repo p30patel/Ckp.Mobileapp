@@ -1,7 +1,7 @@
 
 app.controller('faqController', [
-                   '$scope', '$http', '$sce', 'faqDataService', 'alerting', 'translateService',
-                   function ($scope, $http, $sce, faqDataService, alerting, translateService) {
+                   '$scope', '$http', '$sce', 'faqDataService', 'translateService',
+                   function ($scope, $http, $sce, faqDataService, translateService) {
                        $scope.form = {};
 
                        $scope.form.title = {};

@@ -1,7 +1,7 @@
 
 app.controller('policyController', [
-                   '$scope', '$http', '$sce', 'policyTermsDataService', 'alerting', 'translateService',
-                   function ($scope, $http, $sce, policyTermsDataService, alerting, translateService) {
+                   '$scope', '$http', '$sce', 'policyTermsDataService',  'translateService',
+                   function ($scope, $http, $sce, policyTermsDataService, translateService) {
                        $scope.form = {};
 
                        $scope.form.title = {};

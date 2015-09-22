@@ -1,7 +1,7 @@
 
 app.controller('orderlistController', [
-                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce', 'alerting', 'translateService',
-                   function ($scope, authService, orderDataService, homeDataService, $sce, alerting, translateService) {
+                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService',
+                   function ($scope, authService, orderDataService, homeDataService, $sce,  translateService) {
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -38,7 +38,7 @@ app.controller('orderlistController', [
                            
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                               alerting.addSuccess("Please Login!");
+                              
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
@@ -68,15 +68,15 @@ app.controller('orderlistController', [
 
                        homeDataService.getOrderHeaderData().then(function (result) {
                            $scope.order.orders = result;
-                           alerting.addSuccess("Completed Order Data Header Request!");
+                     
                        });
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                           alerting.addSuccess("Getting Order list..");
+                        
                            orderDataService.getOrderList().then(function (result) {
                                $scope.order.list = result;
-                               alerting.addSuccess("Completed loading order list.");
+                             
                            }).catch(function(error) {
                                $scope.mesages = {};
                            }).finally(function() {

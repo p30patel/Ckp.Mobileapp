@@ -1,7 +1,7 @@
 
 app.controller('feedbackController', [
-                   '$scope', '$http', '$sce', 'feedbackDataService', 'alerting', 'authService', 'translateService', '$timeout',
-function ($scope, $http, $sce, feedbackDataService, alerting, authService, translateService, $timeout) {
+                   '$scope', '$http', '$sce', 'feedbackDataService',  'authService', 'translateService', '$timeout',
+function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
 
                        $scope.form = {};
 
