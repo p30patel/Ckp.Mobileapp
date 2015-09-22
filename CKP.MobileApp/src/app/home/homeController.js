@@ -160,21 +160,17 @@ app.controller('homeController', [
                   
                        var getMessages = function () {
                            kendo.mobile.application.pane.loader.show();
-                           var btnBadge = $("#btn_message").data("kendoMobileButton");
-                           if (typeof btnBadge !== 'undefined') {
-                            
-                               btnBadge.badge(false);
-                           }
-
+                           $("#btn_message").data("kendoMobileButton");
+                         
                            messageDataService.getMessages().then(function (result) {
                                $scope.mesages = result;
                                $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;                            
-                               $("#btn_message").kendoMobileButton({ badge: $scope.messageCount });                              
+                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
                              
                            }).catch(function (error) {
                                $scope.mesages = {};
                                $scope.messageCount = 0;
-                               $("#btn_message").kendoMobileButton({ badge: $scope.messageCount });
+                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });

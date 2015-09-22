@@ -27,7 +27,7 @@ app.factory("feedbackDataService", [
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
                         var data = {};
-                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/ContactUsFormByEmail?webpage=' + feedbackData.webpage + '&comment=' + feedbackData.comment + '&userId=' + userId).success(function (result) {
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/ContactUsByEmail?name=' + contactData.name + '&email=' + contactData.email + '&userId=' + userId).success(function (result) {
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
