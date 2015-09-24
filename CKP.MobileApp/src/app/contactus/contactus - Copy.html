@@ -1,0 +1,317 @@
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController" k-after-show="afterShow" >
+     
+      <kendo-mobile-content>
+        <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
+            <li class="ck-no-pad">
+                <kendo-mobile-button-group k-id="buttongroup-home" class="ck-group-full">
+                    <kendo-mobile-button class="contactusHeader km-state-active" id="us" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="eu" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="hk" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="contactusHeader" id="au" ng-click="onSelect('au')">{{form.titleAU.resoruceValue}}</kendo-mobile-button>
+                </kendo-mobile-button-group>
+            </li>
+         <li class="ck-center-li">
+                <i></i>
+                <kendo-mobile-button class="km-primary km-large" style="width:90%;" k-on-click="showSendEmailmodal()" k-rel="'modalview'">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
+            </li>
+        </kendo-mobile-list-view>
+               <kendo-mobile-list-view class="us contactus">
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                <h4>{{form.subTitileUS.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
+                           <p>101 Wolf Dr.</br>
+                            P.O. Box 188</br>
+                            Thorofare, NJ 08086</br>
+                               </p>
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+1 (800) 257-5540<br />
+                             +1 (856) 848-1800
+                                </p>
+                            <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
+                            <p class="km-light-font">+1 (856) 848-0937</p>
+                            <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>{{form.subTitileUSStatus.resoruceValue}} </h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+1 (800) 775-1802</p>
+                            <p>Option 7 for CheckNet Help Desk</p>
+                            <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+
+             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>{{form.subTitileUSCollection.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+1 (800) 257-5540</p>
+                            <p>Option 9 for Accounting</p>
+                             <p>Option 1 for Accounts Receivable</p>
+                            <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:Checknet@checkpt.com">Checknet@checkpt.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+   
+   
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
+                ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'USA'">
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+  </kendo-mobile-list-view>
+               <!--    EU-->
+        <kendo-mobile-list-view class="eu contactus" style="display: none;">
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+                  <h4>{{form.subTitileEU.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                          <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
+                            <p>Akkermansbeekweg 12</p>
+                            <p>7061 ZA Terborg</p>
+                            <p>Nederland</p>
+
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+31 (0)88008 2400</p>
+                          
+                            <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
+                            <p>+31 (0)315 341161</p>
+                            <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:cs.checknet@checknet-europe.com">cs.checknet@checknet-europe.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4>{{form.subTitileEUSetup.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">{{form.toFaxApplication.resoruceValue}} :</h4>
+                            <p>+31 (0)315 341161</p>
+                           <h4 class="km-bold-font">{{form.forSetupStatus.resoruceValue}} :</h4>
+                            <p>+31 (0)88008 2313</p>
+                            <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:operations@checknet-europe.com">operations@checknet-europe.com</a></a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+
+             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                 <h4>{{form.subTitileEUStatus.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+1 (800) 233-6215</p>
+                         
+                             <p>+1 (800) 645-3290 Toestel 251</p>
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+
+                  <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                 <h4>{{form.EuropeMasTabTitle.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:eucatalog.checknet@checkpt.com">eucatalog.checknet@checkpt.com</a></p>                        
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+   
+   
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
+        
+                ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Europe'">
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                                <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+ </kendo-mobile-list-view>
+           <!-- Hk--->
+                <kendo-mobile-list-view class="hk contactus" style="display: none;">
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+               <h4>{{form.subTitileHK.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                        
+                            <h4 class="km-light-font">Checkpoint Systems Hong Kong Ltd.</h4>
+                            <p>4/F., Blk.A, Shatin Industrial Centre</p>
+                            <p>5-7 Yuen Shun Circuit</p>
+                              <p>Siu Lek Yuen</p>
+                              <p>Shatin, N.T. Hongkong</p>
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+852 2527-2327</p>
+                           
+                              <h4 class="km-bold-font">ALS - US:</h4>
+                            <p>+852 2275-8488</p>
+
+                              <h4 class="km-bold-font"> ALS - EUR :</h4>
+                            <p>+852 2995-8283</p>
+
+                            <h4 class="km-bold-font"> {{form.fax.resoruceValue}} :</h4>
+                            <p>+852 2527-8408</p>
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+          
+        <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                 <h4>{{form.AsiaMasTabTitle.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                           <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:hkcatalog.checknet@checkpt.com">hkcatalog.checknet@checkpt.com</a></p>                        
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
+            
+                   ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Asia'">
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+        </kendo-mobile-list-view>
+
+
+             <!-- AU--->
+                <kendo-mobile-list-view class="au contactus" style="display: none;">
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
+               <h4>{{form.AUTabTitle1.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                            <h4 class="km-bold-font">{{form.address.resoruceValue}} :</h4>
+                            <p>80 Lewis Road</p>
+                            <p>Wantima South, Victoria</p>
+                              <p>Australia</p>
+                           
+                            <h4 class="km-bold-font">{{form.phone.resoruceValue}} :</h4>
+                            <p>+61 1300 369 338</p>
+
+                             <h4 class="km-bold-font">{{form.email.resoruceValue}} :</h4>
+                            <p><a href="mailto:aus.smscustomerservice@checkpt.com">aus.smscustomerservice@checkpt.com</a></p>                        
+                           
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+      
+            <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" 
+            
+                   ng-show="authentication.isAuth && helpDesk.HasHelpCenter && helpDesk.Region == 'Austraila'">
+                <h4>{{form.helpDesk.resoruceValue}}</h4>
+                <table class="match-details">
+                    <tr>
+                        <td>
+                              <p ng-bind-html="renderHtml(helpDesk.HelpCenterMessage)"></p>
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+        </kendo-mobile-list-view>
+    </kendo-mobile-content>
+
+   <!-- write email modal-->
+    
+          <div kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+            <div kendo-mobile-header>
+                <div kendo-mobile-nav-bar class="km-dark">
+                  Write Email
+                </div>
+
+            </div>
+            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+            
+                <li>
+                  
+                    
+                    <h3>
+                       {{form.creditLockMessage.resoruceValue}}
+                    </h3>
+                </li>
+               <li class="ck-no-pad">
+                <fieldset class="ck-login">
+                   
+                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name" />
+
+                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" />
+
+                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" />
+
+                     <input value="" placeholder="{{form.order.resoruceValue}}" type="email" ng-model="contact.orderNumber" />
+
+                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;"></textarea>                     
+                </fieldset>
+                <i></i>
+                   <br />
+                  <kendo-mobile-button 
+                                        k-on-click="send()" 
+                                        k-ng-disabled="!contact.email && !contact.messageBody"                                       
+                                        class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.send.resoruceValue}}</kendo-mobile-button>
+               
+                     <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+               
+            </li>
+            </ul>
+            <kendo-mobile-footer>
+                <div kendo-mobile-button k-on-click="hideSendEmailmodal()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                </div>
+            </kendo-mobile-footer>
+
+          </div>
+
+</kendo-mobile-view>
