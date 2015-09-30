@@ -100,6 +100,10 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.form.email.resoruceName = "Email";
         $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
 
+        $scope.form.phone = {};
+        $scope.form.phone.resoruceName = "Phone";
+        $scope.form.phone.resoruceValue = translateService.getResourceValue($scope.form.phone.resoruceName);
+
         $scope.form.toFaxApplication = {};
         $scope.form.toFaxApplication.resoruceName = "To fax applications";
         $scope.form.toFaxApplication.resoruceValue = translateService.getResourceValue($scope.form.toFaxApplication.resoruceName);
