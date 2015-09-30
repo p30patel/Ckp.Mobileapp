@@ -164,14 +164,6 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             $("#modalview-email").kendoMobileModalView("close");
         };
 
-        $scope.onSelect = function (selectedClass) {
-            $('.contactus').hide();
-            $('.' + selectedClass).show();
-            $('.contactusHeader').removeClass('km-state-active');
-            $('#' + selectedClass).addClass('km-state-active');
-
-        }
-
         $scope.send = function () {
 
             $scope.message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
@@ -209,6 +201,17 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             //    kendo.mobile.application.pane.loader.hide();
             //});
         }
+
+        $scope.myOptions = {
+            select: function (e) {
+              
+                var listviews = $("ul.contactus.km-listview");
+                listviews.hide()
+                .eq(e.index)
+                .show();
+            }
+        }
+
         $scope.renderHtml = function (content) {
             if (typeof content !== 'undefined') {
                 content = content.replace(/<b>/g, '<br><b>');

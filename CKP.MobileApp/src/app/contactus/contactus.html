@@ -2,20 +2,20 @@
      
       <kendo-mobile-content>
         <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
-            <li class="ck-no-pad">
-                <kendo-mobile-button-group k-id="buttongroup-home" class="ck-group-full">
-                    <kendo-mobile-button class="contactusHeader km-state-active" id="us" ng-click="onSelect('us')">{{form.titleUS.resoruceValue}}</kendo-mobile-button>
-                    <kendo-mobile-button class="contactusHeader" id="eu" ng-click="onSelect('eu')">{{form.titleEU.resoruceValue}}</kendo-mobile-button>
-                    <kendo-mobile-button class="contactusHeader" id="hk" ng-click="onSelect('hk')">{{form.titleAsia.resoruceValue}}</kendo-mobile-button>
-                    <kendo-mobile-button class="contactusHeader" id="au" ng-click="onSelect('au')">{{form.titleAU.resoruceValue}}</kendo-mobile-button>
+            <span class="ck-no-pad">
+                <kendo-mobile-button-group k-id="buttongroup-home" class="ck-group-full" k-options="myOptions" style="padding-left:5px; padding-right:5px;">
+                    <li class="contactusHeader km-state-active" id="us">{{form.titleUS.resoruceValue}}</li>
+                    <li class="contactusHeader" id="eu">{{form.titleEU.resoruceValue}}</li>
+                    <li class="contactusHeader" id="hk">{{form.titleAsia.resoruceValue}}</li>
+                    <li class="contactusHeader" id="au">{{form.titleAU.resoruceValue}}</li>
                 </kendo-mobile-button-group>
-            </li>
+            </span>
          <li class="ck-center-li">
                 <i></i>
                 <kendo-mobile-button class="km-primary km-large" style="width:90%;" k-on-click="showSendEmailmodal()" k-rel="'modalview'">{{form.writeEmail.resoruceValue}}</kendo-mobile-button>
             </li>
-        </kendo-mobile-list-view>
-               <kendo-mobile-list-view class="us contactus">
+     
+               <kendo-mobile-list-view class="contactus">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h4>{{form.subTitileUS.resoruceValue}}</h4>
                 <table class="match-details">
@@ -87,7 +87,7 @@
             </kendo-mobile-collapsible>
   </kendo-mobile-list-view>
                <!--    EU-->
-        <kendo-mobile-list-view class="eu contactus" style="display: none;">
+        <kendo-mobile-list-view class="contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                   <h4>{{form.subTitileEU.resoruceValue}}</h4>
                 <table class="match-details">
@@ -227,7 +227,7 @@
 
 
              <!-- AU--->
-                <kendo-mobile-list-view class="au contactus" style="display: none;">
+                <kendo-mobile-list-view class="contactus" style="display: none;">
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                <h4>{{form.AUTabTitle1.resoruceValue}}</h4>
                 <table class="match-details">
@@ -263,6 +263,7 @@
                 </table>
             </kendo-mobile-collapsible>
         </kendo-mobile-list-view>
+               </kendo-mobile-list-view>
     </kendo-mobile-content>
 
    <!-- write email modal-->
