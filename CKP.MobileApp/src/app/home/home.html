@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
             
@@ -281,32 +281,54 @@
         </kendo-mobile-header>
 
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
-             ng-show="mesages.PartnerHolidayList.length > 0" ng-repeat="message in mesages.PartnerHolidayList">
+             ng-show="mesages.PartnerHolidayList.length > 0">
+             <li class="ck-module-date">
+               Print Shop Holidays
+            </li>
             <li>
                 <i class="ck-icon ck-alert ck-module-icon"></i>
-               <h3 class="km-bold-font">{{message.Name}}</h3>
-                <h3 class="km-font">
-                       {{message.HolidayDescription}}
-                    </h3>
+                <span class="km-font" ng-repeat="message in mesages.PartnerHolidayList">
+
+                   <p><b> {{message.Name}} </b>  {{message.HolidayDescription}} closed  on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
+                    
+                    </span>
             </li>
-            <li class="ck-module-date">
-               {{ message.StartDate | date}} - {{message.EndDate | date}} 
-            </li>
+         
         </ul>
 
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
-            ng-show="mesages.AnnouncementList.length > 0" ng-repeat="message in mesages.AnnouncementList">
-            <li> 
-                <i class="ck-icon ck-alert ck-module-icon"></i>
-                 <h3 class="km-bold-font">{{message.RetailerName}}{{message.SpecificRetailerId}} {{message.Title}}</h3>
-                <h3 class="km-font">
-                       {{message.Message}}
-                    </h3>
-            </li>
-            <li class="ck-module-date">
-               {{ message.StartDate | date}} - {{message.EndDate | date}} 
-            </li>
-        </ul>
+           <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+    <li class="ck-module-date">
+        Checkpopint Systems, Inc.
+    </li>
+    <li>
+        <i class="ck-icon ck-alert ck-module-icon"></i>
+  
+    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
+
+        <span class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
+                  <p>  <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+        </span>
+    </span>
+</li>
+</ul>
+
+      <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+    <li class="ck-module-date">
+        Announcements
+    </li>
+    <li>
+        <i class="ck-icon ck-alert ck-module-icon"></i>
+   
+    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
+
+        <div class="km-font" ng-if="value[0].SpecificRetailerId > 0">
+                   <p> <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+        </div>
+    </span>
+</li>
+</ul>
+
+   
    
         <kendo-mobile-footer>
             <kendo-mobile-button k-on-click="hideAlertModel()" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />

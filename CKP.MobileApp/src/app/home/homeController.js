@@ -191,6 +191,8 @@ app.controller('homeController', [
                           
                        }; // end message
 
+                       
+
                        getMessages();
                        getOrderCounts();
 

@@ -156,22 +156,64 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }
         getHelpDesk();
 
-     
+        $scope.showSendEmailmodal = function () {
+
+            $("#modalview-email").kendoMobileModalView("open");
+        };
+        $scope.hideSendEmailmodal = function () {
+            $("#modalview-email").kendoMobileModalView("close");
+        };
+
+        $scope.onSelect = function (selectedClass) {
+            $('.contactus').hide();
+            $('.' + selectedClass).show();
+            $('.contactusHeader').removeClass('km-state-active');
+            $('#' + selectedClass).addClass('km-state-active');
+
+        }
+
+        $scope.send = function () {
+
+            $scope.message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
+            $timeout(function () {
+                $scope.message = "";
+            }, 7000);
+
+            //kendo.mobile.application.pane.loader.show();
+
+
+            //feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
+            //    if (result === 'success') {
+            //        alerting.addSuccess("Thank you for your feedback!", 10000);
+            //        $scope.message = "Thank you for your feedback!";
+            //        $timeout(function () {
+            //            $scope.message = "";
+            //        }, 7000);
+
+            //        $scope.feedbackData.comment = "";
+            //    } else {
+            //        alerting.addSuccess("Faild to post feedback!", 10000);
+            //        $scope.message = "Faild to post feedback, Please try later";
+            //        $timeout(function () {
+            //            $scope.message = "";
+            //        }, 7000);
+            //    }
+            //}).catch(function (error) {
+
+            //    $scope.message = "Faild to post feedback, Please try later";
+            //    $timeout(function () {
+            //        $scope.message = "";
+            //    }, 7000);
+
+            //}).finally(function () {
+            //    kendo.mobile.application.pane.loader.hide();
+            //});
+        }
         $scope.renderHtml = function (content) {
             if (typeof content !== 'undefined') {
                 content = content.replace(/<b>/g, '<br><b>');
             }
             return $sce.trustAsHtml(content);
         };
-
-        $scope.myOptions = {
-            select: function (e) {
-                debugger;
-                var listviews = $("ul.km-listview");
-                listviews.hide()
-                .eq(e.index + 2)
-                .show();
-            }
-        }
     }
 ]);
