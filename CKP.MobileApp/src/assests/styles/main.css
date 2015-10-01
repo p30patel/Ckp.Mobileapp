@@ -42,21 +42,22 @@
     background-color: rgb(233, 233, 233)!important;
 }
 
-.ck-i-signin:after,
+
 .ck-i-signin:before {
-    content: "\e0b2";
+    content: "\E800";
 }
 
-.ck-i-email:after,
+
 .ck-i-email:before {
-    content: "\e099";
-    color: gray;
+    content: "\E801";
+   
 }
 
-.ck-i-phone:after,
 .ck-i-phone:before {
-    content: "\e326";
-    color: gray;
+    content: "\E803";
+}
+.ck-i-home:before {
+    content: "\E802";
 }
 
 .alert-box {
