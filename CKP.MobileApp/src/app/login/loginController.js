@@ -28,8 +28,8 @@ app.controller('loginController', [
                        $scope.form.signin.resoruceValue = "Log In";
 
                        $scope.form.remmberMe = {};
-                       $scope.form.remmberMe.resoruceName = "Remmber me";
-                       $scope.form.remmberMe.resoruceValue = "Remmber me";
+                       $scope.form.remmberMe.resoruceName = "Remember me";
+                       $scope.form.remmberMe.resoruceValue = "Remember me";
 
 
                        $scope.form.email = {};
@@ -211,10 +211,7 @@ app.controller('loginController', [
                     
 
                        var getDeviceInfo = function () {
-                           var rs = { "result": { 'Id': '1234', 'HId': 'h123' } };
-                         
-                           alert(rs.result.Id);
-                           alert(rs.result.HId);
+                    
 
                            var username =  ($scope.loginData.userName === '') ?  " " : $scope.loginData.userName;
 
@@ -257,7 +254,7 @@ app.controller('loginController', [
                                       {
                                           localStorageService.set('deviceData', result);
                                           var deviceData = localStorageService.get('deviceData');
-                                          alert(deviceData.result.Id);
+                                          alert('Registed Device : ' + deviceData.result.Id);
                                         //  var rr = JSON.stringify(result);
 
                                         //  alert(rr.result.HardwaredId);
@@ -277,7 +274,7 @@ app.controller('loginController', [
 
                        $scope.intShow = function (e) {
                           
-                          // getDeviceInfo();
+                           getDeviceInfo();
                            translatePage();
                        };
                      
@@ -318,17 +315,19 @@ app.controller('loginController', [
                            kendo.mobile.application.pane.loader.show();
                         
                            loginDataService.getPasswordHint(username).then(function (result) {
+                               kendo.mobile.application.pane.loader.hide();
                                $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" +  result;
                                $timeout(function () {
                                    $scope.passwordHint = "";
                                }, 5000);
+                              
+                           }, function (err) {
                                kendo.mobile.application.pane.loader.hide();
-                           }).catch(function (err) {
                                $scope.message = 'Error while getting the Hint!';
                                $timeout(function () {
                                    $scope.passwordHint = "";
                                }, 5000);
-                               kendo.mobile.application.pane.loader.hide();
+                           
                            });
                        };
 
