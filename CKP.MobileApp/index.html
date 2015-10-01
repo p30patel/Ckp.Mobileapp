@@ -93,7 +93,7 @@
 
                 <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" style="margin-left:-20px;"><span class="km-icon km-home"></span></kendo-mobile-button>
 
-                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" style="margin-left:-20px;"><span class="km-icon ck-i-signin"></span></kendo-mobile-button>
+                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" style="margin-left:-20px;"><span class="km-icon ck-signin"></span></kendo-mobile-button>
 
                 <kendo-mobile-button k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
 
@@ -155,8 +155,8 @@
                     <h5>{{organizationDetail.Address.Street1}}</h5>
                     <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
                     <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
-                    <h5><span data-icon="ck-icon ck-i-phone"></span> {{organizationDetail.Address.Phone}}</h5>
-                    <h5><span data-class="ck-icon ck-i-email"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
+                    <h5><span class="km-icon ck-i-phone"></span> {{organizationDetail.Address.Phone}}</h5>
+                    <h5><span class="km-icon ck-i-email"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
 
                 </div>
 
