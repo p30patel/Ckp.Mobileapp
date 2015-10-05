@@ -45,7 +45,8 @@
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",
-    "org.apache.cordova.globalization"
+    "org.apache.cordova.globalization",
+    "org.apache.cordova.splashscreen"
   ],
   "WP8SupportedResolutions": [
     "ID_RESOLUTION_WVGA",
