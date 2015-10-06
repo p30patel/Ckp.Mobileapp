@@ -176,7 +176,7 @@ app.controller('loginController', [
 
 
                        //trsnasaltion
-
+                      
                        var translatePage = function () {
 
                            var selectedLanague = $scope.selectedLanague;
@@ -253,7 +253,7 @@ app.controller('loginController', [
                                       el.push.getRegistration().then(function (result) {
                                           localStorageService.set('deviceData', result);
                                           var deviceData = localStorageService.get('deviceData');
-                                       //   alert('Registed Device : ' + deviceData.result.Id);
+                                          alert('Registed Device : ' + deviceData.result.Id);
                                           //  var rr = JSON.stringify(result);
 
                                           //  alert(rr.result.HardwaredId);
@@ -270,13 +270,10 @@ app.controller('loginController', [
                                   }
                                   );
                        };
-
-                       $scope.intShow = function (e) {
-
-                           getDeviceInfo();
+                       getDeviceInfo();
+                       $scope.intShow = function (e) {                                                     
                            translatePage();
                        };
-
 
                        $scope.translatePage = function () {
                            translatePage();
@@ -284,12 +281,18 @@ app.controller('loginController', [
                        //loign event
                        $scope.login = function () {
                            $('#btnLogin').focus();
+
+                           var userName = $scope.loginData.userName;
+                           var password = $scope.loginData.password;
+
                            var loginData = {
-                               userName: $scope.loginData.userName,
-                               password: $scope.loginData.password,
+                               userName: userName,
+                               password: password,
                                remmberme: $scope.loginData.useRefreshTokens
-                           }
+                           };
+
                            localStorageService.set('loginData', loginData);
+
                            if (userName !== '' && password !== '') {
                                kendo.mobile.application.pane.loader.show();
 
