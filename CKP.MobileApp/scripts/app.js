@@ -39,7 +39,7 @@ app.config(function ($httpProvider) {
 });
 
 function onDeviceReady() {
-    navigator.splashscreen.hide();
+   
 }
 
 (function (g) {
