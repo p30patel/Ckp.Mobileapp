@@ -253,7 +253,7 @@ app.controller('loginController', [
                                       el.push.getRegistration().then(function (result) {
                                           localStorageService.set('deviceData', result);
                                           var deviceData = localStorageService.get('deviceData');
-                                          alert('Registed Device : ' + deviceData.result.Id);
+                                          //alert('Registed Device : ' + deviceData.result.Id);
                                           //  var rr = JSON.stringify(result);
 
                                           //  alert(rr.result.HardwaredId);
