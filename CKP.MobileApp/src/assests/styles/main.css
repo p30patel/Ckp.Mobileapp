@@ -45,21 +45,21 @@
 .km-nova .km-drawer .km-content {
     background-color: rgb(233, 233, 233)!important;
 }
-.ck-i-signin:after,
-.ck-i-signin:before {
+.km-i-signin:after,
+.km-i-signin:before {
     content: "\e0b2";
 }
-.ck-i-emai:after
-.ck-i-email:before {
+.km-i-emai:after
+.km-i-email:before {
     content: "\e099";
    
 }
-.ck-i-phone:after
-.ck-i-phone:before {
+.km-i-phone:after
+.km-i-phone:before {
     content: "\e326";
 }
-.ck-i-home:after
-.ck-i-home:before {
+.km-i-home:after
+.km-i-home:before {
     content: "\e0af";
 }
 
