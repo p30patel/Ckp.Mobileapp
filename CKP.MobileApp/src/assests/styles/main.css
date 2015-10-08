@@ -31,6 +31,10 @@
 .ckp-a-link {
     color: rgb(213, 43, 30) !important;
 }
+.km-nova .km-list > li.km-state-active {
+  background-color: #ececed;
+}
+
 .km-nova .km-drawer .km-list .km-listview-link:after, .km-nova .km-drawer .km-list .km-listview-label:after{
    border-color: #D52B1E !important;
 }
@@ -42,11 +46,9 @@
     background-color: rgb(233, 233, 233)!important;
 }
 
-
 .ck-i-signin:before {
     content: "\E800";
 }
-
 
 .ck-i-email:before {
     content: "\E801";
