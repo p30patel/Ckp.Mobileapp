@@ -45,21 +45,22 @@
 .km-nova .km-drawer .km-content {
     background-color: rgb(233, 233, 233)!important;
 }
-
+.ck-i-signin:after,
 .ck-i-signin:before {
-    content: "\E800";
+    content: "\e0b2";
 }
-
+.ck-i-emai:after
 .ck-i-email:before {
-    content: "\E801";
+    content: "\e099";
    
 }
-
+.ck-i-phone:after
 .ck-i-phone:before {
-    content: "\E803";
+    content: "\e326";
 }
+.ck-i-home:after
 .ck-i-home:before {
-    content: "\E802";
+    content: "\e0af";
 }
 
 .alert-box {

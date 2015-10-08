@@ -270,8 +270,10 @@ app.controller('loginController', [
                                   }
                                   );
                        };
+
                        getDeviceInfo();
-                       $scope.intShow = function (e) {                                                     
+
+                       $scope.intShow = function (e) {
                            translatePage();
                        };
 

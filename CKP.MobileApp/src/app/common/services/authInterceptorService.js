@@ -20,10 +20,8 @@ app.factory('authInterceptorService', [
 
                     var responseError = function (rejection) {
                         var authService = $injector.get('authService');
-                        //console.log('current view : ' + kendo.mobile.application.view().id);
-                        kendo.mobile.application.pane.loader.hide();
-                        authService.logout();
-                   
+                        console.log('current view : ' + kendo.mobile.application.view().id);
+
                         if (rejection.status === 401) {
                            
                             var authData = localStorageService.get('authorizationData');
@@ -38,9 +36,9 @@ app.factory('authInterceptorService', [
                            
              
                             //$location.path('/login');
-                            kendo.mobile.application.navigate("src/app/login/login.html");
-
                             console.log("Un-Authorized Access, Please login to access! Error: 401");
+                            kendo.mobile.application.navigate("src/app/login/login.html");
+                        
                         } else if (rejection.status === 404) {
                             console.log("There is an error while proccessing this request! Error: 404");
                         } else if (rejection.status === 0) {
@@ -48,6 +46,8 @@ app.factory('authInterceptorService', [
                             kendo.mobile.application.navigate("src/app/login/login.html");
                             console.log("Server is unavailable. Please try later or contact customer service. Error:" + 0);
                         }
+                        authService.logout();
+                        kendo.mobile.application.navigate("src/app/login/login.html");
                         return $q.reject(rejection);
                     }
 
