@@ -365,10 +365,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                                kendo.mobile.application.pane.loader.show();
 
                                loginDataService.getPasswordHint(username).then(function (result) {
-                                   kendo.mobile.application.pane.loader.hide();
-                                   $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result;
+                                  
+                               
+                                   $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
                                    $timeout(function () {
                                        $scope.passwordHint = "";
+                                       kendo.mobile.application.pane.loader.hide();
                                    }, 5000);
 
                                }, function (err) {
