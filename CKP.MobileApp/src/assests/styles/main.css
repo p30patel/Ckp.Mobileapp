@@ -32,9 +32,6 @@
 .ckp-a-link {
     color: rgb(213, 43, 30) !important;
 }
-.km-nova .km-list > li.km-state-active {
-  background-color: #ececed !important;
-}
 
 .km-nova .km-drawer .km-list .km-listview-link:after, .km-nova .km-drawer .km-list .km-listview-label:after{
    border-color: rgb(213, 43, 30) !important;
@@ -51,17 +48,14 @@
  {
     content: "\e0b2";
 }
-.km-i-phone:after
-{
-    content: "\e226";
+
+
+.km-mail:after,
+.km-mail:before {
+   content: "\e099";
     color: grey !important;
 }
-.km-mail:before
-.km-mail:after
-{
-    content: "\e099";
-    color: grey !important;
-}
+
 .alert-box {
     background: #f7f7f7;
     color: #333;
