@@ -41,10 +41,10 @@ app.factory('loginDataService',
 
             var deferred = $q.defer();
             var url = authServiceBase + "webapi/api/core/MobileApp/GetPasswordHint?username=" + username ;
-            $http.get(url).success(function (result) {
+            $http.get(url).then(function (result) {
                 deferred.resolve(result);
 
-            }).error(function (err, status) {
+            }).catch(function (err, status) {
                 deferred.reject('Faild to retrieve password hint!' + err);
             });
             return deferred.promise;
