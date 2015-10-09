@@ -93,9 +93,9 @@ span.k-icon.k-i-arrow-s {
     content: '\e804'!important;
 }
 
-.km-state-active .km-icon:before {
+/*.km-state-active .km-icon:before {
     display: initial!important;
-}
+}*/
 
 /* COLOR OVERIDES */
 .km-nova .km-badge {
@@ -438,8 +438,8 @@ span.k-icon.k-i-arrow-s {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-[class^="ck-"]:before,
-[class*=" ck-"]:before {
+[class^="ck-"]:after,
+[class*=" ck-"]:after {
     font-family: "fontello";
     font-style: normal;
     font-weight: normal;
@@ -457,35 +457,35 @@ span.k-icon.k-i-arrow-s {
     -moz-osx-font-smoothing: grayscale;
  
 }
-.ck-alert:before {content: '\e800';}
-.ck-terms:before {content: '\e801';}
-.ck-approval:before {content: '\e802';}
-.ck-cart:before {content: '\e803';}
-.ck-contact:before {content: '\e805';}
-.ck-delivery:before {content: '\e806';}
-.ck-faq:before {content: '\e808';}
-.ck-feedback:before {content: '\e809';}
-.ck-globe:before {content: '\e80a';}
-.ck-help:before {content: '\e80b';}
-.ck-location:before {content: '\e80c';}
-.ck-lock:before {content: '\e80d';}
-.ck-maintance:before {content: '\e80e';}
-.ck-messages-alt:before {content: '\e80f';}
-.ck-messages:before {content: '\e810';}
-.ck-news:before {content: '\e811';}
-.ck-menu:before {content: '\e812';}
-.ck-policy:before {content: '\e813';}
-.ck-printshop:before {content: '\e814';}
-.ck-signout:before {content: '\e815';}
-.ck-shipment:before {content: '\e816';}
-.ck-settings:before {content: '\e817';}
-.ck-recieved:before {content: '\e818';}
-.ck-track:before {content: '\e819';}
-.ck-password:before {content: '\e81a';}
-.ck-x-close:before {content: '\e81b';}
-.ck-close:before {content: '\e81c';}
-.ck-left-open:before {content: '\e81d';}
-.ck-barrow:before { content: '\e81d'; }
+.ck-alert:after {content: '\e800';}
+.ck-terms:after {content: '\e801';}
+.ck-approval:after {content: '\e802';}
+.ck-cart:after {content: '\e803';}
+.ck-contact:after {content: '\e805';}
+.ck-delivery:after {content: '\e806';}
+.ck-faq:after {content: '\e808';}
+.ck-feedback:after {content: '\e809';}
+.ck-globe:after {content: '\e80a';}
+.ck-help:after {content: '\e80b';}
+.ck-location:after {content: '\e80c';}
+.ck-lock:after {content: '\e80d';}
+.ck-maintance:after {content: '\e80e';}
+.ck-messages-alt:after {content: '\e80f';}
+.ck-messages:after {content: '\e810';}
+.ck-news:after {content: '\e811';}
+.ck-menu:after {content: '\e812';}
+.ck-policy:after {content: '\e813';}
+.ck-printshop:after {content: '\e814';}
+.ck-signout:after {content: '\e815';}
+.ck-shipment:after {content: '\e816';}
+.ck-settings:after {content: '\e817';}
+.ck-recieved:after {content: '\e818';}
+.ck-track:after {content: '\e819';}
+.ck-password:after {content: '\e81a';}
+.ck-x-close:after {content: '\e81b';}
+.ck-close:after {content: '\e81c';}
+.ck-left-open:after {content: '\e81d';}
+.ck-barrow:after { content: '\e81d'; }
 /* '' */
 
 .ck-grey-wrap {

@@ -309,7 +309,7 @@ app.controller('loginController', [
                                   );
                        };
 
-                       getDeviceInfo();
+                     //  getDeviceInfo();
 
                        $scope.intShow = function (e) {
                            translatePage();

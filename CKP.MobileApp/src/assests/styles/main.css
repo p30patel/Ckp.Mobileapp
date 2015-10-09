@@ -27,16 +27,13 @@
 }
 .ck-lang-select{width:auto !important; padding-right:1em;}
 /* override PL changes*/
-.km-state-active .km-icon:before {
-    display: none!important;
-}
 
 .text-center{text-align:center;}
 .ckp-a-link {
     color: rgb(213, 43, 30) !important;
 }
 .km-nova .km-list > li.km-state-active {
-  background-color: #ececed;
+  background-color: #ececed !important;
 }
 
 .km-nova .km-drawer .km-list .km-listview-link:after, .km-nova .km-drawer .km-list .km-listview-label:after{
@@ -49,24 +46,20 @@
 .km-nova .km-drawer .km-content {
     background-color: rgb(233, 233, 233)!important;
 }
-.km-i-signin:after,
-.km-i-signin:before {
+.km-i-signin:after
+ {
     content: "\e0b2";
 }
-.km-i-emai:after
-.km-i-email:before {
+
+.km-phone:after
+{
+    content: "\e226";
+}
+.km-mail:after
+{
     content: "\e099";
    
 }
-.km-i-phone:after
-.km-i-phone:before {
-    content: "\e326";
-}
-.km-i-home:after
-.km-i-home:before {
-    content: "\e0af";
-}
-
 .alert-box {
     background: #f7f7f7;
     color: #333;
