@@ -44,7 +44,7 @@ app.factory('loginDataService',
             $http.get(url).then(function (result) {
                 deferred.resolve(result);
 
-            }).catch(function (err, status) {
+            }).catch(function (err) {
                 deferred.reject('Faild to retrieve password hint!' + err);
             });
             return deferred.promise;
