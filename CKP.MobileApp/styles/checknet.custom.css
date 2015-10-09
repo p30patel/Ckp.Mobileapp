@@ -93,9 +93,9 @@ span.k-icon.k-i-arrow-s {
     content: '\e804'!important;
 }
 
-/*.km-state-active .km-icon:before {
+.km-state-active .km-icon:before {
     display: initial!important;
-}*/
+}
 
 /* COLOR OVERIDES */
 .km-nova .km-badge {
