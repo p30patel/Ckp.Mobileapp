@@ -207,6 +207,44 @@ app.controller('loginController', [
 
                                kendo.mobile.application.pane.loader.hide();
                            });
+
+                           //Faq
+                           kendo.mobile.application.pane.loader.show();
+
+                           faqDataService.getFaqs(selectedLanague).then(function (result) {
+                               $scope.faqs = result;
+
+                           }).catch(function (error) {
+                               $scope.faqs = {};
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+
+                           //end faq
+                           //terms & conditions
+                           kendo.mobile.application.pane.loader.show();
+                           policyTermsDataService.getPolicyTerms().then(function (result) {
+                               $scope.termsCondition = result;
+
+                           }).catch(function (error) {
+                               $scope.termsCondition = {};
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+                           //end
+                           //policies
+                           kendo.mobile.application.pane.loader.show();
+
+                           policyTermsDataService.getPolicyTerms().then(function (result) {
+                               $scope.policies = result;
+
+                           }).catch(function (error) {
+                               $scope.policies = {};
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+
+
                        }
 
 
