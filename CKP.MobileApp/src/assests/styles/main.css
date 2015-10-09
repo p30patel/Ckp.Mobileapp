@@ -46,13 +46,12 @@
 .km-nova .km-drawer .km-content {
     background-color: rgb(233, 233, 233)!important;
 }
-.km-i-signin:before
+
 .km-i-signin:after
  {
     content: "\e0b2";
 }
-.km-phone:before
-.km-phone:after
+.km-i-phone:after
 {
     content: "\e226";
     color: grey !important;
