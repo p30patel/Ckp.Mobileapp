@@ -54,7 +54,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
                          
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
-                                   alerting.addSuccess("Thank you for your feedback!", 10000);
+                                
                                    $scope.message = "Thank you for your feedback!";
                                    $timeout(function () {
                                        $scope.message = "";
@@ -62,7 +62,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
                                    $scope.feedbackData.comment = "";
                                } else {
-                                   alerting.addSuccess("Faild to post feedback!", 10000);
+                                 
                                    $scope.message = "Faild to post feedback, Please try later";
                                    $timeout(function () {
                                        $scope.message = "";

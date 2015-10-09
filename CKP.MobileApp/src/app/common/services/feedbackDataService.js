@@ -26,6 +26,7 @@ app.factory("feedbackDataService", [
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
+                    
                         var data = {};
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/ContactUsByEmail?name=' + contactData.name + '&email=' + contactData.email + '&userId=' + userId).success(function (result) {
                             deferred.resolve(result);
