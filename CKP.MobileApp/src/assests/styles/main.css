@@ -54,11 +54,12 @@
 .km-phone:after
 {
     content: "\e226";
+    color: grey !important;
 }
 .km-mail:after
 {
     content: "\e099";
-   
+    color: grey !important;
 }
 .alert-box {
     background: #f7f7f7;
