@@ -50,8 +50,7 @@
 }
 
 
-.km-mail:after,
-.km-mail:before {
+.km-mail:after {
    content: "\e099";
     color: grey !important;
 }
