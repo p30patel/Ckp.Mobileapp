@@ -369,6 +369,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
                        kendo.mobile.application.hideLoading();
                        $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
+                       $timeout(function () {
+                           $scope.passwordHint = "";
+                       }, 5000);
                    },
                    function (err) {
                        $scope.passwordHint = 'Error while getting the Hint!';
