@@ -1,6 +1,6 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce','faqDataService', 'policyTermsDataService',
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService',
 function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService) {
     $scope.title = '';
 
@@ -8,63 +8,66 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.loginData = {};
     $scope.form = {};
 
-    $scope.form.username = {};
-    $scope.form.username.resoruceName = "User Name";
-    $scope.form.username.resoruceValue = "User Name";
-    $scope.form.password = {};
-    $scope.form.password.resoruceName = "Password";
-    $scope.form.password.resoruceValue = "Password";
+    var setResources = function () {
+        $scope.form.username = {};
+        $scope.form.username.resoruceName = "User Name";
+        $scope.form.username.resoruceValue = "User Name";
+        $scope.form.password = {};
+        $scope.form.password.resoruceName = "Password";
+        $scope.form.password.resoruceValue = "Password";
 
-    $scope.form.forgotPassword = {};
-    $scope.form.forgotPassword.resoruceName = "Forgot Password";
-    $scope.form.forgotPassword.resoruceValue = "Forgot Password";
+        $scope.form.forgotPassword = {};
+        $scope.form.forgotPassword.resoruceName = "Forgot Password";
+        $scope.form.forgotPassword.resoruceValue = "Forgot Password";
 
-    $scope.form.passwordHint = {};
-    $scope.form.passwordHint.resoruceName = "Password Hint";
-    $scope.form.passwordHint.resoruceValue = "Password Hint";
+        $scope.form.passwordHint = {};
+        $scope.form.passwordHint.resoruceName = "Password Hint";
+        $scope.form.passwordHint.resoruceValue = "Password Hint";
 
-    $scope.form.signin = {};
-    $scope.form.signin.resoruceName = "Log In";
-    $scope.form.signin.resoruceValue = "Log In";
+        $scope.form.signin = {};
+        $scope.form.signin.resoruceName = "Log In";
+        $scope.form.signin.resoruceValue = "Log In";
 
-    $scope.form.remmberMe = {};
-    $scope.form.remmberMe.resoruceName = "Remember me";
-    $scope.form.remmberMe.resoruceValue = "Remember me";
-
-
-    $scope.form.email = {};
-    $scope.form.email.resoruceName = "Email";
-
-    $scope.form.receiveNewPasswordText = {};
-    $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
-    $scope.form.receiveNewPasswordText.resoruceValue = "Please enter your email address to receive a new password";
-
-    $scope.form.forgotYourPassword = {};
-    $scope.form.forgotYourPassword.resoruceName = "Forgot Your Password";
-    $scope.form.forgotYourPassword.resoruceValue = "Forgot Your Password";
+        $scope.form.remmberMe = {};
+        $scope.form.remmberMe.resoruceName = "Remember me";
+        $scope.form.remmberMe.resoruceValue = "Remember me";
 
 
-    $scope.form.sendNewPassword = {};
-    $scope.form.sendNewPassword.resoruceName = "Send New Password";
-    $scope.form.sendNewPassword.resoruceValue = "Send New Password";
+        $scope.form.email = {};
+        $scope.form.email.resoruceName = "Email";
 
-    $scope.form.copyRightsText = {};
-    $scope.form.copyRightsText.resoruceName = "Material contained on this app is Copyright";
-    $scope.form.copyRightsText.resoruceValue = "Material contained on this app is Copyright";
+        $scope.form.receiveNewPasswordText = {};
+        $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
+        $scope.form.receiveNewPasswordText.resoruceValue = "Please enter your email address to receive a new password";
 
-    $scope.form.copyRightsDescription = {};
-    $scope.form.copyRightsDescription.resoruceName = "Unauthorized access disclaimer";
-    $scope.form.copyRightsDescription.resoruceValue = "Unauthorized access disclaimer";
+        $scope.form.forgotYourPassword = {};
+        $scope.form.forgotYourPassword.resoruceName = "Forgot Your Password";
+        $scope.form.forgotYourPassword.resoruceValue = "Forgot Your Password";
 
 
-    $scope.form.hint = {};
-    $scope.form.hint.resoruceName = "Hint";
-    $scope.form.hint.resoruceValue = "Hint";
+        $scope.form.sendNewPassword = {};
+        $scope.form.sendNewPassword.resoruceName = "Send New Password";
+        $scope.form.sendNewPassword.resoruceValue = "Send New Password";
 
-    $scope.form.passwordSentText = {};
-    $scope.form.passwordSentText.resoruceName = "Password sent to your email address";
-    $scope.form.passwordSentText.resoruceValue = "Password sent to your email address";
+        $scope.form.copyRightsText = {};
+        $scope.form.copyRightsText.resoruceName = "Material contained on this app is Copyright";
+        $scope.form.copyRightsText.resoruceValue = "Material contained on this app is Copyright";
 
+        $scope.form.copyRightsDescription = {};
+        $scope.form.copyRightsDescription.resoruceName = "Unauthorized access disclaimer";
+        $scope.form.copyRightsDescription.resoruceValue = "Unauthorized access disclaimer";
+
+
+        $scope.form.hint = {};
+        $scope.form.hint.resoruceName = "Hint";
+        $scope.form.hint.resoruceValue = "Hint";
+
+        $scope.form.passwordSentText = {};
+        $scope.form.passwordSentText.resoruceName = "Password sent to your email address";
+        $scope.form.passwordSentText.resoruceValue = "Password sent to your email address";
+    }
+
+    setResources();
     //end page html 
     var d = new Date();
     $scope.year = d.getFullYear();
@@ -289,17 +292,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                    el.push.getRegistration().then(function (result) {
                        localStorageService.set('deviceData', result);
                        var deviceData = localStorageService.get('deviceData');
-                      // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.model+ '\n    platform =' + deviceData.result.DevicePlatform + '\n version = ' +deviceData.result.DeviceVersion + '\n  active =' +  deviceData.result.IsActive);
-                       //  var rr = JSON.stringify(result);
+                       // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.HardwareModel + '\n    platform =' + deviceData.result.PlatformType  + '\n version = ' +deviceData.result.PlatformVersion  + '\n  active =' +  deviceData.result.Active  );
 
-                       //  alert(rr.result.HardwaredId);
-                       //   alert(rr.result.Id);
                    },
                    function (e) {
                        //error register
                    });
-
-
                },
                function (err) {
                    //  alert('REGISTER ERROR: ' + JSON.stringify(err));
@@ -307,7 +305,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
                );
     };
 
-    getDeviceInfo();
+    if (window.navigator.simulator == false) {
+        getDeviceInfo();
+    }
 
     $scope.intShow = function (e) {
         translatePage();
@@ -366,7 +366,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             loginDataService.getPasswordHint(username)
                .then(
                    function (result) {
-                      
+
                        kendo.mobile.application.hideLoading();
                        $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
                    },
@@ -375,7 +375,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                        kendo.mobile.application.hideLoading();
                    }
                    );
-     
+
         }
         else {
             $scope.passwordHint = 'User name is required!';

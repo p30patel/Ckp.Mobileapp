@@ -38,6 +38,7 @@ app.factory("policyTermsDataService", [
 
                             var previous = localStorageService.get('policyTerms' + !refereshPeriod);
                             if (previous) {
+
                                 localStorageService.remove('policyTerms' + !refereshPeriod);                               
                             }                            
                             forceGetpolicyTerms().then(function (result) {

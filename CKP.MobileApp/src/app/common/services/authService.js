@@ -94,12 +94,13 @@ app.factory('authService', [
                         if (deviceData)
                         {
                             uuId = deviceData.result.Id;
-                            model = deviceData.result.model;
-                            platform = deviceData.result.DevicePlatform;
-                            version = deviceData.result.DeviceVersion;
-                            active = deviceData.result.IsActive
+                            model = deviceData.result.HardwareModel;
+                            platform = deviceData.result.PlatformType;
+                            version = deviceData.result.PlatformVersion;
+                            active = deviceData.result.Active
                         }
 
+                   
                         var data = {
                             UserName: _authentication.userName,
                             DeviceUUId: uuId,

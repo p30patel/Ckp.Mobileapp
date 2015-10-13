@@ -1,12 +1,24 @@
 
 app.controller('policyController', [
-                   '$scope', '$http', '$sce', 'policyTermsDataService',  'translateService',
+                   '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
                        $scope.form = {};
 
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Policies";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+                       var setResources = function () {
+
+                           $scope.form.policyInstructions = {};
+                           $scope.form.policyInstructions.resoruceName = "Policy Instructions";
+                           $scope.form.policyInstructions.resoruceValue = translateService.getResourceValue($scope.form.policyInstructions.resoruceName);
+
+                           $scope.form.noData = {};
+                           $scope.form.noData.resoruceName = "No Data are found";
+                           $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+                       }
+                       setResources();
 
                        $scope.afterShow = function (e) {
 
@@ -20,24 +32,18 @@ app.controller('policyController', [
 
                            }
                        }
-                       $scope.form.policyInstructions = {};
-                       $scope.form.policyInstructions.resoruceName = "Policy Instructions";
-                       $scope.form.policyInstructions.resoruceValue = translateService.getResourceValue($scope.form.policyInstructions.resoruceName);
 
-                       $scope.form.noData = {};
-                       $scope.form.noData.resoruceName = "No Data are found";
-                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
 
                        $scope.policies = {};
-                       var init = function() {
+                       var init = function () {
                            kendo.mobile.application.pane.loader.show();
-                       
+
                            policyTermsDataService.getPolicyTerms().then(function (result) {
                                $scope.policies = result;
-                         
-                           }).catch(function(error) {
+
+                           }).catch(function (error) {
                                $scope.policies = {};
-                           }).finally(function() {
+                           }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
@@ -46,4 +52,4 @@ app.controller('policyController', [
                            return $sce.trustAsHtml(content);
                        };
                    }
-               ]);
+]);

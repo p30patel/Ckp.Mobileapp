@@ -1,13 +1,19 @@
 
 app.controller('termsConditionController', [
-                   '$scope', '$http', '$sce', 'policyTermsDataService',  'translateService',
+                   '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
 
                        $scope.form = {};
-
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Terms & Conditions";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+
+                       var setResources = function () {
+                           $scope.form.noData = {};
+                           $scope.form.noData.resoruceName = "No Data are found";
+                           $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+                       }
+                       setResources();
 
                        $scope.afterShow = function (e) {
 
@@ -22,19 +28,16 @@ app.controller('termsConditionController', [
                            }
                        }
 
-                       $scope.form.noData = {};
-                       $scope.form.noData.resoruceName = "No Data are found";
-                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
 
                        $scope.termsCondition = {};
-                       var init = function() {
+                       var init = function () {
                            kendo.mobile.application.pane.loader.show();
                            policyTermsDataService.getPolicyTerms().then(function (result) {
                                $scope.termsCondition = result;
-                            
-                           }).catch(function(error) {
+
+                           }).catch(function (error) {
                                $scope.termsCondition = {};
-                           }).finally(function() {
+                           }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
@@ -43,4 +46,4 @@ app.controller('termsConditionController', [
                            return $sce.trustAsHtml(content);
                        };
                    }
-               ]);
+]);
