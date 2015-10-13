@@ -27,10 +27,7 @@
 }
 .ck-lang-select{width:auto !important; padding-right:1em;}
 /* override PL changes*/
- /*for showing title in android*/
-  .km-android .km-navbar div.km-view-title{
-     visibility: visible !important;
- }
+
 .text-center{text-align:center;}
 .ckp-a-link {
     color: rgb(213, 43, 30) !important;
