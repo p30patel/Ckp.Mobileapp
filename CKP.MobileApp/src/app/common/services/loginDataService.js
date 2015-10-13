@@ -8,11 +8,11 @@ app.factory('loginDataService',
 
             var deferred = $q.defer();
             var url = authServiceBase + "webapi/api/core/Languages/Get";
-            $http.get(url).success(function(result) {
+            $http.get(url).success(function (result) {
                 localStorageService.set('languageData', result);
                 deferred.resolve(result);
             }).error(function (err, status) {
-               
+
                 deferred.reject(err);
             });
 
@@ -23,7 +23,7 @@ app.factory('loginDataService',
             var deferred = $q.defer();
 
             var languageData = localStorageService.get('languageData');
-         
+
             if (languageData) {
                 deferred.resolve(languageData);
             }
@@ -40,28 +40,30 @@ app.factory('loginDataService',
         var getPasswordHint = function (username) {
 
             var deferred = $q.defer();
-            var url = authServiceBase + "webapi/api/core/MobileApp/GetPasswordHint?username=" + username ;
+            var url = authServiceBase + "webapi/api/core/MobileApp/GetPasswordHint?username=" + username;
             $http.get(url).then(function (result) {
                 deferred.resolve(result);
 
-            }).catch(function (err) {
-                deferred.reject('Faild to retrieve password hint!' + err);
-            });
+            })
+                .catch(function (err) {
+                    deferred.reject('Faild to retrieve password hint!' + err);
+                });
+
             return deferred.promise;
         };
         var resetPassword = function (username, email) {
 
             var deferred = $q.defer();
-            var url =  authServiceBase + "webapi/api/core/MobileApp/Resetpassword?username=" + username + "&email=" + email;
-            $http.post(url).success(function(result) {
+            var url = authServiceBase + "webapi/api/core/MobileApp/Resetpassword?username=" + username + "&email=" + email;
+            $http.post(url).success(function (result) {
                 deferred.resolve(result);
 
-            }).error(function(err, status) {
+            }).error(function (err, status) {
                 deferred.reject(err, status);
 
             }).catch(function (err) {
                 deferred.reject(err);
-               
+
             });
             return deferred.promise;
         };
@@ -99,7 +101,7 @@ app.factory('loginDataService',
                         status = "faild";
                     }
                     );
-           
+
             return deferred.promise;
         }
 
@@ -111,4 +113,4 @@ app.factory('loginDataService',
 
         return loginDataFactory;
     }
-]);
+    ]);

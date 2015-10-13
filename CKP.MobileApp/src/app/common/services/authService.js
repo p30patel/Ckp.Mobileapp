@@ -81,9 +81,37 @@ app.factory('authService', [
                     };
 
                     var forceGetOrganizationData = function () {
+
+                        var deviceData = localStorageService.get('deviceData');
+                        //alert('Registed Device : ' + deviceData.result.Id);
+
+                        var uuId = '';
+                        var model = '';
+                        var platform = '';
+                        var version = '';
+                        var active = true;
+
+                        if (deviceData)
+                        {
+                            uuId = deviceData.result.Id;
+                            model = deviceData.result.model;
+                            platform = deviceData.result.DevicePlatform;
+                            version = deviceData.result.DeviceVersion;
+                            active = deviceData.result.IsActive
+                        }
+
+                        var data = {
+                            UserName: _authentication.userName,
+                            DeviceUUId: uuId,
+                            DeviceModel: model,
+                            DevicePlatform: platform,
+                            DeviceVersion: version,
+                            IsActive: active
+                        }
+
                         var deferred = $q.defer();
-                        var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail?userName=" + _authentication.userName + "&deviceId=" + 1;
-                        $http.post(url).success(function (result) {                        
+                        var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
+                        $http.post(url, data).success(function (result) {
                             localStorageService.set('organizationDetail', result);
                             deferred.resolve(result);
                         }).error(function (err, status) {

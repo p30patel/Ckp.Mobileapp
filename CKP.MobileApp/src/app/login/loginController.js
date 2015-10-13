@@ -289,7 +289,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                    el.push.getRegistration().then(function (result) {
                        localStorageService.set('deviceData', result);
                        var deviceData = localStorageService.get('deviceData');
-                       //alert('Registed Device : ' + deviceData.result.Id);
+                      // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.model+ '\n    platform =' + deviceData.result.DevicePlatform + '\n version = ' +deviceData.result.DeviceVersion + '\n  active =' +  deviceData.result.IsActive);
                        //  var rr = JSON.stringify(result);
 
                        //  alert(rr.result.HardwaredId);
@@ -307,7 +307,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                );
     };
 
-    //  getDeviceInfo();
+    getDeviceInfo();
 
     $scope.intShow = function (e) {
         translatePage();
@@ -363,24 +363,19 @@ function ($scope, $http, authService, translateService, localStorageService, log
         var username = $scope.loginData.userName;
         if (username !== '') {
             kendo.mobile.application.showLoading();
-
-            loginDataService.getPasswordHint(username).then(function (result) {
-                kendo.mobile.application.hideLoading();
-
-                $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
-                $timeout(function () {
-                    $scope.passwordHint = "";
-
-                }, 5000);
-
-            })
-            .catch( function (err) {
-                kendo.mobile.application.hideLoading();
-                $scope.passwordHint = 'Error while getting the Hint!';
-                $timeout(function () {
-                    $scope.passwordHint = "";
-                }, 5000);
-            });
+            loginDataService.getPasswordHint(username)
+               .then(
+                   function (result) {
+                      
+                       kendo.mobile.application.hideLoading();
+                       $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
+                   },
+                   function (err) {
+                       $scope.passwordHint = 'Error while getting the Hint!';
+                       kendo.mobile.application.hideLoading();
+                   }
+                   );
+     
         }
         else {
             $scope.passwordHint = 'User name is required!';
