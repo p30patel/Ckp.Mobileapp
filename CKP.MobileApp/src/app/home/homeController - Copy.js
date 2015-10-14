@@ -132,22 +132,6 @@ app.controller('homeController', [
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
 
-                       $scope.myOptions = {
-                           select: function (e) {
-                               console.log('Selected Btn Group: ' + e.sender.element.attr('data-btnRetailer') + '  selected index : ' + e.index);
-                               var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
-
-                               var listviews = $("ul.order-header.km-listview");
-                               
-
-                               listviews.hide()
-                              
-                               var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
-                           
-                               listviewsToShow.eq(e.index).show();
-                           }
-                       }
-
                        $scope.selectParamter = function () {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
@@ -216,33 +200,33 @@ app.controller('homeController', [
                        getMessages();
                        getOrderCounts();
 
-                       //$scope.approvalDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnApporval-' + id).addClass('km-state-active');
-                       //    $('#approval-' + id).show();
+                       $scope.approvalDetail = function (id) {
+                           $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnApporval-' + id).addClass('km-state-active');
+                           $('#approval-' + id).show();
 
-                       //    $scope.activeTabId = '#approvalDetail-' + id;
-                       //};
+                           $scope.activeTabId = '#approvalDetail-' + id;
+                       };
 
-                       //$scope.newOrderDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnNew-' + id).addClass('km-state-active');
+                       $scope.newOrderDetail = function (id) {
+                           $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnNew-' + id).addClass('km-state-active');
 
-                       //    $('#new-' + id).show();
-                       //    $scope.activeTabId = '#newOrderDetail-' + id;
-                       //};
+                           $('#new-' + id).show();
+                           $scope.activeTabId = '#newOrderDetail-' + id;
+                       };
 
-                       //$scope.releaseOrderDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnReleased-' + id).addClass('km-state-active');
+                       $scope.releaseOrderDetail = function (id) {
+                           $('.order').hide();
+                           $('.retailer').removeClass('km-state-active');
+                           $('.btnReleased-' + id).addClass('km-state-active');
 
-                       //    $('#released-' + id).show();
+                           $('#released-' + id).show();
 
-                       //    $scope.activeTabId = '#releaseOrderDetail-' + id;
-                       //};
+                           $scope.activeTabId = '#releaseOrderDetail-' + id;
+                       };
 
 
                        $scope.setSearhParamter = function (para) {
@@ -289,15 +273,15 @@ app.controller('homeController', [
                        $scope.viewAll = function (orderType, parameterId) {
                            kendo.mobile.application.navigate("src/app/order/order.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
                        }
-                       $scope.approve = function () {
-                           var salesorders = "";
+                       //$scope.approve = function () {
+                       //    var salesorders = "";
 
-                           var salesorderList = $scope.selection;
-                           angular.forEach(salesorderList, function (value, key) {
-                               salesorders += value + ',';
-                           });
-                           kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
-                       }
+                       //    var salesorderList = $scope.selection;
+                       //    angular.forEach(salesorderList, function (value, key) {
+                       //        salesorders += value + ',';
+                       //    });
+                       //    kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
+                       //}
                        $scope.showAlertModel = function () {
 
                            $("#modalview-alerts").kendoMobileModalView("open");
