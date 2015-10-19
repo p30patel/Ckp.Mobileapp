@@ -167,7 +167,7 @@
                                         <td></td>
                                             <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.OrderNumber)" >
                               {{order.OrderNumber}}
-                          <!--  <div>5555534219381872</div>-->
+                        
                                                  <div>&nbsp;</div>
                             </a>
                         </td>
@@ -175,21 +175,21 @@
                                             <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)" >
                               {{order.SalesOrderNo}}
                                                   <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                        
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)" >
                               {{order.ShoppingCart}}  <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                     
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">
                               {{order.VendorRef}}  <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                        
                             </a>
                         </td>
                                  
@@ -228,28 +228,28 @@
                                             <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)" >
                               {{order.OrderNumber}}
                                                    <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                   
                             </a>
                         </td>
 
                                             <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)" >
                               {{order.SalesOrderNo}}
                                                        <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                   
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)" >
                               {{order.ShoppingCart}}     <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                     
                             </a>
                         </td>
 
                                         
                                             <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)" >
                               {{order.VendorRef}}         <div>&nbsp;</div>
-                          <!--  <div>5555534219381872</div>-->
+                     
                             </a>
                         </td>
                                         <td>{{order.Status}}</td>
@@ -277,16 +277,30 @@
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">{{form.alertsAndNews.resoruceValue}}</kendo-mobile-nav-bar>
         </kendo-mobile-header>
+          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+    <li class="ck-module-date">
+          <i class="ck-icon ck-news ck-module-icon"></i>
+        Announcements
+    </li>
+    <li>
+      
+   
+    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
 
+        <div class="km-font" ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
+                   <p> <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+        </div>
+    </span>
+</li>
+</ul>
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
              ng-show="mesages.PartnerHolidayList.length > 0">
              <li class="ck-module-date">
+               <i class="ck-icon ck-alert ck-module-icon"></i>
                Print Shop Holidays
             </li>
             <li>
-                <i class="ck-icon ck-alert ck-module-icon"></i>
                 <span class="km-font" ng-repeat="message in mesages.PartnerHolidayList">
-
                    <p><b> {{message.Name}} </b>  {{message.HolidayDescription}} closed  on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
                     
                     </span>
@@ -294,12 +308,13 @@
          
         </ul>
 
-           <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
+         <i class="ck-icon ck-news ck-module-icon"></i>
         CheckPoint Systems, Inc.
     </li>
     <li>
-        <i class="ck-icon ck-alert ck-module-icon"></i>
+       
   
     <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
 
@@ -310,21 +325,7 @@
 </li>
 </ul>
 
-      <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
-    <li class="ck-module-date">
-        Announcements
-    </li>
-    <li>
-        <i class="ck-icon ck-alert ck-module-icon"></i>
-   
-    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
-
-        <div class="km-font" ng-if="value[0].SpecificRetailerId > 0">
-                   <p> <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
-        </div>
-    </span>
-</li>
-</ul>
+       
 
    
    
