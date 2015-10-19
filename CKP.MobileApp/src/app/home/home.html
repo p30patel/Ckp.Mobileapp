@@ -285,12 +285,14 @@
     <li>
       
    
-    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
-
+    <div ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
+      
         <div class="km-font" ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
-                   <p> <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+                   <p> <b>{{value[0].Title}} </b> </p>
+            <p><span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+
         </div>
-    </span>
+    </div>
 </li>
 </ul>
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
@@ -319,7 +321,8 @@
     <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
 
         <span class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
-                  <p>  <b>{{value[0].Title}} </b> :<span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+                  <p>  <b>{{value[0].Title}} </b> </p>
+                 <p><span ng-bind-html="renderHtml(value[0].Message)"></span></p>
         </span>
     </span>
 </li>
