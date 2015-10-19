@@ -132,15 +132,20 @@ app.controller('homeController', [
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
 
+                       $scope.retailerHeader = function(){
+                           var listviews = $("ul.order-header.km-listview");
+                           listviews.hide();
+                       }
                        $scope.myOptions = {
                            select: function (e) {
+                              
                                console.log('Selected Btn Group: ' + e.sender.element.attr('data-btnRetailer') + '  selected index : ' + e.index);
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
 
                                var listviews = $("ul.order-header.km-listview");
                                
 
-                               listviews.hide()
+                               listviews.hide();
                               
                                var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
                            
@@ -216,34 +221,7 @@ app.controller('homeController', [
                        getMessages();
                        getOrderCounts();
 
-                       //$scope.approvalDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnApporval-' + id).addClass('km-state-active');
-                       //    $('#approval-' + id).show();
-
-                       //    $scope.activeTabId = '#approvalDetail-' + id;
-                       //};
-
-                       //$scope.newOrderDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnNew-' + id).addClass('km-state-active');
-
-                       //    $('#new-' + id).show();
-                       //    $scope.activeTabId = '#newOrderDetail-' + id;
-                       //};
-
-                       //$scope.releaseOrderDetail = function (id) {
-                       //    $('.order').hide();
-                       //    $('.retailer').removeClass('km-state-active');
-                       //    $('.btnReleased-' + id).addClass('km-state-active');
-
-                       //    $('#released-' + id).show();
-
-                       //    $scope.activeTabId = '#releaseOrderDetail-' + id;
-                       //};
-
+                 
 
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);

@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" data-use-native-scrolling="true" >
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
             
@@ -31,15 +31,17 @@
                 </fieldset>
             
             </li>
-
-            <kendo-mobile-collapsible class="ck-home" style="margin-top:-.1em;" k-id="'collapsible'" k-collapsed="'false'" k-on-expand="OpenExpand()"
-                ng-repeat="orderCount in orderCounts">
+           <div></div>
+           <div ng-repeat="orderCount in orderCounts">
+            <div class="ck-home" style="margin-top:-.1em; background-color:gray;"> 
+                
                 <h3>
-                <kendo-mobile-button class="ck-title">{{orderCount.RetailerName}}</kendo-mobile-button>
+               
+                <kendo-mobile-button class="ck-title" k-on-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
                 <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  k-on-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
-                      ng-show="$first"/></kendo-mobile-button>
-
-
+                      ng-show="$first"/></kendo-mobile-button>                   
+                  
+                    </h3>
                       <kendo-mobile-button-group k-id="buttongroup-home" class="ck-button-group" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}">
                     <li class="ck-button km-button">
                         <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
@@ -53,9 +55,8 @@
                                    <div class="ck-button-text">{{form.releasedOrder.resoruceValue}}</div>
                     </li>
                 </kendo-mobile-button-group>
-
-                </h3>
-     
+                </div>
+            
            
                     <!-- Tab panes -->
                 <kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header">
@@ -263,9 +264,10 @@
                         </td></tr>
                          
                             </table>
-                           
+                    
            </kendo-mobile-list-view>
-
+                  </div> 
+ 
         </kendo-mobile-list-view>
         <!-- End Home View -->
     </kendo-mobile-content>
@@ -353,9 +355,7 @@
                        {{form.creditLockMessage.resoruceValue}}
                     </h3>
                 </li>
-                <!--<li class="ck-module-date">
-                    12:15 PM - 05/01/2015 - 05/02/2015
-                </li>-->
+           
             </ul>
             <kendo-mobile-footer>
                 <div kendo-mobile-button k-on-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />

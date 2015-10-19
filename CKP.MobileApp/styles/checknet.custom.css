@@ -465,7 +465,7 @@ span.k-icon.k-i-arrow-s {
 .ck-delivery:after {content: '\e806';}
 .ck-faq:after {content: '\e808';}
 .ck-feedback:after {content: '\e809';}
-.ck-globe:after {content: '\e80a';}
+.ck-globe:before {content: '\e80a';}
 .ck-help:after {content: '\e80b';}
 .ck-location:after {content: '\e80c';}
 .ck-lock:after {content: '\e80d';}
