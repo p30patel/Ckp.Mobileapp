@@ -135,6 +135,8 @@ app.controller('homeController', [
                        $scope.retailerHeader = function(){
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
+                           var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
+                           buttongroup.element.children().removeClass('km-state-active');
                        }
                        $scope.myOptions = {
                            select: function (e) {

@@ -26,6 +26,9 @@
     float: none;
 }
 .ck-lang-select{width:auto !important; padding-right:1em;}
+.ck-font-size-mid{
+    font-size: medium;
+}
 /* override PL changes*/
 .ck-module-icon{
     margin: 0 .6em 0em 0; 

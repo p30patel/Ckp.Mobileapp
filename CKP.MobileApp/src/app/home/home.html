@@ -32,6 +32,8 @@
             
             </li>
            <div></div>
+
+
            <div ng-repeat="orderCount in orderCounts">
             <div class="ck-home" style="margin-top:-.1em; background-color:gray;"> 
                 
@@ -42,7 +44,7 @@
                       ng-show="$first"/></kendo-mobile-button>                   
                   
                     </h3>
-                      <kendo-mobile-button-group k-id="buttongroup-home" class="ck-button-group" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}">
+                      <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}">
                     <li class="ck-button km-button">
                         <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                         <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
@@ -280,7 +282,7 @@
           <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
           <i class="ck-icon ck-news ck-module-icon"></i>
-        Announcements
+         <span class="ck-font-size-mid">Announcements</span>
     </li>
     <li>
       
@@ -299,7 +301,8 @@
              ng-show="mesages.PartnerHolidayList.length > 0">
              <li class="ck-module-date">
                <i class="ck-icon ck-alert ck-module-icon"></i>
-               Print Shop Holidays
+                  <span class="ck-font-size-mid">Print Shop Holidays</span>
+               
             </li>
             <li>
                 <span class="km-font" ng-repeat="message in mesages.PartnerHolidayList">
@@ -313,7 +316,8 @@
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
          <i class="ck-icon ck-news ck-module-icon"></i>
-        CheckPoint Systems, Inc.
+         <span class="ck-font-size-mid">CheckPoint Systems, Inc.</span>
+        
     </li>
     <li>
        
