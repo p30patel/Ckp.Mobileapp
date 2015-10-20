@@ -359,7 +359,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             }, 5000);
 
         }
-    };
+    }
 
     $scope.showPasswordHint = function () {
         var username = $scope.loginData.userName;

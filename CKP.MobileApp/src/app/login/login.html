@@ -31,7 +31,7 @@
 
                     <input value="" type="password" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" />
 
-                    <kendo-mobile-button class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  k-on-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
+                    <kendo-mobile-button class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
                   
                     <p class="ck-align-right"  ng-hide="passwordHint" >
                         <a href="" ng-click="showPasswordHint()"                            
@@ -46,7 +46,7 @@
             <i></i>
 
             <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin"
-                k-on-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
+                ng-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>
            
@@ -87,7 +87,7 @@
             </li>
         </ul>
              <kendo-mobile-footer>
-                <kendo-mobile-button id="closeModalViewForgotPassword" k-on-click="closeModalViewForgotPassword()"  k-transition="'overlay:down'" class="km-justified"style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                <kendo-mobile-button id="closeModalViewForgotPassword" ng-click="closeModalViewForgotPassword()"  k-transition="'overlay:down'" class="km-justified"style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
                 </kendo-mobile-button>
             </kendo-mobile-footer>
     </div>

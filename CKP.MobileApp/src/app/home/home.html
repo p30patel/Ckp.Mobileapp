@@ -2,7 +2,7 @@
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
             
-                   <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'"  k-on-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
+                   <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'"  ng-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
               
 
                <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
@@ -39,8 +39,8 @@
                 
                 <h3>
                
-                <kendo-mobile-button class="ck-title" k-on-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
-                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  k-on-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
+                <kendo-mobile-button class="ck-title" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
+                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  ng-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
                       ng-show="$first"/></kendo-mobile-button>                   
                   
                     </h3>
@@ -146,9 +146,9 @@
                                  <tr>
                         <td colspan="5" style="padding: 1em;">
                             <i></i>
-                            <kendo-mobile-button class="km-secondary ck-btn-left" k-on-click="viewAll(1, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="viewAll(1, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                             <i></i>
-                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" k-on-click="showApprovalModel()">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" ng-click="showApprovalModel()">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                         </td>
                     </tr>
                             </table>
@@ -205,7 +205,7 @@
                 <tr>
                  <td colspan="5" style="padding: 1em;">
                             <i></i>
-                            <kendo-mobile-button class="km-secondary km-justified" k-on-click="viewAll(2, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary km-justified" ng-click="viewAll(2, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                          <i></i>
                         </td></tr>
                          
@@ -260,7 +260,7 @@
                                  <tr>
                  <td colspan="5" style="padding: 1em;">
                             <i></i>
-                            <kendo-mobile-button class="km-secondary km-justified" k-on-click="viewAll(3, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary km-justified" ng-click="viewAll(3, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                             <i></i>
                            
                         </td></tr>
@@ -344,7 +344,7 @@
    
    
         <kendo-mobile-footer>
-            <kendo-mobile-button k-on-click="hideAlertModel()" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+            <kendo-mobile-button ng-click="hideAlertModel()" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
             </kendo-mobile-button>
         </kendo-mobile-footer>
         </kendo-mobile-module-view>
@@ -373,7 +373,7 @@
            
             </ul>
             <kendo-mobile-footer>
-                <div kendo-mobile-button k-on-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                <div kendo-mobile-button ng-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
                 </div>
             </kendo-mobile-footer>
 
@@ -404,9 +404,9 @@
                 <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                 <kendo-mobile-footer>
                       
-                        <kendo-mobile-button class="km-primary km-large ck-btn-left"  k-on-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
+                        <kendo-mobile-button class="km-primary km-large ck-btn-left"  ng-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
                         
-                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" k-on-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
+                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-footer>
                 </kendo-mobile-modal-view>
         
