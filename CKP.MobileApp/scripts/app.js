@@ -11,7 +11,7 @@ var androidProjectNumber = '1018275522168';
 //push notifications because we will generate fake push tokens. But you will be able to test your other push-related functionality without getting errors.
 var emulatorMode = true;
 
-var telerikAnaltyicsProdcutId = "f453d7f3a0cd4551a4009b8768b91b1f"; // App unique product key
+var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // App unique product key
 //Initialize the Telerik Backend Services SDK
 
 
@@ -45,20 +45,38 @@ function onDeviceReady() {
 }
 
 (function (g) {
-    if (g._eqatecmonitor)
-        return;
-    try {
-        // Create the monitor instance
-        var settings = _eqatec.createSettings(telerikAnaltyicsProdcutId);
-        settings.version = "1.2.3";
-        var monitor = g._eqatecmonitor = _eqatec.createMonitor(settings);
-        // Start the monitor when your application starts
-        monitor.start();
+   
+    // Make analytics available via the window.analytics variable
+    // Start analytics by calling window.analytics.Start()
+    var analytics = g.analytics = g.analytics || {};
+    analytics.Start = function () {
+        // Handy shortcuts to the analytics api
+        var factory = window.plugins.EqatecAnalytics.Factory;
+        var monitor = window.plugins.EqatecAnalytics.Monitor;
+        // Create the monitor instance using the unique product key for CKP.Mobile.App-Analytics
+        var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
+        settings.LoggingInterface = factory.CreateTraceLogger();
+        factory.CreateMonitorWithSettings(settings,
+          function () {
+              console.log("Monitor created");
+              // Start the monitor inside the success-callback
+              monitor.Start(function () {
+                  console.log("Monitor started");
+              });
+          },
+          function (msg) {
+              console.log("Error creating monitor: " + msg);
+          });
     }
-    catch (e) {
-        console.log("Telerik Analytics exception: " + e.description);
+    analytics.Stop = function () {
+        var monitor = window.plugins.EqatecAnalytics.Monitor;
+        monitor.Stop();
+    }
+    analytics.Monitor = function () {
+        return window.plugins.EqatecAnalytics.Monitor;
     }
 })(window);
+
 window.monitor.Start();
 
 
