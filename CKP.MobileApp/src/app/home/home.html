@@ -279,6 +279,13 @@
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">{{form.alertsAndNews.resoruceValue}}</kendo-mobile-nav-bar>
         </kendo-mobile-header>
+
+            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
+  
+    <li>
+  No messages are found!
+</li>
+</ul>
           <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
           <i class="ck-icon ck-news ck-module-icon"></i>
@@ -290,7 +297,7 @@
     <div ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
       
         <div class="km-font" ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
-                   <p> <b>{{value[0].Title}} </b> </p>
+                   <p> <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) </p>
             <p><span ng-bind-html="renderHtml(value[0].Message)"></span></p>
 
         </div>
@@ -316,7 +323,7 @@
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
          <i class="ck-icon ck-news ck-module-icon"></i>
-         <span class="ck-font-size-mid">CheckPoint Systems, Inc.</span>
+         <span class="ck-font-size-mid">Checkpoint Systems, Inc.</span>
         
     </li>
     <li>

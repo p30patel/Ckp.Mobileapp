@@ -39,10 +39,7 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-function onDeviceReady() {
-    
-    feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
-}
+
 
 (function (g) {
    
@@ -77,8 +74,12 @@ function onDeviceReady() {
     }
 })(window);
 
-window.monitor.Start();
+function onDeviceReady() {
 
+    feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
+    window.analytics.Start();
+
+}
 
 
 
