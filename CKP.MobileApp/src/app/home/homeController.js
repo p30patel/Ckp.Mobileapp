@@ -18,9 +18,9 @@ app.controller('homeController', [
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
-
+                      
                        $scope.afterShow = function (e) {
-
+                      
                            var view = kendo.mobile.application.view();
                            if (view !== null) {
                                var navbar = kendo.mobile.application.view()

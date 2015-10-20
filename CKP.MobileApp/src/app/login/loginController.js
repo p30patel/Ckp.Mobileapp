@@ -7,7 +7,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     //login page html lables
     $scope.loginData = {};
     $scope.form = {};
-
+  
     var setResources = function () {
         $scope.form.username = {};
         $scope.form.username.resoruceName = "User Name";
@@ -210,7 +210,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         });
 
         //Faq
-        kendo.mobile.application.pane.loader.show();
+    
 
         faqDataService.getFaqs(selectedLanague).then(function (result) {
             $scope.faqs = result;
@@ -218,23 +218,23 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }).catch(function (error) {
             $scope.faqs = {};
         }).finally(function () {
-            kendo.mobile.application.pane.loader.hide();
+        
         });
 
         //end faq
         //terms & conditions
-        kendo.mobile.application.pane.loader.show();
+        
         policyTermsDataService.getPolicyTerms().then(function (result) {
             $scope.termsCondition = result;
 
         }).catch(function (error) {
             $scope.termsCondition = {};
         }).finally(function () {
-            kendo.mobile.application.pane.loader.hide();
+    
         });
         //end
         //policies
-        kendo.mobile.application.pane.loader.show();
+    
 
         policyTermsDataService.getPolicyTerms().then(function (result) {
             $scope.policies = result;
@@ -242,7 +242,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }).catch(function (error) {
             $scope.policies = {};
         }).finally(function () {
-            kendo.mobile.application.pane.loader.hide();
+    
         });
 
 
@@ -250,7 +250,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
 
     var getDeviceInfo = function () {
-        loginDataService.registerForPush();
 
         var username = ($scope.loginData.userName === '') ? " " : $scope.loginData.userName;
 
@@ -280,8 +279,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 channelName: 'EverlivePushChannel'
             },
             customParameters: {             
-                LastLoginDate: new Date()
-
+             
             }
         };
         el.push.register(pushSettings)
@@ -303,16 +301,21 @@ function ($scope, $http, authService, translateService, localStorageService, log
                }
                );
     };
+ 
+    $scope.beforeShow = function (e) {
 
-    if (window.navigator.simulator == false) {
-        getDeviceInfo();
+        if (typeof window.navigator.simulator === 'undefined') {
+            getDeviceInfo();
+        }
     }
 
     $scope.intShow = function (e) {
+        
         translatePage();
     };
 
     $scope.translatePage = function () {
+     
         translatePage();
     };
     //loign event

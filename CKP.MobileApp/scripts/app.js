@@ -11,6 +11,7 @@ var androidProjectNumber = '1018275522168';
 //push notifications because we will generate fake push tokens. But you will be able to test your other push-related functionality without getting errors.
 var emulatorMode = true;
 
+var telerikAnaltyicsProdcutId = "f453d7f3a0cd4551a4009b8768b91b1f"; // App unique product key
 //Initialize the Telerik Backend Services SDK
 
 
@@ -39,50 +40,27 @@ app.config(function ($httpProvider) {
 });
 
 function onDeviceReady() {
-   
+    
+    feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
 }
 
 (function (g) {
-
-    var productId = "d7464702a97c4d9389e316daca91db9d"; // App unique product key
-
-    // Make analytics available via the window.analytics variable
-    // Start analytics by calling window.analytics.Start()
-    var analytics = g.analytics = g.analytics || {};
-
-    analytics.Start = function () {
-
-        // Handy shortcuts to the analytics api
-        var factory = window.plugins.EqatecAnalytics.Factory;
-        var monitor = window.plugins.EqatecAnalytics.Monitor;
-        // Create the monitor instance using the unique product key for Analytics
-        var settings = factory.CreateSettings(productId);
-        settings.LoggingInterface = factory.CreateTraceLogger();
-        factory.CreateMonitorWithSettings(settings,
-		  function () {
-		      console.log("Monitor created");
-		      // Start the monitor inside the success-callback
-		      monitor.Start(function () {
-		          console.log("Monitor started");
-		      });
-		  },
-		  function (msg) {
-
-		      console.log("Error creating monitor: " + msg);
-		  });
+    if (g._eqatecmonitor)
+        return;
+    try {
+        // Create the monitor instance
+        var settings = _eqatec.createSettings(telerikAnaltyicsProdcutId);
+        settings.version = "1.2.3";
+        var monitor = g._eqatecmonitor = _eqatec.createMonitor(settings);
+        // Start the monitor when your application starts
+        monitor.start();
     }
-    analytics.Stop = function () {
-        var monitor = window.plugins.EqatecAnalytics.Monitor;
-        monitor.Stop();
-    }
-    analytics.Monitor = function () {
-        return window.plugins.EqatecAnalytics.Monitor;
+    catch (e) {
+        console.log("Telerik Analytics exception: " + e.description);
     }
 })(window);
+window.monitor.Start();
 
-
-window.analytics.Start();
-feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
 
 
 
