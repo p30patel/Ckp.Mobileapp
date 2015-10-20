@@ -91,9 +91,10 @@ app.factory('loginDataService',
             el.push.register(pushSettings)
                 .then(
                     function (result) {
-                        alert(result.length);
+                      
                         status = "success";
-                        localStorageService.set('deviceId', device.uuid);
+                        localStorageService.set('deviceData', result);
+                        var deviceData = localStorageService.get('deviceData');
                         deferred.reject(result);
 
                     },
