@@ -318,6 +318,13 @@ function ($scope, $http, authService, translateService, localStorageService, log
      
         translatePage();
     };
+    $scope.key = function ($event) {
+        console.log($event.keyCode);
+
+        if ($event.keyCode === 13) {        
+            $('#btnLogin').blur();
+        }
+    }
     //loign event
     $scope.login = function () {
         $('#btnLogin').blur();
