@@ -320,7 +320,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
     //loign event
     $scope.login = function () {
-        $('#btnLogin').focus();
+        $('#btnLogin').blur();
 
         var userName = $scope.loginData.userName;
         var password = $scope.loginData.password;

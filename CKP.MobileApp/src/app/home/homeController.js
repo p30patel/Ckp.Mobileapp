@@ -199,27 +199,36 @@ app.controller('homeController', [
                        //alerts & news - messages
 
                        var getMessages = function () {
-                           kendo.mobile.application.pane.loader.show();
-                           $("#btn_message").data("kendoMobileButton");
+                           var data = localStorageService.get('organizationDetail');
+                           if (data !== null) {
 
-                           messageDataService.getMessages().then(function (result) {
-                               $scope.mesages = result;
-                               $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
-                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
 
-                           }).catch(function (error) {
-                               $scope.mesages = {};
-                               $scope.messageCount = 0;
-                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
-                           }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
-                           });
+                               kendo.mobile.application.pane.loader.show();
+                               $("#btn_message").data("kendoMobileButton");
+
+                               messageDataService.getMessages().then(function (result) {
+                                   $scope.mesages = result;
+                                   $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
+                                   $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
+
+                               }).catch(function (error) {
+                                   $scope.mesages = {};
+                                   $scope.messageCount = 0;
+                                   $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
+                               }).finally(function () {
+                                   kendo.mobile.application.pane.loader.hide();
+                               });
+                           }
 
 
                        }; // end message
 
+                       var checkForOrganzationDetail = function ()
+                       {
+                           return true;
+                       }
 
-
+                    
                        getMessages();
                        getOrderCounts();
 

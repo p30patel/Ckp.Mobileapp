@@ -21,7 +21,7 @@ app.factory("feedbackDataService", [
                         return deferred.promise;
                     };
 
-                    var contactUsByEmail = function (feedbackData) {
+                    var contactUsByEmail = function (contactUsData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;

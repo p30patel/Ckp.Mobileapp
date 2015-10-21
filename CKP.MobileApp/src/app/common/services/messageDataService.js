@@ -13,11 +13,11 @@ app.factory("messageDataService", [
 
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
-                        localStorageService.get('organizationDetail');
+                      
                         var data = localStorageService.get('organizationDetail');
-
+                       
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/GetMessageListTaskAsync', data).success(function (result) {
-                            localStorageService.set('messages' + refereshPeriod, result);
+                            localStorageService.set('messages', result);
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -28,7 +28,7 @@ app.factory("messageDataService", [
                     var getMessages = function () {
                         var deferred = $q.defer();
                         var forceReferesh = false; // refresh the page once a day
-                        var messages = localStorageService.get("messages" + refereshPeriod);
+                        var messages = localStorageService.get("messages");
                        
                         if (messages) {
                             deferred.resolve(messages);

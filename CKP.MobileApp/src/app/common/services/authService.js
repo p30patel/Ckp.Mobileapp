@@ -36,26 +36,29 @@ app.factory('authService', [
                                 _authentication.isAuth = true;
                                 _authentication.userName = loginData.userName;
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
-                 
-                                deferred.resolve(response);
+
+                                _forceGetPrincipalData().then(function (result) {
+
+                                    forceGetOrganizationData().then(function (result) {
+                                        var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
+                                        result.Logo = logo;
+                                        localStorageService.set('organizationDetail', result);
+                                        localStorageService.remove("messages");
+                                        deferred.resolve(result);
+                                    }).catch(function (err, status) {
+                                        loggedIn = false;
+                                        _logout();
+                                        deferred.reject(err);
+                                    });
+
+
+                                }).catch(function (err, status) {
+                                    loggedIn = false;
+                                    _logout();
+                                    deferred.reject(err);
+                                });
                             }
-                            _forceGetPrincipalData().then(function (result) {
-                            }).catch(function (err, status) {
-                                loggedIn = false;
-                                _logout();
-                                deferred.reject(err);
-                            });
-
-                            forceGetOrganizationData().then(function (result) {
-                                var logo = (result.Logo !== '') ? authServiceBase  +  "/Images/" + result.Logo : "";
-                                result.Logo = logo;
-                                localStorageService.set('organizationDetail', result);
-                            }).catch(function (err, status) {
-                                loggedIn = false;
-                                _logout();
-                                deferred.reject(err);
-                            });
-
+                         
                          
                         }).error(function (err, status, headers, config) {
                             _logout();
