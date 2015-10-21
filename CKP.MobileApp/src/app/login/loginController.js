@@ -319,16 +319,15 @@ function ($scope, $http, authService, translateService, localStorageService, log
         translatePage();
     };
     $scope.key = function ($event) {
-        console.log($event.keyCode);
-
-        if ($event.keyCode === 13) {        
-            $('#btnLogin').blur();
-        }
+    
+        //if ($event.keyCode === 13) {
+        //    $('#btnLogin').focus();
+        //    angular.element('#btnLogin').trigger('click');
+        //}
     }
     //loign event
     $scope.login = function () {
-        $('#btnLogin').blur();
-
+       
         var userName = $scope.loginData.userName;
         var password = $scope.loginData.password;
 
