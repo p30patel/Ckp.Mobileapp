@@ -146,6 +146,7 @@
     <Content Include="src\vendor\angular-local-storage.min.js" />
     <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
+    <Content Include="src\vendor\angular-touch.min.js" />
     <Content Include="src\vendor\angular.min.js" />
     <Content Include="src\vendor\jquery.mobile-1.4.5.min.js" />
     <Content Include="styles\checknet.custom.css" />

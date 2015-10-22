@@ -82,8 +82,13 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.translations = {};
     $scope.message = "";
 
-
-
+    $('.touch').kendoTouch({
+        touchend: handleTouchEvent
+    });
+    var handleTouchEvent = function (e)
+    {
+        console.log("Event Type: " + e.event.type);
+    }
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
