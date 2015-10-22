@@ -28,13 +28,13 @@
             <li class="ck-no-pad">
                 <fieldset class="ck-login">
                  
-                    <input value="" type="text" next-Focuse ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
+                    <input value="" type="search" class="touch" ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
 
-                    <input value="" type="password" next-Focuse ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
+                    <input value="" type="password" class="touch" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
 
-                    <kendo-mobile-button class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
+                    <kendo-mobile-button  class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
                   
-                    <p class="ck-align-right"  ng-hide="passwordHint" next-Focuse>
+                    <p class="ck-align-right"  ng-hide="passwordHint">
                         <a href="" ng-click="showPasswordHint()"                            
                             k-ng-disabled="!loginData.userName" 
                             id="touchSurface"  
@@ -46,8 +46,8 @@
              <li>
             <i></i>
 
-            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin"
-                ng-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
+            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin" 
+                k-on-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>
            

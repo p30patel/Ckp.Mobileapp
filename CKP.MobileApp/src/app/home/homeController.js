@@ -246,10 +246,18 @@ app.controller('homeController', [
                        $scope.orderList = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
-
+                       $scope.searchChange = function () {
+                           var searchElement = $('.ck-po-search');
+                           if ($scope.searchValue !== '') {
+                               searchElement.css('background-size', 0);
+                           }
+                           else {
+                               searchElement.css('background-size', '1em 1em');
+                           }
+                          
+                       }
                        $scope.key = function ($event) {
-                           console.log($event.keyCode);
-
+                        
                            if ($event.keyCode === 13) {
                                //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
 

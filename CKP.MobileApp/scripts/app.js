@@ -59,6 +59,7 @@ app.config(function ($httpProvider) {
               // Start the monitor inside the success-callback
               monitor.Start(function () {
                   console.log("Monitor started");
+                  monitor.TrackFeature("Menu-HandBar");
               });
           },
           function (msg) {
@@ -78,6 +79,7 @@ function onDeviceReady() {
 
     feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
     window.analytics.Start();
+    
 
 }
 

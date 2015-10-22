@@ -25,7 +25,7 @@
                          ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'">
                     </select>
 
-                    <input class="ck-po-search" 
+                    <input class="ck-po-search" type="search" ng-change="searchChange()" ng-blur="searchChange()""
                         style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF;" 
                         value="" placeholder="{{form.search.resoruceValue}}" type="text" ng-model="searchValue"  ng-keypress="key($event)"/>
                 </fieldset>
