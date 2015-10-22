@@ -138,6 +138,7 @@
     <Content Include="src\app\policy\policyController.js" />
     <Content Include="src\app\termsCondition\termsCondition.html" />
     <Content Include="src\app\termsCondition\termsConditionController.js" />
+    <Content Include="src\assests\styles\jquery.mobile-1.4.5.min.css" />
     <Content Include="src\assests\styles\main.css">
       <SubType>Content</SubType>
     </Content>
@@ -146,6 +147,7 @@
     <Content Include="kendo\js\jszip.min.js" />
     <Content Include="kendo\js\kendo.timezones.min.js" />
     <Content Include="src\vendor\angular.min.js" />
+    <Content Include="src\vendor\jquery.mobile-1.4.5.min.js" />
     <Content Include="styles\checknet.custom.css" />
     <Content Include="styles\images\Alert.png" />
     <Content Include="styles\images\back.png" />
