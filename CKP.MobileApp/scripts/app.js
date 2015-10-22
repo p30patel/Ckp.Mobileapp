@@ -1,18 +1,10 @@
 // This is your Telerik Backend Services API key.
-var baasApiKey = 'uTM7cVvTTvlfDZsu';
-
-// This is the scheme (http or https) to use for accessing Telerik Backend Services.
+var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 var baasScheme = 'https';
-
-//This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
-var androidProjectNumber = '1018275522168';
-
-//Set this to true in order to test push notifications in the emulator. Note, that you will not be able to actually receive 
-//push notifications because we will generate fake push tokens. But you will be able to test your other push-related functionality without getting errors.
+var androidProjectNumber = '1018275522168'; // google push tocken
 var emulatorMode = true;
 
-var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // App unique product key
-//Initialize the Telerik Backend Services SDK
+var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics project key
 
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
@@ -29,9 +21,73 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
-app.run(['authService', function (authService) {
-    authService.fillAuthData();
+app.run(['authService', 'localStorageService', function (authService, localStorageService) {
 
+    //authService.fillAuthData();
+    localStorageService.remove('authorizationData');
+    var getDeviceInfo = function () {
+
+        var baasApiKey = ngAuthSettings.baasApiKey;
+
+        var baasScheme = ngAuthSettings.baasScheme;
+
+        var androidProjectNumber = ngAuthSettings.androidProjectNumber;
+
+        var emulatorMode = true;
+        var el = new Everlive({
+            apiKey: baasApiKey,
+            scheme: baasScheme
+        });
+
+
+        var pushSettings = {
+            android: {
+                senderID: androidProjectNumber
+            },
+            iOS: {
+                badge: "true",
+                sound: "true",
+                alert: "true"
+            },
+            wp8: {
+                channelName: 'EverlivePushChannel'
+            },
+            customParameters: {
+
+            }
+        };
+        el.push.register(pushSettings)
+           .then(
+               function (data) {
+
+                   el.push.getRegistration().then(function (result) {
+                       localStorageService.set('deviceData', result);
+                       var deviceData = localStorageService.get('deviceData');
+                       // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.HardwareModel + '\n    platform =' + deviceData.result.PlatformType  + '\n version = ' +deviceData.result.PlatformVersion  + '\n  active =' +  deviceData.result.Active  );
+
+                   },
+                   function (e) {
+                       //error register
+                   });
+               },
+               function (err) {
+                   //  alert('REGISTER ERROR: ' + JSON.stringify(err));
+               }
+               );
+    };
+
+    document.addEventListener('deviceready', function () {
+        kendo.mobile.application.navigate("src/app/login/login.html");
+        window.analytics.Start();
+
+        if (typeof window.navigator.simulator === 'undefined') {
+            getDeviceInfo();
+        }
+        
+    });
+
+   
+    
 }]);
 
 app.config(function ($httpProvider) {
@@ -74,14 +130,6 @@ app.config(function ($httpProvider) {
         return window.plugins.EqatecAnalytics.Monitor;
     }
 })(window);
-
-function onDeviceReady() {
-
-    feedback.initialize('7c882340-3274-11e5-a28d-c9df925f448c'); // Replace with your API key
-    window.analytics.Start();
-    
-
-}
 
 
 

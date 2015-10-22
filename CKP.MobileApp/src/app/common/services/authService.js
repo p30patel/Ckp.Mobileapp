@@ -147,7 +147,7 @@ app.factory('authService', [
                     var _fillAuthData = function () {
                         var authData = localStorageService.get('authorizationData');
                         var userProfileData = localStorageService.get('userProfileData');
-            
+                        
                         if (authData) {
                             _authentication.isAuth = true;
                             _authentication.userName = authData.userName;

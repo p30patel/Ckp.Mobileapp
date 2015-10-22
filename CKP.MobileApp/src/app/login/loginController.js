@@ -252,66 +252,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
 
     }
-
-
-    var getDeviceInfo = function () {
-
-        var username = ($scope.loginData.userName === '') ? " " : $scope.loginData.userName;
-
-        var baasApiKey = ngAuthSettings.baasApiKey;
-
-        var baasScheme = ngAuthSettings.baasScheme;
-
-        var androidProjectNumber = ngAuthSettings.androidProjectNumber;
-
-        var emulatorMode = true;
-        var el = new Everlive({
-            apiKey: baasApiKey,
-            scheme: baasScheme
-        });
-
-
-        var pushSettings = {
-            android: {
-                senderID: androidProjectNumber
-            },
-            iOS: {
-                badge: "true",
-                sound: "true",
-                alert: "true"
-            },
-            wp8: {
-                channelName: 'EverlivePushChannel'
-            },
-            customParameters: {             
-             
-            }
-        };
-        el.push.register(pushSettings)
-           .then(
-               function (data) {
-
-                   el.push.getRegistration().then(function (result) {
-                       localStorageService.set('deviceData', result);
-                       var deviceData = localStorageService.get('deviceData');
-                       // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.HardwareModel + '\n    platform =' + deviceData.result.PlatformType  + '\n version = ' +deviceData.result.PlatformVersion  + '\n  active =' +  deviceData.result.Active  );
-
-                   },
-                   function (e) {
-                       //error register
-                   });
-               },
-               function (err) {
-                   //  alert('REGISTER ERROR: ' + JSON.stringify(err));
-               }
-               );
-    };
  
     $scope.beforeShow = function (e) {
 
-        if (typeof window.navigator.simulator === 'undefined') {
-            getDeviceInfo();
-        }
+      
     }
 
     $scope.intShow = function (e) {

@@ -262,7 +262,7 @@ app.controller('homeController', [
                                //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
 
                                forceGetData = true;
-                               $("#icon-right").blur();
+                               $(".ck-po-search").focusout();
                                getOrderCounts();
 
                            }
