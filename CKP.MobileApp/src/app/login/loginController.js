@@ -266,16 +266,16 @@ function ($scope, $http, authService, translateService, localStorageService, log
      
         translatePage();
     };
-    $scope.key = function ($event) {
-    
-        if ($event.keyCode === 13) {
-          
-            angular.element('#btnLogin').trigger('touchend');
+    var type = $($event.target).attr("type");
+
+    if ($event.keyCode === 13) {
+        $event.target.blur();
+        if (type === 'password') {
+            login();
         }
     }
     //loign event
-    $scope.login = function () {
-       
+    var login = function () {
         var userName = $scope.loginData.userName;
         var password = $scope.loginData.password;
 
@@ -313,6 +313,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
             }, 5000);
 
         }
+    }
+    $scope.login = function () {
+        login();
     }
 
     $scope.showPasswordHint = function () {
