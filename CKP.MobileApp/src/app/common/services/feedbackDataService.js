@@ -26,9 +26,11 @@ app.factory("feedbackDataService", [
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
-                        var username = authentication.UserName;
-
+                        var username = authentication.userName;
+                        var orgContext = localStorageService.get('organizationDetail');
+                      
                         var data = {
+                            OrgContext: orgContext.OrgContext,
                             UserName: username,
                             Name: contactUsData.name,
                             Email: contactUsData.email,
@@ -42,7 +44,7 @@ app.factory("feedbackDataService", [
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
-                               
+                                console.log(err);
                                 deferred.reject(err);
                             });
                         return deferred.promise;
