@@ -82,13 +82,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.translations = {};
     $scope.message = "";
 
-    $('.touch').kendoTouch({
-        touchend: handleTouchEvent
-    });
-    var handleTouchEvent = function (e)
-    {
-        console.log("Event Type: " + e.event.type);
-    }
+   
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
@@ -266,12 +260,14 @@ function ($scope, $http, authService, translateService, localStorageService, log
      
         translatePage();
     };
-    var type = $($event.target).attr("type");
 
-    if ($event.keyCode === 13) {
-        $event.target.blur();
-        if (type === 'password') {
-            login();
+    $scope.key = function ($event) {
+        if ($event.keyCode === 13) {
+            $event.target.blur();
+            var type = $($event.target).attr("type");
+            if (type === 'password') {
+                login();
+            }
         }
     }
     //loign event
