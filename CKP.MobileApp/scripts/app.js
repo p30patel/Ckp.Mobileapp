@@ -10,7 +10,7 @@ var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
-var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter']);
+var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
@@ -115,7 +115,16 @@ app.config(function ($httpProvider) {
               // Start the monitor inside the success-callback
               monitor.Start(function () {
                   console.log("Monitor started");
-                  monitor.TrackFeature("Menu-HandBar");
+                  monitor.TrackFeature("track-menu-handBarClick");
+                  monitor.TrackFeature("track-login-btnClick");
+                  monitor.TrackFeature("track-login-view");
+                  monitor.TrackFeature("track-home-view");
+                  monitor.TrackFeature("track-notification-view");
+                  monitor.TrackFeature("track-policy-view");
+                  monitor.TrackFeature("track-terms-view");
+                  monitor.TrackFeature("track-feedback-view");
+                  monitor.TrackFeature("track-faq-view");
+                  monitor.TrackFeature("track-contactus-view");
               });
           },
           function (msg) {

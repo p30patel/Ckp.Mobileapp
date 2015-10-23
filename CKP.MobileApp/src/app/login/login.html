@@ -1,11 +1,11 @@
-<kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController"  k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow">
+<kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController"  k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" track-login-view>
 
     <kendo-mobile-header>
 
         <kendo-mobile-nav-bar class="km-light">
               <kendo-view-title style="display: none;"></kendo-view-title>
 
-           <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
+           <a data-align="left" data-role="button" href="#right-drawer" track-menu-handBarClick data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
            
      <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
               k-data-source="languages"
@@ -28,7 +28,7 @@
             <li class="ck-no-pad">
                 <fieldset class="ck-login">
                  
-                    <input value="" type="search" class="touch" ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
+                    <input value="" type="text" class="touch" ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
 
                     <input value="" type="password" class="touch" ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
 
@@ -46,7 +46,7 @@
              <li>
             <i></i>
 
-            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin" 
+            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin" track-login-btnClick
                 k-on-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
                  </li>

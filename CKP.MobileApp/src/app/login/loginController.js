@@ -254,7 +254,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
  
     $scope.beforeShow = function (e) {
-
       
     }
 
@@ -271,7 +270,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     
         if ($event.keyCode === 13) {
            
-            angular.element('#btnLogin').trigger('click');
+            angular.element('#btnLogin').trigger('touchend');
         }
     }
     //loign event
