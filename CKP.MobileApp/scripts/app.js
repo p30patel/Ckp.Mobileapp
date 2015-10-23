@@ -27,11 +27,6 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
-        var baasApiKey = ngAuthSettings.baasApiKey;
-
-        var baasScheme = ngAuthSettings.baasScheme;
-
-        var androidProjectNumber = ngAuthSettings.androidProjectNumber;
 
         var emulatorMode = true;
         var el = new Everlive({
