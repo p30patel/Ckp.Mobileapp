@@ -67,7 +67,7 @@
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController" k-transition="'slide'">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
-                <a data-align="left" data-role="button" href="#right-drawer" track-menu-handBarClick data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
+                <a data-align="left" data-role="button" data-tap="myTouch.tap" href="#right-drawer" track-menu-handBarClick data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
                 <!--   <kendo-mobile-back-button k-align="'left'" style="padding-left:25px;">Back</kendo-mobile-back-button>-->
                 <kendo-view-title></kendo-view-title>
             </kendo-mobile-nav-bar>
@@ -89,56 +89,56 @@
                 <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
                 </kendo-view-title>
 
-                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" ><span class="km-icon km-home"></span></kendo-mobile-button>
+                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" href="src/app/home/home.html" ><span class="km-icon km-home"></span></kendo-mobile-button>
 
-                <kendo-mobile-button data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" ><span class="km-icon km-i-signin"></span></kendo-mobile-button>
+                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" ><span class="km-icon km-i-signin"></span></kendo-mobile-button>
 
-                <kendo-mobile-button k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
+                <kendo-mobile-button data-tap="myTouch.tap" k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
           <kendo-mobile-content>
         <ul kendo-mobile-list-view>
-            <li  data-icon="ck-icon ck-contact">
+            <li>
 
-                <a href="src/app/contactus/contactus.html">
+                <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
                         
                         {{form.contactus.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq">
+                <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
                           
                         {{form.faq.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms">
+                <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
                           
                         {{form.termsCondition.resoruceValue}}
                    
                     </a>
             </li>
             <li>
-                <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy">
+                <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
                          {{form.policies.resoruceValue}}
                       
                     </a>
             </li>
             <li>
-                <a href="src/app/help/help.html" data-icon="ck-icon ck-help">
+                <a href="src/app/help/help.html" data-icon="ck-icon ck-help" data-tap="myTouch.tap">
                              {{form.help.resoruceValue}}
                    
                     </a>
             </li>
             <li ng-show="authentication.isAuth">
-                <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings">
+                <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings" data-tap="myTouch.tap">
                              {{form.notificationSettings.resoruceValue}}
                    
                     </a>
             </li>
             <li ng-show="authentication.isAuth">
-                <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback">
+                <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback" data-tap="myTouch.tap">
                              {{form.feedback.resoruceValue}}
                      
                     </a>

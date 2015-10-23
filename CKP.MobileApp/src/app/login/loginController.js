@@ -269,7 +269,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.key = function ($event) {
     
         if ($event.keyCode === 13) {
-           
+          
             angular.element('#btnLogin').trigger('touchend');
         }
     }

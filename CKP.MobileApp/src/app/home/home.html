@@ -39,8 +39,8 @@
                 
                 <h3>
                
-                <kendo-mobile-button class="ck-title" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
-                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'"  ng-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
+                <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
+                <kendo-mobile-button class="ck-title-icon" k-transition="'fade'" k-rel="'modalview'" data-tap="myTouch.tap"  ng-click="showCreditModel()"><img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" 
                       ng-show="$first"/></kendo-mobile-button>                   
                   
                     </h3>
@@ -344,7 +344,7 @@
    
    
         <kendo-mobile-footer>
-            <kendo-mobile-button ng-click="hideAlertModel()" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+            <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
             </kendo-mobile-button>
         </kendo-mobile-footer>
         </kendo-mobile-module-view>
@@ -373,7 +373,7 @@
            
             </ul>
             <kendo-mobile-footer>
-                <div kendo-mobile-button ng-click="hideCreditModel()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
+                <div kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
                 </div>
             </kendo-mobile-footer>
 
@@ -404,9 +404,9 @@
                 <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                 <kendo-mobile-footer>
                       
-                        <kendo-mobile-button class="km-primary km-large ck-btn-left"  ng-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
+                        <kendo-mobile-button class="km-primary km-large ck-btn-left" data-tap="myTouch.tap"  ng-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
                         
-                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
+                        <kendo-mobile-button class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap"  ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-footer>
                 </kendo-mobile-modal-view>
         
