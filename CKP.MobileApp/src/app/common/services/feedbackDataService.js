@@ -26,12 +26,23 @@ app.factory("feedbackDataService", [
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
-                    
-                        var data = {};
-                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/ContactUsByEmail?name=' + contactData.name + '&email=' + contactData.email + '&userId=' + userId).success(function (result) {
+                        var username = authentication.UserName;
+
+                        var data = {
+                            UserName: username,
+                            Name: contactUsData.name,
+                            Email: contactUsData.email,
+                            CompanyName: contactUsData.organization,
+                            OrderNumber: contactUsData.orderNumber,
+                            MessageBody: contactUsData.messageBody
+                        };
+                       
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/ContactUsByEmail', data).success(function (result) {
+                         
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
+                               
                                 deferred.reject(err);
                             });
                         return deferred.promise;

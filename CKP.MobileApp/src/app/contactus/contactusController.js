@@ -1,6 +1,6 @@
 
-app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout',
-    function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout) {
+app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout', 'feedbackDataService',
+    function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout, feedbackDataService) {
 
         $scope.form = {};
         $scope.authentication = authService.authentication;
@@ -175,40 +175,36 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         $scope.send = function () {
 
-            $scope.message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
-            $timeout(function () {
-                $scope.message = "";
-            }, 7000);
+            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
+          
+            kendo.mobile.application.pane.loader.show();
 
-            //kendo.mobile.application.pane.loader.show();
+            feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
+                if (result === 'success') {
+                   
+                    $scope.message = message;
+                    $timeout(function () {
+                        $scope.message = "";
+                    }, 7000);
 
+           
+                } else {
+                    
+                    $scope.message = "Faild to save data, Please try later";
+                    $timeout(function () {
+                        $scope.message = "";
+                    }, 7000);
+                }
+            }).catch(function (error) {
 
-            //feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
-            //    if (result === 'success') {
-            //        alerting.addSuccess("Thank you for your feedback!", 10000);
-            //        $scope.message = "Thank you for your feedback!";
-            //        $timeout(function () {
-            //            $scope.message = "";
-            //        }, 7000);
+                $scope.message = "Faild to save data, Please try later";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 7000);
 
-            //        $scope.feedbackData.comment = "";
-            //    } else {
-            //        alerting.addSuccess("Faild to post feedback!", 10000);
-            //        $scope.message = "Faild to post feedback, Please try later";
-            //        $timeout(function () {
-            //            $scope.message = "";
-            //        }, 7000);
-            //    }
-            //}).catch(function (error) {
-
-            //    $scope.message = "Faild to post feedback, Please try later";
-            //    $timeout(function () {
-            //        $scope.message = "";
-            //    }, 7000);
-
-            //}).finally(function () {
-            //    kendo.mobile.application.pane.loader.hide();
-            //});
+            }).finally(function () {
+                kendo.mobile.application.pane.loader.hide();
+            });
         }
 
         $scope.myOptions = {
