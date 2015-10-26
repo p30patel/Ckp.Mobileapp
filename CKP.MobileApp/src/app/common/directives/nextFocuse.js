@@ -10,19 +10,10 @@ app.directive('nextFocus', function() {
                 if (code === 13) {
                     e.preventDefault();
                 
-                     elem.next()[0].focus();
+                  //   elem.next()[0].focus();
                 }
             });
 
-            elem.bind('touchend', function (e) {
-
-                var code = e.keyCode || e.which;
-                if (code === 13) {
-                    e.preventDefault();
-                
-                    elem.next()[0].focus();
-                }
-            });
-        }
+           }
     }
 });
