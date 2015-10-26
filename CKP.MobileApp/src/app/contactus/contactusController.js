@@ -154,6 +154,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         $scope.HelpDesk = {};
         $scope.contact = {};
+       
         //address
         var getHelpDesk = function () {
 
@@ -172,21 +173,28 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             $("#modalview-email").kendoMobileModalView("close");
         };
         var clearWriteEmailInputs = function () {
-            //$scope.contact.name = '';
-            //$scope.contact.email;
-            //$scope.contact.organization = '';
+            $scope.contact.name = '';
+            $scope.contact.email;
+            $scope.contact.organization = '';
             $scope.contact.orderNumber = '';
             $scope.contact.messageBody = '';
         }
+        clearWriteEmailInputs();
+
+        var validator = $('#contactForm').kendoValidator({
+            validateOnBlur: true
+        }).data('kendoValidator');
+
         $scope.send = function () {
 
             var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!<br>";
-            console.log('clicked');
-            var validator = $('#contactForm').kendoValidator({
-                validateOnBlur: false
-            }).data('kendoValidator');
-            console.log(validator.validate());
-            if (validator.validate()) {
+            var isAuth = $scope.authentication.isAuth;
+            
+            if (($scope.contact.orderNumber !== '' && $scope.contact.messageBody !== ''  && isAuth) || (
+                $scope.contact.name !== '' &&  $scope.contact.email !== '' &&
+                $scope.contact.orderNumber !== '' && $scope.contact.organization !== '' &&
+                $scope.contact.messageBody !== '' && validator.validate())) {
+            
                 kendo.mobile.application.pane.loader.show();
 
                 feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
@@ -215,6 +223,12 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                 }).finally(function () {
                     kendo.mobile.application.pane.loader.hide();
                 });
+            }
+            else{
+                $scope.message = "Please check required inputs!";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 7000);
             }
         }
 
