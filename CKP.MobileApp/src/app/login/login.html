@@ -30,7 +30,7 @@
                  
                     <input value="" type="text"  ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
 
-                    <input value="" type="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
+                    <input value="" type="password" id="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
 
                     <kendo-mobile-button  class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
                   

@@ -268,9 +268,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
             if (type === 'password') {
                 login();
             }
-            if (type === 'text')
-            {
-                $(event.target).next().focus();
+           else{
+                $('#password').focus();
             }
         }
     }
