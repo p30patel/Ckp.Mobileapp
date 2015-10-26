@@ -158,9 +158,6 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         var getHelpDesk = function () {
 
             var helpDesk = localStorageService.get("organizationDetail");
-          
-            console.log(helpDesk);
-
             if (helpDesk) {
                 $scope.helpDesk = helpDesk.HelpDesk;
             }
@@ -168,45 +165,57 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         getHelpDesk();
 
         $scope.showSendEmailmodal = function () {
-
+            clearWriteEmailInputs();
             $("#modalview-email").kendoMobileModalView("open");
         };
         $scope.hideSendEmailmodal = function () {
             $("#modalview-email").kendoMobileModalView("close");
         };
-
+        var clearWriteEmailInputs = function () {
+            //$scope.contact.name = '';
+            //$scope.contact.email;
+            //$scope.contact.organization = '';
+            $scope.contact.orderNumber = '';
+            $scope.contact.messageBody = '';
+        }
         $scope.send = function () {
 
-            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!";
-          
-            kendo.mobile.application.pane.loader.show();
+            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!<br>";
+            console.log('clicked');
+            var validator = $('#contactForm').kendoValidator({
+                validateOnBlur: false
+            }).data('kendoValidator');
+            console.log(validator.validate());
+            if (validator.validate()) {
+                kendo.mobile.application.pane.loader.show();
 
-            feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
-                if (result === 'success') {
-                   
-                    $scope.message = message;
+                feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
+                    if (result === 'success') {
+
+                        $scope.message = message;
+                        $timeout(function () {
+                            $scope.message = "";
+                        }, 7000);
+
+
+                    } else {
+
+                        $scope.message = "Faild to save data, Please try later<br>";
+                        $timeout(function () {
+                            $scope.message = "";
+                        }, 7000);
+                    }
+                }).catch(function (error) {
+
+                    $scope.message = "Faild to save data, Please try later<br>";
                     $timeout(function () {
                         $scope.message = "";
                     }, 7000);
 
-           
-                } else {
-                    
-                    $scope.message = "Faild to save data, Please try later";
-                    $timeout(function () {
-                        $scope.message = "";
-                    }, 7000);
-                }
-            }).catch(function (error) {
-
-                $scope.message = "Faild to save data, Please try later";
-                $timeout(function () {
-                    $scope.message = "";
-                }, 7000);
-
-            }).finally(function () {
-                kendo.mobile.application.pane.loader.hide();
-            });
+                }).finally(function () {
+                    kendo.mobile.application.pane.loader.hide();
+                });
+            }
         }
 
         $scope.myOptions = {

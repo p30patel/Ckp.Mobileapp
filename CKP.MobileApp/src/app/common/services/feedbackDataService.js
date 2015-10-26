@@ -27,10 +27,14 @@ app.factory("feedbackDataService", [
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
                         var username = authentication.userName;
-                        var orgContext = localStorageService.get('organizationDetail');
-                      
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var orgContext = '';
+                        if (organizationDetail)
+                        {
+                            orgContext = organizationDetail.OrgContext
+                        }                       
                         var data = {
-                            OrgContext: orgContext.OrgContext,
+                            OrgContext: orgContext,
                             UserName: username,
                             Name: contactUsData.name,
                             Email: contactUsData.email,

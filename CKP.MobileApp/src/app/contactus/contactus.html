@@ -275,27 +275,24 @@
                 </div>
 
             </div>
-            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
             
                 <li>
-                  
-                    
                     <h3>
                        {{form.creditLockMessage.resoruceValue}}
                     </h3>
                 </li>
                <li class="ck-no-pad">
                 <fieldset class="ck-login">
-                   
-                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name" autofocus />
+                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name" autofocus required />
 
-                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" />
+                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email"  required/>
 
-                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" />
+                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" required />
 
-                     <input value="" placeholder="{{form.order.resoruceValue}}" type="email" ng-model="contact.orderNumber" />
+                     <input value="" placeholder="{{form.order.resoruceValue}}" type="email" ng-model="contact.orderNumber" required/>
 
-                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;"></textarea>                     
+                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;" required></textarea>                     
                 </fieldset>
                 <i></i>
                    <br />
