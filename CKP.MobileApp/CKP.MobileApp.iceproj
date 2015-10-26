@@ -140,6 +140,7 @@
     <Content Include="src\assests\styles\main.css">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="src\vendor\angular-aria.min.js" />
     <Content Include="src\vendor\angular-filter.min.js" />
     <Content Include="src\vendor\angular-local-storage.min.js" />
     <Content Include="kendo\js\jszip.min.js" />
