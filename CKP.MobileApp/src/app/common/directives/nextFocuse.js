@@ -9,7 +9,8 @@ app.directive('nextFocuse', function() {
                 var code = e.keyCode || e.which;
                 if (code === 13) {
                     e.preventDefault();
-                    elem.next().focus();
+                    console.log(elem.next());
+                     elem.next()[0].focus();
                 }
             });
         }
