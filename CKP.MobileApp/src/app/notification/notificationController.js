@@ -1,6 +1,6 @@
 
-app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService',
-    function ($scope, $http, $sce, translateService) {
+app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService',
+    function ($scope, $http, $sce, translateService, authService) {
 
         $scope.form = {};
 
@@ -8,6 +8,15 @@ app.controller('notificationController', ['$scope', '$http', '$sce', 'translateS
         $scope.form.title.resoruceName = "Notification Settings";
         $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+        $scope.beforeShow = function () {
+            kendo.mobile.application.pane.loader.show();
+            if (!authService.authentication.isAuth) {
+                authService.logout();
+                kendo.mobile.application.navigate("src/app/login/login.html");
+            }
+            kendo.mobile.application.pane.loader.hide();
+
+        };
         $scope.afterShow = function (e) {
 
             var view = kendo.mobile.application.view();
@@ -89,6 +98,31 @@ app.controller('notificationController', ['$scope', '$http', '$sce', 'translateS
         }
 
         setResources();
+
+        var init = function(){
+            $scope.orderReceived = true;
+            $scope.orderApproval = true;
+
+            $scope.orderApprovedStatus = true;
+
+            $scope.shipment = true;
+            $scope.delivery = true;
+
+            $scope.printshop = true;
+            $scope.maintenance = true;
+
+        }
+        init();
+
+        $scope.notifications = {
+            "orderReceived": false,
+            "orderApproval": true,
+            "orderApprovedStatus": true,
+            "shipment": false,
+            "delivery": false,
+            "printshop": true,
+            "maintenance": false,
+        };
 
         $scope.renderHtml = function () {
             return $sce.trustAsHtml(content);

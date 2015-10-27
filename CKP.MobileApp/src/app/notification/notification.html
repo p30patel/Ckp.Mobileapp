@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'"  ng-controller="notificationController"  k-after-show="afterShow" track-notification-view>
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'"  ng-controller="notificationController"  k-after-show="afterShow" k-before-show="beforeShow" track-notification-view>
     
    <kendo-mobile-content>
           <div class="km-listview-wrapper">
@@ -7,7 +7,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="km-list ck-brd-setting ck-title-setting">
                         <li >
-                            <input kendo-mobile-switch k-checked="checked" />
+                            <input kendo-mobile-switch k-checked="{{notifications.orderReceived}}" />
                             <i class="ck-icon ck-recieved ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.orderReceived.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.orderReceivedDesc.resoruceValue}}.</p>
@@ -18,7 +18,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.orderApproval}}" />
                             <i class="ck-icon ck-approval ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.orderApproval.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.orderApprovalDesc.resoruceValue}}.</p>
@@ -29,7 +29,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.orderApprovedStatus}}" />
                             <i class="ck-icon ck-cart ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.orderApprovedStatus.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.orderApprovedStatusDesc.resoruceValue}}.</p>
@@ -40,7 +40,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.shipment}}" />
                             <i class="ck-icon ck-shipment ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.shipment.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.shipmentDesc.resoruceValue}}.</p>
@@ -51,7 +51,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.delivery}}" />
                             <i class="ck-icon ck-delivery ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.delivery.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.deliveryDesc.resoruceValue}}</p>
@@ -62,7 +62,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.printshop}}" />
                             <i class="ck-icon ck-printshop ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.printshop.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.printshopDesc.resoruceValue}}</p>
@@ -73,7 +73,7 @@
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="ck-brd-setting ck-title-setting km-list">
                         <li >
-                            <input kendo-mobile-switch  k-checked="checked" />
+                            <input kendo-mobile-switch  k-checked="{{notifications.maintenance}}" />
                             <i class="ck-icon ck-maintance ck-icon-setting"></i>
                             <h4 class="ck-title-setting">{{form.maintenance.resoruceValue}}</h4>
                             <p class="ck-descript-setting">{{form.maintenanceDesc.resoruceValue}}</p>

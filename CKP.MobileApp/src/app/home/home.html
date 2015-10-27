@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" data-use-native-scrolling="true" track-home-view>
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow"  k-before-show="beforeShow" data-use-native-scrolling="true" track-home-view>
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
             
@@ -45,7 +45,7 @@
                   
                     </h3>
                       <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}">
-                    <li class="ck-button km-button">
+                    <li class="ck-button km-button" ng-disabled="orderCount.ApprovalCount == 0">
                         <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                         <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
                     </li>

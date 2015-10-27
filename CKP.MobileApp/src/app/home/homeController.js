@@ -2,16 +2,15 @@
 app.controller('homeController', [
                   '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce',
                    function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce) {
-                       var init = function () {
-
-                           if (!authService.authentication.isAuth) {
+                       $scope.beforeShow = function () {
+                           kendo.mobile.application.pane.loader.show();
+                           if (!authService.authentication.isAuth) {                               
                                authService.logout();
-
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
+                           kendo.mobile.application.pane.loader.hide();
 
-                       };
-                       init();
+                       };                     
 
                        $scope.form = {};
                        $scope.mesages = {};
