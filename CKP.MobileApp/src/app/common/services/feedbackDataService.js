@@ -48,7 +48,7 @@ app.factory("feedbackDataService", [
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
-                                console.log(err);
+                               
                                 deferred.reject(err);
                             });
                         return deferred.promise;

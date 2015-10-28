@@ -73,13 +73,29 @@ app.factory("orderDataService", [
                     }
                     
                     
-                     var approveDecline = function (data) {
+                    var approveDecline = function (approvalDeclineData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
-                      
+                        var username = authData.userName;
+                        var orgId = authData.organizationId;
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext
+                        }
+                     
+                        var data = {
+                            UserName: username,
+                            OrgId: orgId,
+                            RetailerId: approvalDeclineData.RetailerId,
+                            UpdateStatus: approvalDeclineData.UpdateStatus,
+                            OrgContext: orgContext,
+                            ApproveOrdersListData: approvalDeclineData.Salesorders
+                        };
+                        console.log(data);
                         var url = authServiceBase + "webapi/api/core/MobileApp/UpdateApproveOrderList";
                         $http.post(url, data).success(function (result) {   
                             alert(result.success);

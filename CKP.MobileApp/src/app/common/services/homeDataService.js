@@ -23,7 +23,7 @@ app.factory("homeDataService", [
 
                         return deferred.promise;
                     };
-
+                    
                     var getOrderCounts = function () {
                         var deferred = $q.defer();
           

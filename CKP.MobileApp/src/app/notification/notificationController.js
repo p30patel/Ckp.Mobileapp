@@ -149,6 +149,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 }
             }).catch(function (error) {
                 $location.hash('bottom');
+                $anchorScroll();
                 $scope.message = "Faild to update notifcation.";
                 $timeout(function () {
                     $scope.message = "";

@@ -138,14 +138,13 @@ app.controller('homeController', [
                            buttongroup.element.children().removeClass('km-state-active');
                        }
                        $scope.myOptions = {
-                           select: function (e) {
-                              
-                               console.log('Selected Btn Group: ' + e.sender.element.attr('data-btnRetailer') + '  selected index : ' + e.index);
+                           select: function (e) {                              
+                             
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
+                               $scope.selectedRetailer = selectedBtnRetailer;
 
                                var listviews = $("ul.order-header.km-listview");
                                
-
                                listviews.hide();
                               
                                var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
@@ -200,8 +199,6 @@ app.controller('homeController', [
                        var getMessages = function () {
                            var data = localStorageService.get('organizationDetail');
                            if (data !== null) {
-
-
                                kendo.mobile.application.pane.loader.show();
                                $("#btn_message").data("kendoMobileButton");
 
@@ -222,17 +219,12 @@ app.controller('homeController', [
 
                        }; // end message
 
-                       var checkForOrganzationDetail = function ()
-                       {
-                           return true;
-                       }
-
-                    
+                                    
                        getMessages();
                        getOrderCounts();
 
                  
-
+                       $scope.selectedRetailer = 0;
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
 
@@ -316,8 +308,10 @@ app.controller('homeController', [
                        };
                        //approve modal
 
-                       $scope.showApprovalModel = function () {
+                       $scope.showApprovalModel = function (retailerId) {
                            var salesorders = "";
+                           $scope.selectedRetailer = retailerId;
+                          
 
                            var salesorderList = $scope.selection;
                            angular.forEach(salesorderList, function (value, key) {
@@ -332,7 +326,6 @@ app.controller('homeController', [
                        };
 
                        $scope.approved = function (status) {
-                           //alert('approved:' + status);
                            orderApprovalByStatus(status);
 
                        }
@@ -352,14 +345,13 @@ app.controller('homeController', [
                                }
                            });
 
-                           var jsonIn = {
-                               UserName: "jim rl tjx",
-                               OrgId: 6884,
-                               RetailerId: 6884,
-                               ApproveOrdersListData: salesorders
+                           var data = {
+                               RetailerId: $scope.selectedRetailer,
+                               Salesorders: salesorders,
+                               UpdateStatus: statusUpdate,
                            }
                            kendo.mobile.application.pane.loader.show();
-                           orderDataService.approveDecline(jsonIn).then(function (result) {
+                           orderDataService.approveDecline(data).then(function (result) {
                                $scope.message = "Approve / Decliend Successfully";
                                $timeout(function () {
                                    $scope.message = "";
