@@ -46,8 +46,7 @@ app.factory('authInterceptorService', [
                             kendo.mobile.application.navigate("src/app/login/login.html");
                             console.log("Server is unavailable. Please try later or contact customer service. Error:" + 0);
                         }
-                        authService.logout();
-                        kendo.mobile.application.navigate("src/app/login/login.html");
+                       
                         return $q.reject(rejection);
                     }
 

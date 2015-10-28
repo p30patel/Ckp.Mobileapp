@@ -1,6 +1,6 @@
 
-app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService',
-    function ($scope, $http, $sce, translateService, authService) {
+app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', '$anchorScroll', '$location',
+function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, $anchorScroll, $location) {
 
         $scope.form = {};
 
@@ -17,6 +17,7 @@ app.controller('notificationController', ['$scope', '$http', '$sce', 'translateS
             kendo.mobile.application.pane.loader.hide();
 
         };
+        $scope.message = "";
         $scope.afterShow = function (e) {
 
             var view = kendo.mobile.application.view();
@@ -99,7 +100,7 @@ app.controller('notificationController', ['$scope', '$http', '$sce', 'translateS
 
         setResources();
 
-        var init = function(){
+        var init = function () {
             $scope.orderReceived = true;
             $scope.orderApproval = true;
 
@@ -124,8 +125,40 @@ app.controller('notificationController', ['$scope', '$http', '$sce', 'translateS
             "maintenance": false,
         };
 
-        $scope.renderHtml = function () {
-            return $sce.trustAsHtml(content);
+        $scope.onChange = function (e) {
+            var notifcationUpdateData = [];
+            var notifcation = {
+                type: e.sender.element.attr('data-notifcation'),
+                flag: e.checked
+            }
+            notifcationUpdateData.push(notifcation);
+
+            notificationDataService.updateNotifcation(notifcationUpdateData).then(function (result) {
+                if (result === 'success') {
+                    $scope.message = message;
+                    $timeout(function () {
+                        $scope.message = "";
+                    }, 7000);
+
+                } else {
+
+                    $scope.message = "Faild to save data, Please try later<br>";
+                    $timeout(function () {
+                        $scope.message = "";
+                    }, 7000);
+                }
+            }).catch(function (error) {
+                $location.hash('bottom');
+                $scope.message = "Faild to update notifcation.";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 7000);
+
+            });
+        }
+        $scope.renderHtml = function (message) {
+         
+            return $sce.trustAsHtml(message);
         };
 
     }
