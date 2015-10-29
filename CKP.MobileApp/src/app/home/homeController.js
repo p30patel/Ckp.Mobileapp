@@ -11,7 +11,7 @@ app.controller('homeController', [
                            kendo.mobile.application.pane.loader.hide();
 
                        };                     
-
+                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.home");
                        $scope.form = {};
                        $scope.mesages = {};
                        $scope.form.title = {};

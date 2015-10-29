@@ -3,7 +3,7 @@ app.controller('faqController', [
                    '$scope', '$http', '$sce', 'faqDataService', 'translateService',
                    function ($scope, $http, $sce, faqDataService, translateService) {
                        $scope.form = {};
-
+                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "FAQ";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);

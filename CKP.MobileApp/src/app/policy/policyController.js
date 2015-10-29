@@ -2,6 +2,7 @@
 app.controller('policyController', [
                    '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
+                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.policy");
                        $scope.form = {};
 
                        $scope.form.title = {};

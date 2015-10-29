@@ -2,7 +2,7 @@
 app.controller('orderDetailController', [
                    '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout',
                    function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout) {
-
+                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -100,6 +100,7 @@ app.controller('orderDetailController', [
                        }; // end message
 
                        $scope.send = function () {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");
                            kendo.mobile.application.pane.loader.show();
                            $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {

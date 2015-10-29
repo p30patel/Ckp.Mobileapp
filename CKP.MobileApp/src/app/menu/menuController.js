@@ -1,8 +1,9 @@
 app.controller('menuController', [
                    '$scope', 'authService', 'translateService', 'localStorageService',
                    function ($scope, authService, translateService, localStorageService) {
+                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        $scope.form = {};
-                     
+                       
                        $scope.menu = {};
 
                        $scope.menu.title = 'Check-Net';

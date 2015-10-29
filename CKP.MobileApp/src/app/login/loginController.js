@@ -7,7 +7,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     //login page html lables
     $scope.loginData = {};
     $scope.form = {};
-  
+    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     var setResources = function () {
         $scope.form.username = {};
         $scope.form.username.resoruceName = "User Name";
@@ -138,6 +138,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     $scope.sendPassword = function () {
         $('#btnSendPassword').focus();
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
         kendo.mobile.application.pane.loader.show();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
@@ -314,11 +315,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("track.login.btnClick");
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
         login();
     }
 
     $scope.showPasswordHint = function () {
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
         var username = $scope.loginData.userName;
         if (username !== '') {
             kendo.mobile.application.showLoading();

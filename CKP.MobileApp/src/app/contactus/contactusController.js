@@ -1,7 +1,7 @@
 
 app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout', 'feedbackDataService',
     function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout, feedbackDataService) {
-
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.contactus");
         $scope.form = {};
         $scope.authentication = authService.authentication;
         $scope.helpDesk = ""; //need to set help des
@@ -186,7 +186,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }).data('kendoValidator');
 
         $scope.send = function () {
-
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
             var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!<br>";
             var isAuth = $scope.authentication.isAuth;
             

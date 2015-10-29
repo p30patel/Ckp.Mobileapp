@@ -110,16 +110,7 @@ app.config(function ($httpProvider) {
               // Start the monitor inside the success-callback
               monitor.Start(function () {
                   console.log("Monitor started");
-                  monitor.TrackFeature("track-menu-handBarClick");
-                
-                  monitor.TrackFeature("track-login-view");
-                  monitor.TrackFeature("track-home-view");
-                  monitor.TrackFeature("track-notification-view");
-                  monitor.TrackFeature("track-policy-view");
-                  monitor.TrackFeature("track-terms-view");
-                  monitor.TrackFeature("track-feedback-view");
-                  monitor.TrackFeature("track-faq-view");
-                  monitor.TrackFeature("track-contactus-view");
+                  monitor.TrackFeature("app.loaded");
               });
           },
           function (msg) {
