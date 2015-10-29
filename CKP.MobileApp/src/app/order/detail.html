@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" data-use-native-scrolling="true">
    
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
@@ -83,7 +83,7 @@
                     <tr>
                         <td>
                             <i></i>
-                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">Send Inqury</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">Send Inquiry</kendo-mobile-button>
                               <p ng-show="inqueryMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(inqueryMessage)"></p>
                         </td>
                     </tr>
