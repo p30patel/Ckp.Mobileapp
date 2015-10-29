@@ -7,7 +7,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     //login page html lables
     $scope.loginData = {};
     $scope.form = {};
-    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
+    
     var setResources = function () {
         $scope.form.username = {};
         $scope.form.username.resoruceName = "User Name";
@@ -123,7 +123,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     };
     languages(); //init languages
-
+    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
 
     //forgot password 
     $scope.loginData.email = "";

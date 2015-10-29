@@ -1,7 +1,7 @@
 app.controller('menuController', [
                    '$scope', 'authService', 'translateService', 'localStorageService',
                    function ($scope, authService, translateService, localStorageService) {
-                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
+                      
                        $scope.form = {};
                        
                        $scope.menu = {};
@@ -73,7 +73,7 @@ app.controller('menuController', [
 
                        }
                        
-
+                       //window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        $scope.mnuClick = function (viewName) {
 
 

@@ -111,6 +111,7 @@ app.config(function ($httpProvider) {
               monitor.Start(function () {
                   console.log("Monitor started");
                   monitor.TrackFeature("app.loaded");
+                
               });
           },
           function (msg) {
