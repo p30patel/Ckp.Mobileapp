@@ -314,6 +314,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("track.login.btnClick");
         login();
     }
 

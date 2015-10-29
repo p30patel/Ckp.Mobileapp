@@ -1,20 +1,16 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow"  k-before-show="beforeShow" data-use-native-scrolling="true" track-home-view>
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true" track-home-view>
      <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-accent">
-            
-                   <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'"  ng-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
-              
-
-               <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
-               <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
-                </kendo-view-title>
+            <kendo-mobile-nav-bar class="km-accent">            
+                   <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'"  ng-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>              
+               <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>               <kendo-view-title>
+                   <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
 
 
        <kendo-mobile-content>
       
-       <kendo-mobile-list-view class="ck-no-border">
+       <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
 
@@ -61,7 +57,7 @@
             
            
                     <!-- Tab panes -->
-                <kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header">
+                <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header">
                             <table class="ck-table">
                                
                                     <tr class="header">
@@ -152,8 +148,8 @@
                         </td>
                     </tr>
                             </table>
-                </kendo-mobile-list-view>
-                <kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header">     
+                </ul>
+                <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header">     
                             <table class="ck-table">
                                    <tr class="header">
                                        <td>&nbsp;</td>
@@ -210,8 +206,8 @@
                         </td></tr>
                          
                        </table>
-                  </kendo-mobile-list-view>
-           <kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header"> 
+                  </ul>
+                <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" class="order-header"> 
                             <table class="ck-table">
                                  <tr class="header">
                                      <td></td>
@@ -267,15 +263,15 @@
                          
                             </table>
                     
-           </kendo-mobile-list-view>
+           </ul>
                   </div> 
  
-        </kendo-mobile-list-view>
+        </ul>
         <!-- End Home View -->
     </kendo-mobile-content>
  
 <!--  Alert modal  -->
-    <kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">{{form.alertsAndNews.resoruceValue}}</kendo-mobile-nav-bar>
         </kendo-mobile-header>
@@ -347,12 +343,12 @@
             <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
             </kendo-mobile-button>
         </kendo-mobile-footer>
-        </kendo-mobile-module-view>
+        </div>
 
 
       <!--  credit lock modal  -->
 
-          <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
             <div kendo-mobile-header>
                 <div kendo-mobile-nav-bar class="km-dark">
                     {{form.creditLock.resoruceValue}}
@@ -382,7 +378,7 @@
 
                   <!--  approve modal -->
         
-         <kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
                 <kendo-mobile-header>
                     <kendo-mobile-nav-bar class="km-dark">
                             <kendo-mobile-button k-align="'left'" k-on-click="hideApporvalModel()"><i class="ck-icon ck-barrow" style="color: rgb(213, 43, 30);"></i></kendo-mobile-button>
@@ -408,7 +404,7 @@
                         
                         <kendo-mobile-button class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap"  ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
                 </kendo-mobile-footer>
-                </kendo-mobile-modal-view>
+                </div>
         
      
 </kendo-mobile-view>

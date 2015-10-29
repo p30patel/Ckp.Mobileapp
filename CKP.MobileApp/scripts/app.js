@@ -111,7 +111,7 @@ app.config(function ($httpProvider) {
               monitor.Start(function () {
                   console.log("Monitor started");
                   monitor.TrackFeature("track-menu-handBarClick");
-                  monitor.TrackFeature("track-login-btnClick");
+                
                   monitor.TrackFeature("track-login-view");
                   monitor.TrackFeature("track-home-view");
                   monitor.TrackFeature("track-notification-view");
