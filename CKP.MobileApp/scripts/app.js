@@ -11,7 +11,7 @@ var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
-
+var isTrackingActive = false;
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
     clientId: clientId,
@@ -110,8 +110,10 @@ app.config(function ($httpProvider) {
               // Start the monitor inside the success-callback
               monitor.Start(function () {
                   console.log("Monitor started");
-                  monitor.TrackFeature("app.loaded");
-                
+                  monitor.TrackFeature("app.view");
+                  isTrackingActive = true;
+                  console.log(isTrackingActive);
+
               });
           },
           function (msg) {
@@ -121,6 +123,7 @@ app.config(function ($httpProvider) {
     analytics.Stop = function () {
         var monitor = window.plugins.EqatecAnalytics.Monitor;
         monitor.Stop();
+        isTrackingActive = false;
     }
     analytics.Monitor = function () {
         return window.plugins.EqatecAnalytics.Monitor;

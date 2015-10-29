@@ -72,8 +72,10 @@ app.controller('menuController', [
                            kendo.mobile.application.navigate("src/app/login/login.html");
 
                        }
+                       if (isTrackingActive) {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
+                       }
                        
-                       //window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        $scope.mnuClick = function (viewName) {
 
 
