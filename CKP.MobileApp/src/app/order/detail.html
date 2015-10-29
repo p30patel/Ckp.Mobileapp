@@ -57,7 +57,7 @@
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                 <h4>Ship To Information</h4>
                <p>
-                  <b>{{order.detail[0].hipToAddress.Name}}</b>
+                  <b>{{order.detail[0].ShipToAddress.Name}}</b>
                 </p>
                 <p ng-show="order.detail[0].ShipToAddress.Contact">{{order.detail[0].ShipToAddress.Contact}}</p>
                  <p ng-show="order.detail[0].ShipToAddress.StoreNumber">{{order.detail[0].ShipToAddress.StoreNumber}}</p>
