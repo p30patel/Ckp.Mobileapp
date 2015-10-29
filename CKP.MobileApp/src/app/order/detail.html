@@ -153,9 +153,9 @@
                             <h4>Phone</h4>
                          </td>
                         <td>
-                            <h4>:Greg Sendi</h4>
-                            <h4>:gsendi@premierlogic.com</h4>
-                            <h4>:000-000-000</h4>
+                            <h4>:{{order.detail[0].ReleasedBy}}</h4>
+                            <h4>:{{order.detail[0].Email}}</h4>
+                            <h4>:{{order.detail[0].Phone}}</h4>
                        </td>
                     </tr>
                   
@@ -166,17 +166,18 @@
             <tr>
                 <td colspan="2">
                     <fieldset>
-                        <textarea placeholder="Approve / Declined Comments" style="height: 125px;"></textarea>
+                        <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 125px;"></textarea>
                     </fieldset>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                         <i></i>
-                    <kendo-mobile-button class="km-secondary km-large ck-btn-left">Declined</kendo-mobile-button>
+                    <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
                     <i></i>
-                    <kendo-mobile-button class="km-primary km-large ck-btn-right">Approve</kendo-mobile-button>
+                    <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
                 </td>
+                  <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
             </tr>
         </table>
         </kendo-mobile-list-view>
