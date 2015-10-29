@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
    
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
@@ -12,26 +12,26 @@
     <kendo-mobile-content>
         <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
             <li>
-                <h2 class="km-bold-font">GEM Trading Co. LLC</h2>
+                <h2 class="km-bold-font">{{order.detail[0].ProductionOrderData.OrganizationName}}</h2>
                 <table class="ck-table">
                     <tr>
                         <td class="v-align">
                             <h3 class="km-bold-font">Order Date</h3>
                             <h3 class="km-bold-font">Shopping Cart</h3>
-                            <h3 class="km-bold-font">Order No</h3>
-                            <h3 class="km-bold-font">Sales No</h3>
                             <h3 class="km-bold-font">Cust PO No</h3>
+                            <h3 class="km-bold-font">Sales Order No</h3>
+                            <h3 class="km-bold-font">Vendor Ref</h3>
                         </td>
                         <td class="v-align">
-                            <h3>:24/03/2015</h3>
-                            <h3>:092883450</h3>
-                            <h3>:CAT144893</h3>
-                            <h3>:070018975</h3>
-                            <h3>:5555534219381872</h3>
+                            <h3>:{{order.detail[0].ProductionOrderData.DateSOCreated | date}}</h3>
+                            <h3>:{{order.detail[0].ProductionOrderData.ShoppingCartId}}</h3>
+                            <h3>:{{order.detail[0].ProductionOrderData.OrderNumber}}</h3>
+                            <h3>:{{order.detail[0].ProductionOrderData.OrderLines[0].SalesOrderNo}}</h3>
+                            <h3>:{{order.detail[0].ProductionOrderData.ReceiverReference}}</h3>
                         </td>
                         <td class="v-align c-align">
                            
-                            <div class="status open">OPEN</div>
+                            <div class="status open">{{order.detail[0].ProductionOrderData.StatusText}}</div>
                              <input kendo-mobile-switch k-checked="checked" />
                             <h3 class="notify">Notify Me</h3>
                         </td>
@@ -41,14 +41,34 @@
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h4>Bill To Information</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.
+                  <b>{{order.detail[0].BillToAddress.Name}}</b>
                 </p>
+                <p ng-show="order.detail[0].BillToAddress.Contact">{{order.detail[0].BillToAddress.Contact}}</p>
+                 <p ng-show="order.detail[0].BillToAddress.StoreNumber">{{order.detail[0].BillToAddress.StoreNumber}}</p>
+
+                 <p ng-show="order.detail[0].BillToAddress.Street1">{{order.detail[0].BillToAddress.Street1}}</p>
+                 <p ng-show="order.detail[0].BillToAddress.Street2">{{order.detail[0].BillToAddress.Street2}}</p>
+                 <p ng-show="order.detail[0].BillToAddress.Street3">{{order.detail[0].BillToAddress.Street3}}</p>
+                 <p ng-show="order.detail[0].BillToAddress.Street4">{{order.detail[0].BillToAddress.Street4}}</p>
+
+                 <p ng-show="order.detail[0].BillToAddress.City">{{order.detail[0].BillToAddress.City}}, {{order.detail[0].BillToAddress.StateProv}} {{order.detail[0].BillToAddress.ZipCode}} {{order.detail[0].BillToAddress.Iso3166}} </p>
+                
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                 <h4>Ship To Information</h4>
-                <p> 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus sollicitudin nunc, ut auctor lectus scelerisque id. Duis semper, dui non iaculis placerat, enim orci venenatis enim, a laoreet turpis tellus a nulla. Suspendisse nec mi mattis, hendrerit magna eget, convallis quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus hendrerit pellentesque. Aliquam dictum sodales velit eget hendrerit. Ut diam dui, maximus id nisi et, mattis condimentum nunc. Phasellus sollicitudin scelerisque lacus non placerat.
+               <p>
+                  <b>{{order.detail[0].hipToAddress.Name}}</b>
                 </p>
+                <p ng-show="order.detail[0].ShipToAddress.Contact">{{order.detail[0].ShipToAddress.Contact}}</p>
+                 <p ng-show="order.detail[0].ShipToAddress.StoreNumber">{{order.detail[0].ShipToAddress.StoreNumber}}</p>
+
+                 <p ng-show="order.detail[0].ShipToAddress.Street1">{{order.detail[0].ShipToAddress.Street1}}</p>
+                 <p ng-show="order.detail[0].ShipToAddress.Street2">{{order.detail[0].ShipToAddress.Street2}}</p>
+                 <p ng-show="order.detail[0].ShipToAddress.Street3">{{order.detail[0].ShipToAddress.Street3}}</p>
+                 <p ng-show="order.detail[0].ShipToAddress.Street4">{{order.detail[0].ShipToAddress.Street4}}</p>
+
+                 <p ng-show="order.detail[0].ShipToAddress.City">{{order.detail[0].ShipToAddress.City}}, {{order.detail[0].ShipToAddress.StateProv}} {{order.detail[0].ShipToAddress.ZipCode}} {{order.detail[0].ShipToAddress.Iso3166}} </p>
+                
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-inquiry" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                 <h4>Order Inquiry</h4>
@@ -56,14 +76,15 @@
                     <tr>
                         <td>
                             <fieldset>
-                                <textarea placeholder="Have a question or comment about this order?" style="height: 125px;"></textarea>
+                                <textarea placeholder="{{form.orderInquiry.resoruceValue}}" ng-model="inqueryComment" style="height: 125px;"></textarea>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <i></i>
-                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;">SEND INQUIRY</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">Send Inqury</kendo-mobile-button>
+                              <p ng-show="inqueryMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(inqueryMessage)"></p>
                         </td>
                     </tr>
                 </table>
@@ -75,21 +96,27 @@
                         <td>
                             <h4 class="km-bold-font">Item</h4></td>
                         <td>
+                            <h4 class="km-bold-font">Quantity</h4>
+                       </td>
+                          <td>
                             <h4 class="km-bold-font">Price</h4>
                        </td>
                     </tr>
-                    <tr class="pipe">
+                    <tr class="pipe" ng-repeat="orderLine in order.detail[0].ProductionOrderData.OrderLines">
                         <td>
-                            <h4 class="km-bold-font">T.J.Maxx Big & Tall Special HTgs 10m/40</h4>
-                            <h5>T.J. Maxx Big & Tall (CASE)</h5>
-                            <h5>1 X USD 18.00 per 1000 pcs</h5>
-                            <h5>Production Location:DAYTON OHIO LASER</h5>
+                            <h4 class="km-bold-font">{{orderLine.ProductName}}</h4>
+                            <h5>Item Code: {{orderLine.RetailerProductCode}}</h5>
+                            <h5>{{orderLine.FormattedGrossPrice}}</h5>
+                            <h5>Production Location:{{order.detail[0].OrderDetailData[0].PrintingLocation}}</h5>
                         </td>
                         <td class="v-align">
-                            <h4 class="km-bold-font">$180.00</h4>
+                            <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
+                        </td>
+                          <td class="v-align">
+                            <h4 class="km-bold-font">{{orderLine.FormattedNetValue}}</h4>
                         </td>
                     </tr>
-                    <tr class="pipe">
+                 <!--   <tr class="pipe">
                         <td>
                             <h4 class="km-bold-font r-align">Sub Total:</h4>
                         </td>
@@ -97,7 +124,7 @@
                             <h4 class="km-bold-font">$180.00</h4>
                        </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td>
                             <h4 class="km-bold-font r-align">Taxes VAT (6.00%):</h4>
                         </td>
@@ -105,9 +132,9 @@
                             <h4 class="km-bold-font">$10.80</h4>
                        </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td colspan="2" class="pipe r-align">
-                            <p style="font-style:italic;">Shipping and tax charges are estimated at time of checkout. The final shipping and tax amount will be reflected on your invoice.</em>
+                            <p style="font-style:italic;">{{form.shippingInstruction.resoruceValue}}</p>
                         </td>
                     </tr>
                     <tr class="med-grey pipe">
@@ -116,7 +143,7 @@
                         <td>
                             <h4 class="km-bold-font">$190.80</h4>
                        </td>
-                    </tr>
+                    </tr>-->
                 </table>
                 <table class="ck-table pad">
                      <tr class="pipe" style="background:#fff;">
@@ -131,23 +158,27 @@
                             <h4>:000-000-000</h4>
                        </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
-                            <fieldset>
-                                <textarea placeholder="Comments" style="height: 125px;"></textarea>
-                            </fieldset>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                             <i></i>
-                            <kendo-mobile-button class="km-secondary km-large ck-btn-left">DENY</kendo-mobile-button>
-                            <i></i>
-                            <kendo-mobile-button class="km-primary km-large ck-btn-right">APPROVE</kendo-mobile-button>
-                        </td>
-                    </tr>
+                  
                 </table>
             </kendo-mobile-collapsible>
+                <table class="ck-table pad" ng-show="order.hasApproval">
+                 
+            <tr>
+                <td colspan="2">
+                    <fieldset>
+                        <textarea placeholder="Approve / Declined Comments" style="height: 125px;"></textarea>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <i></i>
+                    <kendo-mobile-button class="km-secondary km-large ck-btn-left">Declined</kendo-mobile-button>
+                    <i></i>
+                    <kendo-mobile-button class="km-primary km-large ck-btn-right">Approve</kendo-mobile-button>
+                </td>
+            </tr>
+        </table>
         </kendo-mobile-list-view>
     </kendo-mobile-content>
 </kendo-mobile-view>
