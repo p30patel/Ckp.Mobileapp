@@ -124,12 +124,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
     languages(); //init languages
     
     if (isTrackingActive) {
-        console.log('y');
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
-    else {
-        console.log('N');
-    }
+ 
 
     //forgot password 
     $scope.loginData.email = "";
