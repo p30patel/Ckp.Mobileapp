@@ -110,7 +110,7 @@ app.config(function ($httpProvider) {
               // Start the monitor inside the success-callback
               monitor.Start(function () {
                   console.log("Monitor started");
-                  monitor.TrackFeature("app.view");
+                  monitor.TrackFeature("app.loaded");
                   isTrackingActive = true;
                   console.log(isTrackingActive);
 
