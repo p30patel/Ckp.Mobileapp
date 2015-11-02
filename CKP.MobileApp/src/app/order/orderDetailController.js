@@ -103,7 +103,8 @@ app.controller('orderDetailController', [
                        $scope.track = function () {
                            var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
                            $scope.trackingUrl = $sce.trustAsResourceUrl(url);
-                           $("#modalview-trackingList").kendoMobileModalView("open");
+                           // $("#modalview-trackingList").kendoMobileModalView("open");
+                           window.open("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048", '_system');
                        }
 
                        $scope.trackIndividual = function (urlId) {
