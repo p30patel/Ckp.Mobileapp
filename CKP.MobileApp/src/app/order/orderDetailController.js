@@ -57,6 +57,7 @@ app.controller('orderDetailController', [
                        $scope.feedbackData.comment = "";
 
                        $scope.trackingUrl = "";
+                       $scope.trackingList = {};
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -100,18 +101,23 @@ app.controller('orderDetailController', [
                            //    kendo.mobile.application.pane.loader.hide();
                            //});
                        }; // end message
-                       $scope.track = function () {
-                           var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
-                           $scope.trackingUrl = $sce.trustAsResourceUrl(url);
-                           // $("#modalview-trackingList").kendoMobileModalView("open");
-                           window.open("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048", '_system');
+                       $scope.showTrakcingListModal = function () {
+                         
+                           $scope.trackingList = [{
+                               'Url': "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048",
+                               'TrackingNumber': '9505500004115234000048'
+                           }, {
+                               'Url': "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000055",
+                               'TrackingNumber': '9505500004115234000055'
+
+                           }];
+                           $("#modalview-trackingList").kendoMobileModalView("open");
                        }
 
-                       $scope.trackIndividual = function (urlId) {
-                          
+                       $scope.trackUrl = function (url) {
                            var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
                            $scope.trackingUrl = $sce.trustAsResourceUrl(url);
-                           $("#modalview-tracking").kendoMobileModalView("open");
+                           window.open("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048", '_system');
                        }
                        $scope.send = function () {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");
@@ -186,10 +192,7 @@ app.controller('orderDetailController', [
                           
                        }
                        //tracking modal 
-                      
-                       $scope.closeTrackingModel = function () {
-                           $("#modalview-tracking").kendoMobileModalView("close");
-                       };
+                     
                        $scope.closeTrackingListModel = function () {
                            $("#modalview-trackingList").kendoMobileModalView("close");
                        };

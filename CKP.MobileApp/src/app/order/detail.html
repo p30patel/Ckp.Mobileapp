@@ -2,7 +2,7 @@
    
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
-            <kendo-mobile-button k-align="'right'" ng-click="track()"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
+            <kendo-mobile-button k-align="'right'" ng-click="showTrakcingListModal()"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
             </kendo-mobile-button>
                 <kendo-mobile-back-button k-align="'left'" ><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
             <kendo-view-title>Order Details</kendo-view-title>
@@ -115,34 +115,7 @@
                             <h4 class="km-bold-font">{{orderLine.FormattedNetValue}}</h4>
                         </td>
                     </tr>
-                 <!--   <tr class="pipe">
-                        <td>
-                            <h4 class="km-bold-font r-align">Sub Total:</h4>
-                        </td>
-                        <td>
-                            <h4 class="km-bold-font">$180.00</h4>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 class="km-bold-font r-align">Taxes VAT (6.00%):</h4>
-                        </td>
-                        <td>
-                            <h4 class="km-bold-font">$10.80</h4>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="pipe r-align">
-                            <p style="font-style:italic;">{{form.shippingInstruction.resoruceValue}}</p>
-                        </td>
-                    </tr>
-                    <tr class="med-grey pipe">
-                        <td>
-                            <h4 class="km-bold-font r-align">Grand Total:</h4></td>
-                        <td>
-                            <h4 class="km-bold-font">$190.80</h4>
-                       </td>
-                    </tr>-->
+                
                 </table>
                 <table class="ck-table pad">
                      <tr class="pipe" style="background:#fff;">
@@ -183,10 +156,6 @@
     </kendo-mobile-content>
 
 
-    
-                  <!--  url tracking modal -->
-        
-    
                   <!--  url tracking modal -->
         
     <kendo-mobile-modal-view id="modalview-trackingList" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
@@ -196,22 +165,11 @@
                             <kendo-mobile-button ng-click="closeTrackingListModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
                     </kendo-mobile-nav-bar>
                 </kendo-mobile-header>
-                <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
-                    <li><a ng-href="{{trackingUrl}}">9505500004115234000048</a></li>
-                    <li><a ng-href="{{trackingUrl}}">9505500004115234000055</a></li>
+                <kendo-mobile-list-view class="ck-grey-wrap ck-no-border" ng-repeat="tracking in trackingList">
+                    <li><a href="#" ng-click="trackUrl({{trackUrl}})">{{tracking.TrackingNumber}}</a></li>
                 </kendo-mobile-list-view>
                </kendo-mobile-modal-view>
 
-    <kendo-mobile-modal-view id="modalview-tracking" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
-                <kendo-mobile-header>
-                    <kendo-mobile-nav-bar class="km-dark">                      
-                            <kendo-view-title>Tracking</kendo-view-title>
-                            <kendo-mobile-button ng-click="closeTrackingModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
-                    </kendo-mobile-nav-bar>
-                </kendo-mobile-header>
-             
-                   <iframe height="1350" width="100%" scrolling="no" ng-src="{{trackingUrl}}"></iframe>
-              
-               </kendo-mobile-modal-view>
+  
         
 </kendo-mobile-view>
