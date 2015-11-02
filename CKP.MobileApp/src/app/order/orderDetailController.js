@@ -99,7 +99,7 @@ app.controller('orderDetailController', [
                            //});
                        }; // end message
                        $scope.track = function () {
-                           location.replace("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000055");
+                           $("#modalview-tracking").kendoMobileModalView("open");
                        }
                        $scope.send = function () {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");
@@ -173,6 +173,11 @@ app.controller('orderDetailController', [
                            });
                           
                        }
+                       //tracking modal 
+                      
+                       $scope.closeTrackingModel = function () {
+                           $("#modalview-tracking").kendoMobileModalView("close");
+                       };
                 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);

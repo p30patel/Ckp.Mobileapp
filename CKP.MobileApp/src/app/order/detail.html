@@ -4,7 +4,6 @@
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-button k-align="'right'" ng-click="track()"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
             </kendo-mobile-button>
-            <kendo-mobile-back-button data-role="button" href="yahoo.html">Go to bar</kendo-mobile-back-button>
                 <kendo-mobile-back-button k-align="'left'" ><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
             <kendo-view-title>Order Details</kendo-view-title>
         </kendo-mobile-nav-bar>
@@ -182,4 +181,23 @@
         </table>
         </kendo-mobile-list-view>
     </kendo-mobile-content>
+
+
+    
+                  <!--  url tracking modal -->
+        
+    <kendo-mobile-modal-view id="modalview-tracking" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
+                <kendo-mobile-header>
+                    <kendo-mobile-nav-bar class="km-dark">                      
+                            <kendo-view-title>Tracking</kendo-view-title>
+                            <kendo-mobile-button ng-click="closeTrackingModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+                    </kendo-mobile-nav-bar>
+                </kendo-mobile-header>
+                <kendo-mobile-content>
+                 <iframe style="border: 0px;" src="https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000055" width="100%" height="100%"></iframe>
+               
+              </kendo-mobile-content>
+            
+               </kendo-mobile-modal-view>
+        
 </kendo-mobile-view>
