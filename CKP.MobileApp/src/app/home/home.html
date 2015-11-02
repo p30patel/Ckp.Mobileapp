@@ -271,18 +271,21 @@
     </kendo-mobile-content>
  
 <!--  Alert modal  -->
-    <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-dark">{{form.alertsAndNews.resoruceValue}}</kendo-mobile-nav-bar>
+            <kendo-mobile-nav-bar class="km-dark">
+             <kendo-view-title>{{form.alertsAndNews.resoruceValue}}</kendo-view-title>
+                       <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+            </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-
-            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
+        <kendo-mobile-content>
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
   
     <li>
   No messages are found!
 </li>
 </ul>
-          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
           <i class="ck-icon ck-news ck-module-icon"></i>
          <span class="ck-font-size-mid">Announcements</span>
@@ -316,6 +319,7 @@
          
         </ul>
 
+
          <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
     <li class="ck-module-date">
          <i class="ck-icon ck-news ck-module-icon"></i>
@@ -334,26 +338,25 @@
     </span>
 </li>
 </ul>
-
+            </kendo-mobile-content>
        
-
-   
-   
-        <kendo-mobile-footer>
+       <!-- <kendo-mobile-footer>
             <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
             </kendo-mobile-button>
-        </kendo-mobile-footer>
+        </kendo-mobile-footer>-->
         </div>
 
 
       <!--  credit lock modal  -->
 
-    <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
             <div kendo-mobile-header>
                 <div kendo-mobile-nav-bar class="km-dark">
-                    {{form.creditLock.resoruceValue}}
-                </div>
+                       <kendo-view-title> {{form.creditLock.resoruceValue}}</kendo-view-title>
+                       <kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
 
+                </div>
+                 
             </div>
             <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
                  <li class="ck-module-date">
@@ -368,10 +371,10 @@
                 </li>
            
             </ul>
-            <kendo-mobile-footer>
+        <!--    <kendo-mobile-footer>
                 <div kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
                 </div>
-            </kendo-mobile-footer>
+            </kendo-mobile-footer>-->
 
           </div>
 
