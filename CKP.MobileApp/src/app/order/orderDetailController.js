@@ -55,6 +55,8 @@ app.controller('orderDetailController', [
                        $scope.feedbackData = {};
                        $scope.feedbackData.webpage = "Mobile App - Order Inquiry";
                        $scope.feedbackData.comment = "";
+
+                       $scope.trackingUrl = "";
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -99,6 +101,15 @@ app.controller('orderDetailController', [
                            //});
                        }; // end message
                        $scope.track = function () {
+                           var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
+                           $scope.trackingUrl = $sce.trustAsResourceUrl(url);
+                           $("#modalview-trackingList").kendoMobileModalView("open");
+                       }
+
+                       $scope.trackIndividual = function (urlId) {
+                          
+                           var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
+                           $scope.trackingUrl = $sce.trustAsResourceUrl(url);
                            $("#modalview-tracking").kendoMobileModalView("open");
                        }
                        $scope.send = function () {
@@ -177,6 +188,9 @@ app.controller('orderDetailController', [
                       
                        $scope.closeTrackingModel = function () {
                            $("#modalview-tracking").kendoMobileModalView("close");
+                       };
+                       $scope.closeTrackingListModel = function () {
+                           $("#modalview-trackingList").kendoMobileModalView("close");
                        };
                 
                        $scope.renderHtml = function (content) {
