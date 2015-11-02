@@ -23,8 +23,8 @@ app.constant('ngAuthSettings', {
 
 app.run(['authService', 'localStorageService', function (authService, localStorageService) {
 
-    //authService.fillAuthData();
-    localStorageService.remove('authorizationData');
+    authService.fillAuthData();
+    //localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
 

@@ -114,10 +114,10 @@ app.controller('orderDetailController', [
                            $("#modalview-trackingList").kendoMobileModalView("open");
                        }
 
-                       $scope.trackUrl = function (url) {
-                           var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048";
-                           $scope.trackingUrl = $sce.trustAsResourceUrl(url);
-                           window.open("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000048", '_system');
+                       $scope.showTracking = function (url) {
+                          
+                           window.open(url, '_system');
+                         
                        }
                        $scope.send = function () {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");

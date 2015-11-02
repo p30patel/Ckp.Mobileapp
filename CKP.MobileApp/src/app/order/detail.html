@@ -166,7 +166,8 @@
                     </kendo-mobile-nav-bar>
                 </kendo-mobile-header>
                 <kendo-mobile-list-view class="ck-grey-wrap ck-no-border" ng-repeat="tracking in trackingList">
-                    <li><a href="#" ng-click="trackUrl({{trackUrl}})">{{tracking.TrackingNumber}}</a></li>
+                    <li><kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.Url}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.TrackingNumber}}</kendo-mobile-button></li>
+             
                 </kendo-mobile-list-view>
                </kendo-mobile-modal-view>
 
