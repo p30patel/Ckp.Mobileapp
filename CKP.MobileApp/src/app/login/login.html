@@ -62,16 +62,20 @@
 
     <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up reverse'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">
            <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-dark" style="border-bottom:1px;">
-                <kendo-view-title> Reset Password</kendo-view-title>
+                  <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                       <kendo-view-title>{{form.resetPassword.resoruceValue}}</kendo-view-title>
                        <kendo-mobile-button ng-click="closeModalViewForgotPassword()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
          <ul kendo-mobile-list-view style="margin-bottom: .5em; border:none !important; margin-top: 5.2em !important;"  class="ck-module-solid ck-no-border" k-style="'inset'">
+
                <li class="ck-module-date">
-                   {{form.forgotYourPassword.resoruceValue}}?
-                </li>
+         <i class="ck-icon ck-password ck-module-icon"></i>
+         <span class="ck-font-size-mid">  {{form.forgotYourPassword.resoruceValue}}?</span>
+        
+    </li>
+           
             <li>
                 <h2 class="km-bold-font"> </h2>
                 <p>

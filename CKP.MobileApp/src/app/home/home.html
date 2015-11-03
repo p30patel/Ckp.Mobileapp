@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true" >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
      <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">            
                    <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'"  ng-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>              
@@ -273,7 +273,7 @@
 <!--  Alert modal  -->
     <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-dark">
+            <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
              <kendo-view-title>{{form.alertsAndNews.resoruceValue}}</kendo-view-title>
                        <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
             </kendo-mobile-nav-bar>
@@ -351,7 +351,7 @@
 
     <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
             <div kendo-mobile-header>
-                <div kendo-mobile-nav-bar class="km-dark">
+                <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                        <kendo-view-title> {{form.creditLock.resoruceValue}}</kendo-view-title>
                        <kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
 
@@ -359,11 +359,14 @@
                  
             </div>
             <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
-                 <li class="ck-module-date">
-                   {{form.creditLock.resoruceValue}}
-                </li>
+
+                    <li class="ck-module-date">
+         <i class="ck-icon ck-lock ck-module-icon"></i>
+         <span class="ck-font-size-mid">   {{form.creditLock.resoruceValue}}</span>
+        
+    </li>
                 <li>
-                    <i class="ck-icon ck-lock ck-module-icon"></i>
+               
                     <h3 class="km-bold-font">{{form.attentionUser.resoruceValue}}</h3>
                     <h3 class="km-font">
                        {{form.creditLockMessage.resoruceValue}}
@@ -380,12 +383,14 @@
 
 
                   <!--  approve modal -->
+   
         
     <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
                 <kendo-mobile-header>
-                    <kendo-mobile-nav-bar class="km-dark">
+                    <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                             <kendo-mobile-button k-align="'left'" k-on-click="hideApporvalModel()"><i class="ck-icon ck-barrow" style="color: rgb(213, 43, 30);"></i></kendo-mobile-button>
-                        {{form.approval.resoruceValue}}</kendo-mobile-nav-bar>
+                         </kendo-view-title>
+                        {{form.approval.resoruceValue}}<kendo-view-title></kendo-mobile-nav-bar>
                 </kendo-mobile-header>
                 <ul kendo-mobile-list-view k-style="'inset'">
                     <li class="ck-module-solid">

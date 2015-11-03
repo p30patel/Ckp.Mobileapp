@@ -219,7 +219,7 @@ app.factory('translateService',
            
             var deferred = $q.defer();
 
-            localStorage.clear();
+           // localStorage.clear();
 
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
 

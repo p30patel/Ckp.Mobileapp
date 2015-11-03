@@ -65,6 +65,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.passwordSentText = {};
         $scope.form.passwordSentText.resoruceName = "Password sent to your email address";
         $scope.form.passwordSentText.resoruceValue = "Password sent to your email address";
+
+        $scope.form.resetPassword = {};
+        $scope.form.resetPassword.resoruceName = "Reset Password";
+        $scope.form.resetPassword.resoruceValue = "Reset Password";
     }
 
     setResources();
@@ -209,6 +213,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.form.hint.resoruceValue = translateService.getResourceValue($scope.form.hint.resoruceName);
             $scope.form.passwordSentText.resoruceValue = translateService.getResourceValue($scope.form.passwordSentText.resoruceName);
 
+            $scope.form.resetPassword.resoruceValue = translateService.getResourceValue($scope.form.resetPassword.resoruceName);
             kendo.mobile.application.pane.loader.hide();
         });
 
