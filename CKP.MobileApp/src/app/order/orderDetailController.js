@@ -118,7 +118,8 @@ app.controller('orderDetailController', [
                                'TrackingNumber': '9505500004115234000055'
 
                            }];
-                           if ($scope.trackingCount > 2) {
+                           console.log($scope.trackingCount);
+                           if ($scope.trackingCount > 1) {
                                $("#modalview-trackingList").kendoMobileModalView("open");
                            }
                            else {
