@@ -58,6 +58,8 @@ app.controller('orderDetailController', [
 
                        $scope.trackingUrl = "";
                        $scope.trackingList = {};
+                       $scope.trackingCount = 0;
+
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -90,6 +92,9 @@ app.controller('orderDetailController', [
                            $scope.order.ShoppingCart =  $scope.order.detail[0].ProductionOrderData.ShoppingCartId;
                            $scope.order.SalesOrderNo = $scope.order.detail[0].ProductionOrderData.OrderLines[0].SalesOrderNo;
                          
+                           var tracking = new Date().getMinutes() % 2 == 0 ? 1 : 2;
+                           $scope.trackingCount = tracking;
+                           $("#btn_tracking").data("kendoMobileButton").badge(tracking);
                            //kendo.mobile.application.pane.loader.show();
                           
                            //orderDataService.getOrderDetail().then(function (result) {
@@ -101,6 +106,8 @@ app.controller('orderDetailController', [
                            //    kendo.mobile.application.pane.loader.hide();
                            //});
                        }; // end message
+
+                      
                        $scope.showTrakcingListModal = function () {
                          
                            $scope.trackingList = [{
@@ -111,7 +118,13 @@ app.controller('orderDetailController', [
                                'TrackingNumber': '9505500004115234000055'
 
                            }];
-                           $("#modalview-trackingList").kendoMobileModalView("open");
+                           if ($scope.trackingCount > 2) {
+                               $("#modalview-trackingList").kendoMobileModalView("open");
+                           }
+                           else {
+                               var url = "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9505500004115234000055";
+                               window.open(url, '_system');
+                           }
                        }
 
                        $scope.showTracking = function (url) {
