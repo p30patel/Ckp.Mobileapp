@@ -148,10 +148,9 @@ app.factory('translateService',
             
             var resources = JSON.parse(localStorage.getItem(cultureName));
             var hasForceRefresh = true;
-         
-            if (hasForceRefresh)
-            {
             
+            if (hasForceRefresh)
+            {            
                 forceGetResourceUpdates(cultureName, version).then(function (result) {
                     console.log('resoruce from server' + result.length);
                   
@@ -220,7 +219,7 @@ app.factory('translateService',
            
             var deferred = $q.defer();
 
-            //localStorage.clear();
+            localStorage.clear();
 
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
 

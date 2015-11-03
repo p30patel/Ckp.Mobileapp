@@ -115,21 +115,13 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         }
         init();
 
-        $scope.notifications = {
-            "orderReceived": false,
-            "orderApproval": true,
-            "orderApprovedStatus": true,
-            "shipment": false,
-            "delivery": false,
-            "printshop": true,
-            "maintenance": false,
-        };
+        $scope.notifications = [{ "SubscriptionType": 101, "IsEnabled": true, "SubscriptinDescription": "NewOrderReceived", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-recieved" }, { "SubscriptionType": 102, "IsEnabled": true, "SubscriptinDescription": "OrderApproval", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-approval" }, { "SubscriptionType": 103, "IsEnabled": true, "SubscriptinDescription": "ApprovedOrDeclinedOrder", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-cart" }, { "SubscriptionType": 104, "IsEnabled": false, "SubscriptinDescription": "ShipmentConfirmation", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-shipment" }, { "SubscriptionType": 105, "IsEnabled": false, "SubscriptinDescription": "DeliveryConfirmation", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-delivery" }, { "SubscriptionType": 106, "IsEnabled": false, "SubscriptinDescription": "PrintshopHoliday", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-printshop" }, { "SubscriptionType": 107, "IsEnabled": true, "SubscriptinDescription": "Maintenance", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-maintance" }];
 
         $scope.onChange = function (e) {
             var notifcationUpdateData = [];
             var notifcation = {
-                type: e.sender.element.attr('data-notifcation'),
-                flag: e.checked
+                SubscriptionType: e.sender.element.attr('data-SubscriptionType'),
+                IsEnabled: e.checked
             }
             notifcationUpdateData.push(notifcation);
 

@@ -1,82 +1,18 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="notificationController" k-after-show="afterShow" k-before-show="beforeShow"  data-use-native-scrolling="true" >
     
    <kendo-mobile-content>
+    
           <div class="km-listview-wrapper">
-            <ul id="custom-listview"  data-role="listview" class="km-widget km-listview km-listgroup">
-                <li class="km-group-container">
+            <ul id="custom-listview"  data-role="listview" class="km-widget km-listview km-listgroup" ng-repeat="subscription in notifications">
+                 <li class="km-group-container">
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="km-list ck-brd-setting ck-title-setting">
                         <li >
-                            <input kendo-mobile-switch k-checked="{{notifications.orderReceived}}" k-on-change="onChange(kendoEvent)" data-notifcation="orderReceived" />
-                            <i class="ck-icon ck-recieved ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.orderReceived.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.orderReceivedDesc.resoruceValue}}.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.orderApproval}}" k-on-change="onChange(kendoEvent)" data-notifcation="orderApproval"/>
-                            <i class="ck-icon ck-approval ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.orderApproval.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.orderApprovalDesc.resoruceValue}}.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.orderApprovedStatus}}" k-on-change="onChange(kendoEvent)" data-notifcation="orderApprovedStatus"/>
-                            <i class="ck-icon ck-cart ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.orderApprovedStatus.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.orderApprovedStatusDesc.resoruceValue}}.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.shipment}}" k-on-change="onChange(kendoEvent)" data-notifcation="shipment"/>
-                            <i class="ck-icon ck-shipment ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.shipment.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.shipmentDesc.resoruceValue}}.</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.delivery}}" k-on-change="onChange(kendoEvent)" data-notifcation="delivery"/>
-                            <i class="ck-icon ck-delivery ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.delivery.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.deliveryDesc.resoruceValue}}</p>
-                        </li>
-                    </ul>
-                </li>
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.printshop}}" k-on-change="onChange(kendoEvent)" data-notifcation="printshop"/>
-                            <i class="ck-icon ck-printshop ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.printshop.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.printshopDesc.resoruceValue}}</p>
-                        </li>
-                    </ul>
-                </li>
-                   <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="ck-brd-setting ck-title-setting km-list">
-                        <li >
-                            <input kendo-mobile-switch  k-checked="{{notifications.maintenance}}" k-on-change="onChange(kendoEvent)" data-notifcation="maintenance"/>
-                            <i class="ck-icon ck-maintance ck-icon-setting"></i>
-                            <h4 class="ck-title-setting">{{form.maintenance.resoruceValue}}</h4>
-                            <p class="ck-descript-setting">{{form.maintenanceDesc.resoruceValue}}</p>
+                            <input kendo-mobile-switch k-checked="{{subscription.IsEnabled}}" k-on-change="onChange(kendoEvent)" data-SubscriptionType="{{subscription.SubscriptionType}}" />
+                            <i class="ck-icon {{subscription.IconClass}} ck-icon-setting"></i>
+                            <h4 class="ck-title-setting" translate-element="{{subscription.SubscriptinDescription}}"></h4>
+                         
+                               <p class="ck-descript-setting" translate-element="{{subscription.SubscriptinDescription}}" data-translateText="Description"></p>
                         </li>
                     </ul>
                 </li>
