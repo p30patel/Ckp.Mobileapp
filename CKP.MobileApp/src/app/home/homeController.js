@@ -135,11 +135,12 @@ app.controller('homeController', [
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
                            var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-                           buttongroup.element.children().removeClass('km-state-active');
+                       
+                           $(".ck-count-btn").removeClass('km-state-active');
                        }
                        $scope.myOptions = {
                            select: function (e) {                              
-                             
+                              // $(".ck-count-btn").removeClass('km-state-active');                               
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
                                $scope.selectedRetailer = selectedBtnRetailer;
 
@@ -148,8 +149,12 @@ app.controller('homeController', [
                                listviews.hide();
                               
                                var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
-                           
+                                
                                listviewsToShow.eq(e.index).show();
+
+                               var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
+                              
+                              // e.sender.element.eq(e.index).addClass('active');
                            }
                        }
 

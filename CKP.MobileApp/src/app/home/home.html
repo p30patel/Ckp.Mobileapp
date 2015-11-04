@@ -41,14 +41,14 @@
                   
                     </h3>
                       <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}">
-                    <li class="ck-button km-button" ng-disabled="orderCount.ApprovalCount == 0">
+                    <li class="ck-button km-button ck-count-btn" ng-disabled="orderCount.ApprovalCount == 0">
                         <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                         <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
                     </li>
-                    <li class="ck-button km-button">  
+                    <li class="ck-button km-button ck-count-btn">  
                                     <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
                                     <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div></li>
-                    <li class="ck-button km-button">
+                    <li class="ck-button km-button ck-count-btn">
                          <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
                                    <div class="ck-button-text">{{form.releasedOrder.resoruceValue}}</div>
                     </li>
@@ -385,34 +385,217 @@
                   <!--  approve modal -->
    
         
-    <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview" style="width: 90%; height:97%; background:rgba(255, 255, 255, 0);">
+    <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview ck-grey-wrap" style="width: 100%; height:100%;"  data-use-native-scrolling="true">
                 <kendo-mobile-header>
                     <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                             <kendo-mobile-button k-align="'left'" k-on-click="hideApporvalModel()"><i class="ck-icon ck-barrow" style="color: rgb(213, 43, 30);"></i></kendo-mobile-button>
                          </kendo-view-title>
                         {{form.approval.resoruceValue}}<kendo-view-title></kendo-mobile-nav-bar>
                 </kendo-mobile-header>
-                <ul kendo-mobile-list-view k-style="'inset'">
-                    <li class="ck-module-solid">
-                        <h3 class="km-bold-font">{{form.salesOrder.resoruceValue}}(s)</h3>
-                        <h4 class="km-font">
-                         {{salesorderList}}
-                    </h4>
-                    </li>
-                    <li class="ck-no-pad-side" style="border:0;">
+                <kendo-mobile-list-view k-style="'inset'" class="ck-grey-wrap">
+                   <li class="ck-grey-wrap">
+                <h2>Shopping Cart - 092883450</h2>
+            </li>
+            <table class="ck-table">
+                <tr class="header">
+                    <td></td>
+                    <td class="spacer">Purchase Order</td>
+                    <td>Status</td>
+                    <td>Date</td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+            </table>
+           
+
+                        <li class="ck-grey-wrap">
+                <h2>Shopping Cart - 092883450</h2>
+            </li>
+            <table class="ck-table">
+                <tr class="header">
+                    <td></td>
+                    <td class="spacer">Purchase Order</td>
+                    <td>Status</td>
+                    <td>Date</td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+                <tr class="pipe">
+                    <td>
+                        <img src="styles/images/page.png" class="page" />
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            GEM Trading Co. LLc
+                            <div>5555534219381872</div>
+                            </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                           Open
+                           </a>
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+            </table>
+             </kendo-mobile-list-view>
+          
+                <kendo-mobile-footer style="margin:10px !important;">
                        <fieldset>
-                            <textarea placeholder="{{form.comment.resoruceValue}}" ng-model="orderApprovalComment" style="height: 150px; border: .1em solid #5E6A71; border-radius:0;"></textarea>
+                            <textarea rows="4" placeholder="{{form.comment.resoruceValue}}" ng-model="orderApprovalComment" style="width: 99%;  border-radius:0; margin-bottom:.2em"></textarea>
                         </fieldset>
-                    </li>
-               </ul>
-                <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-                <kendo-mobile-footer>
-                      
+                     <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+                     <p></p>
                         <kendo-mobile-button class="km-primary km-large ck-btn-left" data-tap="myTouch.tap"  ng-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
-                        
+                       
                         <kendo-mobile-button class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap"  ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
+                    
                 </kendo-mobile-footer>
                 </div>
-        
+
+   
      
 </kendo-mobile-view>

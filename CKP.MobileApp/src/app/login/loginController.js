@@ -130,6 +130,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     if (isTrackingActive) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
+
  
 
     //forgot password 
