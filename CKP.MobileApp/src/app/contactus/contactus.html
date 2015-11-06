@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="contactusController" k-after-show="afterShow" data-use-native-scrolling="true">
      
       <kendo-mobile-content>
         <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
@@ -268,14 +268,15 @@
 
    <!-- write email modal-->
     
-          <div kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 90%; height:100%; background:rgba(255, 255, 255, 0);">
-            <div kendo-mobile-header>
-                <div kendo-mobile-nav-bar class="km-dark">
-                  Write Email
-                </div>
+          <kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
+              <kendo-mobile-header>
+                  <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                       <kendo-view-title>Write Email</kendo-view-title>
+                       <kendo-mobile-button ng-click="hideSendEmailmodal()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
 
-            </div>
-            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" >
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+            <kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
             
                 <li>
                     <h3>
@@ -285,33 +286,30 @@
                <li class="ck-no-pad">
                 <fieldset class="ck-login" ng-show="!authentication.isAuth">
                  
-                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name" autofocus next-Focus/>
+                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name"  />
 
-                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" required next-Focus/>
+                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" required />
 
-                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" next-Focus/>
+                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" />
                       </fieldset>
                      <fieldset class="ck-login">
                      <input value="" placeholder="{{form.order.resoruceValue}}" type="text" ng-model="contact.orderNumber" required next-Focus/>
 
-                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;" required></textarea>                     
+                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;" required></textarea>                                           
                 </fieldset>
-                <i></i>
+              
                    <br />
                   <kendo-mobile-button 
                                         k-on-click="send()" 
                                         k-ng-disabled="!contact.email && !contact.messageBody"                                       
-                                        class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.send.resoruceValue}}</kendo-mobile-button>
+                                        class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.send.resoruceValue}}
+
+                  </kendo-mobile-button>
                
                      <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                
             </li>
-            </ul>
-            <kendo-mobile-footer>
-                <div kendo-mobile-button k-on-click="hideSendEmailmodal()" k-transition="'fade'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
-                </div>
-            </kendo-mobile-footer>
-
-          </div>
+            </kendo-mobile-list-view>
+              </kendo-mobile-modal-view>
 
 </kendo-mobile-view>
