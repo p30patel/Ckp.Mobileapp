@@ -18,6 +18,8 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         };
         $scope.message = "";
+        $scope.notifications = [];
+
         $scope.afterShow = function (e) {
 
             var view = kendo.mobile.application.view();
@@ -100,48 +102,43 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         setResources();
 
-        var init = function () {
-            $scope.orderReceived = true;
-            $scope.orderApproval = true;
+        var getNotifications = function () {
+            kendo.mobile.application.pane.loader.show();
+            notificationDataService.getUserNotifications().then(function (result) {
+                kendo.mobile.application.pane.loader.hide();
+                $scope.notifications = result;
+            }).catch(function (error) {
+                kendo.mobile.application.pane.loader.hide();
+                $scope.message = "Faild to get notifcation.";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 7000);
 
-            $scope.orderApprovedStatus = true;
-
-            $scope.shipment = true;
-            $scope.delivery = true;
-
-            $scope.printshop = true;
-            $scope.maintenance = true;
-
+            });
         }
-        init();
+        getNotifications();
 
-        $scope.notifications = [{ "SubscriptionType": 101, "IsEnabled": true, "SubscriptinDescription": "NewOrderReceived", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-recieved" }, { "SubscriptionType": 102, "IsEnabled": true, "SubscriptinDescription": "OrderApproval", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-approval" }, { "SubscriptionType": 103, "IsEnabled": true, "SubscriptinDescription": "ApprovedOrDeclinedOrder", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-cart" }, { "SubscriptionType": 104, "IsEnabled": false, "SubscriptinDescription": "ShipmentConfirmation", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-shipment" }, { "SubscriptionType": 105, "IsEnabled": false, "SubscriptinDescription": "DeliveryConfirmation", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-delivery" }, { "SubscriptionType": 106, "IsEnabled": false, "SubscriptinDescription": "PrintshopHoliday", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-printshop" }, { "SubscriptionType": 107, "IsEnabled": true, "SubscriptinDescription": "Maintenance", "ErrorDescription": null, "UserId": 0, "IconClass": "ck-maintance" }];
+        
 
         $scope.onChange = function (e) {
-            var notifcationUpdateData = [];
-            var notifcation = {
+            var notificationUpdateData = [];
+            var notification = {
                 SubscriptionType: e.sender.element.attr('data-SubscriptionType'),
-                IsEnabled: e.checked
-            }
-            notifcationUpdateData.push(notifcation);
+                IsEnabled: e.checked,
+                UserId : 0
 
-            notificationDataService.updateNotifcation(notifcationUpdateData).then(function (result) {
-                if (result === 'success') {
-                    $scope.message = message;
-                    $timeout(function () {
-                        $scope.message = "";
-                    }, 7000);
-
-                } else {
-
+            };
+          
+            notificationDataService.updateNotification(notification).then(function (result) {
+                if (result !== 'success') {
+               
                     $scope.message = "Faild to save data, Please try later<br>";
                     $timeout(function () {
                         $scope.message = "";
                     }, 7000);
                 }
             }).catch(function (error) {
-                $location.hash('bottom');
-                $anchorScroll();
+                
                 $scope.message = "Faild to update notifcation.";
                 $timeout(function () {
                     $scope.message = "";

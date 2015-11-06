@@ -18,8 +18,10 @@
                 </li>
             </ul>
         </div>
-     <p ng-show="message" class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+     
     </kendo-mobile-content>
-   
+         <kendo-mobile-footer ng-show="message">
+                <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+            </kendo-mobile-footer>
 </kendo-mobile-view>
 

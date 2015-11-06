@@ -6,13 +6,13 @@ app.factory("notificationDataService", [
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var notificationDataServiceFactory = {};
 
-                    var getNotifcation = function () {
+                    var getUserNotifications = function () {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
                         var userId = authentication.userId;
 
-                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetNotification?userId=' + userId).success(function (result) {
+                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetUserNotifications?userId=' + userId).success(function (result) {
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -22,14 +22,14 @@ app.factory("notificationDataService", [
                     };
 
 
-                    var updateNotifcation = function (notifcationData) {
+                    var updateNotification = function (notifcationData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
                         var userId = authentication.userId;    
-                        notifcationData[0].userId = userId;
+                        notifcationData.UserId = userId;
                         console.log(notifcationData);
-                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotification', notifcationData).success(function (result) {
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotifcation', notifcationData).success(function (result) {
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -38,9 +38,9 @@ app.factory("notificationDataService", [
                         return deferred.promise;
                     };
 
-                    notificationDataServiceFactory.updateNotifcation = updateNotifcation;
+                    notificationDataServiceFactory.updateNotification = updateNotification;
 
-                    notificationDataServiceFactory.getNotifcation =getNotifcation;
+                    notificationDataServiceFactory.getUserNotifications = getUserNotifications;
                
                     return notificationDataServiceFactory;
                 }
