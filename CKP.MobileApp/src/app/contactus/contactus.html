@@ -276,7 +276,8 @@
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-            <kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
+              <form>
+            <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
             
                 <li>
                     <h3>
@@ -293,7 +294,7 @@
                      <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" />
                       </fieldset>
                      <fieldset class="ck-login">
-                     <input value="" placeholder="{{form.order.resoruceValue}}" type="text" ng-model="contact.orderNumber" required next-Focus/>
+                     <input value="" placeholder="{{form.order.resoruceValue}}" type="text" ng-model="contact.orderNumber" required />
 
                      <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;" required></textarea>                                           
                 </fieldset>
@@ -309,7 +310,9 @@
                      <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                
             </li>
-            </kendo-mobile-list-view>
+            </ul>
+
+                  </form>
               </kendo-mobile-modal-view>
 
 </kendo-mobile-view>

@@ -1,4 +1,4 @@
-<kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController"  k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
+<kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
 
     <kendo-mobile-header>
 
@@ -68,6 +68,7 @@
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
+          <form novalidate name="forgotPasswordFrom">
          <ul kendo-mobile-list-view style="margin-bottom: .5em; border:none !important; margin-top: 5.2em !important;"  class="ck-module-solid ck-no-border" k-style="'inset'">
 
                <li class="ck-module-date">
@@ -84,13 +85,14 @@
                 </p>
             </li>
             <li class="ck-no-pad">
+              
                 <fieldset class="ck-login">
-                    <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" autofocus />
+                    <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" autofocus ng-keypress="key($event)" required />
                 </fieldset>
                 <i></i>
                   <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
-                                        k-ng-disabled="!loginData.email" 
+                                        ng-disabled="forgotPasswordFrom.$invalid" 
                                         id="btnSendPassword"
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
                
@@ -98,10 +100,7 @@
                
             </li>
         </ul>
-          <!--   <kendo-mobile-footer>
-                <kendo-mobile-button id="closeModalViewForgotPassword" ng-click="closeModalViewForgotPassword()"  k-transition="'overlay:down'" class="km-justified"style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
-                </kendo-mobile-button>
-            </kendo-mobile-footer>-->
+              </form>
     </div>
     <!-- End Forgot Password View -->
    

@@ -7,7 +7,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     //login page html lables
     $scope.loginData = {};
     $scope.form = {};
-    
+
     var setResources = function () {
         $scope.form.username = {};
         $scope.form.username.resoruceName = "User Name";
@@ -126,12 +126,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     };
     languages(); //init languages
-    
+
     if (isTrackingActive) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
 
- 
+
 
     //forgot password 
     $scope.loginData.email = "";
@@ -144,8 +144,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $("#modalview-password").kendoMobileModalView("close");
     };
 
-    $scope.sendPassword = function () {
-        $('#btnSendPassword').focus();
+    var sendPassword = function () {
+
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
         kendo.mobile.application.pane.loader.show();
         var username = $scope.loginData.userName;
@@ -172,7 +172,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 }, 7000);
 
             });
-    };
+
+    }
+    $scope.sendPassword = function () {
+        sendPassword();
+    }
     //end forgot password
 
     var loginData = {
@@ -219,7 +223,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         });
 
         //Faq
-    
+
 
         faqDataService.getFaqs(selectedLanague).then(function (result) {
             $scope.faqs = result;
@@ -227,23 +231,23 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }).catch(function (error) {
             $scope.faqs = {};
         }).finally(function () {
-        
+
         });
 
         //end faq
         //terms & conditions
-        
+
         policyTermsDataService.getPolicyTerms().then(function (result) {
             $scope.termsCondition = result;
 
         }).catch(function (error) {
             $scope.termsCondition = {};
         }).finally(function () {
-    
+
         });
         //end
         //policies
-    
+
 
         policyTermsDataService.getPolicyTerms().then(function (result) {
             $scope.policies = result;
@@ -251,23 +255,23 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }).catch(function (error) {
             $scope.policies = {};
         }).finally(function () {
-    
+
         });
 
 
     }
- 
+
     $scope.beforeShow = function (e) {
-      
+
     }
 
     $scope.intShow = function (e) {
-        
+
         translatePage();
     };
 
     $scope.translatePage = function () {
-     
+
         translatePage();
     };
 
@@ -275,11 +279,16 @@ function ($scope, $http, authService, translateService, localStorageService, log
         if ($event.keyCode === 13) {
             $event.target.blur();
             var type = $($event.target).attr("type");
-            if (type === 'password') {
+            var disabledSendEmail = $('#btnSendPassword').attr('disabled');
+            
+            if (type === 'password' || type === 'text') {
                 login();
             }
-           else{
+            else {
                 $('#password').focus();
+            }
+            if (type === 'email' && disabledSendEmail !== 'disabled') {
+                sendPassword();
             }
         }
     }

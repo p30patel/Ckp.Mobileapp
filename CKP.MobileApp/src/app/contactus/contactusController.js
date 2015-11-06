@@ -185,16 +185,16 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             validateOnBlur: true
         }).data('kendoValidator');
 
-        $scope.send = function () {
+        var sendEmail = function () {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
             var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!<br>";
             var isAuth = $scope.authentication.isAuth;
-            
-            if (($scope.contact.orderNumber !== '' && $scope.contact.messageBody !== ''  && isAuth) || (
-                $scope.contact.name !== '' &&  $scope.contact.email !== '' &&
+
+            if (($scope.contact.orderNumber !== '' && $scope.contact.messageBody !== '' && isAuth) || (
+                $scope.contact.name !== '' && $scope.contact.email !== '' &&
                 $scope.contact.orderNumber !== '' && $scope.contact.organization !== '' &&
                 $scope.contact.messageBody !== '' && validator.validate())) {
-            
+
                 kendo.mobile.application.pane.loader.show();
 
                 feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
@@ -224,12 +224,15 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                     kendo.mobile.application.pane.loader.hide();
                 });
             }
-            else{
+            else {
                 $scope.message = "Please check required inputs!";
                 $timeout(function () {
                     $scope.message = "";
                 }, 7000);
             }
+        }
+        $scope.send = function () {
+            sendEmail();
         }
 
         $scope.myOptions = {
@@ -239,6 +242,13 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                 listviews.hide()
                 .eq(e.index)
                 .show();
+            }
+        }
+
+        $scope.key = function ($event) {
+            if ($event.keyCode === 13) {
+                $event.target.blur();
+                sendEmail();
             }
         }
 
