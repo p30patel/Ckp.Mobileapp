@@ -278,8 +278,8 @@
                        <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-        <kendo-mobile-content>
-         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
+     
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
   
     <li>
   No messages are found!
@@ -290,33 +290,29 @@
           <i class="ck-icon ck-news ck-module-icon"></i>
          <span class="ck-font-size-mid">Announcements</span>
     </li>
-    <li>
-      
    
-    <div ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
+    <span kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId'">
       
-        <div class="km-font" ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
-                   <p> <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) </p>
-            <p > <span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+        <li ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
+                    <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) 
+            <p> <span ng-bind-html="renderHtml(value[0].Message)"></span></p>
 
-        </div>
-    </div>
-</li>
+        </li>
+   
+</span>
 </ul>
-         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
+         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'"
              ng-show="mesages.PartnerHolidayList.length > 0">
              <li class="ck-module-date">
                <i class="ck-icon ck-alert ck-module-icon"></i>
                   <span class="ck-font-size-mid">Print Shop Holidays</span>
                
             </li>
-            <li>
-                <span class="km-font" ng-repeat="message in mesages.PartnerHolidayList">
-                   <p><b> {{message.Name}} </b>  {{message.HolidayDescription}} closed  on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
-                    
-                    </span>
-            </li>
-         
+            
+              
+                   <li ng-repeat="message in mesages.PartnerHolidayList"><b> {{message.Name}} </b> 
+                       <p>({{message.HolidayDescription}}) closed  on {{ message.StartDate | date}} - {{message.EndDate | date}} </p></li>
+                 
         </ul>
 
 
@@ -329,21 +325,16 @@
     <li>
        
   
-    <span ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
+    <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
 
-        <span class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
-                  <p>  <b>{{value[0].Title}} </b> </p>
+        <li class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
+                  <b>{{value[0].Title}} </b>
                  <p><span ng-bind-html="renderHtml(value[0].Message)"></span></p>
-        </span>
-    </span>
+        </li>
+    </ul>
 </li>
 </ul>
-            </kendo-mobile-content>
-       
-       <!-- <kendo-mobile-footer>
-            <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'overlay:down'" class="km-justified" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 3.2em; height: 3.2em;" />
-            </kendo-mobile-button>
-        </kendo-mobile-footer>-->
+           
         </div>
 
 

@@ -285,18 +285,17 @@
                     </h3>
                 </li>
                <li class="ck-no-pad">
-                <fieldset class="ck-login" ng-show="!authentication.isAuth">
+                <fieldset class="ck-login">
                  
-                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name"  />
+                     <input value="" placeholder="{{form.name.resoruceValue}}" type="text" ng-model="contact.name"  ng-show="!authentication.isAuth"/>
 
-                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" required />
+                      <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" required ng-show="!authentication.isAuth"/>
 
-                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" />
-                      </fieldset>
-                     <fieldset class="ck-login">
+                     <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" ng-show="!authentication.isAuth"/>
+                     
                      <input value="" placeholder="{{form.order.resoruceValue}}" type="text" ng-model="contact.orderNumber" required />
 
-                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" style="height: 80px;" required></textarea>                                           
+                     <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" rows="3" required></textarea>                                           
                 </fieldset>
               
                    <br />
