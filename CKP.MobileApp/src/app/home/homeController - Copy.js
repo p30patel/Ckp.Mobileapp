@@ -126,13 +126,6 @@ app.controller('homeController', [
                        $scope.message = "";
                        $scope.messageCount = 0;
 
-                       $scope.hasCreditLock = false;
-                       $scope.hasSearch = false;
-                       $scope.hasListView = false;
-                       $scope.hasDetailView = false;
-                       $scope.selectedRetailer = 0;
-                       $scope.selectedOrderType = 0;
-
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
@@ -147,13 +140,10 @@ app.controller('homeController', [
                        }
                        $scope.myOptions = {
                            select: function (e) {                              
-                                       
+                              // $(".ck-count-btn").removeClass('km-state-active');                               
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
-
                                $scope.selectedRetailer = selectedBtnRetailer;
 
-                             
-                               
                                var listviews = $("ul.order-header.km-listview");
                                
                                listviews.hide();
@@ -162,12 +152,9 @@ app.controller('homeController', [
                                 
                                listviewsToShow.eq(e.index).show();
 
-                               var selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');
+                               var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
                               
-                               $scope.selectedOrderType = parameterService.getOrderTypeById(selectedOrderType);                               
-
-                               var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");                              
-                           
+                              // e.sender.element.eq(e.index).addClass('active');
                            }
                        }
 
@@ -181,8 +168,6 @@ app.controller('homeController', [
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
                        }
-
-                      
                        setSelectPara();
 
                        $scope.intShow = function (e) {
@@ -201,8 +186,9 @@ app.controller('homeController', [
 
                        });
 
+
                        var getOrderCounts = function () {
-                           $scope.hasSearch = false;
+
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
 
@@ -218,8 +204,6 @@ app.controller('homeController', [
                        var getMessages = function () {
                            var data = localStorageService.get('organizationDetail');
                            if (data !== null) {
-                               $scope.hasCreditLock = data.CreditStatus === "Blocked";
-
                                kendo.mobile.application.pane.loader.show();
                                $("#btn_message").data("kendoMobileButton");
 
@@ -244,6 +228,7 @@ app.controller('homeController', [
                        getMessages();
                        getOrderCounts();
 
+                 
                        $scope.selectedRetailer = 0;
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
@@ -270,9 +255,10 @@ app.controller('homeController', [
                        $scope.key = function ($event) {
                         
                            if ($event.keyCode === 13) {
-                               $event.target.blur();
+                               //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
+
                                forceGetData = true;
-                               $scope.hasSearch = true;
+                               $(".ck-po-search").focusout();
                                getOrderCounts();
 
                            }

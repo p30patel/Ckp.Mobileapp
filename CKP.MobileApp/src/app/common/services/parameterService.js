@@ -21,17 +21,17 @@ app.factory('parameterService', [
                     vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
 
                     var searchParameters = [
-                        { id: '1', name: orderNumber.resoruceValue, value: "Purchase Order" },
-                        { id: '2', name: salesOrder.resoruceValue, value: "Sales Orderr" },
-                        { id: '3', name: shoppingCart.resoruceValue, value: "Shopping Cart" },
-                        { id: '4', name: vendorRef.resoruceName, value: "Vendor Ref" },
+                        { id: '1', name: orderNumber.resoruceValue, value: "Purchase Order", hasListView : true, hasDetailViee : true },
+                        { id: '2', name: salesOrder.resoruceValue, value: "Sales Orderr", hasListView: true, hasDetailViee: true },
+                        { id: '3', name: shoppingCart.resoruceValue, value: "Shopping Cart", hasListView: true, hasDetailViee: true },
+                        { id: '4', name: vendorRef.resoruceName, value: "Vendor Ref", hasListView: true, hasDetailViee: true },
             
                     ];
                     
                       var orderTypes = [
-                        { id: '1', name : "Approval"},
-                        { id: '2', name : "New"},
-                        { id: '3', name : "Released"}                  
+                        { id: 1, name : "Approval"},
+                        { id: 2, name : "New"},
+                        { id: 3, name : "Released"}                  
             
                     ];
 
@@ -66,11 +66,23 @@ app.factory('parameterService', [
                         });
                         return paramterName;
                     }
+
+                    var getOrderTypeById = function (name) {
+                        var id = 0;
+                        angular.forEach(orderTypes, function (item) {
+                            if (item.name === name) {
+                                id = item.id;
+                                return id;
+                            }
+                        });
+                        return id;
+                    }
                     service.getSearchParameters = getSearchParameters;
                     service.getSearchParameterName = getSearchParameterName;
                     
                     service.getOrderTypes = getOrderTypes;
                     service.getOrderTypeName = getOrderTypeName;
+                    service.getOrderTypeById = getOrderTypeById;
 
                     return service;
                 }
