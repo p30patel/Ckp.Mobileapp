@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService',
-function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService', '$window',
+function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService, $window) {
     $scope.title = '';
 
     //login page html lables
@@ -129,6 +129,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     if (isTrackingActive) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
+    }
+    if ($window.ga) {
+
+        $window.ga('send', 'pageview', { page: 'Login View-GA' });
+
     }
 
 

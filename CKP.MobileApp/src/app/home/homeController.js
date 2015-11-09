@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce', '$window',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce, $window) {
                        $scope.beforeShow = function () {
                            kendo.mobile.application.pane.loader.show();
                            if (!authService.authentication.isAuth) {                               
@@ -123,6 +123,14 @@ app.controller('homeController', [
 
                        setResources();
 
+                       if (isTrackingActive) {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
+                       }
+                       if ($window.ga) {
+
+                           $window.ga('send', 'pageview', { page: 'Home View-GA' });
+
+                       }
                        $scope.message = "";
                        $scope.messageCount = 0;
 

@@ -11,6 +11,8 @@ var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
+
+var gaPlugin;
 var isTrackingActive = false;
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
@@ -72,6 +74,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     };
 
     document.addEventListener('deviceready', function () {
+       
         kendo.mobile.application.navigate("src/app/login/login.html");
         window.analytics.Start();
 
@@ -91,6 +94,12 @@ app.config(function ($httpProvider) {
 });
 
 
+   
+   
+window.ga=window.ga||function(){
+    (ga.q=ga.q||[]).push(arguments)};
+    ga.l=+new Date;
+    ga('create', 'UA-69875163-1', 'auto');
 
 (function (g) {
    
