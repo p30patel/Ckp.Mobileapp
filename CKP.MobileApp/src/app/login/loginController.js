@@ -131,9 +131,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
     if ($window.ga) {
-
+        
         $window.ga('send', 'pageview', { page: 'Login View-GA' });
-
+    
     }
 
 

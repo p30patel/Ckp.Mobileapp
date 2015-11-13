@@ -1,25 +1,25 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce', '$window',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce, $window) {
                        $scope.beforeShow = function () {
                            kendo.mobile.application.pane.loader.show();
-                           if (!authService.authentication.isAuth) {                               
+                           if (!authService.authentication.isAuth) {
                                authService.logout();
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                            kendo.mobile.application.pane.loader.hide();
 
-                       };                     
-                     
+                       };
+
                        $scope.form = {};
                        $scope.mesages = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
-                      
+
                        $scope.afterShow = function (e) {
-                      
+
                            var view = kendo.mobile.application.view();
                            if (view !== null) {
                                var navbar = kendo.mobile.application.view()
@@ -123,51 +123,67 @@ app.controller('homeController', [
 
                        setResources();
 
+                       if (isTrackingActive) {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
+                       }
+                       if ($window.ga) {
+
+                           $window.ga('send', 'pageview', { page: 'Home View-GA' });
+
+                       }
                        $scope.message = "";
                        $scope.messageCount = 0;
+
+                       $scope.hasCreditLock = false;
+                       $scope.hasSearch = false;
+                       $scope.hasListView = false;
+                       $scope.hasDetailView = false;
+                       $scope.selectedRetailer = 0;
+                       $scope.selectedOrderType = 0;
 
                        $scope.searchParameterId = 1;
                        $scope.activeTabId = "";
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.isAuth = authService.authentication.isAuth;
 
-                       $scope.retailerHeader = function(){
+                       $scope.retailerHeader = function () {
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
                            var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-                       
+
                            $(".ck-count-btn").removeClass('km-state-active');
                        }
                        $scope.myOptions = {
-                           select: function (e) {                              
-                              // $(".ck-count-btn").removeClass('km-state-active');                               
+                           select: function (e) {
+
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
+
                                $scope.selectedRetailer = selectedBtnRetailer;
 
                                var listviews = $("ul.order-header.km-listview");
-                               
+
                                listviews.hide();
-                              
+
                                var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
-                                
+
                                listviewsToShow.eq(e.index).show();
 
+                               var selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');
+
+                               $scope.selectedOrderType = parameterService.getOrderTypeById(selectedOrderType);
+
                                var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-                              
-                              // e.sender.element.eq(e.index).addClass('active');
+
                            }
                        }
 
-                       $scope.selectParamter = function () {
-                           parameterService.getSearchParameterName($scope.selectedPara)
-                           $scope.searchParameterId = $scope.selectedPara;
-
-                       }
 
                        var setSelectPara = function () {
                            parameterService.getSearchParameterName($scope.selectedPara)
                            $scope.searchParameterId = $scope.selectedPara;
                        }
+
+
                        setSelectPara();
 
                        $scope.intShow = function (e) {
@@ -186,9 +202,8 @@ app.controller('homeController', [
 
                        });
 
-
                        var getOrderCounts = function () {
-
+                           $scope.hasSearch = false;
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
 
@@ -204,6 +219,8 @@ app.controller('homeController', [
                        var getMessages = function () {
                            var data = localStorageService.get('organizationDetail');
                            if (data !== null) {
+                               $scope.hasCreditLock = data.CreditStatus === "Blocked";
+
                                kendo.mobile.application.pane.loader.show();
                                $("#btn_message").data("kendoMobileButton");
 
@@ -224,11 +241,10 @@ app.controller('homeController', [
 
                        }; // end message
 
-                                    
+
                        getMessages();
                        getOrderCounts();
 
-                 
                        $scope.selectedRetailer = 0;
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
@@ -243,35 +259,35 @@ app.controller('homeController', [
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
                        $scope.searchChange = function () {
-                           var searchElement = $('.ck-po-search');
-                           if ($scope.searchValue !== '') {
-                               searchElement.css('background-size', 0);
-                           }
-                           else {
-                               searchElement.css('background-size', '1em 1em');
-                           }
-                          
+                           //var searchElement = $('.ck-po-search');
+                           //if ($scope.searchValue !== '') {
+                           //    searchElement.css('background-size', 0);
+                           //}
+                           //else {
+                           //    searchElement.css('background-size', '1em 1em');
+                           //}
+
                        }
                        $scope.key = function ($event) {
-                        
-                           if ($event.keyCode === 13) {
-                               //$scope.message = "Searching for " + $scope.selectedPara + " like  " + $scope.searchValue + "Para: " + $scope.searchParamterId;
 
+                           if ($event.keyCode === 13) {
+                               $event.target.blur();
                                forceGetData = true;
-                               $(".ck-po-search").focusout();
+                               $scope.hasSearch = true;
+                               setSelectPara();
                                getOrderCounts();
 
                            }
                        }
 
-                       //
+                       //so - check box for approval
                        $scope.selection = [];
                        $scope.orderApprovalComment = "";
                        $scope.salesorderList = "";
 
                        $scope.toggleSelection = function toggleSelection(so) {
                            var idx = $scope.selection.indexOf(so);
-                           // is currently selected                          
+
                            if (idx > -1) {
                                $scope.selection.splice(idx, 1);
                            } else {
@@ -316,7 +332,7 @@ app.controller('homeController', [
                        $scope.showApprovalModel = function (retailerId) {
                            var salesorders = "";
                            $scope.selectedRetailer = retailerId;
-                          
+
 
                            var salesorderList = $scope.selection;
                            angular.forEach(salesorderList, function (value, key) {

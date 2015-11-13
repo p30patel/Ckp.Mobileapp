@@ -12,8 +12,7 @@ app.factory("homeDataService", [
                         var deferred = $q.defer();
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCountsTaskAsync?userId=" + 1;
                         $http.get(url).success(function (result) {
-                          
-                            localStorageService.set('orderCount' +  date, result);
+                           
                             deferred.resolve(result);
                         }).error(function (err, status) {
                             deferred.reject(err);
@@ -26,18 +25,11 @@ app.factory("homeDataService", [
                     
                     var getOrderCounts = function () {
                         var deferred = $q.defer();
-          
-                        var orderCountData = localStorageService.get('orderCount' + date);
-                        
-                        if (orderCountData) {
-                            
-                            deferred.resolve(orderCountData);
-                        } else {
-                            
-                            forceGetOrderCounts().then(function (result) {
-                                deferred.resolve(result);
-                            });
-                        }
+
+
+                        forceGetOrderCounts().then(function (result) {
+                            deferred.resolve(result);
+                        });
 
                         return deferred.promise;
                     };
@@ -48,7 +40,6 @@ app.factory("homeDataService", [
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderHeaderDataTaskAsync?userId=" + 1 + "&client_id=" + ngAuthSettings.clientId;
                         $http.get(url).success(function (result) {
                           
-                            localStorageService.set('orderHeaderData' + date, result);
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {   
                            
@@ -61,17 +52,9 @@ app.factory("homeDataService", [
 
                     var getOrderHeaderData = function () {
                         var deferred = $q.defer();
-
-                        var orderHeaderData = localStorageService.get('orderHeaderData' + date);
-
-                        if (orderHeaderData) {
-                            deferred.resolve(orderHeaderData);
-                        } else {
                             forceGetOrderHeaderData().then(function (result) {
                                 deferred.resolve(result);
                             });
-                        }
-
                         return deferred.promise;
                     };
 

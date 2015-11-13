@@ -93,13 +93,9 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-
-   
-   
-window.ga=window.ga||function(){
-    (ga.q=ga.q||[]).push(arguments)};
-    ga.l=+new Date;
-    ga('create', 'UA-69875163-1', 'auto');
+window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+ga('create', 'UA-69875163-1', 'auto');
+ga('send', 'pageview', '/app-init');
 
 (function (g) {
    
