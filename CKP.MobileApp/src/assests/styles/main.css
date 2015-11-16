@@ -6,13 +6,11 @@
     border-color: #cccccc !important;   
 }
 
-.km-nova .ck-listview .km-collapsible-content { padding: 0; background: rgba(0, 0, 0, 0) ;}
-.km-nova .ck-listview .km-collapsible-header {  background: #DEDEDE; padding-left:35px; border-bottom-color:gray }
-.km-nova .ck-listview .km-collapsible-header h5 { color: black;}
-.ck-listview-tr{line-height:14px; font-size: .8em;}
-.ck-listview-tr-so{line-height:15px; font-size:1.2rem; margin-top:-5px;}
+.ck-details.ck-listview-collapse.ng-scope.km-widget.km-collapsible.km-collapsed {}
+.ck-listview-tr{line-height:14px; font-size: .6em !important; color:white !important; margin-top: 0 !important;}
+.ck-listview-tr-so{line-height:15px; font-size:1.2rem; text-align: right}
 .ck-listview-page {width: 1em; height: 1.4em; margin: .6em 0 .6em 3em;}
-.ck-listview-price {font-size: .6em !important;}
+
 
 
 .main-nav {

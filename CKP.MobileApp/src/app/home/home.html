@@ -315,55 +315,52 @@
         <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
 
                <kendo-mobile-collapsible ng-repeat="i in [1,2,3,4]"
-                   class="ck-details" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                   class="ck-details ck-listview-collapse" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                 <h4> 
                     
                       <table>
                     <tr class="ck-listview-tr-so">
                         <td>
-                            <span>Sales Order :
-                                <span class="ck-a-link">12345{{$index}}</span>
-                            </span>
-                           
+                            Sales Order :
+                                <a class="km-external-link">12345{{$index}}</a>
+
                         </td>                       
-                          <td>
+                       <!--   <td>
                               <img src="styles/images/page.png" class="ck-listview-page"/>
                     
-                       </td>
+                       </td>-->
                     </tr>
 
                               <tr class="ck-listview-tr">
-                        <td>
+                        <td colspan="2">
                             <span>Organization Name
                             </span>
                            
                         </td>                       
-                          <td>
-                      USD 200.00
-                       </td>
-                    </tr>
-                            <tr class="ck-listview-tr">
-                        <td>
+                       
+                    </tr>                        
+
+                                   <tr class="ck-listview-tr">
+                        <td colspan="2">
                             <span>Order by: user1234 (p30@yahoo.com)
                             </span>
                            
                         </td>                       
-                          <td>
-                    
-                       </td>
-                    </tr>
-                              <tr class="ck-listview-tr">
+                      
+                    </tr>   
+                          
+                                           <tr class="ck-listview-tr">
                         <td>
                             <span>Order Date : Nov 5, 2015
                             </span>
                            
                         </td>                       
-                          <td>
-                    
+                          <td style="text-align: right">
+                              <a>
+                      USD 200.00</a>
                        </td>
-                    </tr>
+                    </tr>                                   
                 </table>  
-
                 </h4>
                 <table class="ck-table pad">
                     <tr class="med-grey pipe">
