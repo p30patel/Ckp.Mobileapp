@@ -312,10 +312,114 @@
         </kendo-mobile-header>
 
          <kendo-mobile-content>
-        <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
 
-               <kendo-mobile-collapsible ng-repeat="i in [1,2,3,4]"
-                   class="ck-details ck-listview-collapse" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+               <kendo-mobile-list-view class="ck-no-border">
+            <!--<li class="ck-po-container ck-grey-wrap">
+            
+            </li>-->
+            <li class="ck-grey-wrap" style="padding-left: 0 !important; padding-right:0 !important; padding-top:5px; padding-bottom:5px; ">
+                  <div  ng-repeat="i in [1,2,3,4]" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
+                      <table>
+                    <tr class="ck-listview-tr-so">
+                            <td style="width:10%;" rowspan="4"><span class="km-icon km-plus ck-icon-toggge-{{$index}}" ng-click="headerClick('{{$index}}')"></span></td>  
+                        <td style="width:auto;" ng-click="headerClick('{{$index}}')"> 
+                            Sales Order :
+                                <a>123456789011{{$index}}</a>
+
+                        </td> 
+                        <td style="width:20%;"></td>   
+                        <td style="width:10%;">                   
+                    <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel()"/>
+                            </td>
+                    </tr>
+
+                              <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                                
+                        <td colspan="2" class="ck-font-size-small" >
+                            <span>Organization Name
+                            </span>
+                           
+                        </td>                       
+                       
+                    </tr>                        
+
+                                   <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                                       
+                        <td colspan="2" class="ck-font-size-small">
+                            <span>Order by: user1234 (p30@yahoo.com)
+                            </span>
+                           
+                        </td>                       
+                      
+                    </tr>   
+                          
+                                           <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                                           
+                        <td  class="ck-font-size-small">
+                            <span>Order Date : Nov 5, 2015
+                            </span>
+                           
+                        </td >                       
+                          <td style="text-align: right; width:10%;"  class="ck-font-size-small" >
+                            
+                      USD 200.00
+                       </td>
+                    </tr>                                   
+                          </table>
+
+                        <table class="ck-table pad list-view-detail-{{$index}}" style="background-color:white !important; display:none">
+                <tr class="header">
+                    <td></td>
+                    <td>Purchase Order</td>
+                    <td>Price</td>
+                   
+                </tr>
+                <tr class="pipe" ng-repeat="order in orders">
+                    <td>
+                  
+                    </td>
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            {{order.OrderNumber}}
+                         
+                    </td>
+                 
+                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">11.12</a><i class="km-icon km-details red"></i>
+                    </td>
+                </tr>
+         
+            </table>
+
+                </div>  
+            </li>
+                   
+          
+         
+                         <table class="ck-table pad">
+                 
+            <tr>
+                <td colspan="2">
+                    <fieldset>
+                        <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <i></i>
+                    <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
+                    <i></i>
+                    <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
+                </td>
+                  <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
+            </tr>
+        </table>
+        </kendo-mobile-list-view>
+
+
+   <!--     <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
+
+               <div ng-repeat="i in [1,2,3,4]" 
+                   class="ck-grey-wrap ck-details ck-listview-collapse" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                 <h4> 
                     
                       <table>
@@ -359,7 +463,7 @@
                     </tr>                                   
                 </table>  
                 </h4>
-                <table class="ck-table pad">
+                <table class="ck-table">
                     <tr class="med-grey pipe">
                         <td>
                             <h4 class="km-bold-font">Order Number</h4></td>
@@ -378,7 +482,7 @@
                     </tr>
                 
                 </table>
-                   </kendo-mobile-collapsible>
+                   </div>
 
                <table class="ck-table pad">
                  
@@ -400,7 +504,7 @@
             </tr>
         </table>
 
-        </kendo-mobile-list-view>
+        </kendo-mobile-list-view>-->
         </kendo-mobile-content>
       
 <!--        <kendo-mobile-footer style="margin-left: 2px !important; padding: 5px;" class="ck-grey-wrap">
@@ -511,6 +615,24 @@
                     </h3>
             </li>
 
+        </ul>
+      
+    </div>
+
+      <!--  confirmation modal  -->
+
+      <div kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true">
+        <div kendo-mobile-header>
+            <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                <kendo-view-title> Confirmation</kendo-view-title>
+                <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+
+            </div>
+
+        </div>
+        <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important;" k-style="'inset'">
+
+          <p ng-bind-html="renderHtml(confiramtionConent)"></p>
         </ul>
       
     </div>
