@@ -7,10 +7,10 @@
 }
 
 .km-nova .ck-listview .km-collapsible-content { padding: 0; background: rgba(0, 0, 0, 0) ;}
-.km-nova .ck-listview .km-collapsible-header {  background: #DEDEDE; padding-left:35px; }
+.km-nova .ck-listview .km-collapsible-header {  background: #DEDEDE; padding-left:35px; border-bottom-color:gray }
 .km-nova .ck-listview .km-collapsible-header h5 { color: black;}
 .ck-listview-tr{line-height:14px; font-size: .8em;}
-.ck-listview-tr-so{line-height:18px; font-size:1.2rem;}
+.ck-listview-tr-so{line-height:15px; font-size:1.2rem; margin-top:-5px;}
 .ck-listview-page {width: 1em; height: 1.4em; margin: .6em 0 .6em 3em;}
 .ck-listview-price {font-size: .6em !important;}
 

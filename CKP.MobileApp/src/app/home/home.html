@@ -310,167 +310,106 @@
                 {{form.approval.resoruceValue}}
                 <kendo-view-title></kendo-mobile-nav-bar>
         </kendo-mobile-header>
-        <ul kendo-mobile-list-view k-style="'inset'" style="background-color:white;">
 
-            <kendo-mobile-collapsible k-icon-position="'left'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" class="ck-listview">
-                <h5>
-                    <table>
-                <tr class="ck-listview-tr-so">            
-                    <td>Sales Order:<span class="ckp-a-link">123456789012</span></td>
-                    <td align="right"> <img src="styles/images/page.png" class="ck-listview-page"/>
-                    </td>     
-                </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Organization Name</td>
-                          <td></td>
-                        </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Order By : user0003 (email@yahoo.com)</td>
-                            <td></td>
-                        </tr>
+         <kendo-mobile-content>
+        <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
 
-                        <tr class="ck-listview-tr">
-                            <td>Order Date: Nov 5, 2015</td>
-                              <td class="km-right">USD 200.00 </td>
-                        </tr>
-                        </table>
-                </h5>
+               <kendo-mobile-collapsible ng-repeat="i in [1,2,3,4]"
+                   class="ck-details" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
+                <h4> 
+                    
+                      <table>
+                    <tr class="ck-listview-tr-so">
+                        <td>
+                            <span>Sales Order :
+                                <span class="ck-a-link">12345{{$index}}</span>
+                            </span>
+                           
+                        </td>                       
+                          <td>
+                              <img src="styles/images/page.png" class="ck-listview-page"/>
+                    
+                       </td>
+                    </tr>
 
-               
-               <table class="ck-table">
-                <tr class="header">
-                 <td></td>       
-                    <td class="spacer">Order Number</td>
-                    <td>Price</td>     
-                    <td></td>               
-                   
-                </tr>
-                <tr class="pipe" ng-repeat="order in orders">
-                 <!--   <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>-->
-                     <td>&nbsp; </td>       
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                         {{order.OrderNumber}}
-                            </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           20. 3
-                           </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html"></a><i class="km-icon km-details red" style="margin-top:-5px;"></i>
-                    </td>
-                </tr>
-                   </table>
-        </kendo-mobile-collapsible>
+                              <tr class="ck-listview-tr">
+                        <td>
+                            <span>Organization Name
+                            </span>
+                           
+                        </td>                       
+                          <td>
+                      USD 200.00
+                       </td>
+                    </tr>
+                            <tr class="ck-listview-tr">
+                        <td>
+                            <span>Order by: user1234 (p30@yahoo.com)
+                            </span>
+                           
+                        </td>                       
+                          <td>
+                    
+                       </td>
+                    </tr>
+                              <tr class="ck-listview-tr">
+                        <td>
+                            <span>Order Date : Nov 5, 2015
+                            </span>
+                           
+                        </td>                       
+                          <td>
+                    
+                       </td>
+                    </tr>
+                </table>  
 
-                <kendo-mobile-collapsible k-icon-position="'left'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" class="ck-listview">
-                <h5>
-                    <table>
-                <tr class="ck-listview-tr-so">            
-                    <td>Sales Order:<span class="ckp-a-link">123456789012</span></td>
-                    <td align="right"> <img src="styles/images/page.png" class="ck-listview-page"/>
-                    </td>     
-                </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Organization Name</td>
-                          <td></td>
-                        </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Order By : user0003 (email@yahoo.com)</td>
-                            <td></td>
-                        </tr>
+                </h4>
+                <table class="ck-table pad">
+                    <tr class="med-grey pipe">
+                        <td>
+                            <h4 class="km-bold-font">Order Number</h4></td>
+                       
+                          <td>
+                            <h4 class="km-bold-font">Price</h4>
+                       </td>
+                    </tr>
+                    <tr class="pipe" ng-repeat="order in orders">
+                        <td>
+                            <h4>  {{order.OrderNumber}}</h4>
+                        </td>
+                        <td class="v-align">
+                            <h4>{{$index}}</h4>
+                        </td>
+                    </tr>
+                
+                </table>
+                   </kendo-mobile-collapsible>
 
-                        <tr class="ck-listview-tr">
-                            <td>Order Date: Nov 5, 2015</td>
-                              <td class="km-right">USD 200.00 </td>
-                        </tr>
-                        </table>
-                </h5>
+               <table class="ck-table pad">
+                 
+            <tr>
+                <td colspan="2">
+                    <fieldset>
+                        <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <i></i>
+                    <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
+                    <i></i>
+                    <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
+                </td>
+                  <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
+            </tr>
+        </table>
 
-               
-               <table class="ck-table">
-                <tr class="header">
-                 <td></td>       
-                    <td class="spacer">Order Number</td>
-                    <td>Price</td>     
-                    <td></td>               
-                   
-                </tr>
-                <tr class="pipe" ng-repeat="order in orders">
-                 <!--   <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>-->
-                     <td>&nbsp; </td>       
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                         {{order.OrderNumber}}
-                            </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           20. 3
-                           </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html"></a><i class="km-icon km-details red" style="margin-top:-5px;"></i>
-                    </td>
-                </tr>
-                   </table>
-        </kendo-mobile-collapsible>
-
-
-                <kendo-mobile-collapsible k-icon-position="'left'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" class="ck-listview">
-                <h5>
-                    <table>
-                <tr class="ck-listview-tr-so">            
-                    <td>Sales Order:<span class="ckp-a-link">123456789012</span></td>
-                    <td align="right"> <img src="styles/images/page.png" class="ck-listview-page"/>
-                    </td>     
-                </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Organization Name</td>
-                          <td></td>
-                        </tr>
-                        <tr class="ck-listview-tr">
-                            <td>Order By : user0003 (email@yahoo.com)</td>
-                            <td></td>
-                        </tr>
-
-                        <tr class="ck-listview-tr">
-                            <td>Order Date: Nov 5, 2015</td>
-                              <td class="km-right">USD 200.00 </td>
-                        </tr>
-                        </table>
-                </h5>
-
-               
-               <table class="ck-table">
-                <tr class="header">
-                 <td></td>       
-                    <td class="spacer">Order Number</td>
-                    <td>Price</td>     
-                    <td></td>               
-                   
-                </tr>
-                <tr class="pipe" ng-repeat="order in orders">
-                 <!--   <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>-->
-                     <td>&nbsp; </td>       
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                         {{order.OrderNumber}}
-                            </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           20. 3
-                           </a>
-                    </td>
-                    <td class="v-align"><a  class="data-btn" kendo-mobile-button href="src/app/order/detail.html"></a><i class="km-icon km-details red" style="margin-top:-5px;"></i>
-                    </td>
-                </tr>
-                   </table>
-        </kendo-mobile-collapsible>
-        </ul>
-
-        <kendo-mobile-footer style="margin-left: 2px !important; padding: 5px;" class="ck-grey-wrap">
+        </kendo-mobile-list-view>
+        </kendo-mobile-content>
+      
+<!--        <kendo-mobile-footer style="margin-left: 2px !important; padding: 5px;" class="ck-grey-wrap">
             
                 <textarea rows="4" placeholder="{{form.comment.resoruceValue}}" ng-model="orderApprovalComment" style="width: 99%;  border-radius:0; margin-bottom:.2em;" class="km-nova km-text"></textarea>
            
@@ -480,7 +419,7 @@
 
             <kendo-mobile-button class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap" ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
 
-        </kendo-mobile-footer>
+        </kendo-mobile-footer>-->
     </div>
 
 
