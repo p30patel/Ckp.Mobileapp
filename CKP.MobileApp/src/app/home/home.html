@@ -319,10 +319,10 @@
             </li>-->
             <li class="ck-grey-wrap" style="padding-left: 0 !important; padding-right:0 !important; padding-top:5px; padding-bottom:5px; ">
                   <div  ng-repeat="i in [1,2,3,4]" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
-                      <table>
+                      <table class="list-view-table">
                     <tr class="ck-listview-tr-so">
-                            <td style="width:10%;" rowspan="4"><span class="km-icon km-plus ck-icon-toggge-{{$index}}" ng-click="headerClick('{{$index}}')"></span></td>  
-                        <td style="width:auto;" ng-click="headerClick('{{$index}}')"> 
+                            <td style="width:10%;" rowspan="4" class="km-bold-font"><span class="km-icon km-plus ck-icon-toggge-{{$index}}" ng-click="headerClick('{{$index}}')"></span></td>  
+                        <td style="width:auto;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
                             Sales Order :
                                 <a>123456789011{{$index}}</a>
 
@@ -630,9 +630,9 @@
             </div>
 
         </div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important;" k-style="'inset'">
+        <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important; overflow:auto !important;" k-style="'inset'">
 
-          <p ng-bind-html="renderHtml(confiramtionConent)"></p>
+          <div class="container" ng-bind-html="renderHtml(confiramtionConent)"></div>
         </ul>
       
     </div>
