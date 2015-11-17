@@ -132,7 +132,6 @@
     <Content Include="src\app\order\detail - Copy.html" />
     <Content Include="src\app\order\detail.html" />
     <Content Include="src\app\order\list.html" />
-    <Content Include="src\app\order\order.html" />
     <Content Include="src\app\order\orderDetailController.js" />
     <Content Include="src\app\order\orderlistController.js" />
     <Content Include="src\app\policy\policy.html" />

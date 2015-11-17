@@ -319,7 +319,7 @@ app.controller('homeController', [
 
                        };
                        $scope.viewAll = function (orderType, parameterId) {
-                           kendo.mobile.application.navigate("src/app/order/order.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
                        }
                        $scope.approve = function () {
                            var salesorders = "";
