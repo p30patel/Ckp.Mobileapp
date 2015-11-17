@@ -1,14 +1,12 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="termsConditionController" k-after-show="afterShow">
-     <kendo-mobile-content>
+    <kendo-mobile-content>
         <kendo-mobile-list-view ng-show="termsCondition" ng-repeat="terms in termsCondition.Resources" ng-if="$index == 2">
             <li>
                 <p ng-bind-html="renderHtml(terms.ResourceValue.ResourceValue)"></p>
-
-            </li>              
+            </li>
         </kendo-mobile-list-view>
-  
-    <div ng-show="!termsCondition">
-          <p>{{form.noData.resoruceValue}}</p>
-    </div>
-         </kendo-mobile-content>
+        <div ng-show="!termsCondition">
+            <p>{{form.noData.resoruceValue}}</p>
+        </div>
+    </kendo-mobile-content>
 </kendo-mobile-view>

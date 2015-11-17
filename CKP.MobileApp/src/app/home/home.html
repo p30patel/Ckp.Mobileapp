@@ -1,171 +1,158 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
-            <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" ng-click="showAlertModel()"><i class="ck-icon ck-messages"></i></kendo-mobile-button>
-            <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
-            <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
+            <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" ng-click="showAlertModel()">
+                <i class="ck-icon ck-messages"></i>
+            </kendo-mobile-button>
+            <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button">
+                <i class="ck-icon ck-menu"></i>
+            </a>
+            <kendo-view-title>
+                <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
+            </kendo-view-title>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
-
-
     <kendo-mobile-content>
-
         <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
-
                     <select class="ck-po-select" 
                         style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;" 
-                        ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'">
-                    </select>
-
+                        ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
                     <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue"  ng-keypress="key($event)"
                         style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " 
                         />
-                </fieldset>            
+                </fieldset>
             </li>
-           
-
-           <div ng-repeat="orderCount in orderCounts ">
-            <div class="ck-home " style="margin-top:-.1em; background-color:gray; "> 
-
-                <h3>
-                <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
-                <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "  
+            <div ng-repeat="orderCount in orderCounts ">
+                <div class="ck-home " style="margin-top:-.1em; background-color:gray; ">
+                    <h3>
+                        <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
+                        <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "  
                     ng-click="showCreditModel()" ng-show="hasCreditLock">
-                    <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
-                </kendo-mobile-button>   
+                            <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
+                        </kendo-mobile-button>
                     </h3>
-
                     <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" >
-                    <li class="ck-button km-button ck-count-btn" ng-disabled="orderCount.ApprovalCount==0" >
-                        <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
-                        <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
-                    </li>
-                    <li class="ck-button km-button ck-count-btn">  
-                                    <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
-                                    <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div></li>
-                    <li class="ck-button km-button ck-count-btn">
-                         <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
-                                   <div class="ck-button-text ">{{form.releasedOrder.resoruceValue}}</div>
-                    </li>
-                </kendo-mobile-button-group>
+                        <li class="ck-button km-button ck-count-btn" ng-disabled="orderCount.ApprovalCount==0" >
+                            <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
+                            <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
+                        </li>
+                        <li class="ck-button km-button ck-count-btn">
+                            <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
+                            <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div>
+                        </li>
+                        <li class="ck-button km-button ck-count-btn">
+                            <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
+                            <div class="ck-button-text ">{{form.releasedOrder.resoruceValue}}</div>
+                        </li>
+                    </kendo-mobile-button-group>
                 </div>
-            
-           
-                    <!-- Tab panes -->
+                <!-- Tab panes -->
                 <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}} " class="order-header" data-orderType="Approval">
                     <table class="ck-table">
-                               
                         <tr class="header">
-                                <td></td>
-                                <td ng-if="searchParameterId=='1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='1'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='2'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='2'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='3'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
-                                <td ng-if="searchParameterId=='4'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                                <td colspan="2">{{form.dateInSystem.resoruceValue}}</td>
-                            </tr>
-                          
+                            <td></td>
+                            <td ng-if="searchParameterId=='1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='1'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='2'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='2'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='3'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='4'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
+                            <td colspan="2">{{form.dateInSystem.resoruceValue}}</td>
+                        </tr>
                         <tr class="pipe" ng-repeat="order in orders">
-
-                        <td> 
-                            <input type="checkbox"  class="km-checkbox" value="{{order.SalesOrderNo}}"  id="{{$index}}"
+                            <td>
+                                <input type="checkbox"  class="km-checkbox" value="{{order.SalesOrderNo}}"  id="{{$index}}"
                                 ng-checked="selection.indexOf(order.SalesOrderNo)> -1" ng-click="toggleSelection(order.SalesOrderNo)"/>
-                    <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
-                    </td>
-
-
-                    <td class="v-align" ng-if="searchParameterId == '1'">
+                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
+                            </td>
+                            <td class="v-align" ng-if="searchParameterId == '1'">
                    
-                        Organization Name <br />
-                            <p>  {{order.OrderNumber}} </p>
-                                 <p>   {{order.OrderNumber}}  </p>
-                                   <p> {{order.OrderNumber}}  </p>
-                                   <p> {{order.OrderNumber}}  </p>
-                          
-                     
-                        <a  ng-click="showMoreOrderModel()">
+                        Organization Name 
+                                <br />
+                                <p>  {{order.OrderNumber}} </p>
+                                <p>   {{order.OrderNumber}}  </p>
+                                <p> {{order.OrderNumber}}  </p>
+                                <p> {{order.OrderNumber}}  </p>
+                                <a  ng-click="showMoreOrderModel()">
                            see more
                            </a>
-                      
-                    </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '1'">
+                            </td>
+                            <td ng-if="searchParameterId == '1'"  valign="center">
                            {{order.SalesOrderNo}}
                     </td>
-
-
-                    <td class="v-align" ng-if="searchParameterId == '2'">>
+                            <td class="v-align" ng-if="searchParameterId == '2'">
                               {{order.SalesOrderNo}} 
                     </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '2'">
+                            <td class="v-align" ng-if="searchParameterId == '2'">
                              Organization Name
-                            <small>  {{order.OrderNumber}}   </small>
-                        
-                        <a  ng-click="showMoreOrderModel()">
+                            
+                                <small>  {{order.OrderNumber}}   </small>
+                                <a  ng-click="showMoreOrderModel()">
                            View More
                            </a>
-                    </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                            </td>
+                            <td class="v-align" ng-if="searchParameterId == '3'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
                               {{order.ShoppingCart}}
                             </a>
-                    </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                            </td>
+                            <td class="v-align" ng-if="searchParameterId == '3'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
                               {{order.SalesOrderNo}} 
                             </a>
-                    </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.VendorRef)">
+                            </td>
+                            <td class="v-align" ng-if="searchParameterId == '4'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.VendorRef)">
                               {{order.VendorRef}}
                         
                             </a>
-                    </td>
-
-                    <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.OrderNumber)">
+                            </td>
+                            <td class="v-align" ng-if="searchParameterId == '4'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.OrderNumber)">
                               {{order.SalesOrderNo}}
                             </a>
-                    </td>
-
-
-                    <td class="v-align">
-                        <p  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.DateInSystem | date}}  </p>
-                        <p  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.DateInSystem | date}}  </p>
-                        <p  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)">{{order.DateInSystem | date}} </p>
-                        <p  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">{{order.DateInSystem | date}}  </p>                     
-                    </td>
-                     <td class="v-align">
-                        <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)"><i class="km-icon km-details red"></i></a>
-                        <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)"><i class="km-icon km-details red"></i></a>
-                        <a  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)"><i class="km-icon km-details red"></i></a>
-                        <a  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)"><i class="km-icon km-details red"></i></a>
-                     
-                    </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="5" style="padding: 1em;">
-                            <i></i>
-                            <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="viewAll(1, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
-                            <i></i>
-                            <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" ng-click="showApprovalModel()">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
-                        </td>
-                    </tr>
+                            </td>
+                            <td  valign="center">
+                                <p  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.DateInSystem | date}}  </p>
+                                <p  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.DateInSystem | date}}  </p>
+                                <p  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)">{{order.DateInSystem | date}} </p>
+                                <p  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">{{order.DateInSystem | date}}  </p>
+                            </td>
+                            <td  valign="center">
+                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                                <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                                <a  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="padding: 1em;">
+                                <i></i>
+                                <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="viewAll(1, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <i></i>
+                                <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" ng-click="showApprovalModel(1)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                            </td>
+                        </tr>
                     </table>
-        </ul>
+                </ul>
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" class="order-header" data-orderType="New">
                     <table class="ck-table">
                         <tr class="header">
                             <td>&nbsp;</td>
                             <td ng-if="searchParameterId == '1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer">{{form.salesOrder.resoruceValue}}</td>
-
                             <td ng-if="searchParameterId == '3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
                             <td>{{form.orderStatus.resoruceValue}}</td>
@@ -177,35 +164,31 @@
                                 <a class="data-btn" kendo-mobile-button ng-click="nextView(2, searchParameterId, 111111)">
                                     {{order.OrderNumber}}</a>
                             </td>
-
-                            <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)">
+                            <td class="v-align" ng-if="searchParameterId == '2'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)">
                                       {{order.SalesOrderNo}}
-                                                          <div>&nbsp;</div>
-                        
-                                    </a>
+                                                          
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-
-                            <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)">
-                                      {{order.ShoppingCart}}  <div>&nbsp;</div>
-                     
-                                    </a>
+                            <td class="v-align" ng-if="searchParameterId == '3'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)">
+                                      {{order.ShoppingCart}}  
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-
-                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">
-                                      {{order.VendorRef}}  <div>&nbsp;</div>
-                        
-                                    </a>
+                            <td class="v-align" ng-if="searchParameterId == '4'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">
+                                      {{order.VendorRef}}  
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-
-
                             <td>{{order.Status}}</td>
-                            <td><a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a><i class="km-icon km-details red"></i></td>
+                            <td>
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a>
+                                <i class="km-icon km-details red"></i>
+                            </td>
                         </tr>
-
-
                         <tr>
                             <td colspan="5" style="padding: 1em;">
                                 <i></i>
@@ -213,7 +196,6 @@
                                 <i></i>
                             </td>
                         </tr>
-
                     </table>
                 </ul>
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" class="order-header" data-orderType="Released">
@@ -222,317 +204,86 @@
                             <td></td>
                             <td ng-if="searchParameterId == '1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer">{{form.salesOrder.resoruceValue}}</td>
-
                             <td ng-if="searchParameterId == '3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
                             <td>{{form.orderStatus.resoruceValue}}</td>
                             <td>{{form.orderDate.resoruceValue}}</td>
                         </tr>
-
-
                         <tr class="pipe" ng-repeat="order in orders">
                             <td>&nbsp;</td>
-                            <td class="v-align" ng-if="searchParameterId == '1'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">
+                            <td class="v-align" ng-if="searchParameterId == '1'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">
                                       {{order.OrderNumber}}
-                                                           <div>&nbsp;</div>
-                   
-                                    </a>
+                                                           
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-                            <td class="v-align" ng-if="searchParameterId == '2'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)">
+                            <td class="v-align" ng-if="searchParameterId == '2'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)">
                                       {{order.SalesOrderNo}}
-                                                               <div>&nbsp;</div>
-                   
-                                    </a>
+                                                               
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-
-                            <td class="v-align" ng-if="searchParameterId == '3'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)">
-                                      {{order.ShoppingCart}}     <div>&nbsp;</div>
-                     
-                                    </a>
+                            <td class="v-align" ng-if="searchParameterId == '3'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)">
+                                      {{order.ShoppingCart}}     
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
-
-
-                            <td class="v-align" ng-if="searchParameterId == '4'"><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">
-                                      {{order.VendorRef}}         <div>&nbsp;</div>
-                     
-                                    </a>
+                            <td class="v-align" ng-if="searchParameterId == '4'">
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">
+                                      {{order.VendorRef}}         
+                                    <div>&nbsp;</div>
+                                </a>
                             </td>
                             <td>{{order.Status}}</td>
-                            <td><a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a><i class="km-icon km-details red"></i></td>
+                            <td>
+                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a>
+                                <i class="km-icon km-details red"></i>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="5" style="padding: 1em;">
                                 <i></i>
                                 <kendo-mobile-button class="km-secondary km-justified" ng-click="viewAll(3, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
-
                             </td>
                         </tr>
-
                     </table>
-
                 </ul>
-        </div>
-
+            </div>
         </ul>
-
-       
         <!-- End Home View -->
     </kendo-mobile-content>
-     
-         <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
-               
-                <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-            </kendo-mobile-footer>
-
-      <!--  view more po modal  -->
-   
+    <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
+        <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+    </kendo-mobile-footer>
+    <!--  view more po modal  -->
     <div kendo-mobile-modal-view id="modalview-moreOrder" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                 <kendo-view-title>Order List</kendo-view-title>
-                <kendo-mobile-button ng-click="hideMoreOrderModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
-
+                <kendo-mobile-button ng-click="hideMoreOrderModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
             </div>
-
         </div>
-         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-repeat="order in orders">
-           <li>{{order.OrderNumber}}</li>
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-repeat="order in orders">
+            <li>{{order.OrderNumber}}</li>
         </ul>
-      
     </div>
-     <!--  approve modal -->
-    <div kendo-mobile-modal-view id="modalview-approve" class="km-moduleview ck-grey-wrap" style="width: 100%; height:100%;" data-use-native-scrolling="true">
-        <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-                <kendo-mobile-button k-align="'left'" k-on-click="hideApporvalModel()"><i class="ck-icon ck-barrow"></i></kendo-mobile-button>
-                </kendo-view-title>
-                {{form.approval.resoruceValue}}
-                <kendo-view-title></kendo-mobile-nav-bar>
-        </kendo-mobile-header>
-
-         <kendo-mobile-content>
-
-               <kendo-mobile-list-view class="ck-no-border">
-        
-            <li class="ck-grey-wrap" style="padding-left: 0 !important; padding-right:0 !important; padding-top:5px; padding-bottom:5px; ">
-                  <div  ng-repeat="i in [1,2,3,4]" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
-                      <table class="list-view-table">
-                    <tr class="ck-listview-tr-so">
-                            <td style="width:10% !important; padding-left:15px;" rowspan="4" class="km-bold-font"><span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span></td>  
-                        <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
-                            Sales Order :
-                                123456789011{{$index}}
-
-                        </td> 
-                        <td style="width:20%;"></td>   
-                        <td style="width:10%;" rowspan="4">                   
-                    <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel()"/>
-                             <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
-                            
-                      USD 200.00
-                       </span>
-                            </td>
-                    </tr>
-
-                              <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
-                                
-                        <td colspan="2" class="ck-font-size-small" >
-                            <span>Organization Name
-                            </span>
-                           
-                        </td>                       
-                       
-                    </tr>                        
-
-                                   <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
-                                       
-                        <td colspan="2" class="ck-font-size-small">
-                            <span>Order by: user1234 (p30@yahoo.com)
-                            </span>
-                           
-                        </td>                       
-                      
-                    </tr>   
-                          
-                                           <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
-                                           
-                        <td  class="ck-font-size-small">
-                            <span>Order Date : Nov 5, 2015
-                            </span>
-                           
-                        </td >                       
-                         
-                    </tr>                                   
-                          </table>
-
-                        <table class="ck-table pad list-view-detail-{{$index}}" style="background-color:white !important; display:none">
-                <tr class="header">
-                    <td></td>
-                    <td>Purchase Order</td>
-                    <td>Price</td>
-                   
-                </tr>
-                <tr class="pipe" ng-repeat="order in orders">
-                    <td>
-                  
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                            {{order.OrderNumber}}
-                         
-                    </td>
-                 
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">11.12</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-         
-            </table>
-
-                </div>  
-            </li>
-                   
-          
-         
-                         <table class="ck-table pad">
-                 
-            <tr>
-                <td colspan="2">
-                    <fieldset>
-                        <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                        <i></i>
-                    <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
-                    <i></i>
-                    <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
-                </td>
-                  <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
-            </tr>
-        </table>
-        </kendo-mobile-list-view>
-
-
-   <!--     <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
-
-               <div ng-repeat="i in [1,2,3,4]" 
-                   class="ck-grey-wrap ck-details ck-listview-collapse" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h4> 
-                    
-                      <table>
-                    <tr class="ck-listview-tr-so">
-                        <td>
-                            Sales Order :
-                                <a>12345{{$index}}</a>
-
-                        </td>                       
-                  
-                    </tr>
-
-                              <tr class="ck-listview-tr">
-                        <td colspan="2">
-                            <span>Organization Name
-                            </span>
-                           
-                        </td>                       
-                       
-                    </tr>                        
-
-                                   <tr class="ck-listview-tr">
-                        <td colspan="2">
-                            <span>Order by: user1234 (p30@yahoo.com)
-                            </span>
-                           
-                        </td>                       
-                      
-                    </tr>   
-                          
-                                           <tr class="ck-listview-tr">
-                        <td>
-                            <span>Order Date : Nov 5, 2015
-                            </span>
-                           
-                        </td>                       
-                          <td style="text-align: right">
-                              <a>
-                      USD 200.00</a>
-                       </td>
-                    </tr>                                   
-                </table>  
-                </h4>
-                <table class="ck-table">
-                    <tr class="med-grey pipe">
-                        <td>
-                            <h4 class="km-bold-font">Order Number</h4></td>
-                       
-                          <td>
-                            <h4 class="km-bold-font">Price</h4>
-                       </td>
-                    </tr>
-                    <tr class="pipe" ng-repeat="order in orders">
-                        <td>
-                            <h4>  {{order.OrderNumber}}</h4>
-                        </td>
-                        <td class="v-align"><a ng-click="orderDetail(1, searchParameterId, order.OrderNumber)"> <i class="km-icon km-details red" style="margin-top:-5px;"></i></a>
-                            <h4>{{$index}}</h4>
-                        </td>
-                    </tr>
-                
-                </table>
-                   </div>
-
-               <table class="ck-table pad">
-                 
-            <tr>
-                <td colspan="2">
-                    <fieldset>
-                        <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                        <i></i>
-                    <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
-                    <i></i>
-                    <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
-                </td>
-                  <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
-            </tr>
-        </table>
-
-        </kendo-mobile-list-view>-->
-        </kendo-mobile-content>
-      
-<!--        <kendo-mobile-footer style="margin-left: 2px !important; padding: 5px;" class="ck-grey-wrap">
-            
-                <textarea rows="4" placeholder="{{form.comment.resoruceValue}}" ng-model="orderApprovalComment" style="width: 99%;  border-radius:0; margin-bottom:.2em;" class="km-nova km-text"></textarea>
-           
-            <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-            <p></p>
-            <kendo-mobile-button class="km-primary km-large ck-btn-left" data-tap="myTouch.tap" ng-click="approved(true)">{{form.yes.resoruceValue}}</kendo-mobile-button>
-
-            <kendo-mobile-button class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap" ng-click="approved(false)">{{form.no.resoruceValue}}</kendo-mobile-button>
-
-        </kendo-mobile-footer>-->
-    </div>
-
-
     <!--  Alert modal  -->
     <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                 <kendo-view-title>{{form.alertsAndNews.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+                <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
-
             <li>
                 No messages are found!
             </li>
@@ -542,102 +293,64 @@
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid">Announcements</span>
             </li>
-
             <span kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId'">
-      
-        <li ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
+                <li ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
                     <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) 
-            <p> <span ng-bind-html="renderHtml(value[0].Message)"></span></p>
-
-            </li>
-
+            
+                    <p>
+                        <span ng-bind-html="renderHtml(value[0].Message)"></span>
+                    </p>
+                </li>
             </span>
         </ul>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.PartnerHolidayList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
                 <span class="ck-font-size-mid">Print Shop Holidays</span>
-
             </li>
-
-
-            <li ng-repeat="message in mesages.PartnerHolidayList"><b> {{message.Name}} </b>
+            <li ng-repeat="message in mesages.PartnerHolidayList">
+                <b> {{message.Name}} </b>
                 <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
             </li>
-
         </ul>
-
-
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid">Checkpoint Systems, Inc.</span>
-
             </li>
             <li>
-
-
                 <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
-
                     <li class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
                         <b>{{value[0].Title}} </b>
-                        <p><span ng-bind-html="renderHtml(value[0].Message)"></span></p>
+                        <p>
+                            <span ng-bind-html="renderHtml(value[0].Message)"></span>
+                        </p>
                     </li>
                 </ul>
             </li>
         </ul>
-
     </div>
-
-
     <!--  credit lock modal  -->
-
     <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                 <kendo-view-title> {{form.creditLock.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
-
+                <kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
             </div>
-
         </div>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
-
             <li class="ck-module-date">
                 <i class="ck-icon ck-lock ck-module-icon"></i>
                 <span class="ck-font-size-mid">   {{form.creditLock.resoruceValue}}</span>
-
             </li>
             <li>
-
                 <h3 class="km-bold-font">{{form.attentionUser.resoruceValue}}</h3>
                 <h3 class="km-font">
                        {{form.creditLockMessage.resoruceValue}}
                     </h3>
             </li>
-
         </ul>
-      
     </div>
-
-      <!--  confirmation modal  -->
-
-      <div kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
-        <div kendo-mobile-header>
-            <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-                <kendo-view-title> Confirmation</kendo-view-title>
-                <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
-
-            </div>
-
-        </div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important; overflow:auto !important;" k-style="'inset'">
-
-          <div class="container" ng-bind-html="renderHtml(confiramtionConent)"></div>
-        </ul>
-      
-    </div>
-
-
-   
 </kendo-mobile-view>

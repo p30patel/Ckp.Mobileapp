@@ -128,7 +128,6 @@
     <Content Include="src\app\menu\menuController.js" />
     <Content Include="src\app\notification\notification.html" />
     <Content Include="src\app\notification\notificationController.js" />
-    <Content Include="src\app\order\approve.html" />
     <Content Include="src\app\order\approveController.js" />
     <Content Include="src\app\order\detail - Copy.html" />
     <Content Include="src\app\order\detail.html" />

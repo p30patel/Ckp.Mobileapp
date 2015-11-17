@@ -1,67 +1,65 @@
 <kendo-mobile-view k-transition="'slide:right'" ng-controller="menuController" k-after-show="afterShow" >
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
-               <kendo-mobile-button k-transition="'fade'" href="#:back" k-align="'left'"><i class="ck-icon ck-x-close"></i></kendo-mobile-button>
-
-           <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" /></kendo-view-title>
-
-           <kendo-mobile-button k-align="'right'" k-transition="'flip'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout"></kendo-mobile-button>
+            <kendo-mobile-button k-transition="'fade'" href="#:back" k-align="'left'">
+                <i class="ck-icon ck-x-close"></i>
+            </kendo-mobile-button>
+            <kendo-view-title>
+                <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
+            </kendo-view-title>
+            <kendo-mobile-button k-align="'right'" k-transition="'flip'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout"></kendo-mobile-button>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-
         <ul kendo-mobile-list-view>
-                 
-                <li>
-
-                    <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact">
+            <li>
+                <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact">
                      
                         {{form.contactus.resoruceValue}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq">
+            </li>
+            <li>
+                <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq">
                         {{menu.faq}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms">
+            </li>
+            <li>
+                <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms">
                         {{menu.termsCondition}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy">
+            </li>
+            <li>
+                <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy">
                         {{menu.policies}}
                     </a>
-                </li>
-                <li>
-                    <a href="src/app/help/help.html" data-icon="ck-icon ck-help">
+            </li>
+            <li>
+                <a href="src/app/help/help.html" data-icon="ck-icon ck-help">
                         {{menu.help}}
                     </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings">
+            </li>
+            <li ng-show="authentication.isAuth">
+                <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings">
                         {{menu.notificationSettings}}
                     </a>
-                </li>
-                <li ng-show="authentication.isAuth">
-                    <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback"">
+            </li>
+            <li ng-show="authentication.isAuth">
+                <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback"">
                         {{menu.feedback}}
                     </a>
-                </li>
-
-            </ul>
-   
-     <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && address">
-
+            </li>
+        </ul>
+        <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && address">
             <li>
-               <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
-                <img src="styles/images/Checknet-Logo.png" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />
-                <h5>{{address.name}}</h5> 
-                <h5>OLDFIELD BLVD</h5>
-                <h5>PITTSTON, PA, 18640</h5>
-                <h5>US Phone : 000-000-0000</h5>
-                <h5>Email : <a href="#">testuser@email.com</a> </h5>
+                <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
+                    <img src="styles/images/Checknet-Logo.png" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />
+                    <h5>{{address.name}}</h5>
+                    <h5>OLDFIELD BLVD</h5>
+                    <h5>PITTSTON, PA, 18640</h5>
+                    <h5>US Phone : 000-000-0000</h5>
+                    <h5>Email : 
+                        <a href="#">testuser@email.com</a>
+                    </h5>
                 </div>
             </li>
         </ul>

@@ -1,137 +1,117 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" >
-    <!-- <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
-            <kendo-mobile-button k-align="'right'"><i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
-            </kendo-mobile-button>
-       
-                <kendo-mobile-back-button k-align="'left'"><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
-            <kendo-view-title>Order List</kendo-view-title>
-        </kendo-mobile-nav-bar>
-    </kendo-mobile-header>
-   <div ng-repeat="order in order.list">
-       <p>{{order.OrderNumber}}</p>
-   </div>-->
-
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow">
     <kendo-mobile-header>
-        <kendo-mobile-nav-bar class="km-accent">
-               <kendo-mobile-back-button k-align="'left'"><i class="ck-icon ck-barrow"></i></kendo-mobile-back-button>
-         
-            <kendo-view-title>Shopping Cart Details</kendo-view-title>
+        <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+            <kendo-mobile-back-button k-align="'left'" >
+                <i class="ck-icon ck-barrow"></i>
+            </kendo-mobile-back-button>
+        </kendo-view-title>
+                {{form.approval.resoruceValue}}
+                
+        <kendo-view-title>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-        <kendo-mobile-list-view class="ck-no-border">
-            <li class="ck-po-container ck-grey-wrap">
-                <fieldset class="ck-login">
-                    <select class="ck-po-select" id="dropdown" style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;">
-                        <option value="First Option">Purchase Orders</option>
-                        <option value="Second Option">PO 1</option>
-                        <option value="Third Option">PO 2</option>
-                        <option value="Third Option">PO 3</option>
-                        <option value="Third Option">PO 4</option>
-                        <option value="Third Option">PO 5</option>
-                        <option value="Third Option">PO 6</option>
-                    </select>
-                    <input class="ck-po-search" style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF;" value="" placeholder="Search" type="text" />
-                </fieldset>
-                <!--<i class="km-icon km-arrowdown" style="position:relative; bottom: 25px; left:115px; z-index: 1; color:#fff; float:left;"></i>
-                <i class="km-icon km-search" style="position:relative; bottom: 25px; float:right; z-index: 1; font-size:80%; color:#D52B1E;"></i>-->
-            </li>
-            <li class="ck-grey-wrap">
-                <h2>Shopping Cart - 092883450</h2>
-            </li>
-            <table class="ck-table">
-                <tr class="header">
-                    <td></td>
-                    <td class="spacer">Purchase Order</td>
-                    <td>Status</td>
-                    <td>Date</td>
-                    <td>
-                    </td>
-                </tr>
-                <tr class="pipe">
-                    <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           Open
-                           </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-                <tr class="pipe">
-                    <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           Open
-                           </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-                <tr class="pipe">
-                    <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           Open
-                           </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-                <tr class="pipe">
-                    <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>
-                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" href="src/app/order/detail.html">
-                           Open
-                           </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-                <tr class="pipe">
-                    <td>
-                        <img src="styles/images/page.png" class="page" />
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                            GEM Trading Co. LLc
-                            <div>5555534219381872</div>
-                            </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
-                           Open
-                           </a>
-                    </td>
-                    <td class="v-align"><a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">24/03</a><i class="km-icon km-details red"></i>
-                    </td>
-                </tr>
-            </table>
-            <li class="ck-grey-wrap">
-           </li>
-        </kendo-mobile-list-view>
-    </kendo-mobile-content>
-</kendo-mobile-view>
+        <ul kendo-mobile-list-view class="ck-no-border">
+            <li class="ck-grey-wrap" style="padding : 5px 0 5px 0;">
+                <div  ng-repeat="i in [1,2,3,4]" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
+                    <table class="list-view-table">
+                        <tr class="ck-listview-tr-so">
+                            <td style="width:10% !important; padding-left:15px;" rowspan="4" class="km-bold-font">
+                                <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span>
+                            </td>
+                            <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
+                            Sales Order :
+                                123456789011{{$index}}
+
+                        </td>
+                            <td style="width:20%;"></td>
+                            <td style="width:10%;" rowspan="4">
+                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel()"/>
+                                <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
+                            
+                      USD 200.00
+                       </span>
+                            </td>
+                        </tr>
+                        <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                            <td colspan="2" class="ck-font-size-small" >
+                                <span>Organization Name
+                            </span>
+                            </td>
+                        </tr>
+                        <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                            <td colspan="2" class="ck-font-size-small">
+                                <span>Order by: user1234 (p30@yahoo.com)
+                            </span>
+                            </td>
+                        </tr>
+                        <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
+                            <td  class="ck-font-size-small">
+                                <span>Order Date : Nov 5, 2015
+                            </span>
+                            </td >
+                        </tr>
+                    </table>
+                    <table class="ck-table pad list-view-detail-{{$index}}" style="background-color:white !important; display:none">
+                        <tr class="header">
+                            <td></td>
+                            <td>Purchase Order</td>
+                            <td>Price</td>
+                        </tr>
+                        <tr class="pipe" ng-repeat="order in order.list">
+                            <td></td>
+                            <td class="v-align">
+                                <a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            {{order.OrderNumber}}
+                         
+                    
+                                </td>
+                                <td class="v-align">
+                                    <a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">11.12</a>
+                                    <i class="km-icon km-details red"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <table class="ck-table pad ck-grey-wrap" ng-show="order.hasApproval">
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <i></i>
+                            <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
+                            <i></i>
+                            <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
+                        </td>
+                        <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
+                    </tr>
+                </table>
+            </ul>
+        </kendo-mobile-content>
+
+         <!--  confirmation modal  -->
+
+      <div kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
+        <div kendo-mobile-header>
+            <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                <kendo-view-title> Confirmation</kendo-view-title>
+                <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+
+            </div>
+
+        </div>
+        <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important; overflow:auto !important;" k-style="'inset'">
+
+          <div class="container" ng-bind-html="renderHtml(confiramtionConent)"></div>
+        </ul>
+      
+    </div>
+
+    </kendo-mobile-view>
+

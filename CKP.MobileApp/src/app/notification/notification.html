@@ -1,27 +1,23 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="notificationController" k-after-show="afterShow" k-before-show="beforeShow"  data-use-native-scrolling="true" >
-    
-   <kendo-mobile-content>
-    
-          <div class="km-listview-wrapper">
+    <kendo-mobile-content>
+        <div class="km-listview-wrapper">
             <ul id="custom-listview"  data-role="listview" class="km-widget km-listview km-listgroup" ng-repeat="subscription in notifications">
-                 <li class="km-group-container">
+                <li class="km-group-container">
                     <div class="ck-padfix-setting km-group-title"></div>
                     <ul class="km-list ck-brd-setting ck-title-setting">
                         <li >
                             <input kendo-mobile-switch k-checked="{{subscription.IsEnabled}}" k-on-change="onChange(kendoEvent)" data-SubscriptionType="{{subscription.SubscriptionType}}" />
                             <i class="ck-icon {{subscription.IconClass}} ck-icon-setting"></i>
                             <h4 class="ck-title-setting" translate-element="{{subscription.SubscriptinDescription}}"></h4>
-                         
-                               <p class="ck-descript-setting" translate-element="{{subscription.SubscriptinDescription}}" data-translateText="Description"></p>
+                            <p class="ck-descript-setting" translate-element="{{subscription.SubscriptinDescription}}" data-translateText="Description"></p>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-     
     </kendo-mobile-content>
-         <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
-                <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-            </kendo-mobile-footer>
+    <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
+        <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+    </kendo-mobile-footer>
 </kendo-mobile-view>
 

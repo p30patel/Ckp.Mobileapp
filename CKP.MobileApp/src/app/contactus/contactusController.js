@@ -187,7 +187,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         var sendEmail = function () {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
-            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you!<br>";
+            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you! <br>";
             var isAuth = $scope.authentication.isAuth;
 
             if (($scope.contact.orderNumber !== '' && $scope.contact.messageBody !== '' && isAuth) || (
@@ -215,7 +215,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                     }
                 }).catch(function (error) {
 
-                    $scope.message = "Faild to save data, Please try later<br>";
+                    $scope.message = "Faild to save data, Please try later <br>";
                     $timeout(function () {
                         $scope.message = "";
                     }, 7000);
@@ -255,7 +255,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         $scope.renderHtml = function (content) {
             if (typeof content !== 'undefined') {
                 content = content.replace(/<b>/g, '<br><b>');
-            }
+                }
             return $sce.trustAsHtml(content);
         };
     }

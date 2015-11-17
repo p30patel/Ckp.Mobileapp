@@ -1,23 +1,17 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="faqController" k-layout="'default'" k-after-show="afterShow">
-
     <kendo-mobile-content>
-
         <kendo-mobile-list-view class="ck-grey-wrap ck-no-border">
             <li>
                 <p>{{form.faqInstructions.resoruceValue}}</p>
             </li>
-                <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
                     ng-show="faqs" ng-repeat="faq in faqs | orderBy : 'DisplayOrder'">
-                    <h4>{{faq.Question}}</h4>
-                    <p ng-bind-html="renderHtml(faq.Answer)"></p>
-
-                </kendo-mobile-collapsible>
-                  
+                <h4>{{faq.Question}}</h4>
+                <p ng-bind-html="renderHtml(faq.Answer)"></p>
+            </kendo-mobile-collapsible>
         </kendo-mobile-list-view>
-   
         <div ng-show="!faqs">
-          <p>{{form.noData.resoruceValue}}</p>
+            <p>{{form.noData.resoruceValue}}</p>
         </div>
-
     </kendo-mobile-content>
 </kendo-mobile-view>

@@ -1,107 +1,89 @@
 <kendo-mobile-view id="login" k-title="'Login'" ng-controller="loginController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
-
     <kendo-mobile-header>
-
         <kendo-mobile-nav-bar class="km-light">
-              <kendo-view-title style="display: none;"></kendo-view-title>
-
-           <a data-align="left" data-role="button" href="#right-drawer"  data-tap="myTouch.tap"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
-           
-     <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
+            <kendo-view-title style="display: none;"></kendo-view-title>
+            <a data-align="left" data-role="button" href="#right-drawer"  data-tap="myTouch.tap"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button">
+                <i class="ck-icon ck-menu"></i>
+            </a>
+            <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
               k-data-source="languages"
               k-data-text-field="'Name'" k-data-value-field="'Culture'"
-              k-on-change="translatePage()">
-      </select>
+              k-on-change="translatePage()"></select>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
-
-
-  <img src="styles/images/Checknet-Logo.png" class="ck-login-logo" />
-
+    <img src="styles/images/Checknet-Logo.png" class="ck-login-logo" />
     <form>
         <ul kendo-mobile-list-view k-style="'inset'" class="ck-grey-wrap ck-no-border">
-
-            <li> <span class="ck-switchpad-right"><p>   {{form.remmberMe.resoruceValue}}</p></span>
+            <li>
+                <span class="ck-switchpad-right">
+                    <p>   {{form.remmberMe.resoruceValue}}</p>
+                </span>
                 <input kendo-mobile-switch k-id="email-switch" k-checked="checked" data-ng-model="loginData.useRefreshTokens" />
             </li>
-
             <li class="ck-no-pad">
                 <fieldset class="ck-login">
-                 
                     <input value="" type="text"  ng-model="loginData.userName" required autofocus placeholder="{{form.username.resoruceValue}}" ng-keypress="key($event)" />
-
                     <input value="" type="password" id="password"  ng-model="loginData.password" required placeholder="{{form.password.resoruceValue}}" ng-keypress="key($event)" />
-
-                    <kendo-mobile-button  class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()"><i style="font-size: 150%;" class="ck-icon ck-password"></i></kendo-mobile-button>
-                  
+                    <kendo-mobile-button  class="ck-input-btn" k-ng-disabled="!loginData.userName" id="modalview-open-button" k-rel="'modalview'"  ng-click="forgotPasswordModalOpen()">
+                        <i style="font-size: 150%;" class="ck-icon ck-password"></i>
+                    </kendo-mobile-button>
                     <p class="ck-align-right"  ng-hide="passwordHint">
                         <a href="" ng-click="showPasswordHint()"                            
                             k-ng-disabled="!loginData.userName" 
                             id="touchSurface"  
                             data-tap="myTouch.tap" class="ckp-a-link">{{form.passwordHint.resoruceValue}} </a>
                     </p>
-                     <p ng-show="passwordHint" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(passwordHint)"></p>
+                    <p ng-show="passwordHint" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(passwordHint)"></p>
                 </fieldset>
             </li>
-             <li>
-            <i></i>
-
-            <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin" track-login-btnClick
+            <li>
+                <i></i>
+                <kendo-mobile-button class="km-primary km-large km-justified" id="btnLogin" track-login-btnClick
                 k-on-click="login()" ng-disabled="!(loginData.userName && loginData.password)">{{form.signin.resoruceValue}}
             </kendo-mobile-button>
-                 </li>
-           
+            </li>
         </ul>
-
     </form>
-
     <!-- End Form Area -->
     <p class="ck-disclamier km-style-info">{{form.copyRightsDescription.resoruceValue}}. </p>
     <p class="ck-disclamier km-style-info">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
     <!-- End Login View -->
-
     <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">
-           <kendo-mobile-header>
-                  <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-                       <kendo-view-title>{{form.resetPassword.resoruceValue}}</kendo-view-title>
-                       <kendo-mobile-button ng-click="closeModalViewForgotPassword()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
-
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                <kendo-view-title>{{form.resetPassword.resoruceValue}}</kendo-view-title>
+                <kendo-mobile-button ng-click="closeModalViewForgotPassword()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-          <form novalidate name="forgotPasswordFrom">
-         <ul kendo-mobile-list-view style="margin-bottom: .5em; border:none !important; margin-top: 5.2em !important;"  class="ck-module-solid ck-no-border" k-style="'inset'">
-
-               <li class="ck-module-date">
-         <i class="ck-icon ck-password ck-module-icon"></i>
-         <span class="ck-font-size-mid">  {{form.forgotYourPassword.resoruceValue}}?</span>
-        
-    </li>
-           
-            <li>
-                <h2 class="km-bold-font"> </h2>
-                <p>
+        <form novalidate name="forgotPasswordFrom">
+            <ul kendo-mobile-list-view style="margin-bottom: .5em; border:none !important; margin-top: 5.2em !important;"  class="ck-module-solid ck-no-border" k-style="'inset'">
+                <li class="ck-module-date">
+                    <i class="ck-icon ck-password ck-module-icon"></i>
+                    <span class="ck-font-size-mid">  {{form.forgotYourPassword.resoruceValue}}?</span>
+                </li>
+                <li>
+                    <h2 class="km-bold-font"></h2>
+                    <p>
                     {{form.receiveNewPasswordText.resoruceValue}}.
 
                 </p>
-            </li>
-            <li class="ck-no-pad">
-              
-                <fieldset class="ck-login">
-                    <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" autofocus ng-keypress="key($event)" required />
-                </fieldset>
-                <i></i>
-                  <kendo-mobile-button 
+                </li>
+                <li class="ck-no-pad">
+                    <fieldset class="ck-login">
+                        <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="loginData.email" autofocus ng-keypress="key($event)" required />
+                    </fieldset>
+                    <i></i>
+                    <kendo-mobile-button 
                                         k-on-click="sendPassword()" 
                                         ng-disabled="forgotPasswordFrom.$invalid" 
                                         id="btnSendPassword"
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.sendNewPassword.resoruceValue}}</kendo-mobile-button>
-               
-                     <p ng-show="forgotPassworMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(forgotPassworMessage)"></p>
-               
-            </li>
-        </ul>
-              </form>
+                    <p ng-show="forgotPassworMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(forgotPassworMessage)"></p>
+                </li>
+            </ul>
+        </form>
     </div>
     <!-- End Forgot Password View -->
-   
 </kendo-mobile-view>

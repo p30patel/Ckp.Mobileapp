@@ -50,7 +50,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     var init = function () {
         if (!authService.authentication.isAuth) {
             authService.logout();
-          
+
             kendo.mobile.application.navigate("src/app/login/login.html");
         }
 
