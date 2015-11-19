@@ -292,9 +292,12 @@
                 </kendo-mobile-button>
             </div>
         </div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-repeat="order in orderList">
+        <div  style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+        <ul kendo-mobile-list-view ng-repeat="order in orderList">
             <li>{{order.Order}}</li>
         </ul>
+            </div>
+
     </div>
     <!--  Alert modal  -->
     <div kendo-mobile-modal-view id="modalview-alerts" k-transition="'overlay:up'" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
