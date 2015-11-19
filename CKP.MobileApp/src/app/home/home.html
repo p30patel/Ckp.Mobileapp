@@ -92,31 +92,30 @@
                             </td>
                            
                             <td valign="center" ng-if="searchParameterId == '3'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                            
                               {{order.ShoppingCart}}
-                            </a>
+                          
                             </td>
                             <td valign="center" ng-if="searchParameterId == '3'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                              
                               {{order.SalesOrderNo}} 
-                            </a>
                             </td>
                             <td valign="center" ng-if="searchParameterId == '4'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.VendorRef)">
+                              
                               {{order.VendorRef}}
                         
-                            </a>
+                         
                             </td>
                             <td valign="center" ng-if="searchParameterId == '4'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.OrderNumber)">
+                              
                               {{order.SalesOrderNo}}
-                            </a>
+                           
                             </td>
                             <td  valign="center">
                                 <p>{{order.OrderDate | date : 'MM/dd'}}  </p>
                             </td>
                             <td  valign="center" style="margin-top:-10px;">
-                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">
+                                <a  ng-if="searchParameterId == '1'" ng-click="orderList(1, searchParameterId, order.OrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
                                 <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">
