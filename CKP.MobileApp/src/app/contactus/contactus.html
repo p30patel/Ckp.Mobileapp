@@ -165,7 +165,11 @@
             </td>
         </tr>
     </table>
-</kendo-mobile-collapsible>undefined</kendo-mobile-list-view>undefined<!-- Hk--->undefined<kendo-mobile-list-view class="hk contactus" style="display: none;">
+</kendo-mobile-collapsible>
+
+</kendo-mobile-list-view>
+            <!-- Hk--->
+            <kendo-mobile-list-view class="hk contactus" style="display: none;">
 <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
     <h4>{{form.subTitileHK.resoruceValue}}</h4>
     <table class="match-details">
@@ -212,7 +216,9 @@
             </td>
         </tr>
     </table>
-</kendo-mobile-collapsible>undefined</kendo-mobile-list-view>undefined<!-- AU--->undefined<kendo-mobile-list-view class="contactus" style="display: none;">
+</kendo-mobile-collapsible></kendo-mobile-list-view>
+            <!-- AU--->
+ <kendo-mobile-list-view class="contactus" style="display: none;">
 <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
     <h4>{{form.AUTabTitle1.resoruceValue}}</h4>
     <table class="match-details">
@@ -243,11 +249,24 @@
             </td>
         </tr>
     </table>
-</kendo-mobile-collapsible>undefined</kendo-mobile-list-view>undefined</kendo-mobile-list-view>undefined</kendo-mobile-content>undefined<!-- write email modal-->undefined<kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">undefined<kendo-mobile-header>undefined<kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+</kendo-mobile-collapsible>
+
+ </kendo-mobile-list-view>
+
+        </kendo-mobile-list-view>
+
+    </kendo-mobile-content>
+    <!-- write email modal-->
+    <kendo-mobile-modal-view id="modalview-email" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-dark">
 <kendo-view-title>Write Email</kendo-view-title>
 <kendo-mobile-button ng-click="hideSendEmailmodal()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
-</kendo-mobile-button>undefined</kendo-mobile-nav-bar>undefined</kendo-mobile-header>undefined<form>undefined<ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
+</kendo-mobile-button></kendo-mobile-nav-bar>
+
+        </kendo-mobile-header>
+        <form><ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" id="contactForm">
 <li>
     <h3>
                        {{form.creditLockMessage.resoruceValue}}
@@ -262,11 +281,19 @@
         <textarea  placeholder="{{form.messageBody.resoruceValue}}"  ng-model="contact.messageBody" rows="3" required></textarea>
     </fieldset>
     <br />
-    <kendo-mobile-button 
+    <kendo-mobile-button
                                         k-on-click="send()" 
                                         k-ng-disabled="!contact.email && !contact.messageBody"                                       
                                         class="km-primary km-large km-justified" style="margin-bottom: 1.3rem;">{{form.send.resoruceValue}}
 
                   </kendo-mobile-button>
     <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-</li>undefined</ul>undefined</form>undefined</kendo-mobile-modal-view>undefined</kendo-mobile-view>
+</li>
+
+              </ul>
+
+        </form>
+
+    </kendo-mobile-modal-view>
+
+</kendo-mobile-view>

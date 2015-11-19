@@ -337,8 +337,9 @@ span.k-icon.k-i-arrow-s {
 .km-nova .km-dark.km-navbar,
 .km-nova .km-dark.k-toolbar,
 .km-nova .km-dark.km-tabstrip {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     color: #111;
+    border-bottom: solid;  border-width: 1px; border-color:gray!important;
     background: none!important;
     box-shadow: none;
     -webkit-box-shadow: none
