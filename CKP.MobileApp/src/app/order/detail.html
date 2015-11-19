@@ -140,10 +140,12 @@
                 </kendo-mobile-button>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-        <kendo-mobile-list-view class="ck-grey-wrap ck-no-border" ng-repeat="tracking in trackingList">
-            <li>
-                <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.Url}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.TrackingNumber}}</kendo-mobile-button>
-            </li>
-        </kendo-mobile-list-view>
+
+         <div style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" >
+        <ul kendo-mobile-list-view ng-repeat="tracking in trackingList">
+            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.Url}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.TrackingNumber}}</kendo-mobile-button></li>
+        </ul>
+        </div>
+
     </kendo-mobile-modal-view>
 </kendo-mobile-view>
