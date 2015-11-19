@@ -66,7 +66,7 @@ app.controller('homeController', [
                            $scope.form.alertsAndNews.resoruceValue = translateService.getResourceValue($scope.form.alertsAndNews.resoruceName);
 
                            $scope.form.viewAll = {};
-                           $scope.form.viewAll.resoruceName = "View All";
+                           $scope.form.viewAll.resoruceName = "View More";
                            $scope.form.viewAll.resoruceValue = translateService.getResourceValue($scope.form.viewAll.resoruceName);
 
 
