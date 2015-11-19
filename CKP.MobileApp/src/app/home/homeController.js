@@ -100,7 +100,7 @@ app.controller('homeController', [
                            $scope.form.bulkApprove.resoruceValue = translateService.getResourceValue($scope.form.bulkApprove.resoruceName);
 
                            $scope.form.dateInSystem = {};
-                           $scope.form.dateInSystem.resoruceName = "Date In System";
+                           $scope.form.dateInSystem.resoruceName = "Receive Date";
                            $scope.form.dateInSystem.resoruceValue = translateService.getResourceValue($scope.form.dateInSystem.resoruceName);
 
                            $scope.form.releasedOrder = {};
@@ -141,7 +141,7 @@ app.controller('homeController', [
                        $scope.selectedRetailer = 0;
                        $scope.selectedOrderType = 0;
                        $scope.currentSearchInput = '';
-
+                       $scope.orderList = {};
                        $scope.searchParameterId = 1;
                        $scope.parameters = parameterService.getSearchParameters();
 
@@ -185,7 +185,7 @@ app.controller('homeController', [
                        //get ordetrs
                        var getOrders = function (orderType, searchParamterId, searchInput) {
 
-                           $scope.message = "Loading : Order Type: " + orderType + " SearchParmeter : " + searchParamterId + "Search Input: " + searchInput;
+                         //  $scope.message = "Loading : Order Type: " + orderType + " SearchParmeter : " + searchParamterId + "Search Input: " + searchInput;
 
                            $timeout(function () {
                                $scope.message = "";
@@ -194,7 +194,33 @@ app.controller('homeController', [
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderHeaderData().then(function (result) {
                                kendo.mobile.application.pane.loader.hide();
-                               $scope.orders = result;
+                               var orders =
+                                    [
+                                     {
+                                         "ProductionOrderId": 412976631, "Orders":
+                                           [
+       { "Order": "111111" },
+      { "Order": "22222" },
+       { "Order": "333333" },
+        { "Order": "333333" },
+         { "Order": "44444" },
+      { "Order": "55555" },
+       { "Order": "66666" },
+        { "Order": "77777" }
+
+                                           ]
+                                         , "ShoppingCart": "124321", "SalesOrderNo": "170026201", "VendorRef": "V r 1", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
+                                     },
+                                     {
+                                         "ProductionOrderId": 412978692,
+
+                                         "Orders": [{ "Order": "111111" }, { "Order": "1112111" }, { "Order": "111111" }, { "Order": "1111311" }], "ShoppingCart": "125502", "SalesOrderNo": "170026202", "VendorRef": "ADIDAS SCM", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
+                                     },
+                                     { "ProductionOrderId": 412974923, "Orders": [{ "Order": "111234111" }], "ShoppingCart": "116084", "SalesOrderNo": "170026203", "VendorRef": "v 2 2", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" },
+
+                                    ];
+
+                               $scope.orders = orders;
                            }).catch(function (error) {
                                $scope.orders = {};
                            }).finally(function () {
@@ -274,6 +300,22 @@ app.controller('homeController', [
 
                            $scope.searchParameterId = para;
                        }
+
+                       $scope.ViewMore = function (orderType) {
+                           var temporders = [{ "ProductionOrderId": 4129766371, "Orders": [{ "Order": "1" }], "ShoppingCart": "124321", "SalesOrderNo": "170026206", "VendorRef": "bv", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" },
+                           { "ProductionOrderId": 4129786982, "Orders": [{ "Order": "2" }], "ShoppingCart": "125502", "SalesOrderNo": "170026207", "VendorRef": "ADIw33DAS SCM", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" }];
+                           var currentOrders = $scope.orders;
+                        
+                           angular.forEach(temporders, function (value, key) {
+                               if (key <= temporders.length) {
+                                   currentOrders.push(value);
+                               
+                               }
+                           });
+
+                           $scope.orders = currentOrders;
+                           console.log($scope.orders.length);
+                       }
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
@@ -294,8 +336,8 @@ app.controller('homeController', [
                            }
                        }
                        //view more orders
-                       $scope.showMoreOrderModel = function () {
-
+                       $scope.showMoreOrderModel = function (orders) {
+                           $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };
                        $scope.hideMoreOrderModel = function () {

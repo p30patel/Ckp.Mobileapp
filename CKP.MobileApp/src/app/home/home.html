@@ -61,7 +61,8 @@
                             <td ng-if="searchParameterId=='3'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='4'" class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                            <td colspan="2">{{form.dateInSystem.resoruceValue}}</td>
+                            <td >{{form.orderDate.resoruceValue}}</td>
+                            <td></td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in orders">
                             <td>
@@ -70,59 +71,51 @@
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '1'">
-                   
-                        Organization Name 
-                                <br />
-                                <p>  {{order.OrderNumber}} </p>
-                                <p>   {{order.OrderNumber}}  </p>
-                                <p> {{order.OrderNumber}}  </p>
-                                <p> {{order.OrderNumber}}  </p>
-                                <a  ng-click="showMoreOrderModel()">
+                                <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
                            see more
                            </a>
                             </td>
                             <td ng-if="searchParameterId == '1'"  valign="center">
                            {{order.SalesOrderNo}}
-                    </td>
-                            <td class="v-align" ng-if="searchParameterId == '2'">
+                            </td>
+                            <td valign="center" ng-if="searchParameterId == '2'">
                               {{order.SalesOrderNo}} 
-                    </td>
+                            </td>
                             <td class="v-align" ng-if="searchParameterId == '2'">
-                             Organization Name
-                            
-                                <small>  {{order.OrderNumber}}   </small>
-                                <a  ng-click="showMoreOrderModel()">
-                           View More
+                               <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : orderLimitDisplay">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
+                           see more
                            </a>
                             </td>
-                            <td class="v-align" ng-if="searchParameterId == '3'">
+                           
+                            <td valign="center" ng-if="searchParameterId == '3'">
                                 <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
                               {{order.ShoppingCart}}
                             </a>
                             </td>
-                            <td class="v-align" ng-if="searchParameterId == '3'">
+                            <td valign="center" ng-if="searchParameterId == '3'">
                                 <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
                               {{order.SalesOrderNo}} 
                             </a>
                             </td>
-                            <td class="v-align" ng-if="searchParameterId == '4'">
+                            <td valign="center" ng-if="searchParameterId == '4'">
                                 <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.VendorRef)">
                               {{order.VendorRef}}
                         
                             </a>
                             </td>
-                            <td class="v-align" ng-if="searchParameterId == '4'">
+                            <td valign="center" ng-if="searchParameterId == '4'">
                                 <a class="data-btn" kendo-mobile-button ng-click="orderList(1, searchParameterId, order.OrderNumber)">
                               {{order.SalesOrderNo}}
                             </a>
                             </td>
                             <td  valign="center">
-                                <p  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">{{order.DateInSystem | date}}  </p>
-                                <p  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">{{order.DateInSystem | date}}  </p>
-                                <p  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)">{{order.DateInSystem | date}} </p>
-                                <p  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">{{order.DateInSystem | date}}  </p>
+                                <p>{{order.OrderDate | date : 'MM/dd'}}  </p>
                             </td>
-                            <td  valign="center">
+                            <td  valign="center" style="margin-top:-10px;">
                                 <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(1, searchParameterId, order.OrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
@@ -140,7 +133,7 @@
                         <tr>
                             <td colspan="5" style="padding: 1em;">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="viewAll(1, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="ViewMore(1)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                                 <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" ng-click="showApprovalModel(1)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
@@ -155,44 +148,57 @@
                             <td ng-if="searchParameterId == '2' " class="spacer">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
+                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
                             <td>{{form.orderStatus.resoruceValue}}</td>
-                            <td>{{form.orderDate.resoruceValue}}</td>
+                             <td>{{form.dateInSystem.resoruceValue}}</td>
+                          <td></td>
                         </tr>
-                        <tr class="pipe" ng-repeat="order in orders">
+                        <tr class="pipe" ng-show="searchParameterId == '2' ||  searchParameterId == '3' ">
+                            <td  colspan="5">
+                            <p>No results</p>
+                                </td>
+                        </tr>
+                        <tr class="pipe" ng-repeat="order in orders" ng-hide="searchParameterId == '2'  || searchParameterId == '3'">
                             <td></td>
                             <td class="v-align" ng-if="searchParameterId == '1'">
-                                <a class="data-btn" kendo-mobile-button ng-click="nextView(2, searchParameterId, 111111)">
-                                    {{order.OrderNumber}}</a>
-                            </td>
-                            <td class="v-align" ng-if="searchParameterId == '2'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.SalesOrderNo)">
-                                      {{order.SalesOrderNo}}
-                                                          
-                                    <div>&nbsp;</div>
-                                </a>
-                            </td>
-                            <td class="v-align" ng-if="searchParameterId == '3'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.ShoppingCart)">
-                                      {{order.ShoppingCart}}  
-                                    <div>&nbsp;</div>
-                                </a>
+                               <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
+                           see more
+                           </a>
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '4'">
                                 <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">
                                       {{order.VendorRef}}  
-                                    <div>&nbsp;</div>
                                 </a>
+                            </td>
+                               <td class="v-align" ng-if="searchParameterId == '4'">
+                               <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
+                           see more
+                           </a>
                             </td>
                             <td>{{order.Status}}</td>
                             <td>
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(2, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a>
-                                <i class="km-icon km-details red"></i>
+                             
+                                <p  ng-if="searchParameterId == '1' || searchParameterId == '4'" >{{order.DateInSystem | date : 'MM/dd'}}  </p>
+                             
                             </td>
-                        </tr>
+                       
+                              <td  valign="center" style="margin-top:-10px;">
+                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(2, searchParameterId, order.OrderNumber)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>                               
+                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(2, searchParameterId, order.VendorRef)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                            </td>
+                            </tr>
                         <tr>
-                            <td colspan="5" style="padding: 1em;">
+                            <td colspan="5" style="padding: 1em;" ng-hide="searchParameterId == '2' ||  searchParameterId == '3' ">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified" ng-click="viewAll(2, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified" ng-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
@@ -204,49 +210,75 @@
                             <td></td>
                             <td ng-if="searchParameterId == '1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer">{{form.salesOrder.resoruceValue}}</td>
-                            <td ng-if="searchParameterId == '3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>
+                            <td ng-if="searchParameterId == '3'" class="spacer">{{form.shoppingCart.resoruceValue}}</td>                            
                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
+                             <td ng-if="searchParameterId != '1'" class="spacer">{{form.orderNumber.resoruceValue}}</td>
                             <td>{{form.orderStatus.resoruceValue}}</td>
-                            <td>{{form.orderDate.resoruceValue}}</td>
+                            <td >{{form.orderDate.resoruceValue}}</td>
+                            <td></td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in orders">
                             <td>&nbsp;</td>
                             <td class="v-align" ng-if="searchParameterId == '1'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">
-                                      {{order.OrderNumber}}
-                                                           
-                                    <div>&nbsp;</div>
-                                </a>
+                                <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
+                           see more
+                           </a>
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '2'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.SalesOrderNo)">
-                                      {{order.SalesOrderNo}}
-                                                               
-                                    <div>&nbsp;</div>
-                                </a>
+                             
+                                      {{order.SalesOrderNo}}                                
+                              
                             </td>
-                            <td class="v-align" ng-if="searchParameterId == '3'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.ShoppingCart)">
+
+                             <td class="v-align" ng-if="searchParameterId == '3'">
+                             
                                       {{order.ShoppingCart}}     
-                                    <div>&nbsp;</div>
-                                </a>
+                                 
+                             
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '4'">
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">
+                              
                                       {{order.VendorRef}}         
-                                    <div>&nbsp;</div>
-                                </a>
+                             
+                            </td>
+                              <td class="v-align" ng-if="searchParameterId != '1'">
+                               <p>Organization Name </p>
+                                <p ng-repeat="orderline in order.Orders | limitTo : orderLimitDisplay">  {{orderline.Order}} </p>
+                                <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
+                           see more
+                           </a>
                             </td>
                             <td>{{order.Status}}</td>
+                            
                             <td>
-                                <a class="data-btn" kendo-mobile-button ng-click="orderDetail(3, searchParameterId, order.VendorRef)">{{order.OrderDate | date}}</a>
-                                <i class="km-icon km-details red"></i>
+                                 <p>{{order.OrderDate | date : 'MM/dd'}}  </p>
+                               
                             </td>
-                        </tr>
+                     
+                         
+                              <td  valign="center" style="margin-top:-10px;">
+                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>     
+                                   <a  ng-if="searchParameterId == '2'" ng-click="orderList(3, searchParameterId, order.SalesOrder)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>  
+                                  <a  ng-if="searchParameterId == '3'"  ng-click="orderList(3, searchParameterId, order.ShoppingCart)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>                              
+                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(4, searchParameterId, order.VendorRef)">
+                                    <i class="km-icon km-details red"></i>
+                                </a>
+                            </td>
+                               </tr>
+                           
                         <tr>
+
                             <td colspan="5" style="padding: 1em;">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified" ng-click="viewAll(3, searchParameterId)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified"  ng-click="ViewMore(1)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
@@ -269,8 +301,8 @@
                 </kendo-mobile-button>
             </div>
         </div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-repeat="order in orders">
-            <li>{{order.OrderNumber}}</li>
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-repeat="order in orderList">
+            <li>{{order.Order}}</li>
         </ul>
     </div>
     <!--  Alert modal  -->
@@ -297,6 +329,7 @@
                 <li ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
                     <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) 
             
+                    
                     <p>
                         <span ng-bind-html="renderHtml(value[0].Message)"></span>
                     </p>

@@ -132,8 +132,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         notificationDataService.updateNotification(notification).then(function (result) {
             if (result !== 'success') {
                
-                $scope.message = "Faild to save data, Please try later
-<br>";
+                $scope.message = "Faild to save data, Please try later<br>";
                 $timeout(function () {
                     $scope.message = "";
                 }, 7000);
