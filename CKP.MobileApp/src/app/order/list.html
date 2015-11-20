@@ -20,17 +20,19 @@
                                 <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span>
                             </td>
                             <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
-                            Sales Order :
-                                123456789011{{$index}}
+                            <div> Sales Order :123456789011{{$index}} </div>
 
                         </td>
                             <td style="width:20%;"></td>
                             <td style="width:10%;" rowspan="4">
+                                <h4>
                                 <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel()"/>
                                 <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
+                                  
                             
                       USD 200.00
                        </span>
+                                      </h4>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
