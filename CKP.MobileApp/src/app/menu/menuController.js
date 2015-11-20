@@ -67,7 +67,6 @@ app.controller('menuController', [
                            authService.logout();
                            $scope.authentication.isAuth = false;
 
-
                            kendo.mobile.application.navigate("src/app/login/login.html");
 
                        }
@@ -79,18 +78,9 @@ app.controller('menuController', [
                        $scope.mnuClick = function (viewName) {
 
 
-                           switch (viewName) {
-                               case "message":
-                                   kendo.mobile.application.navigate("src/app/message/message.html");
-                                   break;
-                               case "login":
-                                   kendo.mobile.application.navigate("src/app/login/login.html#userId=12345");
-                                   break;
-                               case "close":
-                                   kendo.mobile.application.navigate("src/app/home/home.html");
-                                   break;
+                           switch (viewName) {                                                     
                                default:
-                                   kendo.mobile.application.navigate("src/app/login/login.html", "slide");
+                                   kendo.mobile.application.navigate("src/app/login/login.html");
                                    break;
                            }
                        }

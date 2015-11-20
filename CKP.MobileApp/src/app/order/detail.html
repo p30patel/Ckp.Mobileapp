@@ -4,6 +4,7 @@
             <kendo-mobile-button ng-show="trackingCount > 0" id="btn_tracking"  k-align="'right'" ng-click="showTrakcingListModal()">
                 <i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
             </kendo-mobile-button>
+            
             <kendo-mobile-back-button k-align="'left'" >
                 <i class="ck-icon ck-barrow"></i>
             </kendo-mobile-back-button>
@@ -70,7 +71,7 @@
                     <tr>
                         <td>
                             <fieldset>
-                                <textarea placeholder="{{form.orderInquiry.resoruceValue}}" ng-model="inqueryComment" style="height: 125px;"></textarea>
+                                <textarea rows="3" placeholder="{{form.orderInquiry.resoruceValue}}" ng-model="inqueryComment"></textarea>
                             </fieldset>
                         </td>
                     </tr>

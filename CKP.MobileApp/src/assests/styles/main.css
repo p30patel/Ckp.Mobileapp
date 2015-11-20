@@ -11,7 +11,10 @@
 .ck-listview-tr-so{line-height:15px; }
 .ck-listview-page {width: 1em; height: 1.4em; margin: .6em 0 .6em 3em;}
 .ck-font-size-small{font-size: .6em !important;  }
-
+i.km-icon.km-details.red {
+ 
+  margin-bottom: 24px !important;
+}
 .main-nav {
   position: fixed;
   top: 0;
