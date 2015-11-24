@@ -343,9 +343,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
             authService.login($scope.loginData).then(function (response) {
 
                 var data = localStorageService.get('organizationDetail');
-                console.log(data);
+                
                 if (data !== null) {
-                  //  hasNewPassword = data.hasNewPassword;
+
+                    hasNewPassword = data.HasNewPassword;
                 }
                 if (hasNewPassword)
                 {
