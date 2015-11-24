@@ -85,5 +85,40 @@
             </ul>
         </form>
     </div>
+
+
     <!-- End Forgot Password View -->
+
+     <div kendo-mobile-modal-view id="modalview-newPassword" k-transition="'overlay:up'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-dark">
+                <kendo-view-title>{{form.newPassword.resoruceValue}}</kendo-view-title>
+                <kendo-mobile-button ng-click="newPasswordModalClose()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+        <form >
+            <ul kendo-mobile-list-view style="margin-bottom: .5em; border:none !important; margin-top: 5.2em !important;"  class="ck-module-solid ck-no-border" k-style="'inset'">
+                <li class="ck-module-date">
+                    <i class="ck-icon ck-password ck-module-icon"></i>
+                    <span class="ck-font-size-mid">  {{form.newPassword.resoruceValue}}?</span>
+                </li>
+                <li>
+                    <h2 class="km-bold-font"></h2>
+                    <p>
+                    {{form.newPasswordText.resoruceValue}}.
+
+                </p>
+                </li>
+                <li class="ck-no-pad">
+                    <fieldset class="ck-login">
+                      <p ng-show="forgotPassworMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(forgotPassworMessage)"></p>
+                    </fieldset>
+                    <i></i>
+               
+                </li>
+            </ul>
+        </form>
+    </div>
 </kendo-mobile-view>

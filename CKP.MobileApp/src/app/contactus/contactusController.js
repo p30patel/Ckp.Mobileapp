@@ -147,6 +147,19 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             $scope.form.messageBody = {};
             $scope.form.messageBody.resoruceName = "Message";
             $scope.form.messageBody.resoruceValue = translateService.getResourceValue($scope.form.messageBody.resoruceName);
+
+            $scope.form.feedbackSuccess = {};
+            $scope.form.feedbackSuccess.resoruceName = "Wite Email Save Success";
+            $scope.form.feedbackSuccess.resoruceValue = translateService.getResourceValue($scope.form.feedbackSuccess.resoruceName);
+
+            $scope.form.feedbackFailed = {};
+            $scope.form.feedbackFailed.resoruceName = "Wite Email  Save Failed";
+            $scope.form.feedbackFailed.resoruceValue = translateService.getResourceValue($scope.form.feedbackFailed.resoruceName);
+
+            $scope.form.inputValidation = {};
+            $scope.form.inputValidation.resoruceName = "Please check required inputs";
+            $scope.form.inputValidation.resoruceValue = translateService.getResourceValue($scope.form.inputValidation.resoruceName);
+
         }
         setResources();
 
@@ -187,7 +200,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         var sendEmail = function () {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
-            var message = "We have received your Enquiry. <br> Someone will be get back to you! Thank you! <br>";
+            var message = $scope.form.feedbackSuccess.resoruceValue;
             var isAuth = $scope.authentication.isAuth;
 
             if (($scope.contact.orderNumber !== '' && $scope.contact.messageBody !== '' && isAuth) || (
@@ -208,14 +221,14 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
                     } else {
 
-                        $scope.message = "Faild to save data, Please try later<br>";
+                        $scope.message = $scope.form.feedbackFailed.resoruceValue;
                         $timeout(function () {
                             $scope.message = "";
                         }, 7000);
                     }
                 }).catch(function (error) {
 
-                    $scope.message = "Faild to save data, Please try later <br>";
+                    $scope.message = $scope.form.feedbackFailed.resoruceValue;
                     $timeout(function () {
                         $scope.message = "";
                     }, 7000);
@@ -225,7 +238,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                 });
             }
             else {
-                $scope.message = "Please check required inputs!";
+                $scope.message = $scope.form.inputValidation.resoruceValue;
                 $timeout(function () {
                     $scope.message = "";
                 }, 7000);

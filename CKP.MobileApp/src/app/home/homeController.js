@@ -66,7 +66,7 @@ app.controller('homeController', [
                            $scope.form.alertsAndNews.resoruceValue = translateService.getResourceValue($scope.form.alertsAndNews.resoruceName);
 
                            $scope.form.viewAll = {};
-                           $scope.form.viewAll.resoruceName = "View More";
+                           $scope.form.viewAll.resoruceName = "View Next";
                            $scope.form.viewAll.resoruceValue = translateService.getResourceValue($scope.form.viewAll.resoruceName);
 
 
@@ -119,6 +119,24 @@ app.controller('homeController', [
                            $scope.form.search.resoruceName = "Search";
                            $scope.form.search.resoruceValue = translateService.getResourceValue($scope.form.search.resoruceName);
 
+                           $scope.form.announcements = {};
+                           $scope.form.announcements.resoruceName = "Announcements";
+                           $scope.form.announcements.resoruceValue = translateService.getResourceValue($scope.form.announcements.resoruceName);
+
+                           $scope.form.printShopHolidays = {};
+                           $scope.form.printShopHolidays.resoruceName = "Print Shop Holidays";
+                           $scope.form.printShopHolidays.resoruceValue = translateService.getResourceValue($scope.form.printShopHolidays.resoruceName);
+
+                           $scope.form.noMessages = {};
+                           $scope.form.noMessages.resoruceName = "No messages are found";
+                           $scope.form.noMessages.resoruceValue = translateService.getResourceValue($scope.form.noMessages.resoruceName);
+
+                           $scope.form.orderList = {};
+                           $scope.form.orderList.resoruceName = "Order List";
+                           $scope.form.orderList.resoruceValue = translateService.getResourceValue($scope.form.orderList.resoruceName);
+
+                           
+                           
                        }
 
                        setResources();

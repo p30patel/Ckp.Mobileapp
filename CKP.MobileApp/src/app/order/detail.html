@@ -18,11 +18,11 @@
                 <table class="ck-table">
                     <tr>
                         <td class="v-align">
-                            <h3 class="km-bold-font">Order Date</h3>
-                            <h3 class="km-bold-font">Shopping Cart</h3>
-                            <h3 class="km-bold-font">Cust PO No</h3>
-                            <h3 class="km-bold-font">Sales Order No</h3>
-                            <h3 class="km-bold-font">Vendor Ref</h3>
+                            <h3 class="km-bold-font">{{form.orderDate.resoruceValue}}</h3>
+                            <h3 class="km-bold-font">{{form.shoppingCart.resoruceValue}}</h3>
+                            <h3 class="km-bold-font">{{form.orderNumber.resoruceValue}}</h3>
+                            <h3 class="km-bold-font">{{form.salesOrder.resoruceValue}}</h3>
+                            <h3 class="km-bold-font">{{form.vendorRef.resoruceValue}}</h3>
                         </td>
                         <td class="v-align">
                             <h3>:{{order.detail[0].ProductionOrderData.DateSOCreated | date}}</h3>
@@ -34,13 +34,13 @@
                         <td class="v-align c-align">
                             <div class="status open">{{order.detail[0].ProductionOrderData.StatusText}}</div>
                             <input kendo-mobile-switch k-checked="checked" />
-                            <h3 class="notify">Notify Me</h3>
+                            <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>
                         </td>
                     </tr>
                 </table>
             </li>
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
-                <h4>Bill To Information</h4>
+                <h4>{{form.billingInfo.resoruceValue}}</h4>
                 <p>
                     <b>{{order.detail[0].BillToAddress.Name}}</b>
                 </p>
@@ -53,7 +53,8 @@
                 <p ng-show="order.detail[0].BillToAddress.City">{{order.detail[0].BillToAddress.City}}, {{order.detail[0].BillToAddress.StateProv}} {{order.detail[0].BillToAddress.ZipCode}} {{order.detail[0].BillToAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h4>Ship To Information</h4>
+            <h4>{{form.shiptoInfo.resoruceValue}}</h4>
+              
                 <p>
                     <b>{{order.detail[0].ShipToAddress.Name}}</b>
                 </p>
@@ -66,7 +67,7 @@
                 <p ng-show="order.detail[0].ShipToAddress.City">{{order.detail[0].ShipToAddress.City}}, {{order.detail[0].ShipToAddress.StateProv}} {{order.detail[0].ShipToAddress.ZipCode}} {{order.detail[0].ShipToAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-inquiry" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h4>Order Inquiry</h4>
+                    <h4>{{form.orderInquiry.resoruceValue}}</h4>
                 <table class="ck-table">
                     <tr>
                         <td>
@@ -78,32 +79,32 @@
                     <tr>
                         <td>
                             <i></i>
-                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">Send Inquiry</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">{{form.sendInquiry.resoruceValue}}</kendo-mobile-button>
                             <p ng-show="inqueryMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(inqueryMessage)"></p>
                         </td>
                     </tr>
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-details" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
-                <h4>Order Details</h4>
+                <h4>{{form.orderDetail.resoruceValue}}</h4>
                 <table class="ck-table pad">
                     <tr class="med-grey pipe">
                         <td>
-                            <h4 class="km-bold-font">Item</h4>
+                            <h4 class="km-bold-font">{{form.item.resoruceValue}}</h4>
                         </td>
                         <td>
-                            <h4 class="km-bold-font">Quantity</h4>
+                            <h4 class="km-bold-font">{{form.quantity.resoruceValue}}</h4>
                         </td>
                         <td>
-                            <h4 class="km-bold-font">Price</h4>
+                            <h4 class="km-bold-font">{{form.price.resoruceValue}}</h4>
                         </td>
                     </tr>
                     <tr class="pipe" ng-repeat="orderLine in order.detail[0].ProductionOrderData.OrderLines">
                         <td>
                             <h4 class="km-bold-font">{{orderLine.ProductName}}</h4>
-                            <h5>Item Code: {{orderLine.RetailerProductCode}}</h5>
+                            <h5>{{form.itemCode.resoruceValue}}: {{orderLine.RetailerProductCode}}</h5>
                             <h5>{{orderLine.FormattedGrossPrice}}</h5>
-                            <h5>Production Location:{{order.detail[0].OrderDetailData[0].PrintingLocation}}</h5>
+                            <h5>{{form.prodcutionLocation.resoruceValue}}:{{order.detail[0].OrderDetailData[0].PrintingLocation}}</h5>
                         </td>
                         <td class="v-align">
                             <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
@@ -116,9 +117,9 @@
                 <table class="ck-table pad">
                     <tr class="pipe" style="background:#fff;">
                         <td>
-                            <h4>Released by</h4>
-                            <h4>Email</h4>
-                            <h4>Phone</h4>
+                            <h4>{{form.releasedBy.resoruceValue}}</h4>
+                            <h4>{{form.email.resoruceValue}}</h4>
+                            <h4>{{form.phone.resoruceValue}}</h4>
                         </td>
                         <td>
                             <h4>:{{order.detail[0].ReleasedBy}}</h4>
@@ -135,7 +136,7 @@
     <kendo-mobile-modal-view id="modalview-trackingList" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">
-                <kendo-view-title>Tracking List</kendo-view-title>
+                <kendo-view-title>{{form.trackingList.resoruceValue}}</kendo-view-title>
                 <kendo-mobile-button ng-click="closeTrackingListModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
                     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
                 </kendo-mobile-button>

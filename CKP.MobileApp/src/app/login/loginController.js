@@ -35,6 +35,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         $scope.form.email = {};
         $scope.form.email.resoruceName = "Email";
+        $scope.form.email.resoruceValue = "Email";
 
         $scope.form.receiveNewPasswordText = {};
         $scope.form.receiveNewPasswordText.resoruceName = "Please enter your email address to receive a new password";
@@ -69,6 +70,28 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.resetPassword = {};
         $scope.form.resetPassword.resoruceName = "Reset Password";
         $scope.form.resetPassword.resoruceValue = "Reset Password";
+
+        $scope.form.inputError = {};
+        $scope.form.inputError.resoruceName = "User name and Password is required";
+        $scope.form.inputError.resoruceValue = "User name and Password is required";
+
+        $scope.form.passwordHintError = {};
+        $scope.form.passwordHintError.resoruceName = "Error while getting the Hint";
+        $scope.form.passwordHintError.resoruceValue = "Error while getting the Hint";
+
+        $scope.form.passwordHintUserInputError = {};
+        $scope.form.passwordHintUserInputError.resoruceName = "User name is required";
+        $scope.form.passwordHintUserInputError.resoruceValue = "User name is required";
+
+        $scope.form.newPassword = {};
+        $scope.form.newPassword.resoruceName = "New Password";
+        $scope.form.newPassword.resoruceValue = "New Password";
+
+        $scope.form.newPasswordText = {};
+        $scope.form.newPasswordText.resoruceName = "New Password Description";
+        $scope.form.newPasswordText.resoruceValue = "New Password Description";
+
+        
     }
 
     setResources();
@@ -224,15 +247,18 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.form.passwordSentText.resoruceValue = translateService.getResourceValue($scope.form.passwordSentText.resoruceName);
 
             $scope.form.resetPassword.resoruceValue = translateService.getResourceValue($scope.form.resetPassword.resoruceName);
+            $scope.form.inputError.resoruceValue = translateService.getResourceValue($scope.form.inputError.resoruceName);
+            $scope.form.passwordHintUserInputError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintUserInputError.resoruceName);
+            $scope.form.passwordHintError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintError.resoruceName);
+            
+
+            
             kendo.mobile.application.pane.loader.hide();
         });
 
         //Faq
-
-
         faqDataService.getFaqs(selectedLanague).then(function (result) {
             $scope.faqs = result;
-
         }).catch(function (error) {
             $scope.faqs = {};
         }).finally(function () {
@@ -241,7 +267,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         //end faq
         //terms & conditions
-
         policyTermsDataService.getPolicyTerms().then(function (result) {
             $scope.termsCondition = result;
 
@@ -301,6 +326,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     var login = function () {
         var userName = $scope.loginData.userName;
         var password = $scope.loginData.password;
+        var hasNewPassword = true;
 
         var loginData = {
             userName: userName,
@@ -316,8 +342,20 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.passwordHint = "";
             authService.login($scope.loginData).then(function (response) {
 
-                kendo.mobile.application.navigate("src/app/home/home.html");
-                kendo.mobile.application.pane.loader.hide();
+                var data = localStorageService.get('organizationDetail');
+                console.log(data);
+                if (data !== null) {
+                  //  hasNewPassword = data.hasNewPassword;
+                }
+                if (hasNewPassword)
+                {
+                    authService.authentication.isAuth = false;
+                    $("#modalview-newPassword").kendoMobileModalView("open");
+                    kendo.mobile.application.pane.loader.hide();
+                }
+                else {
+                    kendo.mobile.application.navigate("src/app/home/home.html");
+                }
 
             }).catch(function (err) {
                 kendo.mobile.application.pane.loader.hide();
@@ -330,7 +368,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             });
         }
         else {
-            $scope.passwordHint = 'User name and Password is required!';
+            $scope.passwordHint = $scope.form.inputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
             }, 5000);
@@ -358,21 +396,26 @@ function ($scope, $http, authService, translateService, localStorageService, log
                        }, 5000);
                    },
                    function (err) {
-                       $scope.passwordHint = 'Error while getting the Hint!';
+                       $scope.passwordHint = $scope.form.passwordHintError.resoruceValue
                        kendo.mobile.application.hideLoading();
                    }
                    );
 
         }
         else {
-            $scope.passwordHint = 'User name is required!';
+            $scope.passwordHint = $scope.form.passwordHintUserInputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
             }, 5000);
 
         }
     };
-
+    //new password    
+    $scope.newPasswordModalClose = function () {
+        $("#modalview-newPassword").kendoMobileModalView("close");
+        authService.logout();
+        kendo.mobile.application.navigate("src/app/login/login.html");
+    };
     $scope.renderHtml = function (content) {
         return $sce.trustAsHtml(content);
     };

@@ -37,7 +37,6 @@ app.factory('authService', [
                                 _authentication.userName = loginData.userName;
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
-                                _forceGetPrincipalData().then(function (result) {
 
                                     forceGetOrganizationData().then(function (result) {
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
@@ -52,11 +51,6 @@ app.factory('authService', [
                                     });
 
 
-                                }).catch(function (err, status) {
-                                    loggedIn = false;
-                                    _logout();
-                                    deferred.reject(err);
-                                });
                             }
                          
                          
@@ -72,6 +66,8 @@ app.factory('authService', [
                         localStorageService.remove('authorizationData');
                         localStorageService.remove('userProfileData');
                         localStorageService.remove('organizationDetail');
+                      
+                        
                         _authentication.isAuth = false;
                         _authentication.userName = "";
                         _authentication.useRefreshTokens = true;
