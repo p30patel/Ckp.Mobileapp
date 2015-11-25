@@ -150,6 +150,10 @@ app.controller('orderlistController', [
                                 //$("#modalview-approve").kendoMobileModalView("close");
                             });
                         }
+
+                        $scope.orderDetail = function () {
+                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + "test");
+                        }
                        
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);

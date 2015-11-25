@@ -53,7 +53,7 @@ app.controller('faqController', [
                        var loadFaqs = function () {
                            var cultureName = translateService.getCurrentCultureName();
 
-                           if (cultureName != 'en-US') {
+                           if (cultureName !== 'en-US') {
                                kendo.mobile.application.pane.loader.show();
 
                                faqDataService.getFaqs('en-US').then(function (result) {

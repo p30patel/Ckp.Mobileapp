@@ -36,7 +36,7 @@ app.factory('authService', [
                                 _authentication.isAuth = true;
                                 _authentication.userName = loginData.userName;
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
-
+                                _forceGetPrincipalData();
 
                                     forceGetOrganizationData().then(function (result) {
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";

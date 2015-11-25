@@ -26,7 +26,8 @@ app.factory("notificationDataService", [
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
-                        var userId = authentication.userId;    
+                        var userId = authentication.userId;
+                        console.log(userId);
                         notifcationData.UserId = userId;
                         console.log(notifcationData);
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotifcation', notifcationData).success(function (result) {

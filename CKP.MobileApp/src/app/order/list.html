@@ -59,18 +59,21 @@
                             <td></td>
                             <td>Purchase Order</td>
                             <td>Price</td>
+                            <td></td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in order.list">
                             <td></td>
-                            <td class="v-align">
-                                <a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">
+                            <td valign="center" >
                             {{order.OrderNumber}}
-                         
-                    
                                 </td>
-                                <td class="v-align">
-                                    <a class="data-btn" kendo-mobile-button href="src/app/order/detail.html">11.12</a>
+                                <td valign="center" >
+                                   11.12
+                                
+                                </td>
+                               <td valign="center" >
+                                    <a ng-click="orderDetail()">
                                     <i class="km-icon km-details red"></i>
+                                </a>   
                                 </td>
                             </tr>
                         </table>
