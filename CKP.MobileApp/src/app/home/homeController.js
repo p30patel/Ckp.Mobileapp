@@ -135,8 +135,19 @@ app.controller('homeController', [
                            $scope.form.orderList.resoruceName = "Order List";
                            $scope.form.orderList.resoruceValue = translateService.getResourceValue($scope.form.orderList.resoruceName);
 
-                           
-                           
+                           $scope.form.neworderNoResult = {};
+                           $scope.form.neworderNoResult.resoruceName = "New Order No results";
+                           $scope.form.neworderNoResult.resoruceValue = translateService.getResourceValue($scope.form.neworderNoResult.resoruceName);
+
+                           $scope.form.seeMore = {};
+                           $scope.form.seeMore.resoruceName = "See More";
+                           $scope.form.seeMore.resoruceValue = translateService.getResourceValue($scope.form.seeMore.resoruceName);
+
+                           $scope.form.orgName = {};
+                           $scope.form.orgName.resoruceName = "Organization";
+                           $scope.form.orgName.resoruceValue = translateService.getResourceValue($scope.form.orgName.resoruceName);
+
+
                        }
 
                        setResources();
@@ -144,11 +155,11 @@ app.controller('homeController', [
                        if (isTrackingActive) {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
                        }
-                       if ($window.ga) {
+                       //if ($window.ga) {
 
-                           $window.ga('send', 'pageview', { page: 'Home View-GA' });
+                       //    $window.ga('send', 'pageview', { page: 'Home View-GA' });
 
-                       }
+                       //}
                        $scope.message = "";
                        $scope.messageCount = 0;
 

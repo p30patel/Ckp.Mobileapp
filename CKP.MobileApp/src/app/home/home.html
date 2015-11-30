@@ -75,7 +75,8 @@
                                <div>Organization Name </div>
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
-                           see more
+                                       {{form.seeMore.resoruceValue}}
+                           
                            </a>
                             </td>
                             <td ng-if="searchParameterId == '1'"  valign="center">
@@ -88,7 +89,7 @@
                             <div>Organization Name </div>
                                 <p ng-repeat="orderline in order.Orders | limitTo : orderLimitDisplay">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
-                           see more
+                           {{form.seeMore.resoruceValue}}
                            </a>
                             </td>
                            
@@ -146,13 +147,13 @@
                             <td>&nbsp;</td>                                     
                             <td ng-if="searchParameterId == '4'" class="spacer">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4' || searchParameterId == '1'"  class="spacer">{{form.orderNumber.resoruceValue}}</td>
-                            <td ng-if="searchParameterId != '4'">Organization</td>                        
+                            <td ng-if="searchParameterId != '4'">{{form.orgName.resoruceName}}</td>                        
                              <td>{{form.dateInSystem.resoruceValue}}</td>
                           <td></td>
                         </tr>
                         <tr class="pipe" ng-show="searchParameterId == '2' ||  searchParameterId == '3' ">
                             <td  colspan="5">
-                            No results
+                            {{form.neworderNoResult.resoruceValue}}
                                 </td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in orders" ng-hide="searchParameterId == '2'  || searchParameterId == '3'">
@@ -167,7 +168,7 @@
                             
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
-                           see more
+                           {{form.seeMore.resoruceValue}}
                            </a>
                             </td>
                             <td ng-if="searchParameterId != '4'">   
@@ -217,7 +218,7 @@
                                 <div>Organization Name </div>
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
-                           see more
+                            {{form.seeMore.resoruceValue}}
                            </a>
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '2'">

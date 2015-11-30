@@ -153,11 +153,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
     if (isTrackingActive) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
-    if ($window.ga) {
+    //if ($window.ga) {
         
-        $window.ga('send', 'pageview', { page: 'Login View-GA' });
+    //    $window.ga('send', 'pageview', { page: 'Login View-GA' });
     
-    }
+    //}
 
 
 
