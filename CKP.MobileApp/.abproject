@@ -39,9 +39,9 @@
   "AndroidVersionCode": "1",
   "FrameworkVersion": "3.7.0",
   "CorePlugins": [
-    "com.phonegap.plugins.PushPlugin@2.5.6",
-    "com.telerik.feedback",
-    "com.telerik.plugin.eqatecanalytics",
+    "com.phonegap.plugins.PushPlugin@3.0.1",
+    "com.telerik.feedback@2.0.0",
+    "com.telerik.plugin.telerikanalytics@3.3.2",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",

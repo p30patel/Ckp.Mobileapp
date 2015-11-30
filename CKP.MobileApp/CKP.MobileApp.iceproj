@@ -23,6 +23,8 @@
   <ItemGroup>
     <Content Include=".abignore" />
     <Content Include=".abproject" />
+    <Content Include=".debug.abproject" />
+    <Content Include=".release.abproject" />
     <Content Include="App_Resources\Android\drawable-hdpi\splashscreen.png" />
     <Content Include="App_Resources\Android\drawable-land-hdpi\splashscreen.png" />
     <Content Include="App_Resources\Android\drawable-land-ldpi\splashscreen.png" />
