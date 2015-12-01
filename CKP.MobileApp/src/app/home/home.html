@@ -67,12 +67,13 @@
                         </tr>
                         <tr class="pipe" ng-repeat="order in orders">
                             <td>
-                                <input type="checkbox"  class="km-checkbox" value="{{order.SalesOrderNo}}"  id="{{$index}}"
-                                ng-checked="selection.indexOf(order.SalesOrderNo)> -1" ng-click="toggleSelection(order.SalesOrderNo)"/>
+                                <input type="checkbox"  class="km-checkbox" value="{{order.SalesOrderNumber}}"  id="{{$index}}"
+                                ng-checked="selection.indexOf(order.SalesOrderNumber)> -1" ng-click="toggleSelection(order.SalesOrderNumber)"/>
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '1'">
-                               <div>Organization Name </div>
+                               <div>{{order.OrganizationName}} </div>
+                                {{order.OrderNumber}}
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
                                        {{form.seeMore.resoruceValue}}
@@ -80,13 +81,13 @@
                            </a>
                             </td>
                             <td ng-if="searchParameterId == '1'"  valign="center">
-                           {{order.SalesOrderNo}}
+                           {{order.SalesOrderNumber}}
                             </td>
                             <td valign="center" ng-if="searchParameterId == '2'">
-                              {{order.SalesOrderNo}} 
+                              {{order.SalesOrderNumber}} 
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '2'">
-                            <div>Organization Name </div>
+                            <div>{{order.OrganizationName}}</div>
                                 <p ng-repeat="orderline in order.Orders | limitTo : orderLimitDisplay">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
                            {{form.seeMore.resoruceValue}}
@@ -95,12 +96,12 @@
                            
                             <td valign="center" ng-if="searchParameterId == '3'">
                             
-                              {{order.ShoppingCart}}
+                              {{order.ShoppingCartId}}
                           
                             </td>
                             <td valign="center" ng-if="searchParameterId == '3'">
                               
-                              {{order.SalesOrderNo}} 
+                              {{order.SalesOrderNumber}} 
                             </td>
                             <td valign="center" ng-if="searchParameterId == '4'">
                               
@@ -110,7 +111,7 @@
                             </td>
                             <td valign="center" ng-if="searchParameterId == '4'">
                               
-                              {{order.SalesOrderNo}}
+                              {{order.SalesOrderNumber}}
                            
                             </td>
                             <td  valign="center">
@@ -120,10 +121,10 @@
                                 <a  ng-if="searchParameterId == '1'" ng-click="orderList(1, searchParameterId, order.OrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
-                                <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNo)">
+                                <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
-                                <a  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCart)">
+                                <a  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCartId)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
                                 <a  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">
@@ -165,14 +166,14 @@
                                 </a>
                             </td>
                                <td class="v-align" ng-if="searchParameterId == '4' || searchParameterId == '1'">
-                            
+                            {{order.OrderNumber}}
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
                            {{form.seeMore.resoruceValue}}
                            </a>
                             </td>
                             <td ng-if="searchParameterId != '4'">   
-                              <div>Organization Name </div>
+                              <div>{{order.OrganizationName}} </div>
 
                             </td>
                             <td>
@@ -215,7 +216,8 @@
                         <tr class="pipe" ng-repeat="order in orders">
                             <td>&nbsp;</td>
                             <td class="v-align" ng-if="searchParameterId == '1'">
-                                <div>Organization Name </div>
+                                <div>{{order.OrganizationName}}</div>
+                                  {{order.OrderNumber}}
                                 <p ng-repeat="orderline in order.Orders | limitTo : 3">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
                             {{form.seeMore.resoruceValue}}
@@ -223,13 +225,13 @@
                             </td>
                             <td class="v-align" ng-if="searchParameterId == '2'">
                              
-                                      {{order.SalesOrderNo}}                                
+                                      {{order.SalesOrderNumber}}                                
                               
                             </td>
 
                              <td class="v-align" ng-if="searchParameterId == '3'">
                              
-                                      {{order.ShoppingCart}}     
+                                      {{order.ShoppingCartId}}     
                                  
                              
                             </td>
@@ -239,10 +241,10 @@
                              
                             </td>
                               <td class="v-align" ng-if="searchParameterId != '1'">
-                              <div>Organization Name </div>
+                              <div>{{order.OrganizationName}}</div>
                                 <p ng-repeat="orderline in order.Orders | limitTo : orderLimitDisplay">  {{orderline.Order}} </p>
                                 <a  ng-click="showMoreOrderModel(order.Orders)" ng-show="order.Orders.length > 3">
-                           see more
+                            {{form.seeMore.resoruceValue}}
                            </a>
                             </td>
                             <td>{{order.Status}}</td>
@@ -257,10 +259,10 @@
                                 <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.OrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>     
-                                   <a  ng-if="searchParameterId == '2'" ng-click="orderList(3, searchParameterId, order.SalesOrder)">
+                                   <a  ng-if="searchParameterId == '2'" ng-click="orderList(3, searchParameterId, order.SalesOrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>  
-                                  <a  ng-if="searchParameterId == '3'"  ng-click="orderList(3, searchParameterId, order.ShoppingCart)">
+                                  <a  ng-if="searchParameterId == '3'"  ng-click="orderList(3, searchParameterId, order.ShoppingCartId)">
                                     <i class="km-icon km-details red"></i>
                                 </a>                              
                                 <a  ng-if="searchParameterId == '4'"  ng-click="orderList(4, searchParameterId, order.VendorRef)">

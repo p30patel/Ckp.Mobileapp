@@ -14,7 +14,7 @@
     <kendo-mobile-content>
         <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
             <li>
-                <h2 class="km-bold-font">{{order.detail[0].ProductionOrderData.OrganizationName}}</h2>
+                <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
                 <table class="ck-table">
                     <tr>
                         <td class="v-align">
@@ -25,14 +25,15 @@
                             <h3 class="km-bold-font">{{form.vendorRef.resoruceValue}}</h3>
                         </td>
                         <td class="v-align">
-                            <h3>:{{order.detail[0].ProductionOrderData.DateSOCreated | date}}</h3>
-                            <h3>:{{order.detail[0].ProductionOrderData.ShoppingCartId}}</h3>
-                            <h3>:{{order.detail[0].ProductionOrderData.OrderNumber}}</h3>
-                            <h3>:{{order.detail[0].ProductionOrderData.OrderLines[0].SalesOrderNo}}</h3>
-                            <h3>:{{order.detail[0].ProductionOrderData.ReceiverReference}}</h3>
+                            <h3 ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</h3>
+                             <h3 ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</h3>
+                            <h3>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</h3>
+                            <h3>:{{order.detail.MobileOrderDetail.OrderNumber}}</h3>
+                            <h3>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</h3>
+                            <h3>:{{order.detail.MobileOrderDetail.VendorRef}}</h3>
                         </td>
                         <td class="v-align c-align">
-                            <div class="status open">{{order.detail[0].ProductionOrderData.StatusText}}</div>
+                            <div class="status open">{{order.detail.MobileOrderDetail.Status}}</div>
                             <input kendo-mobile-switch k-checked="checked" />
                             <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>
                         </td>
@@ -41,30 +42,35 @@
             </li>
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h4>{{form.billingInfo.resoruceValue}}</h4>
-                <p>
-                    <b>{{order.detail[0].BillToAddress.Name}}</b>
+                 <p ng-if="order.detail.MobileOrderDetail.BillingAddress === null">
+                   <p> No data are found!</p> 
                 </p>
-                <p ng-show="order.detail[0].BillToAddress.Contact">{{order.detail[0].BillToAddress.Contact}}</p>
-                <p ng-show="order.detail[0].BillToAddress.StoreNumber">{{order.detail[0].BillToAddress.StoreNumber}}</p>
-                <p ng-show="order.detail[0].BillToAddress.Street1">{{order.detail[0].BillToAddress.Street1}}</p>
-                <p ng-show="order.detail[0].BillToAddress.Street2">{{order.detail[0].BillToAddress.Street2}}</p>
-                <p ng-show="order.detail[0].BillToAddress.Street3">{{order.detail[0].BillToAddress.Street3}}</p>
-                <p ng-show="order.detail[0].BillToAddress.Street4">{{order.detail[0].BillToAddress.Street4}}</p>
-                <p ng-show="order.detail[0].BillToAddress.City">{{order.detail[0].BillToAddress.City}}, {{order.detail[0].BillToAddress.StateProv}} {{order.detail[0].BillToAddress.ZipCode}} {{order.detail[0].BillToAddress.Iso3166}} </p>
+                <p>
+                    <b>{{order.detail.MobileOrderDetail.BillingAddress.Name}}</b>
+                </p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.Contact">{{order.detail.MobileOrderDetail.BillingAddress.Contact}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.StoreNumber">{{order.detail.MobileOrderDetail.BillingAddress.StoreNumber}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.Street1">{{order.detail.MobileOrderDetail.BillingAddress.Street1}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.Street2">{{order.detail.MobileOrderDetail.BillingAddress.Street2}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.Street3">{{order.detail.MobileOrderDetail.BillingAddress.Street3}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.Street4">{{order.detail.MobileOrderDetail.BillingAddress.Street4}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.BillingAddress.City">{{order.detail.MobileOrderDetail.BillingAddress.City}}, {{order.detail.MobileOrderDetail.BillingAddress.StateProv}} {{order.detail.MobileOrderDetail.BillingAddress.ZipCode}} {{order.detail.MobileOrderDetail.BillingAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
             <h4>{{form.shiptoInfo.resoruceValue}}</h4>
-              
-                <p>
-                    <b>{{order.detail[0].ShipToAddress.Name}}</b>
+               <p ng-if="order.detail.MobileOrderDetail.DeliveryAddress === null">
+                  <p> No data are found!</p> 
                 </p>
-                <p ng-show="order.detail[0].ShipToAddress.Contact">{{order.detail[0].ShipToAddress.Contact}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.StoreNumber">{{order.detail[0].ShipToAddress.StoreNumber}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.Street1">{{order.detail[0].ShipToAddress.Street1}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.Street2">{{order.detail[0].ShipToAddress.Street2}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.Street3">{{order.detail[0].ShipToAddress.Street3}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.Street4">{{order.detail[0].ShipToAddress.Street4}}</p>
-                <p ng-show="order.detail[0].ShipToAddress.City">{{order.detail[0].ShipToAddress.City}}, {{order.detail[0].ShipToAddress.StateProv}} {{order.detail[0].ShipToAddress.ZipCode}} {{order.detail[0].ShipToAddress.Iso3166}} </p>
+                <p>
+                    <b>{{order.detail.MobileOrderDetail.DeliveryAddress.Name}}</b>
+                </p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.Contact">{{order.detail.MobileOrderDetail.DeliveryAddress.Contact}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.StoreNumber">{{order.detail.MobileOrderDetail.DeliveryAddress.StoreNumber}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.Street1">{{order.detail.MobileOrderDetail.DeliveryAddress.Street1}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.Street2">{{order.detail.MobileOrderDetail.DeliveryAddress.Street2}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.Street3">{{order.detail.MobileOrderDetail.DeliveryAddress.Street3}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.Street4">{{order.detail.MobileOrderDetail.DeliveryAddress.Street4}}</p>
+                <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.City">{{order.detail.MobileOrderDetail.DeliveryAddress.City}}, {{order.detail.MobileOrderDetail.DeliveryAddress.StateProv}} {{order.detail.MobileOrderDetail.DeliveryAddress.ZipCode}} {{order.detail.MobileOrderDetail.DeliveryAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-inquiry" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
                     <h4>{{form.orderInquiry.resoruceValue}}</h4>
@@ -145,7 +151,7 @@
 
          <div style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" >
         <ul kendo-mobile-list-view ng-repeat="tracking in trackingList">
-            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.Url}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.TrackingNumber}}</kendo-mobile-button></li>
+            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.TrackingUrl}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.AwbNumber}}</kendo-mobile-button></li>
         </ul>
         </div>
 

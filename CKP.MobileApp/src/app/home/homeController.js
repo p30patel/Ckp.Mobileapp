@@ -152,7 +152,7 @@ app.controller('homeController', [
 
                        setResources();
 
-                       if (isTrackingActive) {
+                       if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
                        }
                        //if ($window.ga) {
@@ -203,8 +203,7 @@ app.controller('homeController', [
                            $scope.hasSearch = false;
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderCounts().then(function (result) {
-
-                               $scope.orderCounts = result;
+                               $scope.orderCounts = result.MobileOrderCountList;
 
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
@@ -223,33 +222,33 @@ app.controller('homeController', [
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderHeaderData().then(function (result) {
                                kendo.mobile.application.pane.loader.hide();
-                               var orders =
-                                    [
-                                     {
-                                         "ProductionOrderId": 412976631, "Orders":
-                                           [
-       { "Order": "111111" },
-      { "Order": "22222" },
-       { "Order": "333333" },
-        { "Order": "333333" },
-         { "Order": "44444" },
-      { "Order": "55555" },
-       { "Order": "66666" },
-        { "Order": "77777" }
+      //                         var orders =
+      //                              [
+      //                               {
+      //                                   "ProductionOrderId": 412976631, "Orders":
+      //                                     [
+      // { "Order": "111111" },
+      //{ "Order": "22222" },
+      // { "Order": "333333" },
+      //  { "Order": "333333" },
+      //   { "Order": "44444" },
+      //{ "Order": "55555" },
+      // { "Order": "66666" },
+      //  { "Order": "77777" }
 
-                                           ]
-                                         , "ShoppingCart": "124321", "SalesOrderNo": "170026201", "VendorRef": "V r 1", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
-                                     },
-                                     {
-                                         "ProductionOrderId": 412978692,
+      //                                     ]
+      //                                   , "ShoppingCart": "124321", "SalesOrderNo": "170026201", "VendorRef": "V r 1", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
+      //                               },
+      //                               {
+      //                                   "ProductionOrderId": 412978692,
 
-                                         "Orders": [{ "Order": "111111" }, { "Order": "1112111" }, { "Order": "111111" }, { "Order": "1111311" }], "ShoppingCart": "125502", "SalesOrderNo": "170026202", "VendorRef": "ADIDAS SCM", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
-                                     },
-                                     { "ProductionOrderId": 412974923, "Orders": [{ "Order": "111234111" }], "ShoppingCart": "116084", "SalesOrderNo": "170026203", "VendorRef": "v 2 2", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" },
+      //                                   "Orders": [{ "Order": "111111" }, { "Order": "1112111" }, { "Order": "111111" }, { "Order": "1111311" }], "ShoppingCart": "125502", "SalesOrderNo": "170026202", "VendorRef": "ADIDAS SCM", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
+      //                               },
+      //                               { "ProductionOrderId": 412974923, "Orders": [{ "Order": "111234111" }], "ShoppingCart": "116084", "SalesOrderNo": "170026203", "VendorRef": "v 2 2", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" },
 
-                                    ];
+      //                              ];
 
-                               $scope.orders = orders;
+                               $scope.orders = result;
                            }).catch(function (error) {
                                $scope.orders = {};
                            }).finally(function () {

@@ -123,14 +123,10 @@ app.controller('homeController', [
 
                        setResources();
 
-                       if (isTrackingActive) {
+                       if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
                        }
-                       if ($window.ga) {
-
-                           $window.ga('send', 'pageview', { page: 'Home View-GA' });
-
-                       }
+                       
                        $scope.message = "";
                        $scope.messageCount = 0;
 

@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" data-use-native-scrolling="true">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" >
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
             <kendo-mobile-back-button k-align="'left'" >
@@ -13,43 +13,44 @@
     <kendo-mobile-content>
         <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-grey-wrap" style="padding : 5px 0 5px 0;">
-                <div  ng-repeat="i in [1,2,3,4]" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
+                <div  ng-repeat="orderList in order.orders" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
                     <table class="list-view-table">
                         <tr class="ck-listview-tr-so">
                             <td style="width:10% !important; padding-left:15px;" rowspan="4" class="km-bold-font">
                                 <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span>
                             </td>
                             <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
-                            <div> Sales Order :123456789011{{$index}} </div>
+                            <div> Sales Order :{{orderList.SalesOrderNumber}}</div>
 
                         </td>
                             <td style="width:20%;"></td>
                             <td style="width:10%;" rowspan="4">
                                 <h4>
-                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel()"/>
+                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel({{ShoppingCartId}})"/>
                                 <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
                                   
                             
-                      USD 200.00
+                      USD {{orderList.Price}}
                        </span>
                                       </h4>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td colspan="2" class="ck-font-size-small" >
-                                <span>Organization Name
+                                <span>{{orderList.OrganizationName}}
                             </span>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td colspan="2" class="ck-font-size-small">
-                                <span>Order by: user1234 (p30@yahoo.com)
+                                <span>Order by: {{orderList.OrderedBy}}
                             </span>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td  class="ck-font-size-small">
-                                <span>Order Date : Nov 5, 2015
+                                <span ng-show="!orderList.IsStagedOrder">Order Date : {{orderList.OrderDate}}
+                                <span ng-show="orderList.IsStagedOrder">Date In System : {{orderList.DateInSystem}}
                             </span>
                             </td >
                         </tr>
@@ -102,7 +103,7 @@
 
          <!--  confirmation modal  -->
 
-      <div kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
+      <kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true">
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                 <kendo-view-title> Confirmation</kendo-view-title>
@@ -113,10 +114,10 @@
         </div>
         <ul kendo-mobile-list-view style="margin-bottom: .5em; background-color:white !important; overflow:auto !important;" k-style="'inset'">
 
-          <div class="container" ng-bind-html="renderHtml(confiramtionConent)"></div>
+          <div class="container" ng-bind-html="renderHtml(confirmationConent)"></div>
         </ul>
       
-    </div>
+    <//kendo-mobile-modal-view>
 
     </kendo-mobile-view>
 

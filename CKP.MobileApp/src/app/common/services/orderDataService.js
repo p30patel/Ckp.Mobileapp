@@ -7,14 +7,18 @@ app.factory("orderDataService", [
                     var orderDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd");
                     
-                    var forceGetOrderDetail = function () {
+                    var getOrderDetail = function (poctrlno) {
+                   
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
                       
-                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderHeaderDetailTaskAsync?searchText=" + 'testorder' + "&client_id=" + ngAuthSettings.clientId;
+                       
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo?productionOrderId=" + poctrlno;
+
+                     
                         $http.get(url).success(function (result) {
                             localStorageService.set('orderDetail' + date, result);
                             deferred.resolve(result);
@@ -23,31 +27,32 @@ app.factory("orderDataService", [
                         });
                         return deferred.promise;
                     };
-                    var getOrderDetail = function () {
-                        var deferred = $q.defer();
-                        
-                        var orderDetail = localStorageService.get("orderDetail" + date);
-                        orderDetail = '';
-                        if (orderDetail) {
-                            deferred.resolve(orderDetail);
-                        } else {
-                            forceGetOrderDetail().then(function (result) {
-                                deferred.resolve(result);
-                            });
-                        }
-
-                        return deferred.promise;
-                    }
-                    
-                     var forceGetOrderList = function () {
+             
+                    var forceGetOrderList = function () {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
                       
-                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderHeaderDataTaskAsync?userId=" + userId + "&client_id=" + ngAuthSettings.clientId;
-                        $http.get(url).success(function (result) {
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
+
+                        var data = {
+                            PageSize: 1,
+                            PageNumber: 1,
+
+                            OrderNumber: '',
+                            ShoppingCartId: '773849',
+                            SalesOrderNumber: '',
+                            VendorRef: '',
+
+                            RetailerId: 6884,
+
+                            UserId: 1,
+                            OrderType: 1,
+                            SearchList: ["773849", "773810"]
+                        };
+                        $http.post(url, data).success(function (result) {
                             localStorageService.set('orderList' + date, result);
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {  
@@ -105,13 +110,41 @@ app.factory("orderDataService", [
                         });
                         return deferred.promise;
                     };
+                    var getConfirmationHtml = function (id) {
+                        var deferred = $q.defer();
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
+                        var authData = authService.getUserInfo();
+
+                        var data = localStorageService.get('organizationDetail');
+                        if (data === null) {
+                            deferred.reject('failed to get data');
+                        }
+
+                        var userId = authData.userId;
+                        var data = {
+                            OrgContext: data.OrgContext,
+                            ShoppingCartId: id
+                        };
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
+
+                        
+                        $http.post(url, data).success(function (result) {
+                            console.log(result);
+                            deferred.resolve(result);
+                        }).error(function (xhr, status, error) {
+
+                            deferred.reject(error);
+                        });
+                        return deferred.promise;
+                    };
 
                     orderDataServiceFactory.approveDecline = approveDecline;
                     
                     orderDataServiceFactory.getOrderDetail = getOrderDetail;
-                    orderDataServiceFactory.forceGetOrderDetail = forceGetOrderDetail;
-                    
+                                     
+                    orderDataServiceFactory.getConfirmationHtml = getConfirmationHtml;
+
                     orderDataServiceFactory.getOrderList = getOrderList;
                     orderDataServiceFactory.forceGetOrderList = forceGetOrderList;
 

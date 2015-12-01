@@ -4,7 +4,9 @@ app.controller('feedbackController', [
 function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
 
     $scope.form = {};
-    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
+    if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
+    }
     $scope.form.title = {};
     $scope.form.title.resoruceName = "Feedback";
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -61,7 +63,9 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     };
 
     $scope.send = function () {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.feedback.send");
+        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.feedback.send");
+        }
         kendo.mobile.application.pane.loader.show();
         feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
             if (result === 'success') {

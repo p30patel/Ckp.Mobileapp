@@ -1,7 +1,9 @@
 
 app.controller('helpController', ['$scope', '$http', '$sce', 'translateService',
     function ($scope, $http, $sce, translateService) {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
+        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
+        }
         $scope.form = {};
 
         $scope.form.title = {};

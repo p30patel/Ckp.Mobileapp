@@ -104,26 +104,28 @@ app.config(function ($httpProvider) {
     var analytics = g.analytics = g.analytics || {};
     analytics.Start = function () {
         // Handy shortcuts to the analytics api
-        var factory = window.plugins.EqatecAnalytics.Factory;
-        var monitor = window.plugins.EqatecAnalytics.Monitor;
-        // Create the monitor instance using the unique product key for CKP.Mobile.App-Analytics
-        var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
-        settings.LoggingInterface = factory.CreateTraceLogger();
-        factory.CreateMonitorWithSettings(settings,
-          function () {
-              console.log("Monitor created");
-              // Start the monitor inside the success-callback
-              monitor.Start(function () {
-                  console.log("Monitor started");
-                  monitor.TrackFeature("app.loaded");
-                  isTrackingActive = true;
-                  console.log(isTrackingActive);
+        if (typeof (EqatecAnalytics) !== 'undefined') {
+            var factory = window.plugins.EqatecAnalytics.Factory;
+            var monitor = window.plugins.EqatecAnalytics.Monitor;
+            // Create the monitor instance using the unique product key for CKP.Mobile.App-Analytics
+            var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
+            settings.LoggingInterface = factory.CreateTraceLogger();
+            factory.CreateMonitorWithSettings(settings,
+              function () {
+                  console.log("Monitor created");
+                  // Start the monitor inside the success-callback
+                  monitor.Start(function () {
+                      console.log("Monitor started");
+                      monitor.TrackFeature("app.loaded");
+                      isTrackingActive = true;
+                      console.log(isTrackingActive);
 
+                  });
+              },
+              function (msg) {
+                  console.log("Error creating monitor: " + msg);
               });
-          },
-          function (msg) {
-              console.log("Error creating monitor: " + msg);
-          });
+        }
     }
     analytics.Stop = function () {
         var monitor = window.plugins.EqatecAnalytics.Monitor;
