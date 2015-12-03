@@ -1,7 +1,9 @@
 
 app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', '$anchorScroll', '$location',
 function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, $anchorScroll, $location) {
-    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
+    if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
+    }
     $scope.form = {};
 
     $scope.form.title = {};

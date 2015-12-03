@@ -21,10 +21,10 @@ app.factory('parameterService', [
                     vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
 
                     var searchParameters = [
-                        { id: '1', name: orderNumber.resoruceValue, value: "Purchase Order", hasListView : true, hasDetailViee : true },
-                        { id: '2', name: salesOrder.resoruceValue, value: "Sales Orderr", hasListView: true, hasDetailViee: true },
-                        { id: '3', name: shoppingCart.resoruceValue, value: "Shopping Cart", hasListView: true, hasDetailViee: true },
-                        { id: '4', name: vendorRef.resoruceName, value: "Vendor Ref", hasListView: true, hasDetailViee: true },
+                        { id: '1', name: orderNumber.resoruceValue, value: "OrderNumber", hasListView: true, hasDetailViee: true },
+                        { id: '2', name: salesOrder.resoruceValue, value: "SalesOrderNumber", hasListView: true, hasDetailViee: true },
+                        { id: '3', name: shoppingCart.resoruceValue, value: "ShoppingCartId", hasListView: true, hasDetailViee: true },
+                        { id: '4', name: vendorRef.resoruceName, value: "VendorRef", hasListView: true, hasDetailViee: true },
             
                     ];
                     

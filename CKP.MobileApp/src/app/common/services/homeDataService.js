@@ -2,19 +2,22 @@
 'use strict';
 
 app.factory("homeDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings",
-                function ($http, $q, localStorageService, ngAuthSettings) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
+                function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
+                   
                     var homeDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd HH");
 
-                    var data = localStorageService.get('organizationDetail');
-                    if (data === null) {
-                        deferred.reject('failed to get data');
-                    }
+                   
                    
                     var forceGetOrderCounts = function () {
                         var deferred = $q.defer();
+                        var data = localStorageService.get('organizationDetail');
+                        if (data === null) {
+                            deferred.reject('failed to get data');
+                        }
+
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, data).success(function (result) {
                             deferred.resolve(result);
@@ -39,27 +42,13 @@ app.factory("homeDataService", [
                         return deferred.promise;
                     };
 
-                    var forceGetOrderHeaderData = function () {
+                    var forceGetOrderSummary = function (jsonIn) {
                         var deferred = $q.defer();
-            
-                        //var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderHeaderDataTaskAsync?userId=" + 1 + "&client_id=" + ngAuthSettings.clientId;
+                        var authentication = authService.authentication;
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderSummary";
 
-                        var data = {
-                            PageSize: 1,
-                            PageNumber: 1,
-
-                            OrderNumber: '',
-                            ShoppingCartId: '773849',
-                            SalesOrderNumber: '',
-                            VendorRef: '',
-
-                            RetailerId: 6884,
-
-                            UserId: 1,
-                            OrderType: 1
-                        };
-                        $http.post(url, data).success(function (result) {
+                        
+                        $http.post(url, jsonIn).success(function (result) {
                           
                             deferred.resolve(result);
                             console.log(result);
@@ -72,9 +61,10 @@ app.factory("homeDataService", [
                         return deferred.promise;
                     };
 
-                    var getOrderHeaderData = function () {
+                    var getOrderSummary = function (jsonIn) {
                         var deferred = $q.defer();
-                            forceGetOrderHeaderData().then(function (result) {
+                       
+                        forceGetOrderSummary(jsonIn).then(function (result) {
                                 deferred.resolve(result);
                             });
                         return deferred.promise;
@@ -83,8 +73,8 @@ app.factory("homeDataService", [
                     homeDataServiceFactory.getOrderCounts = getOrderCounts;
                     homeDataServiceFactory.forceGetOrderCounts = forceGetOrderCounts;
 
-                    homeDataServiceFactory.getOrderHeaderData = getOrderHeaderData;
-                    homeDataServiceFactory.forceGetOrderHeaderData = forceGetOrderHeaderData;
+                    homeDataServiceFactory.getOrderSummary = getOrderSummary;
+                    homeDataServiceFactory.forceGetOrderSummary = forceGetOrderSummary;
 
                     return homeDataServiceFactory;
                 }

@@ -2,7 +2,9 @@
 app.controller('termsConditionController', [
                    '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
-                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.termsCondition");
+                       if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.termsCondition");
+                       }
                        $scope.form = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Terms & Conditions";

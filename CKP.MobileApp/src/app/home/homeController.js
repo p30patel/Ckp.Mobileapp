@@ -147,6 +147,11 @@ app.controller('homeController', [
                            $scope.form.orgName.resoruceName = "Organization";
                            $scope.form.orgName.resoruceValue = translateService.getResourceValue($scope.form.orgName.resoruceName);
 
+                           $scope.form.noResults = {};
+                           $scope.form.noResults.resoruceName = "No Results are found";
+                           $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
+
+
 
                        }
 
@@ -172,15 +177,19 @@ app.controller('homeController', [
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
+                       $scope.sortOrder = 'OrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
 
                        $scope.isAuth = authService.authentication.isAuth;
 
 
                        var setSelectPara = function () {
-                           parameterService.getSearchParameterName($scope.selectedPara)
+                           
+                           var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
+                          
                            $scope.searchParameterId = $scope.selectedPara;
-
+                         
+                           $scope.sortOrder = selectedPara;
                            $scope.currentSearchInput = $scope.searchValue;
                        }
 
@@ -211,43 +220,35 @@ app.controller('homeController', [
 
                        }
                        //get ordetrs
-                       var getOrders = function (orderType, searchParamterId, searchInput) {
+                       var getOrders = function (orderType, orderTypeId, searchParamterId, searchInput) {
 
-                         //  $scope.message = "Loading : Order Type: " + orderType + " SearchParmeter : " + searchParamterId + "Search Input: " + searchInput;
+                           $scope.message = "Loading : Order Type: " + orderType + " SearchParmeter : " + searchParamterId + "Search Input: " + searchInput;
 
                            $timeout(function () {
                                $scope.message = "";
                            }, 7000);
 
+                           var jsonIn = {
+                               PageSize: 5,
+                               PageNumber: 1,
+
+                               OrderNumber: $scope.searchParameterId == '1'  ? $scope.currentSearchInput : '',
+                               ShoppingCartId: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
+                               SalesOrderNumber: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
+                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : '',
+
+                               RetailerId: 6884, //$scope.selectedRetailer
+
+                               UserId: 1,
+                               OrderType: orderTypeId,
+                               SearchList: []
+                           };
+                         
+                      
                            kendo.mobile.application.pane.loader.show();
-                           homeDataService.getOrderHeaderData().then(function (result) {
+                           homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                kendo.mobile.application.pane.loader.hide();
-      //                         var orders =
-      //                              [
-      //                               {
-      //                                   "ProductionOrderId": 412976631, "Orders":
-      //                                     [
-      // { "Order": "111111" },
-      //{ "Order": "22222" },
-      // { "Order": "333333" },
-      //  { "Order": "333333" },
-      //   { "Order": "44444" },
-      //{ "Order": "55555" },
-      // { "Order": "66666" },
-      //  { "Order": "77777" }
-
-      //                                     ]
-      //                                   , "ShoppingCart": "124321", "SalesOrderNo": "170026201", "VendorRef": "V r 1", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
-      //                               },
-      //                               {
-      //                                   "ProductionOrderId": 412978692,
-
-      //                                   "Orders": [{ "Order": "111111" }, { "Order": "1112111" }, { "Order": "111111" }, { "Order": "1111311" }], "ShoppingCart": "125502", "SalesOrderNo": "170026202", "VendorRef": "ADIDAS SCM", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00"
-      //                               },
-      //                               { "ProductionOrderId": 412974923, "Orders": [{ "Order": "111234111" }], "ShoppingCart": "116084", "SalesOrderNo": "170026203", "VendorRef": "v 2 2", "Status": "Open", "DateInSystem": "2015-11-18T00:00:00+00:00", "OrderDate": "2015-11-18T00:00:00+00:00" },
-
-      //                              ];
-
+                               console.log(result);
                                $scope.orders = result;
                            }).catch(function (error) {
                                $scope.orders = {};
@@ -281,13 +282,14 @@ app.controller('homeController', [
                                listviewsToShow.eq(e.index).show();
 
                                var selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');
-
+                              
                                $scope.selectedOrderType = parameterService.getOrderTypeById(selectedOrderType);
-
+                              
                                var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
 
+                               var orderTypeId = $scope.selectedOrderType;
 
-                               getOrders(selectedOrderType, $scope.searchParameterId, $scope.currentSearchInput);
+                               getOrders(selectedOrderType, orderTypeId, $scope.searchParameterId, $scope.currentSearchInput);
                            }
                        }
                        //end button group events
@@ -365,6 +367,7 @@ app.controller('homeController', [
                        }
                        //view more orders
                        $scope.showMoreOrderModel = function (orders) {
+                           console.log(orders);
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };
