@@ -367,7 +367,7 @@ app.controller('homeController', [
                        }
                        //view more orders
                        $scope.showMoreOrderModel = function (orders) {
-                           console.log(orders);
+                           
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };
