@@ -1,4 +1,6 @@
-
+.km-navbar{
+    padding-top:12px !important;
+}
 .k-invalid {
     border-color: rgb(213, 43, 30) !important;
     
