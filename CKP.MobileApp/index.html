@@ -75,7 +75,7 @@
 
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController" k-transition="'slide'">
         <kendo-mobile-header>
-            <kendo-mobile-nav-bar class="km-accent">
+            <kendo-mobile-nav-bar class="km-accent" style="padding-top:12px;">
                 <a data-align="left" data-role="button" data-tap="myTouch.tap" href="#right-drawer"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
                 <!--   <kendo-mobile-back-button k-align="'left'" style="padding-left:25px;">Back</kendo-mobile-back-button>-->
                 <kendo-view-title></kendo-view-title>
@@ -92,8 +92,8 @@
 
 
     <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" data-use-native-scrolling="true" class="main-nav">
-        <kendo-mobile-header style="padding-top:12px;">
-                <kendo-mobile-nav-bar class="km-accent">
+        <kendo-mobile-header >
+                <kendo-mobile-nav-bar class="km-accent" style="padding-top:12px;">
             
                 <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
                 </kendo-view-title>
