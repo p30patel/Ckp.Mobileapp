@@ -288,8 +288,9 @@
                                </a>
                             </p>
                             </td>
-                            <td>{{order.Status}}</td>
-                            
+                          <!--  <td>{{order.Status}}</td>  
+                            remove below line once new framework is deployed-->
+                              <td>Open</td>
                             <td>
                                  <p>{{order.OrderDate | date : 'MM/dd'}}  </p>
                                
@@ -329,9 +330,9 @@
 
 
     </kendo-mobile-content>
-    <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
+  <!--  <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
         <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-    </kendo-mobile-footer>
+    </kendo-mobile-footer>-->
     <!--  view more po modal  -->
     <div kendo-mobile-modal-view id="modalview-moreOrder" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>

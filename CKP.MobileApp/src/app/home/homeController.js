@@ -346,13 +346,16 @@ app.controller('homeController', [
                            $scope.orders = currentOrders;
                            console.log($scope.orders.length);
                        }
+                       $scope.orderList = function (orderType, parameterId, parameterValue) {
+                          
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
+                       }
+
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
 
-                       $scope.orderList = function (orderType, parameterId, parameterValue) {
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
-                       }
+                   
 
                        $scope.key = function ($event) {
 

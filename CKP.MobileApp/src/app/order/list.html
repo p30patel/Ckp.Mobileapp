@@ -62,7 +62,7 @@
                             <td>Price</td>
                             <td></td>
                         </tr>
-                        <tr class="pipe" ng-repeat="order in order.list">
+                        <tr class="pipe" ng-repeat="order in order.orders">
                             <td></td>
                             <td valign="center" >
                             {{order.OrderNumber}}
@@ -95,9 +95,11 @@
                             <i></i>
                             <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
                         </td>
-                        <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
+                       
                     </tr>
                 </table>
+
+                <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
             </ul>
         </kendo-mobile-content>
 

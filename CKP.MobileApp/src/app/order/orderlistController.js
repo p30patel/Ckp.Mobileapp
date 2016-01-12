@@ -1,7 +1,7 @@
 
 app.controller('orderlistController', [
-                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService',
-                   function ($scope, authService, orderDataService, homeDataService, $sce,  translateService) {
+                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService', 'parameterService', '$timeout',
+                   function ($scope, authService, orderDataService, homeDataService, $sce, translateService, parameterService, $timeout) {
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -45,17 +45,19 @@ app.controller('orderlistController', [
                        init();
                        var orderType = '1';
                        var parameterId = 0;
-                       var parameterValue = "";
-                      
+                       var parameterValue = [];
+                       $scope.searchBy = 'SalesOrderNumber';
                        $scope.intShow = function (e) {
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
-                           parameterValue = e.view.params.parameterValue;                          
+                           parameterValue.push( e.view.params.parameterValue);                          
                           
                            $scope.order.message = orderType + ";" + parameterId + ":" + parameterValue;
                               $scope.order.title = 'Shopping Cart Detail';
                               $scope.order.orderType = orderType;
-                              $scope.searchParameterId = parameterId;
+                              $scope.searchBy = parameterService.getGroupByName(parameterId, orderType);
+                              
+                           //   $scope.searchParameterId = parameterId;
                          
                            if (orderType === '1'){
                                   $scope.order.hasApproval = true;
@@ -66,23 +68,28 @@ app.controller('orderlistController', [
                    
 
 
-                       orderDataService.getOrderList().then(function (result) {
-                           $scope.order.orders = result;
+                       //orderDataService.getOrderList().then(function (result) {
+                       //    $scope.order.orders = result;
                      
-                       });
+                       //});
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                        
-                           orderDataService.getOrderList().then(function (result) {
-                               $scope.order.list = result;
+                         
+                           var searchData = {                             
+                               SearchBy: $scope.searchBy,
+                               SearchList: parameterValue
+                           };
+
+                           orderDataService.getOrderList(searchData).then(function (result) {
+                               $scope.order.orders = result;
                              
                            }).catch(function(error) {
-                               $scope.mesages = {};
+                               $scope.order.list = {};
                            }).finally(function() {
                                kendo.mobile.application.pane.loader.hide();
                            });
-                        }; // end message
+                        }; // end order list
 
                       
                        //
@@ -121,6 +128,9 @@ app.controller('orderlistController', [
 
                             $("#modalview-confirmation").kendoMobileModalView("close");
                         };
+                        $scope.approved = function (status) {
+                            orderApprovalByStatus(status);
+                        }
                        //appprove order
                         var orderApprovalByStatus = function (statusUpdate) {
                             var salesorders = [];
@@ -142,10 +152,12 @@ app.controller('orderlistController', [
                                 UpdateStatus: statusUpdate,
                             }
                             kendo.mobile.application.pane.loader.show();
+                            $scope.apporvalMessage = "";
                             orderDataService.approveDecline(data).then(function (result) {
-                                $scope.message = "Approve / Decliend Successfully";
+                                $scope.apporvalMessage = "Approve / Decliend Successfully";
+                                $scope.order.hasApproval = false;
                                 $timeout(function () {
-                                    $scope.message = "";
+                                    $scope.apporvalMessage = "";
                                     $("#modalview-approve").kendoMobileModalView("close");
                                 }, 5000);
 
@@ -153,9 +165,9 @@ app.controller('orderlistController', [
 
 
                             }).catch(function (error) {
-                                $scope.message = "Approve / Decliend failed";
+                                $scope.apporvalMessage = "Approve / Decliend failed";
                                 $timeout(function () {
-                                    $scope.message = "";
+                                      $scope.apporvalMessage = ""; 
                                 }, 7000);
 
                                 kendo.mobile.application.pane.loader.hide();

@@ -33,7 +33,22 @@ app.factory('parameterService', [
                         { id: 2, name : "New"},
                         { id: 3, name : "Released"}                  
             
-                    ];
+                      ];
+
+                      var groupList = [
+                          { searchParamterId: '1', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
+
+                          { searchParamterId: '2', orderTypeId: 1, groupBy: 'SalesOrderNumber' },                          
+                          { searchParamterId: '2', orderTypeId: 3, groupBy: 'SalesOrderNumber' },
+
+                          { searchParamterId: '3', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
+                          { searchParamterId: '3', orderTypeId: 3, groupBy: 'ShoppingCartId' },
+
+                          { searchParamterId: '4', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
+                          { searchParamterId: '4', orderTypeId: 2, groupBy: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: 3, groupBy: 'VendorRef' },
+
+                          ];
 
 
                     var getSearchParameters = function () {
@@ -41,7 +56,7 @@ app.factory('parameterService', [
                     }
         
                     var getSearchParameterName = function (id) {
-                        var paramterName = "Purchase Order";
+                        var paramterName = "Order Number";
                         angular.forEach(searchParameters, function (item) {
                             if (item.id === id) {
                                 paramterName = item.value;
@@ -77,12 +92,27 @@ app.factory('parameterService', [
                         });
                         return id;
                     }
+
+                    var getGroupByName = function (searchParaId, orderTypeId) {
+                        var groupByName = "SalesOrderNumber";
+                        angular.forEach(groupList, function (item) {
+                            if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
+                                groupByName = item.groupBy;
+                                return groupByName;
+                            }
+                        });
+                        return groupByName;
+                    }
+
+
                     service.getSearchParameters = getSearchParameters;
                     service.getSearchParameterName = getSearchParameterName;
                     
                     service.getOrderTypes = getOrderTypes;
                     service.getOrderTypeName = getOrderTypeName;
                     service.getOrderTypeById = getOrderTypeById;
+
+                    service.getGroupByName = getGroupByName;
 
                     return service;
                 }

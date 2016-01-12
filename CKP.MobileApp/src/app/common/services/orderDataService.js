@@ -20,7 +20,7 @@ app.factory("orderDataService", [
 
                      
                         $http.get(url).success(function (result) {
-                            localStorageService.set('orderDetail' + date, result);
+                         
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {                                  
                             deferred.reject(error);
@@ -28,15 +28,25 @@ app.factory("orderDataService", [
                         return deferred.promise;
                     };
              
-                    var forceGetOrderList = function () {
+                    var getOrderList = function (searchData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
-                      
-                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
-
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+                        
+                        //var data = {
+                        //    RetailerId: orgContext,
+                        //    UserId: userId,
+                        //    SearchBy: searchData.SearchBy,
+                        //    SearchList: searchData.SearchList
+                        //};  -- remove below data object once new framework is deployed
                         var data = {
                             PageSize: 1,
                             PageNumber: 1,
@@ -48,10 +58,16 @@ app.factory("orderDataService", [
 
                             RetailerId: 6884,
 
-                            UserId: 1,
                             OrderType: 1,
-                            SearchList: ["773849", "773810"]
-                        };
+                            SearchList: ["773849", "773810"],
+                           
+                            UserId: userId,
+                            SearchBy: searchData.SearchBy,
+                       
+                    };
+                        
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
+                                             
                         $http.post(url, data).success(function (result) {
                             localStorageService.set('orderList' + date, result);
                             deferred.resolve(result);
@@ -61,23 +77,7 @@ app.factory("orderDataService", [
                         });
                         return deferred.promise;
                     };
-                    var getOrderList = function () {
-                        var deferred = $q.defer();
-                        
-                        var orderList = localStorageService.get("orderList" + date);
-                        orderList = '';
-                        if (orderList) {
-                            deferred.resolve(orderList);
-                        } else {
-                            forceGetOrderList().then(function (result) {
-                                deferred.resolve(result);
-                            });
-                        }
-
-                        return deferred.promise;
-                    }
-                    
-                    
+                
                     var approveDecline = function (approvalDeclineData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
@@ -86,7 +86,7 @@ app.factory("orderDataService", [
                         var userId = authData.userId;
                         var username = authData.userName;
                         var orgId = authData.organizationId;
-                        var orgContext = '';
+                        var orgContext = {};
                         var organizationDetail = localStorageService.get('organizationDetail');
                         if (organizationDetail) {
                             orgContext = organizationDetail.OrgContext
@@ -101,9 +101,9 @@ app.factory("orderDataService", [
                             ApproveOrdersListData: approvalDeclineData.Salesorders
                         };
                         console.log(data);
-                        var url = authServiceBase + "webapi/api/core/MobileApp/UpdateApproveOrderList";
+                        var url = authServiceBase + "webapi/api/core/MobileApp/UpdateApproveOrderStatus";
                         $http.post(url, data).success(function (result) {   
-                            alert(result.success);
+                          
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {                           
                             deferred.reject(error);
@@ -146,8 +146,7 @@ app.factory("orderDataService", [
                     orderDataServiceFactory.getConfirmationHtml = getConfirmationHtml;
 
                     orderDataServiceFactory.getOrderList = getOrderList;
-                    orderDataServiceFactory.forceGetOrderList = forceGetOrderList;
-
+                   
                     return orderDataServiceFactory;
                 }
             ]);
