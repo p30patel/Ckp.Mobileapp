@@ -74,7 +74,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     };
 
     document.addEventListener('deviceready', function () {
-       
+        StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
         window.analytics.Start();
 
