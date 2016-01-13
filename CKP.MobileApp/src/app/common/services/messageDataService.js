@@ -5,7 +5,7 @@ app.factory("messageDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var messageDataServiceFactory = {};
-                    var refereshPeriod = new Date().getDay() % 2 == 0;
+                    var refereshPeriod = true;
                     
                     var forceGetMessages = function () {
                         var deferred = $q.defer();
@@ -27,10 +27,16 @@ app.factory("messageDataService", [
                     };
                     var getMessages = function () {
                         var deferred = $q.defer();
-                        var forceReferesh = false; // refresh the page once a day
+                        var forceReferesh = true;
                         var messages = localStorageService.get("messages");
-                       
-                        if (messages) {
+
+                        var refreshData = localStorageService.get('refreshPeriod');
+                        if (refreshData) {
+                            forceReferesh = refreshData.refereshPeriod;
+                        }
+
+                        
+                        if (messages && !forceReferesh) {
                             deferred.resolve(messages);
                         } else {
                             forceReferesh = true;

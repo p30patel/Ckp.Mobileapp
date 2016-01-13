@@ -84,7 +84,6 @@ app.run(['authService', 'localStorageService', function (authService, localStora
         
     });
 
-   
     
 }]);
 

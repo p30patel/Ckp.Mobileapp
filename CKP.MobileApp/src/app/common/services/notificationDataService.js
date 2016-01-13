@@ -30,7 +30,7 @@ app.factory("notificationDataService", [
                         console.log(userId);
                         notifcationData.UserId = userId;
                         console.log(notifcationData);
-                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotifcation', notifcationData).success(function (result) {
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotification', notifcationData).success(function (result) {
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {

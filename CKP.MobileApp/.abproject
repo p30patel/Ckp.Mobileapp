@@ -39,13 +39,15 @@
   "AndroidVersionCode": "1",
   "FrameworkVersion": "3.7.0",
   "CorePlugins": [
-    "com.phonegap.plugins.PushPlugin@3.0.1",
+    "com.phonegap.plugins.PushPlugin@3.0.5",
     "com.telerik.feedback@2.0.0",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",
     "org.apache.cordova.globalization",
-    "org.apache.cordova.inappbrowser"
+    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.keyboard",
+    "org.apache.cordova.splashscreen"
   ],
   "WP8SupportedResolutions": [
     "ID_RESOLUTION_WVGA",
@@ -62,16 +64,9 @@
   "WP8Capabilities": [],
   "WP8Requirements": [],
   "WP8Publisher": "",
-  "WP8TileTitle": "Check-Net Application",
+  "WP8TileTitle": "Check-Net Mobile",
   "WP8WindowsPublisherName": "CN=Telerik",
   "WP8PackageIdentityName": "com.telerik.CheckNetApplication",
   "WPSdk": "8.0",
-  "iOSDeploymentTarget": "6.0",
-  "CordovaPluginVariables": {
-    "com.telerik.plugin.telerikanalytics": {
-      "AUTO_TRACK_EXCEPTIONS": "false",
-      "AUTO_TRACK_KENDO_EVENTS": "false",
-      "PRODUCT_ID": "70d4845295c541ff8e423ed4c3953b94"
-    }
-  }
+  "iOSDeploymentTarget": "6.0"
 }
