@@ -13,14 +13,19 @@
     <kendo-mobile-content>
         <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-grey-wrap" style="padding : 5px 0 5px 0;">
-                <div  ng-repeat="orderList in order.orders" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
+
+                
+                <div ng-repeat="(key, value) in order.orders | groupBy: groupBy"  data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
                     <table class="list-view-table">
+                      
                         <tr class="ck-listview-tr-so">
                             <td style="width:10% !important; padding-left:15px;" rowspan="4" class="km-bold-font">
                                 <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span>
                             </td>
                             <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
-                            <div> Sales Order :{{orderList.SalesOrderNumber}}</div>
+                            <div ng-show="groupBy == 'SalesOrderNumber'"> Sales Order :{{key}}</div>
+                            <div ng-show="groupBy == 'ShoppingCartId'"> Shopping Cart :{{key}}</div>
+                                 <div ng-show="groupBy == 'VendorRef'"> Vendor Ref :{{key}}</div>
 
                         </td>
                             <td style="width:20%;"></td>
@@ -30,27 +35,27 @@
                                 <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
                                   
                             
-                      USD {{orderList.Price}}
+                       {{orderList.Price}}
                        </span>
                                       </h4>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td colspan="2" class="ck-font-size-small" >
-                                <span>{{orderList.OrganizationName}}
+                                <span>{{value[0].OrganizationName}}
                             </span>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td colspan="2" class="ck-font-size-small">
-                                <span>Order by: {{orderList.OrderedBy}}
+                                <span>Order by: {{value[0].OrderedBy}}
                             </span>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td  class="ck-font-size-small">
-                                <span ng-show="!orderList.IsStagedOrder">Order Date : {{orderList.OrderDate}}
-                                <span ng-show="orderList.IsStagedOrder">Date In System : {{orderList.DateInSystem}}
+                                <span ng-show="!orderList.IsStagedOrder">Order Date : {{value[0].OrderDate | date}}
+                                <span ng-show="orderList.IsStagedOrder">Date In System : {{value[0].DateInSystem | date}}
                             </span>
                             </td >
                         </tr>
@@ -62,13 +67,13 @@
                             <td>Price</td>
                             <td></td>
                         </tr>
-                        <tr class="pipe" ng-repeat="order in order.orders">
+                        <tr class="pipe" ng-repeat="order in value">
                             <td></td>
                             <td valign="center" >
                             {{order.OrderNumber}}
                                 </td>
                                 <td valign="center" >
-                                   11.12
+                                  {{order.Price}}
                                 
                                 </td>
                                <td valign="center" >

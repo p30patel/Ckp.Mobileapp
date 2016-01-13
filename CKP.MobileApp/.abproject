@@ -47,7 +47,8 @@
     "org.apache.cordova.globalization",
     "org.apache.cordova.inappbrowser",
     "org.apache.cordova.keyboard",
-    "org.apache.cordova.splashscreen"
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.statusbar"
   ],
   "WP8SupportedResolutions": [
     "ID_RESOLUTION_WVGA",

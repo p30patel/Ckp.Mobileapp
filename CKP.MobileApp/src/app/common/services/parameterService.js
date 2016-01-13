@@ -36,17 +36,11 @@ app.factory('parameterService', [
                       ];
 
                       var groupList = [
-                          { searchParamterId: '1', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
-
-                          { searchParamterId: '2', orderTypeId: 1, groupBy: 'SalesOrderNumber' },                          
-                          { searchParamterId: '2', orderTypeId: 3, groupBy: 'SalesOrderNumber' },
-
-                          { searchParamterId: '3', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
-                          { searchParamterId: '3', orderTypeId: 3, groupBy: 'ShoppingCartId' },
-
-                          { searchParamterId: '4', orderTypeId: 1, groupBy: 'SalesOrderNumber' },
-                          { searchParamterId: '4', orderTypeId: 2, groupBy: 'VendorRef' },
-                          { searchParamterId: '4', orderTypeId: 3, groupBy: 'VendorRef' },
+                         
+                          { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId' },
+                        
+                          { searchParamterId: '4', orderTypeId: '2', groupBy: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '3', groupBy: 'VendorRef' },
 
                           ];
 
@@ -95,7 +89,9 @@ app.factory('parameterService', [
 
                     var getGroupByName = function (searchParaId, orderTypeId) {
                         var groupByName = "SalesOrderNumber";
+                        
                         angular.forEach(groupList, function (item) {
+                           
                             if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
                                 groupByName = item.groupBy;
                                 return groupByName;
