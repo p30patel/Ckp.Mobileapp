@@ -15,8 +15,11 @@ app.factory("messageDataService", [
                         var userId = authData.userId;
                       
                         var data = localStorageService.get('organizationDetail');
-                       
+
+                        localStorageService.set('messages', '');
+
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/GetMessageListTaskAsync', data).success(function (result) {
+                            
                             localStorageService.set('messages', result);
                             deferred.resolve(result);
                         })

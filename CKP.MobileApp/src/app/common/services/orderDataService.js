@@ -15,14 +15,14 @@ app.factory("orderDataService", [
                         var authData = authService.getUserInfo();
                         var userId = authData.userId;
                       
-                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo?productionOrderId=" + poctrlno;
 
                      
                         $http.get(url).success(function (result) {
-                         
+                      
                             deferred.resolve(result);
-                        }).error(function (xhr, status, error) {                                  
+                        }).error(function (xhr, status, error) {
+                           
                             deferred.reject(error);
                         });
                         return deferred.promise;
@@ -110,6 +110,7 @@ app.factory("orderDataService", [
                         });
                         return deferred.promise;
                     };
+
                     var getConfirmationHtml = function (id) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;

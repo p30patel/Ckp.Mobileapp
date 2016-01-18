@@ -17,9 +17,10 @@ app.factory("homeDataService", [
                         if (data === null) {
                             deferred.reject('failed to get data');
                         }
-
+                      
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, data).success(function (result) {
+                        
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {

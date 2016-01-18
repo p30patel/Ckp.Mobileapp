@@ -56,18 +56,18 @@
     "ID_RESOLUTION_HD720P"
   ],
   "Framework": "Cordova",
-  "DisplayName": "Check-Net Mobile",
+  "DisplayName": "Check-Net",
   "Author": "",
-  "Description": "Check-Net Mobile ",
+  "Description": "Check-Net",
   "projectVersion": "1",
   "WP8PublisherID": "{15da2ddb-6326-4e60-b258-d8b49ce3d0fd}",
   "WP8ProductID": "{6deca108-14fa-4ba9-8001-d32225ff55c4}",
   "WP8Capabilities": [],
   "WP8Requirements": [],
   "WP8Publisher": "",
-  "WP8TileTitle": "Check-Net Mobile",
+  "WP8TileTitle": "Check-Net",
   "WP8WindowsPublisherName": "CN=Telerik",
-  "WP8PackageIdentityName": "com.telerik.CheckNetApplication",
+  "WP8PackageIdentityName": "com.checkpt.checknetmobile",
   "WPSdk": "8.0",
   "iOSDeploymentTarget": "6.0"
 }

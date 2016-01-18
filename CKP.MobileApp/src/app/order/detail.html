@@ -5,7 +5,7 @@
                 <i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
             </kendo-mobile-button>
             
-            <kendo-mobile-back-button k-align="'left'" >
+            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;">
                 <i class="ck-icon ck-barrow"></i>
             </kendo-mobile-back-button>
             <kendo-view-title>Order Details</kendo-view-title>
@@ -33,8 +33,8 @@
                             <h3>:{{order.detail.MobileOrderDetail.VendorRef}}</h3>
                         </td>
                         <td class="v-align c-align">
-                           <!-- <div class="status open">{{order.detail.MobileOrderDetail.Status}}</div>-->
-                               <div class="status open">Open</div> <!--remove after new frameowrk deplyoment-->
+                            <div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
+                            
                             <input kendo-mobile-switch k-checked="checked" />
                             <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>
                         </td>
@@ -43,15 +43,7 @@
             </li>
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()">
                 <h4>{{form.billingInfo.resoruceValue}}</h4>
-                 <p ng-if="order.detail.MobileOrderDetail.BillingAddress === null">
-                   <!--<p> No data are found!</p> -->
-                     <p>TJX COMPANY</p>
-                     <p>
-The TJX Companies, Inc</p>
-                     <p>
-Framingham, MA, 01701, US</p>
-                </p>
-              
+                
                 <p>
                     <b>{{order.detail.MobileOrderDetail.BillingAddress.Name}}</b>
                 </p>
@@ -65,15 +57,6 @@ Framingham, MA, 01701, US</p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()">
             <h4>{{form.shiptoInfo.resoruceValue}}</h4>
-               <p ng-if="order.detail.MobileOrderDetail.DeliveryAddress === null">
-                  <!--<p> No data are found!</p> -->
-                    <p>TJX COMPANY</p>
-                     <p>
-The TJX Companies, Inc</p>
-                     <p>
-Framingham, MA, 01701, US</p>
-                </p>
-               
                 <p>
                     <b>{{order.detail.MobileOrderDetail.DeliveryAddress.Name}}</b>
                 </p>
@@ -118,7 +101,23 @@ Framingham, MA, 01701, US</p>
                             <h4 class="km-bold-font">{{form.price.resoruceValue}}</h4>
                         </td>
                     </tr>
-                    <tr class="pipe" ng-repeat="orderLine in order.detail[0].ProductionOrderData.OrderLines">
+                    <tr class="pipe"> <!--ng-repeat="orderLine in order.detail.ProductionOrderData[0].ProductionOrderLine">-->
+                        <td>
+                            <h4 class="km-bold-font">{{order.detail.ProductionOrderData[0].ProductionOrderLine.ProductName}}</h4>
+                            <h5>{{form.itemCode.resoruceValue}}:<b> {{order.detail.ProductionOrderData[0].ProductionOrderLine.RetailerProductCode}}</b></h5>
+                            <h5>{{order.detail.ProductionOrderData[0].ProductionOrderLine.PriceUomName}}</h5>
+                            <h5>{{form.prodcutionLocation.resoruceValue}}:<b>{{order.detail.ProductionOrderData[0].PartnerName}}</b></h5>
+                        </td>
+                        <td class="v-align">
+                            <h4 class="km-bold-font">{{order.detail.ProductionOrderData[0].ProductionOrderLine.Quantity.Value}}</h4>
+                        </td>
+                        <td class="v-align">
+                            <h4 class="km-bold-font">{{order.detail.ProductionOrderData[0].ProductionOrderLine.FormattedNetValue}}</h4>
+                        </td>
+                    </tr>
+                
+                   <!--    <tr class="pipe" ng-repeat="orderLine in order.detail.ProductionOrderData[0].ProductionOrderLine">
+                           {{orderLine.ArticleNumber}}
                         <td>
                             <h4 class="km-bold-font">{{orderLine.ProductName}}</h4>
                             <h5>{{form.itemCode.resoruceValue}}: {{orderLine.RetailerProductCode}}</h5>
@@ -131,26 +130,9 @@ Framingham, MA, 01701, US</p>
                         <td class="v-align">
                             <h4 class="km-bold-font">{{orderLine.FormattedNetValue}}</h4>
                         </td>
-                    </tr>
-                   
-                       <!--remove below tr once next production delployment-->
-                       <tr class="pipe" >
-                        <td>
-                            <h4 class="km-bold-font">MARSHALLS GUM LABEL ON SHEETS</h4>
-                            <h5>{{form.itemCode.resoruceValue}}: 8-SH</h5>
-                            <h5>49.40 USD
-</h5>
-                            <h5>{{form.prodcutionLocation.resoruceValue}}:DAYTON OHIO LASER</h5>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">3800</h4>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">49.40 USD</h4>
-                        </td>
-                    </tr>
-                     </table>
-                <table class="ck-table pad">
+                    </tr>-->
+                </table>
+                <table class="ck-table pad" ng-show="!order.hasStaged">
                     <tr class="pipe" style="background:#fff;">
                         <td>
                             <h4>{{form.releasedBy.resoruceValue}}</h4>
@@ -158,41 +140,12 @@ Framingham, MA, 01701, US</p>
                             <h4>{{form.phone.resoruceValue}}</h4>
                         </td>
                         <td>
-                            <h4>:use001</h4>
-                            <h4>:user01@yaho.com</h4>
-                            <h4>:12121</h4>
+                            <h4>:{{order.detail.ReleasedBy}}</h4>
+                            <h4>:{{order.detail.Email}}</h4>
+                            <h4>:{{order.detail.Phone}}</h4>
                         </td>
                     </tr>
                 </table>
-                   <!--    <tr class="pipe" ng-repeat="orderLine in order.detail[0].ProductionOrderData.OrderLines">
-                        <td>
-                            <h4 class="km-bold-font">{{orderLine.ProductName}}</h4>
-                            <h5>{{form.itemCode.resoruceValue}}: {{orderLine.RetailerProductCode}}</h5>
-                            <h5>{{orderLine.FormattedGrossPrice}}</h5>
-                            <h5>{{form.prodcutionLocation.resoruceValue}}:{{order.detail[0].OrderDetailData[0].PrintingLocation}}</h5>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">{{orderLine.FormattedNetValue}}</h4>
-                        </td>
-                    </tr>
-                </table>
-                <table class="ck-table pad">
-                    <tr class="pipe" style="background:#fff;">
-                        <td>
-                            <h4>{{form.releasedBy.resoruceValue}}</h4>
-                            <h4>{{form.email.resoruceValue}}</h4>
-                            <h4>{{form.phone.resoruceValue}}</h4>
-                        </td>
-                        <td>
-                            <h4>:{{order.detail[0].ReleasedBy}}</h4>
-                            <h4>:{{order.detail[0].Email}}</h4>
-                            <h4>:{{order.detail[0].Phone}}</h4>
-                        </td>
-                    </tr>
-                </table>-->
             </kendo-mobile-collapsible>
      
         </kendo-mobile-list-view>
@@ -210,7 +163,7 @@ Framingham, MA, 01701, US</p>
 
          <div style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" >
         <ul kendo-mobile-list-view ng-repeat="tracking in trackingList">
-            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.TrackingUrl}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.AwbNumber}}</kendo-mobile-button></li>
+            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.TrackingUrl}} + {{tracking.AwbNumber}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.AwbNumber}}</kendo-mobile-button></li>
         </ul>
         </div>
 

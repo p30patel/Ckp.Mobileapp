@@ -141,6 +141,7 @@ app.controller('orderDetailController', [
                        $scope.order = {};
                   
                        $scope.order.hasApproval = false;
+                       $scope.order.hasStaged = false;
                        $scope.order.title = 'Order Detail';
                        $scope.order.detail = {};
                        $scope.inqueryMessage = "";
@@ -174,14 +175,29 @@ app.controller('orderDetailController', [
                            if (orderType === '1') {
                                $scope.order.hasApproval = true;
                            }
+                           else if (orderType === '2')
+                           {
+                               $scope.order.hasStaged = true;
+                           }
 
-                           var poctrlno = 403699152; // static po ctrl no, later remove and set from paramter 
-                           getOrderDetail(poctrlno);
+                          
+                           getOrderDetail(parameterValue);
                            
                           
                        }
-                      
+                       
                        var getOrderDetail = function (poctrlno) {
+                           //poctrlno = 12345; // reomve after DEMO
+
+                           var staticData = {
+                               "MobileOrderDetail": {
+                                   "OrderNumber": "UO-41072315172", "ShoppingCartId": "11080", "OrganizationName": "MARSHALLS", "SalesOrderNumber": "178007724", "VendorRef": "VendorRef 2", "Status": 120, "DateInSystem": "2014-03-15T00:33:00", "OrderDate": "2015-12-03T21:13:16.727", "POCtrlNo": 409024214, "OrderedBy": "marshall_admin", "Price": "USD 13.00", "IsStagedOrder": false, "BillingAddress": { "AddressType": 102, "PoCtrlNo": 409024214, "IntegrateErpCode": null, "Id": 52072288, "Name": "TJX COMPANY", "Contact": "", "Street1": "The TJX Companies, Inc", "Street2": "", "Street3": "", "Street4": "", "ZipCode": "01701", "City": "Framingham", "County": "", "StateProv": "MA", "CountryName": "UNITED STATES", "Iso3166": "US", "Phone": "0", "Fax": "", "Email": "", "VAT": "", "ERPRefCode": "162389", "StoreNumber": "", "TaxIdNo": "", "POBox": "9133", "CheckSum": 44376563, "Error": "" }, "DeliveryAddress": { "AddressType": 103, "PoCtrlNo": 409024214, "IntegrateErpCode": null, "Id": 52072287, "Name": "Ralph Lauren Childrens", "Contact": "Jill Shockery", "Street1": "4100 Beechwood Drive", "Street2": "", "Street3": "", "Street4": "", "ZipCode": "27410", "City": "Greensboro", "County": "", "StateProv": "NC", "CountryName": "UNITED STATES", "Iso3166": "US", "Phone": "336-323-8868", "Fax": "", "Email": "", "VAT": "", "ERPRefCode": "", "StoreNumber": "", "TaxIdNo": "", "POBox": "", "CheckSum": -1271510762, "Error": "" },
+                                   "OrderTrackingNumberList": [{ "ProductionOrderId": 0, "CourierName": "UPS", "TrackingUrl": "http://wwwapps.ups.com/etracking/tracking.cgi?TypeOfInquiryNumber=T&AcceptUPSLicenseAgreement=yes&InquiryNumber1=", "AwbNumber": "1Z146V020460170748", "Id": -1, "Error": "" },
+                                   { "ProductionOrderId": 0, "CourierName": "Fedex", "TrackingUrl": "https://www.fedex.com/apps/fedextrack/?action=track&action=track&mps=y&language=english&cntry_code=us&tracknumbers=", "AwbNumber": "640251899563", "Id": -1, "Error": "" }],
+                                   "StatusDisplay": "Open", "Id": -1, "Error": ""
+                               },
+                               "ProductionOrderData": [{ "ProductionOrderLine": { "FormattedTotalWeight": "722.00 PER 1000 PIECES", "ProductionOrderId": 409024214, "Position": 1, "RetailerId": 6884, "SalesOrderLine": 100, "SalesOrderNo": 178007724, "Status": 0, "StatusDate": "2015-12-03T21:13:17.133", "StatusText": "New order", "Quantity": { "Value": 3800, "Uom": { "Name": "Each", "ShortText": "EA", "UOMCode": 101, "SapCode": "PCE", "TypeId": 0, "IntegrateCode": "EA", "UomDisplay": "per Piece", "Id": 101, "Error": "" } }, "LineItemCount": 0, "StagedOrderLineId": 0, "ProductionId": 0, "HasLineItems": false, "InvoiceNumber": "0", "AwbNumber": "", "GrossCurrency": { "Code": "USD", "Description": "US Dollar", "Id": 1, "Error": "" }, "PriceUnit": 1000, "PriceUom": { "Name": "PER 1000 PIECES", "ShortText": "/1000", "UOMCode": 102, "SapCode": "MIL", "TypeId": 0, "IntegrateCode": "", "UomDisplay": "per 1000 pcs", "Id": 102, "Error": "" }, "GrossPrice": 13.0, "GrossValue": 49.4, "GrossExchangeRate": 1.0, "FreightCost": 0.0, "ErpFreightCost": 0.0, "FreightCurrency": { "Code": "USD", "Description": "US Dollar", "Id": 1, "Error": "" }, "ExpeditedServiceUnit": 0, "ExpeditedServiceUom": { "Name": "Not set", "ShortText": "N/A", "UOMCode": 0, "SapCode": "0", "TypeId": 0, "IntegrateCode": "", "UomDisplay": "N/A", "Id": 0, "Error": "" }, "ExpeditedServiceCharge": 0.0, "ExpeditedServiceRate": 0.0, "ExpeditedServiceCurrency": { "Code": "USD", "Description": "US Dollar", "Id": 1, "Error": "" }, "ExpeditedServiceExchangeRate": 0.0, "DiscountUnit": 0, "DiscountUom": { "Name": "Not set", "ShortText": "N/A", "UOMCode": 0, "SapCode": "0", "TypeId": 0, "IntegrateCode": "", "UomDisplay": "N/A", "Id": 0, "Error": "" }, "DiscountValue": 0.0, "DiscountRate": 0.0, "DiscountCurrency": { "Code": "USD", "Description": "US Dollar", "Id": 1, "Error": "" }, "DiscountExchangeRate": 0.0, "Vat": 3.33, "VatRate": 6.75, "ItemNetValue": 49.4, "RetailerProductCode": "8-SH", "BaseCurrency": "USD", "UnitWeight": 0.18999999761581421, "TotalWeight": 722.0, "WeightUOM": { "Name": "PER 1000 PIECES", "ShortText": "/1000", "UOMCode": 102, "SapCode": "MIL", "TypeId": 0, "IntegrateCode": "", "UomDisplay": "per 1000 pcs", "Id": 102, "Error": "" }, "ParcelNumber": null, "Courier": null, "SendToERP": false, "BOD902CtrlNo": 0, "BOD902StatusCode": null, "BOD902Courier": null, "DateAtPrintshop": null, "DatePrinted": null, "BOD902ShipDt": null, "BOD012Status": 0, "ProcessedBOD905": false, "ShipmentEmailStatus": 0, "BOD902QtyShipped": 0, "EstimatedShipDate": null, "ReRoute": false, "OldPrintshop": "", "DateRouted": null, "DivisionCode": "", "LastShipQty": 0, "TotalShipQty": 0, "LastShipFreight": 0.0, "IsPartial": false, "ErpDeliveryDate": null, "ImprintFee": 0.0, "BaseStockPrice": 0.0, "ShippingWeight": 0.0, "RetailerOrderLineId": "", "LineItems": [], "OrderLineFields": [], "DueDate": null, "ProductionDate": null, "ShipDate": null, "CancelDate": null, "IsCancelled": false, "IsProduced": false, "IsShipped": false, "LineItemsTable": [], "ReceiverReference": "", "PriceUomName": "PER 1000 PIECES", "ExpeditedServiceUomName": "Not set", "DiscountUomName": "Not set", "FormattedGrossPrice": "USD 13.00 per 1000 pc", "FormattedFreightCost": "USD 0.00", "FormattedExpeditedServiceCharge": "USD 0.00", "FormattedDiscountValue": "USD 0.00", "FormattedVat": "USD 3.33", "FormattedNetValue": "USD 49.40", "OrderNumber": null, "IsSelected": false, "PrintshopFreightCost": 0.0, "PrintshopFreightCurrency": "", "IsManualFreight": false, "ErpProductionStatus": 0, "ErpDeliveryStatus": 0, "ERPProductionMessage": "", "ERPDeliveryMessage": "", "Surcharge": 0.0, "BackOrderedOrderLine": null, "BackOrderedMessage": null, "FormattedAmount": 49.4, "QuantityMultiplier": 1, "ShoppingCartOrderLineId": 0, "BimSalesOrderNumber": "", "IsExplosionItem": false, "ShipmentWeight": 0.7219999818801881, "OriginalQuantity": 0, "IsRoundUpApplied": false, "IsValidQty": true, "MinimumOrderQty": 0, "RoundUpQty": 0, "ProductId": 56444, "ProductName": "MARSHALLS GUM LABEL ON SHEETS", "ArticleNumber": "1010714", "EndProductId": 26884, "LayoutId": 0, "EndProductName": "", "ErpArticleNumber": "", "NewSalesOrderNo": 0, "OldSalesOrderNo": null, "OldDetailSumm": null, "Id": 37427385, "Error": "" }, "ServiceLevel": { "DeliveryTime": 0, "ErpCode": "0 ", "IsDefault": false, "Description": "Not Set", "FormattedServiceLevel": "0 Hours", "IntegrateCode": null, "Id": 0, "Error": "" }, "PartnerName": "DAYTON OHIO LASER", "OrderDate": "2015-12-03T21:13:16.727", "OrderedBy": null, "ShippingClass": "REGULAR", "OrderTrackingNumber": { "ProductionOrderId": 0, "CourierName": null, "TrackingUrl": null, "AwbNumber": null, "Id": -1, "Error": "" }, "Status": "Open", "IsCatalogPo": false, "InvoiceNumber": null, "Id": -1, "Error": "" }], "StagedOrderLineList": [], "ErrorMessage": "", "ReleasedBy": "marshall_admin", "Email": "prakash.patel@checkpt.com", "Phone": "123456788"
+                           };
 
                            $scope.order.OrderNumber = '';
                            $scope.order.ShoppingCart = '';
@@ -190,21 +206,33 @@ app.controller('orderDetailController', [
                          
                            kendo.mobile.application.pane.loader.show();
                          
-                         
-                               orderDataService.getOrderDetail(poctrlno).then(function (result) {
-                                 
+                           
+                           orderDataService.getOrderDetail(poctrlno).then(function (result) {
+                               result = staticData; // remove after DEMo
                                    $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
                                    $scope.order.ShoppingCart = result.MobileOrderDetail.ShoppingCartId;
                                    $scope.order.SalesOrderNo = result.MobileOrderDetail.SalesOrderNumber;
 
                                    $scope.order.detail = result;
                                    $scope.trackingList = result.MobileOrderDetail.OrderTrackingNumberList;
-                                 
+                                  
                                    $scope.trackingCount = $scope.trackingList.length;
                                    $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
                                }).catch(function (error) {
-                                   $scope.mesages = {};
+                                   $scope.order.detail = {};
+                                   // reomve after DEMO - below code
+                                   var result = staticData; // remove after DEMo
+                                   $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
+                                   $scope.order.ShoppingCart = result.MobileOrderDetail.ShoppingCartId;
+                                   $scope.order.SalesOrderNo = result.MobileOrderDetail.SalesOrderNumber;
+
+                                   $scope.order.detail = result;
+                                   $scope.trackingList = result.MobileOrderDetail.OrderTrackingNumberList;
+
+                                   $scope.trackingCount = $scope.trackingList.length;
+                                   $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
+                                 
                                }).finally(function () {
                                    kendo.mobile.application.pane.loader.hide();
                                });

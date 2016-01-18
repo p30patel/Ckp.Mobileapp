@@ -1,7 +1,7 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" >
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-            <kendo-mobile-back-button k-align="'left'" >
+            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;">
                 <i class="ck-icon ck-barrow"></i>
             </kendo-mobile-back-button>
         </kendo-view-title>
@@ -29,13 +29,11 @@
 
                         </td>
                             <td style="width:20%;"></td>
-                            <td style="width:10%;" rowspan="4">
+                            <td style="width:10%;" rowspan="4" ng-show="value[0].ShoppingCartId">
                                 <h4>
-                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" ng-click="showConfirmationModel({{ShoppingCartId}})"/>
+                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>
                                 <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
-                                  
-                            
-                       {{orderList.Price}}
+                       {{value[0].Price}}
                        </span>
                                       </h4>
                             </td>
@@ -96,9 +94,9 @@
                     <tr>
                         <td colspan="2">
                             <i></i>
-                            <kendo-mobile-button class="km-secondary km-large ck-btn-left" ng-click="approved(true)">Declined</kendo-mobile-button>
+                            <kendo-mobile-button class="km-secondary km-large ck-btn-left" data-tap="myTouch.tap" ng-click="approved(true)">Declined</kendo-mobile-button>
                             <i></i>
-                            <kendo-mobile-button class="km-primary km-large ck-btn-right" ng-click="approved(false)">Approve</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary km-large ck-btn-right" data-tap="myTouch.tap" ng-click="approved(false)">Approve</kendo-mobile-button>
                         </td>
                        
                     </tr>

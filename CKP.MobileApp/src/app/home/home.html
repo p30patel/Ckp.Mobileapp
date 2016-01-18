@@ -147,10 +147,9 @@
                     <table class="ck-table">
                         <tr>
                             <td colspan="5" style="padding: 1em;">
+                               
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="ViewMore(1)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
-                                <i></i>
-                                <kendo-mobile-button class="km-primary ck-btn-right" k-rel="'modalview'" ng-click="showApprovalModel(1)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'" ng-click="showApprovalModel(1)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
                     </table>
@@ -366,22 +365,21 @@
                !
             </li>
         </ul>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+        <div kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid"> {{form.announcements.resoruceValue}}</span>
             </li>
-            <span kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId'">
-                <li ng-if="value[0].SpecificRetailerId > 0 && value[0].Message !==''">
-                    <b>{{value[0].Title}} </b> ({{value[0].RetailerName}}) 
-            
-                    
-                    <p>
-                        <span ng-bind-html="renderHtml(value[0].Message)"></span>
-                    </p>
+            <ul kendo-mobile-list-view  ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'Message' | orderBy: 'RetailerName'" k-style="'inset'" style="margin: .5em;" >
+                 <span ng-repeat='msg in value'>
+                <li ng-if="msg.RetailerName">
+                    <b>{{msg.Title}} </b> ({{msg.RetailerName}}) 
+                    <p ng-bind-html="renderHtml(msg.Message)" style="padding-left:.5em"> </p>
+                    <p ng-show="!msg.Message" style="padding-left:.5em">Sample Test Message.</p>
                 </li>
-            </span>
-        </ul>
+                 </span>
+            </ul>
+       
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.PartnerHolidayList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
@@ -398,13 +396,15 @@
                 <span class="ck-font-size-mid">Checkpoint Systems, Inc.</span>
             </li>
             <li>
-                <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'SpecificRetailerId' | orderBy: 'SpecificRetailerId' ">
-                    <li class="km-font" ng-if="value[0].SpecificRetailerId == 0 && value[0].Message && value[0].Title">
-                        <b>{{value[0].Title}} </b>
+                <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'RetailerName' | orderBy: 'RetailerName' ">
+                    <span ng-repeat='msg in value'>
+                    <li class="km-font" ng-if="!msg.RetailerName && msg.Title">
+                        <b>{{msg.Title}} </b>
                         <p>
-                            <span ng-bind-html="renderHtml(value[0].Message)"></span>
+                            <span ng-bind-html="renderHtml(msg.Message)"></span>
                         </p>
                     </li>
+                    </span>
                 </ul>
             </li>
         </ul>
