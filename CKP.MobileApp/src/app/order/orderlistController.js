@@ -162,7 +162,7 @@ app.controller('orderlistController', [
                                 $scope.order.hasApproval = false;
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
-                                    $("#modalview-approve").kendoMobileModalView("close");
+                                  //  $("#modalview-approve").kendoMobileModalView("close");
                                 }, 5000);
 
                                 kendo.mobile.application.pane.loader.hide();

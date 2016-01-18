@@ -28,14 +28,14 @@
                                  <div ng-show="groupBy == 'VendorRef'"> Vendor Ref :{{key}}</div>
 
                         </td>
-                            <td style="width:20%;"></td>
-                            <td style="width:10%;" rowspan="4" ng-show="value[0].ShoppingCartId">
+                            <td style="width:10%;"></td>
+                            <td style="width:20%; text-align: center;" rowspan="4" ng-show="value[0].ShoppingCartId">
                                 <h4>
-                                <img src="styles/images/page.png" class="page"  style="height:25px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>
-                                <span style="text-align: right; width:10%;"  class="ck-font-size-small" >
+                                <img src="styles/images/page.png" class="page"  style="height:20px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>                                
+                                      </h4>
+                                <span style="text-align: center; width:10%; " class="ck-font-size-small">
                        {{value[0].Price}}
                        </span>
-                                      </h4>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
