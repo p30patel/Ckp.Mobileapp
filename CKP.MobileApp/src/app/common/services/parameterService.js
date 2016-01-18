@@ -50,7 +50,7 @@ app.factory('parameterService', [
                     }
         
                     var getSearchParameterName = function (id) {
-                        var paramterName = "Order Number";
+                        var paramterName = "OrderNumber";
                         angular.forEach(searchParameters, function (item) {
                             if (item.id === id) {
                                 paramterName = item.value;
