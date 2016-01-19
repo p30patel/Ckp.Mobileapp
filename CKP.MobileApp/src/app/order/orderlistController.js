@@ -141,44 +141,37 @@ app.controller('orderlistController', [
                         var orderApprovalByStatus = function (statusUpdate) {
                             var salesorders = [];
 
-                            var salesorderList = $scope.selection;
-                            angular.forEach(salesorderList, function (value, key) {
-                                if (value !== '') {
-                                    var solist = {
-                                        SalesOrderNo: value,
-                                        Comment: $scope.orderApprovalComment
-                                    };
-                                    salesorders.push(solist);
-                                }
-                            });
-
+                            var solist = {
+                                SalesOrderNo: $scope.SalesOrderNo,
+                                Comment: $scope.orderApprovalComment
+                            };
+                            salesorders.push(solist);
                             var data = {
                                 RetailerId: $scope.selectedRetailer,
                                 Salesorders: salesorders,
                                 UpdateStatus: statusUpdate,
                             }
                             kendo.mobile.application.pane.loader.show();
-                            $scope.apporvalMessage = "";
+                            var successMessage = statusUpdate ? "Aprroved" : "Declined"
                             orderDataService.approveDecline(data).then(function (result) {
-                                $scope.apporvalMessage = "Approve / Declined Successfully";
-                                $scope.order.hasApproval = false;
+
+                                $scope.apporvalMessage = "Order " + successMessage + " Successfully.";
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
-                                  //  $("#modalview-approve").kendoMobileModalView("close");
+                                    $scope.order.hasApproval = false;
                                 }, 5000);
 
                                 kendo.mobile.application.pane.loader.hide();
 
 
                             }).catch(function (error) {
-                                $scope.apporvalMessage = "Approve / Declined failed";
-                                $timeout(function () {
-                                      $scope.apporvalMessage = ""; 
-                                }, 7000);
-
                                 kendo.mobile.application.pane.loader.hide();
-                                //$("#modalview-approve").kendoMobileModalView("close");
+                                $scope.apporvalMessage = "Approve / Decliend failed";
+                                $timeout(function () {
+                                    $scope.apporvalMessage = "";
+                                }, 7000);
                             });
+
                         }
 
                         $scope.orderDetail = function () {
