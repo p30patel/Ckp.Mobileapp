@@ -159,6 +159,7 @@ app.controller('orderlistController', [
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
                                     $scope.order.hasApproval = false;
+                                    kendo.mobile.application.navigate("src/app/home/home.html");
                                 }, 5000);
 
                                 kendo.mobile.application.pane.loader.hide();
