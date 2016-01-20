@@ -7,7 +7,8 @@
         </kendo-mobile-list-view>
         <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()"
                     ng-show="policies" ng-repeat="policy in policies.Resources" ng-if="$index != 2">
-            <h4>{{policy.ResourceValue.ResourceName}}</h4>
+        
+              <h4  translate-element="{{policy.ResourceValue.ResourceName}}"></h4>
             <p ng-bind-html="renderHtml(policy.ResourceValue.ResourceValue)"></p>
         </kendo-mobile-collapsible>
         <div ng-show="!policies">
