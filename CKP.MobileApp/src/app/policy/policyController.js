@@ -20,6 +20,14 @@ app.controller('policyController', [
                            $scope.form.noData = {};
                            $scope.form.noData.resoruceName = "No Data are found";
                            $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
+                           $scope.form.policyInstructions = {};
+                           $scope.form.policyInstructions.resoruceName = "Policy Instructions";
+                           $scope.form.policyInstructions.resoruceValue = translateService.getResourceValue($scope.form.policyInstructions.resoruceName);
+
+                           $scope.form.noData = {};
+                           $scope.form.noData.resoruceName = "No Data are found";
+                           $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
                        }
                        setResources();
 

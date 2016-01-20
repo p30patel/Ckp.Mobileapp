@@ -35,15 +35,15 @@
                         </kendo-mobile-button>
                     </h3>
                     <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" >
-                        <li class="ck-button km-button ck-count-btn" ng-disabled="orderCount.ApprovalCount==0" >
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
                             <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                             <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
                         </li>
-                        <li class="ck-button km-button ck-count-btn">
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasStagedOrder">
                             <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
                             <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div>
                         </li>
-                        <li class="ck-button km-button ck-count-btn">
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasReleasedOrder">
                             <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
                             <div class="ck-button-text ">{{form.releasedOrder.resoruceValue}}</div>
                         </li>

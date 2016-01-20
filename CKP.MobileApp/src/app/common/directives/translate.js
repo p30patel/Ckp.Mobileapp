@@ -8,10 +8,12 @@ app.directive('translateElement', function (translateService) {
                     if (typeof additionaTranslate !== 'undefined') {
                         resourceName = resourceName + additionaTranslate;
                     }
-                 
+
+             
                     resourceName = translateService.getResourceValue(resourceName);
                     
                 }
+              
                 element.text(resourceName == undefined ? '' : resourceName);               
             });           
         }

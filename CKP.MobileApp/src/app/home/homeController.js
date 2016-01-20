@@ -206,7 +206,13 @@ app.controller('homeController', [
                        //retailers with count
                        $scope.orderCounts = {};
 
-                       var staticOrderCountData = { "MobileOrderCountList": [{ "RetailerId": 1, "RetailerName": "TJ Maxx", "HasApproval": true, "ApprovalCount": 10, "HasStagedOrder": true, "NewOrderCount": 4, "HasReleasedOrder": true, "ReleasedOrderCount": 40, "Id": -1, "Error": "" }], "Error": "" };
+                       var staticOrderCountData = {
+                           "MobileOrderCountList":
+                               [{ "RetailerId": 1, "RetailerName": "TJ Maxx", "HasApproval": true, "ApprovalCount": 10, "HasStagedOrder": true, "NewOrderCount": 4, "HasReleasedOrder": true, "ReleasedOrderCount": 40, "Id": -1, "Error": "" },
+                                   { "RetailerId": 2, "RetailerName": "Marshalls", "HasApproval": false, "ApprovalCount": 10, "HasStagedOrder": true, "NewOrderCount": 8, "HasReleasedOrder": true, "ReleasedOrderCount": 120, "Id": -1, "Error": "" },
+                               { "RetailerId": 3, "RetailerName": "TJ Canada", "HasApproval": false, "ApprovalCount": 10, "HasStagedOrder": false, "NewOrderCount": 4, "HasReleasedOrder": true, "ReleasedOrderCount": 45, "Id": -1, "Error": "" }
+                               ], "Error": ""
+                       };
 
                        var staticOrderSummaryData = [{ "OrderNumber": "00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -1, "Error": "" },
                            { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -2, "Error": "" },

@@ -219,7 +219,7 @@ app.factory('translateService',
            
             var deferred = $q.defer();
 
-           // localStorage.clear();
+           //localStorage.clear();
 
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
 
@@ -258,13 +258,13 @@ app.factory('translateService',
   
         var getResourceValue = function (resourceName) {
 
-
+          
             var resourceValue =  resourceName ;
-       
+         
             angular.forEach(resourceData, function (item) {
-              
+             
                 if (item.ResourceName === resourceName) {
-                    console.log(item.ResourceName   + '=>' + item.ResourceValue + ' Len:' + resourceData.length);
+            
                     resourceValue = item.ResourceValue ;
                     return resourceValue;
                 }
