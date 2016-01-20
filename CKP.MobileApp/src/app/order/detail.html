@@ -5,7 +5,7 @@
                 <i class="ck-icon ck-track" style="font-size: 140%; margin-top: .6em;"></i>
             </kendo-mobile-button>
             
-            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;">
+            <kendo-mobile-back-button k-align="'left'"  style="margin-left:5px;">
                 <i class="ck-icon ck-barrow"></i>
             </kendo-mobile-back-button>
             <kendo-view-title>Order Details</kendo-view-title>
@@ -116,21 +116,7 @@
                         </td>
                     </tr>
                 
-                   <!--    <tr class="pipe" ng-repeat="orderLine in order.detail.ProductionOrderData[0].ProductionOrderLine">
-                           {{orderLine.ArticleNumber}}
-                        <td>
-                            <h4 class="km-bold-font">{{orderLine.ProductName}}</h4>
-                            <h5>{{form.itemCode.resoruceValue}}: {{orderLine.RetailerProductCode}}</h5>
-                            <h5>{{orderLine.FormattedGrossPrice}}</h5>
-                            <h5>{{form.prodcutionLocation.resoruceValue}}:{{order.detail[0].OrderDetailData[0].PrintingLocation}}</h5>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
-                        </td>
-                        <td class="v-align">
-                            <h4 class="km-bold-font">{{orderLine.FormattedNetValue}}</h4>
-                        </td>
-                    </tr>-->
+             
                 </table>
                 <table class="ck-table pad" ng-show="!order.hasStaged">
                     <tr class="pipe" style="background:#fff;">
@@ -163,7 +149,8 @@
 
          <div style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" >
         <ul kendo-mobile-list-view ng-repeat="tracking in trackingList">
-            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.TrackingUrl}} + {{tracking.AwbNumber}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.AwbNumber}}</kendo-mobile-button></li>
+            
+            <li> <kendo-mobile-button k-align="left" k-on-click="showTracking('{{tracking.TrackingUrl}} + {{tracking.AwbNumber}}')" style="border:none !important; background: #F8F8F8!important; text-align:left !important;" class="km-listview-link">{{tracking.CourierName}} - {{tracking.AwbNumber}}</kendo-mobile-button></li>
         </ul>
         </div>
 
