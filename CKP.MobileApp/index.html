@@ -142,7 +142,7 @@
                     </a>
             </li>
             <li ng-show="authentication.isAuth">
-                <a href="src/app/notification/notification.html" data-icon="ck-icon ck-settings" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('notification')" data-icon="ck-icon ck-settings" data-tap="myTouch.tap">
                              {{form.notificationSettings.resoruceValue}}
                    
                     </a>

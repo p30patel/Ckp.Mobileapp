@@ -1,6 +1,6 @@
 
-app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', '$anchorScroll', '$location',
-function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, $anchorScroll, $location) {
+app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout',
+function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout) {
     if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
     }
@@ -148,6 +148,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         });
     }
+
     $scope.renderHtml = function (message) {
          
         return $sce.trustAsHtml(message);

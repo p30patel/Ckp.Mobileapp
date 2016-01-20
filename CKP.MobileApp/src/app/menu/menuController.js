@@ -79,8 +79,13 @@ app.controller('menuController', [
                        }
                        $scope.mnuClick = function (viewName) {
 
+                           switch (viewName) {
 
-                           switch (viewName) {                                                     
+                           case "notification" :
+                           
+                               kendo.mobile.application.navigate("src/app/notification/notification.html"); 
+                           break;
+                       
                                default:
                                    kendo.mobile.application.navigate("src/app/login/login.html");
                                    break;
