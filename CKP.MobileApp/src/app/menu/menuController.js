@@ -74,7 +74,9 @@ app.controller('menuController', [
                        if (isTrackingActive) {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        }
-
+                       $scope.home = function () {
+                           kendo.mobile.application.navigate("src/app/home/home.html");
+                       }
                        $scope.mnuClick = function (viewName) {
 
 
