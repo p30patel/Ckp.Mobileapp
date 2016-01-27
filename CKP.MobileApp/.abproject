@@ -39,7 +39,7 @@
   "AndroidVersionCode": "1",
   "FrameworkVersion": "3.7.0",
   "CorePlugins": [
-    "com.phonegap.plugins.PushPlugin@3.0.5",
+    "com.phonegap.plugins.PushPlugin@3.0.6",
     "com.telerik.feedback@2.0.0",
     "org.apache.cordova.console",
     "org.apache.cordova.device",

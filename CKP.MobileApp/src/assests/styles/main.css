@@ -1,11 +1,13 @@
 
-.ck-table{
-    text-indent : 10px !important;
+.ck-table{  
     text-align: left !important;
+    table-layout: fixed;
+    width:100%;
 }
-.ck-table th{
-    font-size: 11px;
-    font-weight:100;
+.ck-table td{
+    margin-left:5px; 
+    margin-right:5px;
+    overflow-wrap: break-word;
 }
 .k-invalid {
     border-color: rgb(213, 43, 30) !important;

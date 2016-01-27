@@ -104,7 +104,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.loginData = {
         userName: "",
         password: "",
-        useRefreshTokens: true
+        useRefreshTokens: false
     };
     $scope.translations = {};
     $scope.message = "";
@@ -131,25 +131,29 @@ function ($scope, $http, authService, translateService, localStorageService, log
             localStorageService.set('selectedLanguage', $scope.selectedLanague);
 
         }
-
-
-        //set user name pass if set remmber on.
+    };
+    languages(); //init languages
+    var setLoginData = function () {
         var loginData = localStorageService.get('loginData');
 
         if (loginData) {
             if (loginData.remmberme) {
                 $scope.loginData.userName = loginData.userName;
                 $scope.loginData.password = loginData.password;
-                $scope.loginData.useRefreshTokens = loginData.remmberme
+                $scope.loginData.useRefreshTokens = loginData.remmberme;
             }
         } else {
             $scope.loginData.userName = ""
             $scope.loginData.password = "";
-            $scope.loginData.useRefreshTokens = false;
+            $scope.loginData.useRefreshTokens = true;
         }
-    };
-    languages(); //init languages
-    
+    }
+
+    $scope.afterShow = function (e) {      
+
+        setLoginData();
+      
+    }
     if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
@@ -335,6 +339,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             remmberme: $scope.loginData.useRefreshTokens
         };
 
+        
         localStorageService.set('loginData', loginData);
 
         if (userName !== '' && password !== '') {

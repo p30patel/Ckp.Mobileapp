@@ -260,11 +260,11 @@ app.factory('translateService',
 
           
             var resourceValue =  resourceName ;
-         
+            
             angular.forEach(resourceData, function (item) {
              
                 if (item.ResourceName === resourceName) {
-            
+                  
                     resourceValue = item.ResourceValue ;
                     return resourceValue;
                 }

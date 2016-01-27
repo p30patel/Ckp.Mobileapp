@@ -19,7 +19,7 @@ app.factory('parameterService', [
                     var vendorRef = {};
                     vendorRef.resoruceName = "Vendor Ref";
                     vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
-
+                    
                     var searchParameters = [
                         { id: '1', name: orderNumber.resoruceValue, value: "OrderNumber", hasListView: true, hasDetailViee: true },
                         { id: '2', name: salesOrder.resoruceValue, value: "SalesOrderNumber", hasListView: true, hasDetailViee: true },
@@ -45,7 +45,21 @@ app.factory('parameterService', [
                           ];
 
 
-                    var getSearchParameters = function () {
+                      var getSearchParameters = function () {
+                          salesOrder.resoruceValue = translateService.getResourceValue(salesOrder.resoruceName);
+                          orderNumber.resoruceValue = translateService.getResourceValue(orderNumber.resoruceName);
+                          shoppingCart.resoruceValue = translateService.getResourceValue(shoppingCart.resoruceName);
+                          vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
+
+                          var searchParameters = [
+                       { id: '1', name: orderNumber.resoruceValue, value: "OrderNumber", hasListView: true, hasDetailViee: true },
+                       { id: '2', name: salesOrder.resoruceValue, value: "SalesOrderNumber", hasListView: true, hasDetailViee: true },
+                       { id: '3', name: shoppingCart.resoruceValue, value: "ShoppingCartId", hasListView: true, hasDetailViee: true },
+                       { id: '4', name: vendorRef.resoruceName, value: "VendorRef", hasListView: true, hasDetailViee: true },
+
+                          ];
+
+
                         return searchParameters;
                     }
         
