@@ -25,7 +25,7 @@
                             <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
                             <div ng-show="groupBy == 'SalesOrderNumber'"> Sales Order :{{key}}</div>
                             <div ng-show="groupBy == 'ShoppingCartId'"> Shopping Cart :{{key}}</div>
-                                 <div ng-show="groupBy == 'VendorRef'"> Vendor Ref :{{key}}</div>
+                            <div ng-show="groupBy == 'VendorRef'"> Vendor Ref :{{key}}</div>
 
                         </td>
                             <td style="width:10%;"></td>
@@ -83,7 +83,7 @@
                         </table>
                     </div>
                 </li>
-                <table class="ck-table pad ck-grey-wrap" ng-show="order.hasApproval">
+                <table class="ck-table pad ck-grey-wrap" ng-show="order.hasApproval && order.orders.length > 0">
                     <tr>
                         <td colspan="2">
                             <fieldset>
@@ -102,7 +102,9 @@
                     </tr>
                 </table>
 
-                <p ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></p>
+           
+                <li ng-show="order.orders.length == 0">   {{form.noResults.resoruceValue}}</li>
+                <li ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></li>
             </ul>
         </kendo-mobile-content>
 

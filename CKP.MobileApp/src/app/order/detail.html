@@ -33,10 +33,10 @@
                             <h3>:{{order.detail.MobileOrderDetail.VendorRef}}</h3>
                         </td>
                         <td class="v-align c-align">
-                            <div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
-                            
+                            <!--<div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
                             <input kendo-mobile-switch k-checked="checked" />
-                            <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>
+                            <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>-->
+                            <img src="styles/images/page.png" class="page"  style="height:20px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({order.detail.MobileOrderDetail.ShoppingCartId}})"/>  
                         </td>
                     </tr>
                 </table>

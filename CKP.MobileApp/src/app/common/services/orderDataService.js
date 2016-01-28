@@ -10,15 +10,26 @@ app.factory("orderDataService", [
                     var getOrderDetail = function (poctrlno) {
                    
                         var deferred = $q.defer();
+
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
-                        var authData = authService.getUserInfo();
-                        var userId = authData.userId;
-                      
-                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo?productionOrderId=" + poctrlno;
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+
+                        var jsonIn = {
+                            ProductionOrderId: 413077235,
+                            OrganizationDetail: orgContext,
+
+                        }
+                     
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
 
                      
-                        $http.get(url).success(function (result) {
+                        $http.post(url, jsonIn).success(function (result) {
                       
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {
@@ -41,31 +52,15 @@ app.factory("orderDataService", [
                             orgContext = organizationDetail.OrgContext;
                         }
                         
-                        //var data = {
-                        //    RetailerId: orgContext,
-                        //    UserId: userId,
-                        //    SearchBy: searchData.SearchBy,
-                        //    SearchList: searchData.SearchList
-                        //};  -- remove below data object once new framework is deployed
                         var data = {
-                            PageSize: 1,
-                            PageNumber: 1,
-
-                            OrderNumber: '',
-                            ShoppingCartId: '773849',
-                            SalesOrderNumber: '',
-                            VendorRef: '',
-
-                            RetailerId: 6884,
-
-                            OrderType: 1,
-                            SearchList: ["773849", "773810"],
-                           
+                            RetailerId: orgContext.RetailerId,
                             UserId: userId,
                             SearchBy: searchData.SearchBy,
-                       
-                    };
-                        
+                            SearchList: searchData.SearchList,
+                            SalesOrderNumber: '34',
+                            OrderType: 3,
+                        }; 
+                                         
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
                                              
                         $http.post(url, data).success(function (result) {
@@ -117,15 +112,21 @@ app.factory("orderDataService", [
 
                         var authData = authService.getUserInfo();
 
-                        var data = localStorageService.get('organizationDetail');
-                        if (data === null) {
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+
+                        if (organizationDetail === null) {
                             deferred.reject('failed to get data');
                         }
 
-                        var userId = authData.userId;
+                       
                         var data = {
-                            OrgContext: data.OrgContext,
-                            ShoppingCartId: id
+                            OrgContext: orgContext.OrgContext,
+                            ShoppingCartId: 95142
                         };
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
 
