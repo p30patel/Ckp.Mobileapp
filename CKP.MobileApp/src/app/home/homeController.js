@@ -425,6 +425,22 @@ app.controller('homeController', [
                            $('.approve-chk').prop('checked', selectedAll);
                        }
 
+                       $scope.checkedIndividual = function (salesOrder, id)
+                       {
+                           var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
+
+                           var sameSalesOrders = $('.approve-chk').filter("[data-salesOrder='" + salesOrder + "']");
+
+                           if (isChecked)
+                           {                             
+                               sameSalesOrders.prop('checked', true);
+                           }
+                           else {
+                               sameSalesOrders.prop('checked', false);
+                           }
+
+                       }
+
                        $scope.viewAll = function (orderType, parameterId) {
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
                        }
@@ -432,7 +448,8 @@ app.controller('homeController', [
                        $scope.showApproval = function (orderType, parameterId) {
                            getSelectedList();
                            parameterValue = $scope.salesorderList;
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
+                           salesorderList = $scope.selection;
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&salesOrderList=" + salesorderList);
                        }
 
                     

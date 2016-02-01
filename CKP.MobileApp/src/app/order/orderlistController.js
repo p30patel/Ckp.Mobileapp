@@ -47,13 +47,14 @@ app.controller('orderlistController', [
                        var orderType = '1';
                        var parameterId = 0;
                        var parameterValue = [];
+                       var salesOrderList = '';
                      
                        $scope.groupBy = 'VendorRef';
                        $scope.intShow = function (e) {
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
                            parameterValue.push( e.view.params.parameterValue);                                                    
-                         
+                           salesOrderList = e.view.params.salesOrderList;
                       
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getGroupByName(parameterId, orderType);
@@ -72,7 +73,7 @@ app.controller('orderlistController', [
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                           alert(parameterValue);
+                           alert(salesOrderList);
                            var searchList = [];
                            if (orderType === '1')
                            {

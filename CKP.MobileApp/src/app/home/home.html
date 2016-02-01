@@ -83,7 +83,10 @@
                     
                         <tr class="pipe" ng-repeat="order in value | limitTo : 1">
                             <td style="width:50px;">                           
-                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$parent.$index}} " data-salesOrder="{{order.SalesOrderNumber}}"  />
+                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$parent.$index}}" 
+                                    data-salesOrder="{{order.SalesOrderNumber}}"
+                                    ng-model="chk[$parent.$index]"
+                                    ng-change="checkedIndividual({{order.SalesOrderNumber}}, {{$parent.$index}})" />
                                
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$parent.$index}}"></label>
                             </td>
