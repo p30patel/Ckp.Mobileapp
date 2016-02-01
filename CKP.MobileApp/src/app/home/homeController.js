@@ -361,13 +361,13 @@ app.controller('homeController', [
                            $scope.currentPage += 1;
                          
                            var hasNext = true;
-
+                          
                            getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
                          
                           
                        }
                        $scope.orderList = function (orderType, parameterId, parameterValue) {
-                           parameterValue = 170009071;
+                         
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
 
@@ -390,7 +390,6 @@ app.controller('homeController', [
                        }
                        //view more orders
                        $scope.showMoreOrderModel = function (orders) {
-                           
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };

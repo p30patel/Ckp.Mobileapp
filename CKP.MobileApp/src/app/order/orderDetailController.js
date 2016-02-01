@@ -170,7 +170,7 @@ app.controller('orderDetailController', [
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
-                           
+                           alert(parameterValue);
                            $scope.order.message = orderType + ";" + parameterId + ":" + parameterValue;
                            if (orderType === '1') {
                                $scope.order.hasApproval = true;

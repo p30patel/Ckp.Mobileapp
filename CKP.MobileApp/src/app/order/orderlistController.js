@@ -73,7 +73,7 @@ app.controller('orderlistController', [
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                           alert(salesOrderList);
+                           alert(parameterValue +" : " + salesOrderList);
                            var searchList = [];
                            if (orderType === '1')
                            {
