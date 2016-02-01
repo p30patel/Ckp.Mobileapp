@@ -20,7 +20,7 @@ app.factory("homeDataService", [
                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, data).success(function (result) {
-                        
+                           
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {
@@ -35,9 +35,9 @@ app.factory("homeDataService", [
                     var getOrderCounts = function () {
                         var deferred = $q.defer();
 
-
                         forceGetOrderCounts().then(function (result) {
                             deferred.resolve(result);
+                            
                         });
 
                         return deferred.promise;
@@ -46,9 +46,14 @@ app.factory("homeDataService", [
                     var forceGetOrderSummary = function (jsonIn) {
                         var deferred = $q.defer();
                         var authentication = authService.authentication;
+
+
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderSummary";
 
-                        
+                        var organization = localStorageService.get('organizationDetail');
+
+                        jsonIn.UserId = organization.UserId;
+                     
                         $http.post(url, jsonIn).success(function (result) {
                           
                             deferred.resolve(result);

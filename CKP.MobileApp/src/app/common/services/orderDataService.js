@@ -55,10 +55,10 @@ app.factory("orderDataService", [
                         var data = {
                             RetailerId: orgContext.RetailerId,
                             UserId: userId,
-                            SearchBy: searchData.SearchBy,
+                            //SearchBy: searchData.SearchBy,
                             SearchList: searchData.SearchList,
                             SalesOrderNumber: '34',
-                            OrderType: 3,
+                            OrderType: 1,
                         }; 
                                          
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";

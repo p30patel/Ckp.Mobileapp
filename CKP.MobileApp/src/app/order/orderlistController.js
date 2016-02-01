@@ -69,26 +69,30 @@ app.controller('orderlistController', [
                         //retailers with count
                    
 
-
-                       //orderDataService.getOrderList().then(function (result) {
-                       //    $scope.order.orders = result;
-                     
-                       //});
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                         
+                           alert(parameterValue);
+                           var searchList = [];
+                           if (orderType === '1')
+                           {
+                               //need to loop throught for appoval
+                           }
+                           else {
+                               searchList.push(parameterValue);
+                           }
                            var searchData = {                             
                                SearchBy: $scope.searchBy,
-                               SearchList: parameterValue
+                               SearchList: searchList,
                            };
 
                            
                             orderDataService.getOrderList(searchData).then(function (result) {
                                 $scope.order.orders = result;
-                             
-                           }).catch(function(error) {
-                               $scope.order.list = {};
+                                alert(result);
+                            }).catch(function (error) {
+                                alert(error);
+                               $scope.order.orders = {};
                            }).finally(function() {
                                kendo.mobile.application.pane.loader.hide();
                            });
@@ -119,7 +123,7 @@ app.controller('orderlistController', [
                                     $scope.confirmationConent = result;
                                 }
                             }).catch(function (error) {
-                                $scope.mesages = {};
+                                $scope.confirmationConent = 'No data found';
                             }).finally(function () {
                                 kendo.mobile.application.pane.loader.hide();
                             });

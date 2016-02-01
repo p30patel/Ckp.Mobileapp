@@ -173,13 +173,20 @@ app.controller('homeController', [
                        $scope.hasListView = false;
                        $scope.hasDetailView = false;
                        $scope.selectedRetailer = 0;
-                       $scope.selectedOrderType = 0;
+                       $scope.selectedOrderType = '';
+                       $scope.selectedOrderTypeId = 0;
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
                        $scope.sortOrder = 'OrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
+
                        $scope.hasNext = true;
+                       $scope.currentPage = 1;
+                       $scope.PageSize = 5;
+                                           
+                       $scope.selectedAll = false;
+
                        $scope.isAuth = authService.authentication.isAuth;
 
 
@@ -224,22 +231,22 @@ app.controller('homeController', [
                            });
 
                        }
-                       //get ordetrs
-                       var getOrders = function (orderType, orderTypeId, searchParamterId, searchInput) {
-                           $scope.hasNext = true;
+                       
+                       var getOrderSummary = function (orderType, orderTypeId, searchParamterId, searchInput, currentPage, hasNext) {
+                           $scope.hasNext = !hasNext;
                           
                            var jsonIn = {
-                               PageSize: 5,
-                               PageNumber: 1,
+                               PageSize: $scope.PageSize,
+                               PageNumber: currentPage,
 
                                OrderNumber: $scope.searchParameterId == '1'  ? $scope.currentSearchInput : '',
                                ShoppingCartId: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
                                SalesOrderNumber: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
                                VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : '',
 
-                               RetailerId: 6884,// $scope.selectedRetailer,
+                               RetailerId: $scope.selectedRetailer,
 
-                               UserId: 126089,
+                               UserId: 0,
                                OrderType: orderTypeId,
                                SearchList: []
                            };
@@ -247,14 +254,30 @@ app.controller('homeController', [
                       
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
-
+                               $scope.hasNext = result.length > 0;
                                kendo.mobile.application.pane.loader.hide();
-                            
-                               $scope.orders = result;
+                               if (hasNext) {
+
+                                   var currentOrders = $scope.orders;
+                                  
+                                   angular.forEach(result, function (value, key) {
+                                       
+                                       if (key <= result.length) {
+                                           currentOrders.push(value);
+
+                                       }
+                                   });
+                                   console.log(currentOrders.length);
+                                   $scope.orders = currentOrders;
+                               }
+                               else {
+                                   $scope.orders = result;
+                               }
                            }).catch(function (error) {
                                $scope.orders = {};
                             
                            }).finally(function () {
+                             
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
@@ -283,18 +306,18 @@ app.controller('homeController', [
 
                                listviewsToShow.eq(e.index).show();
 
-                               var selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');
+                               $scope.selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');
                               
-                               $scope.selectedOrderType = parameterService.getOrderTypeById(selectedOrderType);
+                               $scope.selectedOrderTypeId = parameterService.getOrderTypeById($scope.selectedOrderType);
                               
                                var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-
-                               var orderTypeId = $scope.selectedOrderType;
-
-                               getOrders(selectedOrderType, orderTypeId, $scope.searchParameterId, $scope.currentSearchInput);
+                                                           
+                               $scope.currentPage = 1;
+                               var hasNext = false;
+                               getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
                            }
                        }
-                       //end button group events
+
                        //alerts & news - messages
 
                        var getMessages = function () {
@@ -334,20 +357,13 @@ app.controller('homeController', [
                        }
 
                        $scope.ViewMore = function (orderType) {
-                           var temporders = [{ "OrderNumber": "A00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -1, "Error": "" }, { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -2, "Error": "" }, { "OrderNumber": "00001502", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -3, "Error": "" },
-                                             { "OrderNumber": "A04938439", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026110", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-10T00:00:00", "OrderDate": "2015-11-10T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -4, "Error": "" }, { "OrderNumber": "00010806", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -5, "Error": "" }, { "OrderNumber": "00015983", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -6, "Error": "" },
-                                             { "OrderNumber": "A00019847", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -7, "Error": "" }, { "OrderNumber": "00974620", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -8, "Error": "" }, { "OrderNumber": "00974623", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -9, "Error": "" }, { "OrderNumber": "00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -10, "Error": "" }, { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -11, "Error": "" }, { "OrderNumber": "00001502", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -12, "Error": "" }, { "OrderNumber": "04938439", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026110", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-10T00:00:00", "OrderDate": "2015-11-10T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -13, "Error": "" }, { "OrderNumber": "00010806", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -14, "Error": "" }, { "OrderNumber": "00015983", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -15, "Error": "" }, { "OrderNumber": "00019847", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -16, "Error": "" }, { "OrderNumber": "00974620", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -17, "Error": "" }, { "OrderNumber": "00974623", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -18, "Error": "" }, { "OrderNumber": "00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -19, "Error": "" }, { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -20, "Error": "" }, { "OrderNumber": "00001502", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -21, "Error": "" }, { "OrderNumber": "04938439", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026110", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-10T00:00:00", "OrderDate": "2015-11-10T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -22, "Error": "" }, { "OrderNumber": "00010806", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -23, "Error": "" }, { "OrderNumber": "00015983", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -24, "Error": "" }, { "OrderNumber": "00019847", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -25, "Error": "" }, { "OrderNumber": "00974620", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -26, "Error": "" }, { "OrderNumber": "00974623", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -27, "Error": "" }, { "OrderNumber": "00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -28, "Error": "" }, { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -29, "Error": "" }, { "OrderNumber": "00001502", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -30, "Error": "" }, { "OrderNumber": "04938439", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026110", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-10T00:00:00", "OrderDate": "2015-11-10T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -31, "Error": "" }, { "OrderNumber": "00010806", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -32, "Error": "" }, { "OrderNumber": "00015983", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -33, "Error": "" }, { "OrderNumber": "00019847", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -34, "Error": "" }, { "OrderNumber": "00974620", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -35, "Error": "" }, { "OrderNumber": "00974623", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -36, "Error": "" }, { "OrderNumber": "00019319", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -37, "Error": "" }, { "OrderNumber": "00020399", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699152, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -38, "Error": "" }, { "OrderNumber": "00001502", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026101", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-08T00:00:00", "OrderDate": "2015-11-08T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -39, "Error": "" }, { "OrderNumber": "04938439", "ShoppingCartId": "773865", "OrganizationName": "Lunula Nail Polish", "SalesOrderNumber": "170026110", "VendorRef": "PY19304123", "Status": 0, "DateInSystem": "2015-11-10T00:00:00", "OrderDate": "2015-11-10T00:00:00", "POCtrlNo": 403699160, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -40, "Error": "" }, { "OrderNumber": "00010806", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -41, "Error": "" }, { "OrderNumber": "00015983", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403658677, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -42, "Error": "" }, { "OrderNumber": "00019847", "ShoppingCartId": "773849", "OrganizationName": "Aglet Ltd. Co.", "SalesOrderNumber": "170026100", "VendorRef": "PY19304115", "Status": 0, "DateInSystem": "2015-11-05T00:00:00", "OrderDate": "2015-11-05T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -43, "Error": "" }, { "OrderNumber": "00974620", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -44, "Error": "" }, { "OrderNumber": "00974623", "ShoppingCartId": "773810", "OrganizationName": "Griffonage Pens", "SalesOrderNumber": "170026209", "VendorRef": "PY19304110", "Status": 0, "DateInSystem": "2015-11-02T00:00:00", "OrderDate": "2015-11-02T00:00:00", "POCtrlNo": 403640040, "OrderedBy": "user1109", "Price": 20.0, "IsStagedOrder": false, "BillingAddress": null, "DeliveryAddress": null, "OrderTrackingNumberList": [], "Id": -45, "Error": "" }];
-                           var currentOrders = $scope.orders;
-                           $scope.hasNext = false;
-                           angular.forEach(temporders, function (value, key) {
-                               console.log(value);
-                               if (key <= temporders.length) {
-                                   currentOrders.push(value);
-                               
-                               }
-                           });
 
-                           $scope.orders = currentOrders;
+                           $scope.currentPage += 1;
+                         
+                           var hasNext = true;
+
+                           getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
+                         
                           
                        }
                        $scope.orderList = function (orderType, parameterId, parameterValue) {
@@ -385,31 +401,41 @@ app.controller('homeController', [
 
                        //so - check box for approval
                        $scope.selection = [];
-                       $scope.orderApprovalComment = "";
                        $scope.salesorderList = "";
 
-                       $scope.toggleSelection = function toggleSelection(so) {
-                           var idx = $scope.selection.indexOf(so);
-
-                           if (idx > -1) {
-                               $scope.selection.splice(idx, 1);
-                           } else {
-                               $scope.selection.push(so);
+                       var getSelectedList = function () {
+                           var currentSelection = [];
+                           var salesorderList = '';
+                           var checkedItems = $('.approve-chk:checked');
+                           if (checkedItems.length > 0) {
+                               angular.forEach(checkedItems, function (value, key) {
+                                   var salesOrder = checkedItems.eq(key).attr('data-salesOrder');
+                                   if (currentSelection.indexOf(salesOrder) == -1) {
+                                       salesorderList += salesOrder + ',';
+                                       currentSelection.push(salesOrder);                                  
+                                   }
+                               });
                            }
+                           $scope.selection = currentSelection;
+                           $scope.salesorderList = salesorderList;
+                          
+                       }
 
-                       };
+                       $scope.checkAll = function (selectedAll) {                        
+                           $('.approve-chk').prop('checked', selectedAll);
+                       }
+
                        $scope.viewAll = function (orderType, parameterId) {
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
                        }
-                       $scope.approve = function () {
-                           var salesorders = "";
 
-                           var salesorderList = $scope.selection;
-                           angular.forEach(salesorderList, function (value, key) {
-                               salesorders += value + ',';
-                           });
-                           kendo.mobile.application.navigate("src/app/order/approve.html?orders=" + salesorders);
+                       $scope.showApproval = function (orderType, parameterId) {
+                           getSelectedList();
+                           parameterValue = $scope.salesorderList;
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
+
+                    
                        $scope.showAlertModel = function () {
 
                            $("#modalview-alerts").kendoMobileModalView("open");
@@ -430,32 +456,7 @@ app.controller('homeController', [
                            $('.order').hide();
                            $("#modalview-credit").kendoMobileModalView("close");
                        };
-                       //approve modal
-
-                       $scope.showApprovalModel = function (orderType, parameterId, retailerId) {
-                           var salesorders = "";
-                           $scope.selectedRetailer = retailerId;
-
-
-                           var salesorderList = $scope.selection;
-                           angular.forEach(salesorderList, function (value, key) {
-                               salesorders += value + ',';
-                           });
-                           $scope.salesorderList = salesorders;
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType);
-                           //  $("#modalview-approve").kendoMobileModalView("open");
-                       };
-                       $scope.hideApporvalModel = function () {
-                           $scope.salesorderList = "";
-                           $("#modalview-approve").kendoMobileModalView("close");
-                       };
-
-                       $scope.approved = function (status) {
-                           orderApprovalByStatus(status);
-                       }
-
-
-
+                     
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
                        };
