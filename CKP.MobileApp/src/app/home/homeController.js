@@ -167,7 +167,7 @@ app.controller('homeController', [
                        //}
                        $scope.message = "";
                        $scope.messageCount = 0;
-
+                       $scope.searchValue = "";
                        $scope.hasCreditLock = false;
                        $scope.hasSearch = false;
                        $scope.hasListView = false;
