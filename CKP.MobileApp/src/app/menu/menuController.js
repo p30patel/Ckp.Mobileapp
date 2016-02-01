@@ -1,6 +1,6 @@
 app.controller('menuController', [
-                   '$scope', 'authService', 'translateService', 'localStorageService',
-                   function ($scope, authService, translateService, localStorageService) {
+                   '$scope', 'authService', 'translateService', 'localStorageService', 'ngAuthSettings',
+                   function ($scope, authService, translateService, localStorageService, ngAuthSettings) {
 
                        $scope.form = {};
 
@@ -47,7 +47,11 @@ app.controller('menuController', [
 
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
+
+                       $scope.helpUrl = ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help.pdf";
+                     
                        //address
+
                        var getOrganizationDetail = function () {
 
                            var organizationDetail = localStorageService.get("organizationDetail");
@@ -80,13 +84,16 @@ app.controller('menuController', [
                        $scope.mnuClick = function (viewName) {
 
                            switch (viewName) {
+                               case "help":
+                                 
+                                   window.open($scope.helpUrl, '_system');
+                                   break;
 
-                           case "notification" :
-                           
-                               kendo.mobile.application.navigate("src/app/notification/notification.html"); 
-                           break;
+                               case "notification" :                           
+                                   kendo.mobile.application.navigate("src/app/notification/notification.html"); 
+                                   break;
                        
-                               default:
+                           default:
                                    kendo.mobile.application.navigate("src/app/login/login.html");
                                    break;
                            }

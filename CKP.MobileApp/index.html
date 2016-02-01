@@ -136,9 +136,8 @@
                     </a>
             </li>
             <li>
-                <a href="src/app/help/help.html" data-icon="ck-icon ck-help" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('help')"  data-icon="ck-icon ck-help" data-tap="myTouch.tap">
                              {{form.help.resoruceValue}}
-                   
                     </a>
             </li>
             <li ng-show="authentication.isAuth">

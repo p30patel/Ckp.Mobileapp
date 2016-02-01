@@ -120,7 +120,6 @@
     <Content Include="src\app\feedback\feedbackController.js" />
     <Content Include="src\app\help\help.html" />
     <Content Include="src\app\help\helpController.js" />
-    <Content Include="src\app\home\home - Copy.html" />
     <Content Include="src\app\home\home.html" />
     <Content Include="src\app\home\homeController - Copy.js" />
     <Content Include="src\app\home\homeController.js" />
@@ -131,7 +130,6 @@
     <Content Include="src\app\notification\notification.html" />
     <Content Include="src\app\notification\notificationController.js" />
     <Content Include="src\app\order\approveController.js" />
-    <Content Include="src\app\order\detail - Copy.html" />
     <Content Include="src\app\order\detail.html" />
     <Content Include="src\app\order\list.html" />
     <Content Include="src\app\order\orderDetailController.js" />
