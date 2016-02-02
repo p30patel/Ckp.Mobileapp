@@ -179,7 +179,7 @@ app.controller('homeController', [
                        $scope.hasDetailView = false;
                        $scope.selectedRetailer = 0;
                        $scope.selectedOrderType = '';
-                       $scope.selectedOrderTypeId = '1';
+                       $scope.selectedOrderTypeId = 0;
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
@@ -191,6 +191,7 @@ app.controller('homeController', [
                        $scope.PageSize = 5;
                                            
                        $scope.selectedAll = false;
+                       $scope.jsonIn = {};
 
                        $scope.isAuth = authService.authentication.isAuth;
 
@@ -198,12 +199,19 @@ app.controller('homeController', [
                        var setSelectPara = function () {
                            
                            var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
-                          
+                        
                            $scope.searchParameterId = $scope.selectedPara;
                         
                            $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);;
 
                            $scope.currentSearchInput = $scope.searchValue;
+
+                           $scope.jsonIn = {
+                               OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
+                               SalesOrderNumber: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
+                               ShoppingCartId: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
+                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
+                           };
                        }
 
                        setSelectPara();
@@ -221,17 +229,9 @@ app.controller('homeController', [
                        
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
-
-                           var jsonIn = {
-                               OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
-                               ShoppingCartId: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
-                               SalesOrderNumber: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
-                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
-                           };
-
                            kendo.mobile.application.pane.loader.show();
 
-                           homeDataService.getOrderCounts(jsonIn).then(function (result) {
+                           homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
 
                                $scope.orderCounts = result.MobileOrderCountList;
                                kendo.mobile.application.pane.loader.hide();
@@ -251,10 +251,10 @@ app.controller('homeController', [
                                PageSize: $scope.PageSize,
                                PageNumber: currentPage,
 
-                               OrderNumber: $scope.searchParameterId == '1'  ? $scope.currentSearchInput : '',
-                               ShoppingCartId: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
-                               SalesOrderNumber: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
-                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : '',
+                               OrderNumber: $scope.jsonIn.OrderNumber,
+                               ShoppingCartId: $scope.jsonIn.ShoppingCartId,
+                               SalesOrderNumber: $scope.jsonIn.SalesOrderNumber,
+                               VendorRef: $scope.jsonIn.VendorRef,
 
                                RetailerId: $scope.selectedRetailer,
 
@@ -390,8 +390,8 @@ app.controller('homeController', [
                    
 
                        $scope.key = function ($event) {
-
-                           if ($event.keyCode === 13 && $scope.searchValue.length > 0) {
+                        
+                           if ($event.keyCode === 13 && ($scope.searchValue.length > 0 || $scope.selectedPara === '1')) {
                                $event.target.blur();
                                forceGetData = true;
                                $scope.hasSearch = true;

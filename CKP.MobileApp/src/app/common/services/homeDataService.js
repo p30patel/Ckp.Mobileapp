@@ -65,7 +65,7 @@ app.factory("homeDataService", [
                         jsonIn.UserId = organization.UserId;
                      
                         $http.post(url, jsonIn).success(function (result) {
-                            console.log(result);
+                         
                             deferred.resolve(result);                           
                         }).error(function (xhr, status, error) {   
                            
