@@ -8,7 +8,6 @@ app.factory("homeDataService", [
                    
                     var homeDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd HH");
-
                    
                    
                     var forceGetOrderCounts = function () {
@@ -18,8 +17,17 @@ app.factory("homeDataService", [
                             deferred.reject('failed to get data');
                         }
                       
+                        var jsonIn = {
+                            OrderNumber: '',
+                            ShoppingCartId: '',
+                            SalesOrderNumber: '',
+                            VendorRef: '',
+                            OrganizationDetail: data,
+
+                        }
+
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
-                        $http.post(url, data).success(function (result) {
+                        $http.post(url, jsonIn).success(function (result) {
                            
                             deferred.resolve(result);
                           

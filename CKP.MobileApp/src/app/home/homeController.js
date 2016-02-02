@@ -152,6 +152,11 @@ app.controller('homeController', [
                            $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
 
 
+                           $scope.form.noOrderCounts = {};
+                           $scope.form.noOrderCounts.resoruceName = "Error while getting data from server, Please try later or contact customer service.";
+                           $scope.form.noOrderCounts.resoruceValue = translateService.getResourceValue($scope.form.noOrderCounts.resoruceName);
+
+
 
                        }
 
@@ -215,19 +220,18 @@ app.controller('homeController', [
                    
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
+
                            kendo.mobile.application.pane.loader.show();
+
                            homeDataService.getOrderCounts().then(function (result) {
 
                                $scope.orderCounts = result.MobileOrderCountList;
-
+                               kendo.mobile.application.pane.loader.hide();
                            }).catch(function (error) {
 
                                $scope.orderCounts = {};
-
-                            
-                           }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
-                          
+
                            });
 
                        }

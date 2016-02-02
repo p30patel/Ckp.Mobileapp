@@ -13,8 +13,12 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
+      
         <ul kendo-mobile-list-view class="ck-no-border">
-            <li class="ck-po-container ck-grey-wrap">
+            <li ng-show="orderCounts.length == 0">           
+                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>
+            </li>
+            <li class="ck-po-container ck-grey-wrap" ng-show="orderCounts.length > 0">
                 <fieldset class="ck-login">
                     <select class="ck-po-select" 
                         style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;" 
@@ -24,7 +28,7 @@
                         />
                 </fieldset>
             </li>
-            <div ng-repeat="orderCount in orderCounts ">
+            <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
                 <div class="ck-home " style="margin-top:-.1em; background-color:gray; ">
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
@@ -337,8 +341,6 @@
             </div>
         </ul>
         <!-- End Home View -->
-
-
     </kendo-mobile-content>
   <!--  <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
         <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
