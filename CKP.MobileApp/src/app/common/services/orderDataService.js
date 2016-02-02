@@ -123,16 +123,15 @@ app.factory("orderDataService", [
                             deferred.reject('failed to get data');
                         }
 
-                       
                         var data = {
-                            OrgContext: orgContext.OrgContext,
-                            ShoppingCartId: 95142
+                            OrgContext: orgContext,
+                            ShoppingCartId: id
                         };
+                      
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
 
-                        
                         $http.post(url, data).success(function (result) {
-                            console.log(result);
+                         
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {
 

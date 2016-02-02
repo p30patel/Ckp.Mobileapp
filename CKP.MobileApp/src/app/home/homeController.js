@@ -179,11 +179,11 @@ app.controller('homeController', [
                        $scope.hasDetailView = false;
                        $scope.selectedRetailer = 0;
                        $scope.selectedOrderType = '';
-                       $scope.selectedOrderTypeId = 0;
+                       $scope.selectedOrderTypeId = '1';
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
-                       $scope.sortOrder = 'OrderNumber';
+                       $scope.groupBy = 'SalesOrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
 
                        $scope.hasNext = true;
@@ -200,8 +200,9 @@ app.controller('homeController', [
                            var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
                           
                            $scope.searchParameterId = $scope.selectedPara;
-                         
-                           $scope.sortOrder = selectedPara;
+                        
+                           $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);;
+
                            $scope.currentSearchInput = $scope.searchValue;
                        }
 
@@ -217,13 +218,20 @@ app.controller('homeController', [
 
                        //retailers with count
                        $scope.orderCounts = {};
-                   
+                       
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
 
+                           var jsonIn = {
+                               OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
+                               ShoppingCartId: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
+                               SalesOrderNumber: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
+                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
+                           };
+
                            kendo.mobile.application.pane.loader.show();
 
-                           homeDataService.getOrderCounts().then(function (result) {
+                           homeDataService.getOrderCounts(jsonIn).then(function (result) {
 
                                $scope.orderCounts = result.MobileOrderCountList;
                                kendo.mobile.application.pane.loader.hide();
@@ -383,7 +391,7 @@ app.controller('homeController', [
 
                        $scope.key = function ($event) {
 
-                           if ($event.keyCode === 13) {
+                           if ($event.keyCode === 13 && $scope.searchValue.length > 0) {
                                $event.target.blur();
                                forceGetData = true;
                                $scope.hasSearch = true;

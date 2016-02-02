@@ -10,22 +10,24 @@ app.factory("homeDataService", [
                     var date = kendo.toString(new Date(), "yyyy-MM-dd HH");
                    
                    
-                    var forceGetOrderCounts = function () {
+                    var forceGetOrderCounts = function (data) {
                         var deferred = $q.defer();
-                        var data = localStorageService.get('organizationDetail');
-                        if (data === null) {
+
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        if (organizationDetail === null) {
                             deferred.reject('failed to get data');
                         }
-                      
+                       
                         var jsonIn = {
-                            OrderNumber: '',
-                            ShoppingCartId: '',
-                            SalesOrderNumber: '',
-                            VendorRef: '',
-                            OrganizationDetail: data,
+                            OrderNumber: data.OrderNumber,
+                            ShoppingCartId: data.ShoppingCartId,
+                            SalesOrderNumber: data.SalesOrderNumber,
+                            VendorRef: data.VendorRef,
+                            OrganizationDetail: organizationDetail,
 
                         }
-
+                    
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, jsonIn).success(function (result) {
                            
@@ -40,10 +42,10 @@ app.factory("homeDataService", [
                         return deferred.promise;
                     };
                     
-                    var getOrderCounts = function () {
+                    var getOrderCounts = function (data) {
                         var deferred = $q.defer();
 
-                        forceGetOrderCounts().then(function (result) {
+                        forceGetOrderCounts(data).then(function (result) {
                             deferred.resolve(result);
                             
                         });
@@ -62,7 +64,8 @@ app.factory("homeDataService", [
 
                         jsonIn.UserId = organization.UserId;
                      
-                        $http.post(url, jsonIn).success(function (result) {                          
+                        $http.post(url, jsonIn).success(function (result) {
+                            console.log(result);
                             deferred.resolve(result);                           
                         }).error(function (xhr, status, error) {   
                            

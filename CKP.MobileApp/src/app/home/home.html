@@ -53,14 +53,14 @@
                         </li>
                     </kendo-mobile-button-group>
                 </div>
-             
+              
                 <!-- Tab panes -->
                 <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}} " class="order-header" data-orderType="Approval">
                     <li ng-show="!orders.length > 0">
                         {{form.noResults.resoruceValue}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: sortOrder ">     
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy ">     
                               
                             
                           <tr class="header" ng-show="$first">
@@ -85,7 +85,7 @@
 
                               
                     
-                        <tr class="pipe" ng-repeat="order in value | limitTo : 1">
+                        <tr class="pipe" ng-repeat="order in value">
                             <td style="width:15%;">                           
                                 <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$parent.$index}}" 
                                     data-salesOrder="{{order.SalesOrderNumber}}"
@@ -176,7 +176,7 @@
                     </li>
 
                   
-                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" ng-repeat="(key, value) in orders | groupBy: sortOrder">
+                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" ng-repeat="(key, value) in orders | groupBy: groupBy">
                         
                       
                         <tr class="header" ng-show="$first">
@@ -189,7 +189,7 @@
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
                          
-                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value | limitTo : 1">
+                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value">
                           
                                <td style="width:5%;"></td>     
                            
@@ -252,7 +252,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: sortOrder">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;"class="spacer"></td>     
@@ -266,7 +266,7 @@
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
                         
-                        <tr class="pipe" ng-repeat="order in value | limitTo : 1" >
+                        <tr class="pipe" ng-repeat="order in value" >
                                 <td style="width:5%;"></td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">
@@ -301,7 +301,7 @@
                            </td>
 
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">
-                                {{order.Status}}
+                                {{order.StatusDisplay}}
 
                             </td>  
                             

@@ -230,8 +230,6 @@ app.controller('orderDetailController', [
                       
                        $scope.showTrakcingListModal = function () {
                          
-                        
-                           console.log($scope.trackingList[0].TrackingUrl);
                            if ($scope.trackingCount > 1) {
                                $("#modalview-trackingList").kendoMobileModalView("open");
                            }
@@ -281,11 +279,31 @@ app.controller('orderDetailController', [
                            });
                        }
 
+                      
+                       $scope.confirmationConent = "";
+                      
+                       $scope.showConfirmationModel = function (id) {
+                       
+                           kendo.mobile.application.pane.loader.show();
 
-                       $scope.approved = function (status) {
-                           orderApprovalByStatus(status);
-                       }
+                           $scope.confiramtionConent = 'No data found';
 
+                           orderDataService.getConfirmationHtml(id).then(function (result) {
+                               if (result.length > 0) {
+                                   $scope.confirmationConent = result;
+                               }
+                           }).catch(function (error) {
+                               $scope.confirmationConent = 'No data found';
+                           }).finally(function () {
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+
+                           $("#modalview-confirmation").kendoMobileModalView("open");
+                       };
+                       $scope.hideConfirmationModel = function () {
+
+                           $("#modalview-confirmation").kendoMobileModalView("close");
+                       };
                  
                        //tracking modal 
                      

@@ -57,7 +57,7 @@ app.controller('orderlistController', [
                            salesOrderList = e.view.params.salesOrderList;
                       
                            $scope.order.orderType = orderType;
-                           $scope.groupBy = parameterService.getGroupByName(parameterId, orderType);
+                           $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
                            
                           
                            //   $scope.searchParameterId = parameterId;

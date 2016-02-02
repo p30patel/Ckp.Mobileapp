@@ -34,8 +34,14 @@ app.factory('parameterService', [
                         { id: 3, name : "Released"}                  
             
                       ];
+                      var groupListScreen1 = [
 
-                      var groupList = [
+                          { searchParamterId: '1', orderTypeId: '1', groupBy: '' },
+                       
+                      ];
+
+
+                      var groupListScreen2 = [
                          
                           { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId' },
                         
@@ -101,10 +107,23 @@ app.factory('parameterService', [
                         return id;
                     }
 
-                    var getGroupByName = function (searchParaId, orderTypeId) {
+                    var getScreen1GroupByName = function (searchParaId, orderTypeId) {
+                        var groupByName = "SalesOrderNumber";
+
+                        angular.forEach(groupListScreen1, function (item) {
+                           
+                            if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
+                                groupByName = item.groupBy;
+                                return groupByName;
+                            }
+                        });
+                        return groupByName;
+                    }
+
+                    var getScreen2GroupByName = function (searchParaId, orderTypeId) {
                         var groupByName = "SalesOrderNumber";
                         
-                        angular.forEach(groupList, function (item) {
+                        angular.forEach(groupListScreen2, function (item) {
                            
                             if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
                                 groupByName = item.groupBy;
@@ -122,7 +141,9 @@ app.factory('parameterService', [
                     service.getOrderTypeName = getOrderTypeName;
                     service.getOrderTypeById = getOrderTypeById;
 
-                    service.getGroupByName = getGroupByName;
+                    service.getScreen1GroupByName = getScreen1GroupByName;
+                    service.getScreen2GroupByName = getScreen2GroupByName;
+
 
                     return service;
                 }

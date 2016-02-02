@@ -36,7 +36,8 @@
                             <div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
                        <!--     <input kendo-mobile-switch k-checked="checked" />
                             <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>-->
-                        <!--    <img src="styles/images/page.png" class="page"  style="height:20px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({order.detail.MobileOrderDetail.ShoppingCartId}})"/> --> 
+                            <h3></h3>
+                            <img src="styles/images/page.png" class="page"  style="height:35px !important; width:25px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)"/>  
                         </td>
                     </tr>
                 </table>
@@ -133,7 +134,7 @@
                         </td>
                         <td>
                             <h4>:{{order.detail.MobileOrderDetail.OrderedBy}}</h4>
-                            <h4>:{{order.detail.MobileOrderDetail.EmailAddress}}</h4>
+                            <h4>:{{order.detail.MobileOrderDetail.EMailAddress}}</h4>
                             <h4>:{{order.detail.MobileOrderDetail.PhoneNumber}}</h4>
                         </td>
                     </tr>
@@ -159,5 +160,25 @@
         </ul>
         </div>
 
+    </kendo-mobile-modal-view>
+
+        <!--  confirmation modal  -->
+    
+      <kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true">
+        <div kendo-mobile-header>
+            <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                <kendo-view-title> Confirmation</kendo-view-title>
+                <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+
+            </div>
+
+        </div>
+           <div data-role="content" data-zoom="true" style='background-color:white !important;'>
+        
+
+          <div  ng-bind-html="renderHtml(confirmationConent)"></div>
+        
+       </div>
+      
     </kendo-mobile-modal-view>
 </kendo-mobile-view>
