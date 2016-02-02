@@ -17,15 +17,15 @@ app.factory("orderDataService", [
                         var organizationDetail = localStorageService.get('organizationDetail');
 
                         if (organizationDetail) {
-                            orgContext = organizationDetail.OrgContext;
+                            orgContext = organizationDetail;
                         }
 
                         var jsonIn = {
-                            ProductionOrderId: 413077235,
-                            OrganizationDetail: orgContext,
-
+                            ProductionOrderId: poctrlno,
+                            OrganizationDetail: orgContext
                         }
-                     
+                        
+                        console.log(jsonIn);
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
 
                      

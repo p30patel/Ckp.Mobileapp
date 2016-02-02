@@ -170,8 +170,8 @@ app.controller('orderDetailController', [
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
-                           alert(parameterValue);
-                           $scope.order.message = orderType + ";" + parameterId + ":" + parameterValue;
+                          
+                     
                            if (orderType === '1') {
                                $scope.order.hasApproval = true;
                            }
@@ -185,6 +185,17 @@ app.controller('orderDetailController', [
                            
                           
                        }
+
+                       var removeEmptyTracking = function (trakcingList)
+                       {
+                           var newTrakcingList = [];
+                           angular.forEach(trakcingList, function (value) {                             
+                               if (value.ProductionOrderId > 0 ) {
+                                   newTrakcingList.push(value);
+                               }                            
+                           });
+                           return newTrakcingList;
+                       }
                        
                        var getOrderDetail = function (poctrlno) {
 
@@ -193,9 +204,8 @@ app.controller('orderDetailController', [
                            $scope.order.SalesOrderNo = '';
                          
                          
-                           kendo.mobile.application.pane.loader.show();
-                         
-                           
+                           kendo.mobile.application.pane.loader.show();                        
+                      
                            orderDataService.getOrderDetail(poctrlno).then(function (result) {
                               
                                    $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
@@ -203,8 +213,8 @@ app.controller('orderDetailController', [
                                    $scope.order.SalesOrderNo = result.MobileOrderDetail.SalesOrderNumber;
 
                                    $scope.order.detail = result;
-                                   $scope.trackingList = result.MobileOrderDetail.OrderTrackingNumberList;
-                                  
+                                   $scope.trackingList = removeEmptyTracking(result.MobileOrderDetail.OrderTrackingNumberList);
+                                
                                    $scope.trackingCount = $scope.trackingList.length;
                                    $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
