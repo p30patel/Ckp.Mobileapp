@@ -19,7 +19,7 @@ app.controller('homeController', [
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
                        $scope.afterShow = function (e) {
-
+                       
                            var view = kendo.mobile.application.view();
                            if (view !== null) {
                                var navbar = kendo.mobile.application.view()
@@ -29,6 +29,7 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
 
                            }
+                           
                        }
 
                        var setResources = function () {
@@ -193,6 +194,7 @@ app.controller('homeController', [
                                            
                        $scope.selectedAll = false;
                        $scope.jsonIn = {};
+                       $scope.orderCounts = {};
 
                        $scope.isAuth = authService.authentication.isAuth;
 
@@ -213,8 +215,30 @@ app.controller('homeController', [
                            };
                        }
 
+                       var getOrderCounts = function () {
+                           $scope.hasSearch = false;
+                           kendo.mobile.application.pane.loader.show();
+
+                           homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
+
+                               $scope.orderCounts = result.MobileOrderCountList;
+                               kendo.mobile.application.pane.loader.hide();
+
+                           }).catch(function (error) {
+
+                               $scope.orderCounts = {};
+                               kendo.mobile.application.pane.loader.hide();
+
+                           }).finally(function () {
+
+                               kendo.mobile.application.pane.loader.hide();
+                           });
+
+                       }
+
 
                        $scope.intShow = function (e) {
+                   
                            $scope.selectedPara = '1';
                            setSelectPara();
                            getOrderCounts();
@@ -222,28 +246,8 @@ app.controller('homeController', [
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
                            $scope.searchValue = "";
-                       }
-
-                       //retailers with count
-                       $scope.orderCounts = {};
-                       
-                       var getOrderCounts = function () {
-                           $scope.hasSearch = false;
-                           kendo.mobile.application.pane.loader.show();
-                       
-                           homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
-
-                               $scope.orderCounts = result.MobileOrderCountList;
-                               kendo.mobile.application.pane.loader.hide();
-                       
-                           }).catch(function (error) {
-
-                               $scope.orderCounts = {};
-                               kendo.mobile.application.pane.loader.hide();
-
-                           });
-
-                       }
+                       }                                          
+                     
                        
                        var getOrderSummary = function (orderType, orderTypeId, searchParamterId, searchInput, currentPage, hasNext) {
                            $scope.hasNext = !hasNext;
@@ -281,8 +285,7 @@ app.controller('homeController', [
                                            currentOrders.push(value);
 
                                        }
-                                   });
-                                   console.log(currentOrders.length);
+                                   });                                   
                                    $scope.orders = currentOrders;
                                }
                                else {
@@ -292,7 +295,6 @@ app.controller('homeController', [
                                $scope.orders = {};
                             
                            }).finally(function () {
-                             
                                kendo.mobile.application.pane.loader.hide();
                            });
                        }
@@ -454,6 +456,7 @@ app.controller('homeController', [
                        }
 
                        $scope.showOrderList = function (orderType, parameterId, parameterValue) {
+                           $scope.orderCounts = {};
                            getSelectedList();
                            
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;

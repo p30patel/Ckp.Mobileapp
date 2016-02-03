@@ -13,6 +13,9 @@
     border-color: rgb(213, 43, 30) !important;
     
 }
+.km-scroll-container{
+    -webkit-transform: none !important;
+}
 
 .k-invalid:focus,:valid {
     border-color: #cccccc !important;   
