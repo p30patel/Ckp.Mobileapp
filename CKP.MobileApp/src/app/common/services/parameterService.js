@@ -29,14 +29,28 @@ app.factory('parameterService', [
                     ];
                     
                       var orderTypes = [
-                        { id: 1, name : "Approval"},
-                        { id: 2, name : "New"},
-                        { id: 3, name : "Released"}                  
+                        { id: '1', name : "Approval"},
+                        { id: '2', name : "New"},
+                        { id: '3', name : "Released"}                  
             
                       ];
                       var groupListScreen1 = [
 
-                          { searchParamterId: '1', orderTypeId: '1', groupBy: '' },
+                          { searchParamterId: '1', orderTypeId: '1', groupBy: '', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '1', orderTypeId: '2', groupBy: '', searchParameterScreen2: '' },
+                          { searchParamterId: '1', orderTypeId: '3', groupBy: '', searchParameterScreen2: '' },
+
+
+                          { searchParamterId: '2', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '2', orderTypeId: '3', groupBy: 'SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
+
+                          { searchParamterId: '3', orderTypeId: '1', groupBy: 'ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },                          
+                          { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },
+
+
+                          { searchParamterId: '4', orderTypeId: '1', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '2', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '3', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
                        
                       ];
 
@@ -57,7 +71,7 @@ app.factory('parameterService', [
                           shoppingCart.resoruceValue = translateService.getResourceValue(shoppingCart.resoruceName);
                           vendorRef.resoruceName = translateService.getResourceValue(vendorRef.resoruceName);
 
-                          var searchParameters = [
+                      var searchParameters = [
                        { id: '1', name: orderNumber.resoruceValue, value: "OrderNumber", hasListView: true, hasDetailViee: true },
                        { id: '2', name: salesOrder.resoruceValue, value: "SalesOrderNumber", hasListView: true, hasDetailViee: true },
                        { id: '3', name: shoppingCart.resoruceValue, value: "ShoppingCartId", hasListView: true, hasDetailViee: true },
@@ -109,9 +123,7 @@ app.factory('parameterService', [
 
                     var getScreen1GroupByName = function (searchParaId, orderTypeId) {
                         var groupByName = "SalesOrderNumber";
-
-                        angular.forEach(groupListScreen1, function (item) {
-                           
+                        angular.forEach(groupListScreen1, function (item) {                         
                             if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
                                 groupByName = item.groupBy;
                                 return groupByName;
@@ -120,6 +132,18 @@ app.factory('parameterService', [
                         return groupByName;
                     }
 
+                    var getScreen2SearchParameter = function (searchParaId, orderTypeId) {
+                        var searchParameter = "SalesOrderNumber";
+
+                        angular.forEach(groupListScreen1, function (item) {
+
+                            if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
+                                searchParameter = item.searchParameterScreen2;
+                                return searchParameter;
+                            }
+                        });
+                        return searchParameter;
+                    }
                     var getScreen2GroupByName = function (searchParaId, orderTypeId) {
                         var groupByName = "SalesOrderNumber";
                         
@@ -142,6 +166,7 @@ app.factory('parameterService', [
                     service.getOrderTypeById = getOrderTypeById;
 
                     service.getScreen1GroupByName = getScreen1GroupByName;
+                    service.getScreen2SearchParameter = getScreen2SearchParameter;
                     service.getScreen2GroupByName = getScreen2GroupByName;
 
 

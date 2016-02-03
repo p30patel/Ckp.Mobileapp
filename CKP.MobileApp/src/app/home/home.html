@@ -15,6 +15,7 @@
     <kendo-mobile-content>
       
         <ul kendo-mobile-list-view class="ck-no-border">
+         
             <li ng-show="orderCounts.length == 0">           
                  <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>
             </li>
@@ -28,7 +29,7 @@
                         />
                 </fieldset>
             </li>
-            <li>{{groupBy}}</li>
+          
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
                 <div class="ck-home " style="margin-top:-.1em; background-color:gray; ">
                     <h3>
@@ -61,7 +62,7 @@
                         {{form.noResults.resoruceValue}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy ">     
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: ['groupBy'] ">     
                               
                             
                           <tr class="header" ng-show="$first">
@@ -88,12 +89,14 @@
                     
                         <tr class="pipe" ng-repeat="order in value">
                             <td style="width:15%;">                           
-                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$parent.$index}}" 
-                                    data-salesOrder="{{order.SalesOrderNumber}}"
-                                    ng-model="chk[$parent.$index]"
-                                    ng-change="checkedIndividual({{order.SalesOrderNumber}}, {{$parent.$index}})" />
+                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$index}}" value="{{$index}}" 
+                                    data-SalesOrderNumber="{{order.SalesOrderNumber}}"
+                                    data-ShoppingCartId="{{order.ShoppingCartId}}"
+                                    data-VendorRef="{{order.VendorRef}}"
+                                    ng-model="chk[$index]"
+                                    ng-change="checkedIndividual({{$index}})" />
                                
-                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$parent.$index}}"></label>
+                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
                             </td>
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">
                         
@@ -133,37 +136,38 @@
                             </td>
                             <td ng-if="searchParameterId == '4'" style="width:30%;">
                               
-                              {{order.SalesOrderNumber}}
-                           
+                             
+                            <div ng-repeat="orderNumber in value | limitTo : 3">
+                                   {{orderNumber.SalesOrderNumber}}                
+                               </div>
+                                <p><a  ng-click="showMoreOrderModel(value)" ng-show="value.length > 3">
+                               {{form.seeMore.resoruceValue}}
+                               </a>
+                               </p>
                             </td>
+
                             <td  style="text-align:center !important; width:25%;">
                                 {{order.OrderDate | date : 'MM/dd'}} 
                             </td>
                             <td style="margin-top:-10px; width:10%;">
 
-                                   <a  ng-click="orderList(1, searchParameterId, order.SalesOrderNumber)">
+                                <a  ng-if="searchParameterId == '1' || searchParameterId == '2'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
-
-<!--                                <a  ng-if="searchParameterId == '1'" ng-click="orderList(1, searchParameterId, order.OrderNumber)">
+                             
+                                <a  ng-if="searchParameterId == '3'" ng-click="showOrderList(1, searchParameterId, order.ShoppingCartId)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
-                                <a  ng-if="searchParameterId == '2'"  ng-click="orderList(1, searchParameterId, order.SalesOrderNumber)">
+                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(1, searchParameterId, order.VendorRef)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
-                                <a  ng-if="searchParameterId == '3'" ng-click="orderList(1, searchParameterId, order.ShoppingCartId)">
-                                    <i class="km-icon km-details red"></i>
-                                </a>
-                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(1, searchParameterId, order.VendorRef)">
-                                    <i class="km-icon km-details red"></i>
-                                </a>-->
                             </td>
                         </tr>
                         
                         <tr ng-show="$last">
                                  <td colspan="5" style="padding: 1em;">                               
                                 <i></i>
-                                <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'" ng-click="showApproval(1, searchParameterId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'" ng-click="showOrderList(1, searchParameterId, '')">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
                         </table>
@@ -229,7 +233,7 @@
                                 <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(2, searchParameterId, order.POCtrlNo)">
                                     <i class="km-icon km-details red"></i>
                                 </a>                               
-                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(2, searchParameterId, order.VendorRef)">
+                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(2, searchParameterId, order.VendorRef)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
                             </td>
@@ -316,13 +320,13 @@
                                 <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.POCtrlNo)">
                                     <i class="km-icon km-details red"></i>
                                 </a>     
-                                   <a  ng-if="searchParameterId == '2'" ng-click="orderList(3, searchParameterId, order.SalesOrderNumber)">
+                                   <a  ng-if="searchParameterId == '2'" ng-click="showOrderList(3, searchParameterId, order.SalesOrderNumber)">
                                     <i class="km-icon km-details red"></i>
                                 </a>  
-                                  <a  ng-if="searchParameterId == '3'"  ng-click="orderList(3, searchParameterId, order.ShoppingCartId)">
+                                  <a  ng-if="searchParameterId == '3'"  ng-click="showOrderList(3, searchParameterId, order.ShoppingCartId)">
                                     <i class="km-icon km-details red"></i>
                                 </a>                              
-                                <a  ng-if="searchParameterId == '4'"  ng-click="orderList(3, searchParameterId, order.VendorRef)">
+                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(3, searchParameterId, order.VendorRef)">
                                     <i class="km-icon km-details red"></i>
                                 </a>
                             </td>

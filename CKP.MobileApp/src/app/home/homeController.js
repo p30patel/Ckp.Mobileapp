@@ -179,11 +179,12 @@ app.controller('homeController', [
                        $scope.hasDetailView = false;
                        $scope.selectedRetailer = 0;
                        $scope.selectedOrderType = '';
-                       $scope.selectedOrderTypeId = 0;
+                       $scope.selectedOrderTypeId = '1';
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
                        $scope.groupBy = 'SalesOrderNumber';
+                       $scope.screen2SearchParameter = 'SalesOrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
 
                        $scope.hasNext = true;
@@ -201,8 +202,6 @@ app.controller('homeController', [
                            var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
                         
                            $scope.searchParameterId = $scope.selectedPara;
-                        
-                           $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);;
 
                            $scope.currentSearchInput = $scope.searchValue;
 
@@ -214,10 +213,11 @@ app.controller('homeController', [
                            };
                        }
 
-                       setSelectPara();
 
                        $scope.intShow = function (e) {
+                           $scope.selectedPara = '1';
                            setSelectPara();
+                           getOrderCounts();
                        }
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
@@ -230,11 +230,12 @@ app.controller('homeController', [
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
                            kendo.mobile.application.pane.loader.show();
-
+                       
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
 
                                $scope.orderCounts = result.MobileOrderCountList;
                                kendo.mobile.application.pane.loader.hide();
+                       
                            }).catch(function (error) {
 
                                $scope.orderCounts = {};
@@ -263,7 +264,9 @@ app.controller('homeController', [
                                SearchList: []
                            };
                          
-                      
+                           $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);
+                           $scope.screen2SearchParameter = parameterService.getScreen2SearchParameter($scope.searchParameterId, $scope.selectedOrderTypeId);
+
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length > 0;
@@ -336,8 +339,7 @@ app.controller('homeController', [
                            var data = localStorageService.get('organizationDetail');
                            if (data !== null) {
                                $scope.hasCreditLock = data.CreditStatus === "Blocked";
-
-                               kendo.mobile.application.pane.loader.show();
+                             
                                $("#btn_message").data("kendoMobileButton");
 
                                messageDataService.getMessages().then(function (result) {
@@ -350,7 +352,6 @@ app.controller('homeController', [
                                    $scope.messageCount = 0;
                                    $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
                                }).finally(function () {
-                                   kendo.mobile.application.pane.loader.hide();
                                });
                            }
 
@@ -359,7 +360,7 @@ app.controller('homeController', [
 
 
                        getMessages();
-                       getOrderCounts();
+                       
 
                        $scope.selectedRetailer = 0;
                        $scope.setSearhParamter = function (para) {
@@ -378,11 +379,7 @@ app.controller('homeController', [
                          
                           
                        }
-                       $scope.orderList = function (orderType, parameterId, parameterValue) {
-                         
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
-                       }
-
+                    
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
@@ -410,25 +407,25 @@ app.controller('homeController', [
                            $("#modalview-moreOrder").kendoMobileModalView("close");
                        };
 
-                       //so - check box for approval
+                       // selected list for approval
                        $scope.selection = [];
-                       $scope.salesorderList = "";
+                       $scope.selectedList = "";
 
                        var getSelectedList = function () {
                            var currentSelection = [];
-                           var salesorderList = '';
+                           var selectedList = '';
                            var checkedItems = $('.approve-chk:checked');
                            if (checkedItems.length > 0) {
-                               angular.forEach(checkedItems, function (value, key) {
-                                   var salesOrder = checkedItems.eq(key).attr('data-salesOrder');
-                                   if (currentSelection.indexOf(salesOrder) == -1) {
-                                       salesorderList += salesOrder + ',';
-                                       currentSelection.push(salesOrder);                                  
+                               angular.forEach(checkedItems, function (value, key) {                                   
+                                   var item = checkedItems.eq(key).attr('data-' + $scope.screen2SearchParameter);
+                                   if (currentSelection.indexOf(item) == -1) {
+                                       selectedList += item + ',';
+                                       currentSelection.push(item);                                  
                                    }
                                });
                            }
                            $scope.selection = currentSelection;
-                           $scope.salesorderList = salesorderList;
+                           $scope.selectedList = selectedList;
                           
                        }
 
@@ -436,31 +433,32 @@ app.controller('homeController', [
                            $('.approve-chk').prop('checked', selectedAll);
                        }
 
-                       $scope.checkedIndividual = function (salesOrder, id)
+                       $scope.checkedIndividual = function (id)
                        {
                            var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
+                         
+                           switch ($scope.screen2SearchParameter) {
+                               case 'SalesOrderNumber':
+                                   var salesOrderNumber = $('#' + id).attr('data-SalesOrderNumber');
+                                
+                                   var sameSalesOrders = $('.approve-chk').filter("[data-SalesOrderNumber='" + salesOrderNumber + "']");
+                                   if (isChecked) {
+                                       sameSalesOrders.prop('checked', true);
+                                   }
+                                   else {
+                                       sameSalesOrders.prop('checked', false);
+                                   }
 
-                           var sameSalesOrders = $('.approve-chk').filter("[data-salesOrder='" + salesOrder + "']");
-
-                           if (isChecked)
-                           {                             
-                               sameSalesOrders.prop('checked', true);
+                                   break;
                            }
-                           else {
-                               sameSalesOrders.prop('checked', false);
-                           }
-
                        }
 
-                       $scope.viewAll = function (orderType, parameterId) {
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + "" + "&orders=" + $scope.orders);
-                       }
-
-                       $scope.showApproval = function (orderType, parameterId) {
+                       $scope.showOrderList = function (orderType, parameterId, parameterValue) {
                            getSelectedList();
-                           parameterValue = $scope.salesorderList;
-                           salesorderList = $scope.selection;
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&salesOrderList=" + salesorderList);
+                           
+                           parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
+                           selectedList = $scope.selection;
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList);
                        }
 
                     

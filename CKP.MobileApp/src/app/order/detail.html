@@ -17,14 +17,14 @@
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
                 <table class="ck-table">
                     <tr>
-                        <td class="v-align">
+                        <td class="v-align" style="width :25%">
                             <h3 class="km-bold-font">{{form.orderDate.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.shoppingCart.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.orderNumber.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.salesOrder.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.vendorRef.resoruceValue}}</h3>
                         </td>
-                        <td class="v-align">
+                        <td class="v-align" style="width :40%">
                             <h3 ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</h3>
                              <h3 ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</h3>
                             <h3>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</h3>
@@ -32,12 +32,14 @@
                             <h3>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</h3>
                             <h3>:{{order.detail.MobileOrderDetail.VendorRef}}</h3>
                         </td>
-                        <td class="v-align c-align">
+                        <td class="v-align c-align" style="width :25%">
                             <div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
                        <!--     <input kendo-mobile-switch k-checked="checked" />
                             <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>-->
                             <h3></h3>
-                            <img src="styles/images/page.png" class="page"  style="height:35px !important; width:25px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)"/>  
+                            <img src="styles/images/page.png" class="page"  style="height:35px !important; width:25px !important;" data-tap="myTouch.tap" 
+                                ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0"
+                                ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)"/>  
                         </td>
                     </tr>
                 </table>
@@ -125,7 +127,7 @@
                 </table>
             </kendo-mobile-collapsible>
 
-                <table class="ck-table pad" ng-show="!order.hasStaged">
+                <table class="ck-table pad" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">
                     <tr class="pipe" style="background:#fff;">
                         <td>
                             <h4>{{form.releasedBy.resoruceValue}}</h4>

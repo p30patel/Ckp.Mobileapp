@@ -39,7 +39,7 @@ app.factory("orderDataService", [
                         return deferred.promise;
                     };
              
-                    var getOrderList = function (searchData) {
+                    var getOrderList = function (jsonIn) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
 
@@ -48,22 +48,14 @@ app.factory("orderDataService", [
                         var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
                         
-                        if (organizationDetail) {
-                            orgContext = organizationDetail.OrgContext;
-                        }
-                        
-                        var data = {
-                            RetailerId: orgContext.RetailerId,
-                            UserId: userId,
-                            //SearchBy: searchData.SearchBy,
-                            SearchList: searchData.SearchList,
-                            SalesOrderNumber: '34',
-                            OrderType: 1,
-                        }; 
+                       
+                        jsonIn.RetailerId = organizationDetail.OrgContext.RetailerId;
+                        jsonIn.UserId = organizationDetail.UserId;
+                        console.log(jsonIn);
                                          
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
                                              
-                        $http.post(url, data).success(function (result) {
+                        $http.post(url, jsonIn).success(function (result) {
                             localStorageService.set('orderList' + date, result);
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {  
@@ -73,31 +65,24 @@ app.factory("orderDataService", [
                         return deferred.promise;
                     };
                 
-                    var approveDecline = function (approvalDeclineData) {
+                    var approveDecline = function (jsonIn) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
-
-                        var authData = authService.getUserInfo();
-                        var userId = authData.userId;
-                        var username = authData.userName;
-                        var orgId = authData.organizationId;
-                        var orgContext = {};
+                                              
+                        var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
-                        if (organizationDetail) {
-                            orgContext = organizationDetail.OrgContext
-                        }
+                                                
+                        jsonIn.OrgDetail = organizationDetail;
                      
-                        var data = {
-                            UserName: username,
-                            OrgId: orgId,
-                            RetailerId: approvalDeclineData.RetailerId,
-                            UpdateStatus: approvalDeclineData.UpdateStatus,
-                            OrgContext: orgContext,
-                            ApproveOrdersListData: approvalDeclineData.Salesorders
-                        };
-                        console.log(data);
                         var url = authServiceBase + "webapi/api/core/MobileApp/UpdateApproveOrderStatus";
-                        $http.post(url, data).success(function (result) {   
+                       
+                        var data = {
+                            OrgDetail: organizationDetail,
+                            ApproveOrdersListData: jsonIn.Salesorders
+                        }
+
+                        console.log(data);
+                        $http.post(url, data).success(function (result) {
                           
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {                           
@@ -131,7 +116,7 @@ app.factory("orderDataService", [
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
 
                         $http.post(url, data).success(function (result) {
-                         
+                          
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {
 

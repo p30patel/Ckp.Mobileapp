@@ -23,15 +23,16 @@
                                 <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important;" ng-click="headerClick('{{$index}}')"></span>
                             </td>
                             <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick('{{$index}}')" class="km-bold-font"> 
-                            <div ng-show="groupBy == 'SalesOrderNumber'"> Sales Order :{{key}}</div>
-                            <div ng-show="groupBy == 'ShoppingCartId'"> Shopping Cart :{{key}}</div>
-                            <div ng-show="groupBy == 'VendorRef'"> Vendor Ref :{{key}}</div>
+                            <div ng-show="groupBy == 'SalesOrderNumber'"> {{form.salesOrder.resoruceValue}} :{{key}}</div>
+                            <div ng-show="groupBy == 'ShoppingCartId'"> {{form.shoppingCart.resoruceValue}} :{{key}}</div>
+                            <div ng-show="groupBy == 'vendorRef'"> {{form.orderBy.resoruceValue}} :{{key}}</div>
 
                         </td>
                             <td style="width:10%;"></td>
-                            <td style="width:20%; text-align: center;" rowspan="4" ng-show="value[0].ShoppingCartId">
+                            <td style="width:20%; text-align: center;" rowspan="4" ng-show="value[0].ShoppingCartId && value[0].ShoppingCartId > 0">
                                 <h4>
-                                <img src="styles/images/page.png" class="page"  style="height:20px !important;" data-tap="myTouch.tap" ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>                                
+                                <img src="styles/images/page.png" class="page"  style="height:30px !important; width:20px !important;" data-tap="myTouch.tap" 
+                                     ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>                                
                                       </h4>
                             </td>
                         </tr>
@@ -43,36 +44,35 @@
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td colspan="2" class="ck-font-size-small">
-                                <span>Order by: {{value[0].OrderedBy}}
+                                <span>{{form.orderBy.resoruceValue}}: {{value[0].OrderedBy}}
                             </span>
                             </td>
                         </tr>
                         <tr class="ck-listview-tr" ng-click="headerClick('{{$index}}')">
                             <td  class="ck-font-size-small">
-                                <span ng-show="!orderList.IsStagedOrder">Order Date : {{value[0].OrderDate | date}}
-                                <span ng-show="orderList.IsStagedOrder">Date In System : {{value[0].DateInSystem | date}}
+                                <span ng-show="!orderList.IsStagedOrder">{{form.orderDate.resoruceValue}} : {{value[0].OrderDate | date}}
+                                <span ng-show="orderList.IsStagedOrder">{{form.dateInSystem.resoruceValue}} : {{value[0].DateInSystem | date}}
                             </span>
                             </td >
                         </tr>
                     </table>
                     <table class="ck-table pad list-view-detail-{{$index}}" style="background-color:white !important; display:none">
                         <tr class="header">
-                            <td></td>
-                            <td>Purchase Order</td>
-                            <td>Price</td>
-                            <td></td>
+                            <td style="width:5%"></td>
+                            <td style="width:40%">{{form.orderNumber.resoruceValue}}</td>
+                            <td style="width:20%">{{form.price.resoruceValue}}</td>
+                            <td style="width:10%"></td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in value">
-                            <td></td>
-                            <td valign="center" >
+                            <td style="width:5%"></td>
+                            <td style="width:40%">
                             {{order.OrderNumber}}
                                 </td>
-                                <td valign="center" >
+                                <td style="width:20%">
                                   {{order.Price}}
-                                
                                 </td>
-                               <td valign="center" >
-                                    <a ng-click="orderDetail()">
+                               <td valign="center" style="width:10%">
+                                    <a ng-click="orderDetail(order.POCtrlNo)" data-tap="myTouch.tap">
                                     <i class="km-icon km-details red"></i>
                                 </a>   
                                 </td>

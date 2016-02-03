@@ -170,17 +170,7 @@ app.controller('orderDetailController', [
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
-                          
-                     
-                           if (orderType === '1') {
-                               $scope.order.hasApproval = true;
-                           }
-                           else if (orderType === '2')
-                           {
-                               $scope.order.hasStaged = true;
-                           }
-
-                          
+                         
                            getOrderDetail(parameterValue);
                            
                           
@@ -289,7 +279,7 @@ app.controller('orderDetailController', [
                            $scope.confiramtionConent = 'No data found';
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                               if (result.length > 0) {
+                               if (result !== null) {
                                    $scope.confirmationConent = result;
                                }
                            }).catch(function (error) {

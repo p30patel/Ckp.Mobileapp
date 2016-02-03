@@ -25,6 +25,38 @@ app.controller('orderlistController', [
                        $scope.form.noResults.resoruceName = "No Results are found";
                        $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
 
+                       $scope.form.dateInSystem = {};
+                       $scope.form.dateInSystem.resoruceName = "Receive Date";
+                       $scope.form.dateInSystem.resoruceValue = translateService.getResourceValue($scope.form.dateInSystem.resoruceName);
+
+                       $scope.form.orderDate = {};
+                       $scope.form.orderDate.resoruceName = "Order Date";
+                       $scope.form.orderDate.resoruceValue = translateService.getResourceValue($scope.form.orderDate.resoruceName);
+
+                       $scope.form.salesOrder = {};
+                       $scope.form.salesOrder.resoruceName = "Sales Order";
+                       $scope.form.salesOrder.resoruceValue = translateService.getResourceValue($scope.form.salesOrder.resoruceName);
+
+
+                       $scope.form.orderNumber = {};
+                       $scope.form.orderNumber.resoruceName = "Order Number";
+                       $scope.form.orderNumber.resoruceValue = translateService.getResourceValue($scope.form.orderNumber.resoruceName);
+
+                       $scope.form.shoppingCart = {};
+                       $scope.form.shoppingCart.resoruceName = "Shopping Cart";
+                       $scope.form.shoppingCart.resoruceValue = translateService.getResourceValue($scope.form.shoppingCart.resoruceName);
+
+                       $scope.form.vendorRef = {};
+                       $scope.form.vendorRef.resoruceName = "Vendor Ref";
+                       $scope.form.vendorRef.resoruceValue = translateService.getResourceValue($scope.form.vendorRef.resoruceName);
+
+                       $scope.form.price = {};
+                       $scope.form.price.resoruceName = "Price";
+                       $scope.form.price.resoruceValue = translateService.getResourceValue($scope.form.price.resoruceName);
+
+                       $scope.form.orderBy = {};
+                       $scope.form.orderBy.resoruceName = "Order By";
+                       $scope.form.orderBy.resoruceValue = translateService.getResourceValue($scope.form.orderBy.resoruceName);
 
 
 
@@ -46,25 +78,23 @@ app.controller('orderlistController', [
                        init();
                        var orderType = '1';
                        var parameterId = 0;
-                       var parameterValue = [];
-                       var salesOrderList = '';
+                       var selectedList = '';
+
+                       $scope.searchParameter = 'SalesOrderNumber';
                      
                        $scope.groupBy = 'VendorRef';
                        $scope.intShow = function (e) {
+                           $scope.searchParameter = e.view.params.searchParameter;
                            orderType = e.view.params.orderType;
-                           parameterId = e.view.params.parameterId;
-                           parameterValue.push( e.view.params.parameterValue);                                                    
-                           salesOrderList = e.view.params.salesOrderList;
-                      
+                           parameterId = e.view.params.parameterId;                       
+                       
+                           selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
-                           
-                          
-                           //   $scope.searchParameterId = parameterId;
-                         
                            if (orderType === '1'){
                                   $scope.order.hasApproval = true;
                            }
+                         
                            getOrderList();
                        }
                         //retailers with count
@@ -73,24 +103,21 @@ app.controller('orderlistController', [
                         var getOrderList = function () {
                             
                            kendo.mobile.application.pane.loader.show();
-                           alert(parameterValue +" : " + salesOrderList);
+                          
                            var searchList = [];
-                           if (orderType === '1')
-                           {
-                               //need to loop throught for appoval
-                           }
-                           else {
-                               searchList.push(parameterValue);
-                           }
-                           var searchData = {                             
-                               SearchBy: $scope.searchBy,
-                               SearchList: searchList,
+                           searchList.push(selectedList);
+
+                           var searchData = {
+                               OrderNumber: $scope.searchParameter === 'OrderNumber' ? $scope.searchParameter : '',
+                               ShoppingCartId: $scope.searchParameter === 'ShoppingCartId' ? $scope.searchParameter : '',
+                               SalesOrderNumber: $scope.searchParameter === 'SalesOrderNumber' ? $scope.searchParameter : '',
+                               VendorRef: $scope.searchParameter === 'VendorRef' ? $scope.searchParameter : '',
+                               SearchList: searchList
                            };
 
-                           
                             orderDataService.getOrderList(searchData).then(function (result) {
                                 $scope.order.orders = result;
-                                alert(result);
+                            
                             }).catch(function (error) {
                                 alert(error);
                                $scope.order.orders = {};
@@ -116,7 +143,7 @@ app.controller('orderlistController', [
                         $scope.confirmationConent = "";
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
-                            //id = 107154; // reomve it once real data comnes in
+                       
                             kendo.mobile.application.pane.loader.show();
                             $scope.confiramtionConent = 'No data found';
                             orderDataService.getConfirmationHtml(id).then(function (result) {
@@ -139,17 +166,29 @@ app.controller('orderlistController', [
                             orderApprovalByStatus(status);
                         }
                        //appprove order
-                        var orderApprovalByStatus = function (statusUpdate) {
-                            var salesorders = [];
 
-                            var solist = {
-                                SalesOrderNo: $scope.SalesOrderNo,
-                                Comment: $scope.orderApprovalComment
-                            };
-                            salesorders.push(solist);
-                            var data = {
-                                RetailerId: $scope.selectedRetailer,
-                                Salesorders: salesorders,
+                        var getSalesOrders = function ()
+                        {
+                            var orders = $scope.order.orders;
+                            var salesOrders = new Array();
+                            angular.forEach(orders, function (value, key) {
+                                if (salesOrders.indexOf(orders.SalesOrderNumber) == -1)
+                                {
+                                    var solist = {
+                                        SalesOrderNo: parseInt(value.SalesOrderNumber),
+                                        Comment: $scope.orderApprovalComment
+                                    };
+                                    salesOrders.push(solist);
+                                }
+                            });
+                          
+                            return salesOrders;
+                        }
+                        var orderApprovalByStatus = function (statusUpdate) {
+                            var salesOrders = getSalesOrders();
+
+                            var data = {                              
+                                Salesorders: salesOrders,
                                 UpdateStatus: statusUpdate,
                             }
                             kendo.mobile.application.pane.loader.show();
@@ -176,8 +215,8 @@ app.controller('orderlistController', [
 
                         }
 
-                        $scope.orderDetail = function () {
-                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + 'teeree');
+                        $scope.orderDetail = function (poctrlno) {
+                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno);
                         }
                        
                        $scope.renderHtml = function (content) {
