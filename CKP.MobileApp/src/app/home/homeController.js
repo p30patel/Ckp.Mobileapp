@@ -27,8 +27,10 @@ app.controller('homeController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
-
+                               $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
+
+
                            
                        }
 
@@ -184,6 +186,8 @@ app.controller('homeController', [
                        $scope.currentSearchInput = '';
                        $scope.orderList = {};
                        $scope.searchParameterId = 1;
+
+                     
                        $scope.groupBy = 'SalesOrderNumber';
                        $scope.screen2SearchParameter = 'SalesOrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
@@ -192,6 +196,7 @@ app.controller('homeController', [
                        $scope.currentPage = 1;
                        $scope.PageSize = 5;
                                            
+                       $scope.hasItemSelectedForApporval = false;
                        $scope.selectedAll = false;
                        $scope.jsonIn = {};
                        $scope.orderCounts = {};
@@ -273,7 +278,7 @@ app.controller('homeController', [
 
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
-                               $scope.hasNext = result.length > 0;
+                               $scope.hasNext = result.length >= $scope.PageSize;
                                kendo.mobile.application.pane.loader.hide();
                                if (hasNext) {
 
@@ -310,7 +315,7 @@ app.controller('homeController', [
                        }
                        $scope.myOptions = {
                            select: function (e) {
-
+                               $scope.orders = {};
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
 
                                $scope.selectedRetailer = selectedBtnRetailer;
@@ -394,6 +399,7 @@ app.controller('homeController', [
                                $event.target.blur();
                                forceGetData = true;
                                $scope.hasSearch = true;
+                               $scope.orders = {};
                                setSelectPara();
                                getOrderCounts();
 
@@ -433,25 +439,54 @@ app.controller('homeController', [
 
                        $scope.checkAll = function (selectedAll) {                        
                            $('.approve-chk').prop('checked', selectedAll);
+                           $scope.hasItemSelectedForApporval = selectedAll;
                        }
 
                        $scope.checkedIndividual = function (id)
                        {
                            var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
-                         
-                           switch ($scope.screen2SearchParameter) {
+                           $scope.hasItemSelectedForApporval = isChecked;
+
+                           switch ($scope.screen2SearchParameter) {                              
+                               case 'ShoppingCartId':
+                                   var shoppingCartId = $('#' + id).attr('data-ShoppingCartId');
+
+                                   var shoppingCartIds = $('.approve-chk').filter("[data-ShoppingCartId='" + shoppingCartId + "']");
+                                   if (isChecked) {
+                                       shoppingCartIds.prop('checked', true);
+                                   }
+                                   else {
+                                       shoppingCartIds.prop('checked', false);
+                                   }
+                                   break;
+
+                               case 'VendorRef':
+                                   var vendorRef = $('#' + id).attr('data-vendorRef');
+
+                                   var vendorRefs = $('.approve-chk').filter("[data-vendorRef='" + vendorRef + "']");
+                                   if (isChecked) {
+                                       vendorRefs.prop('checked', true);
+                                   }
+                                   else {
+                                       vendorRefs.prop('checked', false);
+                                   }
+                                   break;
+
                                case 'SalesOrderNumber':
-                                   var salesOrderNumber = $('#' + id).attr('data-SalesOrderNumber');
-                                
-                                   var sameSalesOrders = $('.approve-chk').filter("[data-SalesOrderNumber='" + salesOrderNumber + "']");
+
+                               default:
+                                   
+                                   var salesOrderNumber = $('#' + id).attr('data-salesordernumber');
+                                  
+                                   var sameSalesOrders = $('.approve-chk').filter("[data-salesordernumber='" + salesOrderNumber + "']");
                                    if (isChecked) {
                                        sameSalesOrders.prop('checked', true);
                                    }
                                    else {
                                        sameSalesOrders.prop('checked', false);
                                    }
-
                                    break;
+
                            }
                        }
 
@@ -460,7 +495,8 @@ app.controller('homeController', [
                            getSelectedList();
                            
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
-                           selectedList = $scope.selection;
+                        
+                           var selectedList = $scope.selection;
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList);
                        }
 

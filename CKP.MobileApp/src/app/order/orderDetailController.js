@@ -273,15 +273,19 @@ app.controller('orderDetailController', [
                        $scope.confirmationConent = "";
                       
                        $scope.showConfirmationModel = function (id) {
-                       
+                           $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.pane.loader.show();
 
                            $scope.confiramtionConent = 'No data found';
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                               if (result !== null) {
+                               if (result !== "") {
                                    $scope.confirmationConent = result;
                                }
+                               else {
+                                   $scope.confirmationConent = 'No data found';
+                               }
+                             
                            }).catch(function (error) {
                                $scope.confirmationConent = 'No data found';
                            }).finally(function () {

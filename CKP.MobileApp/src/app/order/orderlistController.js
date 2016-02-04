@@ -87,7 +87,8 @@ app.controller('orderlistController', [
                            $scope.searchParameter = e.view.params.searchParameter;
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;                       
-                       
+                           console.log(e.view.params.parameterValue);
+                           console.log(e.view.params.parameterValue);
                            selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
@@ -143,12 +144,17 @@ app.controller('orderlistController', [
                         $scope.confirmationConent = "";
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
-                       
+                            $('.km-view').css('-webkit-transform', 'none');
                             kendo.mobile.application.pane.loader.show();
                             $scope.confiramtionConent = 'No data found';
                             orderDataService.getConfirmationHtml(id).then(function (result) {
-                                if (result !== null) {
+                              
+                                if (result !== "")
+                                {
                                     $scope.confirmationConent = result;
+                                }
+                                else {
+                                    $scope.confirmationConent = 'No data found';
                                 }
                             }).catch(function (error) {
                                 $scope.confirmationConent = 'No data found';

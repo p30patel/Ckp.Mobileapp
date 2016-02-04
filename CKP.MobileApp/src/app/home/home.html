@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" style="-webkit-transform: none !important;">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" ng-click="showAlertModel()">
@@ -29,7 +29,7 @@
                         />
                 </fieldset>
             </li>
-          
+                
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
                 <div class="ck-home " style="margin-top:-.1em; background-color:gray; ">
                     <h3>
@@ -62,7 +62,7 @@
                         {{form.noResults.resoruceValue}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: ['groupBy'] ">     
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy : '-OrderDate'">
                               
                             
                           <tr class="header" ng-show="$first">
@@ -87,16 +87,16 @@
 
                               
                     
-                        <tr class="pipe" ng-repeat="order in value">
+                        <tr class="pipe" ng-repeat="order in value | limitTo: 1">
                             <td style="width:15%;">                           
-                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$index}}" value="{{$index}}" 
-                                    data-SalesOrderNumber="{{order.SalesOrderNumber}}"
+                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}" 
+                                    data-salesordernumber="{{order.SalesOrderNumber}}"
                                     data-ShoppingCartId="{{order.ShoppingCartId}}"
                                     data-VendorRef="{{order.VendorRef}}"
-                                    ng-model="chk[$index]"
-                                    ng-change="checkedIndividual({{$index}})" />
+                                    ng-model="chk[$parent.$index]"
+                                    ng-change="checkedIndividual({{$parent.$index}})" />
                                
-                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$index}}"></label>
+                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$parent.$index}}"></label>
                             </td>
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">
                         
@@ -147,7 +147,7 @@
                             </td>
 
                             <td  style="text-align:center !important; width:25%;">
-                                {{order.OrderDate | date : 'MM/dd'}} 
+                                {{order.OrderDate | date}} 
                             </td>
                             <td style="margin-top:-10px; width:10%;">
 
@@ -167,7 +167,9 @@
                         <tr ng-show="$last">
                                  <td colspan="5" style="padding: 1em;">                               
                                 <i></i>
-                                <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'" ng-click="showOrderList(1, searchParameterId, '')">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'"
+                                     ng-disabled="!hasItemSelectedForApporval"
+                                     ng-click="showOrderList(1, searchParameterId, '')">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
                         </table>
@@ -181,7 +183,8 @@
                     </li>
 
                   
-                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" ng-repeat="(key, value) in orders | groupBy: groupBy">
+                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" 
+                        ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy : '-DateInSystem'">
                         
                       
                         <tr class="header" ng-show="$first">
@@ -194,7 +197,7 @@
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
                          
-                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value">
+                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value | limitTo : 1">
                           
                                <td style="width:5%;"></td>     
                            
@@ -225,7 +228,7 @@
                             </td>
                             <td style="text-align:center !important; width:30%;">
                              
-                                <div  ng-if="searchParameterId == '1' || searchParameterId == '4'" >{{order.DateInSystem | date : 'MM/dd'}}  </div>
+                                <div  ng-if="searchParameterId == '1' || searchParameterId == '4'" >{{order.DateInSystem | date}}  </div>
                              
                             </td>
                        
@@ -257,7 +260,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | orderBy : '-OrderDate' | groupBy: groupBy">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;"class="spacer"></td>     
@@ -269,9 +272,8 @@
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderStatus.resoruceValue}}</td>
                             <td style="width:30%;">{{form.orderDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
-                        </tr>
-                        
-                        <tr class="pipe" ng-repeat="order in value" >
+                        </tr>                     
+                        <tr class="pipe" ng-repeat="order in value | limitTo:1">
                                 <td style="width:5%;"></td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">
@@ -311,7 +313,7 @@
                             </td>  
                             
                             <td style="text-align:center !important; width:30%;">
-                                 {{order.OrderDate | date : 'MM/dd'}} 
+                                 {{order.OrderDate | date}} 
                                
                             </td>
                      
@@ -347,9 +349,7 @@
         </ul>
         <!-- End Home View -->
     </kendo-mobile-content>
-  <!--  <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
-        <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
-    </kendo-mobile-footer>-->
+ 
     <!--  view more po modal  -->
     <div kendo-mobile-modal-view id="modalview-moreOrder" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>
@@ -397,7 +397,7 @@
                 </li>
                  </span>
             </ul>
-       
+         </div>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.PartnerHolidayList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
@@ -425,8 +425,8 @@
                     </span>
                 </ul>
             </li>
-        </ul>
-    </div>
+        </ul>  
+        </div>
     <!--  credit lock modal  -->
     <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>

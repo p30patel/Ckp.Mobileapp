@@ -150,7 +150,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.afterShow = function (e) {      
-
+        $('.k-header').css('background-color', 'white');
         setLoginData();
       
     }

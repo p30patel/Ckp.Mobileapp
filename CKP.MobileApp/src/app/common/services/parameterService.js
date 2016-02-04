@@ -36,9 +36,9 @@ app.factory('parameterService', [
                       ];
                       var groupListScreen1 = [
 
-                          { searchParamterId: '1', orderTypeId: '1', groupBy: '', searchParameterScreen2: 'SalesOrderNumber' },
-                          { searchParamterId: '1', orderTypeId: '2', groupBy: '', searchParameterScreen2: '' },
-                          { searchParamterId: '1', orderTypeId: '3', groupBy: '', searchParameterScreen2: '' },
+                          { searchParamterId: '1', orderTypeId: '1', groupBy: 'Id', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '1', orderTypeId: '2', groupBy: 'POCtrlNo', searchParameterScreen2: '' },
+                          { searchParamterId: '1', orderTypeId: '3', groupBy: 'POCtrlNo', searchParameterScreen2: '' },
 
 
                           { searchParamterId: '2', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
