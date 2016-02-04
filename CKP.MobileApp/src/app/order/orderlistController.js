@@ -63,6 +63,8 @@ app.controller('orderlistController', [
                        $scope.order = {};
                        
                        $scope.order.hasApproval = false;
+                       $scope.order.hasClikedApporval = false;
+                       $scope.orderApprovalComment = "";
 
                        $scope.order.title = 'Order List';
                        $scope.order.detail = {};
@@ -87,8 +89,7 @@ app.controller('orderlistController', [
                            $scope.searchParameter = e.view.params.searchParameter;
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;                       
-                           console.log(e.view.params.parameterValue);
-                           console.log(e.view.params.parameterValue);
+                          
                            selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
@@ -191,6 +192,7 @@ app.controller('orderlistController', [
                             return salesOrders;
                         }
                         var orderApprovalByStatus = function (statusUpdate) {
+                            $scope.order.hasClikedApporval = true;
                             var salesOrders = getSalesOrders();
 
                             var data = {                              
@@ -206,12 +208,13 @@ app.controller('orderlistController', [
                                     $scope.apporvalMessage = "";
                                     $scope.order.hasApproval = false;
                                     kendo.mobile.application.navigate("src/app/home/home.html");
-                                }, 5000);
+                                }, 2000);
 
                                 kendo.mobile.application.pane.loader.hide();
 
 
                             }).catch(function (error) {
+                                $scope.order.hasClikedApporval = false;
                                 kendo.mobile.application.pane.loader.hide();
                                 $scope.apporvalMessage = "Approve / Decliend failed";
                                 $timeout(function () {

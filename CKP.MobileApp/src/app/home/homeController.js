@@ -415,7 +415,7 @@ app.controller('homeController', [
                            $("#modalview-moreOrder").kendoMobileModalView("close");
                        };
 
-                       // selected list for approval
+                       // selected list for approval - screen2
                        $scope.selection = [];
                        $scope.selectedList = "";
 
