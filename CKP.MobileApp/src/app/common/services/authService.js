@@ -81,7 +81,8 @@ app.factory('authService', [
 
                         var deviceData = localStorageService.get('deviceData');
                         var loginData = localStorageService.get('loginData');
-                        var organizationDetail = localStorageService.get('organizationDetail');       
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var refreshData = localStorageService.get('forceRefreshDetail');
 
                         var uuId = '';
                         var model = '';
@@ -113,17 +114,25 @@ app.factory('authService', [
                         {                            
                             var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
-                            alert('same user and device : ' + loginData.userName.toLocaleLowerCase() + '=' + organizationDetail.UserName.toLocaleLowerCase() + ' = ' + hasSameUserName + " :" + hasSameUUID);
-                            hasForceRefresh = !(hasSameUserName && hasSameUUID);
+                            var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
+                            hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
                         }
                         var deferred = $q.defer();
-                        alert('orgConext Force Refresh:' + hasForceRefresh);
+                      
                         if (hasForceRefresh)
                         {
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
                             $http.post(url, data).success(function (result) {
                                 localStorageService.set('organizationDetail', result);
                                 localStorageService.remove("messages");
+
+                                var date = new Date();
+                                var currentDate = date.toLocaleDateString();
+                                var refreshData = {
+                                    date : currentDate
+                                };                              
+                                localStorageService.set('forceRefreshDetail', refreshData);
+                                
                                 deferred.resolve(result);
                             }).error(function (err, status) {
                                 deferred.reject(err);
