@@ -113,8 +113,8 @@ app.factory('authService', [
                         {
                             console.log(organizationDetail);
                             hasForceRefresh = false;
-                            alert('user name : ' + loginData.userName == organizationDetail.UserName);
-                            alert('UUID : ' + uuId == organizationDetail.DeviceId );
+                            alert('user name : ' + angular.equals(loginData.userName,organizationDetail.UserName));
+                            alert('UUID : ' + angular.equals(uuId,organizationDetail.DeviceId ));
                             alert('UUID : ' + uuId + " = " + organizationDetail.DeviceId + " User " + loginData.userName + ' === ' + organizationDetail.UserName);
                         }
                         var deferred = $q.defer();
