@@ -118,7 +118,8 @@ app.factory('authService', [
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
                             alert(uuId  + ' = ' + organizationDetail.DeviceId);
                             var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
-                           
+                            alert(new Date().toLocaleDateString() + ' == ' + refreshData.date );
+                            alert(hasSameDate);
                             hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);                           
                            
                         }
