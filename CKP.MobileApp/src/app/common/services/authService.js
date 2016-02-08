@@ -25,7 +25,7 @@ app.factory('authService', [
 
                         $http.post(authServiceBase + 'authorization/oauth/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
                             var loggedIn = true;
-                            alert('logged');
+                           
                             if (loginData.useRefreshTokens) {
                                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                             } else {
@@ -114,8 +114,11 @@ app.factory('authService', [
                         if (organizationDetail)
                         {                            
                             var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
+                            alert(loginData.userName.toLocaleLowerCase() +' == ' + organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
+                            alert(uuId  + ' = ' + organizationDetail.DeviceId);
                             var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
+                           
                             hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);                           
                            
                         }
