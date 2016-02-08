@@ -108,9 +108,10 @@ app.factory('authService', [
                             DeviceVersion: version,
                             IsActive: active
                         }
-
+                        
                         if (organizationDetail)
                         {
+                            console.log(organizationDetail);
                             hasForceRefresh = false;
                             alert(uuId + " = " + organizationDetail.DeviceUUId + " User " + loginData.userName + " == " + organizationDetail.UserName);
                         }
