@@ -27,6 +27,11 @@ app.controller('orderDetailController', [
                        $scope.form.noData.resoruceName = "No Data are found";
                        $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
 
+                       $scope.form.noResults = {};
+                       $scope.form.noResults.resoruceName = "No Results are found";
+                       $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
+
+
 
                        $scope.form.orderInquiry = {};
                        $scope.form.orderInquiry.resoruceName = "Have a question or comment about this order?";
@@ -279,13 +284,7 @@ app.controller('orderDetailController', [
                            $scope.confiramtionConent = 'No data found';
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                               if (result !== "") {
-                                   $scope.confirmationConent = result;
-                               }
-                               else {
-                                   $scope.confirmationConent = 'No data found';
-                               }
-                             
+                               $scope.confirmationConent = result;
                            }).catch(function (error) {
                                $scope.confirmationConent = 'No data found';
                            }).finally(function () {

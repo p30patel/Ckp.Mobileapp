@@ -12,7 +12,8 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-        <kendo-mobile-list-view class="ck-no-border ck-grey-wrap">
+          <p style="padding:5px;" ng-show="order.detail.MobileOrderDetail.POCtrlNo === 0">   {{form.noResults.resoruceValue}}</p>
+        <kendo-mobile-list-view class="ck-no-border ck-grey-wrap" ng-show="order.detail.MobileOrderDetail.POCtrlNo > 0">
             <li>
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
                 <table class="ck-table">

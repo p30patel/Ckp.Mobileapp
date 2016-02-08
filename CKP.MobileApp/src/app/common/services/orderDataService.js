@@ -51,7 +51,7 @@ app.factory("orderDataService", [
                        
                         jsonIn.RetailerId = organizationDetail.OrgContext.RetailerId;
                         jsonIn.UserId = organizationDetail.UserId;
-                        console.log(jsonIn);
+                       
                                          
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderList";
                                              
@@ -104,10 +104,6 @@ app.factory("orderDataService", [
                             orgContext = organizationDetail.OrgContext;
                         }
 
-                        if (organizationDetail === null) {
-                            deferred.reject('failed to get data');
-                        }
-
                         var data = {
                             OrgContext: orgContext,
                             ShoppingCartId: id
@@ -115,11 +111,9 @@ app.factory("orderDataService", [
                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
 
-                        $http.post(url, data).success(function (result) {
-                          
+                        $http.post(url, data).success(function (result) {                          
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {
-
                             deferred.reject(error);
                         });
                         return deferred.promise;

@@ -14,6 +14,7 @@ app.controller('homeController', [
 
                        $scope.form = {};
                        $scope.mesages = {};
+                       $scope.orders = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -190,6 +191,7 @@ app.controller('homeController', [
                      
                        $scope.groupBy = 'SalesOrderNumber';
                        $scope.screen2SearchParameter = 'SalesOrderNumber';
+                       $scope.viewMoreColumn = 'OrderNumber';
                        $scope.parameters = parameterService.getSearchParameters();
 
                        $scope.hasNext = true;
@@ -244,7 +246,7 @@ app.controller('homeController', [
 
                        $scope.intShow = function (e) {
                    
-                           $scope.selectedPara = '1';
+                           $scope.selectedPara = '1';                         
                            setSelectPara();
                            getOrderCounts();
                        }
@@ -275,7 +277,7 @@ app.controller('homeController', [
                          
                            $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);
                            $scope.screen2SearchParameter = parameterService.getScreen2SearchParameter($scope.searchParameterId, $scope.selectedOrderTypeId);
-
+                         
                            kendo.mobile.application.pane.loader.show();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length >= $scope.PageSize;
@@ -310,20 +312,19 @@ app.controller('homeController', [
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
                            var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-
                            $(".ck-count-btn").removeClass('km-state-active');
                        }
                        $scope.myOptions = {
-                           select: function (e) {
-                               $scope.orders = {};
+                           select: function (e) {                            
+                           
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
-
+                              
                                $scope.selectedRetailer = selectedBtnRetailer;
 
                                var listviews = $("ul.order-header.km-listview");
 
                                listviews.hide();
-
+                               
                                var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
 
                                listviewsToShow.eq(e.index).show();
@@ -333,10 +334,22 @@ app.controller('homeController', [
                                $scope.selectedOrderTypeId = parameterService.getOrderTypeById($scope.selectedOrderType);
                               
                                var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-                                                           
-                               $scope.currentPage = 1;
+
+                               var selectedOrderCount = listviewsToShow.eq(e.index).attr('data-orderCount');
+                              
                                var hasNext = false;
-                               getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
+                               if (selectedOrderCount > 0) {
+                                   $scope.orders = {};
+                                   $scope.currentPage = 1;
+                                   getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
+                               }
+                               else {
+
+                                   $scope.$apply(function () {
+                                       $scope.orders = {};
+                                   });
+                                   
+                               }
                            }
                        }
 
@@ -406,7 +419,8 @@ app.controller('homeController', [
                            }
                        }
                        //view more orders
-                       $scope.showMoreOrderModel = function (orders) {
+                       $scope.showMoreOrderModel = function (orders, columnName) {
+                           $scope.viewMoreColumn = columnName;
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };

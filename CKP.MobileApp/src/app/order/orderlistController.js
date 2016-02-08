@@ -99,8 +99,7 @@ app.controller('orderlistController', [
                          
                            getOrderList();
                        }
-                        //retailers with count
-                   
+                                        
 
                         var getOrderList = function () {
                             
@@ -145,18 +144,12 @@ app.controller('orderlistController', [
                         $scope.confirmationConent = "";
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
-                            $('.km-view').css('-webkit-transform', 'none');
+                           $('.km-view').css('-webkit-transform', 'none');
                             kendo.mobile.application.pane.loader.show();
                             $scope.confiramtionConent = 'No data found';
                             orderDataService.getConfirmationHtml(id).then(function (result) {
-                              
-                                if (result !== "")
-                                {
-                                    $scope.confirmationConent = result;
-                                }
-                                else {
-                                    $scope.confirmationConent = 'No data found';
-                                }
+                                $scope.confirmationConent = result;
+                               
                             }).catch(function (error) {
                                 $scope.confirmationConent = 'No data found';
                             }).finally(function () {
