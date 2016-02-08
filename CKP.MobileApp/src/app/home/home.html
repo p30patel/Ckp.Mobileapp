@@ -59,7 +59,7 @@
                 <!-- Tab panes -->
                 <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ApprovalCount}}" class="order-header" data-orderType="Approval" >
                     <li ng-show="!orders.length > 0">
-                        {{form.noResults.resoruceValue}}
+                        {{successMessage}}
                     </li>                
             
                           <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy : '-OrderDate'">
@@ -176,7 +176,7 @@
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.NewOrderCount}}" class="order-header" data-orderType="New">
 
                      <li ng-show="!orders.length > 0 || searchParameterId == '2' ||  searchParameterId == '3' " >
-                        {{form.noResults.resoruceValue}}
+                        {{successMessage}}
                     </li>
 
                   
@@ -253,7 +253,7 @@
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ReleasedOrderCount}}" class="order-header" data-orderType="Released">
 
                      <li ng-show="!orders.length > 0">
-                        {{form.noResults.resoruceValue}}
+                        {{successMessage}}
                     </li>
 
                    
@@ -378,15 +378,16 @@
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
             <li>
                  {{form.noMessages.resoruceValue}}
-               !
+            
             </li>
         </ul>
-        <div kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
+        <div kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0"
+            ng-repeat="item in mesages.AnnouncementList |  filter: { SpecificRetailerId: '!0' } | limitTo: 1 ">
             <li class="ck-module-date">
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid"> {{form.announcements.resoruceValue}}</span>
             </li>
-            <ul kendo-mobile-list-view  ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'Message' | orderBy: 'RetailerName'" k-style="'inset'" style="margin: .5em;" >
+            <ul kendo-mobile-list-view  ng-repeat="(key, value) in mesages.AnnouncementList |  filter: { SpecificRetailerId: '!0' } | groupBy: 'Message' | orderBy: 'RetailerName'" k-style="'inset'" style="margin: .5em;" >
                  <span ng-repeat='msg in value'>
                 <li ng-if="msg.RetailerName">
                     <b>{{msg.Title}} </b> ({{msg.RetailerName}}) 
@@ -405,13 +406,14 @@
                 <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
             </li>
         </ul>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0">
-            <li class="ck-module-date">
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" ng-show="mesages.AnnouncementList.length > 0"
+            ng-repeat="item in mesages.AnnouncementList |  filter: { SpecificRetailerId: '0' } | limitTo: 1 ">
+            <li class="ck-module-date" >          
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid">Checkpoint Systems, Inc.</span>
             </li>
             <li>
-                <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList | groupBy: 'RetailerName' | orderBy: 'RetailerName' ">
+                <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList |  filter: { SpecificRetailerId: '0' }| groupBy: 'RetailerName' | orderBy: 'RetailerName' ">
                     <span ng-repeat='msg in value'>
                     <li class="km-font" ng-if="!msg.RetailerName && msg.Title">
                         <b>{{msg.Title}} </b>

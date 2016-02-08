@@ -116,9 +116,9 @@ app.factory('authService', [
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
                             var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
                             hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
+                           
                         }
                         var deferred = $q.defer();
-                      
                         if (hasForceRefresh)
                         {
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
@@ -129,7 +129,11 @@ app.factory('authService', [
                                 var date = new Date();
                                 var currentDate = date.toLocaleDateString();
                                 var refreshData = {
-                                    date : currentDate
+                                    date: date.toLocaleDateString(),
+                                    hours : date.getHours(),
+                                    Minutes: date.getMinutes(),
+                                    hasClickedApproval: false,
+                                    hasClickedSearch: false,
                                 };                              
                                 localStorageService.set('forceRefreshDetail', refreshData);
                                 
@@ -139,8 +143,7 @@ app.factory('authService', [
                             });
                         }
                         else {
-                            deferred.resolve(organizationDetail);
-                            console.log('org detail from local stoarge');
+                            deferred.resolve(organizationDetail);                         
                         }
 
                         return deferred.promise;

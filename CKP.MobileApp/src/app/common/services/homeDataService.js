@@ -14,10 +14,6 @@ app.factory("homeDataService", [
                         var deferred = $q.defer();
 
                         var organizationDetail = localStorageService.get('organizationDetail');
-
-                        if (organizationDetail === null) {
-                            deferred.reject('failed to get data');
-                        }
                        
                         var jsonIn = {
                             OrderNumber: data.OrderNumber,
@@ -30,7 +26,7 @@ app.factory("homeDataService", [
                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, jsonIn).success(function (result) {
-                           
+                            localStorageService.set('orderCounts', result);
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {
@@ -44,11 +40,22 @@ app.factory("homeDataService", [
                     
                     var getOrderCounts = function (data) {
                         var deferred = $q.defer();
-
-                        forceGetOrderCounts(data).then(function (result) {
-                            deferred.resolve(result);
-                            
-                        });
+                        var refreshData = localStorageService.get('forceRefreshDetail');
+                        var orderCounts = localStorageService.get('orderCounts');
+                        var hasForceRefresh = true;
+                        //if (refreshData && orderCounts)
+                        //{
+                        //    hasForceRefresh = new Date().getMinutes() <= refreshData.minutes;
+                        //}
+                        
+                        if (!hasForceRefresh) {
+                            deferred.resolve(orderCounts);
+                        }
+                        else {
+                            forceGetOrderCounts(data).then(function (result) {
+                                deferred.resolve(result);
+                            });
+                        }
 
                         return deferred.promise;
                     };

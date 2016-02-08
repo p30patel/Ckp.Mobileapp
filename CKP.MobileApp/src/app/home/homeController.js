@@ -155,12 +155,13 @@ app.controller('homeController', [
                            $scope.form.noResults.resoruceName = "No Results are found";
                            $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
 
-
                            $scope.form.noOrderCounts = {};
                            $scope.form.noOrderCounts.resoruceName = "Error while getting data from server, Please try later or contact customer service.";
                            $scope.form.noOrderCounts.resoruceValue = translateService.getResourceValue($scope.form.noOrderCounts.resoruceName);
 
-
+                           $scope.form.loading = {};
+                           $scope.form.loading.resoruceName = "Loading";
+                           $scope.form.loading.resoruceValue = translateService.getResourceValue($scope.form.loading.resoruceName);
 
                        }
 
@@ -197,6 +198,7 @@ app.controller('homeController', [
                        $scope.hasNext = true;
                        $scope.currentPage = 1;
                        $scope.PageSize = 5;
+                       $scope.successMessage = $scope.form.loading.resoruceValue;
                                            
                        $scope.hasItemSelectedForApporval = false;
                        $scope.selectedAll = false;
@@ -297,9 +299,11 @@ app.controller('homeController', [
                                }
                                else {
                                    $scope.orders = result;
+                                   $scope.successMessage = $scope.form.loading.resoruceValue;
                                }
                            }).catch(function (error) {
                                $scope.orders = {};
+                               $scope.successMessage = $scope.form.noResults.resoruceValue;
                             
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
@@ -316,7 +320,7 @@ app.controller('homeController', [
                        }
                        $scope.myOptions = {
                            select: function (e) {                            
-                           
+                               $scope.successMessage = $scope.form.loading.resoruceValue;
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
                               
                                $scope.selectedRetailer = selectedBtnRetailer;
@@ -338,14 +342,17 @@ app.controller('homeController', [
                                var selectedOrderCount = listviewsToShow.eq(e.index).attr('data-orderCount');
                               
                                var hasNext = false;
+                              
                                if (selectedOrderCount > 0) {
-                                   $scope.orders = {};
+                              
+                                   $scope.orders = {};                               
                                    $scope.currentPage = 1;
                                    getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
                                }
                                else {
 
                                    $scope.$apply(function () {
+                                       $scope.successMessage = $scope.form.noResults.resoruceValue;
                                        $scope.orders = {};
                                    });
                                    
@@ -363,6 +370,7 @@ app.controller('homeController', [
                                $("#btn_message").data("kendoMobileButton");
 
                                messageDataService.getMessages().then(function (result) {
+                                 
                                    $scope.mesages = result;
                                    $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
                                    $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
@@ -414,6 +422,23 @@ app.controller('homeController', [
                                $scope.hasSearch = true;
                                $scope.orders = {};
                                setSelectPara();
+
+                               var refreshData = localStorageService.get('forceRefreshDetail');
+                              
+                               if (refreshData)
+                               {
+                                   var _refreshData = {
+                                       date: refreshData.date,
+                                       hours: refreshData.hours,
+                                       Minutes: refreshData.Minutes,
+                                       hasClickedApproval: false,
+                                       hasClickedSearch: true,
+                                   };
+                                  
+                                   localStorageService.set('forceRefreshDetail', _refreshData);
+                                   console.log(_refreshData);
+                               }
+                               
                                getOrderCounts();
 
                            }
