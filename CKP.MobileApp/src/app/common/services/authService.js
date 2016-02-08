@@ -113,7 +113,7 @@ app.factory('authService', [
                         {                            
                             var hasSameUserName = angular.equals(loginData.userName, organizationDetail.UserName);
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
-
+                            alert('same user and device : ' + hasSameUserName + " :" + hasSameUUID);
                             hasForceRefresh = !(hasSameUserName && hasSameUUID);
                         }
                         var deferred = $q.defer();
