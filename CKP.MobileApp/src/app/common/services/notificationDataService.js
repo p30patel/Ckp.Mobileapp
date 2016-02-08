@@ -10,8 +10,9 @@ app.factory("notificationDataService", [
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
-                        var userId = authentication.userId;
-
+                       
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var userId = organizationDetail.UserId;
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetUserNotifications?userId=' + userId).success(function (result) {
                             deferred.resolve(result);
                         })
@@ -26,8 +27,8 @@ app.factory("notificationDataService", [
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
-                        var userId = authentication.userId;
-                        console.log(userId);
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var userId = organizationDetail.UserId;
                         notifcationData.UserId = userId;
                         console.log(notifcationData);
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdateNotification', notifcationData).success(function (result) {

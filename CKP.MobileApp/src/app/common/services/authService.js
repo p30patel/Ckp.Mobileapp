@@ -36,13 +36,11 @@ app.factory('authService', [
                                 _authentication.isAuth = true;
                                 _authentication.userName = loginData.userName;
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
-                                _forceGetPrincipalData();
+                            //    _forceGetPrincipalData();
 
                                     forceGetOrganizationData().then(function (result) {
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
-                                        result.Logo = logo;
-                                        localStorageService.set('organizationDetail', result);
-                                        localStorageService.remove("messages");
+                                        result.Logo = logo;                                        
                                         deferred.resolve(result);
                                     }).catch(function (err, status) {
                                         loggedIn = false;
@@ -65,7 +63,7 @@ app.factory('authService', [
                     var _logout = function () {
                         localStorageService.remove('authorizationData');
                         localStorageService.remove('userProfileData');
-                        localStorageService.remove('organizationDetail');
+                   //     localStorageService.remove('organizationDetail');
                       
                         
                         _authentication.isAuth = false;
@@ -82,13 +80,15 @@ app.factory('authService', [
                     var forceGetOrganizationData = function () {
 
                         var deviceData = localStorageService.get('deviceData');
-                        //alert('Registed Device : ' + deviceData.result.Id);
+                        var loginData = localStorageService.get('loginData');
+                        var organizationDetail = localStorageService.get('organizationDetail');       
 
                         var uuId = '';
                         var model = '';
                         var platform = '';
                         var version = '';
                         var active = true;
+                        var hasForceRefresh = true;
 
                         if (deviceData)
                         {
@@ -96,9 +96,9 @@ app.factory('authService', [
                             model = deviceData.result.HardwareModel;
                             platform = deviceData.result.PlatformType;
                             version = deviceData.result.PlatformVersion;
-                            active = deviceData.result.Active
+                            active = deviceData.result.Active;
                         }
-
+                    
                    
                         var data = {
                             UserName: _authentication.userName,
@@ -109,14 +109,27 @@ app.factory('authService', [
                             IsActive: active
                         }
 
+                        if (organizationDetail)
+                        {
+                            hasForceRefresh = false;
+                            alert(uuId + " = " + organizationDetail.DeviceUUId + " User " + loginData.userName + " == " + organizationDetail.UserName);
+                        }
                         var deferred = $q.defer();
-                        var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
-                        $http.post(url, data).success(function (result) {
-                            localStorageService.set('organizationDetail', result);
-                            deferred.resolve(result);
-                        }).error(function (err, status) {
-                            deferred.reject(err);
-                        });
+                        if (hasForceRefresh)
+                        {
+                            var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
+                            $http.post(url, data).success(function (result) {
+                                localStorageService.set('organizationDetail', result);
+                                localStorageService.remove("messages");
+                                deferred.resolve(result);
+                            }).error(function (err, status) {
+                                deferred.reject(err);
+                            });
+                        }
+                        else {
+                            deferred.resolve(organizationDetail);
+                            console.log('org detail from local stoarge');
+                        }
 
                         return deferred.promise;
                     };

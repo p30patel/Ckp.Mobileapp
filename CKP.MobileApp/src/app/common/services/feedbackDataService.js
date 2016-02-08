@@ -10,7 +10,8 @@ app.factory("feedbackDataService", [
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authentication = authService.authentication;
-                        var userId = authentication.userId;    
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var userId = organizationDetail.UserId;
                       
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/SendFeedback?webpage=' + feedbackData.webpage + '&comment=' + feedbackData.comment + '&userId=' + userId).success(function (result) {
                             deferred.resolve(result);
@@ -24,14 +25,17 @@ app.factory("feedbackDataService", [
                     var contactUsByEmail = function (contactUsData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
-                        var authentication = authService.authentication;
-                        var userId = authentication.userId;
+                        var authentication = authService.authentication;                       
                         var username = authentication.userName;
                         var organizationDetail = localStorageService.get('organizationDetail');
+                       
+                        var userId = 0;
+                   
                         var orgContext = '';
                         if (organizationDetail)
                         {
-                            orgContext = organizationDetail.OrgContext
+                            orgContext = organizationDetail.OrgContext;
+                            userId = organizationDetail.UserId;
                         }                       
                         var data = {
                             OrgContext: orgContext,

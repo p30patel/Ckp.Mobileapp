@@ -110,7 +110,6 @@
     <Content Include="src\app\common\services\orderDataService.js" />
     <Content Include="src\app\common\services\parameterService.js" />
     <Content Include="src\app\common\services\policyTermsDataService.js" />
-    <Content Include="src\app\common\services\translateService - Copy.js" />
     <Content Include="src\app\common\services\translateService.js" />
     <Content Include="src\app\contactus\contactus.html" />
     <Content Include="src\app\contactus\contactusController.js" />

@@ -151,6 +151,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     $scope.afterShow = function (e) {      
         $('.k-header').css('background-color', 'white');
+
         setLoginData();
       
     }
@@ -350,7 +351,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
                 var data = localStorageService.get('organizationDetail');
                 
-                if (data !== null) {
+                if (data) {
 
                     hasNewPassword = data.HasNewPassword;
                 }

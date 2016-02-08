@@ -5,8 +5,7 @@ app.factory("messageDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
                     var messageDataServiceFactory = {};
-                    var refereshPeriod = true;
-                    
+                  
                     var forceGetMessages = function () {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
@@ -15,8 +14,6 @@ app.factory("messageDataService", [
                         var userId = authData.userId;
                       
                         var data = localStorageService.get('organizationDetail');
-
-                        localStorageService.set('messages', '');
 
                         $http.post(authServiceBase + 'webapi/api/core/MobileApp/GetMessageListTaskAsync', data).success(function (result) {
                             
@@ -33,23 +30,14 @@ app.factory("messageDataService", [
                         var forceReferesh = true;
                         var messages = localStorageService.get("messages");
 
-                        var refreshData = localStorageService.get('refreshPeriod');
-                        if (refreshData) {
-                            forceReferesh = refreshData.refereshPeriod;
-                        }
-
                         
-                        if (messages && !forceReferesh) {
+                        if (messages) {
                             deferred.resolve(messages);
-                        } else {
-                            forceReferesh = true;
                         }
-
-                        if (forceReferesh)
-                        {
+                        else{
                             forceGetMessages().then(function (result) {
                                 deferred.resolve(result);
-                        });
+                            });
                         }
 
                         return deferred.promise;
