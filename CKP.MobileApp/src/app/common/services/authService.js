@@ -112,19 +112,15 @@ app.factory('authService', [
                         }
                         
                         if (organizationDetail)
-                        {                            
+                        {
+                           
+                            if (refreshData && loginData && deviceData)
+                            {
                             var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
-                            alert(loginData.userName.toLocaleLowerCase() +' == ' + organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
-                            alert(uuId + ' = ' + organizationDetail.DeviceId);
-                            var dt = new Date();
-                            alert(dt .getDate());
-                            alert(refreshData.date);
-                            var hasSameDate = false;
-                            //var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
-                            
-                            //alert(hasSameDate);
+                            var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
                             hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);                           
+                            }
                            
                         }
                         alert(hasForceRefresh);
