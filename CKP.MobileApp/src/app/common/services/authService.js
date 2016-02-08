@@ -117,6 +117,7 @@ app.factory('authService', [
                             hasForceRefresh = hasSameUserName && hasSameUUID;
                         }
                         var deferred = $q.defer();
+                        alert('orgConext from local storage:' + !hasForceRefresh)
                         if (hasForceRefresh)
                         {
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
