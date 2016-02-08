@@ -54,19 +54,19 @@
                             </td >
                         </tr>
                     </table>
-                    <table class="ck-table pad list-view-detail-{{$index}}" style="background-color:white !important; display:none">
+                    <table class="ck-table list-view-detail-{{$index}}" style="background-color:white !important; display:none">
                         <tr class="header">
-                            <td style="width:5%"></td>
-                            <td style="width:40%">{{form.orderNumber.resoruceValue}}</td>
-                            <td style="width:20%">{{form.price.resoruceValue}}</td>
-                            <td style="width:10%"></td>
+                            <td style="width:5%" class="spacer"></td>
+                            <td style="width:40%" class="spacer">{{form.orderNumber.resoruceValue}}</td>
+                            <td style="width:25%" class="spacer">{{form.price.resoruceValue}}</td>
+                            <td style="width:10%" class="spacer"></td>
                         </tr>
                         <tr class="pipe" ng-repeat="order in value">
                             <td style="width:5%"></td>
                             <td style="width:40%">
                             {{order.OrderNumber}}
                                 </td>
-                                <td style="width:20%">
+                                <td style="width:25%">
                                   {{order.Price}}
                                 </td>
                                <td valign="center" style="width:10%">

@@ -123,7 +123,7 @@ app.factory('authService', [
                             }
                            
                         }
-                        alert(hasForceRefresh);
+                      
                         var deferred = $q.defer();
                         if (hasForceRefresh)
                         {
