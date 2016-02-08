@@ -25,7 +25,7 @@ app.factory('authService', [
 
                         $http.post(authServiceBase + 'authorization/oauth/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
                             var loggedIn = true;
-               
+                            alert('logged');
                             if (loginData.useRefreshTokens) {
                                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                             } else {
@@ -38,7 +38,8 @@ app.factory('authService', [
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
                             //    _forceGetPrincipalData();
 
-                                    forceGetOrganizationData().then(function (result) {
+                                forceGetOrganizationData().then(function (result) {
+                                   
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
                                         result.Logo = logo;                                        
                                         deferred.resolve(result);
