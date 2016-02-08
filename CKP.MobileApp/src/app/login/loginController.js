@@ -209,6 +209,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     }
     $scope.sendPassword = function () {
+       
         sendPassword();
     }
     //end forgot password
@@ -302,7 +303,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.intShow = function (e) {
-
+     
         translatePage();
     };
 
