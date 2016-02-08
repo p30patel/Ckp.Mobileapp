@@ -111,9 +111,9 @@ app.factory('authService', [
                         
                         if (organizationDetail)
                         {                            
-                            var hasSameUserName = angular.equals(loginData.userName, organizationDetail.UserName);
+                            var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
-                            alert('same user and device : ' + loginData.userName + '=' + organizationDetail.UserName + ' = ' + hasSameUserName + " :" + hasSameUUID);
+                            alert('same user and device : ' + loginData.userName.toLocaleLowerCase() + '=' + organizationDetail.UserName.toLocaleLowerCase() + ' = ' + hasSameUserName + " :" + hasSameUUID);
                             hasForceRefresh = !(hasSameUserName && hasSameUUID);
                         }
                         var deferred = $q.defer();
