@@ -113,7 +113,7 @@ app.factory('authService', [
                         {
                             console.log(organizationDetail);
                             hasForceRefresh = false;
-                            alert(uuId + " = " + organizationDetail.DeviceUUId + " User " + loginData.userName + " == " + organizationDetail.UserName);
+                            alert(uuId + " = " + organizationDetail.DeviceId + " User " + loginData.userName === organizationDetail.UserName);
                         }
                         var deferred = $q.defer();
                         if (hasForceRefresh)
