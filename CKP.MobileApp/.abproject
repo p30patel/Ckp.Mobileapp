@@ -41,7 +41,7 @@
   "CorePlugins": [
     "com.phonegap.plugins.PushPlugin@3.0.6",
     "com.telerik.feedback@2.0.0",
-    "com.telerik.plugin.telerikanalytics@3.3.2",
+    "com.telerik.plugin.telerikanalytics@3.3.1",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",

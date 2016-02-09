@@ -393,8 +393,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.showPasswordHint = function () {
-        alert();
-   
+     
         if (typeof window.navigator.simulator !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
         }
