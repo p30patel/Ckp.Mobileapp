@@ -4,7 +4,7 @@ var baasScheme = 'https';
 var androidProjectNumber = '1018275522168'; // google push tocken
 var emulatorMode = true;
 
-var telerikAnaltyicsProdcutId = "0456d9966dfe4624817122678ba9b7a3"; // analtyics project key
+var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics project key
 
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
@@ -76,7 +76,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");       
     
-        if (typeof window.navigator.simulator === 'undefined') { // check if its simulator not to call Analytics and push 
+        if (!window.navigator.simulator)  { // check if its simulator not to call Analytics and push 
             getDeviceInfo();
             window.analytics.Start();
         }

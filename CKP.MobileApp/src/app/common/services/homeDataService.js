@@ -27,6 +27,7 @@ app.factory("homeDataService", [
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, jsonIn).success(function (result) {
                             localStorageService.set('orderCounts', result);
+                            console.log(result);
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {

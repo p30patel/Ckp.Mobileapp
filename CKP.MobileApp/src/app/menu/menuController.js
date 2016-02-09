@@ -74,8 +74,8 @@ app.controller('menuController', [
                            kendo.mobile.application.navigate("src/app/login/login.html");
 
                        }
-
-                       if (typeof window.navigator.simulator !== 'undefined') {
+                      
+                       if (!window.navigator.simulator) {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        }
                       
