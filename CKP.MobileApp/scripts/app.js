@@ -4,7 +4,7 @@ var baasScheme = 'https';
 var androidProjectNumber = '1018275522168'; // google push tocken
 var emulatorMode = true;
 
-var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics project key
+var telerikAnaltyicsProdcutId = "0456d9966dfe4624817122678ba9b7a3"; // analtyics project key
 
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
