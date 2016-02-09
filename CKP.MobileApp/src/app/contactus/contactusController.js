@@ -1,7 +1,7 @@
 
 app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout', 'feedbackDataService',
     function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout, feedbackDataService) {
-        if (window.navigator.simulator === false) {
+       if (typeof (window.navigator.simulator) === 'undefined'){
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.contactus");
         }
         $scope.form = {};
@@ -201,7 +201,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }).data('kendoValidator');
 
         var sendEmail = function () {
-            if (window.navigator.simulator === false) {
+           if (typeof (window.navigator.simulator) === 'undefined'){
                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
             }
             var message = $scope.form.feedbackSuccess.resoruceValue;

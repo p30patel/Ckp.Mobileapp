@@ -120,7 +120,7 @@ app.controller('orderlistController', [
                                 $scope.order.orders = result;
                             
                             }).catch(function (error) {
-                                alert(error);
+                               
                                $scope.order.orders = {};
                            }).finally(function() {
                                kendo.mobile.application.pane.loader.hide();
@@ -197,7 +197,7 @@ app.controller('orderlistController', [
                             orderDataService.approveDecline(data).then(function (result) {
 
                                 $scope.apporvalMessage = "Order " + successMessage + " Successfully.";
-                                if (window.navigator.simulator === false) {
+                               if (typeof (window.navigator.simulator) === 'undefined'){
                                     window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderApporval");
                                 }
                                 $timeout(function () {

@@ -2,7 +2,7 @@
 app.controller('policyController', [
                    '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
-                       if (window.navigator.simulator === false) {
+                      if (typeof (window.navigator.simulator) === 'undefined'){
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.policy");
                        }
                        $scope.form = {};

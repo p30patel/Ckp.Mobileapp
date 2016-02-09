@@ -75,7 +75,7 @@ app.controller('menuController', [
 
                        }
                       
-                       if (window.navigator.simulator === false) {
+                      if (typeof (window.navigator.simulator) === 'undefined'){
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        }
                       

@@ -64,7 +64,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
 
                    },
                    function (e) {
-                  
+
                    });
                },
                function (err) {
@@ -74,16 +74,15 @@ app.run(['authService', 'localStorageService', function (authService, localStora
 
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
-        kendo.mobile.application.navigate("src/app/login/login.html");       
-       
-        if (window.navigator.simulator === false) { // check if its simulator not to call Analytics and push 
+        kendo.mobile.application.navigate("src/app/login/login.html");
+        if (typeof (window.navigator.simulator) === 'undefined') {
             getDeviceInfo();
             window.analytics.Start();
         }
-        
+
     });
 
-    
+
 }]);
 
 app.config(function ($httpProvider) {
@@ -92,8 +91,11 @@ app.config(function ($httpProvider) {
 });
 
 
+
 (function (g) {
- 
+
+    var productId = "70d4845295c541ff8e423ed4c3953b94"; // App unique product key
+
     // Make analytics available via the window.analytics variable
     // Start analytics by calling window.analytics.Start()
     var analytics = g.analytics = g.analytics || {};
@@ -101,28 +103,28 @@ app.config(function ($httpProvider) {
         // Handy shortcuts to the analytics api
         var factory = window.plugins.EqatecAnalytics.Factory;
         var monitor = window.plugins.EqatecAnalytics.Monitor;
-        // Create the monitor instance using the unique product key for CKP.Mobile.App.DEV-Beta
-        var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
+        // Create the monitor instance using the unique product key for Analytics
+        var settings = factory.CreateSettings(productId);
         settings.LoggingInterface = factory.CreateTraceLogger();
         factory.CreateMonitorWithSettings(settings,
-          function () {
-              console.log("Monitor created");
-              // Start the monitor inside the success-callback
-              monitor.Start(function () {
-                  console.log("Monitor started");
-                  monitor.TrackFeature("App.Loaded");
-              });
-          },
-          function (msg) {
-              console.log("Error creating monitor: " + msg);
-          });
-    }
+			function () {
+			    console.log("Monitor created");
+			    // Start the monitor inside the success-callback
+			    monitor.Start(function () {
+			        console.log("Monitor started");
+			    });
+			},
+			function (msg) {
+			    console.log("Error creating monitor: " + msg);
+			}
+		);
+    };
     analytics.Stop = function () {
         var monitor = window.plugins.EqatecAnalytics.Monitor;
         monitor.Stop();
-    }
+    };
     analytics.Monitor = function () {
         return window.plugins.EqatecAnalytics.Monitor;
-    }
+    };
 })(window);
 
