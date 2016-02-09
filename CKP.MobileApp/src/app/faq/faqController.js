@@ -3,7 +3,7 @@ app.controller('faqController', [
                    '$scope', '$http', '$sce', 'faqDataService', 'translateService',
                    function ($scope, $http, $sce, faqDataService, translateService) {
                        $scope.form = {};
-                       if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+                       if (typeof (EqatecAnalytics) !== 'undefined') {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
                        }
                        $scope.form.title = {};

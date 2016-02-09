@@ -1,7 +1,7 @@
 
 app.controller('helpController', ['$scope', '$http', '$sce', 'translateService',
     function ($scope, $http, $sce, translateService) {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
         }
         $scope.form = {};

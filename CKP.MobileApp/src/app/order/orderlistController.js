@@ -197,6 +197,9 @@ app.controller('orderlistController', [
                             orderDataService.approveDecline(data).then(function (result) {
 
                                 $scope.apporvalMessage = "Order " + successMessage + " Successfully.";
+                                if (typeof (EqatecAnalytics) !== 'undefined') {
+                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderApporval");
+                                }
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
                                     $scope.order.hasApproval = false;

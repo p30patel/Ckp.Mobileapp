@@ -13,7 +13,7 @@ var clientId = 'Ckp.PoC1';
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
 var gaPlugin;
-var isTrackingActive = false;
+
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
     clientId: clientId,
@@ -77,7 +77,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
         window.analytics.Start();
-
+    
         if (typeof window.navigator.simulator === 'undefined') {
             getDeviceInfo();
         }
@@ -116,9 +116,7 @@ app.config(function ($httpProvider) {
                   monitor.Start(function () {
                       console.log("Monitor started");
                       monitor.TrackFeature("app.loaded");
-                      isTrackingActive = true;
-                      console.log(isTrackingActive);
-
+                   
                   });
               },
               function (msg) {
@@ -129,14 +127,11 @@ app.config(function ($httpProvider) {
     analytics.Stop = function () {
         var monitor = window.plugins.EqatecAnalytics.Monitor;
         monitor.Stop();
-        isTrackingActive = false;
+    
     }
     analytics.Monitor = function () {
         return window.plugins.EqatecAnalytics.Monitor;
     }
 })(window);
-
-
-
 
 

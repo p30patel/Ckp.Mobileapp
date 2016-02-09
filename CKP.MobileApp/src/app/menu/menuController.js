@@ -75,9 +75,10 @@ app.controller('menuController', [
 
                        }
 
-                       if (isTrackingActive) {
+                       if (typeof (EqatecAnalytics) !== 'undefined') {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        }
+                      
                        $scope.home = function () {
                            kendo.mobile.application.navigate("src/app/home/home.html");
                        }

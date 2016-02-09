@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService', '$window',
-function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService, $window) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService',
+function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService) {
     $scope.title = '';
 
     //login page html lables
@@ -155,7 +155,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         setLoginData();
       
     }
-    if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+    if (typeof (EqatecAnalytics) !== 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
     //if ($window.ga) {
@@ -178,7 +178,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
 
     var sendPassword = function () {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+       
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
         }
         kendo.mobile.application.pane.loader.show();
@@ -385,16 +386,19 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
         }
         login();
     }
 
     $scope.showPasswordHint = function () {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+      
+   
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
         }
+
         var username = $scope.loginData.userName;
         if (username !== '') {
             kendo.mobile.application.showLoading();

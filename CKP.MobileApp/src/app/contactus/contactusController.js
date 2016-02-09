@@ -1,7 +1,7 @@
 
 app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout', 'feedbackDataService',
     function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout, feedbackDataService) {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.contactus");
         }
         $scope.form = {};
@@ -201,7 +201,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }).data('kendoValidator');
 
         var sendEmail = function () {
-            if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+            if (typeof (EqatecAnalytics) !== 'undefined') {
                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
             }
             var message = $scope.form.feedbackSuccess.resoruceValue;

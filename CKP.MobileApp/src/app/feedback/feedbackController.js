@@ -4,7 +4,7 @@ app.controller('feedbackController', [
 function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
 
     $scope.form = {};
-    if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+    if (typeof (EqatecAnalytics) !== 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
     }
     $scope.form.title = {};
@@ -63,7 +63,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     };
 
     $scope.send = function () {
-        if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.feedback.send");
         }
         kendo.mobile.application.pane.loader.show();

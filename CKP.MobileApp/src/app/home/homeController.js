@@ -167,7 +167,7 @@ app.controller('homeController', [
 
                        setResources();
 
-                       if (isTrackingActive && typeof (EqatecAnalytics) !== 'undefined') {
+                       if (typeof (EqatecAnalytics) !== 'undefined') {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
                        }
                        //if ($window.ga) {
