@@ -2,7 +2,7 @@
 app.controller('orderDetailController', [
                    '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout',
                    function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout) {
-                       if (!window.navigator.simulator) {
+                       if (window.navigator.simulator === false) {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
                        }
                        $scope.form = {};
@@ -240,7 +240,7 @@ app.controller('orderDetailController', [
                          
                        }
                        $scope.send = function () {
-                           if (!window.navigator.simulator) {
+                           if (window.navigator.simulator === false) {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");
                            }
                            kendo.mobile.application.pane.loader.show();

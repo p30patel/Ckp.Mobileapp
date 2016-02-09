@@ -155,7 +155,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         setLoginData();
       
     }
-    if (!window.navigator.simulator) {
+    if (window.navigator.simulator === false) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
     //if ($window.ga) {
@@ -179,7 +179,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     var sendPassword = function () {
        
-        if (!window.navigator.simulator) {
+        if (window.navigator.simulator === false) {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
         }
         kendo.mobile.application.pane.loader.show();
@@ -386,7 +386,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-        if (!window.navigator.simulator) {
+        if (window.navigator.simulator === false) {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
         }
         login();
@@ -394,7 +394,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     $scope.showPasswordHint = function () {
      
-        if (!window.navigator.simulator) {
+        if (window.navigator.simulator === false) {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
         }
 

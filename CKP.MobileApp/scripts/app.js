@@ -75,8 +75,8 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");       
-    
-        if (!window.navigator.simulator)  { // check if its simulator not to call Analytics and push 
+       
+        if (window.navigator.simulator === false) { // check if its simulator not to call Analytics and push 
             getDeviceInfo();
             window.analytics.Start();
         }

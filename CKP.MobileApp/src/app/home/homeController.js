@@ -167,7 +167,7 @@ app.controller('homeController', [
 
                        setResources();
 
-                       if (!window.navigator.simulator) {
+                       if (window.navigator.simulator === false) {
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
                        }
                        //if ($window.ga) {

@@ -1,7 +1,7 @@
 
 app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout',
 function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout) {
-    if (!window.navigator.simulator) {
+    if (window.navigator.simulator === false) {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
     }
     $scope.form = {};
