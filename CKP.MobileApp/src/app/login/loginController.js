@@ -155,7 +155,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         setLoginData();
       
     }
-    if (typeof (EqatecAnalytics) !== 'undefined') {
+    if (typeof window.navigator.simulator !== 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
     //if ($window.ga) {
@@ -179,9 +179,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     var sendPassword = function () {
        
-        //if (typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof window.navigator.simulator !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
-        //}
+        }
         kendo.mobile.application.pane.loader.show();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
@@ -386,18 +386,18 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-        if (typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof window.navigator.simulator !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
         }
         login();
     }
 
     $scope.showPasswordHint = function () {
-        alert(typeof window.navigator.simulator);
+        alert();
    
-        //if (typeof (EqatecAnalytics) !== 'undefined') {
+        if (typeof window.navigator.simulator !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
-        //}
+        }
 
         var username = $scope.loginData.userName;
         if (username !== '') {
