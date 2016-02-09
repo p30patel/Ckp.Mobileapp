@@ -179,9 +179,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     var sendPassword = function () {
        
-        if (typeof (EqatecAnalytics) !== 'undefined') {
+        //if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
-        }
+        //}
         kendo.mobile.application.pane.loader.show();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
@@ -393,11 +393,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.showPasswordHint = function () {
-      
+        alert(typeof window.navigator.simulator);
    
-        if (typeof (EqatecAnalytics) !== 'undefined') {
+        //if (typeof (EqatecAnalytics) !== 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
-        }
+        //}
 
         var username = $scope.loginData.userName;
         if (username !== '') {

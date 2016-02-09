@@ -64,22 +64,21 @@ app.run(['authService', 'localStorageService', function (authService, localStora
 
                    },
                    function (e) {
-                       //error register
+                  
                    });
                },
                function (err) {
-                   //  alert('REGISTER ERROR: ' + JSON.stringify(err));
                }
                );
     };
 
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
-        kendo.mobile.application.navigate("src/app/login/login.html");
-        window.analytics.Start();
+        kendo.mobile.application.navigate("src/app/login/login.html");       
     
         if (typeof window.navigator.simulator === 'undefined') {
             getDeviceInfo();
+            window.analytics.Start();
         }
         
     });
@@ -92,46 +91,38 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-//window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
-//ga('create', 'UA-69875163-1', 'auto');
-//ga('send', 'pageview', '/app-init');
 
 (function (g) {
-   
+ 
     // Make analytics available via the window.analytics variable
     // Start analytics by calling window.analytics.Start()
     var analytics = g.analytics = g.analytics || {};
     analytics.Start = function () {
         // Handy shortcuts to the analytics api
-        if (typeof (EqatecAnalytics) !== 'undefined') {
-            var factory = window.plugins.EqatecAnalytics.Factory;
-            var monitor = window.plugins.EqatecAnalytics.Monitor;
-            // Create the monitor instance using the unique product key for CKP.Mobile.App-Analytics
-            var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
-            settings.LoggingInterface = factory.CreateTraceLogger();
-            factory.CreateMonitorWithSettings(settings,
-              function () {
-                  console.log("Monitor created");
-                  // Start the monitor inside the success-callback
-                  monitor.Start(function () {
-                      console.log("Monitor started");
-                      monitor.TrackFeature("app.loaded");
-                   
-                  });
-              },
-              function (msg) {
-                  console.log("Error creating monitor: " + msg);
+        var factory = window.plugins.EqatecAnalytics.Factory;
+        var monitor = window.plugins.EqatecAnalytics.Monitor;
+        // Create the monitor instance using the unique product key for CKP.Mobile.App.DEV-Beta
+        var settings = factory.CreateSettings(telerikAnaltyicsProdcutId);
+        settings.LoggingInterface = factory.CreateTraceLogger();
+        factory.CreateMonitorWithSettings(settings,
+          function () {
+              console.log("Monitor created");
+              // Start the monitor inside the success-callback
+              monitor.Start(function () {
+                  console.log("Monitor started");
+                  monitor.TrackFeature("App.Loaded");
               });
-        }
+          },
+          function (msg) {
+              console.log("Error creating monitor: " + msg);
+          });
     }
     analytics.Stop = function () {
         var monitor = window.plugins.EqatecAnalytics.Monitor;
         monitor.Stop();
-    
     }
     analytics.Monitor = function () {
         return window.plugins.EqatecAnalytics.Monitor;
     }
 })(window);
-
 
