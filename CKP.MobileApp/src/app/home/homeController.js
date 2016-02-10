@@ -398,9 +398,7 @@ app.controller('homeController', [
                        }
 
                        $scope.ViewMore = function (orderType) {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.ViewMore");
-                           }
+
                            $scope.currentPage += 1;
                          
                            var hasNext = true;
@@ -411,9 +409,6 @@ app.controller('homeController', [
                        }
                     
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.OrderDetail");
-                           }
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
 
@@ -450,9 +445,6 @@ app.controller('homeController', [
                        }
                        //view more orders
                        $scope.showMoreOrderModel = function (orders, columnName) {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.MoreOrdersModal");
-                           }
                            $scope.viewMoreColumn = columnName;
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
@@ -538,9 +530,6 @@ app.controller('homeController', [
                        }
 
                        $scope.showOrderList = function (orderType, parameterId, parameterValue) {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList");
-                           }
                            $scope.orderCounts = {};
                            getSelectedList();
                            
@@ -552,9 +541,7 @@ app.controller('homeController', [
 
                     
                        $scope.showAlertModel = function () {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.MessagesModal");
-                           }
+
                            $("#modalview-alerts").kendoMobileModalView("open");
 
                        };
@@ -566,9 +553,6 @@ app.controller('homeController', [
 
                        //credit lock
                        $scope.showCreditModel = function () {
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.CreditBlockModal");
-                           }
                            $('.order').hide();
                            $("#modalview-credit").kendoMobileModalView("open");
                        };
