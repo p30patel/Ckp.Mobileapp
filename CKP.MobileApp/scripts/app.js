@@ -73,6 +73,8 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
+        alert(typeof (window.navigator.simulator) === 'undefined');
+        alert(window.navigator.simulator);
         if (typeof (window.navigator.simulator) === 'undefined') {
             getDeviceInfo();
         }
