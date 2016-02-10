@@ -72,11 +72,6 @@ app.controller('menuController', [
                            $scope.authentication.isAuth = false;
 
                            kendo.mobile.application.navigate("src/app/login/login.html");
-
-                       }
-                      
-                      if (typeof (window.navigator.simulator) === 'undefined'){
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.menu");
                        }
                       
                        $scope.home = function () {
