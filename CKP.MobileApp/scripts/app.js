@@ -59,9 +59,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
 
                    el.push.getRegistration().then(function (result) {
                        localStorageService.set('deviceData', result);
-                       var deviceData = localStorageService.get('deviceData');
-                       // alert('Registed Device : ' + deviceData.result.Id + '\nuuId =' + deviceData.result.Id + '\n  model =' +  deviceData.result.HardwareModel + '\n    platform =' + deviceData.result.PlatformType  + '\n version = ' +deviceData.result.PlatformVersion  + '\n  active =' +  deviceData.result.Active  );
-
+                       var deviceData = localStorageService.get('deviceData');                  
                    },
                    function (e) {
 
