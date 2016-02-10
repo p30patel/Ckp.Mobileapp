@@ -42,7 +42,6 @@
     "com.phonegap.plugins.PushPlugin@3.0.6",
     "com.telerik.feedback@2.0.0",
     "com.telerik.plugin.telerikanalytics@3.3.2",
-    "com.telerik.plugins.nativepagetransitions@0.6.0",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",
@@ -74,9 +73,9 @@
   "iOSDeploymentTarget": "6.0",
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
-      "PRODUCT_ID": "74868069a4984c899c38d1e188332580",
+      "AUTO_TRACK_EXCEPTIONS": "False",
       "AUTO_TRACK_KENDO_EVENTS": "False",
-      "AUTO_TRACK_EXCEPTIONS": "False"
+      "PRODUCT_ID": "74868069a4984c899c38d1e188332580"
     }
   }
 }
