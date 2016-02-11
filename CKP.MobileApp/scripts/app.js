@@ -23,7 +23,7 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
-app.run(['authService', 'localStorageService', function (authService, localStorageService) {
+app.run(['authService', 'localStorageService', function (authService, localStorageService) {  if (typeof (window.navigator.simulator) === 'undefined')
 
     //authService.fillAuthData();
     localStorageService.remove('authorizationData');
@@ -73,7 +73,7 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
-       
+      
         if (typeof (window.navigator.simulator) === 'undefined') {
             getDeviceInfo();
         }

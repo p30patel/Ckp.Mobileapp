@@ -1,7 +1,7 @@
 
 app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout',
 function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout) {
-   if (typeof (window.navigator.simulator) === 'undefined'){
+       if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
     }
     $scope.form = {};

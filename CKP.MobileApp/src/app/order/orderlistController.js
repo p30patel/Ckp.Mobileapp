@@ -197,7 +197,7 @@ app.controller('orderlistController', [
                             orderDataService.approveDecline(data).then(function (result) {
 
                                 $scope.apporvalMessage = "Order " + successMessage + " Successfully.";
-                               if (typeof (window.navigator.simulator) === 'undefined'){
+                                  if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
                                     window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderApporval");
                                 }
                                 $timeout(function () {

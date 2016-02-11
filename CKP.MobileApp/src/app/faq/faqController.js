@@ -3,7 +3,8 @@ app.controller('faqController', [
                    '$scope', '$http', '$sce', 'faqDataService', 'translateService',
                    function ($scope, $http, $sce, faqDataService, translateService) {
                        $scope.form = {};
-                      if (typeof (window.navigator.simulator) === 'undefined'){
+                       if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+
                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
                        }
                        $scope.form.title = {};
