@@ -167,9 +167,7 @@ app.controller('homeController', [
 
                       setResources();
                       
-                      if (typeof (window.navigator.simulator) === 'undefined'){
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.Home");
-                       }
+                  
                        //if ($window.ga) {
 
                        //    $window.ga('send', 'pageview', { page: 'Home View-GA' });
@@ -193,6 +191,7 @@ app.controller('homeController', [
                        $scope.groupBy = 'SalesOrderNumber';
                        $scope.screen2SearchParameter = 'SalesOrderNumber';
                        $scope.viewMoreColumn = 'OrderNumber';
+                    
                        $scope.parameters = parameterService.getSearchParameters();
 
                        $scope.hasNext = true;
@@ -446,6 +445,7 @@ app.controller('homeController', [
                        //view more orders
                        $scope.showMoreOrderModel = function (orders, columnName) {
                            $scope.viewMoreColumn = columnName;
+
                            $scope.orderList = orders;
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };

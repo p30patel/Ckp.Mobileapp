@@ -185,7 +185,7 @@
                         
                       
                         <tr class="header" ng-show="$first">
-                            <td style="width:5%;"class="spacer"></td>     
+                            <td style="width:5%;" class="spacer"></td>     
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4' || searchParameterId == '1'"  class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
                                  
@@ -260,7 +260,7 @@
                     <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | orderBy : '-OrderDate' | groupBy: groupBy">
                     
                          <tr class="header" ng-show="$first">
-                             <td style="width:5%;"class="spacer"></td>     
+                             <td style="width:5%;" class="spacer"></td>     
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>                            
@@ -358,11 +358,38 @@
             </div>
         </div>
         <div  style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">          
-        <ul kendo-mobile-list-view ng-repeat="order in orderList">
-            <li ng-show="viewMoreColumn == 'OrderNumber'">{{order.OrderNumber}} </li>
-            <li ng-show="viewMoreColumn == 'SalesOrderNumber'">{{order.SalesOrderNumber}} </li>
+            
+        <ul kendo-mobile-list-view>
+                <table class="ck-table" ng-show="orderList.length > 0">
+                    <tr class="header">
+                            <td style="width:5%;" class="spacer"></td>     
+                            <td ng-if="viewMoreColumn == 'OrderNumber'" class="spacer" style="width:60%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="viewMoreColumn == 'SalesOrderNumber'" class="spacer" style="width:60%;">{{form.salesOrder.resoruceValue}}</td>
+                            <td ng-if="selectedOrderTypeId !== '2'" class="spacer" style="width:30%;">{{form.orderDate.resoruceValue}}</td>                            
+                            <td ng-if="selectedOrderTypeId == '2'" class="spacer" style="width:30%;">{{form.dateInSystem.resoruceValue}}</td>
+                            <td style="width:5%;" class="spacer"></td>
+                    </tr>                     
+                    <tr class="pipe" ng-repeat="order in orderList">
+                            <td style="width:5%;"></td>                                
+                            <td  ng-if="viewMoreColumn == 'OrderNumber'" style="width:60%;">
+                                {{ order.OrderNumber }}                            
+                            </td>
+                            <td  ng-if="viewMoreColumn == 'SalesOrderNumber'" style="width:60%;">
+                                {{ order.SalesOrderNumber }}                            
+                            </td>
+                            <td  ng-if="selectedOrderTypeId !== '2'" style="width:30%;">
+                                {{ order.OrderDate | date }}                            
+                            </td>
+                          <td  ng-if="selectedOrderTypeId === '2'" style="width:30%;">
+                               {{order.DateInSystem | date }}                       
+                            </td>
+                        <td style="width:5%;"></td>
+                    </tr>
+
+                </table>
+           
         </ul>
-            </div>
+        </div>
 
     </div>
     <!--  Alert modal  -->

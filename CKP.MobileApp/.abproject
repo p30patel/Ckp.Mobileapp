@@ -73,8 +73,8 @@
   "iOSDeploymentTarget": "6.0",
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
-      "AUTO_TRACK_EXCEPTIONS": "False",
-      "AUTO_TRACK_KENDO_EVENTS": "False",
+      "AUTO_TRACK_EXCEPTIONS": "True",
+      "AUTO_TRACK_KENDO_EVENTS": "True",
       "PRODUCT_ID": "74868069a4984c899c38d1e188332580"
     }
   }
