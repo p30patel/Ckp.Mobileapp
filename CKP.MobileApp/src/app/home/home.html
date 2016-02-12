@@ -15,11 +15,7 @@
     <kendo-mobile-content>
   
         <ul kendo-mobile-list-view class="ck-no-border">
-         
-            <li ng-show="orderCounts.length == 0">           
-                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>
-            </li>
-            <li class="ck-po-container ck-grey-wrap" ng-show="orderCounts.length > 0">
+            <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
                     <select class="ck-po-select" 
                         style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;" 
@@ -28,6 +24,9 @@
                         style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " 
                         />
                 </fieldset>
+            </li>
+              <li ng-show="orderCounts.length == 0">           
+                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>
             </li>
                 
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
@@ -73,9 +72,9 @@
                            
                             </td>
 
-                            <td ng-if="searchParameterId=='1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='1' || searchParameterId == '2'" class="spacer" style="width:30%">{{form.salesOrder.resoruceValue}}</td>                         
-                            <td ng-if="searchParameterId=='2'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='2'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
@@ -98,7 +97,7 @@
                                
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$parent.$index}}"></label>
                             </td>
-                            <td  ng-if="searchParameterId == '1'" style="width:30%;">
+                            <td  ng-if="searchParameterId == '1'" style="width:45%;">
                         
                             {{ order.OrderNumber }}                            
                        
@@ -108,7 +107,7 @@
                            {{order.SalesOrderNumber}}
                            
                             </td>
-                            <td ng-if="searchParameterId == '2' " style="width:30%;">
+                            <td ng-if="searchParameterId == '2' " style="width:45%;">
                           <div ng-repeat="order in value | limitTo : 3">
                             {{ order.OrderNumber }}                            
                          </div>
@@ -187,9 +186,9 @@
                         <tr class="header" ng-show="$first">
                             <td style="width:5%;" class="spacer"></td>     
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
-                            <td ng-if="searchParameterId == '4' || searchParameterId == '1'"  class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId == '4' || searchParameterId == '1'"  class="spacer" style="width:40%;">{{form.orderNumber.resoruceValue}}</td>
                                  
-                            <td ng-if="searchParameterId != '4'" style="width:30%;" class="spacer">{{form.orgName.resoruceName}}</td>                        
+                            <td ng-if="searchParameterId != '4'" style="width:45%;" class="spacer">{{form.orgName.resoruceName}}</td>                        
                             <td style="width:30%;" class="spacer">{{form.dateInSystem.resoruceValue }}</td>
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
@@ -203,7 +202,7 @@
                                
                             </td>
                            
-                            <td ng-if="searchParameterId == '4' " style="width:30%;">
+                            <td ng-if="searchParameterId == '4' " style="width:40%;">
                                <div ng-repeat="order in value | limitTo : 3">
                                    {{order.OrderNumber}}                            
                                </div>
@@ -213,13 +212,13 @@
                                </p>
                             </td>
 
-                            <td ng-if="searchParameterId == '1' " style="width:30%;">
+                            <td ng-if="searchParameterId == '1' " style="width:40%;">
                              
                                 {{ order.OrderNumber }}                            
                        
                          
                             </td>
-                            <td ng-if="searchParameterId != '4'" style="width:30%;">
+                            <td ng-if="searchParameterId != '4'" style="width:45%;">
                               {{order.OrganizationName}} 
 
                             </td>
@@ -261,11 +260,11 @@
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;" class="spacer"></td>     
-                            <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId == '1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>                            
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
-                            <td ng-if="searchParameterId !== '1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId !== '1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderStatus.resoruceValue}}</td>
                             <td style="width:30%;">{{form.orderDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
@@ -273,7 +272,7 @@
                         <tr class="pipe" ng-repeat="order in value | limitTo:1 | orderBy : '-OrderDate'">
                                 <td style="width:5%;"></td>     
                            
-                            <td  ng-if="searchParameterId == '1'" style="width:30%;">
+                            <td  ng-if="searchParameterId == '1'" style="width:45%;">
                            
                             {{ order.OrderNumber }}                            
                             </td>
@@ -294,11 +293,11 @@
                                       {{order.VendorRef}}         
                              
                             </td>
-                           <td  ng-if="searchParameterId !== '1'"  style="width:30%;">
+                           <td  ng-if="searchParameterId !== '1'"  style="width:45%;">
                               <div ng-repeat="order in value | limitTo : 3">
                                  {{ order.OrderNumber }}                            
                               </div>
-                              <p><a  ng-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3">
+                              <p><a  ng-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length >2">
                                {{form.seeMore.resoruceValue}}
                                </a>
                               </p>
@@ -363,27 +362,27 @@
                 <table class="ck-table" ng-show="orderList.length > 0">
                     <tr class="header">
                             <td style="width:5%;" class="spacer"></td>     
-                            <td ng-if="viewMoreColumn == 'OrderNumber'" class="spacer" style="width:60%;">{{form.orderNumber.resoruceValue}}</td>
-                            <td ng-if="viewMoreColumn == 'SalesOrderNumber'" class="spacer" style="width:60%;">{{form.salesOrder.resoruceValue}}</td>
+                            <td ng-if="viewMoreColumn == 'OrderNumber'" class="spacer" style="width:80%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="viewMoreColumn == 'SalesOrderNumber'" class="spacer" style="width:80%;">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="selectedOrderTypeId !== '2'" class="spacer" style="width:30%;">{{form.orderDate.resoruceValue}}</td>                            
                             <td ng-if="selectedOrderTypeId == '2'" class="spacer" style="width:30%;">{{form.dateInSystem.resoruceValue}}</td>
                             <td style="width:5%;" class="spacer"></td>
                     </tr>                     
                     <tr class="pipe" ng-repeat="order in orderList">
-                            <td style="width:5%;"></td>                                
-                            <td  ng-if="viewMoreColumn == 'OrderNumber'" style="width:60%;">
+                            <td style="width:5%; padding: .8em 0;"></td>                                
+                            <td  ng-if="viewMoreColumn == 'OrderNumber'" style="width:80%; padding: .8em 0;">
                                 {{ order.OrderNumber }}                            
                             </td>
-                            <td  ng-if="viewMoreColumn == 'SalesOrderNumber'" style="width:60%;">
+                            <td  ng-if="viewMoreColumn == 'SalesOrderNumber'" style="width:80%; padding: .8em 0;">
                                 {{ order.SalesOrderNumber }}                            
                             </td>
-                            <td  ng-if="selectedOrderTypeId !== '2'" style="width:30%;">
+                            <td  ng-if="selectedOrderTypeId !== '2'" style="width:30%; padding: .8em 0;">
                                 {{ order.OrderDate | date }}                            
                             </td>
-                          <td  ng-if="selectedOrderTypeId === '2'" style="width:30%;">
+                          <td  ng-if="selectedOrderTypeId === '2'" style="width:30%; padding: .8em 0;">
                                {{order.DateInSystem | date }}                       
                             </td>
-                        <td style="width:5%;"></td>
+                        <td style="width:5%; padding: .8em 0;"></td>
                     </tr>
 
                 </table>
