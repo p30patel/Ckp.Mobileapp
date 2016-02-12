@@ -120,7 +120,7 @@
                             <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
                         </td>
                         <td class="v-align" style="width:25%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
-                            <h4 class="km-bold-font">{{orderLine.Amount}}</h4>
+                            <h4 class="km-bold-font">{{orderLine.Amount | number : 2}}</h4>
                         </td>
                     </tr>
                 

@@ -40,7 +40,7 @@
                             <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
                         </kendo-mobile-button>
                     </h3>
-                    <kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" >
+                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" k-data-index="0">
                         <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
                             <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                             <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
@@ -53,7 +53,7 @@
                             <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
                             <div class="ck-button-text ">{{form.releasedOrder.resoruceValue}}</div>
                         </li>
-                    </kendo-mobile-button-group>
+                    </ul>
                 </div>
               
                 <!-- Tab panes -->
@@ -257,7 +257,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | orderBy : '-OrderDate' | groupBy: groupBy">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders  | groupBy: groupBy | orderBy : '-OrderDate' ">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;" class="spacer"></td>     
@@ -270,7 +270,7 @@
                             <td style="width:30%;">{{form.orderDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
                         </tr>                     
-                        <tr class="pipe" ng-repeat="order in value | limitTo:1">
+                        <tr class="pipe" ng-repeat="order in value | limitTo:1 | orderBy : '-OrderDate'">
                                 <td style="width:5%;"></td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:30%;">

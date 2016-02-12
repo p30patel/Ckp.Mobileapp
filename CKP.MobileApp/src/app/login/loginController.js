@@ -155,7 +155,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         setLoginData();
       
     }
-    if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+    if (typeof (window.navigator.simulator) === 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
     }
     //if ($window.ga) {
@@ -179,7 +179,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     var sendPassword = function () {
        
-        if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone')
+        if (typeof (window.navigator.simulator) === 'undefined')
         {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
         }

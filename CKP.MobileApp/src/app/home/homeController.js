@@ -204,6 +204,8 @@ app.controller('homeController', [
                        $scope.jsonIn = {};
                        $scope.orderCounts = {};
 
+                       var hasOneOrderType = false;
+                       var defaultSelectedRetailer = 0;
                        $scope.isAuth = authService.authentication.isAuth;
 
 
@@ -222,7 +224,29 @@ app.controller('homeController', [
                                VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
                            };
                        }
+                       var checkOrderTypeCount = function(result)
+                       {
+                           var hasOneOrderType = false;
+                           var count = 0;
+                           defaultSelectedRetailer = 0;
+                           if ( result.length == 1)
+                           {
 
+                               if (result[0].HasStagedOrder) {
+                                   count++;
+                               }
+                               if (result[0].HasApproval) {
+                                   count++;
+                               }
+                               if (result[0].HasReleasedOrder) {
+                                   count++;
+                               }
+                               defaultSelectedRetailer = result[0].RetailerId;
+                               hasOneOrderType = count > 1 ? false : true;
+                           }
+                          
+                           return hasOneOrderType;
+                       }
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
                            kendo.mobile.application.pane.loader.show();
@@ -230,6 +254,15 @@ app.controller('homeController', [
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
 
                                $scope.orderCounts = result.MobileOrderCountList;
+
+                               hasOneOrderType = checkOrderTypeCount(result.MobileOrderCountList);
+
+                               if (hasOneOrderType)
+                               {
+                                   //TO DO -show order detail for one order type
+                                   
+                               }
+
                                kendo.mobile.application.pane.loader.hide();
 
                            }).catch(function (error) {
@@ -297,30 +330,39 @@ app.controller('homeController', [
                                    $scope.orders = currentOrders;
                                }
                                else {
-                                   $scope.orders = result;
-                                   $scope.successMessage = $scope.form.loading.resoruceValue;
+                                   $scope.orders = result;                                 
                                }
                            }).catch(function (error) {
                                $scope.orders = {};
-                               $scope.successMessage = $scope.form.noResults.resoruceValue;
+                             
                             
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
+                               if ($scope.orders.length > 0)
+                               {
+                                   $scope.successMessage = $scope.form.loading.resoruceValue;
+                               }
+                               else {
+                                   $scope.successMessage = $scope.form.noResults.resoruceValue;
+                               }
                            });
                        }
 
-
+                   
                        //button group events
                        $scope.retailerHeader = function () {
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
-                           var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
+                         
                            $(".ck-count-btn").removeClass('km-state-active');
                        }
                        $scope.myOptions = {
-                           select: function (e) {                            
+                           select: function (e) {
+                             
                                $scope.successMessage = $scope.form.loading.resoruceValue;
+
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
+                               
                               
                                $scope.selectedRetailer = selectedBtnRetailer;
 
@@ -339,7 +381,7 @@ app.controller('homeController', [
                                var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
 
                                var selectedOrderCount = listviewsToShow.eq(e.index).attr('data-orderCount');
-                              
+                               
                                var hasNext = false;
                               
                                if (selectedOrderCount > 0) {
