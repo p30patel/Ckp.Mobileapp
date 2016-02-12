@@ -30,7 +30,9 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
-
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("Analytics.View.Home");
+                           }
 
                            
                        }

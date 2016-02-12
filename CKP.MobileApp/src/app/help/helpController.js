@@ -1,7 +1,7 @@
 
 app.controller('helpController', ['$scope', '$http', '$sce', 'translateService',
     function ($scope, $http, $sce, translateService) {
-        if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+      if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
         }
         $scope.form = {};

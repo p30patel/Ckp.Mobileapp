@@ -149,15 +149,21 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
 
-    $scope.afterShow = function (e) {      
+    $scope.afterShow = function (e) {
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            alert('start');
+            window.plugins.EqatecAnalytics.Monitor.Start();
+            alert('started');
+        }
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
+        }
         $('.k-header').css('background-color', 'white');
 
         setLoginData();
       
     }
-    if (typeof (window.navigator.simulator) === 'undefined') {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
-    }
+   
     //if ($window.ga) {
         
     //    $window.ga('send', 'pageview', { page: 'Login View-GA' });
@@ -301,7 +307,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.beforeShow = function (e) {
-
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            alert('start');
+            window.plugins.EqatecAnalytics.Monitor.Start();
+            alert('started');
+        }
+      
     }
 
     $scope.intShow = function (e) {
@@ -387,7 +398,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-        if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+      if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
         }
         login();
@@ -395,7 +406,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     $scope.showPasswordHint = function () {
      
-        if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+      if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
         }
 

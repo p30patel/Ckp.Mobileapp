@@ -4,7 +4,7 @@ app.controller('feedbackController', [
 function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
 
     $scope.form = {};
-    if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+  if (typeof (window.navigator.simulator) === 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
     }
     $scope.form.title = {};
@@ -63,7 +63,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     };
 
     $scope.send = function () {
-        if (typeof (window.navigator.simulator) === 'undefined' && window.navigator.platform !== 'iPhone') {
+      if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.feedback.send");
         }
         kendo.mobile.application.pane.loader.show();
