@@ -77,11 +77,12 @@ app.factory("orderDataService", [
                         var url = authServiceBase + "webapi/api/core/MobileApp/UpdateApproveOrderStatus";
                        
                         var data = {
+                            UpdateStatus: jsonIn.UpdateStatus,
                             OrgDetail: organizationDetail,
                             ApproveOrdersListData: jsonIn.Salesorders
                         }
 
-                        console.log(data);
+                      
                         $http.post(url, data).success(function (result) {
                           
                             deferred.resolve(result);

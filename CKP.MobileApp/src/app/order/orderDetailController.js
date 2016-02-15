@@ -160,6 +160,8 @@ app.controller('orderDetailController', [
                        $scope.trackingList = {};
                        $scope.trackingCount = 0;
 
+                       $scope.confirmationConent = "";
+
                        var init = function() {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -281,12 +283,12 @@ app.controller('orderDetailController', [
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.pane.loader.show();
 
-                           $scope.confiramtionConent = 'No data found';
+                           $scope.confiramtionConent = $scope.form.noData.resoruceValue;
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
                                $scope.confirmationConent = result;
                            }).catch(function (error) {
-                               $scope.confirmationConent = 'No data found';
+                               $scope.confirmationConent = $scope.form.noData.resoruceValue;
                            }).finally(function () {
                                kendo.mobile.application.pane.loader.hide();
                            });

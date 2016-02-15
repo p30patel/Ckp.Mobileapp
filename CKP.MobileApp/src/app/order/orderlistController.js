@@ -59,6 +59,20 @@ app.controller('orderlistController', [
                        $scope.form.orderBy.resoruceValue = translateService.getResourceValue($scope.form.orderBy.resoruceName);
 
 
+                       $scope.form.appoveMessage = {};
+                       $scope.form.appoveMessage.resoruceName = "Order apporved successfuly";
+                       $scope.form.appoveMessage.resoruceValue = translateService.getResourceValue($scope.form.appoveMessage.resoruceName);
+
+
+                       $scope.form.declineMessage = {};
+                       $scope.form.declineMessage.resoruceName = "Order declined successfuly";
+                       $scope.form.declineMessage.resoruceValue = translateService.getResourceValue($scope.form.declineMessage.resoruceName);
+
+                       $scope.form.faildUpdateMessage = {};
+                       $scope.form.faildUpdateMessage.resoruceName = "Error while approve or decline";
+                       $scope.form.faildUpdateMessage.resoruceValue = translateService.getResourceValue($scope.form.faildUpdateMessage.resoruceName);
+
+
 
                        $scope.order = {};
                        
@@ -69,6 +83,8 @@ app.controller('orderlistController', [
                        $scope.order.title = 'Order List';
                        $scope.order.detail = {};
                        $scope.order.orders = {};
+
+                       $scope.confirmationConent = "";
                        var init = function() {
                            
                            if (!authService.authentication.isAuth) {
@@ -141,17 +157,17 @@ app.controller('orderlistController', [
                                 $('.ck-icon-toggge-' + index).removeClass('km-minus');
                             }
                         }
-                        $scope.confirmationConent = "";
+                       
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
                             kendo.mobile.application.pane.loader.show();
-                            $scope.confiramtionConent = 'No data found';
+                            $scope.confiramtionConent = $scope.form.noResults.resoruceValue;
                             orderDataService.getConfirmationHtml(id).then(function (result) {
                                 $scope.confirmationConent = result;
                                
                             }).catch(function (error) {
-                                $scope.confirmationConent = 'No data found';
+                                $scope.confirmationConent = $scope.form.noResults.resoruceValue;
                             }).finally(function () {
                                 kendo.mobile.application.pane.loader.hide();
                             });
@@ -163,6 +179,7 @@ app.controller('orderlistController', [
                             $("#modalview-confirmation").kendoMobileModalView("close");
                         };
                         $scope.approved = function (status) {
+                        
                             orderApprovalByStatus(status);
                         }
                        //appprove order
@@ -185,6 +202,7 @@ app.controller('orderlistController', [
                             return salesOrders;
                         }
                         var orderApprovalByStatus = function (statusUpdate) {
+                      
                             $scope.order.hasClikedApporval = true;
                             var salesOrders = getSalesOrders();
 
@@ -193,10 +211,10 @@ app.controller('orderlistController', [
                                 UpdateStatus: statusUpdate,
                             }
                             kendo.mobile.application.pane.loader.show();
-                            var successMessage = statusUpdate ? "Aprroved" : "Declined"
+                            var successMessage = statusUpdate ? $scope.form.successMessage.resoruceValue :$scope.form.declineMessage.resoruceValue;
                             orderDataService.approveDecline(data).then(function (result) {
 
-                                $scope.apporvalMessage = "Order " + successMessage + " Successfully.";
+                                $scope.apporvalMessage = successMessage
                                 if (typeof (window.navigator.simulator) === 'undefined') {
                                     window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderApporval");
                                 }
@@ -204,7 +222,7 @@ app.controller('orderlistController', [
                                     $scope.apporvalMessage = "";
                                     $scope.order.hasApproval = false;
                                     kendo.mobile.application.navigate("src/app/home/home.html");
-                                }, 2000);
+                                }, 1000);
 
                                 kendo.mobile.application.pane.loader.hide();
 
@@ -212,7 +230,7 @@ app.controller('orderlistController', [
                             }).catch(function (error) {
                                 $scope.order.hasClikedApporval = false;
                                 kendo.mobile.application.pane.loader.hide();
-                                $scope.apporvalMessage = "Approve / Decliend failed";
+                                $scope.apporvalMessage = $scope.form.faildUpdateMessage.resoruceValue;
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
                                 }, 7000);

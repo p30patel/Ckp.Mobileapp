@@ -2,13 +2,12 @@
 'use strict';
 
 app.factory("homeDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
-                function ($http, $q, localStorageService, ngAuthSettings, authService) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "timeStampService",
+function ($http, $q, localStorageService, ngAuthSettings, authService, timeStampService) {
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
                    
                     var homeDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd HH");
-                   
                    
                     var forceGetOrderCounts = function (data) {
                         var deferred = $q.defer();
@@ -25,9 +24,9 @@ app.factory("homeDataService", [
                         }
                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
-                        $http.post(url, jsonIn).success(function (result) {
-                            localStorageService.set('orderCounts', result);
-                            console.log(result);
+                        $http.post(url, jsonIn).success(function (result) {                           
+                            //var result = timeStampService.setLocalDataByKey('orderCount', result);
+                        
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {
@@ -44,6 +43,7 @@ app.factory("homeDataService", [
                         var refreshData = localStorageService.get('forceRefreshDetail');
                         var orderCounts = localStorageService.get('orderCounts');
                         var hasForceRefresh = true;
+                      
                         //if (refreshData && orderCounts)
                         //{
                         //    hasForceRefresh = new Date().getMinutes() <= refreshData.minutes;

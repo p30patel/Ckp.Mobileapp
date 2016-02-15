@@ -150,13 +150,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.afterShow = function (e) {
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            alert('start');
-            window.plugins.EqatecAnalytics.Monitor.Start();
-            alert('started');
-        }
+       
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
+
         }
         $('.k-header').css('background-color', 'white');
 
@@ -307,12 +304,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.beforeShow = function (e) {
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            alert('start');
-            window.plugins.EqatecAnalytics.Monitor.Start();
-            alert('started');
-        }
-      
+   
     }
 
     $scope.intShow = function (e) {

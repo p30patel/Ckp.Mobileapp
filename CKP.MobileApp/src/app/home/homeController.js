@@ -30,10 +30,7 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("Analytics.View.Home");
-                           }
-
+                          
                            
                        }
 
@@ -231,7 +228,8 @@ app.controller('homeController', [
                            var hasOneOrderType = false;
                            var count = 0;
                            defaultSelectedRetailer = 0;
-                           if ( result.length == 1)
+                          
+                           if (typeof(result) !== 'undefined' && result.length == 1)
                            {
 
                                if (result[0].HasStagedOrder) {
@@ -254,22 +252,27 @@ app.controller('homeController', [
                            kendo.mobile.application.pane.loader.show();
 
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
+                               if (typeof result.MobileOrderCountList === 'undefined') {
+                                   $scope.orderCounts = [];
+                               }
+                               else {
+                                   $scope.orderCounts = result.MobileOrderCountList;
 
-                               $scope.orderCounts = result.MobileOrderCountList;
+                                   hasOneOrderType = checkOrderTypeCount(result.MobileOrderCountList);
 
-                               hasOneOrderType = checkOrderTypeCount(result.MobileOrderCountList);
+                                   if (hasOneOrderType) {
+                                       //TO DO -show order detail for one order type
 
-                               if (hasOneOrderType)
-                               {
-                                   //TO DO -show order detail for one order type
-                                   
+                                   }
+
                                }
 
+                             
                                kendo.mobile.application.pane.loader.hide();
 
                            }).catch(function (error) {
 
-                               $scope.orderCounts = {};
+                               $scope.orderCounts = [];
                                kendo.mobile.application.pane.loader.hide();
 
                            }).finally(function () {
@@ -335,7 +338,7 @@ app.controller('homeController', [
                                    $scope.orders = result;                                 
                                }
                            }).catch(function (error) {
-                               $scope.orders = {};
+                               $scope.orders = [];
                              
                             
                            }).finally(function () {
@@ -471,9 +474,8 @@ app.controller('homeController', [
                                if (refreshData)
                                {
                                    var _refreshData = {
-                                       date: refreshData.date,
-                                       hours: refreshData.hours,
-                                       Minutes: refreshData.Minutes,
+                                       timeStamp: 1000*60*30, // Expiration in milliseconds; set to null to never expire
+                                       timeNow : new Date().getTime(),
                                        hasClickedApproval: false,
                                        hasClickedSearch: true,
                                    };
