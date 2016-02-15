@@ -2,9 +2,7 @@
 app.controller('termsConditionController', [
                    '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
-                     if (typeof (window.navigator.simulator) === 'undefined') {
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.termsCondition");
-                       }
+                     
                        $scope.form = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Terms & Conditions";
@@ -26,7 +24,9 @@ app.controller('termsConditionController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
-
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.termsCondition");
+                               }
                            }
                        }
 

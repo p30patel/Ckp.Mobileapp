@@ -1,9 +1,7 @@
 
 app.controller('helpController', ['$scope', '$http', '$sce', 'translateService',
     function ($scope, $http, $sce, translateService) {
-      if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
-        }
+    
         $scope.form = {};
 
         $scope.form.title = {};
@@ -19,7 +17,9 @@ app.controller('helpController', ['$scope', '$http', '$sce', 'translateService',
                              .find(".km-navbar")
                              .data("kendo-mobile-nav-bar");
                 navbar.title($scope.form.title.resoruceValue);
-
+                if (typeof (window.navigator.simulator) === 'undefined') {
+                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.help");
+                }
             }
         }
         $scope.content = 'Comming Soon';

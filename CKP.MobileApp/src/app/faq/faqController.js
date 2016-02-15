@@ -3,10 +3,7 @@ app.controller('faqController', [
                    '$scope', '$http', '$sce', 'faqDataService', 'translateService',
                    function ($scope, $http, $sce, faqDataService, translateService) {
                        $scope.form = {};
-                     if (typeof (window.navigator.simulator) === 'undefined') {
-
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
-                       }
+                     
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "FAQ";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -21,6 +18,11 @@ app.controller('faqController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
+
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
+                               }
                            }
                        }
 

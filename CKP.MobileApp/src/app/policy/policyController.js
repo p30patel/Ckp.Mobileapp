@@ -2,9 +2,7 @@
 app.controller('policyController', [
                    '$scope', '$http', '$sce', 'policyTermsDataService', 'translateService',
                    function ($scope, $http, $sce, policyTermsDataService, translateService) {
-                     if (typeof (window.navigator.simulator) === 'undefined') {
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.policy");
-                       }
+                    
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -40,7 +38,9 @@ app.controller('policyController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
-
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.policy");
+                               }
                            }
                        }
 

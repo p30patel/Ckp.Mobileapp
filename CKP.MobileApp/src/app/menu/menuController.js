@@ -70,6 +70,9 @@ app.controller('menuController', [
                        $scope.logout = function () {
                            authService.logout();
                            $scope.authentication.isAuth = false;
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.menu.logout");
+                           }
 
                            kendo.mobile.application.navigate("src/app/login/login.html");
                        }
@@ -83,6 +86,10 @@ app.controller('menuController', [
                                case "help":
                                  
                                    window.open($scope.helpUrl, '_system');
+                                   if (typeof (window.navigator.simulator) === 'undefined') {
+                                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.menu.help");
+                                   }
+
                                    break;
 
                                case "notification" :                           

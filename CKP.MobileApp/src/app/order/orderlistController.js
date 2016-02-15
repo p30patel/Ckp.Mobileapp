@@ -17,6 +17,10 @@ app.controller('orderlistController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
+
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderList");
+                               }
                            }
                          
                        }
@@ -160,7 +164,10 @@ app.controller('orderlistController', [
                        
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
-                           $('.km-view').css('-webkit-transform', 'none');
+                            $('.km-view').css('-webkit-transform', 'none');
+                            if (typeof (window.navigator.simulator) === 'undefined') {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.confirmationHtml");
+                            }
                             kendo.mobile.application.pane.loader.show();
                             $scope.confiramtionConent = $scope.form.noResults.resoruceValue;
                             orderDataService.getConfirmationHtml(id).then(function (result) {
@@ -216,7 +223,7 @@ app.controller('orderlistController', [
 
                                 $scope.apporvalMessage = successMessage
                                 if (typeof (window.navigator.simulator) === 'undefined') {
-                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderApporval");
+                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderApporval");
                                 }
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";
@@ -239,6 +246,9 @@ app.controller('orderlistController', [
                         }
 
                         $scope.orderDetail = function (poctrlno) {
+                            if (typeof (window.navigator.simulator) === 'undefined') {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
+                            }
                             kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno);
                         }
                        

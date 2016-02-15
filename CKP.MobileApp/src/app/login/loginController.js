@@ -161,14 +161,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
       
     }
    
-    //if ($window.ga) {
-        
-    //    $window.ga('send', 'pageview', { page: 'Login View-GA' });
-    
-    //}
-
-
-
     //forgot password 
     $scope.loginData.email = "";
     $scope.forgotPasswordModalOpen = function () {
@@ -184,7 +176,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
        
         if (typeof (window.navigator.simulator) === 'undefined')
         {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.sendPassword");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.sendPassword");
         }
         kendo.mobile.application.pane.loader.show();
         var username = $scope.loginData.userName;
@@ -267,40 +259,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
             
             kendo.mobile.application.pane.loader.hide();
         });
-
-        //Faq
-        faqDataService.getFaqs(selectedLanague).then(function (result) {
-            $scope.faqs = result;
-        }).catch(function (error) {
-            $scope.faqs = {};
-        }).finally(function () {
-
-        });
-
-        //end faq
-        //terms & conditions
-        policyTermsDataService.getPolicyTerms().then(function (result) {
-            $scope.termsCondition = result;
-
-        }).catch(function (error) {
-            $scope.termsCondition = {};
-        }).finally(function () {
-
-        });
-        //end
-        //policies
-
-
-        policyTermsDataService.getPolicyTerms().then(function (result) {
-            $scope.policies = result;
-
-        }).catch(function (error) {
-            $scope.policies = {};
-        }).finally(function () {
-
-        });
-
-
     }
 
     $scope.beforeShow = function (e) {
@@ -313,6 +271,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
 
     $scope.translatePage = function () {
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.changeLanguage");
+        }
 
         translatePage();
     };
@@ -365,6 +326,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 {
                     authService.authentication.isAuth = false;
                     $("#modalview-newPassword").kendoMobileModalView("open");
+
+                    if (typeof (window.navigator.simulator) === 'undefined') {
+                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.newPassword");
+                    }
+
+
                     kendo.mobile.application.pane.loader.hide();
                 }
                 else {
@@ -399,7 +366,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.showPasswordHint = function () {
      
       if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.passwordHint");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.passwordHint");
         }
 
         var username = $scope.loginData.userName;

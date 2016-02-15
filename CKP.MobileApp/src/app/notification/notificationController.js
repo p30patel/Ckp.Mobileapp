@@ -1,9 +1,7 @@
 
 app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout',
 function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout) {
-     if (typeof (window.navigator.simulator) === 'undefined') {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
-    }
+   
     $scope.form = {};
 
     $scope.form.title = {};
@@ -31,6 +29,10 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                          .find(".km-navbar")
                          .data("kendo-mobile-nav-bar");
             navbar.title($scope.form.title.resoruceValue);
+
+            if (typeof (window.navigator.simulator) === 'undefined') {
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.notifcation");
+            }
 
         }
     }
@@ -106,6 +108,10 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
     var getNotifications = function () {
         kendo.mobile.application.pane.loader.show();
+
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.getNotifcation");
+        }
         notificationDataService.getUserNotifications().then(function (result) {
             kendo.mobile.application.pane.loader.hide();
             $scope.notifications = result;
@@ -130,7 +136,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             UserId : 0
 
         };
-          
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.updateNotifcation");
+        }
         notificationDataService.updateNotification(notification).then(function (result) {
             if (result !== 'success') {
                

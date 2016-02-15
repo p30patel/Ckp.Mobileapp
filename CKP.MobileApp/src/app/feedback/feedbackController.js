@@ -4,9 +4,7 @@ app.controller('feedbackController', [
 function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
 
     $scope.form = {};
-  if (typeof (window.navigator.simulator) === 'undefined') {
-        window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
-    }
+ 
     $scope.form.title = {};
     $scope.form.title.resoruceName = "Feedback";
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -19,6 +17,10 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
                          .find(".km-navbar")
                          .data("kendo-mobile-nav-bar");
             navbar.title($scope.form.title.resoruceValue);
+
+            if (typeof (window.navigator.simulator) === 'undefined') {
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.feedback");
+            }
 
         }
     }
@@ -64,7 +66,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
     $scope.send = function () {
       if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.feedback.send");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.feedback.send");
         }
         kendo.mobile.application.pane.loader.show();
         feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {

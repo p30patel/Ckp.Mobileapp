@@ -1,9 +1,7 @@
 
 app.controller('contactusController', ['$scope', '$http', '$sce', 'authService', 'translateService', 'localStorageService', '$timeout', 'feedbackDataService',
     function ($scope, $http, $sce, authService, translateService, localStorageService, $timeout, feedbackDataService) {
-      if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.contactus");
-        }
+     
         $scope.form = {};
         $scope.authentication = authService.authentication;
         $scope.helpDesk = ""; //need to set help des
@@ -22,7 +20,9 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                              .find(".km-navbar")
                              .data("kendo-mobile-nav-bar");
                 navbar.title($scope.form.title.resoruceValue);
-
+                if (typeof (window.navigator.simulator) === 'undefined') {
+                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.contactus");
+                }
             }
         }
 
@@ -202,7 +202,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
 
         var sendEmail = function () {
           if (typeof (window.navigator.simulator) === 'undefined') {
-                window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.contactus.writeEamil");
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.contactus.writeEamil");
             }
             var message = $scope.form.feedbackSuccess.resoruceValue;
             var isAuth = $scope.authentication.isAuth;

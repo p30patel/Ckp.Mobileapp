@@ -166,12 +166,6 @@ app.controller('homeController', [
 
                       setResources();
                       
-                  
-                       //if ($window.ga) {
-
-                       //    $window.ga('send', 'pageview', { page: 'Home View-GA' });
-
-                       //}
                        $scope.message = "";
                        $scope.messageCount = 0;
                        $scope.searchValue = "";
@@ -251,6 +245,10 @@ app.controller('homeController', [
                            $scope.hasSearch = false;
                            kendo.mobile.application.pane.loader.show();
 
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
+                           }
+
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
                                if (typeof result.MobileOrderCountList === 'undefined') {
                                    $scope.orderCounts = [];
@@ -296,6 +294,10 @@ app.controller('homeController', [
                      
                        
                        var getOrderSummary = function (orderType, orderTypeId, searchParamterId, searchInput, currentPage, hasNext) {
+
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderSummary");
+                           }
                            $scope.hasNext = !hasNext;
                           
                            var jsonIn = {
@@ -417,6 +419,9 @@ app.controller('homeController', [
 
                                messageDataService.getMessages().then(function (result) {
                                  
+                                   if (typeof (window.navigator.simulator) === 'undefined') {
+                                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.messages");
+                                   }
                                    $scope.mesages = result;
                                    $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
                                    $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
@@ -449,12 +454,19 @@ app.controller('homeController', [
                          
                            var hasNext = true;
                           
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.viewNext");
+                           }
                            getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
                          
                           
                        }
                     
                        $scope.orderDetail = function (orderType, parameterId, parameterValue) {
+
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderDetail");
+                           }
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
 
@@ -468,7 +480,9 @@ app.controller('homeController', [
                                $scope.hasSearch = true;
                                $scope.orders = {};
                                setSelectPara();
-
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
+                               }
                                var refreshData = localStorageService.get('forceRefreshDetail');
                               
                                if (refreshData)
@@ -493,6 +507,9 @@ app.controller('homeController', [
                            $scope.viewMoreColumn = columnName;
 
                            $scope.orderList = orders;
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.viewMore");
+                           }
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };
                        $scope.hideMoreOrderModel = function () {
@@ -580,8 +597,12 @@ app.controller('homeController', [
                            getSelectedList();
                            
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
-                        
+                            
                            var selectedList = $scope.selection;
+
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
+                           }
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList);
                        }
 
@@ -600,6 +621,9 @@ app.controller('homeController', [
                        //credit lock
                        $scope.showCreditModel = function () {
                            $('.order').hide();
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.creditLock");
+                           }
                            $("#modalview-credit").kendoMobileModalView("open");
                        };
                        $scope.hideCreditModel = function () {

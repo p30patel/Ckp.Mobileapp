@@ -2,9 +2,7 @@
 app.controller('orderDetailController', [
                    '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout',
                    function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout) {
-                       if (typeof (window.navigator.simulator) === 'undefined') {
-                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
-                       }
+                      
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -19,6 +17,10 @@ app.controller('orderDetailController', [
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
+
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
+                               }
 
                            }
                        }
@@ -226,7 +228,9 @@ app.controller('orderDetailController', [
 
                       
                        $scope.showTrakcingListModal = function () {
-                         
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.tracking");
+                           }
                            if ($scope.trackingCount > 1) {
                                $("#modalview-trackingList").kendoMobileModalView("open");
                            }
@@ -243,7 +247,7 @@ app.controller('orderDetailController', [
                        }
                        $scope.send = function () {
                            if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.orderDetail.send");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.send");
                            }
                            kendo.mobile.application.pane.loader.show();
                            $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
@@ -282,7 +286,9 @@ app.controller('orderDetailController', [
                        $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.pane.loader.show();
-
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
+                           }
                            $scope.confiramtionConent = $scope.form.noData.resoruceValue;
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
