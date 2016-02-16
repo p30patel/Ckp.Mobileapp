@@ -84,8 +84,18 @@ app.controller('menuController', [
 
                            switch (viewName) {
                                case "help":
-                                 
-                                   window.open($scope.helpUrl, '_system');
+                                  
+                                   var deviceData = localStorageService.get('deviceData');     
+
+                                   if (deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9)
+                                   {
+                                       window.open($scope.helpUrl, '_blank', 'location=yes');
+                                   }
+                                   else
+                                   {
+                                       window.open($scope.helpUrl, '_system');
+                                   }
+                                   
                                    if (typeof (window.navigator.simulator) === 'undefined') {
                                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.menu.help");
                                    }
