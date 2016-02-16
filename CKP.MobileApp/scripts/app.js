@@ -23,7 +23,7 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
-app.run(['authService', 'localStorageService', function (authService, localStorageService) {
+app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
 
 
     //authService.fillAuthData();
@@ -74,7 +74,11 @@ app.run(['authService', 'localStorageService', function (authService, localStora
     document.addEventListener('deviceready', function () {
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
-      
+        $rootScope.hasSearchOrApporval = false;
+        $rootScope.hasPreviousSearch = false;
+       
+        localStorageService.remove('orderCounts');
+        $rootScope.timeStampOrderCount = new Date().getTime();
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();

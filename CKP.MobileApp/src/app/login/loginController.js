@@ -358,7 +358,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
     $scope.login = function () {
       if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("events.login.login");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
         }
         login();
     }

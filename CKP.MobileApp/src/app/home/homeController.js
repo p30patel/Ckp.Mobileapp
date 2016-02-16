@@ -3,6 +3,10 @@ app.controller('homeController', [
                   '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce', '$window',
                    function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce, $window) {
                        $scope.beforeShow = function () {
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.Start();
+                           }
+
                            kendo.mobile.application.pane.loader.show();
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -30,7 +34,7 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
-                          
+                           console.log('home loaded after show');
                            
                        }
 
@@ -165,7 +169,7 @@ app.controller('homeController', [
                        }
 
                       setResources();
-                      
+                     
                        $scope.message = "";
                        $scope.messageCount = 0;
                        $scope.searchValue = "";
@@ -250,7 +254,11 @@ app.controller('homeController', [
                            }
 
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
-                               if (typeof result.MobileOrderCountList === 'undefined') {
+                               if (result === null)
+                               {
+                                   $scope.orderCounts = [];
+                               }
+                               else if (typeof result.MobileOrderCountList === 'undefined') {
                                    $scope.orderCounts = [];
                                }
                                else {
@@ -285,7 +293,9 @@ app.controller('homeController', [
                    
                            $scope.selectedPara = '1';                         
                            setSelectPara();
+                         
                            getOrderCounts();
+                           console.log('home loaded init show');
                        }
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
@@ -478,25 +488,28 @@ app.controller('homeController', [
                                $event.target.blur();
                                forceGetData = true;
                                $scope.hasSearch = true;
+
+                               $rootScope.hasSearchOrApporval = true;
+
                                $scope.orders = {};
                                setSelectPara();
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
                                }
-                               var refreshData = localStorageService.get('forceRefreshDetail');
+                               //var refreshData = localStorageService.get('forceRefreshDetail');
                               
-                               if (refreshData)
-                               {
-                                   var _refreshData = {
-                                       timeStamp: 1000*60*30, // Expiration in milliseconds; set to null to never expire
-                                       timeNow : new Date().getTime(),
-                                       hasClickedApproval: false,
-                                       hasClickedSearch: true,
-                                   };
+                               //if (refreshData)
+                               //{
+                               //    var _refreshData = {
+                               //        timeStamp: 1000*60*30, // Expiration in milliseconds; set to null to never expire
+                               //        timeNow : new Date().getTime(),
+                               //        hasClickedApproval: false,
+                               //        hasClickedSearch: true,
+                               //    };
                                   
-                                   localStorageService.set('forceRefreshDetail', _refreshData);
-                                   console.log(_refreshData);
-                               }
+                               //    localStorageService.set('forceRefreshDetail', _refreshData);
+                               //    console.log(_refreshData);
+                               //}
                                
                                getOrderCounts();
 

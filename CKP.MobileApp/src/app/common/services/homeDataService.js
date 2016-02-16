@@ -2,8 +2,8 @@
 'use strict';
 
 app.factory("homeDataService", [
-                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "timeStampService",
-function ($http, $q, localStorageService, ngAuthSettings, authService, timeStampService) {
+                "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "timeStampService", "$rootScope",
+function ($http, $q, localStorageService, ngAuthSettings, authService, timeStampService, $rootScope) {
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
                    
                     var homeDataServiceFactory = {};
@@ -24,9 +24,14 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                         }
                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
-                        $http.post(url, jsonIn).success(function (result) {                           
-                            //var result = timeStampService.setLocalDataByKey('orderCount', result);
-                        
+                        $http.post(url, jsonIn).success(function (result) {
+                            
+                            $rootScope.hasPreviousSearch = $rootScope.hasSearchOrApporval;
+                            $rootScope.hasSearchOrApporval = false;
+                            $rootScope.timeStampOrderCount = new Date().getTime();
+                            console.log('order count loaded from server');
+                            localStorageService.set('orderCounts', result);
+
                             deferred.resolve(result);
                           
                         }).error(function (err, status) {
@@ -40,16 +45,24 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                     
                     var getOrderCounts = function (data) {
                         var deferred = $q.defer();
-                        var refreshData = localStorageService.get('forceRefreshDetail');
+
                         var orderCounts = localStorageService.get('orderCounts');
                         var hasForceRefresh = true;
-                      
-                        //if (refreshData && orderCounts)
-                        //{
-                        //    hasForceRefresh = new Date().getMinutes() <= refreshData.minutes;
-                        //}
+                        var timeNow = new Date().getTime();
+                        var persistTime = 1000 * 60 * 5;
+                        
+                        if (orderCounts !== null && !$rootScope.hasSearchOrApporval && !$rootScope.hasPreviousSearch)
+                        {
+                            if (persistTime && timeNow > Number($rootScope.timeStampOrderCount) + persistTime) {
+                                hasForceRefresh = true;
+                            }
+                        else{
+                            hasForceRefresh = false;
+                        }
+                        }
                         
                         if (!hasForceRefresh) {
+                            console.log('order count loaded from local' + orderCounts);
                             deferred.resolve(orderCounts);
                         }
                         else {
