@@ -72,9 +72,9 @@
                            
                             </td>
 
-                            <td ng-if="searchParameterId=='1'" class="spacer" style="width:35%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='1' || searchParameterId == '2'" class="spacer" style="width:30%">{{form.salesOrder.resoruceValue}}</td>                         
-                            <td ng-if="searchParameterId=='2'" class="spacer" style="width:35%;">{{form.orderNumber.resoruceValue}}</td>
+                            <td ng-if="searchParameterId=='2'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
                             
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
@@ -95,9 +95,9 @@
                                     ng-model="chk[$parent.$index]"
                                     ng-change="checkedIndividual({{$parent.$index}})" />
                                
-                                <label class="km-checkbox-label" style="position:relative; bottom:1em;" for="{{$parent.$index}}"></label>
+                                <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="{{$parent.$index}}"></label>
                             </td>
-                            <td  ng-if="searchParameterId == '1'" style="width:35%;">
+                            <td  ng-if="searchParameterId == '1'" style="width:30%;">
                         
                             {{ order.OrderNumber }}                            
                        
@@ -107,7 +107,7 @@
                            {{order.SalesOrderNumber}}
                            
                             </td>
-                            <td ng-if="searchParameterId == '2' " style="width:35%;">
+                            <td ng-if="searchParameterId == '2' " style="width:30%;">
                           <div ng-repeat="order in value | limitTo : 3">
                             {{ order.OrderNumber }}                            
                          </div>
