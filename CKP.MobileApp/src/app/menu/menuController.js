@@ -48,7 +48,7 @@ app.controller('menuController', [
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
 
-                       $scope.helpUrl = ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help.pdf";
+                       $scope.helpUrl = ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
                      
                        //address
 
