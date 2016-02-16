@@ -79,7 +79,7 @@ app.factory('authService', [
                     };
 
                     var forceGetOrganizationData = function () {
-
+                        $rootScope.hasSearchOrApporval = true;
                         var deviceData = localStorageService.get('deviceData');
                         var loginData = localStorageService.get('loginData');
                         var organizationDetail = localStorageService.get('organizationDetail');
@@ -123,7 +123,7 @@ app.factory('authService', [
                             }
                            
                         }
-                      
+                       
                         var deferred = $q.defer();
                         if (hasForceRefresh)
                         {

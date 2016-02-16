@@ -317,7 +317,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             authService.login($scope.loginData).then(function (response) {
 
                 var data = localStorageService.get('organizationDetail');
-                
+                kendo.mobile.application.hideLoading();
                 if (data) {
 
                     hasNewPassword = data.HasNewPassword;
@@ -330,9 +330,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
                     if (typeof (window.navigator.simulator) === 'undefined') {
                         window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.newPassword");
                     }
-
-
-                     kendo.mobile.application.hideLoading();
                 }
                 else {
                     kendo.mobile.application.navigate("src/app/home/home.html");
