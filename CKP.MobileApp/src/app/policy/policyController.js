@@ -47,7 +47,7 @@ app.controller('policyController', [
 
                        $scope.policies = {};
                        var init = function () {
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
 
                            policyTermsDataService.getPolicyTerms().then(function (result) {
                                $scope.policies = result;
@@ -55,7 +55,7 @@ app.controller('policyController', [
                            }).catch(function (error) {
                                $scope.policies = {};
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
                        }
                        init();

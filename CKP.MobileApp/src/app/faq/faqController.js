@@ -43,7 +43,7 @@ app.controller('faqController', [
 
                        var getFaqs = function (selectedCultureName) {
 
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
 
                            faqDataService.getFaqs(selectedCultureName).then(function (result) {
                                $scope.faqs = result;
@@ -51,7 +51,7 @@ app.controller('faqController', [
                            }).catch(function (error) {
                                $scope.faqs = {};
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
                        }
 
@@ -59,7 +59,7 @@ app.controller('faqController', [
                            var cultureName = translateService.getCurrentCultureName();
 
                            if (cultureName !== 'en-US') {
-                               kendo.mobile.application.pane.loader.show();
+                                 kendo.mobile.application.showLoading();
 
                                faqDataService.getFaqs('en-US').then(function (result) {
                                    getFaqs(cultureName);
@@ -67,7 +67,7 @@ app.controller('faqController', [
                                }).catch(function (error) {
                                    $scope.faqs = {};
                                }).finally(function () {
-                                   kendo.mobile.application.pane.loader.hide();
+                                    kendo.mobile.application.hideLoading();
                                });
                            }
                            else {

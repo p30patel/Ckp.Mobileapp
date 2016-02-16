@@ -68,7 +68,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
       if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.feedback.send");
         }
-        kendo.mobile.application.pane.loader.show();
+          kendo.mobile.application.showLoading();
         feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
             if (result === 'success') {
 
@@ -93,7 +93,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
             }, 7000);
 
         }).finally(function () {
-            kendo.mobile.application.pane.loader.hide();
+             kendo.mobile.application.hideLoading();
         });
     }
 }

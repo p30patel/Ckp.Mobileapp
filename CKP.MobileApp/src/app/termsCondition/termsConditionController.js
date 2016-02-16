@@ -33,14 +33,14 @@ app.controller('termsConditionController', [
 
                        $scope.termsCondition = {};
                        var init = function () {
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                            policyTermsDataService.getPolicyTerms().then(function (result) {
                                $scope.termsCondition = result;
 
                            }).catch(function (error) {
                                $scope.termsCondition = {};
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
                        }
                        init();

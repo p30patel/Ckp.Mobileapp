@@ -84,7 +84,7 @@ app.controller('menuController', [
 
                            switch (viewName) {
                                case "help":
-                                  
+                                   $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-i.pdf" : ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
                                    var deviceData = localStorageService.get('deviceData');     
 
                                    if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) 

@@ -123,7 +123,7 @@ app.controller('orderlistController', [
 
                         var getOrderList = function () {
                             
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                           
                            var searchList = [];
                            searchList.push(selectedList);
@@ -143,7 +143,7 @@ app.controller('orderlistController', [
                                
                                $scope.order.orders = {};
                            }).finally(function() {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
                         }; // end order list
 
@@ -168,7 +168,7 @@ app.controller('orderlistController', [
                             if (typeof (window.navigator.simulator) === 'undefined') {
                                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.confirmationHtml");
                             }
-                            kendo.mobile.application.pane.loader.show();
+                              kendo.mobile.application.showLoading();
                             $scope.confiramtionConent = $scope.form.noResults.resoruceValue;
                             orderDataService.getConfirmationHtml(id).then(function (result) {
                                 $scope.confirmationConent = result;
@@ -176,7 +176,7 @@ app.controller('orderlistController', [
                             }).catch(function (error) {
                                 $scope.confirmationConent = $scope.form.noResults.resoruceValue;
                             }).finally(function () {
-                                kendo.mobile.application.pane.loader.hide();
+                                 kendo.mobile.application.hideLoading();
                             });
 
                             $("#modalview-confirmation").kendoMobileModalView("open");
@@ -217,7 +217,7 @@ app.controller('orderlistController', [
                                 Salesorders: salesOrders,
                                 UpdateStatus: statusUpdate,
                             }
-                            kendo.mobile.application.pane.loader.show();
+                              kendo.mobile.application.showLoading();
                             var successMessage = statusUpdate ? $scope.form.successMessage.resoruceValue :$scope.form.declineMessage.resoruceValue;
                             orderDataService.approveDecline(data).then(function (result) {
 
@@ -231,12 +231,12 @@ app.controller('orderlistController', [
                                     kendo.mobile.application.navigate("src/app/home/home.html");
                                 }, 1000);
 
-                                kendo.mobile.application.pane.loader.hide();
+                                 kendo.mobile.application.hideLoading();
 
 
                             }).catch(function (error) {
                                 $scope.order.hasClikedApporval = false;
-                                kendo.mobile.application.pane.loader.hide();
+                                 kendo.mobile.application.hideLoading();
                                 $scope.apporvalMessage = $scope.form.faildUpdateMessage.resoruceValue;
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";

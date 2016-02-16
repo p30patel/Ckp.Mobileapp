@@ -212,7 +212,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                 $scope.contact.orderNumber !== '' && $scope.contact.organization !== '' &&
                 $scope.contact.messageBody !== '' && validator.validate())) {
 
-                kendo.mobile.application.pane.loader.show();
+                  kendo.mobile.application.showLoading();
 
                 feedbackDataService.contactUsByEmail($scope.contact).then(function (result) {
                     if (result === 'success') {
@@ -238,7 +238,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                     }, 7000);
 
                 }).finally(function () {
-                    kendo.mobile.application.pane.loader.hide();
+                     kendo.mobile.application.hideLoading();
                 });
             }
             else {

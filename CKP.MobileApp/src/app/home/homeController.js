@@ -7,12 +7,12 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.Start();
                            }
 
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                            if (!authService.authentication.isAuth) {
                                authService.logout();
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
-                           kendo.mobile.application.pane.loader.hide();
+                            kendo.mobile.application.hideLoading();
 
                        };
 
@@ -247,7 +247,7 @@ app.controller('homeController', [
                        }
                        var getOrderCounts = function () {
                            $scope.hasSearch = false;
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
@@ -274,16 +274,16 @@ app.controller('homeController', [
                                }
 
                              
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
 
                            }).catch(function (error) {
 
                                $scope.orderCounts = [];
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
 
                            }).finally(function () {
 
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
 
                        }
@@ -329,10 +329,10 @@ app.controller('homeController', [
                            $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);
                            $scope.screen2SearchParameter = parameterService.getScreen2SearchParameter($scope.searchParameterId, $scope.selectedOrderTypeId);
                          
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length >= $scope.PageSize;
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                                if (hasNext) {
 
                                    var currentOrders = $scope.orders;
@@ -354,7 +354,7 @@ app.controller('homeController', [
                              
                             
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                                if ($scope.orders.length > 0)
                                {
                                    $scope.successMessage = $scope.form.loading.resoruceValue;

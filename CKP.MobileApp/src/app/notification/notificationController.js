@@ -9,12 +9,12 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
     $scope.beforeShow = function () {
-        kendo.mobile.application.pane.loader.show();
+          kendo.mobile.application.showLoading();
         if (!authService.authentication.isAuth) {
             authService.logout();
             kendo.mobile.application.navigate("src/app/login/login.html");
         }
-        kendo.mobile.application.pane.loader.hide();
+         kendo.mobile.application.hideLoading();
 
     };
     $scope.message = "";
@@ -107,16 +107,16 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     setResources();
 
     var getNotifications = function () {
-        kendo.mobile.application.pane.loader.show();
+          kendo.mobile.application.showLoading();
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.getNotifcation");
         }
         notificationDataService.getUserNotifications().then(function (result) {
-            kendo.mobile.application.pane.loader.hide();
+             kendo.mobile.application.hideLoading();
             $scope.notifications = result;
         }).catch(function (error) {
-            kendo.mobile.application.pane.loader.hide();
+             kendo.mobile.application.hideLoading();
             $scope.message = "Faild to get notifcation.";
             $timeout(function () {
                 $scope.message = "";

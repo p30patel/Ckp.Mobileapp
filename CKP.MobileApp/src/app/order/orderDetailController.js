@@ -203,7 +203,7 @@ app.controller('orderDetailController', [
                            $scope.order.SalesOrderNo = '';
                          
                          
-                           kendo.mobile.application.pane.loader.show();                        
+                           kendo.mobile.application.showLoading();                       
                       
                            orderDataService.getOrderDetail(poctrlno).then(function (result) {
                               
@@ -221,7 +221,7 @@ app.controller('orderDetailController', [
                                    $scope.order.detail = {};
                                  
                                }).finally(function () {
-                                   kendo.mobile.application.pane.loader.hide();
+                                    kendo.mobile.application.hideLoading();
                                });
                          
                        }; // end message
@@ -266,7 +266,7 @@ app.controller('orderDetailController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.send");
                            }
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                            $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
@@ -293,7 +293,7 @@ app.controller('orderDetailController', [
                                }, 7000);
 
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
                        }
 
@@ -302,7 +302,7 @@ app.controller('orderDetailController', [
                       
                        $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
-                           kendo.mobile.application.pane.loader.show();
+                             kendo.mobile.application.showLoading();
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
@@ -313,7 +313,7 @@ app.controller('orderDetailController', [
                            }).catch(function (error) {
                                $scope.confirmationConent = $scope.form.noData.resoruceValue;
                            }).finally(function () {
-                               kendo.mobile.application.pane.loader.hide();
+                                kendo.mobile.application.hideLoading();
                            });
 
                            $("#modalview-confirmation").kendoMobileModalView("open");

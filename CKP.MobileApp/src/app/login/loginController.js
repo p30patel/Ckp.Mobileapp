@@ -178,7 +178,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.sendPassword");
         }
-        kendo.mobile.application.pane.loader.show();
+          kendo.mobile.application.showLoading();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
         var message = "";
@@ -191,12 +191,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                     $scope.forgotPassworMessage = "";
                     $("#modalview-password").kendoMobileModalView("close");
                 }, 7000);
-                kendo.mobile.application.pane.loader.hide();
+                 kendo.mobile.application.hideLoading();
 
             })
             .catch(function (err) {
                 message = "User name and email combination does not match!";
-                kendo.mobile.application.pane.loader.hide();
+                 kendo.mobile.application.hideLoading();
                 $scope.forgotPassworMessage = message;
                 $timeout(function () {
                     $scope.forgotPassworMessage = "";
@@ -228,7 +228,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         var rowVersion = "";
 
         localStorageService.set('selectedLanguage', selectedLanague);
-        kendo.mobile.application.pane.loader.show();
+          kendo.mobile.application.showLoading();
         translateService.getResourceUpdates(selectedLanague, rowVersion).then(function (result) {
 
             $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);
@@ -257,7 +257,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             
 
             
-            kendo.mobile.application.pane.loader.hide();
+             kendo.mobile.application.hideLoading();
         });
     }
 
@@ -311,7 +311,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         localStorageService.set('loginData', loginData);
 
         if (userName !== '' && password !== '') {
-            kendo.mobile.application.pane.loader.show();
+              kendo.mobile.application.showLoading();
 
             $scope.passwordHint = "";
             authService.login($scope.loginData).then(function (response) {
@@ -332,14 +332,14 @@ function ($scope, $http, authService, translateService, localStorageService, log
                     }
 
 
-                    kendo.mobile.application.pane.loader.hide();
+                     kendo.mobile.application.hideLoading();
                 }
                 else {
                     kendo.mobile.application.navigate("src/app/home/home.html");
                 }
 
             }).catch(function (err) {
-                kendo.mobile.application.pane.loader.hide();
+                 kendo.mobile.application.hideLoading();
                 $scope.passwordHint = "<b>" + err.error_description + "</b>";
                 $timeout(function () {
                     $scope.passwordHint = "";
