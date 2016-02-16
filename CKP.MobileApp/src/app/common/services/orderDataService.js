@@ -84,7 +84,7 @@ app.factory("orderDataService", [
 
                       
                         $http.post(url, data).success(function (result) {
-                          
+                            $rootScope.hasSearchOrApporval = true;
                             deferred.resolve(result);
                         }).error(function (xhr, status, error) {                           
                             deferred.reject(error);
