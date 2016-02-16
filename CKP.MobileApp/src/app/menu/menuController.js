@@ -87,7 +87,7 @@ app.controller('menuController', [
                                   
                                    var deviceData = localStorageService.get('deviceData');     
 
-                                   if (deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9)
+                                   if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) 
                                    {
                                        window.open($scope.helpUrl, '_blank', 'location=yes');
                                    }

@@ -1,7 +1,7 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout',
-                   function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout) {
+                   '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout', 'localStorageService',
+                   function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout, localStorageService) {
                       
                        $scope.form = {};
 
@@ -236,13 +236,30 @@ app.controller('orderDetailController', [
                            }
                            else {
                                var url = $scope.trackingList[0].TrackingUrl;
-                               window.open(url, '_system');
+
+                               var deviceData = localStorageService.get('deviceData');
+
+                               if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) {
+                                   window.open(url, '_blank', 'location=yes');
+                               }
+                               else {
+                                   window.open(url, '_system');
+                               }
+                             
                            }
                        }
 
                        $scope.showTracking = function (url) {
                           
-                           window.open(url, '_system');
+                           var deviceData = localStorageService.get('deviceData');
+
+                           if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) {
+                               window.open(url, '_blank', 'location=yes');
+                           }
+                           else {
+                               window.open(url, '_system');
+                           }
+                        
                          
                        }
                        $scope.send = function () {
