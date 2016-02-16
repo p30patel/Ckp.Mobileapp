@@ -34,7 +34,7 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
-                           console.log('home loaded after show');
+                       
                            
                        }
 
@@ -295,7 +295,7 @@ app.controller('homeController', [
                            setSelectPara();
                          
                            getOrderCounts();
-                           console.log('home loaded init show');
+                       
                        }
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
