@@ -103,7 +103,7 @@
                         <td style="width:30%">
                             <h4 class="km-bold-font">{{form.quantity.resoruceValue}}</h4>
                         </td>
-                        <td style="width:25%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
+                        <td style="width:30%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
                             <h4 class="km-bold-font">{{form.price.resoruceValue}} ({{order.detail.MobileOrderlineDetailList[0].GrossCurrency.Code}})</h4>
                         </td>
                     </tr>
@@ -119,7 +119,7 @@
                         <td class="v-align" style="width:30%">
                             <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
                         </td>
-                        <td class="v-align" style="width:25%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
+                        <td class="v-align" style="width:30%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
                             <h4 class="km-bold-font">{{orderLine.Amount | number : 2}}</h4>
                         </td>
                     </tr>

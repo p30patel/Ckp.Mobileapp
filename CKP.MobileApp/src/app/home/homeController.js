@@ -221,6 +221,20 @@ app.controller('homeController', [
                                VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
                            };
                        }
+
+                       $scope.greaterThan = function (prop, val) {
+                           return function (item) {
+                               return item[prop] > val;
+                           }
+                       }
+
+                       $scope.equalProp = function (prop, val) {
+                           return function (item) {
+                           
+                               return item[prop] === val;
+                           }
+                       }
+
                        var checkOrderTypeCount = function(result)
                        {
                            var hasOneOrderType = false;
