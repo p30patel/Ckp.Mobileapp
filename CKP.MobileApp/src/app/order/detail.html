@@ -18,7 +18,7 @@
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
                 <table class="ck-table">
                     <tr>
-                        <td class="v-align" style="width :25%">
+                        <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font">{{form.orderDate.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.shoppingCart.resoruceValue}}</h3>
                             <h3 class="km-bold-font">{{form.orderNumber.resoruceValue}}</h3>
@@ -27,7 +27,7 @@
                         </td>
                         <td class="v-align" style="width :40%">
                             <h3 ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</h3>
-                             <h3 ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</h3>
+                            <h3 ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</h3>
                             <h3>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</h3>
                             <h3>:{{order.detail.MobileOrderDetail.OrderNumber}}</h3>
                             <h3>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</h3>
