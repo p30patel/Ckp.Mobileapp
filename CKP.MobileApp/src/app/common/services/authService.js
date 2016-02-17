@@ -70,6 +70,9 @@ app.factory('authService', [
                         _authentication.isAuth = false;
                         _authentication.userName = "";
                         _authentication.useRefreshTokens = true;
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.Stop();
+                        }
                     };
 
                     var _getPrincipalData = function (loginData) {
