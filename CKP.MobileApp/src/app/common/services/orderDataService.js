@@ -94,10 +94,7 @@ app.factory("orderDataService", [
 
                     var getConfirmationHtml = function (id) {
                         var deferred = $q.defer();
-                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
-
-                        var authData = authService.getUserInfo();
-
+                       
                         var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
 
@@ -111,12 +108,18 @@ app.factory("orderDataService", [
                         };
                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
+                        $http.post(url, data).then(successCallback, errorCallback);
 
-                        $http.post(url, data).success(function (result) {                          
+                        function successCallback(result)
+                        {
                             deferred.resolve(result);
-                        }).error(function (xhr, status, error) {
+                        }
+
+                        function errorCallback(error) {
                             deferred.reject(error);
-                        });
+                        }
+
+                      
                         return deferred.promise;
                     };
 

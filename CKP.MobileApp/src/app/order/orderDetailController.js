@@ -298,18 +298,24 @@ app.controller('orderDetailController', [
                        }
 
                       
-                       $scope.confirmationConent = "";
+                     
                       
                        $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
-                             kendo.mobile.application.showLoading();
+                           kendo.mobile.application.showLoading();
+                           $scope.confirmationConent = "Loading";
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
-                           $scope.confiramtionConent = $scope.form.noData.resoruceValue;
+                           $scope.confirmationConent = $scope.form.noData.resoruceValue;
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                               $scope.confirmationConent = result;
+                               if (result !== null && result.data !== '') {
+                                   $scope.confirmationConent = result.data;
+                               }
+                               else {
+                                   $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                               }
                            }).catch(function (error) {
                                $scope.confirmationConent = $scope.form.noData.resoruceValue;
                            }).finally(function () {

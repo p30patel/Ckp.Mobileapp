@@ -165,18 +165,24 @@ app.controller('orderlistController', [
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
                             $('.km-view').css('-webkit-transform', 'none');
+                            kendo.mobile.application.showLoading();
+                            $scope.confirmationConent = "Loading";
                             if (typeof (window.navigator.simulator) === 'undefined') {
-                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.confirmationHtml");
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                             }
-                              kendo.mobile.application.showLoading();
-                            $scope.confiramtionConent = $scope.form.noResults.resoruceValue;
+                            $scope.confirmationConent = $scope.form.noData.resoruceValue;
+
                             orderDataService.getConfirmationHtml(id).then(function (result) {
-                                $scope.confirmationConent = result;
-                               
+                                if (result !== null && result.data !== '') {
+                                    $scope.confirmationConent = result.data;
+                                }
+                                else {
+                                    $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                                }
                             }).catch(function (error) {
-                                $scope.confirmationConent = $scope.form.noResults.resoruceValue;
+                                $scope.confirmationConent = $scope.form.noData.resoruceValue;
                             }).finally(function () {
-                                 kendo.mobile.application.hideLoading();
+                                kendo.mobile.application.hideLoading();
                             });
 
                             $("#modalview-confirmation").kendoMobileModalView("open");
@@ -252,7 +258,8 @@ app.controller('orderlistController', [
                             kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno);
                         }
                        
-                       $scope.renderHtml = function (content) {
+                        $scope.renderHtml = function (content) {
+                         
                            return $sce.trustAsHtml(content);
                        };
                    }
