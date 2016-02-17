@@ -162,7 +162,7 @@ app.controller('orderDetailController', [
                        $scope.trackingList = {};
                        $scope.trackingCount = 0;
 
-                       $scope.confirmationConent = "";
+                       $scope.confirmationData = "";
 
                        var init = function() {
                            if (!authService.authentication.isAuth) {
@@ -303,21 +303,22 @@ app.controller('orderDetailController', [
                        $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.showLoading();
-                           $scope.confirmationConent = "Loading";
+                           $scope.confirmationData = "Loading";
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
                         
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
+                               console.log(result.status);
                                if (result !== null && result.data !== '') {
-                                   $scope.confirmationConent = result.data;
+                                   $scope.confirmationData = result.data;
                                }
                                else {
-                                   $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                                   $scope.confirmationData = $scope.form.noData.resoruceValue;
                                }
                            }).catch(function (error) {
-                               $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                               $scope.confirmationData = $scope.form.noData.resoruceValue;
                            }).finally(function () {
                                 kendo.mobile.application.hideLoading();
                            });
