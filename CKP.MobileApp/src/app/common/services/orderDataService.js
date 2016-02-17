@@ -108,16 +108,12 @@ app.factory("orderDataService", [
                         };
                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
-                        $http.post(url, data).then(successCallback, errorCallback);
-
-                        function successCallback(result)
-                        {
-                            deferred.resolve(result);
-                        }
-
-                        function errorCallback(error) {
-                            deferred.reject(error);
-                        }
+                        $http.post(url, data).then(
+                            function successCallback(result) {
+                                deferred.resolve(result);
+                            }, function errorCallback(error) {
+                                deferred.reject(error);
+                            });
 
                       
                         return deferred.promise;

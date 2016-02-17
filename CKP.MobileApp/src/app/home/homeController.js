@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', 'orderDataService', '$sce', '$window',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, orderDataService, $sce, $window) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService',  '$sce', '$window',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, $sce, $window) {
                        $scope.beforeShow = function () {
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.Start();
@@ -510,21 +510,7 @@ app.controller('homeController', [
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
                                }
-                               //var refreshData = localStorageService.get('forceRefreshDetail');
-                              
-                               //if (refreshData)
-                               //{
-                               //    var _refreshData = {
-                               //        timeStamp: 1000*60*30, // Expiration in milliseconds; set to null to never expire
-                               //        timeNow : new Date().getTime(),
-                               //        hasClickedApproval: false,
-                               //        hasClickedSearch: true,
-                               //    };
-                                  
-                               //    localStorageService.set('forceRefreshDetail', _refreshData);
-                               //    console.log(_refreshData);
-                               //}
-                               
+                             
                                getOrderCounts();
 
                            }
@@ -545,6 +531,18 @@ app.controller('homeController', [
                        };
 
                        // selected list for approval - screen2
+                       var getSalesOrderNumbers = function (orders)
+                       {
+                           var salesOrders = [];
+                           console.log(orders);
+                           angular.forEach(orders, function (value, key) {
+                              
+                                   salesOrders.push(value.SalesOrderNumber);
+                            
+                           });
+                           return salesOrders;
+                       }
+
                        $scope.selection = [];
                        $scope.selectedList = "";
 
@@ -554,11 +552,37 @@ app.controller('homeController', [
                            var checkedItems = $('.approve-chk:checked');
                            if (checkedItems.length > 0) {
                                angular.forEach(checkedItems, function (value, key) {                                   
+                                 
                                    var item = checkedItems.eq(key).attr('data-' + $scope.screen2SearchParameter);
-                                   if (currentSelection.indexOf(item) == -1) {
-                                       selectedList += item + ',';
-                                       currentSelection.push(item);                                  
+
+                                   // if shopping cart or vendor ref then get sales order list from them
+
+                                 
+                                   if ($scope.screen2SearchParameter === 'ShoppingCartId' || $scope.screen2SearchParameter === 'VendorRef') {
+                                       if ($scope.screen2SearchParameter === 'ShoppingCartId'){
+                                           var orders = $filter('filter')($scope.orders, { ShoppingCartId: item });
+                                       }
+                                       else {
+                                           var orders = $filter('filter')($scope.orders, { VendorRef: item });
+                                       }
+                                       salesOrders = getSalesOrderNumbers(orders);
+                                       angular.forEach(salesOrders, function (value, key) {
+                                          
+                                           if (currentSelection.indexOf(value) == -1) {
+                                               selectedList += value + ',';
+                                               
+                                               currentSelection.push(value);
+                                           }
+                                       });
                                    }
+                                   else {
+                                       if (currentSelection.indexOf(item) == -1) {
+                                           selectedList += item + ',';
+                                           currentSelection.push(item);
+                                       }
+                                   }
+                                  
+                                 
                                });
                            }
                            $scope.selection = currentSelection;
@@ -622,11 +646,11 @@ app.controller('homeController', [
                        $scope.showOrderList = function (orderType, parameterId, parameterValue) {
                            $scope.orderCounts = {};
                            getSelectedList();
-                           
+                          
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
-                            
-                           var selectedList = $scope.selection;
 
+                           var selectedList = $scope.selection;
+                          
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
                            }

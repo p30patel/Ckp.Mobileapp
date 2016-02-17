@@ -4,21 +4,28 @@
 app.factory("policyTermsDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService",
                 function ($http, $q, localStorageService, ngAuthSettings, authService) {
-                    var policyTermsDataService = {};
-                    var refereshPeriod = new Date().getDay() % 2 == 0;
+                    var policyTermsDataService = {};                 
                    
 
-                    var forceGetpolicyTerms = function () {
+                    var forceGetpolicyTerms = function (cultureName) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
                         var authData = authService.getUserInfo();
-                        var cultureName = "en-US";
+                     
                         var rowVersionTerms = '', rowVersionPrivacy = '', rowVersionReturn = '';
 
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetResourceCultureTextUpdate?cultureName=' + cultureName
                             + '&rowVersionTerms=' + rowVersionTerms + '&rowVersionPrivacy=' + rowVersionPrivacy + '&rowVersionReturn=' + rowVersionReturn
                             ).success(function (result) {
-                                localStorageService.set('policyTerms' + refereshPeriod, result);
+
+                                if (cultureName !== 'en-US' && result.Resources[2].ResourceValue === null)
+                                {
+                                    var terms = localStorageService.get('policyTerms-' + 'en-US');
+                                    if (terms) {
+                                        result.Resources[2].ResourceValue = terms.Resources[2].ResourceValue;
+                                    }
+                                }
+                                localStorageService.set('policyTerms-' + cultureName, result);
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -27,21 +34,26 @@ app.factory("policyTermsDataService", [
                         return deferred.promise;
                     };
                     var getPolicyTerms = function () {
+
+                        var refereshPeriod = new Date().getDay();
+
                         var deferred = $q.defer();
+                        var selectedLanguage = localStorageService.get('selectedLanguage');
+                        var cultureName = 'en-US';
+                        if (selectedLanguage) {
+                            cultureName = selectedLanguage;
+                        }
+
+                        var hasForceRefresh = true;
                        
-                        var policyTerms = localStorageService.get('policyTerms' + refereshPeriod);
+                        var policyTerms = localStorageService.get('policyTerms-' + cultureName) || [];
                        
-                        if (policyTerms) {
-                            
+                        if (policyTerms && policyTerms.lenght > 0 && refereshPeriod == 3) {                          
                             deferred.resolve(policyTerms);
-                        } else {
-
-                            var previous = localStorageService.get('policyTerms' + !refereshPeriod);
-                            if (previous) {
-
-                                localStorageService.remove('policyTerms' + !refereshPeriod);                               
-                            }                            
-                            forceGetpolicyTerms().then(function (result) {
+                        }
+                        if (hasForceRefresh) {
+                           
+                            forceGetpolicyTerms(cultureName).then(function (result) {
                            
                                 deferred.resolve(result);
                             });

@@ -8,6 +8,15 @@ app.controller('faqController', [
                        $scope.form.title.resoruceName = "FAQ";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
+                       var setResources = function () {
+                           $scope.form.faqInstructions = {};
+                           $scope.form.faqInstructions.resoruceName = "Faq Instructions";
+                           $scope.form.faqInstructions.resoruceValue = translateService.getResourceValue($scope.form.faqInstructions.resoruceName);
+
+                           $scope.form.noData = {};
+                           $scope.form.noData.resoruceName = "No Data are found";
+                           $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+                       }
 
                        $scope.afterShow = function (e) {
 
@@ -23,20 +32,11 @@ app.controller('faqController', [
 
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
                                }
+                               setResources();
+                               loadFaqs();
                            }
                        }
 
-                       var setResources = function () {
-                           $scope.form.faqInstructions = {};
-                           $scope.form.faqInstructions.resoruceName = "Faq Instructions";
-                           $scope.form.faqInstructions.resoruceValue = translateService.getResourceValue($scope.form.faqInstructions.resoruceName);
-
-                           $scope.form.noData = {};
-                           $scope.form.noData.resoruceName = "No Data are found";
-                           $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
-                       }
-
-                       setResources();
 
                        $scope.faqs = {};
 
@@ -46,8 +46,8 @@ app.controller('faqController', [
                              kendo.mobile.application.showLoading();
 
                            faqDataService.getFaqs(selectedCultureName).then(function (result) {
-                               $scope.faqs = result;
-
+                               $scope.faqs = result.FaqLists;
+                           
                            }).catch(function (error) {
                                $scope.faqs = {};
                            }).finally(function () {
@@ -57,24 +57,24 @@ app.controller('faqController', [
 
                        var loadFaqs = function () {
                            var cultureName = translateService.getCurrentCultureName();
+                           getFaqs(cultureName);
+                           //if (cultureName !== 'en-US') {
+                           //      kendo.mobile.application.showLoading();
 
-                           if (cultureName !== 'en-US') {
-                                 kendo.mobile.application.showLoading();
+                           //    faqDataService.getFaqs('en-US').then(function (result) {
+                           //        getFaqs(cultureName);
 
-                               faqDataService.getFaqs('en-US').then(function (result) {
-                                   getFaqs(cultureName);
-
-                               }).catch(function (error) {
-                                   $scope.faqs = {};
-                               }).finally(function () {
-                                    kendo.mobile.application.hideLoading();
-                               });
-                           }
-                           else {
-                               getFaqs(cultureName);
-                           }
+                           //    }).catch(function (error) {
+                           //        $scope.faqs = {};
+                           //    }).finally(function () {
+                           //         kendo.mobile.application.hideLoading();
+                           //    });
+                           //}
+                           //else {
+                           //    getFaqs(cultureName);
+                           //}
                        }
-                       loadFaqs();
+                      
 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);

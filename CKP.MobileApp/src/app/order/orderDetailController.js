@@ -296,10 +296,7 @@ app.controller('orderDetailController', [
                                 kendo.mobile.application.hideLoading();
                            });
                        }
-
-                      
-                     
-                      
+              
                        $scope.showConfirmationModel = function (id) {
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.showLoading();
@@ -310,13 +307,14 @@ app.controller('orderDetailController', [
                         
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                               console.log(result.status);
-                               if (result !== null && result.data !== '') {
+                              
+                               if (result !== null || result.data !== '') {
                                    $scope.confirmationData = result.data;
                                }
                                else {
                                    $scope.confirmationData = $scope.form.noData.resoruceValue;
                                }
+
                            }).catch(function (error) {
                                $scope.confirmationData = $scope.form.noData.resoruceValue;
                            }).finally(function () {

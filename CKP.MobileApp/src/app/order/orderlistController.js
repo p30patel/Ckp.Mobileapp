@@ -109,14 +109,18 @@ app.controller('orderlistController', [
                        $scope.searchParameter = 'SalesOrderNumber';
                      
                        $scope.groupBy = 'VendorRef';
+                       $scope.searchBy = 'SalesOrderNumber';
                        $scope.intShow = function (e) {
                            $scope.searchParameter = e.view.params.searchParameter;
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;                       
-                          
+                        
                            selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
+
+                           console.log(selectedList);
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
+                           $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
                            if (orderType === '1'){
                                   $scope.order.hasApproval = true;
                            }
@@ -129,14 +133,14 @@ app.controller('orderlistController', [
                             
                              kendo.mobile.application.showLoading();
                           
-                           var searchList = [];
-                           searchList.push(selectedList);
+                             var searchList = [];
 
+                           searchList.push(selectedList);
                            var searchData = {
-                               OrderNumber: $scope.searchParameter === 'OrderNumber' ? $scope.searchParameter : '',
-                               ShoppingCartId: $scope.searchParameter === 'ShoppingCartId' ? $scope.searchParameter : '',
-                               SalesOrderNumber: $scope.searchParameter === 'SalesOrderNumber' ? $scope.searchParameter : '',
-                               VendorRef: $scope.searchParameter === 'VendorRef' ? $scope.searchParameter : '',
+                               OrderNumber: $scope.searchBy === 'OrderNumber' ? $scope.searchBy : '',
+                               ShoppingCartId: $scope.searchBy === 'ShoppingCartId' ? $scope.searchBy : '',
+                               SalesOrderNumber: $scope.searchBy === 'SalesOrderNumber' ? $scope.searchBy : '',
+                               VendorRef: $scope.searchBy === 'VendorRef' ? $scope.searchBy : '',
                                SearchList: searchList
                            };
 
@@ -177,13 +181,14 @@ app.controller('orderlistController', [
                           
 
                             orderDataService.getConfirmationHtml(id).then(function (result) {
-                                console.log(result.status);
-                                if (result !== null && result.data !== '') {
+                              
+                                if (result !== null || result.data !== '') {
                                     $scope.confirmationData = result.data;
                                 }
                                 else {
                                     $scope.confirmationData = $scope.form.noData.resoruceValue;
                                 }
+                               
                             }).catch(function (error) {
                                 $scope.confirmationData = $scope.form.noData.resoruceValue;
                             }).finally(function () {

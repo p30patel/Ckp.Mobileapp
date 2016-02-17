@@ -56,11 +56,23 @@ app.factory('parameterService', [
 
 
                       var groupListScreen2 = [
-                         
-                          { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId' },
-                        
-                          { searchParamterId: '4', orderTypeId: '2', groupBy: 'VendorRef' },
-                          { searchParamterId: '4', orderTypeId: '3', groupBy: 'VendorRef' },
+                          { searchParamterId: '1', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '1', orderTypeId: '2', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '1', orderTypeId: '3', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+
+
+                          { searchParamterId: '2', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '2', orderTypeId: '2', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '2', orderTypeId: '3', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+
+
+                          { searchParamterId: '3', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '3', orderTypeId: '2', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId', searchBy: 'ShoppingCartId' },
+
+                          { searchParamterId: '4', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchBy: 'SalesOrderNumber' },
+                          { searchParamterId: '4', orderTypeId: '2', groupBy: 'VendorRef', searchBy: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '3', groupBy: 'VendorRef', searchBy: 'VendorRef' },
 
                           ];
 
@@ -157,6 +169,19 @@ app.factory('parameterService', [
                         return groupByName;
                     }
 
+                    var getScreen2SearchByName = function (searchParaId, orderTypeId) {
+                        var searchByName = "";
+
+                        angular.forEach(groupListScreen2, function (item) {
+
+                            if (item.searchParamterId === searchParaId && item.orderTypeId === orderTypeId) {
+                                searchByName = item.searchBy;
+                                return searchByName;
+                            }
+                        });
+                        return searchByName;
+                    }
+
 
                     service.getSearchParameters = getSearchParameters;
                     service.getSearchParameterName = getSearchParameterName;
@@ -169,7 +194,8 @@ app.factory('parameterService', [
                     service.getScreen2SearchParameter = getScreen2SearchParameter;
                     service.getScreen2GroupByName = getScreen2GroupByName;
 
-
+                    service.getScreen2SearchByName = getScreen2SearchByName;
+                    
                     return service;
                 }
             ]);
