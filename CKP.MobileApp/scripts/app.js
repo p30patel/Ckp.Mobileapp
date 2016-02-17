@@ -12,6 +12,7 @@ var clientId = 'Ckp.PoC1';
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
+var gaPlugin;
 
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
@@ -23,7 +24,8 @@ app.constant('ngAuthSettings', {
 });
 
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
-  
+
+
     //authService.fillAuthData();
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
@@ -70,7 +72,6 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     };
 
     document.addEventListener('deviceready', function () {
-     
         StatusBar.overlaysWebView(false);
         kendo.mobile.application.navigate("src/app/login/login.html");
         $rootScope.hasSearchOrApporval = false;
@@ -82,7 +83,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
         }
-        
+
     });
 
 
