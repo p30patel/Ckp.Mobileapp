@@ -307,7 +307,7 @@ app.controller('orderDetailController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
-                           $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                        
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
                                if (result !== null && result.data !== '') {

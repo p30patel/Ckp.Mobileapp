@@ -76,6 +76,10 @@ app.controller('orderlistController', [
                        $scope.form.faildUpdateMessage.resoruceName = "Error while approve or decline";
                        $scope.form.faildUpdateMessage.resoruceValue = translateService.getResourceValue($scope.form.faildUpdateMessage.resoruceName);
 
+                       $scope.form.noData = {};
+                       $scope.form.noData.resoruceName = "No Data are found";
+                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
 
 
                        $scope.order = {};
@@ -88,7 +92,7 @@ app.controller('orderlistController', [
                        $scope.order.detail = {};
                        $scope.order.orders = {};
 
-                       $scope.confirmationConent = "";
+                       $scope.confirmationConent = "Loading";
                        var init = function() {
                            
                            if (!authService.authentication.isAuth) {
@@ -164,13 +168,13 @@ app.controller('orderlistController', [
                        
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
+                            $scope.confirmationConent = "Loading";
                             $('.km-view').css('-webkit-transform', 'none');
                             kendo.mobile.application.showLoading();
-                            $scope.confirmationConent = "Loading";
                             if (typeof (window.navigator.simulator) === 'undefined') {
                                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                             }
-                            $scope.confirmationConent = $scope.form.noData.resoruceValue;
+                          
 
                             orderDataService.getConfirmationHtml(id).then(function (result) {
                                 if (result !== null && result.data !== '') {
