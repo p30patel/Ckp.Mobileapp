@@ -29,7 +29,7 @@
     "Portrait"
   ],
   "iOSStatusBarStyle": "Default",
-  "AndroidHardwareAcceleration": "false",
+  "AndroidHardwareAcceleration": "true",
   "BundleVersion": "1.0",
   "iOSDeviceFamily": [
     "1",
@@ -37,19 +37,19 @@
   ],
   "iOSBackgroundMode": [],
   "AndroidVersionCode": "1",
-  "FrameworkVersion": "3.7.0",
+  "FrameworkVersion": "4.0.0",
   "CorePlugins": [
     "com.phonegap.plugins.PushPlugin@3.0.6",
     "com.telerik.feedback@2.0.0",
     "com.telerik.plugin.telerikanalytics@3.3.2",
-    "org.apache.cordova.console",
-    "org.apache.cordova.device",
-    "org.apache.cordova.dialogs",
-    "org.apache.cordova.globalization",
-    "org.apache.cordova.inappbrowser",
-    "org.apache.cordova.keyboard",
-    "org.apache.cordova.splashscreen",
-    "org.apache.cordova.statusbar"
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-globalization",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist"
   ],
   "WP8SupportedResolutions": [
     "ID_RESOLUTION_WVGA",

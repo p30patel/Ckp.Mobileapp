@@ -15,7 +15,7 @@ app.factory("faqDataService", [
                     var forceGetFaqs = function (cultureName, rowVersion) {
                         var deferred = $q.defer();
                         rowVersion = '';
-                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName + '&rowVersion=' + rowVersion
+                        $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName + '&rowVersion=' + ''
                             ).success(function (result) {
                                 //var resources = addFaqs(cultureName, result.RowVersion, result);
                                 localStorageService.set('faq-' + cultureName, result);
