@@ -267,11 +267,11 @@
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId !== '1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderStatus.resoruceValue}}</td>
-                            <td style="width:30%;">{{form.orderDate.resoruceValue}}</td>
+                            <td style="width:30%;">{{form.statusChangedDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
                         </tr>                     
                         <tr class="pipe" ng-repeat="order in value | limitTo:1 | orderBy:'Id'">
-                                <td style="width:5%;"</td>     
+                                <td style="width:5%;">{{order.Id}}</td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:45%;">
                            

@@ -102,6 +102,10 @@ app.controller('homeController', [
                            $scope.form.orderDate.resoruceName = "Order Date";
                            $scope.form.orderDate.resoruceValue = translateService.getResourceValue($scope.form.orderDate.resoruceName);
 
+                           $scope.form.statusChangedDate = {};
+                           $scope.form.statusChangedDate.resoruceName = "Updated On";
+                           $scope.form.statusChangedDate.resoruceValue = translateService.getResourceValue($scope.form.statusChangedDate.resoruceName);
+
                            $scope.form.bulkApprove = {};
                            $scope.form.bulkApprove.resoruceName = "Approve / Decline";
                            $scope.form.bulkApprove.resoruceValue = translateService.getResourceValue($scope.form.bulkApprove.resoruceName);
@@ -358,7 +362,7 @@ app.controller('homeController', [
                                if (hasNext) {
 
                                    var currentOrders = $scope.orders;
-                                   var nextNumber = $scope.orders.length;
+                                   var nextNumber = $scope.orders.length + 1;
                                    angular.forEach(result, function (value, key) {
 
                                        if (key <= result.length) {
