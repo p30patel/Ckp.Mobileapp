@@ -188,6 +188,7 @@ app.controller('homeController', [
                        $scope.groupBy = 'SalesOrderNumber';
                        $scope.screen2SearchParameter = 'SalesOrderNumber';
                        $scope.viewMoreColumn = 'OrderNumber';
+                       
                     
                        $scope.parameters = parameterService.getSearchParameters();
 
@@ -233,6 +234,13 @@ app.controller('homeController', [
                            
                                return item[prop] === val;
                            }
+                       }
+
+                  
+
+                       $scope.orderByColumn = function (arr) {
+                           return $filter('min')
+                             ($filter('map')(arr, 'Id'));
                        }
 
                        var checkOrderTypeCount = function(result)
@@ -346,27 +354,31 @@ app.controller('homeController', [
                              kendo.mobile.application.showLoading();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length >= $scope.PageSize;
-                                kendo.mobile.application.hideLoading();
+                               kendo.mobile.application.hideLoading();
                                if (hasNext) {
 
                                    var currentOrders = $scope.orders;
-                                  
+                                   var nextNumber = $scope.orders.length;
                                    angular.forEach(result, function (value, key) {
-                                       
+
                                        if (key <= result.length) {
+                                           value["Id"] = -1 * nextNumber++;
                                            currentOrders.push(value);
 
                                        }
-                                   });                                   
+                                   });
+                                   console.log(currentOrders);
                                    $scope.orders = currentOrders;
                                }
                                else {
-                                   $scope.orders = result;                                 
+
+
+                                   $scope.orders = result;
                                }
                            }).catch(function (error) {
                                $scope.orders = [];
-                             
-                            
+
+
                            }).finally(function () {
                                 kendo.mobile.application.hideLoading();
                                if ($scope.orders.length > 0)
