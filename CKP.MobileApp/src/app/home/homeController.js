@@ -395,30 +395,38 @@ app.controller('homeController', [
                            });
                        }
 
-                   
+                      
                        //button group events
-                       $scope.retailerHeader = function () {
+                       var retailerHeaderClick = function ()
+                       {
+                           $('.ck-home-button-icon').removeClass('km-minus');
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
-                         
                            $(".ck-count-btn").removeClass('km-state-active');
+
+                           $('.ck-home-button-icon').addClass('km-plus');
+                       }
+                       $scope.retailerHeader = function () {
+                           retailerHeaderClick();
                        }
                        $scope.myOptions = {
                            select: function (e) {
-                             
+                               retailerHeaderClick();
                                $scope.successMessage = $scope.form.loading.resoruceValue;
-
+                            
                                var selectedBtnRetailer = e.sender.element.attr('data-btnRetailer');
-                               
-                              
+                               $('#header-' + selectedBtnRetailer).removeClass('km-plus');
+                               $('#header-' + selectedBtnRetailer).addClass('km-minus');
+
                                $scope.selectedRetailer = selectedBtnRetailer;
-
-                               var listviews = $("ul.order-header.km-listview");
-
-                               listviews.hide();
                                
-                               var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
 
+                               var activeButton = $(event.target).offsetParent();
+                             
+                               activeButton.addClass('km-state-active');
+
+                               var listviewsToShow = $("ul.km-listview").filter("[data-retailer='" + selectedBtnRetailer + "']");
+                             
                                listviewsToShow.eq(e.index).show();
 
                                $scope.selectedOrderType = listviewsToShow.eq(e.index).attr('data-orderType');

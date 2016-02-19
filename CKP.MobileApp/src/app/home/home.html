@@ -30,9 +30,11 @@
             </li>
                 
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
-                <div class="ck-home " style="margin-top:-.1em; background-color:gray; ">
+                <div class="ck-home" style="margin-top:-.1em; background-color:gray; ">
                     <h3>
-                        <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">{{orderCount.RetailerName}}</kendo-mobile-button>
+                        <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">
+                            <span class="ck-home-button-icon km-icon km-plus" id="header-{{orderCount.RetailerId}}"></span>
+                            {{orderCount.RetailerName}}</kendo-mobile-button>
                        
                         <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "  
                     ng-click="showCreditModel()" ng-show="hasCreditLock">
