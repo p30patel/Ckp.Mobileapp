@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" data-use-native-scrolling="true">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" ng-click="showAlertModel()">
@@ -171,6 +171,13 @@
                                      ng-click="showOrderList(1, searchParameterId, '')">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
+
+                               <tr ng-show="$last">
+
+                                <td colspan="5" style="padding: 1em;">
+                                <i></i>                                
+                              
+                            </td>
                         </table>
                   
                 </ul>
@@ -244,11 +251,16 @@
                             <tr ng-show="$last && hasNext">
                             <td colspan="5" style="padding: 1em;" ng-hide="searchParameterId == '2' ||  searchParameterId == '3' ">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified" ng-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" ng-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
-                       
+                         <tr ng-show="$last">
+
+                                <td colspan="5" style="padding: 1em;">
+                                <i></i>                                
+                              
+                            </td>
                           
                     </table>
                 </ul>
@@ -337,10 +349,16 @@
 
                                 <td colspan="5" style="padding: 1em;">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified"  ng-click="ViewMore(3)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" ng-click="ViewMore(3)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
+                            <tr ng-show="$last">
+
+                                <td colspan="5" style="padding: 1em;">
+                                <i></i>                                
+                              
+                            </td>
                         </table> 
                              
                 </ul>

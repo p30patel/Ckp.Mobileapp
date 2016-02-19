@@ -267,7 +267,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     $scope.intShow = function (e) {
      
-       // translatePage();
+        translatePage();
     };
 
     $scope.translatePage = function () {

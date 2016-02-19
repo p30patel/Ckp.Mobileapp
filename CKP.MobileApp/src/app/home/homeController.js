@@ -173,8 +173,8 @@ app.controller('homeController', [
 
                        setResources();
 
+                       $rootScope.hasBackButton = false;
                      
-                       console.log($rootScope.hasBackButton);
                        if (!$rootScope.hasBackButton) {
 
                            $scope.intShow = function (e) {
@@ -211,6 +211,7 @@ app.controller('homeController', [
                            $scope.parameters = parameterService.getSearchParameters();
 
                            $scope.hasNext = true;
+                           $scope.hasNextDisabled = false;
                            $scope.currentPage = 1;
                            $scope.PageSize = 5;
                            $scope.successMessage = $scope.form.loading.resoruceValue;
@@ -346,8 +347,7 @@ app.controller('homeController', [
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderSummary");
-                           }
-                           $scope.hasNext = !hasNext;
+                           }                         
                           
                            var jsonIn = {
                                PageSize: $scope.PageSize,
@@ -368,12 +368,12 @@ app.controller('homeController', [
                            $scope.groupBy = parameterService.getScreen1GroupByName($scope.searchParameterId, $scope.selectedOrderTypeId);
                            $scope.screen2SearchParameter = parameterService.getScreen2SearchParameter($scope.searchParameterId, $scope.selectedOrderTypeId);
                          
-                             kendo.mobile.application.showLoading();
+                           kendo.mobile.application.showLoading();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length >= $scope.PageSize;
-                               kendo.mobile.application.hideLoading();
+                             
                                if (hasNext) {
-
+                                   
                                    var currentOrders = $scope.orders;
                                    var nextNumber = $scope.orders.length + 1;
                                    angular.forEach(result, function (value, key) {
@@ -384,20 +384,20 @@ app.controller('homeController', [
 
                                        }
                                    });
-                                   console.log(currentOrders);
+                                 
                                    $scope.orders = currentOrders;
                                }
-                               else {
-
-
+                               else {                                  
                                    $scope.orders = result;
                                }
+                             
                            }).catch(function (error) {
                                $scope.orders = [];
 
 
                            }).finally(function () {
-                                kendo.mobile.application.hideLoading();
+                               kendo.mobile.application.hideLoading();
+                               $scope.hasNextDisabled = false;
                                if ($scope.orders.length > 0)
                                {
                                    $scope.successMessage = $scope.form.loading.resoruceValue;
@@ -450,7 +450,7 @@ app.controller('homeController', [
                                var selectedOrderCount = listviewsToShow.eq(e.index).attr('data-orderCount');
                                
                                var hasNext = false;
-                              
+                               $scope.hasNextDisabled = false;
                                if (selectedOrderCount > 0) {
                               
                                    $scope.orders = {};                               
@@ -510,7 +510,7 @@ app.controller('homeController', [
                            $scope.currentPage += 1;
                          
                            var hasNext = true;
-                          
+                           $scope.hasNextDisabled = true;
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.viewNext");
                            }
