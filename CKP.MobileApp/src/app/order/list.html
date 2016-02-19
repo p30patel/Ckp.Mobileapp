@@ -1,9 +1,9 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" >
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;">
+            <kendo-mobile-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;" ng-click="backButton()">
                 <i class="ck-icon ck-barrow"></i>
-            </kendo-mobile-back-button>
+            </kendo-mobile-button>
         </kendo-view-title>
                 {{form.approval.resoruceValue}}
                 

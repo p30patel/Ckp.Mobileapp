@@ -175,11 +175,13 @@ app.controller('orderDetailController', [
                        var orderType = '1';
                        var parameterId = 0;
                        var parameterValue = "";
+                       var backUrl = 'home.html';
                        $scope.intShow = function (e) {
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
-                         
+                           backUrl = e.view.params.backUrl;
+                            
                            getOrderDetail(parameterValue);
                            
                           
@@ -334,7 +336,10 @@ app.controller('orderDetailController', [
                        $scope.closeTrackingListModel = function () {
                            $("#modalview-trackingList").kendoMobileModalView("close");
                        };
-                
+                        
+                       $scope.backButton = function () {
+                           kendo.mobile.application.navigate("src/app/" + backUrl);
+                       }
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
                        };

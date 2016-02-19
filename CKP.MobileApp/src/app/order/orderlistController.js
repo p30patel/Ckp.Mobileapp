@@ -1,9 +1,8 @@
 
 app.controller('orderlistController', [
-                   '$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService', 'parameterService', '$timeout',
-                   function ($scope, authService, orderDataService, homeDataService, $sce, translateService, parameterService, $timeout) {
+                   '$rootScope','$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService', 'parameterService', '$timeout',
+                   function ($rootScope, $scope, authService, orderDataService, homeDataService, $sce, translateService, parameterService, $timeout) {
                        $scope.form = {};
-
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Order List";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -20,6 +19,12 @@ app.controller('orderlistController', [
 
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderList");
+                               }
+
+                               if (!authService.authentication.isAuth) {
+                                   authService.logout();
+
+                                   kendo.mobile.application.navigate("src/app/login/login.html");
                                }
                            }
                          
@@ -80,56 +85,52 @@ app.controller('orderlistController', [
                        $scope.form.noData.resoruceName = "No Data are found";
                        $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
 
+                       if (!$rootScope.hasBackButtonList) {
 
+                           $scope.order = {};
 
-                       $scope.order = {};
-                       
-                       $scope.order.hasApproval = false;
-                       $scope.order.hasClikedApporval = false;
-                       $scope.orderApprovalComment = "";
+                           $scope.order.hasApproval = false;
+                           $scope.order.hasClikedApporval = false;
+                           $scope.orderApprovalComment = "";
 
-                       $scope.order.title = 'Order List';
-                       $scope.order.detail = {};
-                       $scope.order.orders = {};
+                           $scope.order.title = 'Order List';
+                           $scope.order.detail = {};
+                           $scope.order.orders = {};
 
-                       $scope.confirmationData = "";
-                       var init = function() {
-                           
-                           if (!authService.authentication.isAuth) {
-                               authService.logout();
-                              
-                               kendo.mobile.application.navigate("src/app/login/login.html");
-                           }
-                       };
-                       init();
-                       var orderType = '1';
-                       var parameterId = 0;
-                       var selectedList = '';
-                       var retailerId = 0;
-                       $scope.searchParameter = 'SalesOrderNumber';
-                     
-                       $scope.groupBy = 'VendorRef';
-                       $scope.searchBy = 'SalesOrderNumber';
-                       $scope.intShow = function (e) {
-                           $scope.searchParameter = e.view.params.searchParameter;
-                           orderType = e.view.params.orderType;
-                           parameterId = e.view.params.parameterId;                       
-                           retailerId = e.view.params.retailerId;
-                           selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
-
-                           $scope.order.orderType = orderType;
-                           $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
-                           $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
-                           if (orderType === '1'){
-                                  $scope.order.hasApproval = true;
-                           }
+                           $scope.confirmationData = "";
+                          
+                           var orderType = '1';
+                           var parameterId = 0;
+                           var selectedList = '';
+                           var retailerId = 0;
                          
-                           getOrderList();
+                           $scope.searchParameter = 'SalesOrderNumber';
+
+                           $scope.groupBy = 'VendorRef';
+                           $scope.searchBy = 'SalesOrderNumber';
+                           $scope.intShow = function (e) {
+                               $scope.searchParameter = e.view.params.searchParameter;
+                               orderType = e.view.params.orderType;
+                               parameterId = e.view.params.parameterId;
+                               retailerId = e.view.params.retailerId;
+                               selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
+                           
+                               $scope.order.orderType = orderType;
+                               $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
+                               $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
+                               if (orderType === '1') {
+                                   $scope.order.hasApproval = true;
+                               }
+
+                               getOrderList();
+                           }
                        }
-                                        
 
                         var getOrderList = function () {
-                            
+                            if ($rootScope.hasBackButtonList)
+                            {
+                                return true;
+                            }
                              kendo.mobile.application.showLoading();
                           
                              var searchList = [];
@@ -262,10 +263,16 @@ app.controller('orderlistController', [
                         }
 
                         $scope.orderDetail = function (poctrlno) {
+                            var backUrl = 'order/list.html';
+                            $rootScope.hasBackButtonList = true;
                             if (typeof (window.navigator.simulator) === 'undefined') {
                                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
                             }
-                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno);
+                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
+                        }
+
+                        $scope.backButton = function () {
+                            kendo.mobile.application.navigate("src/app/home/home.html");
                         }
                        
                         $scope.renderHtml = function (content) {

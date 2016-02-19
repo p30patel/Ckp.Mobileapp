@@ -526,7 +526,9 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderDetail");
                            }
                            $rootScope.hasBackButton = true;
-                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
+                           $rootScope.hasBackButtonList = false;
+                           var backUrl = 'home/home.html';
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&backUrl=" + backUrl);
                        }
 
                    
@@ -679,7 +681,9 @@ app.controller('homeController', [
                        }
 
                        $scope.showOrderList = function (orderType, parameterId, parameterValue, retailerId) {
-                           $rootScope.hasBackButton = true;                          
+                           $rootScope.hasBackButton = true;
+                           $rootScope.hasBackButtonList = false;
+                           var backUrl = 'home/home.html';
                            getSelectedList();
                           
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
@@ -690,7 +694,7 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
                            }
                           
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId);
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
                        }
 
                     

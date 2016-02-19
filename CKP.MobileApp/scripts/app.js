@@ -92,6 +92,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     $rootScope.hasSearchOrApporval = false;
     $rootScope.hasPreviousSearch = false;
     $rootScope.hasBackButton = false;
+    $rootScope.hasBackButtonList = false;
 
     localStorageService.remove('orderCounts');
     $rootScope.timeStampOrderCount = new Date().getTime();
