@@ -3,8 +3,11 @@ app.controller('homeController', [
                   '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService',  '$sce', '$window',
                    function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, $sce, $window) {
                        $scope.beforeShow = function () {
-                        
-                           kendo.mobile.application.showLoading();
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.Start();
+                           }
+
+                             kendo.mobile.application.showLoading();
                            if (!authService.authentication.isAuth) {
                                authService.logout();
                                kendo.mobile.application.navigate("src/app/login/login.html");
