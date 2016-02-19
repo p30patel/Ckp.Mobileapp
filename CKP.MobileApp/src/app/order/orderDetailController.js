@@ -298,6 +298,7 @@ app.controller('orderDetailController', [
                        }
               
                        $scope.showConfirmationModel = function (id) {
+                           $("#modalview-detail-confirmation").kendoMobileModalView("open");
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.showLoading();
                            $scope.confirmationData = "Loading";
@@ -321,11 +322,11 @@ app.controller('orderDetailController', [
                                 kendo.mobile.application.hideLoading();
                            });
 
-                           $("#modalview-confirmation").kendoMobileModalView("open");
+                           
                        };
                        $scope.hideConfirmationModel = function () {
 
-                           $("#modalview-confirmation").kendoMobileModalView("close");
+                           $("#modalview-detail-confirmation").kendoMobileModalView("close");
                        };
                  
                        //tracking modal 

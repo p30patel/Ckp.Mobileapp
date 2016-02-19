@@ -47,9 +47,7 @@ app.factory("orderDataService", [
                         var userId = authData.userId;
                         var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
-                        
-                       
-                        jsonIn.RetailerId = organizationDetail.OrgContext.RetailerId;
+                     
                         jsonIn.UserId = organizationDetail.UserId;
                        
                                          

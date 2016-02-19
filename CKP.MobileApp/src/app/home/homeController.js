@@ -173,7 +173,7 @@ app.controller('homeController', [
 
                        setResources();
 
-                       $rootScope.hasBackButton = false;
+                      // $rootScope.hasBackButton = false;
                      
                        if (!$rootScope.hasBackButton) {
 
@@ -300,6 +300,7 @@ app.controller('homeController', [
                            }
 
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
+                               kendo.mobile.application.hideLoading();
                                if (result === null)
                                {
                                    $scope.orderCounts = [];
@@ -324,7 +325,7 @@ app.controller('homeController', [
                                }
 
                              
-                                kendo.mobile.application.hideLoading();
+                           
 
                            }).catch(function (error) {
 
@@ -677,8 +678,8 @@ app.controller('homeController', [
                            }
                        }
 
-                       $scope.showOrderList = function (orderType, parameterId, parameterValue) {
-                           $scope.orderCounts = {};
+                       $scope.showOrderList = function (orderType, parameterId, parameterValue, retailerId) {
+                           $rootScope.hasBackButton = true;                          
                            getSelectedList();
                           
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
@@ -688,8 +689,8 @@ app.controller('homeController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
                            }
-                           $rootScope.hasBackButton = true;
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList);
+                          
+                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId);
                        }
 
                     

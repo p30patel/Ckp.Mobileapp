@@ -105,7 +105,7 @@ app.controller('orderlistController', [
                        var orderType = '1';
                        var parameterId = 0;
                        var selectedList = '';
-
+                       var retailerId = 0;
                        $scope.searchParameter = 'SalesOrderNumber';
                      
                        $scope.groupBy = 'VendorRef';
@@ -114,10 +114,9 @@ app.controller('orderlistController', [
                            $scope.searchParameter = e.view.params.searchParameter;
                            orderType = e.view.params.orderType;
                            parameterId = e.view.params.parameterId;                       
-                        
+                           retailerId = e.view.params.retailerId;
                            selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
 
-                           console.log(selectedList);
                            $scope.order.orderType = orderType;
                            $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
                            $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
@@ -137,6 +136,7 @@ app.controller('orderlistController', [
 
                            searchList.push(selectedList);
                            var searchData = {
+                               RetailerId : retailerId,
                                OrderNumber: $scope.searchBy === 'OrderNumber' ? $scope.searchBy : '',
                                ShoppingCartId: $scope.searchBy === 'ShoppingCartId' ? $scope.searchBy : '',
                                SalesOrderNumber: $scope.searchBy === 'SalesOrderNumber' ? $scope.searchBy : '',
@@ -172,6 +172,7 @@ app.controller('orderlistController', [
                        
                        //confiramtion modal
                         $scope.showConfirmationModel = function (id) {
+                            $("#modalview-confirmation").kendoMobileModalView("open");
                             $scope.confirmationData = "Loading";
                             $('.km-view').css('-webkit-transform', 'none');
                             kendo.mobile.application.showLoading();
@@ -194,8 +195,7 @@ app.controller('orderlistController', [
                             }).finally(function () {
                                 kendo.mobile.application.hideLoading();
                             });
-
-                            $("#modalview-confirmation").kendoMobileModalView("open");
+                         
                         };
                         $scope.hideConfirmationModel = function () {
 
