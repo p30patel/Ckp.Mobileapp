@@ -66,7 +66,13 @@ app.controller('menuController', [
 
                        }
                        getOrganizationDetail();
-                       //logout
+
+                   
+                       $scope.login = function () {
+                           kendo.mobile.application.navigate("src/app/login/login.html");
+                       }
+
+                       
                        $scope.logout = function () {
                            authService.logout();
                            $scope.authentication.isAuth = false;

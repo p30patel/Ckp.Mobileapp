@@ -10,9 +10,20 @@ var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
 
+
+angular.element(document).ready(function () {
+    if (window.cordova) {
+        document.addEventListener('deviceready', function () {
+            angular.bootstrap(document.body, ['app']);
+        }, false);
+    } else {
+        angular.bootstrap(document.body, ['app']);
+    }
+});
+
+
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
-var gaPlugin;
 
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
@@ -23,10 +34,14 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
+app.config(function ($httpProvider) {
+
+    $httpProvider.interceptors.push('authInterceptorService');
+});
+
+
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
-
-
-    //authService.fillAuthData();
+    
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
@@ -71,26 +86,18 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                );
     };
 
-    document.addEventListener('deviceready', function () {
-        StatusBar.overlaysWebView(false);
-        kendo.mobile.application.navigate("src/app/login/login.html");
-        $rootScope.hasSearchOrApporval = false;
-        $rootScope.hasPreviousSearch = false;
-       
-        localStorageService.remove('orderCounts');
-        $rootScope.timeStampOrderCount = new Date().getTime();
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.Start();
-            getDeviceInfo();
-        }
+   
+    StatusBar.overlaysWebView(false);
 
-    });
+    $rootScope.hasSearchOrApporval = false;
+    $rootScope.hasPreviousSearch = false;
 
+    localStorageService.remove('orderCounts');
+    $rootScope.timeStampOrderCount = new Date().getTime();
+    if (typeof (window.navigator.simulator) === 'undefined') {
+        window.plugins.EqatecAnalytics.Monitor.Start();
+        getDeviceInfo();
+    }
 
 }]);
-
-app.config(function ($httpProvider) {
-
-    $httpProvider.interceptors.push('authInterceptorService');
-});
 

@@ -23,7 +23,7 @@ app.factory('loginDataService',
             var deferred = $q.defer();
 
             var languageData = localStorageService.get('languageData');
-
+            Console.log('get lanauges');
             if (languageData) {
                 deferred.resolve(languageData);
             }

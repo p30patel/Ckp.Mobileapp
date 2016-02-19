@@ -100,6 +100,7 @@
     <Content Include="src\app\common\directives\translate.js" />
     <Content Include="src\app\common\services\authInterceptorService.js" />
     <Content Include="src\app\common\services\authService.js" />
+    <Content Include="src\app\common\services\faqDataService - Copy.js" />
     <Content Include="src\app\common\services\faqDataService.js" />
     <Content Include="src\app\common\services\notificationDataService.js" />
     <Content Include="src\app\common\services\feedbackDataService.js" />

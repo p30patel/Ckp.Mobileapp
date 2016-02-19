@@ -69,7 +69,7 @@
 
 </head>
 
-<body kendo-mobile-application ng-app="app" k-initial="'src/app/home/home.html'" k-hash-bang="true" k-skin="'nova'">
+<body kendo-mobile-application  k-initial="'src/app/login/login.html'" k-hash-bang="true" k-skin="'nova'">
 
     <!-- layout default -->
 
@@ -100,7 +100,7 @@
 
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" ng-click="home()" ><span class="km-icon km-home"></span></kendo-mobile-button>
 
-                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" href="src/app/login/login.html" ><span class="km-icon km-i-signin"></span></kendo-mobile-button>
+                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" ng-click="login()"><span class="km-icon km-i-signin"></span></kendo-mobile-button>
 
                 <kendo-mobile-button data-tap="myTouch.tap" k-align="'right'" ng-show="authentication.isAuth" ng-click="logout()" class="ck-icon ck-signout" style="padding-right : 30px;"></kendo-mobile-button>
 

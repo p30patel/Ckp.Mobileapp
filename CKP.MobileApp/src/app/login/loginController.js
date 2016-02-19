@@ -156,7 +156,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
         $('.k-header').css('background-color', 'white');
-
+        console.log('login - after sohw');
         setLoginData();
       
     }
@@ -262,11 +262,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.beforeShow = function (e) {
-   
+        console.log('login - before sohw');
     }
 
     $scope.intShow = function (e) {
-     
+        console.log('login - init sohw');
         translatePage();
     };
 
