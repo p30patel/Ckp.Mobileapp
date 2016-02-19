@@ -1,6 +1,6 @@
 app.controller('menuController', [
-                   '$scope', 'authService', 'translateService', 'localStorageService', 'ngAuthSettings',
-                   function ($scope, authService, translateService, localStorageService, ngAuthSettings) {
+                   '$rootScope', '$scope', 'authService', 'translateService', 'localStorageService', 'ngAuthSettings',
+                   function ($rootScope, $scope, authService, translateService, localStorageService, ngAuthSettings) {
 
                        $scope.form = {};
 
@@ -86,6 +86,7 @@ app.controller('menuController', [
                        $scope.home = function () {
                            kendo.mobile.application.navigate("src/app/home/home.html");
                        }
+                       $rootScope.hasBackButton = false;
                        $scope.mnuClick = function (viewName) {
 
                            switch (viewName) {

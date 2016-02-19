@@ -16,13 +16,6 @@ app.controller('homeController', [
 
                        };
 
-                       $scope.form = {};
-                       $scope.mesages = {};
-                       $scope.orders = {};
-                       $scope.form.title = {};
-                       $scope.form.title.resoruceName = "Home";
-                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
-
                        $scope.afterShow = function (e) {
                        
                            var view = kendo.mobile.application.view();
@@ -37,6 +30,12 @@ app.controller('homeController', [
                        
                            
                        }
+
+                       $scope.form = {};                    
+                       $scope.form.title = {};
+                       $scope.form.title.resoruceName = "Home";
+                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+                       
 
                        var setResources = function () {
                            $scope.form.attentionUser = {};
@@ -172,44 +171,61 @@ app.controller('homeController', [
 
                        }
 
-                      setResources();
-                     
-                       $scope.message = "";
-                       $scope.messageCount = 0;
-                       $scope.searchValue = "";
-                       $scope.hasCreditLock = false;
-                       $scope.hasSearch = false;
-                       $scope.hasListView = false;
-                       $scope.hasDetailView = false;
-                       $scope.selectedRetailer = 0;
-                       $scope.selectedOrderType = '';
-                       $scope.selectedOrderTypeId = '1';
-                       $scope.currentSearchInput = '';
-                       $scope.orderList = {};
-                       $scope.searchParameterId = 1;
+                       setResources();
 
                      
-                       $scope.groupBy = 'SalesOrderNumber';
-                       $scope.screen2SearchParameter = 'SalesOrderNumber';
-                       $scope.viewMoreColumn = 'OrderNumber';
-                       
-                    
-                       $scope.parameters = parameterService.getSearchParameters();
+                       console.log($rootScope.hasBackButton);
+                       if (!$rootScope.hasBackButton) {
 
-                       $scope.hasNext = true;
-                       $scope.currentPage = 1;
-                       $scope.PageSize = 5;
-                       $scope.successMessage = $scope.form.loading.resoruceValue;
-                                           
-                       $scope.hasItemSelectedForApporval = false;
-                       $scope.selectedAll = false;
-                       $scope.jsonIn = {};
-                       $scope.orderCounts = {};
+                           $scope.intShow = function (e) {
 
-                       var hasOneOrderType = false;
-                       var defaultSelectedRetailer = 0;
-                       $scope.isAuth = authService.authentication.isAuth;
+                               $scope.selectedPara = '1';
+                               setSelectPara();
 
+                               getOrderCounts();
+
+                           }
+                         
+                           $scope.mesages = {};
+                           $scope.orders = {};
+                           $scope.message = "";
+                           $scope.messageCount = 0;
+                           $scope.searchValue = "";
+                           $scope.hasCreditLock = false;
+                           $scope.hasSearch = false;
+                           $scope.hasListView = false;
+                           $scope.hasDetailView = false;
+                           $scope.selectedRetailer = 0;
+                           $scope.selectedOrderType = '';
+                           $scope.selectedOrderTypeId = '1';
+                           $scope.currentSearchInput = '';
+                           $scope.orderList = {};
+                           $scope.searchParameterId = 1;
+
+
+                           $scope.groupBy = 'SalesOrderNumber';
+                           $scope.screen2SearchParameter = 'SalesOrderNumber';
+                           $scope.viewMoreColumn = 'OrderNumber';
+
+
+                           $scope.parameters = parameterService.getSearchParameters();
+
+                           $scope.hasNext = true;
+                           $scope.currentPage = 1;
+                           $scope.PageSize = 5;
+                           $scope.successMessage = $scope.form.loading.resoruceValue;
+
+                           $scope.hasItemSelectedForApporval = false;
+                           $scope.selectedAll = false;
+                           $scope.jsonIn = {};
+                           $scope.orderCounts = {};
+
+                           var hasOneOrderType = false;
+                           var defaultSelectedRetailer = 0;
+
+                           $scope.selectedRetailer = 0;
+                           $scope.isAuth = authService.authentication.isAuth;
+                       }
 
                        var setSelectPara = function () {
                            
@@ -272,6 +288,9 @@ app.controller('homeController', [
                            return hasOneOrderType;
                        }
                        var getOrderCounts = function () {
+                           if ($rootScope.hasBackButton) {
+                               return true;
+                           }
                            $scope.hasSearch = false;
                              kendo.mobile.application.showLoading();
 
@@ -293,8 +312,12 @@ app.controller('homeController', [
                                    hasOneOrderType = checkOrderTypeCount(result.MobileOrderCountList);
 
                                    if (hasOneOrderType) {
-                                       //TO DO -show order detail for one order type
+                                       //TO DO -show order detail for one order type                                   
 
+                                       //var buttongroup = $("#buttongroup" + 17352).data("kendoMobileButtonGroup");
+                                     
+                                       //console.log(buttongroup);
+                                      
                                    }
 
                                }
@@ -312,16 +335,6 @@ app.controller('homeController', [
                                 kendo.mobile.application.hideLoading();
                            });
 
-                       }
-
-
-                       $scope.intShow = function (e) {
-                   
-                           $scope.selectedPara = '1';                         
-                           setSelectPara();
-                         
-                           getOrderCounts();
-                       
                        }
                        $scope.languages = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
@@ -433,8 +446,7 @@ app.controller('homeController', [
                               
                                $scope.selectedOrderTypeId = parameterService.getOrderTypeById($scope.selectedOrderType);
                               
-                               var buttongroup = $(".buttongroup-home").data("kendoMobileButtonGroup");
-
+                            
                                var selectedOrderCount = listviewsToShow.eq(e.index).attr('data-orderCount');
                                
                                var hasNext = false;
@@ -484,12 +496,9 @@ app.controller('homeController', [
 
 
                        }; // end message
-
-
-                       getMessages();
                        
+                       getMessages();
 
-                       $scope.selectedRetailer = 0;
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
 
@@ -515,6 +524,7 @@ app.controller('homeController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderDetail");
                            }
+                           $rootScope.hasBackButton = true;
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue);
                        }
 
@@ -678,6 +688,7 @@ app.controller('homeController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
                            }
+                           $rootScope.hasBackButton = true;
                            kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList);
                        }
 

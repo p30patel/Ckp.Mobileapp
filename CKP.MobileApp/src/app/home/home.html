@@ -41,7 +41,7 @@
                             <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
                         </kendo-mobile-button>
                     </h3>
-                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" k-data-index="0">
+                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}"  id="buttongroup-{{orderCount.RetailerId}}">
                         <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
                             <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                             <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
