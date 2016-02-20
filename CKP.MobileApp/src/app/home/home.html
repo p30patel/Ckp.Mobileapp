@@ -1,7 +1,7 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
-            <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" ng-click="showAlertModel()">
+            <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
             <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button">
@@ -32,12 +32,12 @@
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
                 <div class="ck-home" style="margin-top:-.1em; background-color:gray; ">
                     <h3>
-                        <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" ng-click="retailerHeader()">
+                        <kendo-mobile-button class="ck-title touch-retailer-header" data-tap="myTouch.tap" k-on-click="retailerHeader()">
                             <span class="ck-home-button-icon km-icon km-plus" id="header-{{orderCount.RetailerId}}"></span>
                             {{orderCount.RetailerName}}</kendo-mobile-button>
                        
                         <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "  
-                    ng-click="showCreditModel()" ng-show="hasCreditLock">
+                    k-on-click="showCreditModel()" ng-show="hasCreditLock">
                             <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
                         </kendo-mobile-button>
                     </h3>
@@ -69,7 +69,7 @@
                           <tr class="header" ng-show="$first">
                             
                             <td style="width:15%;">
-                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll"  id="checkAll" ng-click="checkAll(selectedAll)"/>
+                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll"  id="checkAll" k-on-click="checkAll(selectedAll)"/>
                                 <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll" ></label> 
                            
                             </td>
@@ -115,7 +115,7 @@
                             {{ order.OrderNumber }}                            
                          </div>
                           <p>
-                              <a  ng-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" >
+                              <a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
                                {{form.seeMore.resoruceValue}}
                                </a>
                             </p>
@@ -139,7 +139,7 @@
                             <div ng-repeat="order in value | limitTo : 3">
                                    {{order.SalesOrderNumber}}                
                                </div>
-                                <p><a  ng-click="showMoreOrderModel(value, 'SalesOrderNumber')" ng-show="value.length > 3">
+                                <p><a  k-on-click="showMoreOrderModel(value, 'SalesOrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
                                {{form.seeMore.resoruceValue}}
                                </a>
                                </p>
@@ -150,14 +150,14 @@
                             </td>
                             <td style="margin-top:-10px; width:10%;">
 
-                                <a  ng-if="searchParameterId == '1' || searchParameterId == '2'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)">
+                                <a  ng-if="searchParameterId == '1' || searchParameterId == '2'" k-on-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>
                              
-                                <a  ng-if="searchParameterId == '3'" ng-click="showOrderList(1, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)">
+                                <a  ng-if="searchParameterId == '3'" k-on-click="showOrderList(1, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>
-                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(1, searchParameterId, order.VendorRef, orderCount.RetailerId)">
+                                <a  ng-if="searchParameterId == '4'"  k-on-click="showOrderList(1, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>
                             </td>
@@ -168,7 +168,7 @@
                                 <i></i>
                                 <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'"
                                      ng-disabled="!hasItemSelectedForApporval"
-                                     ng-click="showOrderList(1, searchParameterId, '', orderCount.RetailerId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                     k-on-click="showOrderList(1, searchParameterId, '', orderCount.RetailerId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
 
@@ -216,7 +216,7 @@
                                <div ng-repeat="order in value | limitTo : 3">
                                    {{order.OrderNumber}}                            
                                </div>
-                                <p><a  ng-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3">
+                                <p><a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
                                {{form.seeMore.resoruceValue}}
                                </a>
                                </p>
@@ -239,10 +239,10 @@
                             </td>
                        
                               <td  style="margin-top:-10px; width:10%;">                             
-                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(2, searchParameterId, order.POCtrlNo)">
+                                <a  ng-if="searchParameterId == '1'" k-on-click="orderDetail(2, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>                               
-                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(2, searchParameterId, order.VendorRef, orderCount.RetailerId)">
+                                <a  ng-if="searchParameterId == '4'"  k-on-click="showOrderList(2, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>
                             </td>
@@ -251,7 +251,7 @@
                             <tr ng-show="$last && hasNext">
                             <td colspan="5" style="padding: 1em;" ng-hide="searchParameterId == '2' ||  searchParameterId == '3' ">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" ng-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" k-on-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
@@ -312,7 +312,7 @@
                               <div ng-repeat="order in value | limitTo : 3">
                                  {{ order.OrderNumber }}                            
                               </div>
-                              <p><a  ng-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length >2">
+                              <p><a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length >2" data-tap="myTouch.tap" >
                                {{form.seeMore.resoruceValue}}
                                </a>
                               </p>
@@ -330,16 +330,16 @@
                      
                          
                               <td   style="margin-top:-10px; width:10%;">
-                                <a  ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.POCtrlNo)">
+                                <a  ng-if="searchParameterId == '1'" k-on-click="orderDetail(3, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>     
-                                   <a  ng-if="searchParameterId == '2'" ng-click="showOrderList(3, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)">
+                                   <a  ng-if="searchParameterId == '2'" k-on-click="showOrderList(3, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>  
-                                  <a  ng-if="searchParameterId == '3'"  ng-click="showOrderList(3, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)">
+                                  <a  ng-if="searchParameterId == '3'"  k-on-click="showOrderList(3, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>                              
-                                <a  ng-if="searchParameterId == '4'"  ng-click="showOrderList(3, searchParameterId, order.VendorRef, orderCount.RetailerId)">
+                                <a  ng-if="searchParameterId == '4'"  k-on-click="showOrderList(3, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap" >
                                     <i class="km-icon km-details red"></i>
                                 </a>
                             </td>
@@ -349,7 +349,7 @@
 
                                 <td colspan="5" style="padding: 1em;">
                                 <i></i>
-                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" ng-click="ViewMore(3)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+                                <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" k-on-click="ViewMore(3)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
@@ -372,7 +372,7 @@
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark">
                 <kendo-view-title>{{form.seeMore.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button ng-click="hideMoreOrderModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                <kendo-mobile-button k-on-click="hideMoreOrderModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
                     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
                 </kendo-mobile-button>
             </div>
@@ -417,7 +417,7 @@
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">
                 <kendo-view-title>{{form.alertsAndNews.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button ng-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                <kendo-mobile-button k-on-click="hideAlertModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
                     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
                 </kendo-mobile-button>
             </kendo-mobile-nav-bar>
@@ -481,7 +481,7 @@
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark">
                 <kendo-view-title> {{form.creditLock.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button ng-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
+                <kendo-mobile-button k-on-click="hideCreditModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
                     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
                 </kendo-mobile-button>
             </div>

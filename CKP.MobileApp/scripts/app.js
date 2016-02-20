@@ -22,7 +22,7 @@ angular.element(document).ready(function () {
 });
 
 
-var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
+var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter']);
 
 
 app.constant('ngAuthSettings', {
@@ -41,7 +41,7 @@ app.config(function ($httpProvider) {
 
 
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
-    
+    FastClick.attach(document.body);
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
