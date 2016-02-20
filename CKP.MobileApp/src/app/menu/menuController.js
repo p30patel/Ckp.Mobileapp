@@ -84,9 +84,10 @@ app.controller('menuController', [
                        }
                       
                        $scope.home = function () {
+                           $rootScope.hasBackButton = false;
                            kendo.mobile.application.navigate("src/app/home/home.html");
                        }
-                       $rootScope.hasBackButton = false;
+                    
                        $scope.mnuClick = function (viewName) {
 
                            switch (viewName) {
