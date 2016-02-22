@@ -24,6 +24,7 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
+                           FastClick.attach(document.body);
                        
                            
                        }
@@ -33,6 +34,17 @@ app.controller('homeController', [
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
                        
+                       $("#touch").kendoTouch({
+                           touchstart: function (e) {
+                               console.log(e);
+                               $("#right-drawer").data("kendoMobileDrawer").show();
+                               return false;
+                           }
+                       });
+                       $scope.show = function () {
+                           $("#right-drawer").data("kendoMobileDrawer").show();
+                           return false;
+                       }
 
                        var setResources = function () {
                            $scope.form.attentionUser = {};

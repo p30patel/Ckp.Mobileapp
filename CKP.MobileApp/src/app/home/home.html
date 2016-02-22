@@ -4,9 +4,9 @@
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
-            <a data-align="left" data-role="button" href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button" >
+            <kendo-mobile-button data-align="left" data-role="button" id="touch" data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap"  >
                 <i class="ck-icon ck-menu"></i>
-            </a>
+            </kendo-mobile-button>
             <kendo-view-title>
                 <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
             </kendo-view-title>

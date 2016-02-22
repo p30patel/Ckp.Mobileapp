@@ -49,7 +49,8 @@ app.controller('menuController', [
                        $scope.hasAddress = false;
 
                        $scope.helpUrl = ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
-                     
+
+                 
                        //address
 
                        var getOrganizationDetail = function () {
@@ -63,9 +64,17 @@ app.controller('menuController', [
                            else {
                                $scope.hasAddress = false;
                            }
+                           FastClick.attach(document.body);
 
                        }
-                       getOrganizationDetail();
+                       $scope.afterShow = function (e) {
+
+                           getOrganizationDetail();
+                           FastClick.attach(document.body);
+
+
+                       }
+                   
 
                    
                        $scope.login = function () {
@@ -86,6 +95,10 @@ app.controller('menuController', [
                        $scope.home = function () {
                            $rootScope.hasBackButton = false;
                            kendo.mobile.application.navigate("src/app/home/home.html");
+                       }
+                       $scope.show = function(){
+                           $("#right-drawer").data("kendoMobileDrawer").show();
+                           return false;
                        }
                     
                        $scope.mnuClick = function (viewName) {
