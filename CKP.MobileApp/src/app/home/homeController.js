@@ -271,7 +271,7 @@ app.controller('homeController', [
                   
 
                        $scope.orderByColumn = function (arr) {
-                           return $filter('imn')
+                           return $filter('min')
                              ($filter('map')(arr, 'Id'));
                        }
 
