@@ -63,7 +63,7 @@
                         {{successMessage}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | orderBy:approvalOrderByColumn : true">
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | toArray:true | orderBy: orderByColumn: true">
                               
                             
                           <tr class="header" ng-show="$first">
@@ -89,7 +89,7 @@
 
                               
                     
-                        <tr class="pipe" ng-repeat="order in value | limitTo: 1 | orderBy:'POCtrlNo'">
+                        <tr class="pipe" ng-repeat="order in value | limitTo: 1">
                             <td style="width:15%;">                           
                                 <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}" 
                                     data-salesordernumber="{{order.SalesOrderNumber}}"
@@ -191,7 +191,7 @@
 
                   
                     <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" 
-                        ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy:orderByColumn : true">
+                        ng-repeat="(key, value) in orders | groupBy: groupBy | toArray:true | orderBy: orderByColumn: true">
                         
                       
                         <tr class="header" ng-show="$first">
@@ -204,7 +204,7 @@
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
                          
-                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value | limitTo : 1 | orderBy:'Id' ">
+                        <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value | limitTo : 1 ">
                           
                                <td style="width:5%;"></td>     
                            
@@ -271,7 +271,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | toArray:true | orderBy: orderByColumn: true  ">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | toArray:true | orderBy: orderByColumn: true">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;" class="spacer"></td>     
@@ -284,7 +284,7 @@
                             <td style="width:30%;">{{form.statusChangedDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
                         </tr>                     
-                        <tr class="pipe" ng-repeat="order in value | limitTo:1 | orderBy:'Id'">
+                        <tr class="pipe" ng-repeat="order in value | limitTo:1">
                                 <td style="width:5%;">{{order.Id}}</td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:45%;">

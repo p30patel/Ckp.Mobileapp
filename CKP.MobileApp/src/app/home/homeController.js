@@ -271,17 +271,11 @@ app.controller('homeController', [
                   
 
                        $scope.orderByColumn = function (arr) {
-                           return $filter('min')
+                           return $filter('imn')
                              ($filter('map')(arr, 'Id'));
                        }
 
-                       $scope.approvalOrderByColumn = function (arr) {
-                           return $filter('min')
-                             ($filter('map')(arr, 'POCtrlNo'));
-                       }
-
-                       
-
+                     
                        var checkOrderTypeCount = function(result)
                        {
                            var hasOneOrderType = false;
