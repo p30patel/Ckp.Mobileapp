@@ -235,8 +235,7 @@ app.controller('homeController', [
 
                            $scope.selectedRetailer = 0;
                            $scope.isAuth = authService.authentication.isAuth;
-
-                        
+                         
                        }
 
                        var setSelectPara = function () {
@@ -399,14 +398,18 @@ app.controller('homeController', [
                                    });
                                  
                                    $scope.orders = currentOrders;
+                                   $scope.orders = $filter('orderBy')($scope.orders, 'Id');
                                }
                                else {                                  
                                    $scope.orders = result;
+                                   $scope.orders = $filter('orderBy')($scope.orders, 'Id');
                                }
+
+                              
                              
                            }).catch(function (error) {
                                $scope.orders = [];
-
+                           
 
                            }).finally(function () {
                                kendo.mobile.application.hideLoading();
