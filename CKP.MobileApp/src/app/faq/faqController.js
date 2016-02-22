@@ -46,7 +46,7 @@ app.controller('faqController', [
                              kendo.mobile.application.showLoading();
 
                            faqDataService.getFaqs(selectedCultureName).then(function (result) {
-                               $scope.faqs = result.FaqLists;
+                               $scope.faqs = result;
                            
                            }).catch(function (error) {
                                $scope.faqs = {};
@@ -58,21 +58,7 @@ app.controller('faqController', [
                        var loadFaqs = function () {
                            var cultureName = translateService.getCurrentCultureName();
                            getFaqs(cultureName);
-                           //if (cultureName !== 'en-US') {
-                           //      kendo.mobile.application.showLoading();
-
-                           //    faqDataService.getFaqs('en-US').then(function (result) {
-                           //        getFaqs(cultureName);
-
-                           //    }).catch(function (error) {
-                           //        $scope.faqs = {};
-                           //    }).finally(function () {
-                           //         kendo.mobile.application.hideLoading();
-                           //    });
-                           //}
-                           //else {
-                           //    getFaqs(cultureName);
-                           //}
+                          
                        }
                       
 

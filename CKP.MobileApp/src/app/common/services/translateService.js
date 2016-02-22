@@ -163,7 +163,7 @@ app.factory('translateService',
             if (versions.length > 0) {
                 //existed then retruns the values 
                 angular.forEach(versions, function (item) {
-                    console.log(item);
+                  
                     if (item.CultureName === cultureName && !hasExitedItem) {
                       
                         hasExitedItem = true;
@@ -182,7 +182,7 @@ app.factory('translateService',
                          
                             }
                         else {
-                            console.log(item.LastUpdated);
+                            
                             data.CultureName = cultureName;
                             data.RowVersion = item.RowVersion;
                             data.RefereshPeriod = item.RefereshPeriod;
@@ -236,7 +236,7 @@ app.factory('translateService',
                     {
                         forceReferesh = false;
                         resourceData = resources;
-                       
+                      
                         deferred.resolve(resources);
                     }
                     else {
