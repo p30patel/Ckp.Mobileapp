@@ -84,7 +84,7 @@ app.controller('orderlistController', [
                        $scope.form.noData = {};
                        $scope.form.noData.resoruceName = "No Data are found";
                        $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
-
+                      
                        if (!$rootScope.hasBackButtonList) {
 
                            $scope.order = {};
@@ -234,26 +234,28 @@ app.controller('orderlistController', [
                                 Salesorders: salesOrders,
                                 UpdateStatus: statusUpdate,
                             }
-                              kendo.mobile.application.showLoading();
-                            var successMessage = statusUpdate ? $scope.form.successMessage.resoruceValue :$scope.form.declineMessage.resoruceValue;
+                            kendo.mobile.application.showLoading();
+
+                       
+                            var successMessage = statusUpdate ? $scope.form.appoveMessage.resoruceValue : $scope.form.declineMessage.resoruceValue;
                             orderDataService.approveDecline(data).then(function (result) {
 
-                                $scope.apporvalMessage = successMessage
+                                $scope.apporvalMessage = successMessage;
+                             
+                                $rootScope.hasBackButton = false;
                                 if (typeof (window.navigator.simulator) === 'undefined') {
                                     window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderApporval");
                                 }
                                 $timeout(function () {
-                                    $scope.apporvalMessage = "";
                                     $scope.order.hasApproval = false;
+                                    kendo.mobile.application.hideLoading();
+                                    $scope.apporvalMessage = "";
                                     kendo.mobile.application.navigate("src/app/home/home.html");
                                 }, 1000);
-
-                                 kendo.mobile.application.hideLoading();
-
-
                             }).catch(function (error) {
                                 $scope.order.hasClikedApporval = false;
-                                 kendo.mobile.application.hideLoading();
+                                $rootScope.hasBackButton = false;
+                                kendo.mobile.application.hideLoading();
                                 $scope.apporvalMessage = $scope.form.faildUpdateMessage.resoruceValue;
                                 $timeout(function () {
                                     $scope.apporvalMessage = "";

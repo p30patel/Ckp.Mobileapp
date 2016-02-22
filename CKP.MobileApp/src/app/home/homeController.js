@@ -235,6 +235,8 @@ app.controller('homeController', [
 
                            $scope.selectedRetailer = 0;
                            $scope.isAuth = authService.authentication.isAuth;
+
+                        
                        }
 
                        var setSelectPara = function () {
@@ -272,6 +274,13 @@ app.controller('homeController', [
                            return $filter('min')
                              ($filter('map')(arr, 'Id'));
                        }
+
+                       $scope.approvalOrderByColumn = function (arr) {
+                           return $filter('min')
+                             ($filter('map')(arr, 'POCtrlNo'));
+                       }
+
+                       
 
                        var checkOrderTypeCount = function(result)
                        {

@@ -63,7 +63,7 @@
                         {{successMessage}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | orderBy:orderByColumn : true">
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | orderBy:approvalOrderByColumn : true">
                               
                             
                           <tr class="header" ng-show="$first">
@@ -89,7 +89,7 @@
 
                               
                     
-                        <tr class="pipe" ng-repeat="order in value | limitTo: 1 | orderBy:'Id'">
+                        <tr class="pipe" ng-repeat="order in value | limitTo: 1 | orderBy:'POCtrlNo'">
                             <td style="width:15%;">                           
                                 <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}" 
                                     data-salesordernumber="{{order.SalesOrderNumber}}"
@@ -271,7 +271,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy:orderByColumn : true">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | toArray:true | orderBy: orderByColumn: true  ">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;" class="spacer"></td>     
@@ -285,7 +285,7 @@
                             <td style="width:10%;" class="spacer"></td>
                         </tr>                     
                         <tr class="pipe" ng-repeat="order in value | limitTo:1 | orderBy:'Id'">
-                                <td style="width:5%;"></td>     
+                                <td style="width:5%;">{{order.Id}}</td>     
                            
                             <td  ng-if="searchParameterId == '1'" style="width:45%;">
                            
