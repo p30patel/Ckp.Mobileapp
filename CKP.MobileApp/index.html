@@ -110,26 +110,26 @@
         <ul kendo-mobile-list-view>
             <li>
 
-                <a href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('contactus')" href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
                         
                         {{form.contactus.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a href="src/app/faq/faq.html" data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('faq')" href="src/app/faq/faq.html" data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
                           
                         {{form.faq.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('termsCondition')" href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
                           
                         {{form.termsCondition.resoruceValue}}
                    
                     </a>
             </li>
             <li>
-                <a href="src/app/policy/policy.html" data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('policy')" href="src/app/policy/policy.html" data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
                          {{form.policies.resoruceValue}}
                       
                     </a>
@@ -146,7 +146,7 @@
                     </a>
             </li>
             <li ng-show="authentication.isAuth">
-                <a href="src/app/feedback/feedback.html" data-icon="ck-icon ck-feedback" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('feedback')"  data-icon="ck-icon ck-feedback" data-tap="myTouch.tap">
                              {{form.feedback.resoruceValue}}
                      
                     </a>

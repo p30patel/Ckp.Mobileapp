@@ -113,6 +113,22 @@ app.controller('menuController', [
                                case "notification" :                           
                                    kendo.mobile.application.navigate("src/app/notification/notification.html"); 
                                    break;
+                               case "feedback":
+                                   kendo.mobile.application.navigate("src/app/feedback/feedback.html");
+                                   break;
+                               case "policy":
+                                   kendo.mobile.application.navigate("src/app/policy/policy.html");
+                                   break;
+                               case "termsCondition":
+                                   kendo.mobile.application.navigate("src/app/termsCondition/termsCondition.html");
+                                   break;
+                               case "faq":
+                                   kendo.mobile.application.navigate("src/app/faq/faq.html");
+                                   break;
+                               case "contactus":
+                                   kendo.mobile.application.navigate("src/app/contactus/contactus.html");
+                                   break;
+
                        
                            default:
                                    kendo.mobile.application.navigate("src/app/login/login.html");
