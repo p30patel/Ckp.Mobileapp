@@ -1,11 +1,8 @@
 // This is your Telerik Backend Services API key.
 var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 var baasScheme = 'https';
-var androidProjectNumber = '1018275522168'; // google push tocken
+var androidProjectNumber = '1018275522168'; // google push token
 var emulatorMode = true;
-
-var telerikAnaltyicsProdcutId = "70d4845295c541ff8e423ed4c3953b94"; // analtyics project key
-
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';

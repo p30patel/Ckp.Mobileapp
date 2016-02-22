@@ -4,7 +4,7 @@ app.factory('translateService',
 
         var translateFactory = {};
         var currentCultureName = 'en-US';
-        var refereshPeriod = new Date().getDay() % 2 == 0;
+        var refereshPeriod = new Date().getDay();
         var resourceData = [];
 
         var forceGetResourceUpdates = function (cultureName, rowVersion) {
@@ -127,72 +127,68 @@ app.factory('translateService',
                     });
                     localStorage.setItem(cultureName, JSON.stringify(oldItems));
                 }
-                else {
-                    console.log('no changes keep same old  list');
+                else {               
+                    console.log('no changes keep same old  list' );
                 }
             
             }
 
             //update version
             var oldItems = JSON.parse(localStorage.getItem(cultureName)) || [];
-
-            var version = getVersion(cultureName, rowVersion, oldItems, !refereshPeriod, true);
-        
-            //retruns the resources
            
+            var version = getVersion(cultureName, rowVersion, oldItems, refereshPeriod, true);
+        
+    
             // console.log('final list resources : ' + oldItems.length);
             return oldItems;
         }
-        var getResources = function (cultureName, version)
-        {
-            
-            var resources = JSON.parse(localStorage.getItem(cultureName));
-            var hasForceRefresh = true;
-            
-            if (hasForceRefresh)
-            {            
-                forceGetResourceUpdates(cultureName, version).then(function (result) {
-                    console.log('resoruce from server' + result.length);
-                  
-                    return result;
-                });
-            
-            }
-            
-        }
+       
 
         var getVersion = function (cultureName, rowVersion, resouceList, refereshPeriod, hasUpdate) {
          
             var versions = JSON.parse(localStorage.getItem('versions')) || [];
-            
+            var persistTime = 1000 * 60 * 4320;    // Expiration in milliseconds; set to null to never  // curent is 3 days
             var data = {
                 "CultureName":  cultureName,
                 "RowVersion": '',
                 "RefereshPeriod": refereshPeriod,
-                "ResourceList" : ''
+                "LastUpdated": 0,
+                "ResourceList": '',
+                "PersistTime": persistTime
+             
              
             };
-
+            
             hasExitedItem = false;
             if (versions.length > 0) {
                 //existed then retruns the values 
                 angular.forEach(versions, function (item) {
-                  
+                    console.log(item);
                     if (item.CultureName === cultureName && !hasExitedItem) {
+                      
                         hasExitedItem = true;
                         if (hasUpdate) {
+                         
                             item.RowVersion = rowVersion;
-                            item.RefereshPeriod = refereshPeriod
-                            item.ResourceList  = resouceList
+                            item.RefereshPeriod = refereshPeriod;
+                            item.ResourceList = resouceList;
+                            item.LastUpdated = new Date().getTime();
+
                             data.RowVersion = rowVersion;
                             data.RefereshPeriod = refereshPeriod;
                             data.ResourceList = resouceList;
-                        }
+                            data.LastUpdated = new Date().getTime();
+                            data.PersistTime = persistTime;
+                         
+                            }
                         else {
+                            console.log(item.LastUpdated);
                             data.CultureName = cultureName;
                             data.RowVersion = item.RowVersion;
                             data.RefereshPeriod = item.RefereshPeriod;
                             data.ResourceList = item.ResourceList;
+                            data.LastUpdated = item.LastUpdated;
+                            data.PersistTime = persistTime;
                         }
                     }
 
@@ -202,14 +198,15 @@ app.factory('translateService',
             if (!hasExitedItem) {
                 versions.push(data);
                 localStorage.setItem('versions', JSON.stringify(versions));
-              //  console.log('New Version' + data.CultureName + data.RowVersion);
+               
             }
             if (hasUpdate && hasExitedItem) {
+
                 localStorage.setItem('versions', JSON.stringify(versions));
-            //    console.log('Update Version' + data.CultureName + data.RowVersion)
+              
             
             }
-            console.log('ref' + data.RefereshPeriod);
+       
             return data;
         }
 
@@ -225,25 +222,32 @@ app.factory('translateService',
 
             version = versionData.RowVersion;
 
-            var forceReferesh = false; // refresh the page once a day
-        
+            var forceReferesh = true;
+           
             if (versionData) {
                 version = versionData.RowVersion;
                 var resources = versionData.ResourceList;
-              
-                if (resources.length > 0 && versionData.RefereshPeriod !== refereshPeriod) {
-                    resourceData = resources;
-
-                    deferred.resolve(resources);
-                }
-                else {
-                    
+               
+                if (versionData.PersistTime && new Date().getTime() > Number(versionData.LastUpdated) + versionData.PersistTime) {
                     forceReferesh = true;
                 }
-
+                else{
+                    if (resources.length > 0)
+                    {
+                        forceReferesh = false;
+                        resourceData = resources;
+                       
+                        deferred.resolve(resources);
+                    }
+                    else {
+                        forceReferesh = true;
+                    }
+                    
+                }
+                  
             }
             if (forceReferesh) {
-                console.log('force server refrrsh' + forceReferesh);
+              
                 forceGetResourceUpdates(cultureName, version).then(function (result) {
                 
                     resourceData = result;
