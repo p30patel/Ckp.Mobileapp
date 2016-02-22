@@ -212,7 +212,7 @@ app.factory("faqDataService", [
                     }
 
                     var getFaqs = function (selectedCultureName) {
-                        localStorageService.clearAll();
+                       
                         //localStorage.clear();
                         var deferred = $q.defer();
                         if (cultureName != '') {
@@ -240,7 +240,7 @@ app.factory("faqDataService", [
                                 if (faqs.length > 0) {
                                     forceReferesh = false;
                                     faqData = faqs;
-                                    console.log('local ');
+                                  
                                     deferred.resolve(faqs);
                                 }
                                 else {

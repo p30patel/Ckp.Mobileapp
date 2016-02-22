@@ -50,6 +50,7 @@ app.controller('policyController', [
                              kendo.mobile.application.showLoading();
                          
                            policyTermsDataService.getPolicyTerms().then(function (result) {
+                               console.log(result);
                                $scope.policies = result;
 
                            }).catch(function (error) {

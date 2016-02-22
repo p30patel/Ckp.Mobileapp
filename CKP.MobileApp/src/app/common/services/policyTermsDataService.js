@@ -17,14 +17,25 @@ app.factory("policyTermsDataService", [
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetResourceCultureTextUpdate?cultureName=' + cultureName
                             + '&rowVersionTerms=' + rowVersionTerms + '&rowVersionPrivacy=' + rowVersionPrivacy + '&rowVersionReturn=' + rowVersionReturn
                             ).success(function (result) {
-
-                                if (cultureName !== 'en-US' && result.Resources[2].ResourceValue === null)
+                                if (cultureName !== 'en-US')
                                 {
                                     var terms = localStorageService.get('policyTerms-' + 'en-US');
                                     if (terms) {
-                                        result.Resources[2].ResourceValue = terms.Resources[2].ResourceValue;
+                                        if (result.Resources[0].ResourceValue === null) {
+                                            result.Resources[0].ResourceValue = terms.Resources[0].ResourceValue;
+                                        }
+
+                                        if (result.Resources[1].ResourceValue === null) {
+                                            result.Resources[1].ResourceValue = terms.Resources[1].ResourceValue;
+                                        }
+
+                                        if (result.Resources[0].ResourceValue === null) {
+                                            result.Resources[0].ResourceValue = terms.Resources[0].ResourceValue;
+                                        }
                                     }
+
                                 }
+
                                 localStorageService.set('policyTerms-' + cultureName, result);
                             deferred.resolve(result);
                         })
@@ -35,7 +46,7 @@ app.factory("policyTermsDataService", [
                     };
                     var getPolicyTerms = function () {
 
-                        var refereshPeriod = new Date().getDay();
+                        var refreshPeriod = new Date().getDate();
 
                         var deferred = $q.defer();
                         var selectedLanguage = localStorageService.get('selectedLanguage');
@@ -47,12 +58,23 @@ app.factory("policyTermsDataService", [
                         var hasForceRefresh = true;
                        
                         var policyTerms = localStorageService.get('policyTerms-' + cultureName) || [];
-                       
-                        if (policyTerms && policyTerms.lenght > 0 && refereshPeriod == 3) {                          
-                            deferred.resolve(policyTerms);
-                        }
+                        
+                        if (typeof policyTerms.Resources !== 'undefined' && refreshPeriod !== 1) {
+
+                                if (policyTerms.Resources.length > 0 )
+                                {
+                                    console.log('local');
+                                    hasForceRefresh = false;
+                                    deferred.resolve(policyTerms);
+                                }
+                            }
+                            else {
+                                hasForceRefresh = true;
+                            }
+                      
+
                         if (hasForceRefresh) {
-                           
+                            console.log('server');
                             forceGetpolicyTerms(cultureName).then(function (result) {
                            
                                 deferred.resolve(result);
