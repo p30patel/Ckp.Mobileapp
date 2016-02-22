@@ -29,8 +29,8 @@ app.factory("policyTermsDataService", [
                                             result.Resources[1].ResourceValue = terms.Resources[1].ResourceValue;
                                         }
 
-                                        if (result.Resources[0].ResourceValue === null) {
-                                            result.Resources[0].ResourceValue = terms.Resources[0].ResourceValue;
+                                        if (result.Resources[2].ResourceValue === null) {
+                                            result.Resources[2].ResourceValue = terms.Resources[2].ResourceValue;
                                         }
                                     }
 

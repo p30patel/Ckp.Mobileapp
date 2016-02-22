@@ -35,6 +35,7 @@ app.controller('termsConditionController', [
                        var init = function () {
                              kendo.mobile.application.showLoading();
                            policyTermsDataService.getPolicyTerms().then(function (result) {
+                               console.log(result);
                                $scope.termsCondition = result;
 
                            }).catch(function (error) {
