@@ -19,9 +19,10 @@
     
     <script src="bower_components/everlive/min/everlive.all.min.js"></script>
     <script src="src/vendor/angular.min.js"></script>
-
+  
     <script src="kendo/js/kendo.all.min.js"></script>
     <script src="kendo/js/jszip.min.js"></script>
+    <script src="src/vendor/angular-touch.min.js"></script>
     <!-- <script src="src/vendor/analytics.js"></script>--> 
     <script src="src/vendor/angular-local-storage.min.js"></script>
     <script src="src/vendor/angular-filter.min.js"></script>
@@ -110,26 +111,26 @@
         <ul kendo-mobile-list-view>
             <li>
 
-                <a ng-click="mnuClick('contactus')" href="src/app/contactus/contactus.html" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('contactus')"  data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
                         
                         {{form.contactus.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a ng-click="mnuClick('faq')" href="src/app/faq/faq.html" data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('faq')"  data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
                           
                         {{form.faq.resoruceValue}}
                     </a>
             </li>
             <li>
-                <a ng-click="mnuClick('termsCondition')" href="src/app/termsCondition/termsCondition.html" data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('termsCondition')"  data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
                           
                         {{form.termsCondition.resoruceValue}}
                    
                     </a>
             </li>
             <li>
-                <a ng-click="mnuClick('policy')" href="src/app/policy/policy.html" data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
+                <a ng-click="mnuClick('policy')"  data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
                          {{form.policies.resoruceValue}}
                       
                     </a>

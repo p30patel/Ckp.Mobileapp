@@ -22,7 +22,7 @@ angular.element(document).ready(function () {
 });
 
 
-var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter']);
+var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
 
 app.constant('ngAuthSettings', {
