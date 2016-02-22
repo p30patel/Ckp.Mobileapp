@@ -63,13 +63,14 @@
                         {{successMessage}}
                     </li>                
             
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | toArray:true | orderBy:orderByColumn : true">
+                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy  | orderBy:orderByColumn : true">
                               
                             
                           <tr class="header" ng-show="$first">
                             
                             <td style="width:15%;">
-                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll"  id="checkAll" k-on-click="checkAll(selectedAll)"/>
+                            
+                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll"  id="checkAll" ng-change="checkAll(selectedAll)"/>
                                 <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll" ></label> 
                            
                             </td>
@@ -190,7 +191,7 @@
 
                   
                     <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" 
-                        ng-repeat="(key, value) in orders | groupBy: groupBy  | toArray:true | orderBy:orderByColumn : true">
+                        ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy:orderByColumn : true">
                         
                       
                         <tr class="header" ng-show="$first">
@@ -270,7 +271,7 @@
                     </li>
 
                    
-                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | toArray:true | orderBy:orderByColumn : true">
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy | orderBy:orderByColumn : true">
                     
                          <tr class="header" ng-show="$first">
                              <td style="width:5%;" class="spacer"></td>     

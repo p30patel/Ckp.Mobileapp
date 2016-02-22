@@ -636,7 +636,7 @@ app.controller('homeController', [
                           
                        }
 
-                       $scope.checkAll = function (selectedAll) {                        
+                       $scope.checkAll = function (selectedAll) {
                            $('.approve-chk').prop('checked', selectedAll);
                            $scope.hasItemSelectedForApporval = selectedAll;
                        }
