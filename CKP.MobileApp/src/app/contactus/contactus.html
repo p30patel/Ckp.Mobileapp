@@ -280,7 +280,7 @@
                         <input value="" placeholder="{{form.email.resoruceValue}}" type="email" ng-model="contact.email" required ng-show="!authentication.isAuth" />
                         <input value="" placeholder="{{form.organization.resoruceValue}}" type="text" ng-model="contact.organization" ng-show="!authentication.isAuth" />
                         <input value="" placeholder="{{form.order.resoruceValue}}" type="text" ng-model="contact.orderNumber" required />
-                        <textarea placeholder="{{form.messageBody.resoruceValue}}" ng-model="contact.messageBody" rows="3" required></textarea>
+                        <textarea placeholder="{{form.messageBody.resoruceValue}}" ng-model="contact.messageBody" rows="3" required style="resize: none"></textarea>
                     </fieldset>
                     <br />
                     <kendo-mobile-button k-on-click="send()"

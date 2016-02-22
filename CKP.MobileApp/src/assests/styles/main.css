@@ -1,4 +1,7 @@
 
+span.k-widget.k-tooltip.k-tooltip-validation.k-invalid-msg {
+    display:none !important;
+}
 a.ck-title.touch-retailer-header.ng-binding.km-widget.km-button.km-state-active {
   background: none;
 }

@@ -75,7 +75,10 @@ app.controller('menuController', [
 
                        }
                    
-
+                       $scope.show = function () {
+                           $("#right-drawer").data("kendoMobileDrawer").show();
+                           return false;
+                       }
                    
                        $scope.login = function () {
                            kendo.mobile.application.navigate("src/app/login/login.html");

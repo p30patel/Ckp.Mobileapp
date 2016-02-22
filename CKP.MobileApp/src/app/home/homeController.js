@@ -33,14 +33,7 @@ app.controller('homeController', [
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
                        $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
-                       
-                       $("#touch").kendoTouch({
-                           touchstart: function (e) {
-                               console.log(e);
-                               $("#right-drawer").data("kendoMobileDrawer").show();
-                               return false;
-                           }
-                       });
+                     
                        $scope.show = function () {
                            $("#right-drawer").data("kendoMobileDrawer").show();
                            return false;
