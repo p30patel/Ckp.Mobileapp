@@ -109,12 +109,12 @@ app.controller('menuController', [
                            $rootScope.hasBackButton = false;
                            switch (viewName) {
                                case "help":
-                                   $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-i.pdf" : ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
+                                   $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-i.pdf" : ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-e.pdf";
                                    var selectedLanguage = localStorageService.get('selectedLanguage');
                                    var deviceData = localStorageService.get('deviceData');
                                    if (selectedLanguage)
                                    {
-                                       $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-i-" + selectedLanguage + ".pdf" : ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e-" + selectedLanguage + ".pdf";
+                                       $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-i-" + selectedLanguage + ".pdf" : ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-e-" + selectedLanguage + ".pdf";
                                    }
                                    if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) 
                                    {
