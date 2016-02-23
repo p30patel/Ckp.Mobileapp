@@ -216,7 +216,6 @@ app.factory('translateService',
            
             var deferred = $q.defer();
 
-           //localStorage.clear();
 
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
 
@@ -230,6 +229,7 @@ app.factory('translateService',
                
                 if (versionData.PersistTime && new Date().getTime() > Number(versionData.LastUpdated) + versionData.PersistTime) {
                     forceReferesh = true;
+                   
                 }
                 else{
                     if (resources.length > 0)
