@@ -4,7 +4,7 @@
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
-            <kendo-mobile-button data-align="left" data-role="button"  data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="false" >
+            <kendo-mobile-button data-align="left" data-role="button"  data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="true" >
                 <i class="ck-icon ck-menu"></i>
             </kendo-mobile-button>
             <kendo-view-title>
@@ -20,10 +20,14 @@
                     <select class="ck-po-select" 
                         style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;" 
                         ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
-                    <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue"  ng-keypress="key($event)"
-                        style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " 
-                        />
+                    <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue"  ng-keypress="key($event)" />
+                       <!-- style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " -->
+                       
+                   
                 </fieldset>
+                 <a kendo-mobile-button="" class="ck-input-btn km-widget km-button" ng-click="search()" data-role="button" data-rel="modalview">
+                        <i style="font-size: 130%; margin-top:7px;" class="ck-icon ck-password"></i>
+                    </a>
             </li>
               <li ng-show="orderCounts.length == 0">           
                  <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>

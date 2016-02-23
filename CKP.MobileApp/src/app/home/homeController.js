@@ -13,21 +13,7 @@ app.controller('homeController', [
 
                        };
 
-                       $scope.afterShow = function (e) {
-                       
-                           var view = kendo.mobile.application.view();
-                           if (view !== null) {
-                               var navbar = kendo.mobile.application.view()
-                                            .header
-                                            .find(".km-navbar")
-                                            .data("kendo-mobile-nav-bar");
-                               navbar.title($scope.form.title.resoruceValue);
-                               $('.km-scroll-container').css('-webkit-transform', 'none');
-                           }
-                        
-                           console.log($scope.selectedPara);
-                           
-                       }
+                    
 
                        $scope.form = {};                    
                        $scope.form.title = {};
@@ -36,6 +22,7 @@ app.controller('homeController', [
                      
                        $scope.show = function () {
                            $("#right-drawer").data("kendoMobileDrawer").show();
+                           $rootScope.hasBackButton = false;
                            return false;
                        }
 
@@ -175,57 +162,73 @@ app.controller('homeController', [
 
                        setResources();
 
-                     
-                       $scope.init = function (e)
-                       {       
+                   
+                       $scope.afterShow = function (e) {
+
+                           var view = kendo.mobile.application.view();
+                           if (view !== null) {
+                               var navbar = kendo.mobile.application.view()
+                                            .header
+                                            .find(".km-navbar")
+                                            .data("kendo-mobile-nav-bar");
+                               navbar.title($scope.form.title.resoruceValue);
+                               $('.km-scroll-container').css('-webkit-transform', 'none');
+                           }
+                         
+                           console.log($rootScope.hasBackButton);
+                           if ($rootScope.hasBackButton) {
+                             
+                               
+                           }
+                           else{
+                               $scope.mesages = {};
+                               $scope.orders = {};
+                               $scope.message = "";
+                               $scope.messageCount = 0;
+                               $scope.searchValue = "";
+                               $scope.hasCreditLock = false;
+                               $scope.hasSearch = false;
+                               $scope.hasListView = false;
+                               $scope.hasDetailView = false;
+                               $scope.selectedRetailer = 0;
+                               $scope.selectedOrderType = '';
+                               $scope.selectedOrderTypeId = '1';
+                               $scope.currentSearchInput = '';
+                               $scope.orderList = {};
+
+                               $scope.searchParameterId = 1;
                                $scope.selectedPara = '1';
                                setSelectPara();
+
+                               $scope.groupBy = 'SalesOrderNumber';
+                               $scope.screen2SearchParameter = 'SalesOrderNumber';
+                               $scope.viewMoreColumn = 'OrderNumber';
+
+
+                               $scope.parameters = parameterService.getSearchParameters();
+
+                               $scope.hasNext = true;
+                               $scope.hasNextDisabled = false;
+                               $scope.currentPage = 1;
+                               $scope.PageSize = 5;
+                               $scope.successMessage = $scope.form.loading.resoruceValue;
+
+                               $scope.hasItemSelectedForApporval = false;
+                               $scope.selectedAll = false;
+                               $scope.jsonIn = {};
+                               $scope.orderCounts = {};
+
+                               var hasOneOrderType = false;
+                               var defaultSelectedRetailer = 0;
+
+                               $scope.selectedRetailer = 0;
+                               $scope.isAuth = authService.authentication.isAuth;
                                getOrderCounts();
-                         
+                           }
                        }
-                       if (!$rootScope.hasBackButton) {
-                           $scope.mesages = {};
-                           $scope.orders = {};
-                           $scope.message = "";
-                           $scope.messageCount = 0;
-                           $scope.searchValue = "";
-                           $scope.hasCreditLock = false;
-                           $scope.hasSearch = false;
-                           $scope.hasListView = false;
-                           $scope.hasDetailView = false;
-                           $scope.selectedRetailer = 0;
-                           $scope.selectedOrderType = '';
-                           $scope.selectedOrderTypeId = '1';
-                           $scope.currentSearchInput = '';
-                           $scope.orderList = {};
-                           $scope.searchParameterId = 1;
 
-
-                           $scope.groupBy = 'SalesOrderNumber';
-                           $scope.screen2SearchParameter = 'SalesOrderNumber';
-                           $scope.viewMoreColumn = 'OrderNumber';
-
-
-                           $scope.parameters = parameterService.getSearchParameters();
-
-                           $scope.hasNext = true;
-                           $scope.hasNextDisabled = false;
-                           $scope.currentPage = 1;
-                           $scope.PageSize = 5;
-                           $scope.successMessage = $scope.form.loading.resoruceValue;
-
-                           $scope.hasItemSelectedForApporval = false;
-                           $scope.selectedAll = false;
-                           $scope.jsonIn = {};
-                           $scope.orderCounts = {};
-
-                           var hasOneOrderType = false;
-                           var defaultSelectedRetailer = 0;
-
-                           $scope.selectedRetailer = 0;
-                           $scope.isAuth = authService.authentication.isAuth;
-                         
-                       }
+                   
+                     
 
                        var setSelectPara = function () {
                            
@@ -524,22 +527,26 @@ app.controller('homeController', [
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&backUrl=" + backUrl);
                        }
 
-                   
+                       var search = function () {
+                           $scope.orders = {};
+                           $scope.hasSearch = true;
+                           $rootScope.hasBackButton = false;
+                           $rootScope.hasSearchOrApporval = true;
+                           setSelectPara();
+                           getOrderCounts();
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
+                           }
+                       }
 
+                       $scope.search = function () {
+                           search();
+                       }
                        $scope.key = function ($event) {
                         
                            if ($event.keyCode === 13 && ($scope.searchValue.length > 0 || $scope.selectedPara === '1')) {
                                $event.target.blur();                           
-                               $scope.orders = {};
-                               
-                               $scope.hasSearch = true;
-                               $rootScope.hasBackButton = false;
-                               $rootScope.hasSearchOrApporval = true;
-                               setSelectPara();
-                               getOrderCounts();
-                               if (typeof (window.navigator.simulator) === 'undefined') {
-                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
-                               }
+                               search();
                            }
                        }
                        //view more orders

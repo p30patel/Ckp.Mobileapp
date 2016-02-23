@@ -77,6 +77,7 @@ app.controller('menuController', [
                    
                        $scope.show = function () {
                            $("#right-drawer").data("kendoMobileDrawer").show();
+                           $rootScope.hasBackButton = false;
                            return false;
                        }
                    
@@ -105,7 +106,7 @@ app.controller('menuController', [
                        }
                     
                        $scope.mnuClick = function (viewName) {
-
+                           $rootScope.hasBackButton = false;
                            switch (viewName) {
                                case "help":
                                    $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-i.pdf" : ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
