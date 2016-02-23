@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="termsConditionController" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="termsConditionController" k-after-show="afterShow" k-on-init="init(kendoEvent)" data-reload="false">
     <kendo-mobile-content>
         <kendo-mobile-list-view ng-show="termsCondition" ng-repeat="terms in termsCondition.Resources" ng-if="$index == 2">
             <li>

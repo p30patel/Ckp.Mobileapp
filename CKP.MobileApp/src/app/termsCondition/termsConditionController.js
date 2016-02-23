@@ -31,11 +31,11 @@ app.controller('termsConditionController', [
                        }
 
 
-                       $scope.termsCondition = {};
+                      
                        var init = function () {
-                             kendo.mobile.application.showLoading();
+                           kendo.mobile.application.showLoading();
                            policyTermsDataService.getPolicyTerms().then(function (result) {
-                               console.log(result);
+                              
                                $scope.termsCondition = result;
 
                            }).catch(function (error) {
@@ -44,7 +44,12 @@ app.controller('termsConditionController', [
                                 kendo.mobile.application.hideLoading();
                            });
                        }
-                       init();
+
+                       $scope.init = function (e) {
+                           $scope.termsCondition = {};
+                           init();
+                       }
+                      
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
                        };

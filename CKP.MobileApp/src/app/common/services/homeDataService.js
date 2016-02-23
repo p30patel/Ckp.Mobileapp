@@ -4,6 +4,7 @@
 app.factory("homeDataService", [
                 "$http", "$q", "localStorageService", "ngAuthSettings", "authService", "timeStampService", "$rootScope",
 function ($http, $q, localStorageService, ngAuthSettings, authService, timeStampService, $rootScope) {
+
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
                    
                     var homeDataServiceFactory = {};
@@ -76,12 +77,12 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
 
                     var forceGetOrderSummary = function (jsonIn) {
                         var deferred = $q.defer();
-                        var authentication = authService.authentication;
-
-
+                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderSummary";
 
                         var organization = localStorageService.get('organizationDetail');
+                        if (!organization) {
+                        }
 
                         jsonIn.UserId = organization.UserId;
                      

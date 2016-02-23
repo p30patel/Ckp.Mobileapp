@@ -1,10 +1,10 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow">
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" ng-controller="homeController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" k-before-show="beforeShow" k-on-init="init(kendoEvent)" data-reload="false">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
-            <kendo-mobile-button data-align="left" data-role="button"  data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap"  >
+            <kendo-mobile-button data-align="left" data-role="button"  data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="false" >
                 <i class="ck-icon ck-menu"></i>
             </kendo-mobile-button>
             <kendo-view-title>

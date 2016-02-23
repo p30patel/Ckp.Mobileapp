@@ -165,11 +165,6 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
         }
         setResources();
 
-
-
-        $scope.HelpDesk = {};
-        $scope.contact = {};
-       
         //address
         var getHelpDesk = function () {
 
@@ -178,7 +173,17 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
                 $scope.helpDesk = helpDesk.HelpDesk;
             }
         }
-        getHelpDesk();
+
+
+        $scope.init = function (e) {
+
+            $scope.HelpDesk = {};
+            $scope.contact = {};
+            getHelpDesk();
+        }
+
+       
+      
 
         $scope.showSendEmailmodal = function () {
             clearWriteEmailInputs();
@@ -194,7 +199,7 @@ app.controller('contactusController', ['$scope', '$http', '$sce', 'authService',
             $scope.contact.orderNumber = '';
             $scope.contact.messageBody = '';
         }
-        clearWriteEmailInputs();
+       
 
         var validator = $('#contactForm').kendoValidator({
             validateOnBlur: true

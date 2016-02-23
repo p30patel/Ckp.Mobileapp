@@ -44,8 +44,8 @@ app.controller('policyController', [
                            }
                        }
 
-
-                       $scope.policies = {};
+                  
+                     
                        var init = function () {
                              kendo.mobile.application.showLoading();
                          
@@ -59,7 +59,13 @@ app.controller('policyController', [
                                 kendo.mobile.application.hideLoading();
                            });
                        }
-                       init();
+
+                       $scope.init = function (e) {
+                           $scope.policies = {};
+                           init();
+                       }
+
+                       
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
                        };

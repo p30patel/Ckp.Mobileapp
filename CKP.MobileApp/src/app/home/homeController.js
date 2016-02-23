@@ -24,8 +24,8 @@ app.controller('homeController', [
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
-                           FastClick.attach(document.body);
-                       
+                        
+                           console.log($scope.selectedPara);
                            
                        }
 
@@ -175,19 +175,15 @@ app.controller('homeController', [
 
                        setResources();
 
-                      // $rootScope.hasBackButton = false;
                      
-                       if (!$rootScope.hasBackButton) {
-
-                           $scope.intShow = function (e) {
-
+                       $scope.init = function (e)
+                       {       
                                $scope.selectedPara = '1';
                                setSelectPara();
-
                                getOrderCounts();
-
-                           }
                          
+                       }
+                       if (!$rootScope.hasBackButton) {
                            $scope.mesages = {};
                            $scope.orders = {};
                            $scope.message = "";
@@ -247,26 +243,7 @@ app.controller('homeController', [
                            };
                        }
 
-                       $scope.greaterThan = function (prop, val) {
-                           return function (item) {
-                               return item[prop] > val;
-                           }
-                       }
-
-                       $scope.equalProp = function (prop, val) {
-                           return function (item) {
-                           
-                               return item[prop] === val;
-                           }
-                       }
-
-                  
-
-                       $scope.orderByColumn = function (arr) {
-                           return $filter('min')
-                             ($filter('map')(arr, 'Id'));
-                       }
-
+                     
                      
                        var checkOrderTypeCount = function(result)
                        {
@@ -293,11 +270,14 @@ app.controller('homeController', [
                            return hasOneOrderType;
                        }
                        var getOrderCounts = function () {
+                          
                            if ($rootScope.hasBackButton) {
-                               return true;
+                             
+                               $scope.hasSearch = false;
+                               return false;
                            }
                            $scope.hasSearch = false;
-                             kendo.mobile.application.showLoading();
+                           kendo.mobile.application.showLoading();
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
@@ -376,13 +356,14 @@ app.controller('homeController', [
                            kendo.mobile.application.showLoading();
                            homeDataService.getOrderSummary(jsonIn).then(function (result) {
                                $scope.hasNext = result.length >= $scope.PageSize;
-                             
+                               result = $filter('orderBy')(result, 'OrderDate', true);
+                              
                                if (hasNext) {
                                    
                                    var currentOrders = $scope.orders;
                                    var nextNumber = $scope.orders.length + 1;
                                    angular.forEach(result, function (value, key) {
-
+                                       console.log(value);
                                        if (key <= result.length) {
                                            value["Id"] = -1 * nextNumber++;
                                            currentOrders.push(value);
@@ -391,11 +372,15 @@ app.controller('homeController', [
                                    });
                                  
                                    $scope.orders = currentOrders;
-                                   $scope.orders = $filter('orderBy')($scope.orders, 'Id');
+                                  
                                }
-                               else {                                  
+                               else {
+                                   var nextNumber = 1;
+                                   angular.forEach(result, function (value, key) {
+                                       value["Id"] = -1 * nextNumber++;
+                                   });
                                    $scope.orders = result;
-                                   $scope.orders = $filter('orderBy')($scope.orders, 'Id');
+                                  
                                }
 
                               
@@ -544,20 +529,17 @@ app.controller('homeController', [
                        $scope.key = function ($event) {
                         
                            if ($event.keyCode === 13 && ($scope.searchValue.length > 0 || $scope.selectedPara === '1')) {
-                               $event.target.blur();
-                               forceGetData = true;
-                               $scope.hasSearch = true;
-
-                               $rootScope.hasSearchOrApporval = true;
-
+                               $event.target.blur();                           
                                $scope.orders = {};
+                               
+                               $scope.hasSearch = true;
+                               $rootScope.hasBackButton = false;
+                               $rootScope.hasSearchOrApporval = true;
                                setSelectPara();
+                               getOrderCounts();
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
                                }
-                             
-                               getOrderCounts();
-
                            }
                        }
                        //view more orders

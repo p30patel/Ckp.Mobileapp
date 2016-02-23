@@ -36,21 +36,21 @@ app.factory('parameterService', [
                       ];
                       var groupListScreen1 = [
 
-                          { searchParamterId: '1', orderTypeId: '1', groupBy: '-Id', searchParameterScreen2: 'SalesOrderNumber' },
-                          { searchParamterId: '1', orderTypeId: '2', groupBy: '-Id', searchParameterScreen2: '' },
-                          { searchParamterId: '1', orderTypeId: '3', groupBy: '-Id', searchParameterScreen2: '' },
+                          { searchParamterId: '1', orderTypeId: '1', groupBy: 'Id', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '1', orderTypeId: '2', groupBy: 'Id', searchParameterScreen2: '' },
+                          { searchParamterId: '1', orderTypeId: '3', groupBy: 'Id', searchParameterScreen2: '' },
 
 
-                          { searchParamterId: '2', orderTypeId: '1', groupBy: 'SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
-                          { searchParamterId: '2', orderTypeId: '3', groupBy: 'SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '2', orderTypeId: '1', groupBy: '-SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
+                          { searchParamterId: '2', orderTypeId: '3', groupBy: '-SalesOrderNumber', searchParameterScreen2: 'SalesOrderNumber' },
 
-                          { searchParamterId: '3', orderTypeId: '1', groupBy: 'ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },                          
-                          { searchParamterId: '3', orderTypeId: '3', groupBy: 'ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },
+                          { searchParamterId: '3', orderTypeId: '1', groupBy: '-ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },                          
+                          { searchParamterId: '3', orderTypeId: '3', groupBy: '-ShoppingCartId', searchParameterScreen2: 'ShoppingCartId' },
 
 
-                          { searchParamterId: '4', orderTypeId: '1', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
-                          { searchParamterId: '4', orderTypeId: '2', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
-                          { searchParamterId: '4', orderTypeId: '3', groupBy: 'VendorRef', searchParameterScreen2: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '1', groupBy: '-VendorRef', searchParameterScreen2: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '2', groupBy: '-VendorRef', searchParameterScreen2: 'VendorRef' },
+                          { searchParamterId: '4', orderTypeId: '3', groupBy: '-VendorRef', searchParameterScreen2: 'VendorRef' },
                        
                       ];
 
