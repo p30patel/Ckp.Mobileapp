@@ -95,6 +95,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     setResources();
+
+    $scope.show = function () {
+        $("#right-drawer").data("kendoMobileDrawer").show();
+        return false;
+    }
     //end page html 
     var d = new Date();
     $scope.year = d.getFullYear();
