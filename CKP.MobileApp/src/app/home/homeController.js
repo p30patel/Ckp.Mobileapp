@@ -227,7 +227,18 @@ app.controller('homeController', [
                            }
                        }
 
-                   
+                       $scope.greaterThan = function (prop, val) {
+                           return function (item) {
+                               return item[prop] > val;
+                           }
+                       }
+
+                       $scope.equalProp = function (prop, val) {
+                           return function (item) {
+
+                               return item[prop] === val;
+                           }
+                       }
                      
 
                        var setSelectPara = function () {
