@@ -547,7 +547,10 @@ app.controller('homeController', [
                        }
 
                        $scope.search = function () {
-                           search();
+                           if ($scope.searchValue.length > 0 || $scope.selectedPara === '1')
+                           {
+                               search();
+                           }
                        }
                        $scope.key = function ($event) {
                         
