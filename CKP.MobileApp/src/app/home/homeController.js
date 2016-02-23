@@ -175,12 +175,8 @@ app.controller('homeController', [
                                $('.km-scroll-container').css('-webkit-transform', 'none');
                            }
                          
-                           console.log($rootScope.hasBackButton);
-                           if ($rootScope.hasBackButton) {
-                             
-                               
-                           }
-                           else{
+                         
+                           if (!$rootScope.hasBackButton) {
                                $scope.mesages = {};
                                $scope.orders = {};
                                $scope.message = "";
