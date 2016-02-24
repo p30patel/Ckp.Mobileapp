@@ -1,17 +1,17 @@
 app.factory('translateService',
-        ['$http', '$q', 'localStorageService', 'ngAuthSettings',
+        ['$http', '$q', 'localStorageService', 'ngAuthSettings', 
     function ($http, $q, localStorageService, ngAuthSettings) {
 
         var translateFactory = {};
         var currentCultureName = 'en-US';
         var refereshPeriod = new Date().getDay();
         var resourceData = [];
-
+        var authServiceBase = ngAuthSettings.authServiceBaseUri;
         var forceGetResourceUpdates = function (cultureName, rowVersion) {
 
             var deferred = $q.defer();
-
-            var url = "https://qachecknet.checkpt.com/webapi/api/core/MobileApp/GetResourceUpdates?cultureName=" + cultureName + "&rowVersion=" + rowVersion;
+            rowVersion = '';
+            var url = authServiceBase + "webapi/api/core/MobileApp/GetResourceUpdates?cultureName=" + cultureName + "&rowVersion=" + rowVersion;
 
             $http.get(url).success(function (result) {
                               
@@ -218,7 +218,7 @@ app.factory('translateService',
 
 
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
-
+            versionData = '';
             version = versionData.RowVersion;
 
             var forceReferesh = true;

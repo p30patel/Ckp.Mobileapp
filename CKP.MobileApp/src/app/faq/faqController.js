@@ -17,7 +17,7 @@ app.controller('faqController', [
                            $scope.form.noData.resoruceName = "No Data are found";
                            $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
                        }
-
+                       $scope.faqs = {};
                        $scope.afterShow = function (e) {
 
                            var view = kendo.mobile.application.view();
@@ -32,13 +32,13 @@ app.controller('faqController', [
 
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.faq");
                                }
-                               setResources();
-                               loadFaqs();
+                              
                            }
                        }
 
 
-                       $scope.faqs = {};
+                       setResources();
+                     
 
 
                        var getFaqs = function (selectedCultureName) {
@@ -46,6 +46,7 @@ app.controller('faqController', [
                              kendo.mobile.application.showLoading();
 
                            faqDataService.getFaqs(selectedCultureName).then(function (result) {
+                               console.log('view ' + result);
                                $scope.faqs = result;
                            
                            }).catch(function (error) {
@@ -60,6 +61,7 @@ app.controller('faqController', [
                            getFaqs(cultureName);
                           
                        }
+                       loadFaqs();
                       
 
                        $scope.renderHtml = function (content) {

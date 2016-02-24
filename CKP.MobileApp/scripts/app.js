@@ -5,7 +5,7 @@ var androidProjectNumber = '1018275522168'; // google push token
 var emulatorMode = true;
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
-var clientId = 'Ckp.PoC1';
+var clientId = 'Ckp.Poc1';
 
 
 angular.element(document).ready(function () {

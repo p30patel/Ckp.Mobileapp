@@ -166,7 +166,7 @@ app.factory("faqDataService", [
                         if (versions.length > 0) {
                             //existed then retruns the values 
                             angular.forEach(versions, function (item) {
-                                console.log(item);
+                               
                                 if (item.CultureName === cultureName && !hasExitedItem) {
                                     
                                     hasExitedItem = true;
@@ -240,7 +240,7 @@ app.factory("faqDataService", [
                                 if (faqs.length > 0) {
                                     forceReferesh = false;
                                     faqData = faqs;
-                                  
+                                    console.log('local');
                                     deferred.resolve(faqs);
                                 }
                                 else {
@@ -268,6 +268,7 @@ app.factory("faqDataService", [
                                 }
                                 else {
                                     faqData = result;
+                                    console.log(result);
                                     deferred.resolve(result);
                                 }
                                

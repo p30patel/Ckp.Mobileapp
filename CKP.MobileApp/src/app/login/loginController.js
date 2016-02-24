@@ -91,6 +91,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.newPasswordText.resoruceName = "New Password Description";
         $scope.form.newPasswordText.resoruceValue = "New Password Description";
 
+        $scope.form.noMatchFound = {};
+        $scope.form.noMatchFound.resoruceName = "User name and email combination does not match";
+        $scope.form.noMatchFound.resoruceValue = "User name and email combination does not match";
+
         
     }
 
@@ -117,15 +121,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
-        var languageData = localStorageService.get('languageData');
-
-        if (languageData) {
-            $scope.languages = languageData;
-        } else {
-            loginDataService.forceGetLanguages().then(function (result) {
+    
+      
+        loginDataService.getLanguages().then(function (result) {
                 $scope.languages = result;
             });
-        }
+      
 
         var selectedLanguage = localStorageService.get('selectedLanguage');
 
@@ -137,7 +138,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
     };
-    languages(); //init languages
+  
     var setLoginData = function () {
         var loginData = localStorageService.get('loginData');
 
@@ -161,7 +162,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
         $('.k-header').css('background-color', 'white');
-      
+        languages(); //init languages
         setLoginData();
       
     }
@@ -200,7 +201,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
             })
             .catch(function (err) {
-                message = "User name and email combination does not match!";
+                message = $scope.form.noMatchFound.resoruceValue + ".";
                  kendo.mobile.application.hideLoading();
                 $scope.forgotPassworMessage = message;
                 $timeout(function () {
