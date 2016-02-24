@@ -156,17 +156,17 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.afterShow = function (e) {
-       
+        languages(); //init languages
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
 
         }
         $('.k-header').css('background-color', 'white');
-        languages(); //init languages
-        setLoginData();
-      
+     
     }
-   
+  
+    setLoginData();
+
     //forgot password 
     $scope.loginData.email = "";
     $scope.forgotPasswordModalOpen = function () {
