@@ -46,7 +46,7 @@ app.controller('faqController', [
                              kendo.mobile.application.showLoading();
 
                            faqDataService.getFaqs(selectedCultureName).then(function (result) {
-                               console.log('view ' + result);
+                           
                                $scope.faqs = result;
                            
                            }).catch(function (error) {
@@ -62,7 +62,7 @@ app.controller('faqController', [
                           
                        }
                        loadFaqs();
-                      
+
 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);

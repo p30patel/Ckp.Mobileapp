@@ -91,9 +91,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.newPasswordText.resoruceName = "New Password Description";
         $scope.form.newPasswordText.resoruceValue = "New Password Description";
 
-        $scope.form.noMatchFound = {};
-        $scope.form.noMatchFound.resoruceName = "User name and email combination does not match";
-        $scope.form.noMatchFound.resoruceValue = "User name and email combination does not match";
+
+        $scope.form.notMatched = {};
+        $scope.form.notMatched.resoruceName = "User name and email combination does not match";
+        $scope.form.notMatched.resoruceValue = "User name and email combination does not match";
 
         
     }
@@ -121,12 +122,15 @@ function ($scope, $http, authService, translateService, localStorageService, log
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
-    
-      
-        loginDataService.getLanguages().then(function (result) {
+        var languageData = localStorageService.get('languageData');
+
+        if (languageData) {
+            $scope.languages = languageData;
+        } else {
+            loginDataService.forceGetLanguages().then(function (result) {
                 $scope.languages = result;
             });
-      
+        }
 
         var selectedLanguage = localStorageService.get('selectedLanguage');
 
@@ -138,7 +142,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
     };
-  
+    languages(); //init languages
     var setLoginData = function () {
         var loginData = localStorageService.get('loginData');
 
@@ -156,16 +160,16 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.afterShow = function (e) {
-        languages(); //init languages
+
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
 
         }
         $('.k-header').css('background-color', 'white');
-     
+
+        setLoginData();
+
     }
-  
-    setLoginData();
 
     //forgot password 
     $scope.loginData.email = "";
@@ -179,12 +183,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
 
     var sendPassword = function () {
-       
-        if (typeof (window.navigator.simulator) === 'undefined')
-        {
+
+        if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.sendPassword");
         }
-          kendo.mobile.application.showLoading();
+        kendo.mobile.application.showLoading();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
         var message = "";
@@ -197,12 +200,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                     $scope.forgotPassworMessage = "";
                     $("#modalview-password").kendoMobileModalView("close");
                 }, 7000);
-                 kendo.mobile.application.hideLoading();
+                kendo.mobile.application.hideLoading();
 
             })
             .catch(function (err) {
-                message = $scope.form.noMatchFound.resoruceValue + ".";
-                 kendo.mobile.application.hideLoading();
+                message = $scope.form.notMatched.resoruceValue + ".";
+                kendo.mobile.application.hideLoading();
                 $scope.forgotPassworMessage = message;
                 $timeout(function () {
                     $scope.forgotPassworMessage = "";
@@ -212,7 +215,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     }
     $scope.sendPassword = function () {
-       
+
         sendPassword();
     }
     //end forgot password
@@ -234,7 +237,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         var rowVersion = "";
 
         localStorageService.set('selectedLanguage', selectedLanague);
-          kendo.mobile.application.showLoading();
+        kendo.mobile.application.showLoading();
         translateService.getResourceUpdates(selectedLanague, rowVersion).then(function (result) {
 
             $scope.form.username.resoruceValue = translateService.getResourceValue($scope.form.username.resoruceName);
@@ -260,19 +263,19 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.form.inputError.resoruceValue = translateService.getResourceValue($scope.form.inputError.resoruceName);
             $scope.form.passwordHintUserInputError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintUserInputError.resoruceName);
             $scope.form.passwordHintError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintError.resoruceName);
-            
 
-            
-             kendo.mobile.application.hideLoading();
+
+
+            kendo.mobile.application.hideLoading();
         });
     }
 
     $scope.beforeShow = function (e) {
-       
+
     }
 
     $scope.intShow = function (e) {
-     
+
         translatePage();
     };
 
@@ -289,7 +292,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $event.target.blur();
             var type = $($event.target).attr("type");
             var disabledSendEmail = $('#btnSendPassword').attr('disabled');
-            
+
             if (type === 'password' || type === 'text') {
                 login();
             }
@@ -313,11 +316,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
             remmberme: $scope.loginData.useRefreshTokens
         };
 
-        
+
         localStorageService.set('loginData', loginData);
 
         if (userName !== '' && password !== '') {
-              kendo.mobile.application.showLoading();
+            kendo.mobile.application.showLoading();
 
             $scope.passwordHint = "";
             authService.login($scope.loginData).then(function (response) {
@@ -328,8 +331,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
                     hasNewPassword = data.HasNewPassword;
                 }
-                if (hasNewPassword)
-                {
+                if (hasNewPassword) {
                     authService.authentication.isAuth = false;
                     $("#modalview-newPassword").kendoMobileModalView("open");
 
@@ -342,7 +344,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 }
 
             }).catch(function (err) {
-                 kendo.mobile.application.hideLoading();
+                kendo.mobile.application.hideLoading();
                 $scope.passwordHint = "<b>" + err.error_description + "</b>";
                 $timeout(function () {
                     $scope.passwordHint = "";
@@ -360,15 +362,15 @@ function ($scope, $http, authService, translateService, localStorageService, log
         }
     }
     $scope.login = function () {
-      if (typeof (window.navigator.simulator) === 'undefined') {
+        if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
         }
         login();
     }
 
     $scope.showPasswordHint = function () {
-     
-      if (typeof (window.navigator.simulator) === 'undefined') {
+
+        if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.passwordHint");
         }
 

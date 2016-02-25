@@ -16,7 +16,7 @@ app.factory("faqDataService", [
                         $http.get(authServiceBase + 'webapi/api/core/MobileApp/GetFaq?cultureName=' + cultureName + '&rowVersion=' + ''
                             ).success(function (result) {
                                 var resources = addFaqs(cultureName, result.RowVersion, result);
-                                localStorageService.set('faq-' + cultureName, result);
+                              
                                 deferred.resolve(result);
                              
                             })
@@ -149,7 +149,7 @@ app.factory("faqDataService", [
 
                         var versions = JSON.parse(localStorage.getItem('faqs-version')) || [];
 
-                        var persistTime = 1000 * 60 * 43800;    // Expiration in milliseconds; set to null to never  // curent is 3 days
+                        var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // current is 1 days
                         var data = {
                             "CultureName": cultureName,
                             "RowVersion": '',
@@ -228,7 +228,7 @@ app.factory("faqDataService", [
                         version = faqData.RowVersion;
 
                         var forceReferesh = true;
-                       
+                      
                         if (faqData) {
                             version = faqData.RowVersion;
                             var faqs = faqData.FaqList;
@@ -240,7 +240,7 @@ app.factory("faqDataService", [
                                 if (faqs.length > 0) {
                                     forceReferesh = false;
                                     faqData = faqs;
-                                    console.log('local');
+                                 
                                     deferred.resolve(faqs);
                                 }
                                 else {
@@ -259,17 +259,16 @@ app.factory("faqDataService", [
                                     hasCheckforEnglish = true;
                                     var faqData = getFaqData('en-US', '', [], false, false);
                                     if (faqData) {
-                                        faqData = faqData.FaqList;
-                                        deferred.resolve(faqData);
+                                        result = faqData.FaqList;
+                                        deferred.resolve(result);
                                     }
                                     else {
                                         deferred.reject('error');
                                     }
                                 }
                                 else {
-                                    faqData = result;
-                                    console.log(result);
-                                    deferred.resolve(result);
+                                   
+                                    deferred.resolve(result.FaqLists);
                                 }
                                
                             });

@@ -30,7 +30,7 @@ app.controller('termsConditionController', [
                            }
                        }
 
-
+                       $scope.termsCondition = {};
                       
                        var init = function () {
                            kendo.mobile.application.showLoading();
@@ -46,7 +46,7 @@ app.controller('termsConditionController', [
                        }
 
                        $scope.init = function (e) {
-                           $scope.termsCondition = {};
+                         
                            init();
                        }
                       
