@@ -4,9 +4,6 @@
   "AppIdentifier": "com.checkpt.checknetmobiledev",
   "ProjectName": "CKP.MobileApp",
   "AndroidPermissions": [
-    "android.permission.ACCESS_COARSE_LOCATION",
-    "android.permission.ACCESS_FINE_LOCATION",
-    "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
     "android.permission.ACCESS_NETWORK_STATE"
   ],
   "DeviceOrientations": [
