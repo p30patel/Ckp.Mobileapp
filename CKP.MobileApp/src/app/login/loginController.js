@@ -175,9 +175,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $('.k-header').css('background-color', 'white');
 
         setLoginData();
-        if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
-            $scope.offline = true;
-        }
+        //if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
+        //    $scope.offline = true;
+        //}
     }
 
     //forgot password 

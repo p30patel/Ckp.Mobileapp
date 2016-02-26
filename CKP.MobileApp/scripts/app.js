@@ -80,6 +80,12 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
     });
 
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+        alert('Your connection is offline, Please connect to Wifi or Data');
+    }
+
 
 }]);
 
