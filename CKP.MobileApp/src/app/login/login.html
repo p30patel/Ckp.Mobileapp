@@ -48,6 +48,16 @@
     <!-- End Form Area -->
     <p class="ck-disclamier km-style-info">{{form.copyRightsDescription.resoruceValue}}. </p>
     <p class="ck-disclamier km-style-info">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
+     
+     <kendo-mobile-footer ng-show="offline">
+            <kendo-mobile-nav-bar class="km-accent">
+                <kendo-view-title style="display: none;"></kendo-view-title>
+                   <ul kendo-mobile-list-view k-style="'inset'" class="ck-grey-wrap ck-no-border" style="font-size:small;">
+                    <li>{{form.connectinOfflineMsg.resoruceValue}}</li>
+                   </ul>
+        </kendo-mobile-nav-bar>
+        
+     </kendo-mobile-footer>
     <!-- End Login View -->
     <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
@@ -123,27 +133,5 @@
         </form>
     </div>
 
-      <!--  Connection ofgline-->
-    <div kendo-mobile-modal-view id="modalview-offline" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
-        <div kendo-mobile-header>
-            <div kendo-mobile-nav-bar class="km-dark">
-                <kendo-view-title> {{form.connectinOffline.resoruceValue}}</kendo-view-title>
-                <kendo-mobile-button k-on-click="exitApp()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
-                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
-                </kendo-mobile-button>
-            </div>
-        </div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
-            <li class="ck-module-date">
-                <i class="ck-icon ck-lock ck-module-icon"></i>
-                <span class="ck-font-size-mid">   {{form.connectinOffline.resoruceValue}}</span>
-            </li>
-            <li>
-                <h3 class="km-bold-font">{{form.connectinOfflineMsg.resoruceValue}}</h3>
-                <h3 class="km-font">
-                       {{form.connectinOfflineMsg.resoruceValue}}
-                    </h3>
-            </li>
-        </ul>
-    </div>
+    
 </kendo-mobile-view>

@@ -125,7 +125,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
     $scope.translations = {};
     $scope.message = "";
-
+    $scope.offline = false;
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
@@ -176,7 +176,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         setLoginData();
         if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
-            $("#modalview-offline").kendoMobileModalView("show");
+            $scope.offline = true;
         }
     }
 
@@ -418,11 +418,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         kendo.mobile.application.navigate("src/app/login/login.html");
     };
 
-    $scope.exitApp = function () {
-        window.navigator.navigator.app.exitApp();
-        $("#modalview-offline").kendoMobileModalView("hide");
-    }
-
+  
     $scope.show = function () {
         $("#right-drawer").data("kendoMobileDrawer").show();
         return false;
