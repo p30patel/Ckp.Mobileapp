@@ -96,15 +96,22 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.notMatched.resoruceName = "User name and email combination does not match";
         $scope.form.notMatched.resoruceValue = "User name and email combination does not match";
 
+        $scope.form.connectinOffline = {};
+        $scope.form.connectinOffline.resoruceName = "User name and email combination does not match";
+        $scope.form.connectinOffline.resoruceValue = "User name and email combination does not match";
+
+        $scope.form.connectinOffline = {};
+        $scope.form.connectinOffline.resoruceName = "Connection Offline";
+        $scope.form.connectinOffline.resoruceValue = "Connection Offline";
+
+
+        $scope.form.connectinOfflineMsg = {};
+        $scope.form.connectinOfflineMsg.resoruceName = "Your connection is offline, Please connect to Wifi or Data";
+        $scope.form.connectinOfflineMsg.resoruceValue = "Your connection is offline, Please connect to Wifi or Data";
         
     }
 
     setResources();
-
-    $scope.show = function () {
-        $("#right-drawer").data("kendoMobileDrawer").show();
-        return false;
-    }
     //end page html 
     var d = new Date();
     $scope.year = d.getFullYear();
@@ -168,7 +175,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $('.k-header').css('background-color', 'white');
 
         setLoginData();
-
+        if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
+            $("#modalview-offline").kendoMobileModalView("show");
+        }
     }
 
     //forgot password 
@@ -408,6 +417,16 @@ function ($scope, $http, authService, translateService, localStorageService, log
         authService.logout();
         kendo.mobile.application.navigate("src/app/login/login.html");
     };
+
+    $scope.exitApp = function () {
+        window.navigator.navigator.app.exitApp();
+        $("#modalview-offline").kendoMobileModalView("hide");
+    }
+
+    $scope.show = function () {
+        $("#right-drawer").data("kendoMobileDrawer").show();
+        return false;
+    }
     $scope.renderHtml = function (content) {
         return $sce.trustAsHtml(content);
     };

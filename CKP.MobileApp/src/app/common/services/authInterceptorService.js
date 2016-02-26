@@ -4,6 +4,11 @@ app.factory('authInterceptorService', [
                 'localStorageService', function ($q, $injector, localStorageService) {
                     
                     var authInterceptorServiceFactory = {};
+                    if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
+                        kendo.mobile.application.navigate("src/app/login/login.html");
+                        return $q.reject('offline');
+                    }
+
                     var request = function (config) {
                         config.headers = config.headers || {};
      

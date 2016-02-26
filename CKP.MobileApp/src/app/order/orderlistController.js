@@ -84,6 +84,10 @@ app.controller('orderlistController', [
                        $scope.form.noData = {};
                        $scope.form.noData.resoruceName = "No Data are found";
                        $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
+                       $scope.form.confirmation = {};
+                       $scope.form.confirmation.resoruceName = "Confirmation";
+                       $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
                       
                        if (!$rootScope.hasBackButtonList) {
 

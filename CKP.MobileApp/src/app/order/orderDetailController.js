@@ -50,7 +50,7 @@ app.controller('orderDetailController', [
                        $scope.form.thankyou.resoruceValue = translateService.getResourceValue($scope.form.thankyou.resoruceName);
 
                        $scope.form.shippingInstruction = {};
-                       $scope.form.shippingInstruction.resoruceName = "Shipping and tax charges are estimated at time of checkout. The final shipping and tax amount will be reflected on your invoice";
+                       $scope.form.shippingInstruction.resoruceName = "Shipping discliamer";
                        $scope.form.shippingInstruction.resoruceValue = translateService.getResourceValue($scope.form.shippingInstruction.resoruceName);
 
                        $scope.form.orderDate = {};
