@@ -94,12 +94,31 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
         localStorageService.remove('orderCounts');
         $rootScope.timeStampOrderCount = new Date().getTime();
 
+        var networkState = navigator.connection.type;
+        var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
+        if (isOffline)
+        {
+            onOffline();
+        }
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
         }
 
     }, false);
+
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+
+        alert('Connection is offline, Please connect to Wifi or Data.', 'Ofline');
+    }
+    document.addEventListener("online", onOnline, false);
+
+    function onOnline() {
+
+        alert('Connection is online.', 'Online');
+    }
 
    
 }]);

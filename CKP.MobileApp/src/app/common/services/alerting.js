@@ -40,6 +40,11 @@
             }
         };
 
+        var clearAlert = function () {
+
+            currentAlerts = [];
+        };
+
         var errorHandler = function (description) {
             return function () {
                 addDanger(description);
@@ -55,7 +60,8 @@
             removeAlert: removeAlert,
             errorHandler: errorHandler,
             currentAlerts: currentAlerts,
-            alertTypes: alertTypes
+            alertTypes: alertTypes,
+            clearAlert: clearAlert
         };
     };
 
