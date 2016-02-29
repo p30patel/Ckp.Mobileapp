@@ -83,14 +83,16 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
                );
     };
 
+    navigator.splashscreen.hide(); //Hides the splash screen for your app.
+    StatusBar.overlaysWebView(false); //Turns off web view overlay.
+
     $rootScope.hasSearchOrApporval = false;
     $rootScope.hasPreviousSearch = false;
     $rootScope.hasBackButton = false;
-    $rootScope.hasBackButtonList = false;
-
+    $rootScope.hasBackButtonList = false;   
     localStorageService.remove('orderCounts');
     $rootScope.timeStampOrderCount = new Date().getTime();
-    alerting.addDanger("offline");
+   
     if (typeof (window.navigator.simulator) === 'undefined') {
         window.plugins.EqatecAnalytics.Monitor.Start();
         getDeviceInfo();
@@ -101,7 +103,8 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
         alerting.addDanger("offline");
     });
     document.addEventListener("online", function () {
-        alerting.removeAlert("online");
+       
+        alerting.removeAlert("offline");
     });
 }]);
 
