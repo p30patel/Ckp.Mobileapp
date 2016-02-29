@@ -10,7 +10,7 @@ app.controller('homeController', [
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                             kendo.mobile.application.hideLoading();
-
+                            $("#right-drawer").data("kendoMobileDrawer").hide();
                        };
 
                     

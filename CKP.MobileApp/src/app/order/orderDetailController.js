@@ -144,6 +144,9 @@ app.controller('orderDetailController', [
                        $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
 
 
+                       $scope.form.confirmation = {};
+                       $scope.form.confirmation.resoruceName = "Confirmation";
+                       $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
                        
                        $scope.order = {};
                   

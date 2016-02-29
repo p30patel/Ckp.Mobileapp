@@ -5,9 +5,22 @@ var androidProjectNumber = '1018275522168'; // google push token
 var emulatorMode = true;
 
 var authServiceBase = 'https://qachecknet.checkpt.com/';
-var clientId = 'Ckp.Poc1';
+var clientId = 'Ckp.PoC1';
+
+
+angular.element(document).ready(function () {
+    if (window.cordova) {
+        document.addEventListener('deviceready', function () {
+            angular.bootstrap(document.body, ['app']);
+        }, false);
+    } else {
+        angular.bootstrap(document.body, ['app']);
+    }
+});
+
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
+
 
 app.constant('ngAuthSettings', {
     authServiceBaseUri: authServiceBase,
@@ -18,9 +31,14 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
-app.run(['authService', 'localStorageService', '$rootScope', 'alerting', function (authService, localStorageService, $rootScope,  alerting) {
+app.config(function ($httpProvider) {
+
+    $httpProvider.interceptors.push('authInterceptorService');
+});
 
 
+app.run(['authService', 'localStorageService', '$rootScope', 'alerting', function (authService, localStorageService, $rootScope, alerting) {
+  
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
@@ -54,7 +72,7 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
 
                    el.push.getRegistration().then(function (result) {
                        localStorageService.set('deviceData', result);
-                       var deviceData = localStorageService.get('deviceData');
+                       var deviceData = localStorageService.get('deviceData');                  
                    },
                    function (e) {
 
@@ -65,21 +83,19 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
                );
     };
 
-    document.addEventListener('deviceready', function () {
-        FastClick.attach(document.body);
-        $rootScope.hasSearchOrApporval = false;
-        $rootScope.hasPreviousSearch = false;
-        $rootScope.hasBackButton = false;
-        $rootScope.hasBackButtonList = false;
-        localStorageService.remove('orderCounts');
-        $rootScope.timeStampOrderCount = new Date().getTime();
-        navigator.splashscreen.hide();
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.Start();
-            getDeviceInfo();
-        }
+    $rootScope.hasSearchOrApporval = false;
+    $rootScope.hasPreviousSearch = false;
+    $rootScope.hasBackButton = false;
+    $rootScope.hasBackButtonList = false;
 
-    });
+    localStorageService.remove('orderCounts');
+    $rootScope.timeStampOrderCount = new Date().getTime();
+    alerting.addDanger("offline");
+    if (typeof (window.navigator.simulator) === 'undefined') {
+        window.plugins.EqatecAnalytics.Monitor.Start();
+        getDeviceInfo();
+    }
+
 
     document.addEventListener("offline", function () {
         alerting.addDanger("offline");
