@@ -149,7 +149,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
     };
-  
+    languages(); //init languages
     var setLoginData = function () {
         var loginData = localStorageService.get('loginData');
 
@@ -173,7 +173,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         }
         $('.k-header').css('background-color', 'white');
-        languages(); //init languages
+
         setLoginData();
     }
 
