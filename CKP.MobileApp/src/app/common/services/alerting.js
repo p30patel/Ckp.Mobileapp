@@ -31,6 +31,7 @@
         };
 
         var removeAlert = function (alert) {
+         
             for (var i = 0; i < currentAlerts.length; i++) {
                 if (currentAlerts[i] === alert) {
                     currentAlerts.splice(i, 1);

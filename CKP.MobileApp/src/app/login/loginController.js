@@ -110,7 +110,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.connectinOfflineMsg.resoruceValue = "Your connection is offline, Please connect to Wifi or Data";
         
     }
-
+ 
     setResources();
     //end page html 
     var d = new Date();

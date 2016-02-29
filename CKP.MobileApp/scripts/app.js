@@ -83,29 +83,25 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
                );
     };
 
-    navigator.splashscreen.hide(); //Hides the splash screen for your app.
-    StatusBar.overlaysWebView(false); //Turns off web view overlay.
+    document.addEventListener('deviceready', function () {
 
-    $rootScope.hasSearchOrApporval = false;
-    $rootScope.hasPreviousSearch = false;
-    $rootScope.hasBackButton = false;
-    $rootScope.hasBackButtonList = false;   
-    localStorageService.remove('orderCounts');
-    $rootScope.timeStampOrderCount = new Date().getTime();
+        navigator.splashscreen.hide(); //Hides the splash screen for your app.
+        StatusBar.overlaysWebView(false); //Turns off web view overlay.
+        $rootScope.hasSearchOrApporval = false;
+        $rootScope.hasPreviousSearch = false;
+        $rootScope.hasBackButton = false;
+        $rootScope.hasBackButtonList = false;
+        localStorageService.remove('orderCounts');
+        $rootScope.timeStampOrderCount = new Date().getTime();
+
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.Start();
+            getDeviceInfo();
+        }
+
+    }, false);
+
    
-    if (typeof (window.navigator.simulator) === 'undefined') {
-        window.plugins.EqatecAnalytics.Monitor.Start();
-        getDeviceInfo();
-    }
-
-
-    document.addEventListener("offline", function () {
-        alerting.addDanger("offline");
-    });
-    document.addEventListener("online", function () {
-       
-        alerting.removeAlert("offline");
-    });
 }]);
 
 app.config(function ($httpProvider) {

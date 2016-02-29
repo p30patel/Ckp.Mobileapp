@@ -87,7 +87,8 @@ app.factory('authService', [
                         var loginData = localStorageService.get('loginData');
                         var organizationDetail = localStorageService.get('organizationDetail');
                         var refreshData = localStorageService.get('forceRefreshDetail');
-
+                        console.log(refreshData);
+                       
                         var uuId = '';
                         var model = '';
                         var platform = '';
@@ -122,7 +123,9 @@ app.factory('authService', [
                             var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
                             var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
-                            hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);                           
+                            hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
+                           
+                            hasForceRefresh = refreshData.PersistTime && new Date().getTime() > Number(refreshData.LastUpdated) + refreshData.PersistTime ? true : hasForceRefresh;
                             }
                            
                         }
@@ -132,18 +135,25 @@ app.factory('authService', [
                         {
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
                             $http.post(url, data).success(function (result) {
-                                localStorageService.set('organizationDetail', result);
+                                localStorageService.set('organizationDetail', result);                                
                                 localStorageService.remove("messages");
-
+                                
+                                console.log('org detail loaded from server:');
                                 var date = new Date();
                                 var currentDate = date.toLocaleDateString();
+                                var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // current is 1 days
                                 var refreshData = {
                                     date: date.toLocaleDateString(),
-                                    hours : date.getHours(),
+                                    hours: date.getHours(),
                                     Minutes: date.getMinutes(),
                                     hasClickedApproval: false,
                                     hasClickedSearch: false,
-                                };                              
+
+                                    "LastUpdated": new Date().getTime(),
+                                    "PersistTime": persistTime
+                                };
+                             
+
                                 localStorageService.set('forceRefreshDetail', refreshData);
                                 
                                 deferred.resolve(result);
