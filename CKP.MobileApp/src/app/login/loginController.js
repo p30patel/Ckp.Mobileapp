@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService',
-function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService', '$rootScope',
+function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService, $rootScope) {
     $scope.title = '';
 
     //login page html lables
@@ -125,7 +125,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
     $scope.translations = {};
     $scope.message = "";
-    $scope.offline = false;
+ 
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
@@ -175,9 +175,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $('.k-header').css('background-color', 'white');
 
         setLoginData();
-        //if (typeof navigator.connection !== 'undefined' && navigator.connection.type === Connection.NONE) {
-        //    $scope.offline = true;
-        //}
     }
 
     //forgot password 
@@ -190,6 +187,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.closeModalViewForgotPassword = function () {
         $("#modalview-password").kendoMobileModalView("close");
     };
+    $scope.offline = $rootScope.offline;
 
     var sendPassword = function () {
 
@@ -423,6 +421,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $("#right-drawer").data("kendoMobileDrawer").show();
         return false;
     }
+   
+  
     $scope.renderHtml = function (content) {
         return $sce.trustAsHtml(content);
     };

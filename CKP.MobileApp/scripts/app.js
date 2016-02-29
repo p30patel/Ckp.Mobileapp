@@ -18,9 +18,9 @@ app.constant('ngAuthSettings', {
     emulatorMode: emulatorMode
 });
 
-app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
+app.run(['authService', 'localStorageService', '$rootScope', 'alerting', function (authService, localStorageService, $rootScope,  alerting) {
 
-  
+
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
 
@@ -73,6 +73,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
         $rootScope.hasBackButtonList = false;
         localStorageService.remove('orderCounts');
         $rootScope.timeStampOrderCount = new Date().getTime();
+        navigator.splashscreen.hide();
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
@@ -80,13 +81,12 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
     });
 
-    document.addEventListener("offline", onOffline, false);
-
-    function onOffline() {
-        alert('Your connection is offline, Please connect to Wifi or Data');
-    }
-
-
+    document.addEventListener("offline", function () {
+        alerting.addDanger("offline");
+    });
+    document.addEventListener("online", function () {
+        alerting.removeAlert("online");
+    });
 }]);
 
 app.config(function ($httpProvider) {

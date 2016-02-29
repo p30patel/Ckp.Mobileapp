@@ -2,7 +2,7 @@
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-light">
             <kendo-view-title style="display: none;"></kendo-view-title>
-            <a data-align="left" data-role="button" ng-click="show()"  data-tap="myTouch.tap"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button">
+            <a data-align="left" data-role="button" href="#right-drawer"  data-tap="myTouch.tap"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button">
                 <i class="ck-icon ck-menu"></i>
             </a>
             <select kendo-drop-down-list ng-model="selectedLanague" class="ck-icon ck-globe ck-lang-select"
@@ -46,18 +46,11 @@
         </ul>
     </form>
     <!-- End Form Area -->
+   
     <p class="ck-disclamier km-style-info">{{form.copyRightsDescription.resoruceValue}}. </p>
     <p class="ck-disclamier km-style-info">{{form.copyRightsText.resoruceValue}} &copy;2001-{{year}} Checkpoint Systems, Inc.</p>
-     
-     <kendo-mobile-footer ng-show="offline">
-            <kendo-mobile-nav-bar class="km-accent">
-                <kendo-view-title style="display: none;"></kendo-view-title>
-                   <ul kendo-mobile-list-view k-style="'inset'" class="ck-grey-wrap ck-no-border" style="font-size:small;">
-                    <li>{{form.connectinOfflineMsg.resoruceValue}}</li>
-                   </ul>
-        </kendo-mobile-nav-bar>
-        
-     </kendo-mobile-footer>
+  
+   
     <!-- End Login View -->
     <div kendo-mobile-modal-view id="modalview-password" k-transition="'overlay:up'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">
         <kendo-mobile-header>
@@ -97,7 +90,11 @@
         </form>
     </div>
 
-
+       <kendo-mobile-footer>
+            
+                    <alerts></alerts>
+      
+     </kendo-mobile-footer>
     <!-- End Forgot Password View -->
 
      <div kendo-mobile-modal-view id="modalview-newPassword" k-transition="'overlay:up'" class="km-moduleview" style="width: 99%; height:100%; background:rgba(255, 255, 255, 0);">

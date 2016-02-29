@@ -25,6 +25,7 @@
     <Content Include=".abproject" />
     <Content Include=".debug.abproject" />
     <Content Include=".release.abproject" />
+    <Content Include="App_Resources\Android\AndroidManifest.xml" />
     <Content Include="App_Resources\Android\drawable-hdpi\splashscreen.png" />
     <Content Include="App_Resources\Android\drawable-land-hdpi\splashscreen.png" />
     <Content Include="App_Resources\Android\drawable-land-ldpi\splashscreen.png" />
@@ -40,6 +41,8 @@
     <Content Include="App_Resources\Android\drawable-xxhdpi\splashscreen.png" />
     <Content Include="App_Resources\Android\drawable-xxxhdpi\icon.png" />
     <Content Include="App_Resources\Android\drawable-xxxhdpi\splashscreen.png" />
+    <Content Include="App_Resources\Android\xml\config.xml" />
+    <Content Include="App_Resources\iOS\config.xml" />
     <Content Include="App_Resources\iOS\Default-667h.png" />
     <Content Include="App_Resources\iOS\Default-736h.png" />
     <Content Include="App_Resources\iOS\Default-Landscape-667h.png" />
@@ -96,8 +99,11 @@
     <Content Include="scripts\app.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="src\app\common\directives\alerting.js" />
+    <Content Include="src\app\common\directives\alerts.html" />
     <Content Include="src\app\common\directives\nextFocuse.js" />
     <Content Include="src\app\common\directives\translate.js" />
+    <Content Include="src\app\common\services\alerting.js" />
     <Content Include="src\app\common\services\authInterceptorService.js" />
     <Content Include="src\app\common\services\authService.js" />
     <Content Include="src\app\common\services\faqDataService.js" />
@@ -120,7 +126,9 @@
     <Content Include="src\app\feedback\feedbackController.js" />
     <Content Include="src\app\help\help.html" />
     <Content Include="src\app\help\helpController.js" />
+    <Content Include="src\app\home\home - Copy.html" />
     <Content Include="src\app\home\home.html" />
+    <Content Include="src\app\home\homeController - Copy.js" />
     <Content Include="src\app\home\homeController.js" />
     <Content Include="src\app\login\login.html" />
     <Content Include="src\app\login\loginController.js" />
@@ -227,6 +235,7 @@
     <Folder Include="App_Resources\Android\drawable-xhdpi\" />
     <Folder Include="App_Resources\Android\drawable-xxhdpi\" />
     <Folder Include="App_Resources\Android\drawable-xxxhdpi\" />
+    <Folder Include="App_Resources\Android\xml\" />
     <Folder Include="App_Resources\iOS\" />
     <Folder Include="App_Resources\WP8\" />
     <Folder Include="App_Resources\WP8\Assets\" />

@@ -4,7 +4,7 @@
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
-            <kendo-mobile-button data-align="left" data-role="button"  href="#right-drawer" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="true" >
+            <kendo-mobile-button data-align="left" data-role="button"  data-ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="true" >
                 <i class="ck-icon ck-menu"></i>
             </kendo-mobile-button>
             <kendo-view-title>
