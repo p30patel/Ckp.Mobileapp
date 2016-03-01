@@ -1,4 +1,4 @@
-// This is your Telerik Backend Services API key.
+
 var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 var baasScheme = 'https';
 var androidProjectNumber = '1018275522168'; // google push token
@@ -37,7 +37,7 @@ app.config(function ($httpProvider) {
 });
 
 
-app.run(['authService', 'localStorageService', '$rootScope', 'alerting', function (authService, localStorageService, $rootScope, alerting) {
+app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
   
     localStorageService.remove('authorizationData');
     var getDeviceInfo = function () {
@@ -86,7 +86,8 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
     document.addEventListener('deviceready', function () {
 
         navigator.splashscreen.hide(); //Hides the splash screen for your app.
-        StatusBar.overlaysWebView(false); //Turns off web view overlay.
+        //StatusBar.overlaysWebView(false); //Turns off web view overlay.
+        StatusBar.styleDefault();
         $rootScope.hasSearchOrApporval = false;
         $rootScope.hasPreviousSearch = false;
         $rootScope.hasBackButton = false;
@@ -96,11 +97,11 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
 
         var networkState = navigator.connection.type;
         var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
-        if (isOffline)
-        {
+        if (isOffline) {
             onOffline();
         }
         if (typeof (window.navigator.simulator) === 'undefined') {
+         
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
         }
@@ -110,14 +111,20 @@ app.run(['authService', 'localStorageService', '$rootScope', 'alerting', functio
     document.addEventListener("offline", onOffline, false);
 
     function onOffline() {
-
-        alert('Connection is offline, Please connect to Wifi or Data.', 'Ofline');
+        if (typeof kendo.mobile.application !== 'undefined') {
+            kendo.mobile.application.navigate("src/app/error/error.html");
+        }
+        else {
+            window.location = "src/app/error/error.html";
+        }
     }
     document.addEventListener("online", onOnline, false);
 
     function onOnline() {
-
-        alert('Connection is online.', 'Online');
+       
+        if (typeof kendo.mobile.application !== 'undefined') {
+            kendo.mobile.application.navigate("src/app/login/login.html");
+        }
     }
 
    

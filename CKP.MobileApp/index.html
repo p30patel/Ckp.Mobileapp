@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -66,43 +66,42 @@
     <script src="src/app/message/messageController.js"></script>
 
     <script src="src/app/feedback/feedbackController.js"></script>
-    <script src="src/app/help/helpController.js"></script>
+
     <script src="src/app/notification/notificationController.js"></script>
     <script src="src/app/policy/policyController.js"></script>
     <script src="src/app/termsCondition/termsConditionController.js"></script>
 
 </head>
 
-<body kendo-mobile-application  k-initial="'src/app/login/login.html'" k-hash-bang="true" k-skin="'nova'">
+<body kendo-mobile-application k-initial="'src/app/login/login.html'" k-hash-bang="true" k-skin="'nova'">
 
     <!-- layout default -->
 
     <kendo-mobile-layout k-id="'default'" ng-controller="menuController" k-transition="'slide'">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
-                <a data-align="left" data-role="button" data-tap="myTouch.tap" ng-click="show()"   data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
+                <a data-align="left" data-role="button" data-tap="myTouch.tap" ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"><i class="ck-icon ck-menu"></i></a>
                 <!--   <kendo-mobile-back-button k-align="'left'" style="padding-left:25px;">Back</kendo-mobile-back-button>-->
                 <kendo-view-title></kendo-view-title>
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
 
-      
+
 
     </kendo-mobile-layout>
     <!-- end of layout default -->
-
-
     <!-- application drawer and contents -->
 
 
     <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" class="main-nav" data-use-native-scrolling="true" k-after-show="afterShow">
-        <kendo-mobile-header >
-                <kendo-mobile-nav-bar class="km-accent">
-            
-                <kendo-view-title><img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar class="km-accent">
+
+                <kendo-view-title>
+                    <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
                 </kendo-view-title>
 
-                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" ng-click="home()" ><span class="km-icon km-home"></span></kendo-mobile-button>
+                <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" ng-click="home()"><span class="km-icon km-home"></span></kendo-mobile-button>
 
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" ng-click="login()"><span class="km-icon km-i-signin"></span></kendo-mobile-button>
 
@@ -110,73 +109,73 @@
 
             </kendo-mobile-nav-bar>
         </kendo-mobile-header>
-          <kendo-mobile-content>
-        <ul kendo-mobile-list-view>
-            <li>
+        <kendo-mobile-content>
+            <ul kendo-mobile-list-view>
+                <li>
 
-                <a ng-click="mnuClick('contactus')"  data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
-                        
+                    <a ng-click="mnuClick('contactus')" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
+
                         {{form.contactus.resoruceValue}}
                     </a>
-            </li>
-            <li>
-                <a ng-click="mnuClick('faq')"  data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
-                          
+                </li>
+                <li>
+                    <a ng-click="mnuClick('faq')" data-icon="ck-icon ck-faq" data-tap="myTouch.tap">
+
                         {{form.faq.resoruceValue}}
                     </a>
-            </li>
-            <li>
-                <a ng-click="mnuClick('termsCondition')"  data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
-                          
+                </li>
+                <li>
+                    <a ng-click="mnuClick('termsCondition')" data-icon="ck-icon ck-terms" data-tap="myTouch.tap">
+
                         {{form.termsCondition.resoruceValue}}
-                   
-                    </a>
-            </li>
-            <li>
-                <a ng-click="mnuClick('policy')"  data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
-                         {{form.policies.resoruceValue}}
-                      
-                    </a>
-            </li>
-            <li>
-                <a ng-click="mnuClick('help')"  data-icon="ck-icon ck-help" data-tap="myTouch.tap">
-                             {{form.help.resoruceValue}}
-                    </a>
-            </li>
-            <li ng-show="authentication.isAuth">
-                <a ng-click="mnuClick('notification')" data-icon="ck-icon ck-settings" data-tap="myTouch.tap">
-                             {{form.notificationSettings.resoruceValue}}
-                   
-                    </a>
-            </li>
-            <li ng-show="authentication.isAuth">
-                <a ng-click="mnuClick('feedback')"  data-icon="ck-icon ck-feedback" data-tap="myTouch.tap">
-                             {{form.feedback.resoruceValue}}
-                     
-                    </a>
-            </li>
-        </ul>
 
-        <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress && organizationDetail.Address.Street1 && organizationDetail.Address.Name">
-            <li>
-                <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
-                    <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
-                    <h5 ng-show="organizationDetail.Address.Name">{{organizationDetail.Address.Name}}</h5>
-                    <h5 ng-show="organizationDetail.Address.Street1">{{organizationDetail.Address.Street1}}</h5>
-                    <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
-                    <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
-                    <h5 ng-show="organizationDetail.Address.Phone"> <span class="km-icon km-phone" style=" color: grey !important;"></span>{{organizationDetail.Address.Phone}}</h5>
-                    <h5 ng-show="organizationDetail.Address.Phone"><span class="km-icon km-mail" style=" color: grey !important;"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="mnuClick('policy')" data-icon="ck-icon ck-policy" data-tap="myTouch.tap">
+                        {{form.policies.resoruceValue}}
 
-                </div>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="mnuClick('help')" data-icon="ck-icon ck-help" data-tap="myTouch.tap">
+                        {{form.help.resoruceValue}}
+                    </a>
+                </li>
+                <li ng-show="authentication.isAuth">
+                    <a ng-click="mnuClick('notification')" data-icon="ck-icon ck-settings" data-tap="myTouch.tap">
+                        {{form.notificationSettings.resoruceValue}}
 
-            </li>
-        </ul>
+                    </a>
+                </li>
+                <li ng-show="authentication.isAuth">
+                    <a ng-click="mnuClick('feedback')" data-icon="ck-icon ck-feedback" data-tap="myTouch.tap">
+                        {{form.feedback.resoruceValue}}
 
-   </kendo-mobile-content>
+                    </a>
+                </li>
+            </ul>
+
+            <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress && organizationDetail.Address.Street1 && organizationDetail.Address.Name">
+                <li>
+                    <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
+                        <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
+                        <h5 ng-show="organizationDetail.Address.Name">{{organizationDetail.Address.Name}}</h5>
+                        <h5 ng-show="organizationDetail.Address.Street1">{{organizationDetail.Address.Street1}}</h5>
+                        <h5 ng-show="organizationDetail.Address.Street2">{{organizationDetail.Address.Street2}}</h5>
+                        <h5>{{organizationDetail.Address.City}}, {{organizationDetail.Address.StateProv}}, {{organizationDetail.Address.ZipCode}}  {{organizationDetail.Address.Iso3166}}</h5>
+                        <h5 ng-show="organizationDetail.Address.Phone"> <span class="km-icon km-phone" style=" color: grey !important;"></span>{{organizationDetail.Address.Phone}}</h5>
+                        <h5 ng-show="organizationDetail.Address.Phone"><span class="km-icon km-mail" style=" color: grey !important;"></span><a href="#">{{organizationDetail.Address.Email}}</a> </h5>
+
+                    </div>
+
+                </li>
+            </ul>
+
+        </kendo-mobile-content>
     </kendo-mobile-drawer>
     <!-- end application drawer and contents -->
-
+    <alert></alert>
 </body>
 
 </html>

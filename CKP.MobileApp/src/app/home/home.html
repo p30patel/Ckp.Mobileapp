@@ -4,7 +4,7 @@
             <kendo-mobile-button ng-show="messageCount > 0" id="btn_message" k-align="'right'" k-transition="'overlay'" k-rel="'modalview'" k-on-click="showAlertModel()">
                 <i class="ck-icon ck-messages"></i>
             </kendo-mobile-button>
-            <kendo-mobile-button data-align="left" data-role="button"  ng-click="show()"  data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button"  data-tap="myTouch.tap" data-reload="true" >
+            <kendo-mobile-button data-align="left" data-role="button" ng-click="show()" data-rel="drawer" data-icon="drawer-icon" class="km-widget km-button" data-tap="myTouch.tap" data-reload="true">
                 <i class="ck-icon ck-menu"></i>
             </kendo-mobile-button>
             <kendo-view-title>
@@ -13,45 +13,46 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-  
+
         <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-po-container ck-grey-wrap">
                 <fieldset class="ck-login">
-                    <select class="ck-po-select" 
-                        style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;" 
-                        ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
-                    <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue"  ng-keypress="key($event)" />
-                       <!-- style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " -->
-                       
-                   
+                    <select class="ck-po-select"
+                            style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;"
+                            ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
+                    <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue" ng-keypress="key($event)" />
+                    <!-- style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " -->
+
+
                 </fieldset>
-               
-                 <kendo-mobile-button="" class="ck-input-btn km-widget km-button" ng-click="search()" data-role="button">
-                        <i style="font-size: 100%; margin-top:10px; margin-right: 0px;" class="km-icon km-search"></i>
-                  </kendo-mobile-button>
+
+                <kendo-mobile-button ="" class="ck-input-btn km-widget km-button" ng-click="search()" data-role="button">
+                    <i style="font-size: 100%; margin-top:10px; margin-right: 0px;" class="km-icon km-search"></i>
+                </kendo-mobile-button>
             </li>
-              <li ng-show="orderCounts.length == 0">           
-                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)" > </p>
+            <li ng-show="orderCounts.length == 0">
+                <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)"> </p>
             </li>
-                
+
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
                 <div class="ck-home" style="margin-top:-.1em; background-color:gray; ">
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
                             <span class="ck-home-button-icon km-icon km-plus" id="header-{{orderCount.RetailerId}}"></span>
-                            {{orderCount.RetailerName}}</kendo-mobile-button>
-                       
-                        <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "  
-                    k-on-click="showCreditModel()" ng-show="hasCreditLock">
-                            <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;"  ng-show="$first"/>
+                            {{orderCount.RetailerName}}
+                        </kendo-mobile-button>
+
+                        <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "
+                                             k-on-click="showCreditModel()" ng-show="hasCreditLock">
+                            <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" ng-show="$first" />
                         </kendo-mobile-button>
                     </h3>
-                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}"  id="buttongroup-{{orderCount.RetailerId}}">
+                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" id="buttongroup-{{orderCount.RetailerId}}">
                         <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
                             <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                             <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
                         </li>
-                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasStagedOrder" >
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasStagedOrder">
                             <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
                             <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div>
                         </li>
@@ -61,318 +62,320 @@
                         </li>
                     </ul>
                 </div>
-              
+
                 <!-- Tab panes -->
-                <ul kendo-mobile-list-view  style="display:none"  data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ApprovalCount}}" class="order-header" data-orderType="Approval" >
+                <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ApprovalCount}}" class="order-header" data-orderType="Approval">
                     <li ng-show="!orders.length > 0">
                         {{successMessage}}
-                    </li>                
-            
-                          <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy ">
-                              
-                            
-                          <tr class="header" ng-show="$first">
-                            
+                    </li>
+
+                    <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy ">
+
+
+                        <tr class="header" ng-show="$first">
+
                             <td style="width:15%;">
-                            
-                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll"  id="checkAll" ng-change="checkAll(selectedAll)"/>
-                                <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll" ></label> 
-                           
+
+                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll" id="checkAll" ng-change="checkAll(selectedAll)" />
+                                <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll"></label>
+
                             </td>
 
                             <td ng-if="searchParameterId=='1'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
-                            <td ng-if="searchParameterId=='1' || searchParameterId == '2'" class="spacer" style="width:30%">{{form.salesOrder.resoruceValue}}</td>                         
+                            <td ng-if="searchParameterId=='1' || searchParameterId == '2'" class="spacer" style="width:30%">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='2'" class="spacer" style="width:30%;">{{form.orderNumber.resoruceValue}}</td>
-                            
+
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='3'" class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId=='4'" class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
                             <td style="width:30%;">{{form.orderDate.resoruceValue}}</td>
                             <td style="width:10%;"></td>
-                        </tr>    
+                        </tr>
 
-                              
-                    
+
+
                         <tr class="pipe" ng-repeat="order in value | limitTo: 1">
-                            <td style="width:15%;">                   
-                                <input type="checkbox"  class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}" 
-                                    data-salesordernumber="{{order.SalesOrderNumber}}"
-                                    data-ShoppingCartId="{{order.ShoppingCartId}}"
-                                    data-VendorRef="{{order.VendorRef}}"
-                                    ng-model="chk[$parent.$index]"
-                                    ng-change="checkedIndividual({{$parent.$index}})" />
-                               
+                            <td style="width:15%;">
+                                <input type="checkbox" class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}"
+                                       data-salesordernumber="{{order.SalesOrderNumber}}"
+                                       data-ShoppingCartId="{{order.ShoppingCartId}}"
+                                       data-VendorRef="{{order.VendorRef}}"
+                                       ng-model="chk[$parent.$index]"
+                                       ng-change="checkedIndividual({{$parent.$index}})" />
+
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="{{$parent.$index}}"></label>
                             </td>
-                            <td  ng-if="searchParameterId == '1'" style="width:30%;">
-                        
-                            {{ order.OrderNumber }}                            
-                       
+                            <td ng-if="searchParameterId == '1'" style="width:30%;">
+
+                                {{ order.OrderNumber }}
+
                             </td>
 
                             <td ng-if="searchParameterId == '1' || searchParameterId == '2'" style="width:30%;">
-                           {{order.SalesOrderNumber}}
-                           
+                                {{order.SalesOrderNumber}}
+
                             </td>
                             <td ng-if="searchParameterId == '2' " style="width:30%;">
 
-                          <div ng-repeat="order in value | limitTo : 3">
-                            {{ order.OrderNumber }}                            
-                         </div>
-                          <p>
-                              <a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
-                               {{form.seeMore.resoruceValue}}
-                               </a>
-                            </p>
+                                <div ng-repeat="order in value | limitTo : 3">
+                                    {{ order.OrderNumber }}
+                                </div>
+                                <p>
+                                    <a k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap">
+                                        {{form.seeMore.resoruceValue}}
+                                    </a>
+                                </p>
                             </td>
-                           
+
                             <td ng-if="searchParameterId == '3'" style="width:30%;">
-                            
-                              {{order.ShoppingCartId}}
-                          
+
+                                {{order.ShoppingCartId}}
+
                             </td>
-                       
+
                             <td ng-if="searchParameterId == '4'" style="width:30%;">
-                              
-                              {{order.VendorRef}}
-                        
-                         
+
+                                {{order.VendorRef}}
+
+
                             </td>
                             <td ng-if="searchParameterId == '4' || searchParameterId == '3'" style="width:30%;">
-                              
-                             
-                            <div ng-repeat="order in value | limitTo : 3">
-                                   {{order.SalesOrderNumber}}                
-                               </div>
-                                <p><a  k-on-click="showMoreOrderModel(value, 'SalesOrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
-                               {{form.seeMore.resoruceValue}}
-                               </a>
-                               </p>
+
+
+                                <div ng-repeat="order in value | limitTo : 3">
+                                    {{order.SalesOrderNumber}}
+                                </div>
+                                <p>
+                                    <a k-on-click="showMoreOrderModel(value, 'SalesOrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap">
+                                        {{form.seeMore.resoruceValue}}
+                                    </a>
+                                </p>
                             </td>
 
-                            <td  style="text-align:center !important; width:30%;">
-                                {{order.OrderDate | date}} 
+                            <td style="text-align:center !important; width:30%;">
+                                {{order.OrderDate | date}}
                             </td>
                             <td style="margin-top:-10px; width:10%;"
+                                ng-if="searchParameterId == '1' || searchParameterId == '2'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
 
-                                ng-if="searchParameterId == '1' || searchParameterId == '2'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>
-                             
-                                <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '3'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>
-                                <td style="margin-top:-10px; width:10%;"  ng-if="searchParameterId == '4'"  ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>
-                            
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '3'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '4'" ng-click="showOrderList(1, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+
                         </tr>
-                        
+
                         <tr ng-show="$last">
-                                 <td colspan="5" style="padding: 1em;">                               
+                            <td colspan="5" style="padding: 1em;">
                                 <i></i>
                                 <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'"
-                                     ng-disabled="!hasItemSelectedForApporval"
-                                     k-on-click="showOrderList(1, searchParameterId, '', orderCount.RetailerId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                                     ng-disabled="!hasItemSelectedForApporval"
+                                                     k-on-click="showOrderList(1, searchParameterId, '', orderCount.RetailerId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
                             </td>
                         </tr>
 
-                               <tr ng-show="$last">
+                        <tr ng-show="$last">
 
-                                <td colspan="5" style="padding: 1em;">
-                                <i></i>                                
-                              
+                            <td colspan="5" style="padding: 1em;">
+                                <i></i>
+
                             </td>
-                        </table>
-                  
+                    </table>
+
                 </ul>
 
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.NewOrderCount}}" class="order-header" data-orderType="New">
 
-                     <li ng-show="!orders.length > 0 || searchParameterId == '2' ||  searchParameterId == '3' ">
+                    <li ng-show="!orders.length > 0 || searchParameterId == '2' ||  searchParameterId == '3' ">
                         {{successMessage}}
                     </li>
 
-                  
-                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')" 
-                        ng-repeat="(key, value) in orders | groupBy: groupBy ">
-                        
-                      
+
+                    <table class="ck-table" ng-show="orders.length > 0 &&  (searchParameterId === '1' ||  searchParameterId === '4')"
+                           ng-repeat="(key, value) in orders | groupBy: groupBy ">
+
+
                         <tr class="header" ng-show="$first">
-                            <td style="width:5%;" class="spacer"></td>     
+                            <td style="width:5%;" class="spacer"></td>
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
-                            <td ng-if="searchParameterId == '4' || searchParameterId == '1'"  class="spacer" style="width:40%;">{{form.orderNumber.resoruceValue}}</td>
-                                 
-                            <td ng-if="searchParameterId != '4'" style="width:45%;" class="spacer">{{form.orgName.resoruceName}}</td>                        
+                            <td ng-if="searchParameterId == '4' || searchParameterId == '1'" class="spacer" style="width:40%;">{{form.orderNumber.resoruceValue}}</td>
+
+                            <td ng-if="searchParameterId != '4'" style="width:45%;" class="spacer">{{form.orgName.resoruceName}}</td>
                             <td style="width:30%;" class="spacer">{{form.dateInSystem.resoruceValue }}</td>
                             <td style="width:10%;" class="spacer"></td>
                         </tr>
-                         
+
                         <tr class="pipe" ng-hide="searchParameterId == '2'  || searchParameterId == '3'" ng-repeat="order in value | limitTo : 1 ">
-                          
-                               <td style="width:5%;"></td>     
-                           
+
+                            <td style="width:5%;"></td>
+
                             <td ng-if="searchParameterId == '4'" style="width:30%;">
-                                      {{order.VendorRef}}  
-                               
+                                {{order.VendorRef}}
+
                             </td>
-                           
+
                             <td ng-if="searchParameterId == '4' " style="width:40%;">
-                               <div ng-repeat="order in value | limitTo : 3">
-                                   {{order.OrderNumber}}                            
-                               </div>
-                                <p><a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap" >
-                               {{form.seeMore.resoruceValue}}
-                               </a>
-                               </p>
+                                <div ng-repeat="order in value | limitTo : 3">
+                                    {{order.OrderNumber}}
+                                </div>
+                                <p>
+                                    <a k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length > 3" data-tap="myTouch.tap">
+                                        {{form.seeMore.resoruceValue}}
+                                    </a>
+                                </p>
                             </td>
 
                             <td ng-if="searchParameterId == '1' " style="width:40%;">
-                             
-                                {{ order.OrderNumber }}                            
-                       
-                         
+
+                                {{ order.OrderNumber }}
+
+
                             </td>
                             <td ng-if="searchParameterId != '4'" style="width:45%;">
-                              {{order.OrganizationName}} 
+                                {{order.OrganizationName}}
 
                             </td>
                             <td style="text-align:center !important; width:30%;">
-                             
-                                <div  ng-if="searchParameterId == '1' || searchParameterId == '4'" >{{order.DateInSystem | date}}  </div>
-                             
-                            </td>
-                       
-                              <td  style="margin-top:-10px; width:10%;"                           
-                               ng-if="searchParameterId == '1'" ng-click="orderDetail(2, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>                               
-                                <td style="margin-top:-10px; width:10%;"     ng-if="searchParameterId == '4'"  ng-click="showOrderList(2, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>
-                                                        </tr>
 
-                            <tr ng-show="$last && hasNext">
+                                <div ng-if="searchParameterId == '1' || searchParameterId == '4'">{{order.DateInSystem | date}}  </div>
+
+                            </td>
+
+                            <td style="margin-top:-10px; width:10%;"
+                                ng-if="searchParameterId == '1'" ng-click="orderDetail(2, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '4'" ng-click="showOrderList(2, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+                        </tr>
+
+                        <tr ng-show="$last && hasNext">
                             <td colspan="5" style="padding: 1em;" ng-hide="searchParameterId == '2' ||  searchParameterId == '3' ">
                                 <i></i>
                                 <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" k-on-click="ViewMore(2)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
-                         <tr ng-show="$last">
+                        <tr ng-show="$last">
 
-                                <td colspan="5" style="padding: 1em;">
-                                <i></i>                                
-                              
+                            <td colspan="5" style="padding: 1em;">
+                                <i></i>
+
                             </td>
-                          
+
                     </table>
                 </ul>
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ReleasedOrderCount}}" class="order-header" data-orderType="Released">
 
-                     <li ng-show="!orders.length > 0">
+                    <li ng-show="!orders.length > 0">
                         {{successMessage}}
                     </li>
 
-                   
+
                     <table class="ck-table" ng-show="orders.length > 0" ng-repeat="(key, value) in orders | groupBy: groupBy ">
-                    
-                         <tr class="header" ng-show="$first">
-                             <td style="width:5%;" class="spacer"></td>     
+
+                        <tr class="header" ng-show="$first">
+                            <td style="width:5%;" class="spacer"></td>
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '2' " class="spacer" style="width:30%;">{{form.salesOrder.resoruceValue}}</td>
-                            <td ng-if="searchParameterId == '3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>                            
+                            <td ng-if="searchParameterId == '3'" class="spacer" style="width:30%;">{{form.shoppingCart.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '4'" class="spacer" style="width:30%;">{{form.vendorRef.resoruceValue}}</td>
                             <td ng-if="searchParameterId !== '1'" class="spacer" style="width:45%;">{{form.orderNumber.resoruceValue}}</td>
                             <td ng-if="searchParameterId == '1'" class="spacer" style="width:30%;">{{form.orderStatus.resoruceValue}}</td>
                             <td style="width:30%;">{{form.statusChangedDate.resoruceValue}}</td>
                             <td style="width:10%;" class="spacer"></td>
-                        </tr>                     
+                        </tr>
                         <tr class="pipe" ng-repeat="order in value | limitTo:1">
-                                <td style="width:5%;"></td>     
-                           
-                            <td  ng-if="searchParameterId == '1'" style="width:45%;">
-                           
-                            {{ order.OrderNumber }}                            
+                            <td style="width:5%;"></td>
+
+                            <td ng-if="searchParameterId == '1'" style="width:45%;">
+
+                                {{ order.OrderNumber }}
                             </td>
-                            <td  ng-if="searchParameterId == '2'" style="width:30%;">
-                             
-                                      {{order.SalesOrderNumber}}                                
-                              
+                            <td ng-if="searchParameterId == '2'" style="width:30%;">
+
+                                {{order.SalesOrderNumber}}
+
                             </td>
 
-                             <td  ng-if="searchParameterId == '3'" style="width:30%;">
-                             
-                                      {{order.ShoppingCartId}}     
-                                 
-                             
-                            </td>
-                            <td  ng-if="searchParameterId == '4'" style="width:30%;">
-                              
-                                      {{order.VendorRef}}         
-                             
-                            </td>
-                           <td  ng-if="searchParameterId !== '1'"  style="width:45%;">
-                              <div ng-repeat="order in value | limitTo : 3">
-                                 {{ order.OrderNumber }}                            
-                              </div>
-                              <p><a  k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length >2" data-tap="myTouch.tap" >
-                               {{form.seeMore.resoruceValue}}
-                               </a>
-                              </p>
-                           </td>
+                            <td ng-if="searchParameterId == '3'" style="width:30%;">
 
-                            <td  ng-if="searchParameterId == '1'" style="width:30%;">
+                                {{order.ShoppingCartId}}
+
+
+                            </td>
+                            <td ng-if="searchParameterId == '4'" style="width:30%;">
+
+                                {{order.VendorRef}}
+
+                            </td>
+                            <td ng-if="searchParameterId !== '1'" style="width:45%;">
+                                <div ng-repeat="order in value | limitTo : 3">
+                                    {{ order.OrderNumber }}
+                                </div>
+                                <p>
+                                    <a k-on-click="showMoreOrderModel(value, 'OrderNumber')" ng-show="value.length >2" data-tap="myTouch.tap">
+                                        {{form.seeMore.resoruceValue}}
+                                    </a>
+                                </p>
+                            </td>
+
+                            <td ng-if="searchParameterId == '1'" style="width:30%;">
                                 {{order.StatusDisplay}}
 
-                            </td>  
-                            
-                            <td style="text-align:center !important; width:30%;">
-                                 {{order.OrderDate | date}} 
-                               
                             </td>
-                     
-                         
-                              <td   style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap" >
-                           
-                                    <i class="km-icon km-details red"></i>
-                               </td>
-                                 
-                                   <td  style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '2'" ng-click="showOrderList(3, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>  
-                                  <td  style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '3'"  ng-click="showOrderList(3, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>                              
-                                <td  style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '4'"  ng-click="showOrderList(3, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap" >
-                                    <i class="km-icon km-details red"></i>
-                                </td>
-                           
-                               </tr>
 
-                            <tr ng-show="$last && hasNext">
+                            <td style="text-align:center !important; width:30%;">
+                                {{order.OrderDate | date}}
 
-                                <td colspan="5" style="padding: 1em;">
+                            </td>
+
+
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '1'" ng-click="orderDetail(3, searchParameterId, order.POCtrlNo)" data-tap="myTouch.tap">
+
+                                <i class="km-icon km-details red"></i>
+                            </td>
+
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '2'" ng-click="showOrderList(3, searchParameterId, order.SalesOrderNumber, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '3'" ng-click="showOrderList(3, searchParameterId, order.ShoppingCartId, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+                            <td style="margin-top:-10px; width:10%;" ng-if="searchParameterId == '4'" ng-click="showOrderList(3, searchParameterId, order.VendorRef, orderCount.RetailerId)" data-tap="myTouch.tap">
+                                <i class="km-icon km-details red"></i>
+                            </td>
+
+                        </tr>
+
+                        <tr ng-show="$last && hasNext">
+
+                            <td colspan="5" style="padding: 1em;">
                                 <i></i>
                                 <kendo-mobile-button class="km-secondary km-justified" ng-disabled="hasNextDisabled" k-on-click="ViewMore(3)">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
                                 <i></i>
                             </td>
                         </tr>
-                            <tr ng-show="$last">
+                        <tr ng-show="$last">
 
-                                <td colspan="5" style="padding: 1em;">
-                                <i></i>                                
-                              
+                            <td colspan="5" style="padding: 1em;">
+                                <i></i>
+
                             </td>
-                        </table> 
-                             
+                    </table>
+
                 </ul>
             </div>
         </ul>
         <!-- End Home View -->
     </kendo-mobile-content>
- 
+
     <!--  view more  modal  -->
     <div kendo-mobile-modal-view id="modalview-moreOrder" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>
@@ -383,38 +386,38 @@
                 </kendo-mobile-button>
             </div>
         </div>
-        <div  style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">          
-            
-        <ul kendo-mobile-list-view>
+        <div style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'">
+
+            <ul kendo-mobile-list-view>
                 <table class="ck-table" ng-show="orderList.length > 0">
                     <tr class="header">
-                            <td style="width:5%;" class="spacer"></td>     
-                            <td ng-if="viewMoreColumn == 'OrderNumber'" class="spacer" style="width:80%;">{{form.orderNumber.resoruceValue}}</td>
-                            <td ng-if="viewMoreColumn == 'SalesOrderNumber'" class="spacer" style="width:80%;">{{form.salesOrder.resoruceValue}}</td>
-                            <td ng-if="selectedOrderTypeId !== '2'" class="spacer" style="width:30%;">{{form.orderDate.resoruceValue}}</td>                            
-                            <td ng-if="selectedOrderTypeId == '2'" class="spacer" style="width:30%;">{{form.dateInSystem.resoruceValue}}</td>
-                            <td style="width:5%;" class="spacer"></td>
-                    </tr>                     
+                        <td style="width:5%;" class="spacer"></td>
+                        <td ng-if="viewMoreColumn == 'OrderNumber'" class="spacer" style="width:80%;">{{form.orderNumber.resoruceValue}}</td>
+                        <td ng-if="viewMoreColumn == 'SalesOrderNumber'" class="spacer" style="width:80%;">{{form.salesOrder.resoruceValue}}</td>
+                        <td ng-if="selectedOrderTypeId !== '2'" class="spacer" style="width:30%;">{{form.orderDate.resoruceValue}}</td>
+                        <td ng-if="selectedOrderTypeId == '2'" class="spacer" style="width:30%;">{{form.dateInSystem.resoruceValue}}</td>
+                        <td style="width:5%;" class="spacer"></td>
+                    </tr>
                     <tr class="pipe" ng-repeat="order in orderList">
-                            <td style="width:5%; padding: .8em 0;"></td>                                
-                            <td  ng-if="viewMoreColumn == 'OrderNumber'" style="width:80%; padding: .8em 0;">
-                                {{ order.OrderNumber }}                            
-                            </td>
-                            <td  ng-if="viewMoreColumn == 'SalesOrderNumber'" style="width:80%; padding: .8em 0;">
-                                {{ order.SalesOrderNumber }}                            
-                            </td>
-                            <td  ng-if="selectedOrderTypeId !== '2'" style="width:30%; padding: .8em 0;">
-                                {{ order.OrderDate | date }}                            
-                            </td>
-                          <td  ng-if="selectedOrderTypeId === '2'" style="width:30%; padding: .8em 0;">
-                               {{order.DateInSystem | date }}                       
-                            </td>
+                        <td style="width:5%; padding: .8em 0;"></td>
+                        <td ng-if="viewMoreColumn == 'OrderNumber'" style="width:80%; padding: .8em 0;">
+                            {{ order.OrderNumber }}
+                        </td>
+                        <td ng-if="viewMoreColumn == 'SalesOrderNumber'" style="width:80%; padding: .8em 0;">
+                            {{ order.SalesOrderNumber }}
+                        </td>
+                        <td ng-if="selectedOrderTypeId !== '2'" style="width:30%; padding: .8em 0;">
+                            {{ order.OrderDate | date }}
+                        </td>
+                        <td ng-if="selectedOrderTypeId === '2'" style="width:30%; padding: .8em 0;">
+                            {{order.DateInSystem | date }}
+                        </td>
                         <td style="width:5%; padding: .8em 0;"></td>
                     </tr>
 
                 </table>
-           
-        </ul>
+
+            </ul>
         </div>
 
     </div>
@@ -430,11 +433,11 @@
         </kendo-mobile-header>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.AnnouncementList.length <= 0 && mesages.PartnerHolidayList.length <=0">
             <li>
-                 {{form.noMessages.resoruceValue}}
-            
+                {{form.noMessages.resoruceValue}}
+
             </li>
         </ul>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" 
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'"
             ng-show="mesages.AnnouncementList.length > 0"
             ng-repeat="item in mesages.AnnouncementList | filter: greaterThan('SpecificRetailerId', 0) | limitTo: 1 ">
             <li class="ck-module-date">
@@ -442,15 +445,15 @@
                 <span class="ck-font-size-mid"> {{form.announcements.resoruceValue}}</span>
             </li>
             <li ng-repeat="(key, value) in mesages.AnnouncementList |  filter: greaterThan('SpecificRetailerId', 0) | groupBy: 'Message' | orderBy: 'RetailerName'">
-                 <div ng-repeat='msg in value'>
-                <div ng-if="msg.RetailerName">
-                    <b>{{msg.Title}} </b> 
-                    <p>{{msg.RetailerName}}</p>
-                    <p ng-bind-html="renderHtml(msg.Message)" style="padding-left:.5em"> </p>                 
+                <div ng-repeat='msg in value'>
+                    <div ng-if="msg.RetailerName">
+                        <b>{{msg.Title}} </b>
+                        <p>{{msg.RetailerName}}</p>
+                        <p ng-bind-html="renderHtml(msg.Message)" style="padding-left:.5em"> </p>
+                    </div>
                 </div>
-                 </div>
             </li>
-         </ul>
+        </ul>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid" k-style="'inset'" ng-show="mesages.PartnerHolidayList.length > 0">
             <li class="ck-module-date">
                 <i class="ck-icon ck-alert ck-module-icon"></i>
@@ -461,27 +464,27 @@
                 <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
             </li>
         </ul>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'" 
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
             ng-show="mesages.AnnouncementList.length > 0"
             ng-repeat="item in mesages.AnnouncementList | filter: equalProp('SpecificRetailerId', 0)  | limitTo: 1 ">
-            <li class="ck-module-date" >          
+            <li class="ck-module-date">
                 <i class="ck-icon ck-news ck-module-icon"></i>
                 <span class="ck-font-size-mid">Checkpoint Systems, Inc.</span>
             </li>
             <li>
                 <ul kendo-mobile-list-view ng-repeat="(key, value) in mesages.AnnouncementList |  filter: equalProp('SpecificRetailerId', 0) | groupBy: 'RetailerName' | orderBy: 'RetailerName' ">
                     <span ng-repeat='msg in value'>
-                    <li class="km-font" ng-if="msg.SpecificRetailerId == 0 && msg.Title">
-                        <b>{{msg.Title}} </b>
-                        <p>
-                            <span ng-bind-html="renderHtml(msg.Message)"></span>
-                        </p>
-                    </li>
+                        <li class="km-font" ng-if="msg.SpecificRetailerId == 0 && msg.Title">
+                            <b>{{msg.Title}} </b>
+                            <p>
+                                <span ng-bind-html="renderHtml(msg.Message)"></span>
+                            </p>
+                        </li>
                     </span>
                 </ul>
             </li>
-        </ul>  
-        </div>
+        </ul>
+    </div>
     <!--  credit lock modal  -->
     <div kendo-mobile-modal-view id="modalview-credit" class="km-moduleview" style="width: 98%; height:100%; background:rgba(255, 255, 255, 0);">
         <div kendo-mobile-header>
@@ -500,8 +503,8 @@
             <li>
                 <h3 class="km-bold-font">{{form.attentionUser.resoruceValue}}</h3>
                 <h3 class="km-font">
-                       {{form.creditLockMessage.resoruceValue}}
-                    </h3>
+                    {{form.creditLockMessage.resoruceValue}}
+                </h3>
             </li>
         </ul>
     </div>
