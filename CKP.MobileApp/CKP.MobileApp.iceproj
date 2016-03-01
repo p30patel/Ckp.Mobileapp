@@ -143,6 +143,7 @@
     <Content Include="src\app\policy\policyController.js" />
     <Content Include="src\app\termsCondition\termsCondition.html" />
     <Content Include="src\app\termsCondition\termsConditionController.js" />
+    <Content Include="styles\images\splash.png" />
     <Content Include="src\assests\styles\jquery.mobile-1.4.5.min.css" />
     <Content Include="src\assests\styles\main.css">
       <SubType>Content</SubType>
