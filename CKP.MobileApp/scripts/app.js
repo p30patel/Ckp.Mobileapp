@@ -109,7 +109,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     }, false);
 
     document.addEventListener("offline", onOffline, false);
-
+   
     function onOffline() {
         if (typeof kendo.mobile.application !== 'undefined') {
             kendo.mobile.application.navigate("src/app/error/error.html");
