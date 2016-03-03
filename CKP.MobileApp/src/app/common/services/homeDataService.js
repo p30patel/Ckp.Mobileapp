@@ -50,7 +50,7 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                         var orderCounts = localStorageService.get('orderCounts');
                         var hasForceRefresh = true;
                         var timeNow = new Date().getTime();
-                        var persistTime = 1000 * 60 * 5;
+                        var persistTime = 1000 * 60 * 2;
                         
                         if (orderCounts !== null && !$rootScope.hasSearchOrApporval && !$rootScope.hasPreviousSearch)
                         {

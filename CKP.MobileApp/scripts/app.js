@@ -13,15 +13,15 @@ var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 //var clientId = 'Ckp.Mobile';
 //var baasApiKey = '3exw5fdm4p9qp0sj'; // telerik push api key
 
-angular.element(document).ready(function () {
-    if (window.cordova) {
-        document.addEventListener('deviceready', function () {
-            angular.bootstrap(document.body, ['app']);
-        }, false);
-    } else {
-        angular.bootstrap(document.body, ['app']);
-    }
-});
+//angular.element(document).ready(function () {
+//    if (window.cordova) {
+//        document.addEventListener('deviceready', function () {
+//            angular.bootstrap(document.body, ['app']);
+//        }, false);
+//    } else {
+//        angular.bootstrap(document.body, ['app']);
+//    }
+//});
 
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
@@ -102,14 +102,15 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
         var networkState = navigator.connection.type;
         var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
-        if (isOffline) {
-            onOffline();
-        }
+        
         if (typeof (window.navigator.simulator) === 'undefined') {
-         
+            if (isOffline) {
+                onOffline();
+            }
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
         }
+          kendo.mobile.application.navigate("src/app/login/login.html");
 
     }, false);
 
