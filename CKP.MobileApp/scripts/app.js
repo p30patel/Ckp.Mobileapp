@@ -92,7 +92,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
        
         StatusBar.overlaysWebView(false);//Turns off web view overlay.
-        //StatusBar.styleDefault();
+        StatusBar.backgroundColorByName('black');
         $rootScope.hasSearchOrApporval = false;
         $rootScope.hasPreviousSearch = false;
         $rootScope.hasBackButton = false;
