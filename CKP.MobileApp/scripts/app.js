@@ -90,9 +90,9 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
     document.addEventListener('deviceready', function () {
 
-        navigator.splashscreen.hide(); //Hides the splash screen for your app.
-        //StatusBar.overlaysWebView(false); //Turns off web view overlay.
-        StatusBar.styleDefault();
+       
+        StatusBar.overlaysWebView(false);//Turns off web view overlay.
+        //StatusBar.styleDefault();
         $rootScope.hasSearchOrApporval = false;
         $rootScope.hasPreviousSearch = false;
         $rootScope.hasBackButton = false;
@@ -110,7 +110,8 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             window.plugins.EqatecAnalytics.Monitor.Start();
             getDeviceInfo();
         }
-          kendo.mobile.application.navigate("src/app/login/login.html");
+        kendo.mobile.application.navigate("src/app/login/login.html");
+        navigator.splashscreen.hide(); //Hides the splash screen for your app.
 
     }, false);
 
