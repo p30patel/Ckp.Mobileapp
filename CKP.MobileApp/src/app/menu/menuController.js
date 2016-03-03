@@ -63,12 +63,9 @@ app.controller('menuController', [
                            else {
                                $scope.hasAddress = false;
                            }
-                           FastClick.attach(document.body);
-
+                       
                        }
-                       $scope.afterShow = function (e) {
-                           FastClick.attach(document.body);
-                       }
+                     
                        getOrganizationDetail();
                        $scope.show = function () {
                            $("#right-drawer").data("kendoMobileDrawer").show();
