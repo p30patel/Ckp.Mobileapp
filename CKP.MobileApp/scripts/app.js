@@ -1,12 +1,17 @@
 
-var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
+
 var baasScheme = 'https';
 var androidProjectNumber = '1018275522168'; // google push token
 var emulatorMode = true;
-
+//QA
 var authServiceBase = 'https://qachecknet.checkpt.com/';
 var clientId = 'Ckp.PoC1';
+var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 
+//PEODUCTION
+//var authServiceBase = 'https://checknet.checkpt.com/';
+//var clientId = 'Ckp.Mobile';
+//var baasApiKey = '3exw5fdm4p9qp0sj'; // telerik push api key
 
 angular.element(document).ready(function () {
     if (window.cordova) {
