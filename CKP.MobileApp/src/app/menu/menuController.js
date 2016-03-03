@@ -47,10 +47,9 @@ app.controller('menuController', [
 
                        $scope.organizationDetail = {};
                        $scope.hasAddress = false;
-
-                       $scope.helpUrl = ngAuthSettings.authServiceBaseUri + "/Redesign/Documents/Help-Mobile-e.pdf";
-
-                 
+                       var helpUrl = ngAuthSettings.authServiceBaseUri === 'https://qachecknet.checkpt.com/' ? ngAuthSettings.authServiceBaseUri + 'Redesign' : ngAuthSettings.authServiceBaseUri + 'RCNV2';
+                       $scope.helpUrl = helpUrl + "/Documents/Help-Mobile-e.pdf";
+                     
                        //address
 
                        var getOrganizationDetail = function () {
@@ -58,7 +57,7 @@ app.controller('menuController', [
                            var organizationDetail = localStorageService.get("organizationDetail");
                            if (organizationDetail) {
                                $scope.organizationDetail = organizationDetail;
-
+                               console.log($scope.organizationDetail.Address);
                                $scope.hasAddress = true;
                            }
                            else {
@@ -68,13 +67,9 @@ app.controller('menuController', [
 
                        }
                        $scope.afterShow = function (e) {
-
-                           getOrganizationDetail();
                            FastClick.attach(document.body);
-
-
                        }
-                   
+                       getOrganizationDetail();
                        $scope.show = function () {
                            $("#right-drawer").data("kendoMobileDrawer").show();
                            $rootScope.hasBackButton = false;
@@ -109,12 +104,13 @@ app.controller('menuController', [
                            $rootScope.hasBackButton = false;
                            switch (viewName) {
                                case "help":
-                                   $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-i.pdf" : ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-e.pdf";
+                                   $scope.helpUrl = $scope.authentication.isAuth ? helpUrl + "/Documents/Help-Mobile-i.pdf" : helpUrl + "/Documents/Help-Mobile-e.pdf";
                                    var selectedLanguage = localStorageService.get('selectedLanguage');
                                    var deviceData = localStorageService.get('deviceData');
+                                  
                                    if (selectedLanguage)
                                    {
-                                       $scope.helpUrl = $scope.authentication.isAuth ? ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-i-" + selectedLanguage + ".pdf" : ngAuthSettings.authServiceBaseUri + "Redesign/Documents/Help-Mobile-e-" + selectedLanguage + ".pdf";
+                                       $scope.helpUrl = $scope.authentication.isAuth ? helpUrl + "/Documents/Help-Mobile-i-" + selectedLanguage + ".pdf" : helpUrl + "/Documents/Help-Mobile-e-" + selectedLanguage + ".pdf";
                                    }
                                    if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) 
                                    {

@@ -90,7 +90,7 @@
     <!-- application drawer and contents -->
 
 
-    <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" class="main-nav" data-use-native-scrolling="true" k-after-show="afterShow">
+    <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" class="main-nav" data-use-native-scrolling="true"  k-on-show="afterShow(kendoEvent)">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
 
@@ -152,9 +152,10 @@
                     </a>
                 </li>
             </ul>
-
+       
             <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress && organizationDetail.Address.Street1 && organizationDetail.Address.Name">
                 <li>
+                   
                     <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
                         <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
                         <h5 ng-show="organizationDetail.Address.Name">{{organizationDetail.Address.Name}}</h5>
