@@ -38,7 +38,7 @@
                 <div class="ck-home" style="margin-top:-.1em; background-color:gray; ">
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
-                            <span class="ck-home-button-icon km-icon km-plus" id="header-{{orderCount.RetailerId}}"></span>
+                            <span class="ck-home-button-icon km-icon" id="header-{{orderCount.RetailerId}}"></span>
                             {{orderCount.RetailerName}}
                         </kendo-mobile-button>
 
@@ -47,7 +47,7 @@
                             <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" ng-show="$first" />
                         </kendo-mobile-button>
                     </h3>
-                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" id="buttongroup-{{orderCount.RetailerId}}">
+                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" data-select-on="up" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" id="buttongroup-{{orderCount.RetailerId}}">
                         <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
                             <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
                             <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>

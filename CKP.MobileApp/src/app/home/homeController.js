@@ -421,7 +421,7 @@ app.controller('homeController', [
                            listviews.hide();
                            $(".ck-count-btn").removeClass('km-state-active');
 
-                           $('.ck-home-button-icon').addClass('km-plus');
+                       
                        }
                        $scope.retailerHeader = function () {
                            retailerHeaderClick();
