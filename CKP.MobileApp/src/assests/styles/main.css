@@ -1,4 +1,6 @@
-
+.line-height-detail td {
+    line-height: 0.9;
+}
 span.k-widget.k-tooltip.k-tooltip-validation.k-invalid-msg {
     display:none !important;
 }
