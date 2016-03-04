@@ -461,7 +461,7 @@
             </li>
             <li ng-repeat="message in mesages.PartnerHolidayList">
                 <b> {{message.Name}} </b>
-                <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} - {{message.EndDate | date}} </p>
+                <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} <span ng-show="message.StartDate != message.EndDate"> - {{message.EndDate | date}} </span> </p>
             </li>
         </ul>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"

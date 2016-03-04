@@ -26,7 +26,7 @@
                             <h3 ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</h3>
                         </td>
                         <td class="v-align c-align" rowspan="5" style="width :25%">
-                            <div class="status open">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
+                            <div class="status open" style="height:25px;">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
                             <!--     <input kendo-mobile-switch k-checked="checked" />
                                  <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>-->
                             <h3></h3>
@@ -71,7 +71,7 @@
                 </table>
             </li>
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
-                                      ng-show="!order.detail.MobileOrderDetail.BlockAddressInfo">
+                                      ng-show="!hasBlockAddress">
                 <h4>{{form.billingInfo.resoruceValue}}</h4>
 
                 <p>
@@ -86,7 +86,7 @@
                 <p ng-show="order.detail.MobileOrderDetail.BillingAddress.City">{{order.detail.MobileOrderDetail.BillingAddress.City}}, {{order.detail.MobileOrderDetail.BillingAddress.StateProv}} {{order.detail.MobileOrderDetail.BillingAddress.ZipCode}} {{order.detail.MobileOrderDetail.BillingAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" data-animation="false"
-                                      ng-show="!order.detail.MobileOrderDetail.BlockAddressInfo">
+                                      ng-show="!hasBlockAddress">
                 <h4>{{form.shiptoInfo.resoruceValue}}</h4>
                 <p>
                     <b>{{order.detail.MobileOrderDetail.DeliveryAddress.Name}}</b>
@@ -128,7 +128,7 @@
                         <td style="width:30%">
                             <h4 class="km-bold-font">{{form.quantity.resoruceValue}}</h4>
                         </td>
-                        <td style="width:30%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
+                        <td style="width:30%" ng-show="!hasHidePrice">
                             <h4 class="km-bold-font">{{form.price.resoruceValue}} ({{order.detail.MobileOrderlineDetailList[0].GrossCurrency.Code}})</h4>
                         </td>
                     </tr>
@@ -137,14 +137,14 @@
 
                             <h4 class="km-bold-font">{{orderLine.ItemDescription}}</h4>
                             <h5>{{form.itemCode.resoruceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
-                            <h5 ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">{{orderLine.UnitPrice}}</h5>
+                            <h5 ng-show="!hasHidePrice">{{orderLine.UnitPrice}}</h5>
                             <h5>{{form.prodcutionLocation.resoruceValue}}:</h5>
                             <h5><b>{{orderLine.PrintshopName}}</b></h5>
                         </td>
                         <td class="v-align" style="width:30%">
                             <h4 class="km-bold-font">{{orderLine.Quantity.Value}}</h4>
                         </td>
-                        <td class="v-align" style="width:30%" ng-show="!order.detail.MobileOrderDetail.HideCheckOutPrice">
+                        <td class="v-align" style="width:30%" ng-show="!hasHidePrice">
                             <h4 class="km-bold-font">{{orderLine.Amount | number : 2}}</h4>
                         </td>
                     </tr>

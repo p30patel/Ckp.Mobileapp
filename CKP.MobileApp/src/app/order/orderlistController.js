@@ -107,7 +107,8 @@ app.controller('orderlistController', [
                            var parameterId = 0;
                            var selectedList = '';
                            var retailerId = 0;
-
+                           $scope.hasHidePrice = false;
+                           $scope.hasBlockAddress = false;
                            $scope.searchParameter = 'SalesOrderNumber';
 
                            $scope.groupBy = 'VendorRef';
@@ -122,10 +123,7 @@ app.controller('orderlistController', [
                                $scope.order.orderType = orderType;
                                $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
                                $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
-                               if (orderType === '1') {
-                                   $scope.order.hasApproval = true;
-                               }
-
+                                             
                                getOrderList();
                            }
                        }
@@ -151,11 +149,21 @@ app.controller('orderlistController', [
                            orderDataService.getOrderList(searchData).then(function (result) {
                                $scope.order.orders = result;
 
+                               $scope.hasBlockAddress = result[0].BlockAddressInfo;
+                               if ($scope.order.orderType === '1') {
+                                   $scope.order.hasApproval = true;
+                                   $scope.hasHidePrice = false;
+                               }
+                               else {
+                                   $scope.hasHidePrice = true;// order.detail.MobileOrderDetail.HideCheckOutPrice;
+                               }
+
                            }).catch(function (error) {
 
                                $scope.order.orders = {};
                            }).finally(function () {
-                               kendo.mobile.application.hideLoading();
+                               kendo.mobile.application.hideLoading();                              
+                              
                            });
                        }; // end order list
 
@@ -270,7 +278,7 @@ app.controller('orderlistController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
                            }
-                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
                        }
 
                        $scope.backButton = function () {
@@ -278,7 +286,10 @@ app.controller('orderlistController', [
                        }
 
                        $scope.renderHtml = function (content) {
-
+                           if (typeof content !== 'undefined' && $scope.hasBlockAddress) {
+                               content = content.replace(/class="shipTo"/g, 'class="shipTo" style="display:none;"');
+                               content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
+                           }
                            return $sce.trustAsHtml(content);
                        };
                    }

@@ -152,7 +152,9 @@ app.controller('orderDetailController', [
 
                        $scope.order.hasApproval = false;
                        $scope.order.hasStaged = false;
+                       $scope.order.orderType = '1';
                        $scope.order.title = 'Order Detail';
+                       $scope.hasBlockAddress = false;
                        $scope.order.detail = {};
                        $scope.inqueryMessage = "";
                        $scope.inqueryComment = "";
@@ -166,7 +168,7 @@ app.controller('orderDetailController', [
                        $scope.trackingCount = 0;
 
                        $scope.confirmationData = "";
-
+                       $scope.hasHidePrice = false;
                        var init = function () {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -184,10 +186,9 @@ app.controller('orderDetailController', [
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
                            backUrl = e.view.params.backUrl;
-
+                           $scope.order.orderType = orderType;
                            getOrderDetail(parameterValue);
-
-
+                          
                        }
 
                        var removeEmptyTracking = function (trakcingList) {
@@ -221,6 +222,15 @@ app.controller('orderDetailController', [
                                $scope.trackingCount = $scope.trackingList.length;
                                $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
+                               $scope.hasBlockAddress = result.MobileOrderDetail.BlockAddressInfo;
+
+                               if ($scope.order.orderType === '1') {
+                                   $scope.order.hasApproval = true;
+                                   $scope.hasHidePrice = false;
+                               }
+                               else {
+                                   $scope.hasHidePrice = result.MobileOrderDetail.HideCheckOutPrice;
+                               }
                            }).catch(function (error) {
                                $scope.order.detail = {};
 
@@ -345,7 +355,12 @@ app.controller('orderDetailController', [
                            kendo.mobile.application.navigate("src/app/" + backUrl);
                        }
                        $scope.renderHtml = function (content) {
+                           if (typeof content !== 'undefined' && $scope.hasBlockAddress) {
+                               content = content.replace(/class="shipTo"/g, 'class="shipTo" style="display:none;"');
+                               content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
+                           }
                            return $sce.trustAsHtml(content);
+                       
                        };
                    }
 ]);
