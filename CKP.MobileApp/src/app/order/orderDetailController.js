@@ -1,8 +1,8 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService','$sce', 'translateService', 'feedbackDataService', '$timeout', 'localStorageService',
+                   '$scope', 'authService', 'orderDataService', '$sce', 'translateService', 'feedbackDataService', '$timeout', 'localStorageService',
                    function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout, localStorageService) {
-                      
+
                        $scope.form = {};
 
                        $scope.form.title = {};
@@ -88,7 +88,7 @@ app.controller('orderDetailController', [
                        $scope.form.shiptoInfo.resoruceName = "Ship To Information";
                        $scope.form.shiptoInfo.resoruceValue = translateService.getResourceValue($scope.form.shiptoInfo.resoruceName);
 
-                       
+
                        $scope.form.orderInquiry = {};
                        $scope.form.orderInquiry.resoruceName = "Order Inquiry";
                        $scope.form.orderInquiry.resoruceValue = translateService.getResourceValue($scope.form.orderInquiry.resoruceName);
@@ -108,7 +108,7 @@ app.controller('orderDetailController', [
                        $scope.form.quantity = {};
                        $scope.form.quantity.resoruceName = "Quantity";
                        $scope.form.quantity.resoruceValue = translateService.getResourceValue($scope.form.quantity.resoruceName);
-                       
+
 
                        $scope.form.price = {};
                        $scope.form.price.resoruceName = "Price";
@@ -147,9 +147,9 @@ app.controller('orderDetailController', [
                        $scope.form.confirmation = {};
                        $scope.form.confirmation.resoruceName = "Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
-                       
+
                        $scope.order = {};
-                  
+
                        $scope.order.hasApproval = false;
                        $scope.order.hasStaged = false;
                        $scope.order.title = 'Order Detail';
@@ -167,10 +167,10 @@ app.controller('orderDetailController', [
 
                        $scope.confirmationData = "";
 
-                       var init = function() {
+                       var init = function () {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
-                             
+
                                kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
@@ -184,54 +184,53 @@ app.controller('orderDetailController', [
                            parameterId = e.view.params.parameterId;
                            parameterValue = e.view.params.parameterValue;
                            backUrl = e.view.params.backUrl;
-                            
+
                            getOrderDetail(parameterValue);
-                           
-                          
+
+
                        }
 
-                       var removeEmptyTracking = function (trakcingList)
-                       {
+                       var removeEmptyTracking = function (trakcingList) {
                            var newTrakcingList = [];
-                           angular.forEach(trakcingList, function (value) {                             
-                               if (value.ProductionOrderId > 0 ) {
+                           angular.forEach(trakcingList, function (value) {
+                               if (value.ProductionOrderId > 0) {
                                    newTrakcingList.push(value);
-                               }                            
+                               }
                            });
                            return newTrakcingList;
                        }
-                       
+
                        var getOrderDetail = function (poctrlno) {
 
                            $scope.order.OrderNumber = '';
                            $scope.order.ShoppingCart = '';
                            $scope.order.SalesOrderNo = '';
-                         
-                         
-                           kendo.mobile.application.showLoading();                       
-                      
+
+
+                           kendo.mobile.application.showLoading();
+
                            orderDataService.getOrderDetail(poctrlno).then(function (result) {
-                              
-                                   $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
-                                   $scope.order.ShoppingCart = result.MobileOrderDetail.ShoppingCartId;
-                                   $scope.order.SalesOrderNo = result.MobileOrderDetail.SalesOrderNumber;
 
-                                   $scope.order.detail = result;
-                                   $scope.trackingList = removeEmptyTracking(result.MobileOrderDetail.OrderTrackingNumberList);
-                                
-                                   $scope.trackingCount = $scope.trackingList.length;
-                                   $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
+                               $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
+                               $scope.order.ShoppingCart = result.MobileOrderDetail.ShoppingCartId;
+                               $scope.order.SalesOrderNo = result.MobileOrderDetail.SalesOrderNumber;
 
-                               }).catch(function (error) {
-                                   $scope.order.detail = {};
-                                 
-                               }).finally(function () {
-                                    kendo.mobile.application.hideLoading();
-                               });
-                         
+                               $scope.order.detail = result;
+                               $scope.trackingList = removeEmptyTracking(result.MobileOrderDetail.OrderTrackingNumberList);
+
+                               $scope.trackingCount = $scope.trackingList.length;
+                               $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
+
+                           }).catch(function (error) {
+                               $scope.order.detail = {};
+
+                           }).finally(function () {
+                               kendo.mobile.application.hideLoading();
+                           });
+
                        }; // end message
 
-                      
+
                        $scope.showTrakcingListModal = function () {
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.tracking");
@@ -250,12 +249,12 @@ app.controller('orderDetailController', [
                                else {
                                    window.open(url, '_system');
                                }
-                             
+
                            }
                        }
 
                        $scope.showTracking = function (url) {
-                          
+
                            var deviceData = localStorageService.get('deviceData');
 
                            if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) {
@@ -264,14 +263,14 @@ app.controller('orderDetailController', [
                            else {
                                window.open(url, '_system');
                            }
-                        
-                         
+
+
                        }
                        $scope.send = function () {
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.send");
                            }
-                             kendo.mobile.application.showLoading();
+                           kendo.mobile.application.showLoading();
                            $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
@@ -298,10 +297,10 @@ app.controller('orderDetailController', [
                                }, 7000);
 
                            }).finally(function () {
-                                kendo.mobile.application.hideLoading();
+                               kendo.mobile.application.hideLoading();
                            });
                        }
-              
+
                        $scope.showConfirmationModel = function (id) {
                            $("#modalview-detail-confirmation").kendoMobileModalView("open");
                            $('.km-view').css('-webkit-transform', 'none');
@@ -310,36 +309,38 @@ app.controller('orderDetailController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
-                        
+
 
                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                              
-                               if (result !== null || result.data !== '') {
+
+                               if ((result !== null || typeof result != 'undefined') && result.data.length > 0) {
                                    $scope.confirmationData = result.data;
                                }
                                else {
                                    $scope.confirmationData = $scope.form.noData.resoruceValue;
+
                                }
+
 
                            }).catch(function (error) {
                                $scope.confirmationData = $scope.form.noData.resoruceValue;
                            }).finally(function () {
-                                kendo.mobile.application.hideLoading();
+                               kendo.mobile.application.hideLoading();
                            });
 
-                           
+
                        };
                        $scope.hideConfirmationModel = function () {
 
                            $("#modalview-detail-confirmation").kendoMobileModalView("close");
                        };
-                 
+
                        //tracking modal 
-                     
+
                        $scope.closeTrackingListModel = function () {
                            $("#modalview-trackingList").kendoMobileModalView("close");
                        };
-                        
+
                        $scope.backButton = function () {
                            kendo.mobile.application.navigate("src/app/" + backUrl);
                        }
@@ -347,4 +348,4 @@ app.controller('orderDetailController', [
                            return $sce.trustAsHtml(content);
                        };
                    }
-               ]);
+]);

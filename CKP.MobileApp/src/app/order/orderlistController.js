@@ -1,6 +1,6 @@
 
 app.controller('orderlistController', [
-                   '$rootScope','$scope', 'authService', 'orderDataService', 'homeDataService','$sce',  'translateService', 'parameterService', '$timeout',
+                   '$rootScope', '$scope', 'authService', 'orderDataService', 'homeDataService', '$sce', 'translateService', 'parameterService', '$timeout',
                    function ($rootScope, $scope, authService, orderDataService, homeDataService, $sce, translateService, parameterService, $timeout) {
                        $scope.form = {};
                        $scope.form.title = {};
@@ -27,7 +27,7 @@ app.controller('orderlistController', [
                                    kendo.mobile.application.navigate("src/app/login/login.html");
                                }
                            }
-                         
+
                        }
 
                        $scope.form.noResults = {};
@@ -88,7 +88,7 @@ app.controller('orderlistController', [
                        $scope.form.confirmation = {};
                        $scope.form.confirmation.resoruceName = "Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
-                      
+
                        if (!$rootScope.hasBackButtonList) {
 
                            $scope.order = {};
@@ -102,12 +102,12 @@ app.controller('orderlistController', [
                            $scope.order.orders = {};
 
                            $scope.confirmationData = "";
-                          
+
                            var orderType = '1';
                            var parameterId = 0;
                            var selectedList = '';
                            var retailerId = 0;
-                         
+
                            $scope.searchParameter = 'SalesOrderNumber';
 
                            $scope.groupBy = 'VendorRef';
@@ -118,7 +118,7 @@ app.controller('orderlistController', [
                                parameterId = e.view.params.parameterId;
                                retailerId = e.view.params.retailerId;
                                selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
-                           
+
                                $scope.order.orderType = orderType;
                                $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
                                $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
@@ -130,18 +130,17 @@ app.controller('orderlistController', [
                            }
                        }
 
-                        var getOrderList = function () {
-                            if ($rootScope.hasBackButtonList)
-                            {
-                                return true;
-                            }
-                             kendo.mobile.application.showLoading();
-                          
-                             var searchList = [];
+                       var getOrderList = function () {
+                           if ($rootScope.hasBackButtonList) {
+                               return true;
+                           }
+                           kendo.mobile.application.showLoading();
+
+                           var searchList = [];
 
                            searchList.push(selectedList);
                            var searchData = {
-                               RetailerId : retailerId,
+                               RetailerId: retailerId,
                                OrderNumber: $scope.searchBy === 'OrderNumber' ? $scope.searchBy : '',
                                ShoppingCartId: $scope.searchBy === 'ShoppingCartId' ? $scope.searchBy : '',
                                SalesOrderNumber: $scope.searchBy === 'SalesOrderNumber' ? $scope.searchBy : '',
@@ -149,141 +148,138 @@ app.controller('orderlistController', [
                                SearchList: searchList
                            };
 
-                            orderDataService.getOrderList(searchData).then(function (result) {
-                                $scope.order.orders = result;
-                            
-                            }).catch(function (error) {
-                               
+                           orderDataService.getOrderList(searchData).then(function (result) {
+                               $scope.order.orders = result;
+
+                           }).catch(function (error) {
+
                                $scope.order.orders = {};
-                           }).finally(function() {
-                                kendo.mobile.application.hideLoading();
+                           }).finally(function () {
+                               kendo.mobile.application.hideLoading();
                            });
-                        }; // end order list
+                       }; // end order list
 
-                      
+
                        //
-                        $scope.headerClick = function (index) {
-                            $('.list-view-detail-' + index).toggle();
-                            if ($('.ck-icon-toggge-' + index).hasClass('km-plus')) {
-                                $('.ck-icon-toggge-' + index).removeClass('km-plus');
-                                $('.ck-icon-toggge-' + index).addClass('km-minus');
+                       $scope.headerClick = function (index) {
+                           $('.list-view-detail-' + index).toggle();
+                           if ($('.ck-icon-toggge-' + index).hasClass('km-plus')) {
+                               $('.ck-icon-toggge-' + index).removeClass('km-plus');
+                               $('.ck-icon-toggge-' + index).addClass('km-minus');
 
-                            }
-                            else {
-                                $('.ck-icon-toggge-' + index).addClass('km-plus');
-                                $('.ck-icon-toggge-' + index).removeClass('km-minus');
-                            }
-                        }
-                       
+                           }
+                           else {
+                               $('.ck-icon-toggge-' + index).addClass('km-plus');
+                               $('.ck-icon-toggge-' + index).removeClass('km-minus');
+                           }
+                       }
+
                        //confiramtion modal
-                        $scope.showConfirmationModel = function (id) {
-                            $("#modalview-confirmation").kendoMobileModalView("open");
-                            $scope.confirmationData = "Loading";
-                            $('.km-view').css('-webkit-transform', 'none');
-                            kendo.mobile.application.showLoading();
-                            if (typeof (window.navigator.simulator) === 'undefined') {
-                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
-                            }
-                          
+                       $scope.showConfirmationModel = function (id) {
+                           $("#modalview-confirmation").kendoMobileModalView("open");
+                           $scope.confirmationData = "Loading";
+                           $('.km-view').css('-webkit-transform', 'none');
+                           kendo.mobile.application.showLoading();
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
+                           }
 
-                            orderDataService.getConfirmationHtml(id).then(function (result) {
-                              
-                                if (result !== null || result.data !== '') {
-                                    $scope.confirmationData = result.data;
-                                }
-                                else {
-                                    $scope.confirmationData = $scope.form.noData.resoruceValue;
-                                }
-                               
-                            }).catch(function (error) {
-                                $scope.confirmationData = $scope.form.noData.resoruceValue;
-                            }).finally(function () {
-                                kendo.mobile.application.hideLoading();
-                            });
-                         
-                        };
-                        $scope.hideConfirmationModel = function () {
 
-                            $("#modalview-confirmation").kendoMobileModalView("close");
-                        };
-                        $scope.approved = function (status) {
-                        
-                            orderApprovalByStatus(status);
-                        }
+                           orderDataService.getConfirmationHtml(id).then(function (result) {
+                               if ((result !== null || typeof result != 'undefined') && result.data.length > 0) {
+                                   $scope.confirmationData = result.data;
+                               }
+                               else {
+                                   $scope.confirmationData = $scope.form.noData.resoruceValue;
+                               }
+
+                           }).catch(function (error) {
+                               $scope.confirmationData = $scope.form.noData.resoruceValue;
+                           }).finally(function () {
+                               kendo.mobile.application.hideLoading();
+                           });
+
+                       };
+                       $scope.hideConfirmationModel = function () {
+
+                           $("#modalview-confirmation").kendoMobileModalView("close");
+                       };
+                       $scope.approved = function (status) {
+
+                           orderApprovalByStatus(status);
+                       }
                        //appprove order
 
-                        var getSalesOrders = function ()
-                        {
-                            var orders = $scope.order.orders;
-                            var salesOrders = new Array();
-                            angular.forEach(orders, function (value, key) {
-                                if (salesOrders.indexOf(orders.SalesOrderNumber) == -1)
-                                {
-                                    var solist = {
-                                        SalesOrderNo: parseInt(value.SalesOrderNumber),
-                                        Comment: $scope.orderApprovalComment
-                                    };
-                                    salesOrders.push(solist);
-                                }
-                            });
-                          
-                            return salesOrders;
-                        }
-                        var orderApprovalByStatus = function (statusUpdate) {
-                      
-                            $scope.order.hasClikedApporval = true;
-                            var salesOrders = getSalesOrders();
+                       var getSalesOrders = function () {
+                           var orders = $scope.order.orders;
+                           var salesOrders = new Array();
+                           angular.forEach(orders, function (value, key) {
+                               if (salesOrders.indexOf(orders.SalesOrderNumber) == -1) {
+                                   var solist = {
+                                       SalesOrderNo: parseInt(value.SalesOrderNumber),
+                                       Comment: $scope.orderApprovalComment
+                                   };
+                                   salesOrders.push(solist);
+                               }
+                           });
 
-                            var data = {                              
-                                Salesorders: salesOrders,
-                                UpdateStatus: statusUpdate,
-                            }
-                            kendo.mobile.application.showLoading();
+                           return salesOrders;
+                       }
+                       var orderApprovalByStatus = function (statusUpdate) {
 
-                       
-                            var successMessage = statusUpdate ? $scope.form.appoveMessage.resoruceValue : $scope.form.declineMessage.resoruceValue;
-                            orderDataService.approveDecline(data).then(function (result) {
+                           $scope.order.hasClikedApporval = true;
+                           var salesOrders = getSalesOrders();
 
-                                $scope.apporvalMessage = successMessage;
-                             
-                                $rootScope.hasBackButton = false;
-                                if (typeof (window.navigator.simulator) === 'undefined') {
-                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderApporval");
-                                }
-                                $timeout(function () {
-                                    $scope.order.hasApproval = false;
-                                    kendo.mobile.application.hideLoading();
-                                    $scope.apporvalMessage = "";
-                                    kendo.mobile.application.navigate("src/app/home/home.html");
-                                }, 1000);
-                            }).catch(function (error) {
-                                $scope.order.hasClikedApporval = false;
-                                $rootScope.hasBackButton = false;
-                                kendo.mobile.application.hideLoading();
-                                $scope.apporvalMessage = $scope.form.faildUpdateMessage.resoruceValue;
-                                $timeout(function () {
-                                    $scope.apporvalMessage = "";
-                                }, 7000);
-                            });
+                           var data = {
+                               Salesorders: salesOrders,
+                               UpdateStatus: statusUpdate,
+                           }
+                           kendo.mobile.application.showLoading();
 
-                        }
 
-                        $scope.orderDetail = function (poctrlno) {
-                            var backUrl = 'order/list.html';
-                            $rootScope.hasBackButtonList = true;
-                            if (typeof (window.navigator.simulator) === 'undefined') {
-                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
-                            }
-                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
-                        }
+                           var successMessage = statusUpdate ? $scope.form.appoveMessage.resoruceValue : $scope.form.declineMessage.resoruceValue;
+                           orderDataService.approveDecline(data).then(function (result) {
 
-                        $scope.backButton = function () {
-                            kendo.mobile.application.navigate("src/app/home/home.html");
-                        }
-                       
-                        $scope.renderHtml = function (content) {
-                         
+                               $scope.apporvalMessage = successMessage;
+
+                               $rootScope.hasBackButton = false;
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderApporval");
+                               }
+                               $timeout(function () {
+                                   $scope.order.hasApproval = false;
+                                   kendo.mobile.application.hideLoading();
+                                   $scope.apporvalMessage = "";
+                                   kendo.mobile.application.navigate("src/app/home/home.html");
+                               }, 1000);
+                           }).catch(function (error) {
+                               $scope.order.hasClikedApporval = false;
+                               $rootScope.hasBackButton = false;
+                               kendo.mobile.application.hideLoading();
+                               $scope.apporvalMessage = $scope.form.faildUpdateMessage.resoruceValue;
+                               $timeout(function () {
+                                   $scope.apporvalMessage = "";
+                               }, 7000);
+                           });
+
+                       }
+
+                       $scope.orderDetail = function (poctrlno) {
+                           var backUrl = 'order/list.html';
+                           $rootScope.hasBackButtonList = true;
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
+                           }
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + 2 + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
+                       }
+
+                       $scope.backButton = function () {
+                           kendo.mobile.application.navigate("src/app/home/home.html");
+                       }
+
+                       $scope.renderHtml = function (content) {
+
                            return $sce.trustAsHtml(content);
                        };
                    }
-               ]);
+]);
