@@ -148,6 +148,16 @@ app.controller('orderDetailController', [
                        $scope.form.confirmation.resoruceName = "Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
 
+                       $scope.form.estimatedShipDate = {};
+                       $scope.form.estimatedShipDate.resoruceName = "Estimated Ship Date";
+                       $scope.form.estimatedShipDate.resoruceValue = translateService.getResourceValue($scope.form.estimatedShipDate.resoruceName);
+
+
+                       $scope.form.apporvalCommnet = {};
+                       $scope.form.apporvalCommnet.resoruceName = "Apporval Commnet";
+                       $scope.form.apporvalCommnet.resoruceValue = translateService.getResourceValue($scope.form.apporvalCommnet.resoruceName);
+
+                   
                        $scope.order = {};
 
                        $scope.order.hasApproval = false;
@@ -223,7 +233,7 @@ app.controller('orderDetailController', [
                                $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
                                $scope.hasBlockAddress = result.MobileOrderDetail.BlockAddressInfo;
-
+                               console.log($scope.hasBlockAddress);
                                if ($scope.order.orderType === '1') {
                                    $scope.order.hasApproval = true;
                                    $scope.hasHidePrice = false;

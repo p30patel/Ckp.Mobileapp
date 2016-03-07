@@ -1,6 +1,13 @@
 .line-height-detail td {
     line-height: 0.6;
+
 }
+.line-height-detail td.v-align span.ng-binding {
+    line-height: 1;
+}
+/*.line-height-detail td.v-align h3.km-bold-font.ng-binding{
+    line-height: 1;
+}*/
 span.k-widget.k-tooltip.k-tooltip-validation.k-invalid-msg {
     display:none !important;
 }

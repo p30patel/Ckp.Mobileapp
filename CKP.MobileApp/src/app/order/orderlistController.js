@@ -155,7 +155,7 @@ app.controller('orderlistController', [
                                    $scope.hasHidePrice = false;
                                }
                                else {
-                                   $scope.hasHidePrice = true;// order.detail.MobileOrderDetail.HideCheckOutPrice;
+                                   $scope.hasHidePrice = result[0].HideCheckOutPrice;
                                }
 
                            }).catch(function (error) {
