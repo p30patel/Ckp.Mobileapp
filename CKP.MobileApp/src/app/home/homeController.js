@@ -286,7 +286,6 @@ app.controller('homeController', [
                                $scope.hasSearch = false;
                                return false;
                            }
-                           $scope.hasSearch = false;
                            kendo.mobile.application.showLoading();
 
                            if (typeof (window.navigator.simulator) === 'undefined') {

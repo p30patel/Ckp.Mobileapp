@@ -31,7 +31,8 @@
     "cordova-plugin-network-information",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "uk.co.whiteoctober.cordova.appversion@0.1.7"
   ],
   "WP8SupportedResolutions": [
     "ID_RESOLUTION_WVGA",

@@ -51,7 +51,16 @@ app.controller('menuController', [
                        $scope.helpUrl = helpUrl + "/Documents/Help-Mobile-e.pdf";
                      
                        //address
+                       $scope.version = '0.0';
 
+                       var getAppVersion = function () {
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               cordova.getAppVersion(function (version) {
+                                   $scope.version = version;
+                               });
+                           }
+                       }
+                       getAppVersion();
                        var getOrganizationDetail = function () {
 
                            var organizationDetail = localStorageService.get("organizationDetail");

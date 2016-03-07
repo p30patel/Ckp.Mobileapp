@@ -33,9 +33,39 @@
             <li ng-show="orderCounts.length == 0">
                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)"> </p>
             </li>
-
+         
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
-                <div class="ck-home" style="margin-top:-.1em; background-color:gray; ">
+                <div class="ck-home" style="margin-top:-.1em; background-color:gray;" 
+                     ng-if="hasSearch" ng-show="(orderCount.ApprovalCount > 0 || orderCount.NewOrderCount > 0 || orderCount.ReleasedOrderCount > 0)">
+                    <h3>
+                        <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
+                            <span class="ck-home-button-icon km-icon" id="header-{{orderCount.RetailerId}}"></span>
+                            {{orderCount.RetailerName}}
+                        </kendo-mobile-button>
+
+                        <kendo-mobile-button class="ck-title-icon " k-transition=" 'fade' " k-rel=" 'modalview' " data-tap="myTouch.tap "
+                                             k-on-click="showCreditModel()" ng-show="hasCreditLock">
+                            <img src="styles/images/Alert.png" style="width: 1.4em; height: 1.2em;" ng-show="$first" />
+                        </kendo-mobile-button>
+                    </h3>
+                    <ul kendo-mobile-button-group class="ck-button-group buttongroup-home" data-select-on="up" k-options="myOptions" data-btnRetailer="{{orderCount.RetailerId}}" id="buttongroup-{{orderCount.RetailerId}}">
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasApproval">
+                            <div class="ck-button-number">{{orderCount.ApprovalCount}}</div>
+                            <div class="ck-button-text">{{form.approvalOrder.resoruceValue}}</div>
+                        </li>
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasStagedOrder">
+                            <div class="ck-button-number">{{orderCount.NewOrderCount}}</div>
+                            <div class="ck-button-text">{{form.newOrder.resoruceValue}}</div>
+                        </li>
+                        <li class="ck-button km-button ck-count-btn" ng-show="orderCount.HasReleasedOrder">
+                            <div class="ck-button-number">{{orderCount.ReleasedOrderCount}}</div>
+                            <div class="ck-button-text ">{{form.releasedOrder.resoruceValue}}</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="ck-home" style="margin-top:-.1em; background-color:gray;"
+                     ng-if="!hasSearch">
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
                             <span class="ck-home-button-icon km-icon" id="header-{{orderCount.RetailerId}}"></span>
@@ -271,6 +301,7 @@
 
                     </table>
                 </ul>
+
                 <ul kendo-mobile-list-view style="display:none" data-retailer="{{orderCount.RetailerId}}" data-orderCount="{{orderCount.ReleasedOrderCount}}" class="order-header" data-orderType="Released">
 
                     <li ng-show="!orders.length > 0">
