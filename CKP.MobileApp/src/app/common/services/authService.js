@@ -118,7 +118,7 @@ app.factory('authService', [
                         if (organizationDetail)
                         {
                            
-                            if (refreshData && loginData && deviceData)
+                            if (refreshData && loginData && deviceData && typeof (window.navigator.simulator) === 'undefined')
                             {
                             var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
                             var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
