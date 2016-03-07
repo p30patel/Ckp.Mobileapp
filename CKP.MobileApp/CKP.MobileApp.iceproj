@@ -49,6 +49,7 @@
     <Content Include="App_Resources\iOS\Default-Landscape-736h.png" />
     <Content Include="App_Resources\iOS\icon-40%403x.png" />
     <Content Include="App_Resources\iOS\icon-60%403x.png" />
+    <Content Include="App_Resources\iOS\Info.plist" />
     <Content Include="App_Resources\iOS\watch-172x172.png" />
     <Content Include="App_Resources\iOS\watch-196x196.png" />
     <Content Include="App_Resources\iOS\watch-48x48.png" />
