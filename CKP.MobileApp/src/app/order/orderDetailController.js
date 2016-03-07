@@ -148,9 +148,13 @@ app.controller('orderDetailController', [
                        $scope.form.confirmation.resoruceName = "Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
 
-                       $scope.form.estimatedShipDate = {};
-                       $scope.form.estimatedShipDate.resoruceName = "Estimated Ship Date";
-                       $scope.form.estimatedShipDate.resoruceValue = translateService.getResourceValue($scope.form.estimatedShipDate.resoruceName);
+                       $scope.form.estimated = {};
+                       $scope.form.estimated.resoruceName = "Estimated";
+                       $scope.form.estimated.resoruceValue = translateService.getResourceValue($scope.form.estimated.resoruceName);
+
+                       $scope.form.shipDate = {};
+                       $scope.form.shipDate.resoruceName = "Ship Date";
+                       $scope.form.shipDate.resoruceValue = translateService.getResourceValue($scope.form.shipDate.resoruceName);
 
 
                        $scope.form.apporvalCommnet = {};
