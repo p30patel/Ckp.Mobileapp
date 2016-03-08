@@ -30,13 +30,19 @@
                     <i style="font-size: 100%; margin-top:10px; margin-right: 0px;" class="km-icon km-search"></i>
                 </kendo-mobile-button>
             </li>
-            <li ng-show="orderCounts.length == 0">
+            <li ng-show="orderCounts.length == 0 && !hasSearch">
                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)"> </p>
+            </li>
+       
+            <li ng-show="hasSearch && hasNoSearchResults">
+                <p> {{form.noResults.resoruceValue}}</p>
             </li>
          
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
+           
                 <div class="ck-home" style="margin-top:-.1em; background-color:gray;" 
                      ng-if="hasSearch" ng-show="(orderCount.ApprovalCount > 0 || orderCount.NewOrderCount > 0 || orderCount.ReleasedOrderCount > 0)">
+                 
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
                             <span class="ck-home-button-icon km-icon" id="header-{{orderCount.RetailerId}}"></span>

@@ -1,7 +1,7 @@
 
 app.controller('feedbackController', [
-                   '$scope', '$http', '$sce', 'feedbackDataService', 'authService', 'translateService', '$timeout',
-function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout) {
+                   '$scope', '$http', '$sce', 'feedbackDataService', 'authService', 'translateService', '$timeout', 'localStorageService',
+function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout, localStorageService) {
 
     $scope.form = {};
  
@@ -45,11 +45,22 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
     }
     setResources();
+    $scope.version = '0.0';
+
+    var getAppVersion = function () {
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            cordova.getAppVersion(function (version) {
+                $scope.version = version;
+            });
+        }
+    }
+    var deviceData = localStorageService.get('deviceData') || [];
+    getAppVersion();
 
     $scope.feedbackData = {};
-    $scope.feedbackData.webpage = "Mobile App";
+    $scope.feedbackData.webpage = "Mobile App Ver. " + $scope.version + " Device Info :" + deviceData;
     $scope.feedbackData.comment = "";
-
+  
     $scope.message = "";
     var init = function () {
         if (!authService.authentication.isAuth) {
