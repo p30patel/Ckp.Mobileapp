@@ -48,7 +48,15 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     $scope.version = '0.0';
 
     var getAppVersion = function () {
-        if (typeof (window.navigator.simulator) === 'undefined') {
+        var hasSimlulatorMode = false;
+        if (window.navigator.simulator === true) {
+            hasSimlulatorMode = true;
+        } else if (cordova.getAppVersion === undefined) {
+            hasSimlulatorMode = true;
+        } else {
+            hasSimlulatorMode = false;
+        }
+        if (!hasSimlulatorMode) {
             cordova.getAppVersion(function (version) {
                 $scope.version = version;
             });

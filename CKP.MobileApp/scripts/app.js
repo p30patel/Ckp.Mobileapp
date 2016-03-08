@@ -102,14 +102,26 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
         var networkState = navigator.connection.type;
         var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
-        
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            if (isOffline) {
-                onOffline();
+       
+        var startAnalyticsAndDeviceInfo = function () {
+            var hasSimlulatorMode = false;
+            if (window.navigator.simulator === true) {
+                hasSimlulatorMode = true;
+            } else if (cordova.getAppVersion === undefined) {
+                hasSimlulatorMode = true;
+            } else {
+                hasSimlulatorMode = false;
             }
-            window.plugins.EqatecAnalytics.Monitor.Start();
-            getDeviceInfo();
+            if (!hasSimlulatorMode) {
+                if (isOffline) {
+                    onOffline();
+                }
+                window.plugins.EqatecAnalytics.Monitor.Start();
+                getDeviceInfo();
+            }
         }
+        startAnalyticsAndDeviceInfo();
+       
         kendo.mobile.application.navigate("src/app/login/login.html");
         navigator.splashscreen.hide(); //Hides the splash screen for your app.
 
