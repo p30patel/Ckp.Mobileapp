@@ -90,21 +90,40 @@ app.factory("orderDataService", [
                         return deferred.promise;
                     };
 
-                    var getConfirmationHtml = function (id) {
+                    var getOrganization = function(retailerID)
+                    {
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var x2js = new X2JS();
+                        var organizationList = x2js.xml_str2json(organizationDetail.UserOrganizationList);
+                        var orgId = 0;
+                        angular.forEach(organizationList.Organizations.Organization, function (value, key) {
+                            if (value._RetailerID == retailerID)
+                            {
+                                orgId = value._OrganizationID;
+                                console.log(orgId);
+                            }
+                        });
+                        return orgId;
+                    }
+
+                    var getConfirmationHtml = function (shoppingCartId, retailerId) {
                         var deferred = $q.defer();
                        
                         var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
-
+                        var orgId = getOrganization(retailerId);
+                        
                         if (organizationDetail) {
                             orgContext = organizationDetail.OrgContext;
                         }
+                        orgContext.Id = orgId > 0 ? orgId : orgContext.Id;
+                        orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
 
                         var data = {
                             OrgContext: orgContext,
-                            ShoppingCartId: id
+                            ShoppingCartId: shoppingCartId
                         };
-                      
+                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetConfirmationHtml";
                         $http.post(url, data).then(
                             function successCallback(result) {
@@ -116,6 +135,8 @@ app.factory("orderDataService", [
                       
                         return deferred.promise;
                     };
+
+                    
 
                     orderDataServiceFactory.approveDecline = approveDecline;
                     

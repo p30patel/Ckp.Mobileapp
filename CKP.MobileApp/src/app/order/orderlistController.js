@@ -113,11 +113,14 @@ app.controller('orderlistController', [
 
                            $scope.groupBy = 'VendorRef';
                            $scope.searchBy = 'SalesOrderNumber';
+                           $scope.retailerId = 0;
+
                            $scope.intShow = function (e) {
                                $scope.searchParameter = e.view.params.searchParameter;
                                orderType = e.view.params.orderType;
                                parameterId = e.view.params.parameterId;
                                retailerId = e.view.params.retailerId;
+                               $scope.retailerId = retailerId;
                                selectedList = e.view.params.parameterValue === '' ? e.view.params.selectedList : e.view.params.parameterValue;
 
                                $scope.order.orderType = orderType;
@@ -183,7 +186,7 @@ app.controller('orderlistController', [
                        }
 
                        //confiramtion modal
-                       $scope.showConfirmationModel = function (id) {
+                       $scope.showConfirmationModel = function (shoppingCartId) {
                            $("#modalview-confirmation").kendoMobileModalView("open");
                            $scope.confirmationData = "Loading";
                            $('.km-view').css('-webkit-transform', 'none');
@@ -193,7 +196,7 @@ app.controller('orderlistController', [
                            }
 
 
-                           orderDataService.getConfirmationHtml(id).then(function (result) {
+                           orderDataService.getConfirmationHtml(shoppingCartId, $scope.retailerId).then(function (result) {
                                if ((result !== null || typeof result != 'undefined') && result.data.length > 0) {
                                    $scope.confirmationData = result.data;
                                }
@@ -278,7 +281,8 @@ app.controller('orderlistController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
                            }
-                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&backUrl=" + backUrl);
+                         
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + 2 + "&parameterValue=" + poctrlno +  "&retailerId=" + $scope.retailerId + "&backUrl=" + backUrl);
                        }
 
                        $scope.backButton = function () {

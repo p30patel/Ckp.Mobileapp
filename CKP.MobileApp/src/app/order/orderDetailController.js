@@ -182,6 +182,7 @@ app.controller('orderDetailController', [
                        $scope.trackingCount = 0;
 
                        $scope.confirmationData = "";
+                       $scope.retailerId = 0;
                        $scope.hasHidePrice = false;
                        var init = function () {
                            if (!authService.authentication.isAuth) {
@@ -201,6 +202,7 @@ app.controller('orderDetailController', [
                            parameterValue = e.view.params.parameterValue;
                            backUrl = e.view.params.backUrl;
                            $scope.order.orderType = orderType;
+                           $scope.retailerId = e.view.params.retailerId;
                            getOrderDetail(parameterValue);
                           
                        }
@@ -325,7 +327,7 @@ app.controller('orderDetailController', [
                            });
                        }
 
-                       $scope.showConfirmationModel = function (id) {
+                       $scope.showConfirmationModel = function (shoppingCartId) {
                            $("#modalview-detail-confirmation").kendoMobileModalView("open");
                            $('.km-view').css('-webkit-transform', 'none');
                            kendo.mobile.application.showLoading();
@@ -334,8 +336,7 @@ app.controller('orderDetailController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.confirmationHtml");
                            }
 
-
-                           orderDataService.getConfirmationHtml(id).then(function (result) {
+                           orderDataService.getConfirmationHtml(shoppingCartId, $scope.retailerId).then(function (result) {
 
                                if ((result !== null || typeof result != 'undefined') && result.data.length > 0) {
                                    $scope.confirmationData = result.data;

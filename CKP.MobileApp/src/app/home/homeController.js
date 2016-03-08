@@ -531,7 +531,7 @@ app.controller('homeController', [
 
                        }
 
-                       $scope.orderDetail = function (orderType, parameterId, parameterValue) {
+                       $scope.orderDetail = function (orderType, parameterId, parameterValue, retailerId) {
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderDetail");
@@ -539,7 +539,7 @@ app.controller('homeController', [
                            $rootScope.hasBackButton = true;
                            $rootScope.hasBackButtonList = false;
                            var backUrl = 'home/home.html';
-                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&backUrl=" + backUrl);
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
                        }
 
                        var search = function () {
