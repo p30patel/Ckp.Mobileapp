@@ -96,9 +96,9 @@
 
                 <kendo-view-title>
                     <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
-                    <!--<span style="font-size:x-small;">Ver. {{version}}</span>-->
+                    <span class="km-view-subtitle" style="line-height: .1 !important; font-size: .6em !important;">Verison {{version}}</span>
                 </kendo-view-title>
-
+               
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" ng-click="home()"><span class="km-icon km-home"></span></kendo-mobile-button>
 
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" ng-click="login()"><span class="km-icon km-i-signin"></span></kendo-mobile-button>
