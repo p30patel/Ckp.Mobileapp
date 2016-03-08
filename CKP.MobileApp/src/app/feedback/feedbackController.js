@@ -4,7 +4,7 @@ app.controller('feedbackController', [
 function ($scope, $http, $sce, feedbackDataService, authService, translateService, $timeout, localStorageService) {
 
     $scope.form = {};
- 
+
     $scope.form.title = {};
     $scope.form.title.resoruceName = "Feedback";
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
@@ -45,7 +45,12 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
     }
     setResources();
-    $scope.version = '0.0';
+
+    $scope.feedbackData = {};
+    $scope.feedbackData.webpage = "Mobile App Ver. ";
+    $scope.feedbackData.comment = "";
+    $scope.feedbackData.version = "0.0";
+    $scope.message = "";
 
     var getAppVersion = function () {
         var hasSimlulatorMode = false;
@@ -58,36 +63,35 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
         }
         if (!hasSimlulatorMode) {
             cordova.getAppVersion(function (version) {
-                $scope.version = version;
+                $scope.feedbackData.version = version;
             });
         }
     }
-    var deviceData = localStorageService.get('deviceData') || [];
-    getAppVersion();
 
-    $scope.feedbackData = {};
-    $scope.feedbackData.webpage = "Mobile App Ver. " + $scope.version + " Device Info :" + deviceData;
-    $scope.feedbackData.comment = "";
-  
-    $scope.message = "";
     var init = function () {
         if (!authService.authentication.isAuth) {
             authService.logout();
 
             kendo.mobile.application.navigate("src/app/login/login.html");
         }
+       
 
     };
+
     init();
+    getAppVersion();
     $scope.renderHtml = function (content) {
         return $sce.trustAsHtml(content);
     };
 
     $scope.send = function () {
-      if (typeof (window.navigator.simulator) === 'undefined') {
+        var deviceData = localStorageService.get('deviceData') || [];
+        $scope.feedbackData.webpage = "Mobile App Ver. " + $scope.feedbackData.version + " Device Info :" + deviceData;
+
+        if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.feedback.send");
         }
-          kendo.mobile.application.showLoading();
+        kendo.mobile.application.showLoading();
         feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
             if (result === 'success') {
 
@@ -112,7 +116,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
             }, 7000);
 
         }).finally(function () {
-             kendo.mobile.application.hideLoading();
+            kendo.mobile.application.hideLoading();
         });
     }
 }

@@ -51,24 +51,7 @@ app.controller('menuController', [
                        $scope.helpUrl = helpUrl + "/Documents/Help-Mobile-e.pdf";
                      
                        //address
-                       $scope.version = '0.0';
-
-                       var getAppVersion = function () {
-                           var hasSimlulatorMode = false;
-                           if (window.navigator.simulator === true) {
-                               hasSimlulatorMode = true;
-                           } else if (cordova.getAppVersion === undefined) {
-                               hasSimlulatorMode = true;
-                           } else {
-                               hasSimlulatorMode = false;
-                           }
-                           if (!hasSimlulatorMode) {
-                               cordova.getAppVersion(function (version) {
-                                   $scope.version = version;
-                               });
-                           }
-                       }
-                       getAppVersion();
+                      
                        var getOrganizationDetail = function () {
 
                            var organizationDetail = localStorageService.get("organizationDetail");

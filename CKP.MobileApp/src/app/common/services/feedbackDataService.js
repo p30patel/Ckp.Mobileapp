@@ -13,7 +13,7 @@ app.factory("feedbackDataService", [
                         var organizationDetail = localStorageService.get('organizationDetail');
                         var userId = organizationDetail.UserId;
                       
-                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/SendFeedback?webpage=' + feedbackData.webpage + '&comment=' + feedbackData.comment + '&userId=' + userId).success(function (result) {
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/SendFeedback?webpage=' + feedbackData.webpage + '&version=' + feedbackData.version + '&comment=' + feedbackData.comment + '&userId=' + userId).success(function (result) {
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
