@@ -126,9 +126,7 @@
     <Content Include="src\app\feedback\feedback.html" />
     <Content Include="src\app\feedback\feedbackController.js" />
     <Content Include="src\app\error\error.html" />
-    <Content Include="src\app\home\home - Copy.html" />
     <Content Include="src\app\home\home.html" />
-    <Content Include="src\app\home\homeController - Copy.js" />
     <Content Include="src\app\home\homeController.js" />
     <Content Include="src\app\login\login.html" />
     <Content Include="src\app\login\loginController.js" />

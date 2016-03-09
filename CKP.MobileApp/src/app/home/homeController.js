@@ -25,7 +25,7 @@ app.controller('homeController', [
                            $rootScope.hasBackButton = false;
                            return false;
                        }
-
+                       $scope.chk = {};
                        var setResources = function () {
                            $scope.form.attentionUser = {};
                            $scope.form.attentionUser.resoruceName = "Attension User";
@@ -400,6 +400,8 @@ app.controller('homeController', [
                                        value["Id"] = -1 * nextNumber++;
                                    });
                                    $scope.orders = result;
+                                   $('.approve-chk-retailer').prop('checked', false);
+                                   $scope.selection = [];
 
                                }
 
@@ -602,38 +604,41 @@ app.controller('homeController', [
                            var currentSelection = [];
                            var selectedList = '';
                            var checkedItems = $('.approve-chk:checked');
+                       
                            if (checkedItems.length > 0) {
                                angular.forEach(checkedItems, function (value, key) {
 
                                    var item = checkedItems.eq(key).attr('data-' + $scope.screen2SearchParameter);
 
                                    // if shopping cart or vendor ref then get sales order list from them
+                              
+                                   if (typeof item !== 'undefined') {
 
+                                       if ($scope.screen2SearchParameter === 'ShoppingCartId' || $scope.screen2SearchParameter === 'VendorRef') {
+                                           if ($scope.screen2SearchParameter === 'ShoppingCartId') {
+                                               var orders = $filter('filter')($scope.orders, { ShoppingCartId: item });
+                                           }
+                                           else {
+                                               var orders = $filter('filter')($scope.orders, { VendorRef: item });
+                                           }
+                                           salesOrders = getSalesOrderNumbers(orders);
+                                           angular.forEach(salesOrders, function (value, key) {
 
-                                   if ($scope.screen2SearchParameter === 'ShoppingCartId' || $scope.screen2SearchParameter === 'VendorRef') {
-                                       if ($scope.screen2SearchParameter === 'ShoppingCartId') {
-                                           var orders = $filter('filter')($scope.orders, { ShoppingCartId: item });
+                                               if (currentSelection.indexOf(value) == -1) {
+                                                   selectedList += value + ',';
+
+                                                   currentSelection.push(value);
+                                               }
+                                           });
                                        }
                                        else {
-                                           var orders = $filter('filter')($scope.orders, { VendorRef: item });
-                                       }
-                                       salesOrders = getSalesOrderNumbers(orders);
-                                       angular.forEach(salesOrders, function (value, key) {
-
-                                           if (currentSelection.indexOf(value) == -1) {
-                                               selectedList += value + ',';
-
-                                               currentSelection.push(value);
+                                           if (currentSelection.indexOf(item) == -1) {
+                                               console.log(item);
+                                               selectedList += item + ',';
+                                               currentSelection.push(item);
                                            }
-                                       });
-                                   }
-                                   else {
-                                       if (currentSelection.indexOf(item) == -1) {
-                                           selectedList += item + ',';
-                                           currentSelection.push(item);
                                        }
                                    }
-
 
                                });
                            }
@@ -642,14 +647,26 @@ app.controller('homeController', [
 
                        }
 
-                       $scope.checkAll = function (selectedAll) {
-                           $('.approve-chk').prop('checked', selectedAll);
+                       $scope.checkAll = function (retailerId) {
+                        
+                           var selectedAll = $('#chkAll-' + retailerId).is(':checked');
+                           $('.approve-chk').prop('checked', false);
+
+                           $('#chkAll-' + retailerId).prop('checked', selectedAll);
+                           $('.approve-chk-' + retailerId).prop('checked', selectedAll);
                            $scope.hasItemSelectedForApporval = selectedAll;
                        }
 
-                       $scope.checkedIndividual = function (id) {
+                       $scope.checkedIndividual = function (retailerId, id) {
+
                            var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
-                           $scope.hasItemSelectedForApporval = isChecked;
+                           var totalIndividualChk = $('.approve-chk-' + retailerId).length;
+                           var individualChkedCount = $('.approve-chk-' + retailerId + ':checked').length;
+                          
+                           var retailerIds = $('.approve-chk-retailer').filter("[data-retailer='" + retailerId + "']");
+                           retailerIds.prop('checked', totalIndividualChk == individualChkedCount);
+                          
+                           $scope.hasItemSelectedForApporval = individualChkedCount > 0;
 
                            switch ($scope.screen2SearchParameter) {
                                case 'ShoppingCartId':
@@ -683,6 +700,7 @@ app.controller('homeController', [
                                    var salesOrderNumber = $('#' + id).attr('data-salesordernumber');
 
                                    var sameSalesOrders = $('.approve-chk').filter("[data-salesordernumber='" + salesOrderNumber + "']");
+                                   console.log(salesOrderNumber);
                                    if (isChecked) {
                                        sameSalesOrders.prop('checked', true);
                                    }

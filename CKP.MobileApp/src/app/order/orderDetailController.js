@@ -239,7 +239,7 @@ app.controller('orderDetailController', [
                                $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
                                $scope.hasBlockAddress = result.MobileOrderDetail.BlockAddressInfo;
-                               console.log($scope.hasBlockAddress);
+                              
                                if ($scope.order.orderType === '1') {
                                    $scope.order.hasApproval = true;
                                    $scope.hasHidePrice = false;

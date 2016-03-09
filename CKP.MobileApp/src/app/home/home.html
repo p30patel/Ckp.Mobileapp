@@ -111,9 +111,15 @@
                         <tr class="header" ng-show="$first">
 
                             <td style="width:15%;">
+                                <input type="checkbox" class="km-checkbox approve-chk approve-chk-retailer" id="chkAll-{{orderCount.RetailerId}}" value="{{orderCount.RetailerId}}"
+                                       data-retailer="{{orderCount.RetailerId}}"
+                                       ng-model="chk[orderCount.RetailerId]"
+                                       ng-change="checkAll({{orderCount.RetailerId}})" />
 
-                                <input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll" id="checkAll" ng-change="checkAll(selectedAll)" />
-                                <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll"></label>
+                                <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="chkAll-{{orderCount.RetailerId}}"></label>
+
+                                <!--<input type="checkbox" ng-model="selectedAll" class="km-checkbox checkAll" id="checkAll" ng-change="checkAll(selectedAll)" />
+                                <label class="km-checkbox-label" style="position:relative; bottom:0.9em;" for="checkAll"></label>-->
 
                             </td>
 
@@ -133,12 +139,12 @@
 
                         <tr class="pipe" ng-repeat="order in value | limitTo: 1">
                             <td style="width:15%;">
-                                <input type="checkbox" class="km-checkbox approve-chk" id="{{$parent.$index}}" value="{{$.parent.$index}}"
+                                <input type="checkbox" class="km-checkbox approve-chk approve-chk-{{orderCount.RetailerId}}" id="{{$parent.$index}}" value="{{$.parent.$index}}"
                                        data-salesordernumber="{{order.SalesOrderNumber}}"
                                        data-ShoppingCartId="{{order.ShoppingCartId}}"
                                        data-VendorRef="{{order.VendorRef}}"
                                        ng-model="chk[$parent.$index]"
-                                       ng-change="checkedIndividual({{$parent.$index}})" />
+                                       ng-change="checkedIndividual({{orderCount.RetailerId}}, {{$parent.$index}})" />
 
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="{{$parent.$index}}"></label>
                             </td>

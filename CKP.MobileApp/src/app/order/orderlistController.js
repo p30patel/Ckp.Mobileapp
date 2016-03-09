@@ -126,7 +126,7 @@ app.controller('orderlistController', [
                                $scope.order.orderType = orderType;
                                $scope.groupBy = parameterService.getScreen2GroupByName(parameterId, orderType);
                                $scope.searchBy = parameterService.getScreen2SearchByName(parameterId, orderType);
-                                             
+
                                getOrderList();
                            }
                        }
@@ -152,21 +152,22 @@ app.controller('orderlistController', [
                            orderDataService.getOrderList(searchData).then(function (result) {
                                $scope.order.orders = result;
 
-                               $scope.hasBlockAddress = result[0].BlockAddressInfo;
+                               $scope.hasBlockAddress = result.length > 0 ? result[0].BlockAddressInfo : false;
+
                                if ($scope.order.orderType === '1') {
                                    $scope.order.hasApproval = true;
                                    $scope.hasHidePrice = false;
                                }
                                else {
-                                   $scope.hasHidePrice = result[0].HideCheckOutPrice;
+                                   $scope.hasHidePrice = result.length > 0 ? result[0].HideCheckOutPrice : false;
                                }
 
                            }).catch(function (error) {
 
                                $scope.order.orders = {};
                            }).finally(function () {
-                               kendo.mobile.application.hideLoading();                              
-                              
+                               kendo.mobile.application.hideLoading();
+
                            });
                        }; // end order list
 
@@ -281,8 +282,8 @@ app.controller('orderlistController', [
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
                            }
-                         
-                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + 2 + "&parameterValue=" + poctrlno +  "&retailerId=" + $scope.retailerId + "&backUrl=" + backUrl);
+
+                           kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + 2 + "&parameterValue=" + poctrlno + "&retailerId=" + $scope.retailerId + "&backUrl=" + backUrl);
                        }
 
                        $scope.backButton = function () {
