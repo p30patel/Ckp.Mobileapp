@@ -556,20 +556,20 @@ app.controller('homeController', [
                            }
                        }
 
+
                        $scope.search = function () {
-
-                           search();
-
+                           if ($scope.searchValue.length > 0 || $scope.selectedPara === '1') {
+                               search();
+                           }
                        }
                        $scope.key = function ($event) {
 
-                           if ($event.keyCode === 13) {
+                           if ($event.keyCode === 13 && ($scope.searchValue.length > 0 || $scope.selectedPara === '1')) {
                                $event.target.blur();
                                search();
                            }
                        }
-
-
+                 
                        //view more orders
                        $scope.showMoreOrderModel = function (orders, columnName) {
                            $scope.viewMoreColumn = columnName;
