@@ -92,7 +92,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
         var networkState = navigator.connection.type;
         var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
-      
+       
         var startAnalyticsAndDeviceInfo = function () {
             var hasSimlulatorMode = false;
             if (window.navigator.simulator === true) {
@@ -106,7 +106,10 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 if (isOffline) {
                     onOffline();
                 }
-                window.plugins.EqatecAnalytics.Monitor.Start();
+                
+                if (authServiceBase === 'https://checknet.checkpt.com/') {
+                    window.plugins.EqatecAnalytics.Monitor.Start();
+                }
                 getDeviceInfo();
                 kendo.mobile.application.navigate("src/app/login/login.html");
                 navigator.splashscreen.hide(); //Hides the splash screen for your app.
