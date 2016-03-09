@@ -13,16 +13,6 @@ var baasApiKey = 'uTM7cVvTTvlfDZsu'; // telerik push api key
 //var clientId = 'Ckp.Mobile';
 //var baasApiKey = '3exw5fdm4p9qp0sj'; // telerik push api key
 
-//angular.element(document).ready(function () {
-//    if (window.cordova) {
-//        document.addEventListener('deviceready', function () {
-//            angular.bootstrap(document.body, ['app']);
-//        }, false);
-//    } else {
-//        angular.bootstrap(document.body, ['app']);
-//    }
-//});
-
 
 var app = angular.module('app', ['kendo.directives', 'LocalStorageModule', 'angular.filter', 'ngTouch']);
 
@@ -121,14 +111,14 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 kendo.mobile.application.navigate("src/app/login/login.html");
                 navigator.splashscreen.hide(); //Hides the splash screen for your app.
                 cordova.getAppVersion(function (version) {
-                    $(".km-view-subtitle").text('Version ' + version);
+                    $(".version").text('Version ' + version);
                 });
                 
             }
             else {
                 kendo.mobile.application.navigate("src/app/login/login.html");
                 navigator.splashscreen.hide(); //Hides the splash screen for your app.
-                $(".km-view-subtitle").text('Version 0.0');
+                $(".version").text('Version 0.0');
             }
         }
         startAnalyticsAndDeviceInfo();

@@ -282,7 +282,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.intShow = function (e) {
-
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            navigator.splashscreen.hide(); //Hides the splash screen for your app.
+        }
         translatePage();
     };
 

@@ -27,7 +27,7 @@
     <!-- <script src="src/vendor/analytics.js"></script>-->
     <script src="src/vendor/angular-local-storage.min.js"></script>
     <script src="src/vendor/angular-filter.min.js"></script>
-    
+
     <script src="src/vendor/xml2json.min.js"></script>
     <!-- services and directives scripts -->
     <script src="scripts/app.js"></script>
@@ -90,14 +90,14 @@
     <!-- application drawer and contents -->
 
 
-    <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" class="main-nav" data-use-native-scrolling="true"  k-on-show="afterShow(kendoEvent)">
+    <kendo-mobile-drawer id="right-drawer" ng-controller="menuController" class="main-nav" data-use-native-scrolling="true" k-on-show="afterShow(kendoEvent)">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-accent">
 
                 <kendo-view-title>
                     <img src="styles/images/Checknet-title.png" style="width: 5em; height: .9em;" />
                 </kendo-view-title>
-               
+
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="authentication.isAuth" ng-click="home()"><span class="km-icon km-home"></span></kendo-mobile-button>
 
                 <kendo-mobile-button data-tap="myTouch.tap" data-align="left" class="nav-button km-widget km-button" ng-show="!authentication.isAuth" ng-click="login()"><span class="km-icon km-i-signin"></span></kendo-mobile-button>
@@ -152,10 +152,10 @@
                     </a>
                 </li>
             </ul>
-       
+
             <ul kendo-mobile-list-view class="ck-grey-wrap ck-no-border" style="padding:1em 0;" ng-show="authentication.isAuth && hasAddress && organizationDetail.Address.Street1 && organizationDetail.Address.Name">
                 <li>
-                   
+
                     <div style="border-left: .3rem #D52B1E solid; padding-left:1rem;">
                         <!-- <img ng-src="{{organizationDetail.Logo}}" style="width: 10rem; height: 3rem; margin-bottom:1rem; display: block;" />-->
                         <h5 ng-show="organizationDetail.Address.Name">{{organizationDetail.Address.Name}}</h5>
@@ -171,9 +171,17 @@
             </ul>
 
         </kendo-mobile-content>
+
+        <kendo-mobile-footer>
+            <ul kendo-mobile-list-view style="background-color:#888e90;">
+                <li>
+                    <span class="version"></span>
+                </li>
+            </ul>
+        </kendo-mobile-footer>
     </kendo-mobile-drawer>
     <!-- end application drawer and contents -->
-    <alert></alert>
+
 </body>
 
 </html>
