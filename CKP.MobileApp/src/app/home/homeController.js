@@ -404,9 +404,6 @@ app.controller('homeController', [
                                        value["Id"] = -1 * nextNumber++;
                                    });
                                    $scope.orders = result;
-                                  
-                                   $('.approve-chk').prop('checked', false);
-                                   $('.approve-chk-retailer').prop('checked', false);
                                    $scope.selection = [];
 
                                }
@@ -436,6 +433,9 @@ app.controller('homeController', [
                            var listviews = $("ul.order-header.km-listview");
                            listviews.hide();
                            $(".ck-count-btn").removeClass('km-state-active');
+                           $('.approve-chk-retailer').prop('checked', false);
+                           $('.approve-chk').prop('checked', false);
+                       
 
 
                        }
@@ -471,11 +471,13 @@ app.controller('homeController', [
 
                                var hasNext = false;
                                $scope.hasNextDisabled = false;
-                               if (selectedOrderCount > 0) {
-
+                               $scope.chkAll = {};
+                               $('#chkAll-' + $scope.selectedRetailer).prop('checked', false);
+                               if (selectedOrderCount > 0) {                              
                                    $scope.orders = {};
                                    $scope.currentPage = 1;
                                    getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
+                                
                                }
                                else {
 
@@ -655,7 +657,7 @@ app.controller('homeController', [
                        }
 
                        $scope.checkAll = function (retailerId) {
-                           console.log(retailerId);
+                         
                            $('.approve-chk').prop('checked', false);
                            var selectedAll = $('#chkAll-' + retailerId).is(':checked');
 
