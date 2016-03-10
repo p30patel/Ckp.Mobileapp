@@ -18,46 +18,51 @@
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
 
 
-                <table class="ck-table line-height-detail">
+                <table class="ck-table">
                   
                     <tr>
-                        <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font">{{form.orderDate.resoruceValue}}</h3>
+                        <td class="v-align" style="width :35%;">
+                            <h3 class="km-bold-font order-detail-h3">{{form.orderDate.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</span>
                             <span ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</span>
                         </td>
-                        <td class="v-align c-align" rowspan="5" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
-                            <div class="status open" style="">{{order.detail.MobileOrderDetail.StatusDisplay}}</div>
-                            <!--     <input kendo-mobile-switch k-checked="checked" />
-                         <h3 class="notify">{{form.notifyMe.resoruceValue}}</h3>-->
-                            <h3></h3>
-                            <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important;" data-tap="myTouch.tap"
-                                 ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0"
-                                 ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)" />
+                        <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
+                            <div class="status open"><span style="font-size:x-small !important;">{{form.orderStatus.resoruceValue}}:</span>
+                            {{order.detail.MobileOrderDetail.StatusDisplay}}</div>
+                           
                         </td>
                     </tr>
                     <tr>
                         <td class="v-align"  style="width :35%">
-                            <h3 class="km-bold-font">{{form.shoppingCart.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.shoppingCart.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</span>
                         </td>
+
+
                     </tr>
 
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font">{{form.orderNumber.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.orderNumber.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.OrderNumber}}</span>
                         </td>
+
+                        <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important;">
+                         
+                                <!--<input kendo-mobile-switch k-checked="checked" />                               
+                         
+                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resoruceValue}}</p>-->
+                        </td>
                     </tr>
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font">{{form.salesOrder.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.salesOrder.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</span>
@@ -65,22 +70,33 @@
                     </tr>
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font">{{form.vendorRef.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.vendorRef.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.VendorRef}}</span>
                         </td>
+                        <td class="v-align c-align" rowspan="3" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
+                         
+                            <div style="text-align:center;">
+                                <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"
+                                     ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0"
+                                     ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)" />
+                                <p style="font-size:x-small !important; margin-top: -5px !important;">{{form.confirmation.resoruceValue}}</p>
+                            </div>
+
+
+                        </td>
                     </tr>
 
-                    <!--<tr>
+                    <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font">{{form.estimated.resoruceValue}}</h3>
-                            <h3 class="km-bold-font">{{form.shipDate.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.estimated.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:</span>
                         </td>
-                    </tr>-->
+                    </tr>
                 </table>
             </li>
            

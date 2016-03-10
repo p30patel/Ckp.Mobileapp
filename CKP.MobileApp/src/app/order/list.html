@@ -1,58 +1,56 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow" >
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" k-on-show="intShow(kendoEvent)" ng-controller="orderlistController" k-after-show="afterShow">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap"  style="margin-left:5px;" >
+            <kendo-mobile-back-button k-align="'left'" data-tap="myTouch.tap" style="margin-left:5px;">
                 <i class="ck-icon ck-barrow"></i>
             </kendo-mobile-back-button>
-        </kendo-view-title>
-                {{form.approval.resoruceValue}}
-                
-        <kendo-view-title>
+
+            {{form.approval.resoruceValue}}
+
+            <kendo-view-title>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
         <ul kendo-mobile-list-view class="ck-no-border">
             <li class="ck-grey-wrap" style="padding :5px 0 5px 0;">
-                <div ng-repeat="(key, value) in order.orders | groupBy: groupBy"  data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
+                <div ng-repeat="(key, value) in order.orders | groupBy: groupBy" data-index="{{$index}}" class="ck-home" style="border-bottom: .3em solid white;">
                     <table class="list-view-table" style="border-bottom: .3em solid #D52B1E;">
-                      
-                        <tr class="ck-listview-tr-so">
-                            <td style="width:10% !important; padding-left:15px;" rowspan="4" class="km-bold-font">
+
+                        <tr class="">
+                            <td style="width:10% !important; padding-left:15px; text-align:center">
                                 <span class="km-icon km-plus ck-icon-toggge-{{$index}}" style="color : gray !important; height:10px;" ng-click="headerClick({{$index}})"></span>
                             </td>
-                            <td style="width:auto !important; font-size: .8rem !important;" ng-click="headerClick({{$index}})" class="km-bold-font"> 
-                            <div ng-show="groupBy == 'SalesOrderNumber'"> {{form.salesOrder.resoruceValue}} :{{key}}</div>
-                            <div ng-show="groupBy == 'ShoppingCartId'"> {{form.shoppingCart.resoruceValue}} :{{key}}</div>
-                            <div ng-show="groupBy == 'VendorRef'"> {{form.vendorRef.resoruceValue}} :{{key}}</div>
 
-                        </td>
-                            <td style="width:10%;"></td>
+                            <td style="width:auto !important; " ng-click="headerClick({{$index}})">
+                                <div ng-show="groupBy == 'SalesOrderNumber'" style="font-size: .8rem !important; font-weight: bold;"> {{form.salesOrder.resoruceValue}} :{{key}}</div>
+                                <div ng-show="groupBy == 'ShoppingCartId'" style="font-size: .8rem !important; font-weight: bold;"> {{form.shoppingCart.resoruceValue}} :{{key}}</div>
+                                <div ng-show="groupBy == 'VendorRef'" style="font-size: .8rem !important; font-weight: bold;"> {{form.vendorRef.resoruceValue}} :{{key}}</div>
+                                
+                               
+                                    <h4 class="order-list-h4">
+                                        {{value[0].OrganizationName}}
+                                    </h4>
+                               
+                                <h4 class="order-list-h4">{{form.orderBy.resoruceValue}}: {{value[0].OrderedBy}}</h4>
+                                <p ng-show="!orderList.IsStagedOrder" class="ck-font-size-small">
+                                    <h4 class="order-list-h4">
+                                        {{form.orderDate.resoruceValue}} : {{value[0].OrderDate | date}}
+                                        <span ng-show="orderList.IsStagedOrder">{{form.dateInSystem.resoruceValue}} : {{value[0].DateInSystem | date}}</span>
+                                    </h4>
+                                </p>
+                            </td>
+
                             <td style="width:20%; text-align: center;" rowspan="4" ng-show="value[0].ShoppingCartId && value[0].ShoppingCartId > 0">
                                 <h4>
-                                <img src="styles/images/page.png" class="page"  style="height:30px !important; width:20px !important;" data-tap="myTouch.tap" 
-                                     ng-click="showConfirmationModel({{value[0].ShoppingCartId}})"/>                                
-                                      </h4>
+                                    <img src="styles/images/page.png" class="page" style="height:30px !important; width:20px !important;" data-tap="myTouch.tap"
+                                         ng-click="showConfirmationModel({{value[0].ShoppingCartId}})" />
+                                    <p style="font-size:x-small !important; margin-top: 0px !important;">{{form.confirmation.resoruceValue}}</p>
+                                </h4>
                             </td>
                         </tr>
-                        <tr class="ck-listview-tr" ng-click="headerClick({{$index}})">
-                            <td colspan="2" class="ck-font-size-small" >
-                                <span>{{value[0].OrganizationName}}
-                            </span>
-                            </td>
-                        </tr>
-                        <tr class="ck-listview-tr" ng-click="headerClick({{$index}})">
-                            <td colspan="2" class="ck-font-size-small">
-                                <span>{{form.orderBy.resoruceValue}}: {{value[0].OrderedBy}}
-                            </span>
-                            </td>
-                        </tr>
-                        <tr class="ck-listview-tr" ng-click="headerClick({{$index}})">
-                            <td  class="ck-font-size-small">
-                                <span ng-show="!orderList.IsStagedOrder">{{form.orderDate.resoruceValue}} : {{value[0].OrderDate | date}}
-                                <span ng-show="orderList.IsStagedOrder">{{form.dateInSystem.resoruceValue}} : {{value[0].DateInSystem | date}}
-                            </span>
-                            </td >
-                        </tr>
+
+
+
                     </table>
                     <table class="ck-table list-view-detail-{{$index}}" style="background-color:white !important; display:none">
                         <tr class="header">
@@ -64,65 +62,66 @@
                         <tr class="pipe" ng-repeat="order in value">
                             <td style="width:5%"></td>
                             <td style="width:40%">
-                            {{order.OrderNumber}}
-                                </td>
-                                <td style="width:25%" ng-show="!hasHidePrice">
-                                  {{order.Price}}
-                                </td>
-                               <td valign="center" style="width:10%" ng-click="orderDetail(order.POCtrlNo)">
-                                    <a ng-click="orderDetail(order.POCtrlNo)" data-tap="myTouch.tap">
+                                {{order.OrderNumber}}
+                            </td>
+                            <td style="width:25%" ng-show="!hasHidePrice">
+                                {{order.Price}}
+                            </td>
+                            <td valign="center" style="width:10%" ng-click="orderDetail(order.POCtrlNo)">
+                                <a ng-click="orderDetail(order.POCtrlNo)" data-tap="myTouch.tap">
                                     <i class="km-icon km-details red"></i>
-                                </a>   
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </li>
-                <table class="ck-table pad ck-grey-wrap" ng-show="order.hasApproval && order.orders.length > 0">
-                    <tr>
-                        <td colspan="2">
-                            <fieldset>
-                                <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
-                            </fieldset>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <i></i>
-                            <kendo-mobile-button ng-disabled="order.hasClikedApporval" class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap" ng-click="approved(false)">Decline</kendo-mobile-button>
-                            <i></i>
-                            <kendo-mobile-button ng-disabled="order.hasClikedApporval" class="km-primary km-large ck-btn-left" data-tap="myTouch.tap" ng-click="approved(true)">Approve</kendo-mobile-button>
-                        </td>
-                       
-                    </tr>
-                </table>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <table class="ck-table pad ck-grey-wrap" ng-show="order.hasApproval && order.orders.length > 0">
+                <tr>
+                    <td colspan="2">
+                        <fieldset>
+                            <textarea placeholder="Approve / Declined Comments" ng-model="orderApprovalComment" style="height: 100px;"></textarea>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <i></i>
+                        <kendo-mobile-button ng-disabled="order.hasClikedApporval" class="km-secondary km-large ck-btn-right" data-tap="myTouch.tap" ng-click="approved(false)">Decline</kendo-mobile-button>
+                        <i></i>
+                        <kendo-mobile-button ng-disabled="order.hasClikedApporval" class="km-primary km-large ck-btn-left" data-tap="myTouch.tap" ng-click="approved(true)">Approve</kendo-mobile-button>
+                    </td>
 
-           
-                <li ng-show="order.orders.length == 0">   {{form.noResults.resoruceValue}}</li>
-                <li ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></li>
-            </ul>
-        </kendo-mobile-content>
+                </tr>
+            </table>
 
-         <!--  confirmation modal  -->
-    
-      <kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true"  k-transition="'slide'">
+
+            <li ng-show="order.orders.length == 0">   {{form.noResults.resoruceValue}}</li>
+            <li ng-show="apporvalMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(apporvalMessage)"></li>
+        </ul>
+    </kendo-mobile-content>
+
+    <!--  confirmation modal  -->
+
+    <kendo-mobile-modal-view id="modalview-confirmation" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true" k-transition="'slide'">
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
                 <kendo-view-title> {{form.confirmation.resoruceValue}}</kendo-view-title>
                 <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
-                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+                    <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
+                </kendo-mobile-button>
 
             </div>
 
         </div>
-           <div data-role="content" data-zoom="true" style='background-color:white !important; padding: 5px;'>
-        
+        <div data-role="content" data-zoom="true" style='background-color:white !important; padding: 5px;'>
 
-          <div  ng-bind-html="renderHtml(confirmationData)"></div>
-        
-       </div>
-      
+
+            <div ng-bind-html="renderHtml(confirmationData)"></div>
+
+        </div>
+
     </kendo-mobile-modal-view>
- </kendo-mobile-view>
-   
+</kendo-mobile-view>
+
 

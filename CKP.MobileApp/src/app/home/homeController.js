@@ -297,7 +297,8 @@ app.controller('homeController', [
                            return hasOneOrderType;
                        }
                        var getOrderCounts = function () {
-                         
+                           $('.approve-chk').prop('checked', false);
+                           $('.approve-chk-retailer').prop('checked', false);
                            if ($rootScope.hasBackButton) {
 
                                $scope.hasSearch = false;
@@ -400,7 +401,9 @@ app.controller('homeController', [
                                        value["Id"] = -1 * nextNumber++;
                                    });
                                    $scope.orders = result;
-                                 
+                                  
+                                   $('.approve-chk').prop('checked', false);
+                                   $('.approve-chk-retailer').prop('checked', false);
                                    $scope.selection = [];
 
                                }
@@ -649,9 +652,9 @@ app.controller('homeController', [
                        }
 
                        $scope.checkAll = function (retailerId) {
-                        
-                           var selectedAll = $('#chkAll-' + retailerId).is(':checked');
+                           console.log(retailerId);
                            $('.approve-chk').prop('checked', false);
+                           var selectedAll = $('#chkAll-' + retailerId).is(':checked');
 
                            $('#chkAll-' + retailerId).prop('checked', selectedAll);
                            $('.approve-chk-' + retailerId).prop('checked', selectedAll);

@@ -1,3 +1,19 @@
+.order-detail-h3 {
+    margin-top: 0 !important;
+}
+.order-list-h4 {
+    margin-top: 0 !important;
+     margin-bottom: 0 !important;
+     font-size: .8rem !important;
+}
+.km-nova span.km-switch {
+  color: #7ED321;
+  margin-top: -1.3rem !important;
+}
+.ck-switchpad-right  {
+  color: #7ED321;
+  margin-top: 10px !important;
+}
 .line-height-detail td {
     line-height: 0.6;
 

@@ -145,7 +145,7 @@ app.controller('orderDetailController', [
 
 
                        $scope.form.confirmation = {};
-                       $scope.form.confirmation.resoruceName = "Confirmation";
+                       $scope.form.confirmation.resoruceName = "Order Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
 
                        $scope.form.estimated = {};
@@ -160,6 +160,10 @@ app.controller('orderDetailController', [
                        $scope.form.apporvalCommnet = {};
                        $scope.form.apporvalCommnet.resoruceName = "Apporval Commnet";
                        $scope.form.apporvalCommnet.resoruceValue = translateService.getResourceValue($scope.form.apporvalCommnet.resoruceName);
+
+                       $scope.form.orderStatus = {};
+                       $scope.form.orderStatus.resoruceName = "Order Status";
+                       $scope.form.orderStatus.resoruceValue = translateService.getResourceValue($scope.form.orderStatus.resoruceName);
 
                    
                        $scope.order = {};
