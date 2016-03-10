@@ -297,7 +297,7 @@ app.controller('homeController', [
                            return hasOneOrderType;
                        }
                        var getOrderCounts = function () {
-
+                         
                            if ($rootScope.hasBackButton) {
 
                                $scope.hasSearch = false;
@@ -400,7 +400,7 @@ app.controller('homeController', [
                                        value["Id"] = -1 * nextNumber++;
                                    });
                                    $scope.orders = result;
-                                   $('.approve-chk-retailer').prop('checked', false);
+                                 
                                    $scope.selection = [];
 
                                }
@@ -606,6 +606,7 @@ app.controller('homeController', [
                            var checkedItems = $('.approve-chk:checked');
                        
                            if (checkedItems.length > 0) {
+
                                angular.forEach(checkedItems, function (value, key) {
 
                                    var item = checkedItems.eq(key).attr('data-' + $scope.screen2SearchParameter);
@@ -658,14 +659,13 @@ app.controller('homeController', [
                        }
 
                        $scope.checkedIndividual = function (retailerId, id) {
-
+                           var retailerId = $scope.selectedRetailer;
+                          
                            var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
                            var totalIndividualChk = $('.approve-chk-' + retailerId).length;
                            var individualChkedCount = $('.approve-chk-' + retailerId + ':checked').length;
-                          
-                           var retailerIds = $('.approve-chk-retailer').filter("[data-retailer='" + retailerId + "']");
-                           retailerIds.prop('checked', totalIndividualChk == individualChkedCount);
-                          
+                        
+                           $('#chkAll-' + retailerId).prop('checked', totalIndividualChk == individualChkedCount);
                            $scope.hasItemSelectedForApporval = individualChkedCount > 0;
 
                            switch ($scope.screen2SearchParameter) {

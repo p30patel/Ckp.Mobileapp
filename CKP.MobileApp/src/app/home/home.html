@@ -111,10 +111,12 @@
                         <tr class="header" ng-show="$first">
 
                             <td style="width:15%;">
-                                <input type="checkbox" class="km-checkbox approve-chk approve-chk-retailer" id="chkAll-{{orderCount.RetailerId}}" value="{{orderCount.RetailerId}}"
+                                <input type="checkbox" class="km-checkbox approve-chk-retailer" id="chkAll-{{orderCount.RetailerId}}" 
                                        data-retailer="{{orderCount.RetailerId}}"
                                        ng-model="chk[orderCount.RetailerId]"
-                                       ng-change="checkAll({{orderCount.RetailerId}})" />
+                                       ng-click="checkAll({{orderCount.RetailerId}})" 
+                                      
+                                       />
 
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="chkAll-{{orderCount.RetailerId}}"></label>
 
@@ -139,12 +141,13 @@
 
                         <tr class="pipe" ng-repeat="order in value | limitTo: 1">
                             <td style="width:15%;">
-                                <input type="checkbox" class="km-checkbox approve-chk approve-chk-{{orderCount.RetailerId}}" id="{{$parent.$index}}" value="{{$.parent.$index}}"
+                                <input type="checkbox" class="km-checkbox approve-chk approve-chk-{{orderCount.RetailerId}}" id="{{$parent.$index}}"
                                        data-salesordernumber="{{order.SalesOrderNumber}}"
                                        data-ShoppingCartId="{{order.ShoppingCartId}}"
+                                        data-retailer="{{orderCount.RetailerId}}"
                                        data-VendorRef="{{order.VendorRef}}"
                                        ng-model="chk[$parent.$index]"
-                                       ng-change="checkedIndividual({{orderCount.RetailerId}}, {{$parent.$index}})" />
+                                       ng-click="checkedIndividual({{orderCount.RetailerId}}, {{$parent.$index}})" />
 
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="{{$parent.$index}}"></label>
                             </td>
