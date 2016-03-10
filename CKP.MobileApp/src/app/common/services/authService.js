@@ -114,8 +114,9 @@ app.factory('authService', [
                             DeviceVersion: version,
                             IsActive: active
                         }
-                        
-                        if (organizationDetail)
+                       
+                      
+                        if (organizationDetail && !organizationDetail.HasNewPassword)
                         {
                            
                             if (refreshData && loginData && deviceData && typeof (window.navigator.simulator) === 'undefined')
@@ -126,6 +127,7 @@ app.factory('authService', [
                             hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
                            
                             hasForceRefresh = refreshData.PersistTime && new Date().getTime() > Number(refreshData.LastUpdated) + refreshData.PersistTime ? true : hasForceRefresh;
+                           
                             }
                            
                         }
@@ -155,7 +157,7 @@ app.factory('authService', [
                              
 
                                 localStorageService.set('forceRefreshDetail', refreshData);
-                                
+                                $rootScope.hasBackButton = false;
                                 deferred.resolve(result);
                             }).error(function (err, status) {
                                 deferred.reject(err);
