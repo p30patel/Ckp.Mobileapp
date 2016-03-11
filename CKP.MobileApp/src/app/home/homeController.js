@@ -158,6 +158,12 @@ app.controller('homeController', [
                            $scope.form.loading.resoruceName = "Loading";
                            $scope.form.loading.resoruceValue = translateService.getResourceValue($scope.form.loading.resoruceName);
 
+
+                           $scope.form.selectAtleastOneItem = {};
+                           $scope.form.selectAtleastOneItem.resoruceName = "Please select atleast one item";
+                           $scope.form.selectAtleastOneItem.resoruceValue = translateService.getResourceValue($scope.form.selectAtleastOneItem.resoruceName);
+
+
                        }
 
                        setResources();
@@ -224,6 +230,7 @@ app.controller('homeController', [
                         
                            $('.approve-chk').prop('checked', false);
                            $('.approve-chk-retailer').prop('checked', false);
+                           $scope.hasItemSelectedForApporval = false;
                           
                        }
 
@@ -727,16 +734,24 @@ app.controller('homeController', [
                            $rootScope.hasBackButtonList = false;
                            var backUrl = 'home/home.html';
                            getSelectedList();
-
+        
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
 
                            var selectedList = $scope.selection;
-
-                           if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
+                           if (orderType == 1 && parameterValue.length == 0) {
+                             
+                               $scope.message = $scope.form.selectAtleastOneItem.resoruceValue;
+                               console.log($scope.message);
+                               $timeout(function () {
+                                   $scope.message = "";
+                               }, 7000);
                            }
-
-                           kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
+                           else {
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
+                               }
+                               kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
+                           }
                        }
 
 

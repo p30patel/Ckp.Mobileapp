@@ -221,7 +221,10 @@
                                 <kendo-mobile-button class="km-primary km-justified" k-rel="'modalview'"
                                                      ng-disabled="!hasItemSelectedForApporval"
                                                      k-on-click="showOrderList(1, searchParameterId, '', orderCount.RetailerId)">{{form.bulkApprove.resoruceValue}}</kendo-mobile-button>
+                                <i></i>
+                                <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                             </td>
+                            
                         </tr>
 
                         <tr ng-show="$last">
