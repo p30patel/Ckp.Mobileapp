@@ -475,7 +475,7 @@ app.controller('homeController', [
                                $scope.chk = {};
                                $('#chkAll-' + $scope.selectedRetailer).prop('checked', false);
                                $('.approve-chk-' + $scope.selectedRetailer).prop('checked', false);
-
+                               $scope.hasItemSelectedForApporval = false;
                                if (selectedOrderCount > 0) {                              
                                    $scope.orders = {};
                                    $scope.currentPage = 1;
