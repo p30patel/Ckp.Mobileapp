@@ -472,7 +472,10 @@ app.controller('homeController', [
                                var hasNext = false;
                                $scope.hasNextDisabled = false;
                                $scope.chkAll = {};
+                               $scope.chk = {};
                                $('#chkAll-' + $scope.selectedRetailer).prop('checked', false);
+                               $('.approve-chk-' + $scope.selectedRetailer).prop('checked', false);
+
                                if (selectedOrderCount > 0) {                              
                                    $scope.orders = {};
                                    $scope.currentPage = 1;
