@@ -75,11 +75,10 @@
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.VendorRef}}</span>
                         </td>
-                        <td class="v-align c-align" rowspan="3" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
-                         
+                        <td class="v-align c-align" rowspan="3" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;"
+                            ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0">
                             <div style="text-align:center;">
-                                <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"
-                                     ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0"
+                                <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"                                     
                                      ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)" />
                                 <p style="font-size:x-small !important; margin-top: -5px !important;">{{form.confirmation.resoruceValue}}</p>
                             </div>
