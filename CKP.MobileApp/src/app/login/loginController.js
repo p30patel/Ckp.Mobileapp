@@ -182,7 +182,17 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.forgotPasswordModalOpen = function () {
         $scope.loginData.email = "";
         $scope.forgotPassworMessage = "";
-        $("#modalview-password").kendoMobileModalView("open");
+      
+        if (typeof $scope.loginData.userName !== 'undefined') {
+
+            $("#modalview-password").kendoMobileModalView("open");
+        }
+        else {
+            $scope.forgotPassworMessage = $scope.form.passwordHintUserInputError.resoruceValue + ".";
+            $timeout(function () {
+                $scope.forgotPassworMessage = "";
+            }, 7000);
+        }
     };
     $scope.closeModalViewForgotPassword = function () {
         $("#modalview-password").kendoMobileModalView("close");
