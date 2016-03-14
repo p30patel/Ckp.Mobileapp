@@ -167,7 +167,9 @@
 
                             <h4 class="km-bold-font">{{orderLine.ItemDescription}}</h4>
                             <h5>{{form.itemCode.resoruceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
-                            <h5 ng-show="!hasHidePrice">{{orderLine.UnitPrice}}</h5>
+                            <h5 ng-show="!hasHidePrice">
+                                {{orderLine.GrossCurrency.Code}} {{orderLine.GrossPrice | number : 2}} {{orderLine.PriceUom.UomDisplay}}
+                           </h5>
                             <h5>{{form.prodcutionLocation.resoruceValue}}:</h5>
                             <h5><b>{{orderLine.PrintshopName}}</b></h5>
                         </td>
