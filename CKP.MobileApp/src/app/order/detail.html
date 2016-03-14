@@ -22,7 +22,8 @@
                   
                     <tr>
                         <td class="v-align" style="width :35%;">
-                            <h3 class="km-bold-font order-detail-h3">{{form.orderDate.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{form.dateInSystem.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">{{form.orderDate.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</span>
@@ -93,7 +94,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:</span>
+                            <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
                         </td>
                     </tr>
                 </table>
@@ -188,13 +189,13 @@
                         <h4>{{form.releasedBy.resoruceValue}}</h4>
                         <h4>{{form.email.resoruceValue}}</h4>
                         <h4>{{form.phone.resoruceValue}}</h4>
-                        <!--<h4>{{form.apporvalCommnet.resoruceValue}}</h4>-->
+                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">{{form.apporvalCommnet.resoruceValue}}</h4>
                     </td>
                     <td style="width:60%">
                         <h4>:{{order.detail.MobileOrderDetail.OrderedBy}}</h4>
                         <h4>:{{order.detail.MobileOrderDetail.EMailAddress}}</h4>
                         <h4>:{{order.detail.MobileOrderDetail.PhoneNumber}}</h4>
-                        <!--<h4>:</h4>-->
+                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">:{{order.detail.MobileOrderDetail.Comments}}</h4>
                     </td>
                 </tr>
             </table>

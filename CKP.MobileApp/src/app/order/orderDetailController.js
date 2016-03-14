@@ -57,6 +57,9 @@ app.controller('orderDetailController', [
                        $scope.form.orderDate.resoruceName = "Order Date";
                        $scope.form.orderDate.resoruceValue = translateService.getResourceValue($scope.form.orderDate.resoruceName);
 
+                       $scope.form.dateInSystem = {};
+                       $scope.form.dateInSystem.resoruceName = "Receive Date";
+                       $scope.form.dateInSystem.resoruceValue = translateService.getResourceValue($scope.form.dateInSystem.resoruceName);
 
                        $scope.form.salesOrder = {};
                        $scope.form.salesOrder.resoruceName = "Sales Order";
