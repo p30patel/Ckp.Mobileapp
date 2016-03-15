@@ -33,16 +33,16 @@
             <li ng-show="orderCounts.length == 0 && !hasSearch">
                 <p ng-bind-html="renderHtml(form.noOrderCounts.resoruceValue)"> </p>
             </li>
-       
+
             <li ng-show="hasSearch && hasNoSearchResults">
                 <p> {{form.noResults.resoruceValue}}</p>
             </li>
-         
+
             <div ng-repeat="orderCount in orderCounts" ng-show="orderCounts.length > 0">
-           
-                <div class="ck-home" style="margin-top:-.1em; background-color:gray;" 
+
+                <div class="ck-home" style="margin-top:-.1em; background-color:gray;"
                      ng-if="hasSearch" ng-show="(orderCount.ApprovalCount > 0 || orderCount.NewOrderCount > 0 || orderCount.ReleasedOrderCount > 0)">
-                 
+
                     <h3>
                         <kendo-mobile-button class="ck-title touch-retailer-header" k-on-click="retailerHeader()">
                             <span class="ck-home-button-icon km-icon" id="header-{{orderCount.RetailerId}}"></span>
@@ -111,12 +111,10 @@
                         <tr class="header" ng-show="$first">
 
                             <td style="width:15%;">
-                                <input type="checkbox" class="km-checkbox approve-chk-retailer" id="chkAll-{{orderCount.RetailerId}}" 
+                                <input type="checkbox" class="km-checkbox approve-chk-retailer" id="chkAll-{{orderCount.RetailerId}}"
                                        data-retailer="{{orderCount.RetailerId}}"
                                        ng-model="chkAll[orderCount.RetailerId]"
-                                       ng-click="checkAll({{orderCount.RetailerId}})" 
-                                      
-                                       />
+                                       ng-click="checkAll({{orderCount.RetailerId}})" />
 
                                 <label class="km-checkbox-label" style="position:relative; bottom:1em; padding-right:5px;" for="chkAll-{{orderCount.RetailerId}}"></label>
 
@@ -144,7 +142,7 @@
                                 <input type="checkbox" class="km-checkbox approve-chk approve-chk-{{orderCount.RetailerId}}" id="{{$parent.$index}}"
                                        data-salesordernumber="{{order.SalesOrderNumber}}"
                                        data-ShoppingCartId="{{order.ShoppingCartId}}"
-                                        data-retailer="{{orderCount.RetailerId}}"
+                                       data-retailer="{{orderCount.RetailerId}}"
                                        data-VendorRef="{{order.VendorRef}}"
                                        ng-model="chk[$parent.$index]"
                                        ng-click="checkedIndividual({{orderCount.RetailerId}}, {{$parent.$index}})" />
@@ -224,7 +222,7 @@
                                 <i></i>
                                 <p ng-show="message" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
                             </td>
-                            
+
                         </tr>
 
                         <tr ng-show="$last">
@@ -508,9 +506,12 @@
                 <i class="ck-icon ck-alert ck-module-icon"></i>
                 <span class="ck-font-size-mid">{{form.printShopHolidays.resoruceValue}}</span>
             </li>
-            <li ng-repeat="message in mesages.PartnerHolidayList">
-                <b> {{message.Name}} </b>
-                <p>({{message.HolidayDescription}}) closed on {{ message.StartDate | date}} <span ng-show="message.StartDate != message.EndDate"> - {{message.EndDate | date}} </span> </p>
+            <li ng-repeat="(key, value) in mesages.PartnerHolidayList | groupBy: 'Name'">
+                <b> {{key}} </b>
+                <div ng-repeat='msg in value'>
+
+                    <p>({{msg.HolidayDescription}}) closed on {{ msg.StartDate | date}} <span ng-show="msg.StartDate != msg.EndDate"> - {{msg.EndDate | date}} </span> </p>
+                </div>
             </li>
         </ul>
         <ul kendo-mobile-list-view style="margin-bottom: .5em;" class="ck-module-solid ck-no-border" k-style="'inset'"
