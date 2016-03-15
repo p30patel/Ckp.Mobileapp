@@ -281,7 +281,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.form.passwordHintUserInputError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintUserInputError.resoruceName);
             $scope.form.passwordHintError.resoruceValue = translateService.getResourceValue($scope.form.passwordHintError.resoruceName);
 
-
+            $scope.form.newPasswordText.resoruceValue = translateService.getResourceValue($scope.form.newPasswordText.resoruceName);
+            $scope.form.newPassword.resoruceValue = translateService.getResourceValue($scope.form.newPassword.resoruceName);
 
             kendo.mobile.application.hideLoading();
         });
