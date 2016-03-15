@@ -231,6 +231,11 @@ app.controller('homeController', [
                            $('.approve-chk').prop('checked', false);
                            $('.approve-chk-retailer').prop('checked', false);
                            $scope.hasItemSelectedForApporval = false;
+                           var data = localStorageService.get('organizationDetail');
+                          
+                           if (data !== null) {
+                               $scope.hasCreditLock = data.CreditStatus === "Blocked";
+                           }
                           
                        }
 
@@ -503,11 +508,6 @@ app.controller('homeController', [
                        //alerts & news - messages
 
                        var getMessages = function () {
-                           var data = localStorageService.get('organizationDetail');
-                          
-                           if (data !== null) {
-                               $scope.hasCreditLock = data.CreditStatus === "Blocked";
-
                                $("#btn_message").data("kendoMobileButton");
 
                                messageDataService.getMessages().then(function (result) {
@@ -525,9 +525,6 @@ app.controller('homeController', [
                                    $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
                                }).finally(function () {
                                });
-                           }
-
-
                        }; // end message
 
                        getMessages();
