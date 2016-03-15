@@ -1,5 +1,5 @@
 app.factory('translateService',
-        ['$http', '$q', 'localStorageService', 'ngAuthSettings', 
+        ['$http', '$q', 'localStorageService', 'ngAuthSettings',
     function ($http, $q, localStorageService, ngAuthSettings) {
 
         var translateFactory = {};
@@ -10,12 +10,12 @@ app.factory('translateService',
         var forceGetResourceUpdates = function (cultureName, rowVersion) {
 
             var deferred = $q.defer();
-            rowVersion = '';
+
             var url = authServiceBase + "webapi/api/core/MobileApp/GetResourceUpdates?cultureName=" + cultureName + "&rowVersion=" + rowVersion;
 
             $http.get(url).success(function (result) {
-                              
-                var resources = addResources(cultureName, result.RowVersion, result.CultureResourceList);
+
+                var resources = addResources(cultureName, rowVersion, result.RowVersion, result.CultureResourceList);
                 deferred.resolve(resources);
 
             }).error(function (err, status) {
@@ -28,7 +28,7 @@ app.factory('translateService',
 
         }
 
-        var addResources = function (cultureName, rowVersion, resourceList) {
+        var addResources = function (cultureName, previousRowVersion, rowVersion, resourceList) {
 
             var oldItems = JSON.parse(localStorage.getItem(cultureName)) || [];
 
@@ -82,7 +82,7 @@ app.factory('translateService',
                                     itemExisted = false;
                                 }
                             }
-                         
+
                         });
                         localStorage.setItem(cultureName, JSON.stringify(newResources));
                         console.log('set new list - no old - updated with eng ' + newResources.length);
@@ -98,77 +98,82 @@ app.factory('translateService',
             }
             else {// has old items
 
-                if (newResources.length > 0)
-                {
+                if (newResources.length > 0) {
                     console.log('reuired  changes keep list with new list');
-
-                    var itemExisted = false;
-                    angular.forEach(newResources, function (newitem) {
-                        if (!itemExisted) {
-                            angular.forEach(oldItems, function (olditem) {
-                                if (olditem.ResourceName === newitem.ResourceName && olditem.resourceValue != newitem.ResourceValue) {
-                                    // item exist - no actions 
-                                    olditem.ResourceValue = newitem.ResourceValue;
-                                    itemExisted = true;
-                                }
-                            });
-
+                    if (previousRowVersion == '') {
+                        localStorage.setItem(cultureName, JSON.stringify(newResources));
+                        console.log(JSON.stringify(newResources));
+                    }
+                    else {
+                        var itemExisted = false;
+                        angular.forEach(newResources, function (newitem) {
                             if (!itemExisted) {
-                                var ritem = {
-                                    "ResourceName": newitem.ResourceName,
-                                    "ResourceValue": newitem.ResourceValue
+                                angular.forEach(oldItems, function (olditem) {
+                                    if (olditem.ResourceName === newitem.ResourceName && olditem.resourceValue != newitem.ResourceValue) {
+                                        // item exist - no actions 
+                                        olditem.ResourceValue = newitem.ResourceValue;
+                                        itemExisted = true;
+                                    }
+                                });
+
+                                if (!itemExisted) {
+                                    var ritem = {
+                                        "ResourceName": newitem.ResourceName,
+                                        "ResourceValue": newitem.ResourceValue
+                                    }
+                                    oldItems.push(ritem);
+
+                                    itemExisted = false;
                                 }
-                                oldItems.push(ritem);
-
-                                itemExisted = false;
                             }
-                        }
 
-                    });
-                    localStorage.setItem(cultureName, JSON.stringify(oldItems));
+                        });
+                        localStorage.setItem(cultureName, JSON.stringify(oldItems));
+                    }
+
                 }
-                else {               
-                    console.log('no changes keep same old  list' );
+                else {
+                    console.log('no changes keep same old  list');
                 }
-            
+
             }
 
             //update version
             var oldItems = JSON.parse(localStorage.getItem(cultureName)) || [];
-           
+
             var version = getVersion(cultureName, rowVersion, oldItems, refereshPeriod, true);
-        
-    
+
+
             // console.log('final list resources : ' + oldItems.length);
             return oldItems;
         }
-       
+
 
         var getVersion = function (cultureName, rowVersion, resouceList, refereshPeriod, hasUpdate) {
-         
+
             var versions = JSON.parse(localStorage.getItem('versions')) || [];
             var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days
             var data = {
-                "CultureName":  cultureName,
+                "CultureName": cultureName,
                 "RowVersion": '',
                 "RefereshPeriod": refereshPeriod,
                 "LastUpdated": 0,
                 "ResourceList": '',
                 "PersistTime": persistTime
-             
-             
+
+
             };
-            
+
             hasExitedItem = false;
             if (versions.length > 0) {
                 //existed then retruns the values 
                 angular.forEach(versions, function (item) {
-                  
+
                     if (item.CultureName === cultureName && !hasExitedItem) {
-                      
+
                         hasExitedItem = true;
                         if (hasUpdate) {
-                         
+
                             item.RowVersion = rowVersion;
                             item.RefereshPeriod = refereshPeriod;
                             item.ResourceList = resouceList;
@@ -179,10 +184,10 @@ app.factory('translateService',
                             data.ResourceList = resouceList;
                             data.LastUpdated = new Date().getTime();
                             data.PersistTime = persistTime;
-                         
-                            }
+
+                        }
                         else {
-                            
+
                             data.CultureName = cultureName;
                             data.RowVersion = item.RowVersion;
                             data.RefereshPeriod = item.RefereshPeriod;
@@ -198,78 +203,76 @@ app.factory('translateService',
             if (!hasExitedItem) {
                 versions.push(data);
                 localStorage.setItem('versions', JSON.stringify(versions));
-               
+
             }
             if (hasUpdate && hasExitedItem) {
 
                 localStorage.setItem('versions', JSON.stringify(versions));
-              
-            
+
+
             }
-       
+
             return data;
         }
 
         var getResourceUpdates = function (cultureName, version) {
 
             currentCultureName = cultureName;
-           
+
             var deferred = $q.defer();
 
-
             var versionData = getVersion(cultureName, version, [], refereshPeriod, false);
-          
+
             version = versionData.RowVersion;
 
             var forceReferesh = true;
-           
+
             if (versionData) {
                 version = versionData.RowVersion;
                 var resources = versionData.ResourceList;
-               
+
                 if (versionData.PersistTime && new Date().getTime() > Number(versionData.LastUpdated) + versionData.PersistTime) {
                     forceReferesh = true;
-                   
+
                 }
-                else{
-                    if (resources.length > 0)
-                    {
+                else {
+                    if (resources.length > 0) {
                         forceReferesh = false;
                         resourceData = resources;
-                      
+
                         deferred.resolve(resources);
                     }
                     else {
                         forceReferesh = true;
                     }
-                    
+
                 }
-                  
+
             }
             if (forceReferesh) {
-              
+
                 forceGetResourceUpdates(cultureName, version).then(function (result) {
-                
+
                     resourceData = result;
-                   deferred.resolve(result);
-                  
+                    deferred.resolve(result);
+
                 });
             }
 
             return deferred.promise;
         }
 
-  
+
         var getResourceValue = function (resourceName) {
 
-          
-            var resourceValue =  resourceName ;
-            
+
+            var resourceValue = resourceName;
+
             angular.forEach(resourceData, function (item) {
-             
+
                 if (item.ResourceName === resourceName) {
-                  
-                    resourceValue = item.ResourceValue ;
+
+                    resourceValue = item.ResourceValue;
                     return resourceValue;
                 }
             });
@@ -278,9 +281,8 @@ app.factory('translateService',
 
         var getCurrentCultureName = function () {
             var selectedLanguage = localStorageService.get('selectedLanguage');
-       
-            if (selectedLanguage)
-            {
+
+            if (selectedLanguage) {
                 currentCultureName = selectedLanguage;
             }
             else {
