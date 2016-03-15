@@ -168,7 +168,7 @@ app.controller('orderDetailController', [
                        $scope.form.orderStatus.resoruceName = "Order Status";
                        $scope.form.orderStatus.resoruceValue = translateService.getResourceValue($scope.form.orderStatus.resoruceName);
 
-                   
+
                        $scope.order = {};
 
                        $scope.order.hasApproval = false;
@@ -211,7 +211,7 @@ app.controller('orderDetailController', [
                            $scope.order.orderType = orderType;
                            $scope.retailerId = e.view.params.retailerId;
                            getOrderDetail(parameterValue);
-                          
+
                        }
 
                        var removeEmptyTracking = function (trakcingList) {
@@ -246,7 +246,7 @@ app.controller('orderDetailController', [
                                $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
                                $scope.hasBlockAddress = result.MobileOrderDetail.BlockAddressInfo;
-                              
+
                                if ($scope.order.orderType === '1') {
                                    $scope.order.hasApproval = true;
                                    $scope.hasHidePrice = false;
@@ -265,10 +265,13 @@ app.controller('orderDetailController', [
 
 
                        $scope.showTrakcingListModal = function () {
+                          
+                           var hasValidSingleUrl = $scope.trackingCount && ($scope.trackingList[0].TrackingUrl.indexOf('http') !== -1 || $scope.trackingList[0].TrackingUrl.indexOf('www') !== -1);
+                        
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.tracking");
                            }
-                           if ($scope.trackingCount > 1) {
+                           if ($scope.trackingCount > 1 || !hasValidSingleUrl) {
                                $("#modalview-trackingList").kendoMobileModalView("open");
                            }
                            else {
@@ -290,11 +293,14 @@ app.controller('orderDetailController', [
 
                            var deviceData = localStorageService.get('deviceData');
 
-                           if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) {
-                               window.open(url, '_blank', 'location=yes');
-                           }
-                           else {
-                               window.open(url, '_system');
+                           var hasValidUrl = url.indexOf('http') !== -1 || url.indexOf('www') !== -1;
+                           if (hasValidUrl) {
+                               if (deviceData !== null && deviceData.result.PlatformType === 'iOS' && deviceData.result.PlatformVersion < 9) {
+                                   window.open(url, '_blank', 'location=yes');
+                               }
+                               else {
+                                   window.open(url, '_system');
+                               }
                            }
 
 
@@ -382,7 +388,7 @@ app.controller('orderDetailController', [
                                content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
                            }
                            return $sce.trustAsHtml(content);
-                       
+
                        };
                    }
 ]);
