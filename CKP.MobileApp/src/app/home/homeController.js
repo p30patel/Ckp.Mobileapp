@@ -188,7 +188,7 @@ app.controller('homeController', [
                                $scope.message = "";
                                $scope.messageCount = 0;
                                $scope.searchValue = "";
-                               $scope.hasCreditLock = false;
+                           
                                $scope.hasSearch = false;
                                $scope.hasListView = false;
                                $scope.hasDetailView = false;
@@ -504,6 +504,7 @@ app.controller('homeController', [
 
                        var getMessages = function () {
                            var data = localStorageService.get('organizationDetail');
+                          
                            if (data !== null) {
                                $scope.hasCreditLock = data.CreditStatus === "Blocked";
 
