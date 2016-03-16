@@ -108,9 +108,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.connectinOfflineMsg = {};
         $scope.form.connectinOfflineMsg.resoruceName = "Your connection is offline, Please connect to Wifi or Data";
         $scope.form.connectinOfflineMsg.resoruceValue = "Your connection is offline, Please connect to Wifi or Data";
-        
+
     }
- 
+
     setResources();
     //end page html 
     var d = new Date();
@@ -125,7 +125,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
     $scope.translations = {};
     $scope.message = "";
- 
+
     var languages = function () {
         $scope.languages = [{ Name: "English", Culture: "en-US", Id: 1, Error: "" }];
 
@@ -162,7 +162,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         } else {
             $scope.loginData.userName = ""
             $scope.loginData.password = "";
-            $scope.loginData.useRefreshTokens = true;
+            $scope.loginData.useRefreshTokens = false;
         }
     }
 
@@ -182,7 +182,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.forgotPasswordModalOpen = function () {
         $scope.loginData.email = "";
         $scope.forgotPassworMessage = "";
-      
+
         if (typeof $scope.loginData.userName !== 'undefined') {
 
             $("#modalview-password").kendoMobileModalView("open");
@@ -308,6 +308,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
 
     $scope.key = function ($event) {
+         setRememberMe(true);
         if ($event.keyCode === 13) {
             $event.target.blur();
             var type = $($event.target).attr("type");
@@ -324,7 +325,30 @@ function ($scope, $http, authService, translateService, localStorageService, log
             }
         }
     }
-    //loign event
+    $scope.remberMeOnChange = function (e) {
+        setRememberMe(false);
+    };
+
+    var setRememberMe = function (hasloginButton) {
+
+        var loginData = {
+            userName: $scope.loginData.userName,
+            password: $scope.loginData.password,
+            remmberme: $scope.loginData.useRefreshTokens
+        };
+
+        if ($scope.loginData.useRefreshTokens) {
+            localStorageService.set('loginData', loginData);
+        }
+        else {
+            localStorageService.remove('loginData');
+            if (!hasloginButton) {
+                $scope.loginData.userName = '';
+                $scope.loginData.password = '';
+            }
+        }
+    };
+    //login event
     var login = function () {
         var userName = $scope.loginData.userName;
         var password = $scope.loginData.password;
@@ -333,11 +357,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
         var loginData = {
             userName: userName,
             password: password,
-            remmberme: $scope.loginData.useRefreshTokens
+                remmberme: $scope.loginData.useRefreshTokens
         };
 
-
-        localStorageService.set('loginData', loginData);
+        setRememberMe(true);
 
         if (userName !== '' && password !== '') {
             kendo.mobile.application.showLoading();
@@ -357,36 +380,36 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
                     if (typeof (window.navigator.simulator) === 'undefined') {
                         window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.newPassword");
-                    }
+                }
                 }
                 else {
                     kendo.mobile.application.navigate("src/app/home/home.html");
-                }
+            }
 
             }).catch(function (err) {
                 kendo.mobile.application.hideLoading();
                 $scope.passwordHint = "<b>" + err.error_description + "</b>";
                 $timeout(function () {
                     $scope.passwordHint = "";
-                }, 7000);
+            }, 7000);
 
 
-            });
+        });
         }
         else {
             $scope.passwordHint = $scope.form.inputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
-            }, 5000);
+        }, 5000);
 
         }
-    }
+        }
     $scope.login = function () {
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
         }
         login();
-    }
+        }
 
     $scope.showPasswordHint = function () {
 
@@ -402,15 +425,15 @@ function ($scope, $http, authService, translateService, localStorageService, log
                    function (result) {
 
                        kendo.mobile.application.hideLoading();
-                       $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
+                       $scope.passwordHint = "<b>" +$scope.form.hint.resoruceValue + ": </b>" +result.data;
                        $timeout(function () {
                            $scope.passwordHint = "";
-                       }, 5000);
-                   },
+                   }, 5000);
+            },
                    function (err) {
                        $scope.passwordHint = $scope.form.passwordHintError.resoruceValue
                        kendo.mobile.application.hideLoading();
-                   }
+            }
                    );
 
         }
@@ -418,24 +441,24 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.passwordHint = $scope.form.passwordHintUserInputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
-            }, 5000);
+        }, 5000);
 
-        }
-    };
+}
+};
     //new password    
     $scope.newPasswordModalClose = function () {
         $("#modalview-newPassword").kendoMobileModalView("close");
         authService.logout();
         kendo.mobile.application.navigate("src/app/login/login.html");
-    };
+        };
 
-  
+
     $scope.show = function () {
         $("#right-drawer").data("kendoMobileDrawer").show();
         return false;
-    }
-   
-  
+        }
+
+
     $scope.renderHtml = function (content) {
         return $sce.trustAsHtml(content);
     };

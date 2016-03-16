@@ -18,7 +18,8 @@
                 <span class="ck-switchpad-right">
                     <p>   {{form.remmberMe.resoruceValue}}</p>
                 </span>
-                <input kendo-mobile-switch k-id="email-switch" k-checked="checked" ng-model="loginData.useRefreshTokens" />
+               
+                <input kendo-mobile-switch k-id="email-switch" ng-model="loginData.useRefreshTokens"  k-on-change="remberMeOnChange(kendoEvent)"/>
              
             </li>
             <li class="ck-no-pad">
