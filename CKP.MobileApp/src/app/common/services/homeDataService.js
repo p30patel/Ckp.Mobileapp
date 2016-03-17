@@ -21,9 +21,10 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                             SalesOrderNumber: data.SalesOrderNumber,
                             VendorRef: data.VendorRef,
                             OrganizationDetail: organizationDetail,
-
+                            SearchType: data.SearchType
                         }
-                    
+                     
+                        console.log(data.SearchType);
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, jsonIn).success(function (result) {
                             

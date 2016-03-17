@@ -33,6 +33,7 @@ app.config(function ($httpProvider) {
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
   
     localStorageService.remove('authorizationData');
+
     var getDeviceInfo = function () {
 
 
@@ -77,8 +78,25 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     };
 
     document.addEventListener('deviceready', function () {
+      
+        var userProfileData = localStorageService.get('user-profile');
 
-       
+        var userProfile = {
+            SearchType: 'OrderNumber',
+            SelectedPara : '1',
+            HasReadNote: true,
+            IsFirtTime: true,
+            HasForceClearAll : false
+        };
+        
+        if (!userProfileData) {
+            localStorageService.set('user-profile', userProfile);
+            //console.log(userProfile);
+            //var userProfileData = localStorageService.get('user-profile');
+            //console.log(userProfileData.SearchType);
+        }
+      
+
         StatusBar.overlaysWebView(false);//Turns off web view overlay.
         StatusBar.backgroundColorByName('black');
         $rootScope.hasSearchOrApporval = false;

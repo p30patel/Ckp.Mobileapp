@@ -57,7 +57,6 @@ app.controller('menuController', [
                            var organizationDetail = localStorageService.get("organizationDetail");
                            if (organizationDetail) {
                                $scope.organizationDetail = organizationDetail;
-                               console.log($scope.organizationDetail.Address);
                                $scope.hasAddress = true;
                            }
                            else {

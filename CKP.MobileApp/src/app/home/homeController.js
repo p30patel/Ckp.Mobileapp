@@ -200,6 +200,7 @@ app.controller('homeController', [
                                $scope.hasNoSearchResults = false;
                                $scope.searchParameterId = 1;
                                $scope.selectedPara = '1';
+                               getSelectPara();
                                setSelectPara();
 
                                $scope.groupBy = 'SalesOrderNumber';
@@ -252,11 +253,27 @@ app.controller('homeController', [
                            }
                        }
 
+                       var getSelectPara = function () {
+
+                           var userProfileData = localStorageService.get('user-profile');
+
+                           if (userProfileData) {
+                               $scope.selectedPara = userProfileData.SelectedPara;
+                           }
+                         
+                       }
 
                        var setSelectPara = function () {
 
+                           var userProfileData = localStorageService.get('user-profile');
+                           
+                           if (userProfileData)
+                           {
+                               userProfileData.SelectedPara = $scope.selectedPara;
+                               localStorageService.set('user-profile', userProfileData);
+                           }
                            var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
-
+                         
                            $scope.searchParameterId = $scope.selectedPara;
 
                            $scope.currentSearchInput = $scope.searchValue;
@@ -265,7 +282,8 @@ app.controller('homeController', [
                                OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
                                SalesOrderNumber: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
                                ShoppingCartId: $scope.searchParameterId == '3' ? $scope.currentSearchInput : '',
-                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : ''
+                               VendorRef: $scope.searchParameterId == '4' ? $scope.currentSearchInput : '',
+                               SearchType: selectedPara
                            };
                        }
 
@@ -313,7 +331,7 @@ app.controller('homeController', [
                            return hasOneOrderType;
                        }
                        var getOrderCounts = function () {
-                      
+                           setSelectPara();
                            if ($rootScope.hasBackButton) {
 
                                $scope.hasSearch = false;
@@ -325,6 +343,7 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
                            }
                            $scope.hasNoSearchResults = false;
+                           console.log($scope.jsonIn);
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
                                kendo.mobile.application.hideLoading();
                                if (result === null) {
@@ -378,7 +397,7 @@ app.controller('homeController', [
                                ShoppingCartId: $scope.jsonIn.ShoppingCartId,
                                SalesOrderNumber: $scope.jsonIn.SalesOrderNumber,
                                VendorRef: $scope.jsonIn.VendorRef,
-
+                               SearchType: $scope.jsonIn.SearchType,
                                RetailerId: $scope.selectedRetailer,
 
                                UserId: 0,
@@ -565,22 +584,22 @@ app.controller('homeController', [
                            $scope.hasSearch = $scope.searchValue.length > 0 ? true : false;
                            $rootScope.hasBackButton = false;
                            $rootScope.hasSearchOrApporval = true;
-                           setSelectPara();
+                          
                            getOrderCounts();
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
                            }
                        }
 
-
+                       $scope.changeSearchType = function () {
+                           search();
+                       }
                        $scope.search = function () {
-                           if ($scope.searchValue.length > 0 || $scope.selectedPara === '1') {
                                search();
-                           }
                        }
                        $scope.key = function ($event) {
 
-                           if ($event.keyCode === 13 && ($scope.searchValue.length > 0 || $scope.selectedPara === '1')) {
+                           if ($event.keyCode === 13) {
                                $event.target.blur();
                                search();
                            }
@@ -639,6 +658,7 @@ app.controller('homeController', [
                                                var orders = $filter('filter')($scope.orders, { VendorRef: item });
                                            }
                                            salesOrders = getSalesOrderNumbers(orders);
+                                           console.log('list : ' + salesOrders);
                                            angular.forEach(salesOrders, function (value, key) {
 
                                                if (currentSelection.indexOf(value) == -1) {

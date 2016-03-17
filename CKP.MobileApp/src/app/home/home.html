@@ -19,8 +19,8 @@
                 <fieldset class="ck-login">
                     <select class="ck-po-select"
                             style="background-image: url(styles/images/down-arrow.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em .5em; background-color: #7F7F7F;"
-                            ng-model="selectedPara" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
-                    <input class="ck-po-search" type="text" ng-change="searchChange()" value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue" ng-keypress="key($event)" />
+                            ng-model="selectedPara" ng-change="changeSearchType()" ng-options="parameter.id as parameter.name for parameter in parameters" ng-init="selectedPara = selectedPara || '1'"></select>
+                    <input class="ck-po-search" type="text"  value="" placeholder="{{form.search.resoruceValue}}" ng-model="searchValue" ng-keypress="key($event)" />
                     <!-- style="background-image: url(styles/images/search.png); background-position: 95% 50%; background-repeat: no-repeat; background-size: 1em 1em; background-color: #FFFFFF; " -->
 
 
