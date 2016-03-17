@@ -214,14 +214,18 @@ app.controller('orderDetailController', [
 
                        }
 
-                       var removeEmptyTracking = function (trakcingList) {
-                           var newTrakcingList = [];
-                           angular.forEach(trakcingList, function (value) {
-                               if (value.ProductionOrderId > 0) {
-                                   newTrakcingList.push(value);
+                       var removeEmptyTracking = function (trackingList) {
+                           var newTrackingList = [];
+                           var urls = [];
+                           angular.forEach(trackingList, function (value) {
+                               console.log(newTrackingList.indexOf(value.AwbNumber));
+                               if (value.ProductionOrderId > 0 && urls.indexOf(value.AwbNumber) == -1) {
+                                   newTrackingList.push(value);
+                                   urls.push(value.AwbNumber);
+
                                }
                            });
-                           return newTrakcingList;
+                           return newTrackingList;
                        }
 
                        var getOrderDetail = function (poctrlno) {
