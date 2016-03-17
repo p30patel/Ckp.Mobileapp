@@ -377,7 +377,7 @@ app.controller('homeController', [
                            });
 
                        }
-                       $scope.languages = parameterService.getSearchParameters();
+                       $scope.parameters = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
                            $scope.searchValue = "";
                        }
