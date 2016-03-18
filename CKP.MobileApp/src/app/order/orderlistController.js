@@ -294,6 +294,11 @@ app.controller('orderlistController', [
                            if (typeof content !== 'undefined' && $scope.hasBlockAddress) {
                                content = content.replace(/class="shipTo"/g, 'class="shipTo" style="display:none;"');
                                content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
+                               content = content.replace(/class="shipTo"/g, 'class="shipTo" style="display:none;"');
+                               content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
+
+                               content = content.replace(/class=shipTo/g, 'class="shipTo" style="display:none;"');
+                               content = content.replace(/class=billTo/g, 'class="billTo" style="display:none;"');
                            }
                            return $sce.trustAsHtml(content);
                        };

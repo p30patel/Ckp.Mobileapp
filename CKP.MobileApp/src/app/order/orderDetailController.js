@@ -387,9 +387,13 @@ app.controller('orderDetailController', [
                            kendo.mobile.application.navigate("src/app/" + backUrl);
                        }
                        $scope.renderHtml = function (content) {
+                         
                            if (typeof content !== 'undefined' && $scope.hasBlockAddress) {
                                content = content.replace(/class="shipTo"/g, 'class="shipTo" style="display:none;"');
                                content = content.replace(/class="billTo"/g, 'class="billTo" style="display:none;"');
+
+                               content = content.replace(/class=shipTo/g, 'class="shipTo" style="display:none;"');
+                               content = content.replace(/class=billTo/g, 'class="billTo" style="display:none;"');
                            }
                            return $sce.trustAsHtml(content);
 
