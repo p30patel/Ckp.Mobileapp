@@ -1,7 +1,7 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService', '$sce', 'translateService', 'feedbackDataService', '$timeout', 'localStorageService',
-                   function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, $timeout, localStorageService) {
+                   '$scope', 'authService', 'orderDataService', '$sce', 'translateService', 'feedbackDataService', 'notificationDataService' , '$timeout', 'localStorageService',
+                   function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, notificationDataService, $timeout, localStorageService) {
 
                        $scope.form = {};
 
@@ -21,7 +21,7 @@ app.controller('orderDetailController', [
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
                                }
-
+                               $scope.notifyMe = false;
                            }
                        }
 
@@ -179,7 +179,7 @@ app.controller('orderDetailController', [
                        $scope.order.detail = {};
                        $scope.inqueryMessage = "";
                        $scope.inqueryComment = "";
-
+                 
                        $scope.feedbackData = {};
                        $scope.feedbackData.webpage = "Mobile App - Order Inquiry";
                        $scope.feedbackData.comment = "";
@@ -210,6 +210,7 @@ app.controller('orderDetailController', [
                            backUrl = e.view.params.backUrl;
                            $scope.order.orderType = orderType;
                            $scope.retailerId = e.view.params.retailerId;
+                        
                            getOrderDetail(parameterValue);
 
                        }
@@ -245,8 +246,10 @@ app.controller('orderDetailController', [
 
                                $scope.order.detail = result;
                                $scope.trackingList = removeEmptyTracking(result.MobileOrderDetail.OrderTrackingNumberList);
+                               $scope.notifyMe = result.HasNotifyMe;
 
                                $scope.trackingCount = $scope.trackingList.length;
+
                                $("#btn_tracking").data("kendoMobileButton").badge($scope.trackingCount);
 
                                $scope.hasBlockAddress = result.MobileOrderDetail.BlockAddressInfo;
@@ -292,6 +295,39 @@ app.controller('orderDetailController', [
 
                            }
                        }
+                       $scope.onChangeNotifyMe = function (e) {
+                           var isEnabled = $scope.notifyMe;
+
+                           var notificationUpdateData = [];
+                           var notification = {
+                               POCtrlNo : parameterValue,
+                               SubscriptionType: e.sender.element.attr('data-SubscriptionType'),
+                               IsEnabled: e.checked,
+                               OrderStatus : $scope.order.detail.MobileOrderDetail.Status,
+                               UserId: 0
+
+                           };
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.notifyMe");
+                           }
+                           notificationDataService.updateNotification(notification).then(function (result) {
+                               if (result !== 'success') {
+
+                                   $scope.message = "Faild to save data, Please try later<br>";
+                                   $timeout(function () {
+                                       $scope.message = "";
+                                   }, 7000);
+                               }
+                           }).catch(function (error) {
+
+                               $scope.message = "Faild to update notifcation.";
+                               $timeout(function () {
+                                   $scope.message = "";
+                               }, 7000);
+
+                           });
+                          
+                       };
 
                        $scope.showTracking = function (url) {
 

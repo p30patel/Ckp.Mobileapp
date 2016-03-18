@@ -19,7 +19,7 @@
 
 
                 <table class="ck-table">
-                  
+
                     <tr>
                         <td class="v-align" style="width :35%;">
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{form.dateInSystem.resoruceValue}}</h3>
@@ -30,13 +30,15 @@
                             <span ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</span>
                         </td>
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
-                            <div class="status open"><span style="font-size:x-small !important;">{{form.orderStatus.resoruceValue}}:</span>
-                            {{order.detail.MobileOrderDetail.StatusDisplay}}</div>
-                           
+                            <div class="status open">
+                                <span style="font-size:x-small !important;">{{form.orderStatus.resoruceValue}}:</span>
+                                {{order.detail.MobileOrderDetail.StatusDisplay}}
+                            </div>
+
                         </td>
                     </tr>
                     <tr>
-                        <td class="v-align"  style="width :35%">
+                        <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font order-detail-h3">{{form.shoppingCart.resoruceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
@@ -55,10 +57,11 @@
                         </td>
 
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important;">
-                         
-                                <!--<input kendo-mobile-switch k-checked="checked" />                               
-                         
-                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resoruceValue}}</p>-->
+                           
+                            <input kendo-mobile-switch type="checkbox"
+                                   k-on-change="onChangeNotifyMe(kendoEvent)" ng-model="notifyMe" data-SubscriptionType="108" />
+
+                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resoruceValue}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +82,7 @@
                         <td class="v-align c-align" rowspan="3" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;"
                             ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0">
                             <div style="text-align:center;">
-                                <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"                                     
+                                <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"
                                      ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)" />
                                 <p style="font-size:x-small !important; margin-top: -5px !important;">{{form.confirmation.resoruceValue}}</p>
                             </div>
@@ -99,7 +102,7 @@
                     </tr>
                 </table>
             </li>
-           
+
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
                                       ng-show="!hasBlockAddress">
                 <h4>{{form.billingInfo.resoruceValue}}</h4>
@@ -169,7 +172,7 @@
                             <h5>{{form.itemCode.resoruceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
                             <h5 ng-show="!hasHidePrice">
                                 {{orderLine.GrossCurrency.Code}} {{orderLine.GrossPrice | number : 2}} {{orderLine.PriceUom.UomDisplay}}
-                           </h5>
+                            </h5>
                             <h5>{{form.prodcutionLocation.resoruceValue}}:</h5>
                             <h5><b>{{orderLine.PrintshopName}}</b></h5>
                         </td>
