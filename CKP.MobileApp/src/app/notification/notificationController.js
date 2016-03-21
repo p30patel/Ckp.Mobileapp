@@ -1,6 +1,6 @@
 
-app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout',
-function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout) {
+app.controller('notificationController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', 'localStorageService',
+function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, localStorageService) {
    
     $scope.form = {};
 
@@ -136,8 +136,17 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             UserId : 0
 
         };
+        var organizationDetail = localStorageService.get('organizationDetail');
+
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.updateNotifcation");
+        }
+        if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification." + e.checked ? "On" : "Off");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.SubscriptionType" + e.sender.element.attr('data-SubscriptionType'));
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.UserId." + organizationDetail.UserId);
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.RetailerId." + organizationDetail.OrgContext.RetailerId);
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.OrganizationId." + organizationDetail.OrgContext.Id);
         }
         notificationDataService.updateNotification(notification).then(function (result) {
             if (result !== 'success') {

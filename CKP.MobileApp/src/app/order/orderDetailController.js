@@ -238,6 +238,9 @@ app.controller('orderDetailController', [
 
                            kendo.mobile.application.showLoading();
 
+                           if (typeof (window.navigator.simulator) === 'undefined') {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail");
+                           }
                            orderDataService.getOrderDetail(poctrlno).then(function (result) {
 
                                $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
@@ -308,7 +311,15 @@ app.controller('orderDetailController', [
 
                            };
                            if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.notifyMe");
+                               var organizationDetail = localStorageService.get('organizationDetail');
+
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.notifyMe.Update");
+
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe." + e.checked ? "On" : "Off");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.POCtrlNo" + parameterValue);
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.UserId." + organizationDetail.UserId);
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.RetailerId." + organizationDetail.OrgContext.RetailerId);
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.OrganizationId." + organizationDetail.OrgContext.Id);
                            }
                            notificationDataService.updateNotification(notification).then(function (result) {
                                if (result !== 'success') {

@@ -24,7 +24,7 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                             SearchType: data.SearchType
                         }
                      
-                        console.log(data.SearchType);
+                     
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderCounts";
                         $http.post(url, jsonIn).success(function (result) {
                             
@@ -47,7 +47,7 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                     
                     var getOrderCounts = function (data) {
                         var deferred = $q.defer();
-
+                        var organizationDetail = localStorageService.get('organizationDetail');
                         var orderCounts = localStorageService.get('orderCounts');
                         var hasForceRefresh = true;
                         var timeNow = new Date().getTime();
@@ -72,7 +72,14 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                                 deferred.resolve(result);
                             });
                         }
+                       
 
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.SearchType." + data.SearchType);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.UserId." + organizationDetail.UserId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.RetailerId." + organizationDetail.OrgContext.RetailerId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.OrganizationId." + organizationDetail.OrgContext.Id);
+                        }
                         return deferred.promise;
                     };
 

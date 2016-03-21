@@ -19,6 +19,11 @@ app.factory("feedbackDataService", [
                             .error(function (err, status) {
                                 deferred.reject(err);
                             });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.Feedback.UserId." + userId);
+                        }
+
                         return deferred.promise;
                     };
 
@@ -55,6 +60,10 @@ app.factory("feedbackDataService", [
                                
                                 deferred.reject(err);
                             });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.ContactUsByEmail.UserId." + userId);
+                        }
                         return deferred.promise;
                     };
 

@@ -277,7 +277,7 @@ app.controller('homeController', [
                            $scope.searchParameterId = $scope.selectedPara;
 
                            $scope.currentSearchInput = $scope.searchValue;
-
+                          
                            $scope.jsonIn = {
                                OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
                                SalesOrderNumber: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
@@ -343,7 +343,7 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
                            }
                            $scope.hasNoSearchResults = false;
-                           console.log($scope.jsonIn);
+                        
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
                                kendo.mobile.application.hideLoading();
                                if (result === null) {
@@ -588,6 +588,7 @@ app.controller('homeController', [
                            getOrderCounts();
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("search." + $scope.searchValue.length > 0 ? "Non-Default" : "Default");
                            }
                        }
 

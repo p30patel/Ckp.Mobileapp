@@ -25,7 +25,7 @@ app.factory("orderDataService", [
                             OrganizationDetail: orgContext
                         }
                         
-                        console.log(jsonIn);
+                      
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
 
                      
@@ -87,6 +87,13 @@ app.factory("orderDataService", [
                         }).error(function (xhr, status, error) {                           
                             deferred.reject(error);
                         });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + jsonIn.UpdateStatus ? "Apporve" : "Declined");
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.UserId." + organizationDetail.UserId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.RetailerId." + organizationDetail.OrgContext.RetailerId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.OrganizationId." + organizationDetail.OrgContext.Id);
+                        }
                         return deferred.promise;
                     };
 
@@ -132,7 +139,12 @@ app.factory("orderDataService", [
                                 deferred.reject(error);
                             });
 
-                      
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.ShoppingCartId." + shoppingCartId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.UserId." + organizationDetail.UserId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.RetailerId." + organizationDetail.OrgContext.RetailerId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.OrganizationId." + organizationDetail.OrgContext.Id);
+                        }
                         return deferred.promise;
                     };
 
