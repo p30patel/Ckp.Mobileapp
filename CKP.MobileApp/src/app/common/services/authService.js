@@ -41,7 +41,15 @@ app.factory('authService', [
                                 forceGetOrganizationData().then(function (result) {
                                    
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
-                                        result.Logo = logo;                                        
+                                        result.Logo = logo;
+                                      
+                                        if (typeof (window.navigator.simulator) === 'undefined') {
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.GetOrganizationData");
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("RetailerId." + result.OrgContext.RetailerId);
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrgainzationId." + result.OrgContext.Id);
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("UserId." + result.UserId);
+                                        } 
+
                                         deferred.resolve(result);
                                     }).catch(function (err, status) {
                                         loggedIn = false;
@@ -87,8 +95,7 @@ app.factory('authService', [
                         var loginData = localStorageService.get('loginData');
                         var organizationDetail = localStorageService.get('organizationDetail');
                         var refreshData = localStorageService.get('forceRefreshDetail');
-                        console.log(refreshData);
-                       
+                                               
                         var uuId = '';
                         var model = '';
                         var platform = '';

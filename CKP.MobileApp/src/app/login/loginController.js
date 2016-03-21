@@ -407,6 +407,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
     $scope.login = function () {
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("User." + userName);
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language." + $scope.selectedLanague);
         }
         login();
         }
