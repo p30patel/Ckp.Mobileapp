@@ -32,6 +32,7 @@ app.factory('authInterceptorService', [
                                 if (authData.useRefreshTokens) {
                                     //   $location.path('/refresh');
                                     kendo.mobile.application.navigate("src/app/login/login.html");
+                                    authService.logout();
                                     return $q.reject(rejection);
                                 }
                             }
@@ -39,6 +40,7 @@ app.factory('authInterceptorService', [
 
                             //$location.path('/login');
                             console.log("Un-Authorized Access, Please login to access! Error: 401");
+                            authService.logout();
                             kendo.mobile.application.navigate("src/app/login/login.html");
 
                         } else if (rejection.status === 404) {
