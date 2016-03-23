@@ -176,7 +176,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
         setLoginData();
     }
-
+    setLoginData();
     //forgot password 
     $scope.loginData.email = "";
     $scope.forgotPasswordModalOpen = function () {
@@ -289,7 +289,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.beforeShow = function (e) {
-
+        authService.logout();
     }
 
     $scope.intShow = function (e) {

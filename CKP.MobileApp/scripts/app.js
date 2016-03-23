@@ -31,7 +31,7 @@ app.config(function ($httpProvider) {
 
 
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
-  
+
     localStorageService.remove('authorizationData');
 
     var getDeviceInfo = function () {
@@ -66,7 +66,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
                    el.push.getRegistration().then(function (result) {
                        localStorageService.set('deviceData', result);
-                       var deviceData = localStorageService.get('deviceData');                  
+                       var deviceData = localStorageService.get('deviceData');
                    },
                    function (e) {
 
@@ -78,24 +78,24 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     };
 
     document.addEventListener('deviceready', function () {
-      
+
         var userProfileData = localStorageService.get('user-profile');
 
         var userProfile = {
             SearchType: 'OrderNumber',
-            SelectedPara : '1',
+            SelectedPara: '1',
             HasReadNote: true,
             IsFirtTime: true,
-            HasForceClearAll : false
+            HasForceClearAll: false
         };
-        
+
         if (!userProfileData) {
             localStorageService.set('user-profile', userProfile);
             //console.log(userProfile);
             //var userProfileData = localStorageService.get('user-profile');
             //console.log(userProfileData.SearchType);
         }
-      
+
 
         StatusBar.overlaysWebView(false);//Turns off web view overlay.
         StatusBar.backgroundColorByName('black');
@@ -108,7 +108,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
         var networkState = navigator.connection.type;
         var isOffline = networkState === Connection.UNKNOWN || networkState === Connection.NONE;
-       
+
         var startAnalyticsAndDeviceInfo = function () {
             var hasSimlulatorMode = false;
             if (window.navigator.simulator === true) {
@@ -122,7 +122,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 if (isOffline) {
                     onOffline();
                 }
-                
+
                 if (authServiceBase === 'https://checknet.checkpt.com/') {
                     window.plugins.EqatecAnalytics.Monitor.Start();
                 }
@@ -132,7 +132,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 cordova.getAppVersion(function (version) {
                     $(".version").text('Version ' + version);
                 });
-                
+
             }
             else {
                 kendo.mobile.application.navigate("src/app/login/login.html");
@@ -145,7 +145,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     }, false);
 
     document.addEventListener("offline", onOffline, false);
-   
+
     function onOffline() {
         if (typeof kendo.mobile.application !== 'undefined') {
             kendo.mobile.application.navigate("src/app/error/error.html");
@@ -157,13 +157,33 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     document.addEventListener("online", onOnline, false);
 
     function onOnline() {
-       
+
         if (typeof kendo.mobile.application !== 'undefined') {
             kendo.mobile.application.navigate("src/app/login/login.html");
         }
     }
 
-   
+
+    function backButtonEvent() {
+        document.addEventListener("backbutton", function (e) {
+
+            var hasLoginPage = false;
+            if (typeof kendo.mobile.application !== 'undefined') {
+                hasLoginPage = kendo.mobile.application.view().id == 'src/app/login/login.html';
+            }
+
+            if (hasLoginPage) {
+                e.preventDefault();
+                navigator.app.exitApp();
+            }
+            else {
+                navigator.app.backHistory()
+            }
+        }, false);
+    }
+    backButtonEvent();
+
+
 }]);
 
 app.config(function ($httpProvider) {

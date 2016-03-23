@@ -5,9 +5,9 @@ app.controller('homeController', [
                        $scope.beforeShow = function () {
 
                            kendo.mobile.application.showLoading();
-                           if (!authService.authentication.isAuth) {
-                               authService.logout();
+                           if (!authService.authentication.isAuth) {                            
                                kendo.mobile.application.navigate("src/app/login/login.html");
+                               authService.logout();
                            }
                            kendo.mobile.application.hideLoading();
                            $("#right-drawer").data("kendoMobileDrawer").hide();
