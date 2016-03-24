@@ -22,7 +22,7 @@
   "CorePlugins": [
     "com.phonegap.plugins.PushPlugin@3.1.1",
     "com.telerik.feedback@2.0.0",
-    "com.telerik.plugin.telerikanalytics@3.3.2",
+    "com.telerik.plugin.telerikanalytics@3.4.1",
     "com.telerik.plugins.nativepagetransitions@0.6.4",
     "cordova-plugin-console",
     "cordova-plugin-device",
@@ -60,7 +60,7 @@
     "com.telerik.plugin.telerikanalytics": {
       "AUTO_TRACK_EXCEPTIONS": "True",
       "AUTO_TRACK_KENDO_EVENTS": "True",
-      "PRODUCT_ID": "b9263a32381b42c8bb8437adaf72a896"
+      "PRODUCT_ID": "91c4333dbb144ce5b9508b46f11abd90"
     }
   }
 }
