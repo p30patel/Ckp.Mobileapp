@@ -22,8 +22,8 @@ app.controller('orderlistController', [
                                }
 
                                if (!authService.authentication.isAuth) {
-                                   kendo.mobile.application.navigate("src/app/login/login.html");
                                    authService.logout();
+                                   kendo.mobile.application.navigate("src/app/login/login.html");
                                }
                            }
 

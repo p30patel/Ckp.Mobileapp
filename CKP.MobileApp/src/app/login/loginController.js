@@ -167,7 +167,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.afterShow = function (e) {
-
+        if (typeof kendo.mobile.application !== 'undefined') {
+            var view = kendo.mobile.application.view();
+            if (view !== null) {
+                authService.logout();
+            }
+        }
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
 
@@ -289,7 +294,6 @@ function ($scope, $http, authService, translateService, localStorageService, log
     }
 
     $scope.beforeShow = function (e) {
-        authService.logout();
     }
 
     $scope.intShow = function (e) {

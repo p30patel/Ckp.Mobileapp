@@ -193,8 +193,8 @@ app.controller('orderDetailController', [
                        $scope.hasHidePrice = false;
                        var init = function () {
                            if (!authService.authentication.isAuth) {
-                               kendo.mobile.application.navigate("src/app/login/login.html");
                                authService.logout();
+                               kendo.mobile.application.navigate("src/app/login/login.html");
                            }
                        };
                        init();

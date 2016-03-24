@@ -9,12 +9,12 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
     $scope.beforeShow = function () {
-          kendo.mobile.application.showLoading();
-        if (!authService.authentication.isAuth) {          
-            kendo.mobile.application.navigate("src/app/login/login.html");
+        kendo.mobile.application.showLoading();
+        if (!authService.authentication.isAuth) {
             authService.logout();
+            kendo.mobile.application.navigate("src/app/login/login.html");
         }
-         kendo.mobile.application.hideLoading();
+        kendo.mobile.application.hideLoading();
 
     };
     $scope.message = "";

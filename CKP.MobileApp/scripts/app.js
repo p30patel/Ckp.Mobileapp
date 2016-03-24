@@ -169,7 +169,10 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
 
             var hasLoginPage = false;
             if (typeof kendo.mobile.application !== 'undefined') {
-                hasLoginPage = kendo.mobile.application.view().id == 'src/app/login/login.html';
+                var view = kendo.mobile.application.view();              
+                if (view !== null) {
+                    hasLoginPage = kendo.mobile.application.view().id == 'src/app/login/login.html';
+                }
             }
 
             if (hasLoginPage) {
@@ -177,7 +180,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 navigator.app.exitApp();
             }
             else {
-                navigator.app.backHistory()
+                navigator.app.backHistory();
             }
         }, false);
     }
