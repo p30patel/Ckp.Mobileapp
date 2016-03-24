@@ -142,7 +142,6 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.updateNotifcation");
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification." + e.checked ? "On" : "Off");
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.SubscriptionType" + e.sender.element.attr('data-SubscriptionType'));
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.UserId." + organizationDetail.UserId);
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
          
         }
