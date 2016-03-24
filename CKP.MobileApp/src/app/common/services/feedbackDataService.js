@@ -21,7 +21,7 @@ app.factory("feedbackDataService", [
                             });
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.Feedback.UserId." + userId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.Feedback.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
                         }
 
                         return deferred.promise;
@@ -62,7 +62,8 @@ app.factory("feedbackDataService", [
                             });
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.ContactUsByEmail.UserId." + userId);
+                         
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.ContactUsByEmail.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
                         }
                         return deferred.promise;
                     };

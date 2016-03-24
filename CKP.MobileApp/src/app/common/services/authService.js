@@ -42,12 +42,16 @@ app.factory('authService', [
                                    
                                         var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
                                         result.Logo = logo;
-                                      
                                         if (typeof (window.navigator.simulator) === 'undefined') {
                                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.GetOrganizationData");
-                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("RetailerId." + result.OrgContext.RetailerId);
-                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrgainzationId." + result.OrgContext.Id);
-                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("UserId." + result.UserId);
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrgainzationId." + result.OrgContext.Name + "-" + result.OrgContext.Id);
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("User." + result.UserName + "-" + result.UserId);
+
+                                            var retailerName = result.OrgContext.RetailerId;
+                                            if (typeof result.RetailerName !== 'undefined') {
+                                                retailerName = result.RetailerName + "-" + result.OrgContext.RetailerId;
+                                            }
+                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Retailer." + retailerName);
                                         } 
 
                                         deferred.resolve(result);

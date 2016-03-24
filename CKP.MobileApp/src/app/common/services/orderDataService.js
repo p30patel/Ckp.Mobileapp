@@ -90,9 +90,7 @@ app.factory("orderDataService", [
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + jsonIn.UpdateStatus ? "Apporve" : "Declined");
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.UserId." + organizationDetail.UserId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.RetailerId." + organizationDetail.OrgContext.RetailerId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.OrganizationId." + organizationDetail.OrgContext.Id);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);                           
                         }
                         return deferred.promise;
                     };
@@ -141,9 +139,6 @@ app.factory("orderDataService", [
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.ShoppingCartId." + shoppingCartId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.UserId." + organizationDetail.UserId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.RetailerId." + organizationDetail.OrgContext.RetailerId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.OrganizationId." + organizationDetail.OrgContext.Id);
                         }
                         return deferred.promise;
                     };

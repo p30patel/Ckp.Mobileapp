@@ -140,13 +140,11 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.updateNotifcation");
-        }
-        if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification." + e.checked ? "On" : "Off");
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.SubscriptionType" + e.sender.element.attr('data-SubscriptionType'));
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.UserId." + organizationDetail.UserId);
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.RetailerId." + organizationDetail.OrgContext.RetailerId);
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.OrganizationId." + organizationDetail.OrgContext.Id);
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+         
         }
         notificationDataService.updateNotification(notification).then(function (result) {
             if (result !== 'success') {

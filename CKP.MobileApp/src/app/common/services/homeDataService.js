@@ -76,9 +76,6 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.SearchType." + data.SearchType);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.UserId." + organizationDetail.UserId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.RetailerId." + organizationDetail.OrgContext.RetailerId);
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("search.OrganizationId." + organizationDetail.OrgContext.Id);
                         }
                         return deferred.promise;
                     };

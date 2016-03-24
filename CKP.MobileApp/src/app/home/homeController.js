@@ -340,7 +340,7 @@ app.controller('homeController', [
                            kendo.mobile.application.showLoading();
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderCount");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderCount");
                            }
                            $scope.hasNoSearchResults = false;
                         
@@ -386,7 +386,7 @@ app.controller('homeController', [
                        var getOrderSummary = function (orderType, orderTypeId, searchParamterId, searchInput, currentPage, hasNext) {
 
                            if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.home.orderSummary");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderSummary");
                            }
 
                            var jsonIn = {
