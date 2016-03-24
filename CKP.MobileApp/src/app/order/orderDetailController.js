@@ -313,8 +313,8 @@ app.controller('orderDetailController', [
                                var organizationDetail = localStorageService.get('organizationDetail');
 
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.notifyMe.Update");
-
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe." + e.checked ? "On" : "Off");
+                               var flag = e.checked ? "On" : "Off";
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe." + flag);
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.POCtrlNo" + parameterValue);
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.UserId." + organizationDetail.UserId);
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.RetailerId." + organizationDetail.OrgContext.RetailerId);

@@ -89,7 +89,8 @@ app.factory("orderDataService", [
                         });
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + jsonIn.UpdateStatus ? "Apporve" : "Declined");
+                            var flag = jsonIn.UpdateStatus ? "Apporved" : "Declined";
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + flag);
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);                           
                         }
                         return deferred.promise;
