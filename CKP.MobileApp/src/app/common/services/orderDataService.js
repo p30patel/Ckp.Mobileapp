@@ -89,7 +89,7 @@ app.factory("orderDataService", [
                         });
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
-                            var flag = jsonIn.UpdateStatus ? "Apporved" : "Declined";
+                            var flag = jsonIn.UpdateStatus ? "Approved" : "Declined";
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + flag);
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);                           
                         }
