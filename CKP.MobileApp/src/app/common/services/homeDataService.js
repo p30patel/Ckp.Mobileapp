@@ -112,11 +112,63 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                         return deferred.promise;
                     };
 
+                    var setDefaultNotifcations = function () {
+                        var deferred = $q.defer();
+                        var userProfileData = localStorageService.get('user-profile');
+                      
+                        if (typeof userProfileData.HasTrunOnNotifcation !== 'undefined' || !userProfileData.HasTrunOnNotifcation) {
+
+                            var organizationDetail = localStorageService.get('organizationDetail');
+                            var userId = organizationDetail.UserId;
+                            var url = authServiceBase + "webapi/api/core/MobileApp/SetDefaultNotification?userId=" + userId;
+                            $http.post(url).success(function (result) {
+                              
+                                if (typeof userProfileData === 'undefined')
+                                {
+                                    var userProfile = {
+                                        SearchType: 'OrderNumber',
+                                        SelectedPara: '1',
+                                        HasReadNote: true,
+                                        IsFirtTime: true,
+                                        HasTrunOnNotifcation: true,
+                                        HasForceClearAll: false
+                                    };
+                                 
+                                    localStorageService.set('user-profile', userProfile);
+                                }
+                                else {
+                                    userProfileData.HasTrunOnNotifcation = true;
+                                    localStorageService.set('user-profile', userProfileData);
+                                }
+                               
+                                var userProfileData = localStorageService.get('user-profile');
+                                console.log(userProfileData);
+                                alert('in' + userProfileData.HasTrunOnNotifcation);
+                                deferred.resolve(result);
+
+                            }).error(function (err, status) {
+                                deferred.reject(err);
+
+                            });
+                          
+                        }
+                        else {
+                         
+                            deferred.resolve('success');
+                           
+                        }
+
+                        return deferred.promise;
+                       
+                    }
+
                     homeDataServiceFactory.getOrderCounts = getOrderCounts;
                     homeDataServiceFactory.forceGetOrderCounts = forceGetOrderCounts;
 
                     homeDataServiceFactory.getOrderSummary = getOrderSummary;
                     homeDataServiceFactory.forceGetOrderSummary = forceGetOrderSummary;
+
+                    homeDataServiceFactory.setDefaultNotifcations = setDefaultNotifcations;
 
                     return homeDataServiceFactory;
                 }

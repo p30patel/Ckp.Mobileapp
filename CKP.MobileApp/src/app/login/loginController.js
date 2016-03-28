@@ -1,7 +1,7 @@
 'use strict';
 app.controller('loginController', [
-                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'faqDataService', 'policyTermsDataService', '$rootScope',
-function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, faqDataService, policyTermsDataService, $rootScope) {
+                   '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'homeDataService', '$rootScope',
+function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, homeDataService, $rootScope) {
     $scope.title = '';
 
     //login page html lables
@@ -387,6 +387,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 }
                 }
                 else {
+                    homeDataService.setDefaultNotifcations();
                     kendo.mobile.application.navigate("src/app/home/home.html");
             }
 
