@@ -608,11 +608,12 @@ app.controller('homeController', [
                  
                        //view more orders
                        $scope.showMoreOrderModel = function (orders, columnName) {
+                         
                            $scope.viewMoreColumn = columnName;
 
                            $scope.orderList = orders;
                            if (typeof (window.navigator.simulator) === 'undefined') {
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.viewMore");
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.viewMoreOrders");
                            }
                            $("#modalview-moreOrder").kendoMobileModalView("open");
                        };
