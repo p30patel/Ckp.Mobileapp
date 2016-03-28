@@ -86,6 +86,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             SelectedPara: '1',
             HasReadNote: true,
             IsFirtTime: true,
+            HasTrunOnNotifcation : false,
             HasForceClearAll: false
         };
 
@@ -93,7 +94,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             localStorageService.set('user-profile', userProfile);
             //console.log(userProfile);
             //var userProfileData = localStorageService.get('user-profile');
-            //console.log(userProfileData.SearchType);
+            //console.log(userProfileData.HasTrunOnNotifcation);
         }
 
 
