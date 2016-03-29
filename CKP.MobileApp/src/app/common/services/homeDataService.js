@@ -143,7 +143,7 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                                
                                 var userProfileData = localStorageService.get('user-profile');
                                 console.log(userProfileData);
-                                alert('in' + userProfileData.HasTrunOnNotifcation);
+                            
                                 deferred.resolve(result);
 
                             }).error(function (err, status) {

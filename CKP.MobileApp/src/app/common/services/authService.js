@@ -149,9 +149,8 @@ app.factory('authService', [
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
                             $http.post(url, data).success(function (result) {
                                 localStorageService.set('organizationDetail', result);                                
-                                localStorageService.remove("messages");
-                                
-                                console.log('org detail loaded from server:');
+                                localStorageService.remove("messages");                               
+                               
                                 var date = new Date();
                                 var currentDate = date.toLocaleDateString();
                                 var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // current is 1 days
@@ -165,10 +164,16 @@ app.factory('authService', [
                                     "LastUpdated": new Date().getTime(),
                                     "PersistTime": persistTime
                                 };
-                             
 
                                 localStorageService.set('forceRefreshDetail', refreshData);
                                 $rootScope.hasBackButton = false;
+
+                                var userProfileData = localStorageService.get('user-profile');
+                                if (userProfileData) {
+                                    userProfileData.HasTrunOnNotifcation = false;
+                                    localStorageService.set('user-profile', userProfileData);
+                                }
+
                                 deferred.resolve(result);
                             }).error(function (err, status) {
                                 deferred.reject(err);
