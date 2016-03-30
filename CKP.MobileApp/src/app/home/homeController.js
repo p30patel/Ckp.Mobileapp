@@ -28,7 +28,7 @@ app.controller('homeController', [
                        $scope.chk = {};
                        var setResources = function () {
                            $scope.form.attentionUser = {};
-                           $scope.form.attentionUser.resoruceName = "Attension User";
+                           $scope.form.attentionUser.resoruceName = "Attention User";
                            $scope.form.attentionUser.resoruceValue = translateService.getResourceValue($scope.form.attentionUser.resoruceName);
 
                            $scope.form.creditLock = {};
