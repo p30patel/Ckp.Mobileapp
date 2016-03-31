@@ -17,10 +17,6 @@ app.controller('orderlistController', [
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
 
-                               if (typeof (window.navigator.simulator) === 'undefined') {
-                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderList");
-                               }
-
                                if (!authService.authentication.isAuth) {
                                    authService.logout();
                                    kendo.mobile.application.navigate("src/app/login/login.html");
@@ -156,9 +152,15 @@ app.controller('orderlistController', [
                                if ($scope.order.orderType === '1') {
                                    $scope.order.hasApproval = true;
                                    $scope.hasHidePrice = false;
+                                   if (typeof (window.navigator.simulator) === 'undefined') {
+                                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderApporval");
+                                   }
                                }
                                else {
                                    $scope.hasHidePrice = result.length > 0 ? result[0].HideCheckOutPrice : false;
+                                   if (typeof (window.navigator.simulator) === 'undefined') {
+                                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderList");
+                                   }
                                }
 
                            }).catch(function (error) {
