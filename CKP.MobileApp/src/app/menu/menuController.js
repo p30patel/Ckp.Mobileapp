@@ -43,6 +43,10 @@ app.controller('menuController', [
                        $scope.form.feedback.resoruceName = "Feedback";
                        $scope.form.feedback.resoruceValue = translateService.getResourceValue($scope.form.feedback.resoruceName);
 
+                       $scope.form.inbox = {};
+                       $scope.form.inbox.resoruceName = "Inbox";
+                       $scope.form.inbox.resoruceValue = translateService.getResourceValue($scope.form.inbox.resoruceName);
+
                        $scope.authentication = authService.authentication;
 
                        $scope.organizationDetail = {};
@@ -140,6 +144,10 @@ app.controller('menuController', [
                                    break;
                                case "contactus":
                                    kendo.mobile.application.navigate("src/app/contactus/contactus.html");
+                                   break;
+
+                               case "inbox":
+                                   kendo.mobile.application.navigate("src/app/notification/inbox.html");
                                    break;
 
                        

@@ -49,7 +49,7 @@
     <script src="src/app/common/services/policyTermsDataService.js"></script>
     <script src="src/app/common/services/feedbackDataService.js"></script>
     <script src="src/app/common/services/notificationDataService.js"></script>
-
+   
     <script src="src/app/common/directives/alerting.js"></script>
     <script src="src/app/common/directives/nextFocuse.js"></script>
     <script src="src/app/common/directives/translate.js"></script>
@@ -68,6 +68,8 @@
     <script src="src/app/feedback/feedbackController.js"></script>
 
     <script src="src/app/notification/notificationController.js"></script>
+    <script src="src/app/notification/inboxController.js"></script>
+
     <script src="src/app/policy/policyController.js"></script>
     <script src="src/app/termsCondition/termsConditionController.js"></script>
 
@@ -108,6 +110,12 @@
         </kendo-mobile-header>
         <kendo-mobile-content>
             <ul kendo-mobile-list-view>
+                <li ng-show="authentication.isAuth">
+
+                    <a ng-click="mnuClick('inbox')" data-icon="ck-icon ck-messages-alt" data-tap="myTouch.tap">
+                        {{form.inbox.resoruceValue}}
+                    </a>
+                </li>
                 <li>
 
                     <a ng-click="mnuClick('contactus')" data-icon="ck-icon ck-contact" data-tap="myTouch.tap">
