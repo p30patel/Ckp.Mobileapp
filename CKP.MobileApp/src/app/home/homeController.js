@@ -380,6 +380,7 @@ app.controller('homeController', [
                        $scope.parameters = parameterService.getSearchParameters();
                        $scope.clearSearch = function () {
                            $scope.searchValue = "";
+                           search();
                        }
 
 
