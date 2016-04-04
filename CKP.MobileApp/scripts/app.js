@@ -187,6 +187,10 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
     }
     backButtonEvent();
 
+    $(document).on('click', '.showAlertLink', function () {
+        var url = $('#surveyUrl').val();
+        window.open(url, '_blank', 'location=yes');
+    });
 
 }]);
 
