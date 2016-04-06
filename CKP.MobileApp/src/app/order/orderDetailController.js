@@ -6,8 +6,8 @@ app.controller('orderDetailController', [
                        $scope.form = {};
 
                        $scope.form.title = {};
-                       $scope.form.title.resoruceName = "Order Detail";
-                       $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
+                       $scope.form.title.resourceName = "Order Detail";
+                       $scope.form.title.resourceValue = translateService.getResourceValue($scope.form.title.resourceName);
                        $scope.afterShow = function (e) {
 
                            var view = kendo.mobile.application.view();
@@ -16,7 +16,7 @@ app.controller('orderDetailController', [
                                             .header
                                             .find(".km-navbar")
                                             .data("kendo-mobile-nav-bar");
-                               navbar.title($scope.form.title.resoruceValue);
+                               navbar.title($scope.form.title.resourceValue);
 
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.orderDetail");
@@ -26,147 +26,152 @@ app.controller('orderDetailController', [
                        }
 
                        $scope.form.noData = {};
-                       $scope.form.noData.resoruceName = "No Data are found";
-                       $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+                       $scope.form.noData.resourceName = "No Data are found";
+                       $scope.form.noData.resourceValue = translateService.getResourceValue($scope.form.noData.resourceName);
 
                        $scope.form.noResults = {};
-                       $scope.form.noResults.resoruceName = "No Results are found";
-                       $scope.form.noResults.resoruceValue = translateService.getResourceValue($scope.form.noResults.resoruceName);
+                       $scope.form.noResults.resourceName = "No Results are found";
+                       $scope.form.noResults.resourceValue = translateService.getResourceValue($scope.form.noResults.resourceName);
 
 
 
                        $scope.form.orderInquiry = {};
-                       $scope.form.orderInquiry.resoruceName = "Have a question or comment about this order?";
-                       $scope.form.orderInquiry.resoruceValue = translateService.getResourceValue($scope.form.orderInquiry.resoruceName);
+                       $scope.form.orderInquiry.resourceName = "Have a question or comment about this order?";
+                       $scope.form.orderInquiry.resourceValue = translateService.getResourceValue($scope.form.orderInquiry.resourceName);
 
 
                        $scope.form.faildInquiry = {};
-                       $scope.form.faildInquiry.resoruceName = "Failed to Send Inquiry";
-                       $scope.form.faildInquiry.resoruceValue = translateService.getResourceValue($scope.form.faildInquiry.resoruceName);
+                       $scope.form.faildInquiry.resourceName = "Failed to Send Inquiry";
+                       $scope.form.faildInquiry.resourceValue = translateService.getResourceValue($scope.form.faildInquiry.resourceName);
 
 
                        $scope.form.thankyou = {};
-                       $scope.form.thankyou.resoruceName = "Thank you for your Inquiry, someone will be get back to you";
-                       $scope.form.thankyou.resoruceValue = translateService.getResourceValue($scope.form.thankyou.resoruceName);
+                       $scope.form.thankyou.resourceName = "Thank you for your Inquiry, someone will be get back to you";
+                       $scope.form.thankyou.resourceValue = translateService.getResourceValue($scope.form.thankyou.resourceName);
 
                        $scope.form.shippingInstruction = {};
-                       $scope.form.shippingInstruction.resoruceName = "Shipping discliamer";
-                       $scope.form.shippingInstruction.resoruceValue = translateService.getResourceValue($scope.form.shippingInstruction.resoruceName);
+                       $scope.form.shippingInstruction.resourceName = "Shipping discliamer";
+                       $scope.form.shippingInstruction.resourceValue = translateService.getResourceValue($scope.form.shippingInstruction.resourceName);
 
                        $scope.form.orderDate = {};
-                       $scope.form.orderDate.resoruceName = "Order Date";
-                       $scope.form.orderDate.resoruceValue = translateService.getResourceValue($scope.form.orderDate.resoruceName);
+                       $scope.form.orderDate.resourceName = "Order Date";
+                       $scope.form.orderDate.resourceValue = translateService.getResourceValue($scope.form.orderDate.resourceName);
 
                        $scope.form.dateInSystem = {};
-                       $scope.form.dateInSystem.resoruceName = "Receive Date";
-                       $scope.form.dateInSystem.resoruceValue = translateService.getResourceValue($scope.form.dateInSystem.resoruceName);
+                       $scope.form.dateInSystem.resourceName = "Receive Date";
+                       $scope.form.dateInSystem.resourceValue = translateService.getResourceValue($scope.form.dateInSystem.resourceName);
 
                        $scope.form.salesOrder = {};
-                       $scope.form.salesOrder.resoruceName = "Sales Order";
-                       $scope.form.salesOrder.resoruceValue = translateService.getResourceValue($scope.form.salesOrder.resoruceName);
+                       $scope.form.salesOrder.resourceName = "Sales Order";
+                       $scope.form.salesOrder.resourceValue = translateService.getResourceValue($scope.form.salesOrder.resourceName);
 
 
                        $scope.form.orderNumber = {};
-                       $scope.form.orderNumber.resoruceName = "Order Number";
-                       $scope.form.orderNumber.resoruceValue = translateService.getResourceValue($scope.form.orderNumber.resoruceName);
+                       $scope.form.orderNumber.resourceName = "Order Number";
+                       $scope.form.orderNumber.resourceValue = translateService.getResourceValue($scope.form.orderNumber.resourceName);
 
                        $scope.form.shoppingCart = {};
-                       $scope.form.shoppingCart.resoruceName = "Shopping Cart";
-                       $scope.form.shoppingCart.resoruceValue = translateService.getResourceValue($scope.form.shoppingCart.resoruceName);
+                       $scope.form.shoppingCart.resourceName = "Shopping Cart";
+                       $scope.form.shoppingCart.resourceValue = translateService.getResourceValue($scope.form.shoppingCart.resourceName);
 
                        $scope.form.vendorRef = {};
-                       $scope.form.vendorRef.resoruceName = "Vendor Ref";
-                       $scope.form.vendorRef.resoruceValue = translateService.getResourceValue($scope.form.vendorRef.resoruceName);
+                       $scope.form.vendorRef.resourceName = "Vendor Ref";
+                       $scope.form.vendorRef.resourceValue = translateService.getResourceValue($scope.form.vendorRef.resourceName);
 
                        $scope.form.notifyMe = {};
-                       $scope.form.notifyMe.resoruceName = "Notify Me";
-                       $scope.form.notifyMe.resoruceValue = translateService.getResourceValue($scope.form.notifyMe.resoruceName);
+                       $scope.form.notifyMe.resourceName = "Notify Me";
+                       $scope.form.notifyMe.resourceValue = translateService.getResourceValue($scope.form.notifyMe.resourceName);
 
                        $scope.form.billingInfo = {};
-                       $scope.form.billingInfo.resoruceName = "Bill To Information";
-                       $scope.form.billingInfo.resoruceValue = translateService.getResourceValue($scope.form.billingInfo.resoruceName);
+                       $scope.form.billingInfo.resourceName = "Bill To Information";
+                       $scope.form.billingInfo.resourceValue = translateService.getResourceValue($scope.form.billingInfo.resourceName);
 
 
                        $scope.form.shiptoInfo = {};
-                       $scope.form.shiptoInfo.resoruceName = "Ship To Information";
-                       $scope.form.shiptoInfo.resoruceValue = translateService.getResourceValue($scope.form.shiptoInfo.resoruceName);
+                       $scope.form.shiptoInfo.resourceName = "Ship To Information";
+                       $scope.form.shiptoInfo.resourceValue = translateService.getResourceValue($scope.form.shiptoInfo.resourceName);
 
 
                        $scope.form.orderInquiry = {};
-                       $scope.form.orderInquiry.resoruceName = "Order Inquiry";
-                       $scope.form.orderInquiry.resoruceValue = translateService.getResourceValue($scope.form.orderInquiry.resoruceName);
+                       $scope.form.orderInquiry.resourceName = "Order Inquiry";
+                       $scope.form.orderInquiry.resourceValue = translateService.getResourceValue($scope.form.orderInquiry.resourceName);
 
 
                        $scope.form.sendInquiry = {};
-                       $scope.form.sendInquiry.resoruceName = "Send Inquiry";
-                       $scope.form.sendInquiry.resoruceValue = translateService.getResourceValue($scope.form.sendInquiry.resoruceName);
+                       $scope.form.sendInquiry.resourceName = "Send Inquiry";
+                       $scope.form.sendInquiry.resourceValue = translateService.getResourceValue($scope.form.sendInquiry.resourceName);
 
 
 
                        $scope.form.item = {};
-                       $scope.form.item.resoruceName = "Item";
-                       $scope.form.item.resoruceValue = translateService.getResourceValue($scope.form.item.resoruceName);
+                       $scope.form.item.resourceName = "Item";
+                       $scope.form.item.resourceValue = translateService.getResourceValue($scope.form.item.resourceName);
 
 
                        $scope.form.quantity = {};
-                       $scope.form.quantity.resoruceName = "Quantity";
-                       $scope.form.quantity.resoruceValue = translateService.getResourceValue($scope.form.quantity.resoruceName);
+                       $scope.form.quantity.resourceName = "Quantity";
+                       $scope.form.quantity.resourceValue = translateService.getResourceValue($scope.form.quantity.resourceName);
 
 
                        $scope.form.price = {};
-                       $scope.form.price.resoruceName = "Price";
-                       $scope.form.price.resoruceValue = translateService.getResourceValue($scope.form.price.resoruceName);
+                       $scope.form.price.resourceName = "Price";
+                       $scope.form.price.resourceValue = translateService.getResourceValue($scope.form.price.resourceName);
 
                        $scope.form.orderDetail = {};
-                       $scope.form.orderDetail.resoruceName = "Order Detail";
-                       $scope.form.orderDetail.resoruceValue = translateService.getResourceValue($scope.form.orderDetail.resoruceName);
+                       $scope.form.orderDetail.resourceName = "Order Detail";
+                       $scope.form.orderDetail.resourceValue = translateService.getResourceValue($scope.form.orderDetail.resourceName);
 
 
                        $scope.form.itemCode = {};
-                       $scope.form.itemCode.resoruceName = "Item Code";
-                       $scope.form.itemCode.resoruceValue = translateService.getResourceValue($scope.form.itemCode.resoruceName);
+                       $scope.form.itemCode.resourceName = "Item Code";
+                       $scope.form.itemCode.resourceValue = translateService.getResourceValue($scope.form.itemCode.resourceName);
 
                        $scope.form.prodcutionLocation = {};
-                       $scope.form.prodcutionLocation.resoruceName = "Production Location";
-                       $scope.form.prodcutionLocation.resoruceValue = translateService.getResourceValue($scope.form.prodcutionLocation.resoruceName);
+                       $scope.form.prodcutionLocation.resourceName = "Production Location";
+                       $scope.form.prodcutionLocation.resourceValue = translateService.getResourceValue($scope.form.prodcutionLocation.resourceName);
 
                        $scope.form.trackingList = {};
-                       $scope.form.trackingList.resoruceName = "Tracking List";
-                       $scope.form.trackingList.resoruceValue = translateService.getResourceValue($scope.form.trackingList.resoruceName);
+                       $scope.form.trackingList.resourceName = "Tracking List";
+                       $scope.form.trackingList.resourceValue = translateService.getResourceValue($scope.form.trackingList.resourceName);
 
                        $scope.form.releasedBy = {};
-                       $scope.form.releasedBy.resoruceName = "Released by";
-                       $scope.form.releasedBy.resoruceValue = translateService.getResourceValue($scope.form.releasedBy.resoruceName);
+                       $scope.form.releasedBy.resourceName = "Released by";
+                       $scope.form.releasedBy.resourceValue = translateService.getResourceValue($scope.form.releasedBy.resourceName);
 
                        $scope.form.phone = {};
-                       $scope.form.phone.resoruceName = "Phone";
-                       $scope.form.phone.resoruceValue = translateService.getResourceValue($scope.form.phone.resoruceName);
+                       $scope.form.phone.resourceName = "Phone";
+                       $scope.form.phone.resourceValue = translateService.getResourceValue($scope.form.phone.resourceName);
 
                        $scope.form.email = {};
-                       $scope.form.email.resoruceName = "Email";
-                       $scope.form.email.resoruceValue = translateService.getResourceValue($scope.form.email.resoruceName);
+                       $scope.form.email.resourceName = "Email";
+                       $scope.form.email.resourceValue = translateService.getResourceValue($scope.form.email.resourceName);
 
 
                        $scope.form.confirmation = {};
-                       $scope.form.confirmation.resoruceName = "Order Confirmation";
-                       $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
+                       $scope.form.confirmation.resourceName = "Order Confirmation";
+                       $scope.form.confirmation.resourceValue = translateService.getResourceValue($scope.form.confirmation.resourceName);
 
                        $scope.form.estimated = {};
-                       $scope.form.estimated.resoruceName = "Estimated";
-                       $scope.form.estimated.resoruceValue = translateService.getResourceValue($scope.form.estimated.resoruceName);
+                       $scope.form.estimated.resourceName = "Estimated";
+                       $scope.form.estimated.resourceValue = translateService.getResourceValue($scope.form.estimated.resourceName);
 
                        $scope.form.shipDate = {};
-                       $scope.form.shipDate.resoruceName = "Ship Date";
-                       $scope.form.shipDate.resoruceValue = translateService.getResourceValue($scope.form.shipDate.resoruceName);
+                       $scope.form.shipDate.resourceName = "Ship Date";
+                       $scope.form.shipDate.resourceValue = translateService.getResourceValue($scope.form.shipDate.resourceName);
 
 
                        $scope.form.apporvalCommnet = {};
-                       $scope.form.apporvalCommnet.resoruceName = "Apporval Commnet";
-                       $scope.form.apporvalCommnet.resoruceValue = translateService.getResourceValue($scope.form.apporvalCommnet.resoruceName);
+                       $scope.form.apporvalCommnet.resourceName = "Apporval Commnet";
+                       $scope.form.apporvalCommnet.resourceValue = translateService.getResourceValue($scope.form.apporvalCommnet.resourceName);
 
                        $scope.form.orderStatus = {};
-                       $scope.form.orderStatus.resoruceName = "Order Status";
-                       $scope.form.orderStatus.resoruceValue = translateService.getResourceValue($scope.form.orderStatus.resoruceName);
+                       $scope.form.orderStatus.resourceName = "Order Status";
+                       $scope.form.orderStatus.resourceValue = translateService.getResourceValue($scope.form.orderStatus.resourceName);
+
+
+                       $scope.form.searchKeys = {};
+                       $scope.form.searchKeys.resourceName = "Search Keys and Cut Number";
+                       $scope.form.searchKeys.resourceValue = translateService.getResourceValue($scope.form.searchKeys.resourceName);
 
 
                        $scope.order = {};
@@ -363,7 +368,7 @@ app.controller('orderDetailController', [
                            $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
                            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
                                if (result === 'success') {
-                                   $scope.inqueryMessage = $scope.form.thankyou.resoruceValue;
+                                   $scope.inqueryMessage = $scope.form.thankyou.resourceValue;
                                    $timeout(function () {
                                        $scope.inqueryComment = "";
                                        $scope.feedbackData.comment = "";
@@ -380,7 +385,7 @@ app.controller('orderDetailController', [
                                }
                            }).catch(function (error) {
                                $scope.feedbackData.comment = "";
-                               $scope.inqueryMessage = $scope.form.faildInquiry.resoruceValue;
+                               $scope.inqueryMessage = $scope.form.faildInquiry.resourceValue;
                                $timeout(function () {
                                    $scope.inqueryMessage = "";
                                }, 7000);
@@ -405,13 +410,13 @@ app.controller('orderDetailController', [
                                    $scope.confirmationData = result.data;
                                }
                                else {
-                                   $scope.confirmationData = $scope.form.noData.resoruceValue;
+                                   $scope.confirmationData = $scope.form.noData.resourceValue;
 
                                }
 
 
                            }).catch(function (error) {
-                               $scope.confirmationData = $scope.form.noData.resoruceValue;
+                               $scope.confirmationData = $scope.form.noData.resourceValue;
                            }).finally(function () {
                                kendo.mobile.application.hideLoading();
                            });

@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resourceValue}}'" k-layout="'default'" ng-controller="orderDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-button ng-show="trackingCount > 0" id="btn_tracking" k-align="'right'" ng-click="showTrakcingListModal()">
@@ -12,7 +12,7 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-        <p style="padding:5px;" ng-show="order.detail.MobileOrderDetail.POCtrlNo === 0">   {{form.noResults.resoruceValue}}</p>
+        <p style="padding:5px;" ng-show="order.detail.MobileOrderDetail.POCtrlNo === 0">   {{form.noResults.resourceValue}}</p>
         <kendo-mobile-list-view class="ck-no-border ck-grey-wrap" ng-show="order.detail.MobileOrderDetail.POCtrlNo > 0">
             <li>
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
@@ -22,8 +22,8 @@
 
                     <tr>
                         <td class="v-align" style="width :35%;">
-                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{form.dateInSystem.resoruceValue}}</h3>
-                            <h3 class="km-bold-font order-detail-h3" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">{{form.orderDate.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{form.dateInSystem.resourceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">{{form.orderDate.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</span>
@@ -31,7 +31,7 @@
                         </td>
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
                             <div class="status open">
-                                <span style="font-size:x-small !important;">{{form.orderStatus.resoruceValue}}:</span>
+                                <span style="font-size:x-small !important;">{{form.orderStatus.resourceValue}}:</span>
                                 {{order.detail.MobileOrderDetail.StatusDisplay}}
                             </div>
 
@@ -39,7 +39,7 @@
                     </tr>
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font order-detail-h3">{{form.shoppingCart.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.shoppingCart.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</span>
@@ -50,7 +50,7 @@
 
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font order-detail-h3">{{form.orderNumber.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.orderNumber.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.OrderNumber}}</span>
@@ -61,12 +61,12 @@
                             <input kendo-mobile-switch type="checkbox"
                                    k-on-change="onChangeNotifyMe(kendoEvent)" ng-model="notifyMe" data-SubscriptionType="108" />
 
-                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resoruceValue}}</p>
+                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resourceValue}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font order-detail-h3">{{form.salesOrder.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.salesOrder.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</span>
@@ -74,7 +74,7 @@
                     </tr>
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font order-detail-h3">{{form.vendorRef.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.vendorRef.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.VendorRef}}</span>
@@ -84,7 +84,7 @@
                             <div style="text-align:center;">
                                 <img src="styles/images/page.png" class="page" style="height:35px !important; width:25px !important; margin-left: 0 !important;" data-tap="myTouch.tap"
                                      ng-click="showConfirmationModel(order.detail.MobileOrderDetail.ShoppingCartId)" />
-                                <p style="font-size:x-small !important; margin-top: -5px !important;">{{form.confirmation.resoruceValue}}</p>
+                                <p style="font-size:x-small !important; margin-top: -5px !important;">{{form.confirmation.resourceValue}}</p>
                             </div>
 
 
@@ -93,8 +93,8 @@
 
                     <tr>
                         <td class="v-align" style="width :35%">
-                            <h3 class="km-bold-font order-detail-h3">{{form.estimated.resoruceValue}}</h3>
-                            <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resoruceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.estimated.resourceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
@@ -105,7 +105,7 @@
 
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
                                       ng-show="!hasBlockAddress">
-                <h4>{{form.billingInfo.resoruceValue}}</h4>
+                <h4>{{form.billingInfo.resourceValue}}</h4>
 
                 <p>
                     <b>{{order.detail.MobileOrderDetail.BillingAddress.Name}}</b>
@@ -120,7 +120,7 @@
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" data-animation="false"
                                       ng-show="!hasBlockAddress">
-                <h4>{{form.shiptoInfo.resoruceValue}}</h4>
+                <h4>{{form.shiptoInfo.resourceValue}}</h4>
                 <p>
                     <b>{{order.detail.MobileOrderDetail.DeliveryAddress.Name}}</b>
                 </p>
@@ -133,47 +133,47 @@
                 <p ng-show="order.detail.MobileOrderDetail.DeliveryAddress.City">{{order.detail.MobileOrderDetail.DeliveryAddress.City}}, {{order.detail.MobileOrderDetail.DeliveryAddress.StateProv}} {{order.detail.MobileOrderDetail.DeliveryAddress.ZipCode}} {{order.detail.MobileOrderDetail.DeliveryAddress.Iso3166}} </p>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-inquiry" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" data-animation="false">
-                <h4>{{form.orderInquiry.resoruceValue}}</h4>
+                <h4>{{form.orderInquiry.resourceValue}}</h4>
                 <table class="ck-table">
                     <tr>
                         <td>
                             <fieldset>
-                                <textarea rows="3" placeholder="{{form.orderInquiry.resoruceValue}}" ng-model="inqueryComment"></textarea>
+                                <textarea rows="3" placeholder="{{form.orderInquiry.resourceValue}}" ng-model="inqueryComment"></textarea>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <i></i>
-                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">{{form.sendInquiry.resoruceValue}}</kendo-mobile-button>
+                            <kendo-mobile-button class="km-primary km-large km-justified" style="margin-top:1em;" k-on-click="send()">{{form.sendInquiry.resourceValue}}</kendo-mobile-button>
                             <p ng-show="inqueryMessage" class="text-center ckp-a-link" k-transition="'slide'" ng-bind-html="renderHtml(inqueryMessage)"></p>
                         </td>
                     </tr>
                 </table>
             </kendo-mobile-collapsible>
             <kendo-mobile-collapsible class="ck-details" k-mini="false" k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="true" k-on-expand="OpenExpand()" data-animation="false">
-                <h4>{{form.orderDetail.resoruceValue}}</h4>
+                <h4>{{form.orderDetail.resourceValue}}</h4>
                 <table class="ck-table pad">
                     <tr class="med-grey pipe">
                         <td style="width:60%">
-                            <h4 class="km-bold-font">{{form.item.resoruceValue}}</h4>
+                            <h4 class="km-bold-font">{{form.item.resourceValue}}</h4>
                         </td>
                         <td style="width:30%">
-                            <h4 class="km-bold-font">{{form.quantity.resoruceValue}}</h4>
+                            <h4 class="km-bold-font">{{form.quantity.resourceValue}}</h4>
                         </td>
                         <td style="width:30%" ng-show="!hasHidePrice">
-                            <h4 class="km-bold-font">{{form.price.resoruceValue}} ({{order.detail.MobileOrderlineDetailList[0].GrossCurrency.Code}})</h4>
+                            <h4 class="km-bold-font">{{form.price.resourceValue}} ({{order.detail.MobileOrderlineDetailList[0].GrossCurrency.Code}})</h4>
                         </td>
                     </tr>
                     <tr class="pipe" ng-repeat="orderLine in order.detail.MobileOrderlineDetailList">
                         <td style="width:60%">
 
                             <h4 class="km-bold-font">{{orderLine.ItemDescription}}</h4>
-                            <h5>{{form.itemCode.resoruceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
+                            <h5>{{form.itemCode.resourceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
                             <h5 ng-show="!hasHidePrice">
                                 {{orderLine.GrossCurrency.Code}} {{orderLine.GrossPrice | number : 2}} {{orderLine.PriceUom.UomDisplay}}
                             </h5>
-                            <h5>{{form.prodcutionLocation.resoruceValue}}:</h5>
+                            <h5>{{form.prodcutionLocation.resourceValue}}:</h5>
                             <h5><b>{{orderLine.PrintshopName}}</b></h5>
                         </td>
                         <td class="v-align" style="width:30%">
@@ -188,13 +188,36 @@
                 </table>
             </kendo-mobile-collapsible>
 
+            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
+                                      ng-show="order.detail.OrgContext.SearchKeyName ||  order.detail.OrgContext.SearchKeyName2 || order.detail.OrgContext.SearchKeyName3 || order.detail.OrgContext.CutNumberLabel">
+                <h4>{{form.searchKeys.resourceValue}}</h4>
+
+                <table class="ck-table">
+                    <tr>
+                        <td style="width:50%">
+                            <h4 ng-show="order.detail.OrgContext.SearchKeyName">{{order.detail.OrgContext.SearchKeyName}}</h4>
+                            <h4 ng-show="order.detail.OrgContext.SearchKeyName2">{{order.detail.OrgContext.SearchKeyName2}}</h4>
+                            <h4 ng-show="order.detail.OrgContext.SearchKeyName3">{{order.detail.OrgContext.SearchKeyName3}}</h4>
+                            <h4 ng-show="order.detail.OrgContext.CutNumberLabel">{{order.detail.OrgContext.CutNumberLabel}}</h4>
+                        </td>
+                        <td style="width:50%">
+                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue}}</h4>
+                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue2}}</h4>
+                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue3}}</h4>
+                            <h4>:{{order.detail.MobileOrderDetail.CutNumber}}</h4>
+                           
+                        </td>
+                    </tr>
+                </table>
+            </kendo-mobile-collapsible>
+
             <table class="ck-table pad" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">
                 <tr class="pipe" style="background:#fff;">
                     <td style="width:25%">
-                        <h4>{{form.releasedBy.resoruceValue}}</h4>
-                        <h4>{{form.email.resoruceValue}}</h4>
-                        <h4>{{form.phone.resoruceValue}}</h4>
-                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">{{form.apporvalCommnet.resoruceValue}}</h4>
+                        <h4>{{form.releasedBy.resourceValue}}</h4>
+                        <h4>{{form.email.resourceValue}}</h4>
+                        <h4>{{form.phone.resourceValue}}</h4>
+                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">{{form.apporvalCommnet.resourceValue}}</h4>
                     </td>
                     <td style="width:60%">
                         <h4>:{{order.detail.MobileOrderDetail.OrderedBy}}</h4>
@@ -211,7 +234,7 @@
     <kendo-mobile-modal-view id="modalview-trackingList" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-use-native-scrolling="true">
         <kendo-mobile-header>
             <kendo-mobile-nav-bar class="km-dark">
-                <kendo-view-title>{{form.trackingList.resoruceValue}}</kendo-view-title>
+                <kendo-view-title>{{form.trackingList.resourceValue}}</kendo-view-title>
                 <kendo-mobile-button ng-click="closeTrackingListModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;">
                     <img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" />
                 </kendo-mobile-button>
@@ -232,7 +255,7 @@
     <kendo-mobile-modal-view id="modalview-detail-confirmation" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true">
         <div kendo-mobile-header>
             <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
-                <kendo-view-title> {{form.confirmation.resoruceValue}}</kendo-view-title>
+                <kendo-view-title> {{form.confirmation.resourceValue}}</kendo-view-title>
                 <kendo-mobile-button ng-click="hideConfirmationModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
 
             </div>
