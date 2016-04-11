@@ -168,11 +168,6 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                        $scope.form.orderStatus.resourceName = "Order Status";
                        $scope.form.orderStatus.resourceValue = translateService.getResourceValue($scope.form.orderStatus.resourceName);
 
-
-                       $scope.form.searchKeys = {};
-                       $scope.form.searchKeys.resourceName = "Search Keys and Cut Number";
-                       $scope.form.searchKeys.resourceValue = translateService.getResourceValue($scope.form.searchKeys.resourceName);
-
                        $scope.form.itemPreview = {};
                        $scope.form.itemPreview.resourceName = "Item Preview";
                        $scope.form.itemPreview.resourceValue = translateService.getResourceValue($scope.form.itemPreview.resourceName);
