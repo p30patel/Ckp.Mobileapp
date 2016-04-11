@@ -1,16 +1,28 @@
-<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="inboxController" k-after-show="afterShow" k-before-show="beforeShow" >
-    
+<kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="inboxController" k-after-show="afterShow" k-before-show="beforeShow">
+
     <kendo-mobile-content>
-        <ul id="edit-listview" class="km-list" kendo-mobile-list-view k-data-source="notifications">          
-            <div k-template kendo-touch k-enable-swipe="true" k-on-swipe="myTouch.swipe(kendoEvent)">
-                <h4 class="ck-title-setting" translate-element="#=SubscriptinDescription#"></h4>
-                <h3 class="ck-descript-setting" translate-element="#=SubscriptinDescription#" data-translateText="Description"></h3> 
-                <a  data-role="button" data-icon="trash" ng-click="delete(kendoEvent, $index)" class="delete km-primary"></a>                             
-            </div>
-        </ul>
+        <div style="height:10px"></div>
+
+        <div class="km-listview-wrapper">
+            <ul id="edit-listview" kendo-mobile-list-view class="km-widget km-listview km-listgroup" ng-repeat="message in notifications">
+              
+                <li class="km-group-container">
+                    <div class="ck-padfix-setting km-group-title"></div>
+                    <ul class="km-list ck-brd-setting ck-title-setting">
+                        <li kendo-touch k-enable-swipe="true" k-on-swipe="myTouch.swipe(kendoEvent)">                        
+                            <h4 class="ck-title-setting"></h4>
+                            <p class="ck-descript-setting">{{message.DateProcessed | date : 'medium'}}</p>
+                            <p class="ck-descript-setting">{{message.Message}}</p>
+                            <a data-role="button" data-icon="trash" ng-click="delete(kendoEvent, {{message.PushNotificationMessageQueueId}})" class="delete km-primary"></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
     </kendo-mobile-content>
     <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
-        <p  class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
+        <p class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
     </kendo-mobile-footer>
 </kendo-mobile-view>
 
@@ -25,6 +37,8 @@
         border-width: 0;
         margin: 0;
         line-height: 2.5em;
+        width: 20% !important;
         box-shadow: inset .1em .1em .2em 0 rgba(0,0,0,.2);
+        text-align: center;
     }
 </style>

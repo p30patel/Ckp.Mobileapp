@@ -28,7 +28,6 @@ app.factory("notificationDataService", [
                         return deferred.promise;
                     };
 
-                 
                     var updateNotification = function (notifcationData) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
@@ -46,9 +45,50 @@ app.factory("notificationDataService", [
                         return deferred.promise;
                     };
 
+                    var getInboxMessages = function (jsonIn) {
+                        var deferred = $q.defer();
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
+                        var authentication = authService.authentication;
+
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        var orgContext = '';
+                        if (!organizationDetail) {
+                            deferred.reject('Error while getting data');
+                        }
+                       
+                        jsonIn.UserId = organizationDetail.UserId;                       
+
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/GetMessagesForInboxByUserId', jsonIn).success(function (result) {
+
+                            deferred.resolve(result);
+                        })
+                            .error(function (err, status) {
+                                deferred.reject(err);
+                            });
+                        return deferred.promise;
+                    };
+
+                    var updateInboxMessage = function (notifcationData) {
+                        var deferred = $q.defer();
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
+
+                        $http.post(authServiceBase + 'webapi/api/core/MobileApp/UpdatePushNotificationMessageQueue', notifcationData).success(function (result) {
+                            deferred.resolve(result);
+                        })
+                            .error(function (err, status) {
+                                deferred.reject(err);
+                            });
+                        return deferred.promise;
+                    };
+
                     notificationDataServiceFactory.updateNotification = updateNotification;
 
                     notificationDataServiceFactory.getUserNotifications = getUserNotifications;
+
+                    notificationDataServiceFactory.updateInboxMessage = updateInboxMessage;
+
+                    notificationDataServiceFactory.getInboxMessages = getInboxMessages;
                
                     return notificationDataServiceFactory;
                 }

@@ -19,6 +19,8 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     };
     $scope.message = "";
     $scope.notifications = [];
+    $scope.PageSize = 30;
+    $scope.CurrentPage = 1;
 
     $scope.afterShow = function (e) {
 
@@ -46,13 +48,18 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
     setResources();
    
-    var getNotifications = function () {
+    var getInboxMessages = function () {
         kendo.mobile.application.showLoading();
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.getInbox");
         }
-        notificationDataService.getUserNotifications().then(function (result) {
+        var jsonIn = {
+            PageSize: $scope.PageSize,
+            PageNumber: $scope.CurrentPage,
+            UserId: 0,
+        };
+        notificationDataService.getInboxMessages(jsonIn).then(function (result) {
             kendo.mobile.application.hideLoading();
             $scope.notifications = result;
         }).catch(function (error) {
@@ -64,7 +71,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         });
     }
-    getNotifications();
+    getInboxMessages();
 
 
     $scope.myTouch = {
@@ -84,13 +91,51 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         },
     }
 
-   
-    $scope.delete = function(e, index)
+    var updateInbox = function(jsonIn)
     {
-       
-       
-        $scope.notifications.splice(index, 1); //remove the item from the 'added' observable array
-        
+        notificationDataService.updateInboxMessage(jsonIn).then(function (result) {
+            if (result !== 'success') {
+                $scope.message = "Faild to save data, Please try later<br>";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 7000);
+            }
+            else {
+                if (jsonIn.HasDelete)
+                {
+                    //mark as delete
+                }
+                else {
+                    // mark as read
+                }
+            }
+        }).catch(function (error) {
+
+            $scope.message = "Faild to update message.";
+            $timeout(function () {
+                $scope.message = "";
+            }, 7000);
+
+        });
+    }
+    $scope.delete = function(e, id)
+    {
+        var jsonIn = {
+            Id: id,
+            Status: 105,
+            HasDelete : true
+        };
+        updateInbox(jsonIn);
+    }
+
+    $scope.read = function(e, id)
+    {
+        var jsonIn = {
+            Id: id,
+            Status: 103,
+            HasDelete: false
+        };
+        updateInbox(jsonIn);
     }
 
     $scope.renderHtml = function (message) {
