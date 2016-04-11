@@ -173,7 +173,26 @@ app.controller('orderDetailController', [
                        $scope.form.searchKeys.resourceName = "Search Keys and Cut Number";
                        $scope.form.searchKeys.resourceValue = translateService.getResourceValue($scope.form.searchKeys.resourceName);
 
+                       $scope.form.itemPreview = {};
+                       $scope.form.itemPreview.resourceName = "Item Preview";
+                       $scope.form.itemPreview.resourceValue = translateService.getResourceValue($scope.form.itemPreview.resourceName);
 
+                       $scope.form.deliveryDate = {};
+                       $scope.form.deliveryDate.resourceName = "Delivery Date";
+                       $scope.form.deliveryDate.resourceValue = translateService.getResourceValue($scope.form.deliveryDate.resourceName);
+
+                       $scope.form.signedBy = {};
+                       $scope.form.signedBy.resourceName = "Signed By";
+                       $scope.form.signedBy.resourceValue = translateService.getResourceValue($scope.form.signedBy.resourceName);
+
+                       $scope.form.seeMoreDetail = {};
+                       $scope.form.seeMoreDetail.resourceName = "See More Detail";
+                       $scope.form.seeMoreDetail.resourceValue = translateService.getResourceValue($scope.form.seeMoreDetail.resourceName);
+
+                       $scope.form.hideMoreDetail = {};
+                       $scope.form.hideMoreDetail.resourceName = "Hide More Detail";
+                       $scope.form.hideMoreDetail.resourceValue = translateService.getResourceValue($scope.form.hideMoreDetail.resourceName);
+                       
                        $scope.order = {};
 
                        $scope.order.hasApproval = false;
@@ -196,6 +215,7 @@ app.controller('orderDetailController', [
                        $scope.confirmationData = "";
                        $scope.retailerId = 0;
                        $scope.hasHidePrice = false;
+                       $scope.showMore = false;
                        var init = function () {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -428,6 +448,16 @@ app.controller('orderDetailController', [
                            $("#modalview-detail-confirmation").kendoMobileModalView("close");
                        };
 
+                       //item preview modal
+                       $scope.showItemPreviewModel = function (url) {
+
+                           $("#modalview-detail-item-preview").kendoMobileModalView("open");
+                       };
+                       $scope.hideItemPreviewModel = function () {
+
+                           $("#modalview-detail-item-preview").kendoMobileModalView("close");
+                       };
+                   
                        //tracking modal 
 
                        $scope.closeTrackingListModel = function () {

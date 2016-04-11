@@ -3,12 +3,14 @@
 }
 .order-list-h4 {
     margin-top: 0 !important;
-     margin-bottom: 0 !important;
-     font-size: .8rem !important;
+    margin-bottom: 0 !important;
+    font-size: .8rem !important;
 }
-.km-nova span.km-switch {
-  color: #7ED321;
-  margin-top: -1.3rem !important;
+
+.km-listview .ck-table .km-switch{
+    position: relative;
+    top: 5px !important;  
+    right: 0px !important; 
 }
 .ck-switchpad-right  {
   color: #7ED321;

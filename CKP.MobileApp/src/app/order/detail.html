@@ -16,10 +16,7 @@
         <kendo-mobile-list-view class="ck-no-border ck-grey-wrap" ng-show="order.detail.MobileOrderDetail.POCtrlNo > 0">
             <li>
                 <h2 class="km-bold-font">{{order.detail.MobileOrderDetail.OrganizationName}}</h2>
-
-
                 <table class="ck-table">
-
                     <tr>
                         <td class="v-align" style="width :35%;">
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{form.dateInSystem.resourceValue}}</h3>
@@ -44,8 +41,6 @@
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</span>
                         </td>
-
-
                     </tr>
 
                     <tr>
@@ -57,11 +52,12 @@
                         </td>
 
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important;">
-                           
-                            <input kendo-mobile-switch type="checkbox"
-                                   k-on-change="onChangeNotifyMe(kendoEvent)" ng-model="notifyMe" data-SubscriptionType="108" />
+                            <div style="text-align:center;">
+                                <input kendo-mobile-switch type="checkbox"
+                                       k-on-change="onChangeNotifyMe(kendoEvent)" ng-model="notifyMe" data-SubscriptionType="108" />
 
-                            <p class="notify" style="font-size:x-small !important; margin-bottom:0 !important;">{{form.notifyMe.resourceValue}}</p>
+                                <p style="font-size:x-small !important; margin-bottom:0 !important; margin-top:5px !important;">{{form.notifyMe.resourceValue}}</p>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -95,11 +91,76 @@
                         <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font order-detail-h3">{{form.estimated.resourceValue}}</h3>
                             <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3>
+                            <a ng-click="showMore = !showMore" ng-show="!showMore" class="ckp-a-link">{{form.seeMoreDetail.resourceValue}}</a>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
                         </td>
                     </tr>
+                    <tr ng-show="showMore">
+                        <td class="v-align" style="width :35%">
+                            <p><h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3></p>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderlineDetailList[0].DateShipped | date}}</span>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="showMore">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3">{{form.deliveryDate.resourceValue}}</h3>
+                            <h3 class="km-bold-font order-detail-h3">{{form.signedBy.resourceValue}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderlineDetailList[0].DeliveryDate | date}}</span>
+                            <span>:{{order.detail.MobileOrderlineDetailList[0].SignedBy}}</span>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="showMore && order.detail.OrgContext.SearchKeyName">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName">{{order.detail.OrgContext.SearchKeyName}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue}}</span>
+                        </td>
+                    </tr>
+
+
+                    <tr ng-show="showMore && order.detail.OrgContext.SearchKeyName2">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName2">{{order.detail.OrgContext.SearchKeyName2}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue2}}</span>
+                        </td>
+                    </tr>
+
+
+                    <tr ng-show="showMore && order.detail.OrgContext.SearchKeyName3">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName3">{{order.detail.OrgContext.SearchKeyName3}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue3}}</span>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="showMore && order.detail.OrgContext.CutNumberLabel">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.CutNumberLabel">{{order.detail.OrgContext.CutNumberLabel}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
+                            <span>:{{order.detail.MobileOrderDetail.CutNumber}}</span>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="showMore">
+                        <td class="v-align" style="width :35%">
+                            <a ng-click="showMore = !showMore" class="ckp-a-link" ng-show="showMore">{{form.hideMoreDetail.resourceValue}}</a>
+                        </td>
+                    </tr>
+
                 </table>
             </li>
 
@@ -168,7 +229,11 @@
                     <tr class="pipe" ng-repeat="orderLine in order.detail.MobileOrderlineDetailList">
                         <td style="width:60%">
 
-                            <h4 class="km-bold-font">{{orderLine.ItemDescription}}</h4>
+                            <h4 class="km-bold-font">
+
+                                <span data-tap="myTouch.tap" data-align="left" ng-click="showItemPreviewModel()"><span class="km-icon km-info"></span></span>
+                                {{orderLine.ItemDescription}}
+                            </h4>
                             <h5>{{form.itemCode.resourceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
                             <h5 ng-show="!hasHidePrice">
                                 {{orderLine.GrossCurrency.Code}} {{orderLine.GrossPrice | number : 2}} {{orderLine.PriceUom.UomDisplay}}
@@ -185,29 +250,6 @@
                     </tr>
 
 
-                </table>
-            </kendo-mobile-collapsible>
-
-            <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
-                                      ng-show="order.detail.OrgContext.SearchKeyName ||  order.detail.OrgContext.SearchKeyName2 || order.detail.OrgContext.SearchKeyName3 || order.detail.OrgContext.CutNumberLabel">
-                <h4>{{form.searchKeys.resourceValue}}</h4>
-
-                <table class="ck-table">
-                    <tr>
-                        <td style="width:50%">
-                            <h4 ng-show="order.detail.OrgContext.SearchKeyName">{{order.detail.OrgContext.SearchKeyName}}</h4>
-                            <h4 ng-show="order.detail.OrgContext.SearchKeyName2">{{order.detail.OrgContext.SearchKeyName2}}</h4>
-                            <h4 ng-show="order.detail.OrgContext.SearchKeyName3">{{order.detail.OrgContext.SearchKeyName3}}</h4>
-                            <h4 ng-show="order.detail.OrgContext.CutNumberLabel">{{order.detail.OrgContext.CutNumberLabel}}</h4>
-                        </td>
-                        <td style="width:50%">
-                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue}}</h4>
-                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue2}}</h4>
-                            <h4>:{{order.detail.MobileOrderDetail.SearchKeyValue3}}</h4>
-                            <h4>:{{order.detail.MobileOrderDetail.CutNumber}}</h4>
-                           
-                        </td>
-                    </tr>
                 </table>
             </kendo-mobile-collapsible>
 
@@ -266,6 +308,21 @@
 
             <div ng-bind-html="renderHtml(confirmationData)"></div>
 
+        </div>
+
+    </kendo-mobile-modal-view>
+    <!--  preview item modal  -->
+    <kendo-mobile-modal-view id="modalview-detail-item-preview" class="km-moduleview" style="width: 100%; height:100%; background:rgba(255, 255, 255, 0);" data-zoom="true">
+        <div kendo-mobile-header>
+            <div kendo-mobile-nav-bar class="km-dark" style="border-bottom: solid;  border-width: 1px; border-color:gray!important">
+                <kendo-view-title> {{form.itemPreview.resourceValue}}</kendo-view-title>
+                <kendo-mobile-button ng-click="hideItemPreviewModel()" data-tap="myTouch.tap" k-transition="'fade'" k-align="'right'" style="background: none; border: none;"><img src="styles/images/close-button.png" style="width: 1.6em; height: 1.6em;" /></kendo-mobile-button>
+
+            </div>
+
+        </div>
+        <div data-role="content" data-zoom="true" style='background-color:white !important; padding: 5px;'>
+            <img src="https://qachecknet.checkpt.com/Redesign/Images/TJXPetCar.jpg" style="display: block;margin :auto; text-align:center;">
         </div>
 
     </kendo-mobile-modal-view>
