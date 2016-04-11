@@ -97,7 +97,7 @@
                             <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
                         </td>
                     </tr>
-                    <tr ng-show="showMore">
+                    <tr ng-show="showMore && order.detail.MobileOrderlineDetailList[0].DateShipped">
                         <td class="v-align" style="width :35%">
                             <p><h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3></p>
                         </td>
@@ -106,7 +106,7 @@
                         </td>
                     </tr>
 
-                    <tr ng-show="showMore">
+                    <tr ng-show="showMore && order.detail.MobileOrderlineDetailList[0].DeliveryDate">
                         <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font order-detail-h3">{{form.deliveryDate.resourceValue}}</h3>
                             <h3 class="km-bold-font order-detail-h3">{{form.signedBy.resourceValue}}</h3>
@@ -231,7 +231,8 @@
 
                             <h4 class="km-bold-font">
 
-                                <span data-tap="myTouch.tap" data-align="left" ng-click="showItemPreviewModel()"><span class="km-icon km-info"></span></span>
+                                <span data-tap="myTouch.tap" data-align="left" ng-click="showItemPreviewModel('{{orderLine.ThumbNailFile}}')" ng-show="orderLine.ThumbNailFile">
+                                <span class="km-icon km-info"></span></span>
                                 {{orderLine.ItemDescription}}
                             </h4>
                             <h5>{{form.itemCode.resourceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
@@ -322,7 +323,7 @@
 
         </div>
         <div data-role="content" data-zoom="true" style='background-color:white !important; padding: 5px;'>
-            <img src="https://qachecknet.checkpt.com/Redesign/Images/TJXPetCar.jpg" style="display: block;margin :auto; text-align:center;">
+            <img ng-src="{{ThumbNailFile}}" style="display: block;margin :auto; text-align:center;" err-src="{{errSrc}}">
         </div>
 
     </kendo-mobile-modal-view>

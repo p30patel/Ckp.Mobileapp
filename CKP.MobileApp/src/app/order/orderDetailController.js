@@ -1,10 +1,10 @@
 
 app.controller('orderDetailController', [
-                   '$scope', 'authService', 'orderDataService', '$sce', 'translateService', 'feedbackDataService', 'notificationDataService' , '$timeout', 'localStorageService',
-                   function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, notificationDataService, $timeout, localStorageService) {
+                   '$scope', 'authService', 'orderDataService', '$sce', 'translateService', 'feedbackDataService', 'notificationDataService' , '$timeout', 'localStorageService', 'ngAuthSettings',
+function ($scope, authService, orderDataService, $sce, translateService, feedbackDataService, notificationDataService, $timeout, localStorageService, ngAuthSettings) {
 
                        $scope.form = {};
-
+                       var url = ngAuthSettings.authServiceBaseUri === 'https://qachecknet.checkpt.com/' ? ngAuthSettings.authServiceBaseUri + 'Redesign' : ngAuthSettings.authServiceBaseUri + 'RCNV2';
                        $scope.form.title = {};
                        $scope.form.title.resourceName = "Order Detail";
                        $scope.form.title.resourceValue = translateService.getResourceValue($scope.form.title.resourceName);
@@ -194,7 +194,7 @@ app.controller('orderDetailController', [
                        $scope.form.hideMoreDetail.resourceValue = translateService.getResourceValue($scope.form.hideMoreDetail.resourceName);
                        
                        $scope.order = {};
-
+                       $scope.errSrc = url + '/Images/item_thm.png';
                        $scope.order.hasApproval = false;
                        $scope.order.hasStaged = false;
                        $scope.order.orderType = '1';
@@ -450,7 +450,8 @@ app.controller('orderDetailController', [
 
                        //item preview modal
                        $scope.showItemPreviewModel = function (url) {
-
+                           console.log(url);
+                           $scope.ThumbNailFile = url;
                            $("#modalview-detail-item-preview").kendoMobileModalView("open");
                        };
                        $scope.hideItemPreviewModel = function () {
