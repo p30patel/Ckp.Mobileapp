@@ -91,7 +91,14 @@
                         <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font order-detail-h3">{{form.estimated.resourceValue}}</h3>
                             <h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3>
-                            <a ng-click="showMore = !showMore" ng-show="!showMore" class="ckp-a-link">{{form.seeMoreDetail.resourceValue}}</a>
+                            <span ng-show="order.detail.MobileOrderlineDetailList[0].DateShipped ||
+                                           order.detail.MobileOrderlineDetailList[0].DeliveryDate ||
+                                           order.detail.OrgContext.SearchKeyName ||
+                                           order.detail.OrgContext.SearchKeyName2 ||
+                                           order.detail.OrgContext.SearchKeyName3 ||
+                                           order.detail.OrgContext.CutNumberLabel">
+                                <a ng-click="showMore = !showMore" ng-show="!showMore " class="ckp-a-link">{{form.seeMoreDetail.resourceValue}}</a>
+                            </span>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
