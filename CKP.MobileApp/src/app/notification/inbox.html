@@ -2,22 +2,18 @@
 
     <kendo-mobile-content>
         <div style="height:10px"></div>
-        <ul kendo-mobile-list-view style="margin-bottom: .5em;"  k-style="'inset'" ng-repeat="message in notifications">
-            <li kendo-touch k-enable-swipe="true" class="action"
-                k-on-swipe="myTouch.swipe(kendoEvent)" id="pushId-{{message.PushNotificationMessageQueueId}}">               
-                <div>
-                    <h4 class="ck-title-setting" translate-element="{{message.SubscriptionType}}" data-translateText="SubscriptionType" id="pushTitleId-{{message.PushNotificationMessageQueueId}}"
-                        ng-class="message.Status == '102' ? 'km-bold-font' : '' "></h4>
-                    <p class="ck-descript-setting" style="width:100% !important;">{{message.DateProcessed | date : 'medium'}}</p>
-                    <p class="ck-descript-setting" style="width:100% !important;">{{message.Message}}</p>
-                </div>
-             
-                    <a data-role="button" class="btn-archive" data-icon="trash" ng-click="delete(kendoEvent, {{message.PushNotificationMessageQueueId}})" class="delete km-primary"></a>
-             
-</li>
+        <ul id="edit-listview" class="km-list" kendo-mobile-list-view k-data-source="notifications">
+            <div k-template kendo-touch k-enable-swipe="true" k-on-swipe="myTouch.swipe(kendoEvent)">
+                <h4 class="ck-title-setting" translate-element="#=SubscriptionType#" data-translateText="SubscriptionType" id="pushTitleId-#=PushNotificationMessageQueueId#"
+                     ng-class="message.Status == '102' ? 'km-bold-font' : '' "></h4>
+                <p class="ck-descript-setting">#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</p>
+                <p class="ck-descript-setting">#=Message#</p>
+                <a data-role="button" data-icon="trash" ng-click="delete(kendoEvent, $index)" class="delete km-primary"></a>
+            </div>
         </ul>
-    
         <kendo-mobile-button class="km-secondary km-justified" ng-show="hasNext" k-on-click="ViewMore()">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+
+
     </kendo-mobile-content>
     <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
         <p class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>

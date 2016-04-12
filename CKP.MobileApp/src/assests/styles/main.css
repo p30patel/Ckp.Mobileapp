@@ -1,51 +1,16 @@
 /*swipe css start*/
-/*.item {
-  position: absolute;
-  background-color: white;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0;
-  width: 100%;
-  height:100%;
-}
-
-.action {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #F1F1F1;
-  text-align: center;
-}
-
-.centered {
-  margin: auto;
-  margin-top: 15px;
-  text-align: center;
-  color: gray;
-}
-
-
-.km-ios7 .km-list>li.collapsed {
-  border: none;
-  height: 0;
-  padding: 0;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-.km-button.btn-archive {
-  border: none;
-  color: gray;
-  background: #F1F1F1;
-  margin-top: 5px;
-}*/
+ 
+      #edit-listview .delete {
+        display:none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20% !important;
+        background-color: #bd2729;
+        color: #fff;
+        height: 100% !important;
+      
+      }
 /*swipe-css -end*/ 
 .ck-hide{
     display: none !important;

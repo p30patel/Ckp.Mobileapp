@@ -118,34 +118,37 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         // $('#pushTitleId-' + id).removeClass('km-bold-font');
 
     }
+
+    var touchstart = function(e)
+    {
+        alert('touch start');
+
+    }
+
+    var touchend = function (e) {
+        alert('touch touchend');
+
+    }
     $scope.myTouch = {
         filter: ">li",
         enableSwipe: true,
-        touchstart: function (e) {
-            console.log(e.originalEvent.pageX)
-            $('.swipe-delete li > a.open').css('left', '0px').removeClass('open') // close em all
-            $(e.currentTarget).addClass('open')
-            x = e.originalEvent.targetTouches[0].pageX // anchor point
-        },
-        touchend: function (e) {
-            e.preventDefault()
-            $(this).parents('li').slideUp('fast', function () {
-                $(this).remove()
-            })
-        },
+        touchstart: touchstart,
+        touchend: touchend,
         swipe: function (e) {
          
             var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
            
             
             if (e.direction === 'left') {
-                if (e.direction === "left") {
-                    var del = e.sender.element;
-                    kendo.fx(del).slideIn("right").duration(500).reverse();
+                if (e.direction === "left") {                  
+                    button.expand().duration(200).play();
+                    $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 500)
+                    $(e.touch.currentTarget).css({ "width": "130%" });
                 }
             }
             else {
-                $(e.touch.currentTarget).find("[data-role=button]:visible").hide();
+                $(e.touch.currentTarget).animate({ "margin-left": "0px" }, 500)
+               
             }
         },
     }
