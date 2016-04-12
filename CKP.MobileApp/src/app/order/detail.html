@@ -116,10 +116,17 @@
                     <tr ng-show="showMore && order.detail.MobileOrderlineDetailList[0].DeliveryDate">
                         <td class="v-align" style="width :35%">
                             <h3 class="km-bold-font order-detail-h3">{{form.deliveryDate.resourceValue}}</h3>
-                            <h3 class="km-bold-font order-detail-h3">{{form.signedBy.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderlineDetailList[0].DeliveryDate | date}}</span>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="showMore && order.detail.MobileOrderlineDetailList[0].SignedBy">
+                        <td class="v-align" style="width :35%">
+                            <h3 class="km-bold-font order-detail-h3">{{form.signedBy.resourceValue}}</h3>
+                        </td>
+                        <td class="v-align" style="width :40%">
                             <span>:{{order.detail.MobileOrderlineDetailList[0].SignedBy}}</span>
                         </td>
                     </tr>
@@ -170,7 +177,7 @@
 
                 </table>
             </li>
-
+            <p ng-show="hasBlockAddress"></p>
             <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" k-collapsed="'true'" k-on-expand="OpenExpand()" data-animation="false"
                                       ng-show="!hasBlockAddress">
                 <h4>{{form.billingInfo.resourceValue}}</h4>
@@ -239,7 +246,7 @@
                             <h4 class="km-bold-font">
 
                                 <span data-tap="myTouch.tap" data-align="left" ng-click="showItemPreviewModel('{{orderLine.ThumbNailFile}}')" ng-show="orderLine.ThumbNailFile">
-                                <span class="km-icon km-info"></span></span>
+                                <span class="km-icon km-info" style="font: 1.5em/1em 'Kendo UI' !important;"></span></span>
                                 {{orderLine.ItemDescription}}
                             </h4>
                             <h5>{{form.itemCode.resourceValue}}:<b> {{orderLine.ItemCode}}</b></h5>
