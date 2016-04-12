@@ -7,7 +7,7 @@ app.factory("orderDataService", [
                     var orderDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd");
                     
-                    var getOrderDetail = function (poctrlno) {
+                    var getOrderDetail = function (poctrlno, retailerId) {
                    
                         var deferred = $q.defer();
 
@@ -15,6 +15,14 @@ app.factory("orderDataService", [
 
                         var orgContext = '';
                         var organizationDetail = localStorageService.get('organizationDetail');
+
+                        var orgId = getOrganization(retailerId);
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+                        orgContext.Id = orgId > 0 ? orgId : orgContext.Id;
+                        orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
 
                         if (organizationDetail) {
                             orgContext = organizationDetail;
@@ -24,7 +32,7 @@ app.factory("orderDataService", [
                             ProductionOrderId: poctrlno,
                             OrganizationDetail: orgContext
                         }
-                        
+                        console.log(orgId);
                       
                         var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
 
@@ -106,7 +114,6 @@ app.factory("orderDataService", [
                             if (value._RetailerID == retailerID)
                             {
                                 orgId = value._OrganizationID;
-                                console.log(orgId);
                             }
                         });
                         return orgId;

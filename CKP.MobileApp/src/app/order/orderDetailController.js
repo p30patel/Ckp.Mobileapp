@@ -260,7 +260,7 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail");
                            }
-                           orderDataService.getOrderDetail(poctrlno).then(function (result) {
+                           orderDataService.getOrderDetail(poctrlno, $scope.retailerId).then(function (result) {
 
                                $scope.order.OrderNumber = result.MobileOrderDetail.OrderNumber;
                                $scope.order.ShoppingCart = result.MobileOrderDetail.ShoppingCartId;
