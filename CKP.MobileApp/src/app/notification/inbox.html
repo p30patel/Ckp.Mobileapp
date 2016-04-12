@@ -2,43 +2,25 @@
 
     <kendo-mobile-content>
         <div style="height:10px"></div>
-
-        <div class="km-listview-wrapper">
-            <ul id="edit-listview" kendo-mobile-list-view class="km-widget km-listview km-listgroup" ng-repeat="message in notifications">
-              
-                <li class="km-group-container">
-                    <div class="ck-padfix-setting km-group-title"></div>
-                    <ul class="km-list ck-brd-setting ck-title-setting">
-                        <li kendo-touch k-enable-swipe="true" k-on-swipe="myTouch.swipe(kendoEvent)">                        
-                            <h4 class="ck-title-setting"></h4>
-                            <p class="ck-descript-setting">{{message.DateProcessed | date : 'medium'}}</p>
-                            <p class="ck-descript-setting">{{message.Message}}</p>
-                            <a data-role="button" data-icon="trash" ng-click="delete(kendoEvent, {{message.PushNotificationMessageQueueId}})" class="delete km-primary"></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
+        <ul kendo-mobile-list-view style="margin-bottom: .5em;"  k-style="'inset'" ng-repeat="message in notifications">
+            <li kendo-touch k-enable-swipe="true" class="action"
+                k-on-swipe="myTouch.swipe(kendoEvent)" id="pushId-{{message.PushNotificationMessageQueueId}}">               
+                <div class="item">
+                    <h4 class="ck-title-setting" translate-element="{{message.SubscriptionType}}" data-translateText="SubscriptionType" id="pushTitleId-{{message.PushNotificationMessageQueueId}}"
+                        ng-class="message.Status == '102' ? 'km-bold-font' : '' "></h4>
+                    <p class="ck-descript-setting" style="width:100% !important;">{{message.DateProcessed | date : 'medium'}}</p>
+                    <p class="ck-descript-setting" style="width:100% !important;">{{message.Message}}</p>
+                </div>
+             
+                    <a data-role="button" class="btn-archive" data-icon="trash" ng-click="delete(kendoEvent, {{message.PushNotificationMessageQueueId}})" class="delete km-primary"></a>
+             
+</li>
+        </ul>
+    
+        <kendo-mobile-button class="km-secondary km-justified" ng-show="hasNext" k-on-click="ViewMore()">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
     </kendo-mobile-content>
     <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
         <p class="text-center ckp-a-link message" k-transition="'slide'" ng-bind-html="renderHtml(message)"></p>
     </kendo-mobile-footer>
 </kendo-mobile-view>
 
-<style>
-    #edit-listview .delete {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
-        border-width: 0;
-        margin: 0;
-        line-height: 2.5em;
-        width: 20% !important;
-        box-shadow: inset .1em .1em .2em 0 rgba(0,0,0,.2);
-        text-align: center;
-    }
-</style>

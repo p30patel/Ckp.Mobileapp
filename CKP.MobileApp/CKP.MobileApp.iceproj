@@ -102,6 +102,7 @@
     </Content>
     <Content Include="src\app\common\directives\alerting.js" />
     <Content Include="src\app\common\directives\alerts.html" />
+    <Content Include="src\app\common\directives\errSrc.js" />
     <Content Include="src\app\common\directives\nextFocuse.js" />
     <Content Include="src\app\common\directives\translate.js" />
     <Content Include="src\app\common\services\alerting.js" />
