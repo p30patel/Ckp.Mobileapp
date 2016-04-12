@@ -23,7 +23,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     };
     $scope.message = "";
     $scope.notifications = [];
-    $scope.PageSize = 1;
+    $scope.PageSize = 5;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
     $scope.afterShow = function (e) {

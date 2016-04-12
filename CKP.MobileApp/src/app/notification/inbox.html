@@ -5,7 +5,7 @@
         <ul kendo-mobile-list-view style="margin-bottom: .5em;"  k-style="'inset'" ng-repeat="message in notifications">
             <li kendo-touch k-enable-swipe="true" class="action"
                 k-on-swipe="myTouch.swipe(kendoEvent)" id="pushId-{{message.PushNotificationMessageQueueId}}">               
-                <div class="item">
+                <div>
                     <h4 class="ck-title-setting" translate-element="{{message.SubscriptionType}}" data-translateText="SubscriptionType" id="pushTitleId-{{message.PushNotificationMessageQueueId}}"
                         ng-class="message.Status == '102' ? 'km-bold-font' : '' "></h4>
                     <p class="ck-descript-setting" style="width:100% !important;">{{message.DateProcessed | date : 'medium'}}</p>
