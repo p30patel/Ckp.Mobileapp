@@ -2,13 +2,26 @@
 
     <kendo-mobile-content>
         <div style="height:10px"></div>
+      
+        <div ng-show="total <= 0" style="padding:5px;">{{form.noMessages.resoruceValue}}</div>
         <ul id="edit-listview" class="km-list" kendo-mobile-list-view k-data-source="notifications">
-            <div k-template kendo-touch k-enable-swipe="true" k-on-swipe="myTouch.swipe(kendoEvent)">
-                <h4 class="ck-title-setting" translate-element="#=SubscriptionType#" data-translateText="SubscriptionType" id="pushTitleId-#=PushNotificationMessageQueueId#"
-                     ng-class="message.Status == '102' ? 'km-bold-font' : '' "></h4>
-                <p class="ck-descript-setting">#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</p>
-                <p class="ck-descript-setting">#=Message#</p>
-                <a data-role="button" data-icon="trash" ng-click="delete(kendoEvent, $index)" class="delete km-primary"></a>
+            <div k-template kendo-touch 
+                 k-enable-swipe="true" 
+                 k-on-swipe="myTouch.swipe(kendoEvent)"
+                 k-on-touchstart="myTouch.touchstart(kendoEvent)"
+                 data-id="#=PushNotificationMessageQueueId#"
+                 data-status="#=Status#"
+                 id="pushId-#=PushNotificationMessageQueueId#"
+                 class="pushMessage"
+                 >
+                <h4 translate-element="#=SubscriptionType#" data-translateText="SubscriptionType" id="pushTitleId-#=PushNotificationMessageQueueId#"
+                     ng-class="#=Status# == '102' ? 'km-bold-font' : '' "></h4>
+                <h4 ng-class="#=Status# == '102' ? 'km-bold-font' : '' " id="pushDateId-#=PushNotificationMessageQueueId#"
+                    >#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</h4>
+                <p id="msg-#=PushNotificationMessageQueueId#" class="ck-text-overflow">#=Message#</p>
+                <a data-role="button" data-icon="trash" 
+                   style="font: 1.5em/1em 'Kendo UI' !important;"
+                   ng-click="delete($event, #=PushNotificationMessageQueueId#)" class="delete km-primary"></a>
             </div>
         </ul>
         <kendo-mobile-button class="km-secondary km-justified" ng-show="hasNext" k-on-click="ViewMore()">{{form.viewAll.resoruceValue}}</kendo-mobile-button>

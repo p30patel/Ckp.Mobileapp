@@ -22,10 +22,13 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
     };
     $scope.message = "";
-    $scope.notifications = [];
+    $scope.notifications = {};
     $scope.PageSize = 5;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
+    var currentHeight = 0;
+    var previousHeight = 0;
+    $scope.total = 0;
     $scope.afterShow = function (e) {
 
         var view = kendo.mobile.application.view();
@@ -47,6 +50,10 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         $scope.form.noData = {};
         $scope.form.noData.resoruceName = "No Data are found";
         $scope.form.noData.resoruceValue = translateService.getResourceValue($scope.form.noData.resoruceName);
+
+        $scope.form.noMessages = {};
+        $scope.form.noMessages.resoruceName = "No messages are found";
+        $scope.form.noMessages.resoruceValue = translateService.getResourceValue($scope.form.noMessages.resoruceName);
 
     }
 
@@ -79,12 +86,13 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                     }
                 });
 
-                $scope.notifications = currentNotifications;
+                $scope.notifications = currentNotifications;               
             }
             else {
                 $scope.notifications = result;
             }
             $scope.hasNext = result.length >= $scope.PageSize;
+            $scope.total = $scope.notifications.length;
         }).catch(function (error) {
             kendo.mobile.application.hideLoading();
             $scope.message = "Faild to get notifcation.";
@@ -96,59 +104,91 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     }
     getInboxMessages(false);
 
-    $scope.delete = function (e, id) {
+    $scope.delete = function ($event, id) {
+        $event.stopPropagation();
         var jsonIn = {
             Id: id,
             Status: 105,
             HasDelete: true
         };
+        $('#pushId-' + id).closest('li').hide('slow');
+        $('#pushId-' + id).closest('li').remove();
         updateInbox(jsonIn);
+        $scope.total = $('.pushMessage').length;
+       
     }
 
 
-    var markAsRead = function (e) {
-        alert('in');
-        //var jsonIn = {
-        //    Id: id,
-        //    Status: 103,
-        //    HasDelete: false
-        //};
+    var markAsRead = function (id) {
+        
+        var jsonIn = {
+            Id: id,
+            Status: 104, 
+            HasDelete: false
+        };
 
-        //updateInbox(jsonIn);
-        // $('#pushTitleId-' + id).removeClass('km-bold-font');
-
-    }
-
-    var touchstart = function(e)
-    {
-        alert('touch start');
+        updateInbox(jsonIn);
+        $('#pushTitleId-' + id).removeClass('km-bold-font');
+        $('#pushDateId-' + id).removeClass('km-bold-font');
 
     }
 
-    var touchend = function (e) {
-        alert('touch touchend');
-
-    }
     $scope.myTouch = {
-        filter: ">li",
-        enableSwipe: true,
-        touchstart: touchstart,
-        touchend: touchend,
-        swipe: function (e) {
+        filter: ">li",       
+        touchstart: function (e) {           
+            var id = e.sender.element.attr('data-id');
+            var hasRead = e.sender.element.attr('data-status') == 104;
+            var span = $(e.touch.currentTarget).closest("li");
+            currentHeight = span.height();
+            console.log('preov: ' + previousHeight);
+            previousHeight = currentHeight > 88 ? previousHeight : currentHeight;
+            if (!hasRead)
+            {
+                markAsRead(id);
+                e.sender.element.attr('data-status', 104);
+            }
+            //
+            var target = $(e.touch.initialTouch),
+                 listview = $("#edit-listview").data("kendoMobileListView"),
+                 model,
+                 button = $(e.touch.target).find("[data-role=button]:visible");
          
-            var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
-           
-            
-            if (e.direction === 'left') {
-                if (e.direction === "left") {                  
-                    button.expand().duration(200).play();
-                    $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 500)
-                    $(e.touch.currentTarget).css({ "width": "130%" });
-                }
+            if (target.closest("[data-role=button]")[0]) {
+                //delete               
+               
+                e.event.stopPropagation();
+            } else if (button[0]) {
+                button.hide();
+                $('#msg-' + id).height('auto');
+
+            } else {
+                $('#msg-' + id).height('auto');
+                listview.items().find("[data-role=button]:visible").hide();
+            }
+        },
+       
+        swipe: function (e) {
+            var button = $(e.touch.currentTarget).find("[data-role=button]");
+            var span = $(e.touch.currentTarget).closest("li");
+
+            var id = e.sender.element.attr('data-id');
+            console.log(span.height());
+
+            if (e.direction === 'left') {                
+                $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 'slow');
+             
+                $('#msg-' + id).animate({
+                    "height" : "18px",
+                    "text-overflow" : "ellipsis"
+                }, 100)
+                button.show();
             }
             else {
-                $(e.touch.currentTarget).animate({ "margin-left": "0px" }, 500)
-               
+                $(e.touch.currentTarget).animate({"margin-left": "0px" }, "slow" );
+          
+                $('#msg-' + id).height('auto');
+                console.log(previousHeight);
+             
             }
         },
     }
@@ -163,10 +203,12 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 }, 7000);
             }
             else {
+             
                 if (jsonIn.HasDelete)
                 {
                     //mark as delete
-                    $('#pushId-' + jsonIn.id).addClass('ck-hide');
+               
+                   
                 }
                 
             }
@@ -190,3 +232,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
 }
 ]);
+
+       
+         
+     

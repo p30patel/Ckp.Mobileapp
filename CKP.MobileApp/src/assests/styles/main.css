@@ -9,8 +9,16 @@
         background-color: #bd2729;
         color: #fff;
         height: 100% !important;
+        width:30% !important;
       
       }
+
+  .km-nova .km-trash:after, .km-nova .km-delete:after {  
+  top: 60%;
+}
+  .ck-text-overflow{
+       text-overflow: ellipsis;
+  }
 /*swipe-css -end*/ 
 .ck-hide{
     display: none !important;
