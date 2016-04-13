@@ -26,8 +26,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     $scope.PageSize = 5;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
-    var currentHeight = 0;
-    var previousHeight = 0;
+   
     $scope.total = 0;
     $scope.afterShow = function (e) {
 
@@ -139,9 +138,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             var id = e.sender.element.attr('data-id');
             var hasRead = e.sender.element.attr('data-status') == 104;
             var span = $(e.touch.currentTarget).closest("li");
-            currentHeight = span.height();
-            console.log('preov: ' + previousHeight);
-            previousHeight = currentHeight > 88 ? previousHeight : currentHeight;
+            console.log('touch start');
+            $('.pushMessageDescription').height('18px');
+            $('.pushMessage').css({ "margin-left": "0px" });
             if (!hasRead)
             {
                 markAsRead(id);
@@ -166,29 +165,31 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 listview.items().find("[data-role=button]:visible").hide();
             }
         },
-       
+        touchend: function (e) {
+            console.log('touch end');
+        },
+        tap: function (e) {
+            console.log('tap');
+           // $('.pushMessageDescription').height('18px');
+        },
         swipe: function (e) {
             var button = $(e.touch.currentTarget).find("[data-role=button]");
             var span = $(e.touch.currentTarget).closest("li");
 
             var id = e.sender.element.attr('data-id');
-            console.log(span.height());
-
+           
             if (e.direction === 'left') {                
-                $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 'slow');
-             
-                $('#msg-' + id).animate({
-                    "height" : "18px",
-                    "text-overflow" : "ellipsis"
-                }, 100)
+                $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 'fast');
+                $('#msg-' + id).height('18');
+                $('#msg-' + id).width('100%');
+               
                 button.show();
             }
             else {
-                $(e.touch.currentTarget).animate({"margin-left": "0px" }, "slow" );
+                $(e.touch.currentTarget).animate({ "margin-left": "0px" }, "fast");
           
                 $('#msg-' + id).height('auto');
-                console.log(previousHeight);
-             
+                $('#msg-' + id).width('100%');
             }
         },
     }

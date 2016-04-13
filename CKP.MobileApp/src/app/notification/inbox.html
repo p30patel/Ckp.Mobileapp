@@ -7,8 +7,10 @@
         <ul id="edit-listview" class="km-list" kendo-mobile-list-view k-data-source="notifications">
             <div k-template kendo-touch 
                  k-enable-swipe="true" 
+                 k-on-tap="myTouch.tap(kendoEvent)"
                  k-on-swipe="myTouch.swipe(kendoEvent)"
                  k-on-touchstart="myTouch.touchstart(kendoEvent)"
+                 k-on-touchend="myTouch.touchend(kendoEvent)"
                  data-id="#=PushNotificationMessageQueueId#"
                  data-status="#=Status#"
                  id="pushId-#=PushNotificationMessageQueueId#"
@@ -18,7 +20,7 @@
                      ng-class="#=Status# == '102' ? 'km-bold-font' : '' "></h4>
                 <h4 ng-class="#=Status# == '102' ? 'km-bold-font' : '' " id="pushDateId-#=PushNotificationMessageQueueId#"
                     >#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</h4>
-                <p id="msg-#=PushNotificationMessageQueueId#" class="ck-text-overflow">#=Message#</p>
+                <p id="msg-#=PushNotificationMessageQueueId#" class="pushMessageDescription" style="height:18px;">#=Message#</p>
                 <a data-role="button" data-icon="trash" 
                    style="font: 1.5em/1em 'Kendo UI' !important;"
                    ng-click="delete($event, #=PushNotificationMessageQueueId#)" class="delete km-primary"></a>
