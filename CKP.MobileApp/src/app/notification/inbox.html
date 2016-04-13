@@ -16,8 +16,12 @@
                  id="pushId-#=PushNotificationMessageQueueId#"
                  class="pushMessage"
                  >
-                <h4 translate-element="#=SubscriptionType#" data-translateText="SubscriptionType" id="pushTitleId-#=PushNotificationMessageQueueId#"
-                     ng-class="#=Status# == '102' ? 'km-bold-font' : '' "></h4>
+                <h4 translate-element="#=SubscriptionType#" data-translateText="SubscriptionType" 
+                    id="pushTitleId-#=PushNotificationMessageQueueId#"
+                    ng-class="#=Status# == '102' ? 'km-bold-font' : '' "
+                    class='ck-title-setting'>
+                    
+                </h4>
                 <h4 ng-class="#=Status# == '102' ? 'km-bold-font' : '' " id="pushDateId-#=PushNotificationMessageQueueId#"
                     >#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</h4>
                 <p id="msg-#=PushNotificationMessageQueueId#" class="pushMessageDescription ck-text-overflow">#=Message#</p>
