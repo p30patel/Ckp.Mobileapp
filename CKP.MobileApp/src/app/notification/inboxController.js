@@ -139,8 +139,16 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             var hasRead = e.sender.element.attr('data-status') == 104;
             var span = $(e.touch.currentTarget).closest("li");
             console.log('touch start');
-            $('.pushMessageDescription').height('18px');
+            $('.pushMessageDescription').addClass('ck-text-overflow');
+          
+            $('.pushMessage').closest('li').removeClass('ck-active');
+
+            $('#msg-' + id).removeClass('ck-text-overflow');
+
+            span.addClass('ck-active');
+
             $('.pushMessage').css({ "margin-left": "0px" });
+
             if (!hasRead)
             {
                 markAsRead(id);
@@ -180,7 +188,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
            
             if (e.direction === 'left') {                
                 $(e.touch.currentTarget).animate({ "margin-left": "-50px" }, 'fast');
-                $('#msg-' + id).height('18');
+                $('#msg-' + id).addClass('ck-text-overflow');
                 $('#msg-' + id).width('100%');
                
                 button.show();

@@ -15,7 +15,9 @@
 .km-nova .km-trash:after, .km-nova .km-delete:after {
     top: 60%;
 }
-
+.ck-active{
+    background-color: #DEDEDE !important;
+}
 .ck-text-overflow {
     text-overflow: ellipsis;
     white-space: nowrap;
