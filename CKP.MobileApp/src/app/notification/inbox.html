@@ -3,7 +3,7 @@
     <kendo-mobile-content>
         <div style="height:10px"></div>
       
-        <div ng-show="total <= 0" style="padding:5px;">{{form.noMessages.resoruceValue}}</div>
+        <div ng-show="total <= 0 && !hasNext" style="padding:5px;">{{form.noMessages.resoruceValue}}</div>
         <ul id="edit-listview" class="km-list" kendo-mobile-list-view k-data-source="notifications">
             <div k-template kendo-touch 
                  k-enable-swipe="true" 

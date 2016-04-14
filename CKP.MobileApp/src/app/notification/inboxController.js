@@ -22,7 +22,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
     };
     $scope.message = "";
-    $scope.notifications = {};
+    $scope.notifications = new kendo.data.ObservableArray([]);
     $scope.PageSize = 20;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
@@ -75,19 +75,18 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             if (hasNext)
             {
                 var currentNotifications = $scope.notifications;
-              
+             
                 angular.forEach(result, function (value, key) {
                     if (key <= result.length) {
                         currentNotifications.push(value);
                     }
                 });
-
-                $scope.notifications = currentNotifications;               
+                $scope.notifications = new kendo.data.ObservableArray(currentNotifications);
             }
             else {
-                $scope.notifications = result;
+                $scope.notifications = new kendo.data.ObservableArray(result);
             }
-            
+            console.log($scope.notifications.length);
           
             $filter('orderBy')($scope.notifications, 'PushNotificationMessageQueueId', true);
             $scope.hasNext = result.length >= $scope.PageSize;
@@ -112,8 +111,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         };
         $('#pushId-' + id).closest('li').hide('slow');
         $('#pushId-' + id).closest('li').remove();
+     
         updateInbox(jsonIn);
-        $scope.total = $('.pushMessage').length;
+       
        
     }
 
@@ -138,7 +138,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             var id = e.sender.element.attr('data-id');
             var hasRead = e.sender.element.attr('data-status') == 104;
             var span = $(e.touch.currentTarget).closest("li");
-            console.log('touch start');
+            
+            $('.delete').hide();
+
             $('.pushMessageDescription').addClass('ck-text-overflow');
           
             $('.pushMessage').closest('li').removeClass('ck-active');
@@ -148,12 +150,12 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             span.addClass('ck-active');
 
             $('.pushMessage').css({ "margin-left": "0px" });
-
+          
             if (!hasRead)
             {
                 markAsRead(id);
-                e.sender.element.attr('data-status', 104);
             }
+            e.sender.element.attr('data-status', 104);
             $('#pushTitleId-' + id).removeClass('km-bold-font');
             $('#pushDateId-' + id).removeClass('km-bold-font');
             //
@@ -176,16 +178,20 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             }
         },
         touchend: function (e) {
-            console.log('touch end');
+          
         },
         tap: function (e) {
-            console.log('tap');
+           
+            var id = e.sender.element.attr('data-id');
+            $('#pushTitleId-' + id).removeClass('km-bold-font');
+            $('#pushDateId-' + id).removeClass('km-bold-font');
+            e.sender.element.attr('data-status', 104);
            // $('.pushMessageDescription').height('18px');
         },
         swipe: function (e) {
             var button = $(e.touch.currentTarget).find("[data-role=button]");
             var span = $(e.touch.currentTarget).closest("li");
-
+            var hasRead = e.sender.element.attr('data-status') == 104;
             var id = e.sender.element.attr('data-id');
            
             if (e.direction === 'left') {                
@@ -195,18 +201,29 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                
                 button.show();
             }
-            else {
-                $(e.touch.currentTarget).animate({ "margin-left": "0px" }, "fast");
-                button.hide();
-                $('#msg-' + id).height('auto');
-                $('#msg-' + id).width('100%');
+            else{
+            e.sender.element.attr('data-status', 104);
+            $('#pushTitleId-' + id).removeClass('km-bold-font');
+            $('#pushDateId-' + id).removeClass('km-bold-font');
+            $(e.touch.currentTarget).animate({ "margin-left": "0px" }, "fast");
+            button.hide();
+            if (!hasRead) {
+                markAsRead(id);
+            }
+               
+            $('#msg-' + id).height('auto');
+            $('#msg-' + id).width('100%');
+               
             }
         },
     }
 
     var updateInbox = function(jsonIn)
     {
+        $scope.total = $('.pushMessage').length;
+        
         notificationDataService.updateInboxMessage(jsonIn).then(function (result) {
+            
             if (result !== 'success') {
                 $scope.message = "Faild to save data, Please try later<br>";
                 $timeout(function () {
@@ -224,7 +241,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 
             }
         }).catch(function (error) {
-
+          
             $scope.message = "Faild to update message.";
             $timeout(function () {
                 $scope.message = "";
