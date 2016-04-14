@@ -103,7 +103,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     getInboxMessages(false);
 
     $scope.delete = function ($event, id) {
-        $event.stopPropagation();
+       // $event.stopPropagation();
         var jsonIn = {
             Id: id,
             Status: 105,
