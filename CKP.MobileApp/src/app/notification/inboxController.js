@@ -154,6 +154,8 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 markAsRead(id);
                 e.sender.element.attr('data-status', 104);
             }
+            $('#pushTitleId-' + id).removeClass('km-bold-font');
+            $('#pushDateId-' + id).removeClass('km-bold-font');
             //
             var target = $(e.touch.initialTouch),
                  listview = $("#edit-listview").data("kendoMobileListView"),
@@ -195,7 +197,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             }
             else {
                 $(e.touch.currentTarget).animate({ "margin-left": "0px" }, "fast");
-          
+                button.hide();
                 $('#msg-' + id).height('auto');
                 $('#msg-' + id).width('100%');
             }
