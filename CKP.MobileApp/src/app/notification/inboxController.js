@@ -1,6 +1,6 @@
 
-app.controller('inboxController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', 'localStorageService',
-function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, localStorageService) {
+app.controller('inboxController', ['$scope', '$http', '$sce', 'translateService', 'authService', 'notificationDataService', '$timeout', 'localStorageService', '$filter',
+function ($scope, $http, $sce, translateService, authService, notificationDataService, $timeout, localStorageService, $filter) {
 
     $scope.form = {};
 
@@ -23,7 +23,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     };
     $scope.message = "";
     $scope.notifications = {};
-    $scope.PageSize = 5;
+    $scope.PageSize = 20;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
    
@@ -90,6 +90,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             else {
                 $scope.notifications = result;
             }
+            
+          
+            $filter('orderBy')($scope.notifications, 'PushNotificationMessageQueueId', true);
             $scope.hasNext = result.length >= $scope.PageSize;
             $scope.total = $scope.notifications.length;
         }).catch(function (error) {
