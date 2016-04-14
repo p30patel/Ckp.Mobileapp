@@ -60,10 +60,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
    
     var getInboxMessages = function (hasNext) {
         kendo.mobile.application.showLoading();
-
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.getInbox");
-        }
+     
         if (hasNext)
         {
             $scope.CurrentPage++;

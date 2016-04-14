@@ -66,6 +66,14 @@ app.factory("notificationDataService", [
                             .error(function (err, status) {
                                 deferred.reject(err);
                             });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.getInbox");
+                            if (organizationDetail.UserName) {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                            }
+                        }
+
                         return deferred.promise;
                     };
 
@@ -79,6 +87,17 @@ app.factory("notificationDataService", [
                             .error(function (err, status) {
                                 deferred.reject(err);
                             });
+
+                        var status = notifcationData.Status == 104 ? "MarkAsRead" : "MarkAsDelete";
+                     
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                           
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateInbox");
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateInbox.Status." + status);
+                            if (organizationDetail.UserName) {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateInbox.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                            }
+                        }
                         return deferred.promise;
                     };
 

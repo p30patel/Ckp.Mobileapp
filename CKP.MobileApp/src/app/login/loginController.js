@@ -377,8 +377,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 kendo.mobile.application.hideLoading();
                 if (data) {
                     hasNewPassword = data.HasNewPassword;
-                    if (data.UserName) {
-                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + data.UserName + "-" + data.UserId);
+                    if (typeof (window.navigator.simulator) === 'undefined') {
+                        if (data.UserName) {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + data.UserName + "-" + data.UserId);
+                        }
                     }
                 }
                 if (hasNewPassword) {
