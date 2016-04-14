@@ -372,11 +372,14 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.passwordHint = "";
             authService.login($scope.loginData).then(function (response) {
 
-                var data = localStorageService.get('organizationDetail');
+                var data = localStorageService.get('organizationDetail');                
+               
                 kendo.mobile.application.hideLoading();
                 if (data) {
-
                     hasNewPassword = data.HasNewPassword;
+                    if (data.UserName) {
+                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + data.UserName + "-" + data.UserId);
+                    }
                 }
                 if (hasNewPassword) {
                     authService.authentication.isAuth = false;
@@ -413,6 +416,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language." + $scope.selectedLanague);
+           
         }
         login();
         }

@@ -336,9 +336,7 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                                var flag = e.checked ? "On" : "Off";
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe." + flag);
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.POCtrlNo" + parameterValue);
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.UserId." + organizationDetail.UserId);
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.RetailerId." + organizationDetail.OrgContext.RetailerId);
-                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.OrganizationId." + organizationDetail.OrgContext.Id);
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("notifyMe.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
                            }
                            notificationDataService.updateNotification(notification).then(function (result) {
                                if (result !== 'success') {

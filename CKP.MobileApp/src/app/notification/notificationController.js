@@ -111,6 +111,12 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.getNotifcation");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.getNotification");
+            var organizationDetail = localStorageService.get('organizationDetail');
+            if (organizationDetail.UserName)
+            {
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+            }
         }
         notificationDataService.getUserNotifications().then(function (result) {
              kendo.mobile.application.hideLoading();
@@ -141,6 +147,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         if (typeof (window.navigator.simulator) === 'undefined') {
             var flag = e.checked ? "On" : "Off";
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("method.updateNotifcation");
+            window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.updateNotification");
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification." + flag);
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.SubscriptionType" + e.sender.element.attr('data-SubscriptionType'));
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("notification.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);

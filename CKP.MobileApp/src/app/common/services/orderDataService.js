@@ -98,6 +98,7 @@ app.factory("orderDataService", [
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
                             var flag = jsonIn.UpdateStatus ? "Approved" : "Declined";
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.UpdateApproveOrderStatus");
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline." + flag);
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("approveDecline.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);                           
                         }
@@ -146,7 +147,9 @@ app.factory("orderDataService", [
                             });
 
                         if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.getConfirmationHTML");
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.ShoppingCartId." + shoppingCartId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("confiramtionHTML.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
                         }
                         return deferred.promise;
                     };

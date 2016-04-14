@@ -3,7 +3,7 @@ app.factory('authService', [
                 '$http', '$q', 'localStorageService', 'ngAuthSettings', '$rootScope',
                 function ($http, $q, localStorageService, ngAuthSettings, $rootScope) {
                     var authServiceBase = ngAuthSettings.authServiceBaseUri;
-      
+
                     var authServiceFactory = {};
                     var _authentication = {
                         isAuth: false,
@@ -13,8 +13,8 @@ app.factory('authService', [
                         userId: 0,
                         groupType: 0,
                         permissions: {}
-          
-                    };       
+
+                    };
 
                     var _login = function (loginData) {
                         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
@@ -25,46 +25,51 @@ app.factory('authService', [
 
                         $http.post(authServiceBase + 'authorization/oauth/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
                             var loggedIn = true;
-                           
+
                             if (loginData.useRefreshTokens) {
                                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                             } else {
                                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
                             }
-            
+
                             if (loggedIn === true) {
                                 _authentication.isAuth = true;
                                 _authentication.userName = loginData.userName;
                                 _authentication.useRefreshTokens = loginData.useRefreshTokens;
-                            //    _forceGetPrincipalData();
+                                //    _forceGetPrincipalData();
 
                                 forceGetOrganizationData().then(function (result) {
-                                   
-                                        var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
-                                        result.Logo = logo;
-                                        if (typeof (window.navigator.simulator) === 'undefined') {
-                                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.GetOrganizationData");
+
+                                    var logo = (result.Logo !== '') ? authServiceBase + "/Images/" + result.Logo : "";
+                                    result.Logo = logo;
+                                    if (typeof (window.navigator.simulator) === 'undefined') {
+                                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.GetOrganizationData");
+                                        if (result.OrgContext.Name != null) {
                                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrgainzationId." + result.OrgContext.Name + "-" + result.OrgContext.Id);
+                                        }
+                                        if (result.UserName != null) {
                                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("User." + result.UserName + "-" + result.UserId);
+                                        }
 
-                                            var retailerName = result.OrgContext.RetailerId;
-                                            if (typeof result.RetailerName !== 'undefined') {
-                                                retailerName = result.RetailerName + "-" + result.OrgContext.RetailerId;
-                                            }
+                                        var retailerName = result.OrgContext.RetailerId;
+                                        if (typeof result.RetailerName !== 'undefined' && result.RetailerName != null) {
+                                            retailerName = result.RetailerName + "-" + result.OrgContext.RetailerId;
                                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("Retailer." + retailerName);
-                                        } 
+                                        }
 
-                                        deferred.resolve(result);
-                                    }).catch(function (err, status) {
-                                        loggedIn = false;
-                                        _logout();
-                                        deferred.reject(err);
-                                    });
+                                    }
+
+                                    deferred.resolve(result);
+                                }).catch(function (err, status) {
+                                    loggedIn = false;
+                                    _logout();
+                                    deferred.reject(err);
+                                });
 
 
                             }
-                         
-                         
+
+
                         }).error(function (err, status, headers, config) {
                             _logout();
                             deferred.reject(err);
@@ -76,9 +81,9 @@ app.factory('authService', [
                     var _logout = function () {
                         localStorageService.remove('authorizationData');
                         localStorageService.remove('userProfileData');
-                   //     localStorageService.remove('organizationDetail');
-                      
-                        
+                        //     localStorageService.remove('organizationDetail');
+
+
                         _authentication.isAuth = false;
                         _authentication.userName = "";
                         _authentication.useRefreshTokens = true;
@@ -89,7 +94,7 @@ app.factory('authService', [
 
                     var _getPrincipalData = function (loginData) {
                         if (!_authentication.isAuth || _authentication.userName === "") {
-                            _forceGetPrincipalData();  
+                            _forceGetPrincipalData();
                         }
                     };
 
@@ -99,7 +104,7 @@ app.factory('authService', [
                         var loginData = localStorageService.get('loginData');
                         var organizationDetail = localStorageService.get('organizationDetail');
                         var refreshData = localStorageService.get('forceRefreshDetail');
-                                               
+
                         var uuId = '';
                         var model = '';
                         var platform = '';
@@ -107,16 +112,15 @@ app.factory('authService', [
                         var active = true;
                         var hasForceRefresh = true;
 
-                        if (deviceData)
-                        {
+                        if (deviceData) {
                             uuId = deviceData.result.Id;
                             model = deviceData.result.HardwareModel;
                             platform = deviceData.result.PlatformType;
                             version = deviceData.result.PlatformVersion;
                             active = deviceData.result.Active;
                         }
-                    
-                   
+
+
                         var data = {
                             UserName: _authentication.userName,
                             DeviceUUId: uuId,
@@ -125,32 +129,29 @@ app.factory('authService', [
                             DeviceVersion: version,
                             IsActive: active
                         }
-                       
-                      
-                        if (organizationDetail && !organizationDetail.HasNewPassword)
-                        {
-                           
-                            if (refreshData && loginData && deviceData && typeof (window.navigator.simulator) === 'undefined')
-                            {
-                            var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
-                            var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
-                            var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
-                            hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
-                           
-                            hasForceRefresh = refreshData.PersistTime && new Date().getTime() > Number(refreshData.LastUpdated) + refreshData.PersistTime ? true : hasForceRefresh;
-                           
+
+
+                        if (organizationDetail && !organizationDetail.HasNewPassword) {
+
+                            if (refreshData && loginData && deviceData && typeof (window.navigator.simulator) === 'undefined') {
+                                var hasSameUserName = angular.equals(loginData.userName.toLocaleLowerCase(), organizationDetail.UserName.toLocaleLowerCase());
+                                var hasSameUUID = angular.equals(uuId, organizationDetail.DeviceId);
+                                var hasSameDate = angular.equals(new Date().toLocaleDateString(), refreshData.date);
+                                hasForceRefresh = !(hasSameUserName && hasSameUUID && hasSameDate);
+
+                                hasForceRefresh = refreshData.PersistTime && new Date().getTime() > Number(refreshData.LastUpdated) + refreshData.PersistTime ? true : hasForceRefresh;
+
                             }
-                           
+
                         }
-                       
+
                         var deferred = $q.defer();
-                        if (hasForceRefresh)
-                        {
+                        if (hasForceRefresh) {
                             var url = authServiceBase + "webapi/api/core/MobileApp/OrganizationDetail";
                             $http.post(url, data).success(function (result) {
-                                localStorageService.set('organizationDetail', result);                                
-                                localStorageService.remove("messages");                               
-                               
+                                localStorageService.set('organizationDetail', result);
+                                localStorageService.remove("messages");
+
                                 var date = new Date();
                                 var currentDate = date.toLocaleDateString();
                                 var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // current is 1 days
@@ -180,7 +181,7 @@ app.factory('authService', [
                             });
                         }
                         else {
-                            deferred.resolve(organizationDetail);                         
+                            deferred.resolve(organizationDetail);
                         }
 
                         return deferred.promise;
@@ -194,9 +195,9 @@ app.factory('authService', [
                             _authentication.userId = result.UserId;
                             _authentication.groupType = result.GroupType;
                             _authentication.permissions = result.Permissions;
-                  
+
                             localStorageService.add('userProfileData', _authentication);
-                
+
                             deferred.resolve(result);
                         }).error(function (err, status) {
                             deferred.reject(err);
@@ -208,7 +209,7 @@ app.factory('authService', [
                     var _fillAuthData = function () {
                         var authData = localStorageService.get('authorizationData');
                         var userProfileData = localStorageService.get('userProfileData');
-                        
+
                         if (authData) {
                             _authentication.isAuth = true;
                             _authentication.userName = authData.userName;
@@ -219,7 +220,7 @@ app.factory('authService', [
                             }
                         }
                     };
-      
+
                     var _refreshToken = function () {
                         var deferred = $q.defer();
 
@@ -291,7 +292,7 @@ app.factory('authService', [
 
                     authServiceFactory.forceGetPrincipalData = _forceGetPrincipalData;
                     authServiceFactory.fillAuthData = _fillAuthData;
-       
+
                     authServiceFactory.authentication = _authentication;
                     authServiceFactory.refreshToken = _refreshToken;
 
@@ -300,4 +301,4 @@ app.factory('authService', [
 
                     return authServiceFactory;
                 }
-            ]);
+]);
