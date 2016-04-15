@@ -123,7 +123,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             $scope.notifications = result;
         }).catch(function (error) {
              kendo.mobile.application.hideLoading();
-            $scope.message = "Faild to get notifcation.";
+             $scope.message = "Error while getting data.";
             $timeout(function () {
                 $scope.message = "";
             }, 7000);

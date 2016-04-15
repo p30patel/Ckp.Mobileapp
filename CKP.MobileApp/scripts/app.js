@@ -86,7 +86,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             SelectedPara: '1',
             HasReadNote: true,
             IsFirtTime: true,
-            HasTrunOnNotifcation : false,
+            HasTrunOnNotifcation: false,
             HasForceClearAll: false
         };
 
@@ -169,21 +169,43 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
         document.addEventListener("backbutton", function (e) {
 
             var hasLoginPage = false;
+            var hasModalOpen = false;
             if (typeof kendo.mobile.application !== 'undefined') {
-                var view = kendo.mobile.application.view();              
+                var view = kendo.mobile.application.view();
+
+
                 if (view !== null) {
+                    hasModalOpen = $(".km-modalview:visible").length > 0 ? true : false;
                     hasLoginPage = kendo.mobile.application.view().id == 'src/app/login/login.html';
+                    alert(kendo.mobile.application.view().id + "==" + hasModalOpen);
                 }
             }
 
-            if (hasLoginPage) {
+            if (hasLoginPage && !hasModalOpen) {
                 e.preventDefault();
+                //navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", "Yes,No");
                 navigator.app.exitApp();
             }
             else {
-                navigator.app.backHistory();
+                if (hasModalOpen) {
+                    $(".km-modalview:visible").kendoMobileModalView("close");
+                    return false;
+                }
+                else {
+                    navigator.app.backHistory();
+                }
             }
         }, false);
+
+        function onConfirm(buttonIndex) {
+            if (buttonIndex == 1) {
+                navigator.app.exitApp();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
     backButtonEvent();
 
