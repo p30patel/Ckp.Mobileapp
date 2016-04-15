@@ -156,17 +156,17 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         notificationDataService.updateNotification(notification).then(function (result) {
             if (result !== 'success') {
                
-                $scope.message = "Faild to save data, Please try later<br>";
+                $scope.message = "Error while saving the data, Please try later<br>";
                 $timeout(function () {
                     $scope.message = "";
-                }, 7000);
+                }, 3000);
             }
         }).catch(function (error) {
                 
-            $scope.message = "Faild to update notifcation.";
+            $scope.message = "Error while update the data.";
             $timeout(function () {
                 $scope.message = "";
-            }, 7000);
+            }, 3000);
 
         });
     }
