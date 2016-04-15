@@ -177,7 +177,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 if (view !== null) {
                     hasModalOpen = $(".km-modalview:visible").length > 0 ? true : false;
                     hasLoginPage = kendo.mobile.application.view().id == 'src/app/login/login.html';
-                    alert(kendo.mobile.application.view().id + "==" + hasModalOpen);
+                   
                 }
             }
 
