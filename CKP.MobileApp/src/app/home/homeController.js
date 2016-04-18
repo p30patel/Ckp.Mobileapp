@@ -168,7 +168,27 @@ app.controller('homeController', [
 
                        setResources();
 
+                       //alerts & news - messages
 
+                       var getMessages = function () {
+                           $("#btn_message").data("kendoMobileButton");
+
+                           messageDataService.getMessages().then(function (result) {
+
+                               if (typeof (window.navigator.simulator) === 'undefined') {
+                                   window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.messages");
+                               }
+                               $scope.mesages = result;
+                               $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
+                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
+
+                           }).catch(function (error) {
+                               $scope.mesages = {};
+                               $scope.messageCount = 0;
+                               $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
+                           }).finally(function () {
+                           });
+                       }; // end message
                        $scope.afterShow = function (e) {
 
                            var view = kendo.mobile.application.view();
@@ -179,6 +199,8 @@ app.controller('homeController', [
                                             .data("kendo-mobile-nav-bar");
                                navbar.title($scope.form.title.resoruceValue);
                                $('.km-scroll-container').css('-webkit-transform', 'none');
+
+                               getMessages();
                            }
 
 
@@ -525,29 +547,6 @@ app.controller('homeController', [
                            }
                        }
 
-                       //alerts & news - messages
-
-                       var getMessages = function () {
-                               $("#btn_message").data("kendoMobileButton");
-
-                               messageDataService.getMessages().then(function (result) {
-
-                                   if (typeof (window.navigator.simulator) === 'undefined') {
-                                       window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.messages");
-                                   }
-                                   $scope.mesages = result;
-                                   $scope.messageCount = result.AnnouncementList.length + result.PartnerHolidayList.length;
-                                   $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
-
-                               }).catch(function (error) {
-                                   $scope.mesages = {};
-                                   $scope.messageCount = 0;
-                                   $("#btn_message").data("kendoMobileButton").badge($scope.messageCount);
-                               }).finally(function () {
-                               });
-                       }; // end message
-
-                       getMessages();
 
                        $scope.setSearhParamter = function (para) {
                            $scope.selectedPara = parameterService.getSearchParameterName(para);
