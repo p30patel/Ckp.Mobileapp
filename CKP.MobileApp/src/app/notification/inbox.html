@@ -30,8 +30,10 @@
                    ng-click="delete($event, #=PushNotificationMessageQueueId#)" class="delete km-primary"></a>
             </div>
         </ul>
-        <kendo-mobile-button class="km-secondary km-justified" ng-show="hasNext" k-on-click="ViewMore()">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
+        <div style="padding:5px;">
+            <kendo-mobile-button class="km-secondary km-justified" ng-show="hasNext" k-on-click="ViewMore()">{{form.viewAll.resoruceValue}}</kendo-mobile-button>
 
+        </div>
 
     </kendo-mobile-content>
     <kendo-mobile-footer ng-show="message" class='ck-grey-wrap'>
