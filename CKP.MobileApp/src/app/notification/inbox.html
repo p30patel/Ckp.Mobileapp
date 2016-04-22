@@ -24,7 +24,7 @@
                 </h4>
                 <h4 ng-class="#=Status# == '102' ? 'km-bold-font' : '' " id="pushDateId-#=PushNotificationMessageQueueId#"
                     >#=kendo.toString(new Date(DateProcessed), 'MMM d, yyyy h:mm tt')#</h4>
-                <p id="msg-#=PushNotificationMessageQueueId#" class="pushMessageDescription ck-text-overflow">#=Message#</p>
+                <p id="msg-#=PushNotificationMessageQueueId#" class="pushMessageDescription ck-text-overflow" ng-bind-html="renderHtml(dataItem.Message)"></p>
                 <a data-role="button" data-icon="trash" 
                    style="font: 1.5em/1em 'Kendo UI' !important;"
                    ng-click="delete($event, #=PushNotificationMessageQueueId#)" class="delete km-primary"></a>

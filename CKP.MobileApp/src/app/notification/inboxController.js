@@ -94,7 +94,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             $scope.message = "Error while getting data.";
             $timeout(function () {
                 $scope.message = "";
-            }, 7000);
+            }, 1000);
 
         });
     }
@@ -222,7 +222,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                 $scope.message = "Error while saving the data, Please try later<br>";
                 $timeout(function () {
                     $scope.message = "";
-                }, 3000);
+                }, 1000);
             }
             else {
 
@@ -238,7 +238,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             $scope.message = "Error while update the data.";
             $timeout(function () {
                 $scope.message = "";
-            }, 3000);
+            }, 1000);
 
         });
     }
