@@ -458,6 +458,12 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                            $("#modalview-trackingList").kendoMobileModalView("close");
                        };
 
+                        //order line detail
+                       $scope.showOrderLineDetail = function (orderLineId) {
+                          
+                           kendo.mobile.application.navigate("src/app/order/orderLineDetail.html?orderLineId=" + orderLineId + "&retailerId=" + $scope.retailerId);
+                       };
+
                        $scope.backButton = function () {
                            kendo.mobile.application.navigate("src/app/" + backUrl);
                        }

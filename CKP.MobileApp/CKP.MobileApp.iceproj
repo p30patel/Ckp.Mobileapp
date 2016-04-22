@@ -137,6 +137,8 @@
     <Content Include="src\app\notification\notification.html" />
     <Content Include="src\app\notification\inboxController.js" />
     <Content Include="src\app\notification\notificationController.js" />
+    <Content Include="src\app\order\orderLineDetail.js" />
+    <Content Include="src\app\order\orderLineDetail.html" />
     <Content Include="src\app\order\detail.html" />
     <Content Include="src\app\order\list.html" />
     <Content Include="src\app\order\orderDetailController.js" />
