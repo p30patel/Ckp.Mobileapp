@@ -77,9 +77,9 @@ app.factory('surveyDataService',
                 {
                     userId = organizationDetail.UserId;
                 }
-                if (status == 3)
+                if (status == 2)
                 {
-                    //mark as remind me later = 3  if status = 0 means declined and status = 1 then accpeted the survery
+                    //mark as remind me later = 2  if status = 0 means declined and status = 1 then accpeted the survery
                     deferred.resolve("Marked as Remind me Later");
                 }
                 var url = authServiceBase + "webapi/api/core/MobileApp/UpdateSurveyStatus?userId=" + userId + "&surveyId=" + surveyId + "&status=" + status;

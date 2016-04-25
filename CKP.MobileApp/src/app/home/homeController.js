@@ -26,6 +26,8 @@ app.controller('homeController', [
                            return false;
                        }
                        $scope.chk = {};
+                       var hasCalledSurvey = false;
+                       var survey = {};
                        var setResources = function () {
                            $scope.form.attentionUser = {};
                            $scope.form.attentionUser.resoruceName = "Attention User";
@@ -218,7 +220,8 @@ app.controller('homeController', [
                                $scope.message = "";
                                $scope.messageCount = 0;
                                $scope.searchValue = "";
-                           
+
+
                                $scope.hasSearch = false;
                                $scope.hasListView = false;
                                $scope.hasDetailView = false;
@@ -258,16 +261,16 @@ app.controller('homeController', [
                                $scope.isAuth = authService.authentication.isAuth;
                                getOrderCounts();
                            }
-                        
+
                            $('.approve-chk').prop('checked', false);
                            $('.approve-chk-retailer').prop('checked', false);
                            $scope.hasItemSelectedForApporval = false;
                            var data = localStorageService.get('organizationDetail');
-                          
+
                            if (data !== null) {
                                $scope.hasCreditLock = data.CreditStatus === "Blocked";
                            }
-                          
+
                        }
 
                        $scope.greaterThan = function (prop, val) {
@@ -290,24 +293,23 @@ app.controller('homeController', [
                            if (userProfileData) {
                                $scope.selectedPara = userProfileData.SelectedPara;
                            }
-                         
+
                        }
 
                        var setSelectPara = function () {
 
                            var userProfileData = localStorageService.get('user-profile');
-                           
-                           if (userProfileData)
-                           {
+
+                           if (userProfileData) {
                                userProfileData.SelectedPara = $scope.selectedPara;
                                localStorageService.set('user-profile', userProfileData);
                            }
                            var selectedPara = parameterService.getSearchParameterName($scope.selectedPara);
-                         
+
                            $scope.searchParameterId = $scope.selectedPara;
 
                            $scope.currentSearchInput = $scope.searchValue;
-                          
+
                            $scope.jsonIn = {
                                OrderNumber: $scope.searchParameterId == '1' ? $scope.currentSearchInput : '',
                                SalesOrderNumber: $scope.searchParameterId == '2' ? $scope.currentSearchInput : '',
@@ -321,7 +323,7 @@ app.controller('homeController', [
                        var checkForSearchResults = function () {
 
                            var hasFirstMatchFound = false;
-                          
+
                            if ($scope.orderCounts.length > 0 && $scope.hasSearch) {
                                $scope.hasNoSearchResults = true;
                                angular.forEach($scope.orderCounts, function (value, key) {
@@ -330,7 +332,7 @@ app.controller('homeController', [
                                            hasFirstMatchFound = true;
                                            $scope.hasNoSearchResults = false;
                                        }
-                                 
+
                                    }
 
                                });
@@ -373,7 +375,7 @@ app.controller('homeController', [
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderCount");
                            }
                            $scope.hasNoSearchResults = false;
-                        
+
                            homeDataService.getOrderCounts($scope.jsonIn).then(function (result) {
                                kendo.mobile.application.hideLoading();
                                if (result === null) {
@@ -497,7 +499,7 @@ app.controller('homeController', [
                            $(".ck-count-btn").removeClass('km-state-active');
                            $('.approve-chk-retailer').prop('checked', false);
                            $('.approve-chk').prop('checked', false);
-                       
+
 
 
                        }
@@ -538,11 +540,11 @@ app.controller('homeController', [
                                $('#chkAll-' + $scope.selectedRetailer).prop('checked', false);
                                $('.approve-chk-' + $scope.selectedRetailer).prop('checked', false);
                                $scope.hasItemSelectedForApporval = false;
-                               if (selectedOrderCount > 0) {                              
+                               if (selectedOrderCount > 0) {
                                    $scope.orders = {};
                                    $scope.currentPage = 1;
                                    getOrderSummary($scope.selectedOrderType, $scope.selectedOrderTypeId, $scope.searchParameterId, $scope.currentSearchInput, $scope.currentPage, hasNext);
-                                
+
                                }
                                else {
 
@@ -592,7 +594,7 @@ app.controller('homeController', [
                            $scope.hasSearch = $scope.searchValue.length > 0 ? true : false;
                            $rootScope.hasBackButton = false;
                            $rootScope.hasSearchOrApporval = true;
-                          
+
                            getOrderCounts();
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.search");
@@ -604,7 +606,7 @@ app.controller('homeController', [
                            search();
                        }
                        $scope.search = function () {
-                               search();
+                           search();
                        }
                        $scope.key = function ($event) {
 
@@ -613,10 +615,10 @@ app.controller('homeController', [
                                search();
                            }
                        }
-                 
+
                        //view more orders
                        $scope.showMoreOrderModel = function (orders, columnName) {
-                         
+
                            $scope.viewMoreColumn = columnName;
 
                            $scope.orderList = orders;
@@ -649,7 +651,7 @@ app.controller('homeController', [
                            var currentSelection = [];
                            var selectedList = '';
                            var checkedItems = $('.approve-chk:checked');
-                       
+
                            if (checkedItems.length > 0) {
 
                                angular.forEach(checkedItems, function (value, key) {
@@ -657,7 +659,7 @@ app.controller('homeController', [
                                    var item = checkedItems.eq(key).attr('data-' + $scope.screen2SearchParameter);
 
                                    // if shopping cart or vendor ref then get sales order list from them
-                              
+
                                    if (typeof item !== 'undefined') {
 
                                        if ($scope.screen2SearchParameter === 'ShoppingCartId' || $scope.screen2SearchParameter === 'VendorRef') {
@@ -695,7 +697,7 @@ app.controller('homeController', [
                        }
 
                        $scope.checkAll = function (retailerId) {
-                         
+
                            $('.approve-chk').prop('checked', false);
                            var selectedAll = $('#chkAll-' + retailerId).is(':checked');
 
@@ -706,7 +708,7 @@ app.controller('homeController', [
 
                        $scope.checkedIndividual = function (retailerId, id) {
                            var retailerId = $scope.selectedRetailer;
-                          
+
                            var isChecked = $('#' + id + ':checked').length > 0 ? true : false;
                            switch ($scope.screen2SearchParameter) {
                                case 'ShoppingCartId':
@@ -762,12 +764,12 @@ app.controller('homeController', [
                            $rootScope.hasBackButtonList = false;
                            var backUrl = 'home/home.html';
                            getSelectedList();
-        
+
                            parameterValue = parameterValue === '' ? $scope.selectedList : parameterValue;
 
                            var selectedList = $scope.selection;
                            if (orderType == 1 && parameterValue.length == 0) {
-                             
+
                                $scope.message = $scope.form.selectAtleastOneItem.resoruceValue;
                                console.log($scope.message);
                                $timeout(function () {
@@ -808,25 +810,39 @@ app.controller('homeController', [
                        };
                        //survey
                        var onSurveyConfirm = function (buttonIndex) {
-                           alert(buttonIndex);
+                           
                            if (buttonIndex == 1) {
-                         
-                               return true;
+                               window.open(survey.Url, '_blank', 'location=yes');
+                               surveyDataService.updateSurveyStatus(survey.surveyId, 1);
+                             
+                           }
+                           else if (buttonIndex == 2) {
+                               surveyDataService.updateSurveyStatus(survey.surveyId, 0);
                            }
                            else {
-                               return false;
+                               surveyDataService.updateSurveyStatus(survey.surveyId, 2);
                            }
                        }
                        var getUserSurvey = function () {
+                           
                            $timeout(function () {
-                               var title = "Survey";
-                               var buttonLabels = buttonLabels ||  $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue ;
-                               navigator.notification.confirm("Please give us your feedback.", onSurveyConfirm, title, buttonLabels);
-                               surveyDataService.getSurvey().then(function (result) {
-                              //     navigator.notification.confirm("Are you sure you want to exit ?", onSurveyConfirm, "Confirmation", "Yes,No");
-                               }).catch(function (err) {
-                               });
+                               console.log(hasCalledSurvey);
+                               if (!hasCalledSurvey) {
+                                   hasCalledSurvey = true;
+                                   surveyDataService.getSurvey().then(function (result) {
+                                       var title = result.Title || "Survey";
+                                       var description = result.Details || "Please take a moment to complete the survey!";
+                                       var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
+                                  
+                                       if (result) {
+                                           survey = result;
+                                           navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
+                                       }
+                                   }).catch(function (err) {
+                                   });
+                               }
                            }, 10000);
+
                        }
 
                        getUserSurvey();
