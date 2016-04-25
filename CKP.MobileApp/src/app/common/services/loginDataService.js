@@ -67,11 +67,31 @@ app.factory('loginDataService',
             });
             return deferred.promise;
         };
+
+        var addLanguageLog = function (userId, culture) {
+          
+            var deferred = $q.defer();
+           
+            var url = authServiceBase + "webapi/api/core/MobileApp/AddLanguageLog?culture=" + culture + "&userId=" + userId;
+         
+            $http.post(url).success(function (result) {
+                deferred.resolve(result);
+
+            }).error(function (err, status) {
+                deferred.reject(err, status);
+
+            }).catch(function (err) {
+                deferred.reject(err);
+
+            });
+            return deferred.promise;
+        };
         
         loginDataFactory.getLanguages = getLanguages;
         loginDataFactory.forceGetLanguages = forceGetLanguages;
         loginDataFactory.getPasswordHint = getPasswordHint;
         loginDataFactory.resetPassword = resetPassword;
+        loginDataFactory.addLanguageLog = addLanguageLog;
 
         return loginDataFactory;
     }

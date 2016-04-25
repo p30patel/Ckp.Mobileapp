@@ -377,6 +377,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 kendo.mobile.application.hideLoading();
                 if (data) {
                     hasNewPassword = data.HasNewPassword;
+                    var userId = data.UserId;
+                    var culture = $scope.selectedLanague;
+                    if ( userId > 0)
+                    {
+                        loginDataService.addLanguageLog(userId, culture);
+                    }
                     if (typeof (window.navigator.simulator) === 'undefined') {
                         if (data.UserName) {
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + data.UserName + "-" + data.UserId);
