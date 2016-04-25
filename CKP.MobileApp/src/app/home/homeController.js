@@ -1,7 +1,7 @@
 
 app.controller('homeController', [
-                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', '$sce', '$window',
-                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, $sce, $window) {
+                  '$rootScope', '$scope', '$http', 'authService', 'localStorageService', '$timeout', 'homeDataService', 'parameterService', '$filter', 'translateService', 'messageDataService', '$sce', 'surveyDataService',
+                   function ($rootScope, $scope, $http, authService, localStorageService, $timeout, homeDataService, parameterService, $filter, translateService, messageDataService, $sce, surveyDataService) {
                        $scope.beforeShow = function () {
 
                            kendo.mobile.application.showLoading();
@@ -159,9 +159,17 @@ app.controller('homeController', [
                            $scope.form.loading.resoruceValue = translateService.getResourceValue($scope.form.loading.resoruceName);
 
 
-                           $scope.form.selectAtleastOneItem = {};
-                           $scope.form.selectAtleastOneItem.resoruceName = "Please select atleast one item";
-                           $scope.form.selectAtleastOneItem.resoruceValue = translateService.getResourceValue($scope.form.selectAtleastOneItem.resoruceName);
+                           $scope.form.surveyYes = {};
+                           $scope.form.surveyYes.resoruceName = "Yes";
+                           $scope.form.surveyYes.resoruceValue = translateService.getResourceValue($scope.form.surveyYes.resoruceName);
+
+                           $scope.form.remindMeLater = {};
+                           $scope.form.remindMeLater.resoruceName = "Remind me Later";
+                           $scope.form.remindMeLater.resoruceValue = translateService.getResourceValue($scope.form.remindMeLater.resoruceName);
+
+                           $scope.form.neverAskMe = {};
+                           $scope.form.neverAskMe.resoruceName = "Never Ask Me Again";
+                           $scope.form.neverAskMe.resoruceValue = translateService.getResourceValue($scope.form.neverAskMe.resoruceName);
 
 
                        }
@@ -798,6 +806,30 @@ app.controller('homeController', [
                            $('.order').hide();
                            $("#modalview-credit").kendoMobileModalView("close");
                        };
+                       //survey
+                       var onSurveyConfirm = function (buttonIndex) {
+                           alert(buttonIndex);
+                           if (buttonIndex == 1) {
+                         
+                               return true;
+                           }
+                           else {
+                               return false;
+                           }
+                       }
+                       var getUserSurvey = function () {
+                           $timeout(function () {
+                               var title = "Survery";
+                               var buttonLabels = buttonLabels ||  $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue ;
+                               navigator.notification.confirm("Are you sure you want to exit ?", onSurveyConfirm, title, buttonLabels);
+                               surveyDataService.getSurvey().then(function (result) {
+                              //     navigator.notification.confirm("Are you sure you want to exit ?", onSurveyConfirm, "Confirmation", "Yes,No");
+                               }).catch(function (err) {
+                               });
+                           }, 10000);
+                       }
+
+                       getUserSurvey();
 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
