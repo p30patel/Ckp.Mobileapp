@@ -48,6 +48,10 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                        $scope.form.adjustedQuantity.resourceName = "Adjusted Quantity";
                        $scope.form.adjustedQuantity.resourceValue = translateService.getResourceValue($scope.form.adjustedQuantity.resourceName);
 
+                       $scope.form.lineNumber = {};
+                       $scope.form.lineNumber.resourceName = "Line Number";
+                       $scope.form.lineNumber.resourceValue = translateService.getResourceValue($scope.form.lineNumber.resourceName);
+
 
                        $scope.form.price = {};
                        $scope.form.price.resourceName = "Price";
@@ -61,6 +65,11 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                        $scope.form.itemCode = {};
                        $scope.form.itemCode.resourceName = "Item Code";
                        $scope.form.itemCode.resourceValue = translateService.getResourceValue($scope.form.itemCode.resourceName);
+
+                       $scope.form.totalQuantity = {};
+                       $scope.form.totalQuantity.resourceName = "Total Quantity";
+                       $scope.form.totalQuantity.resourceValue = translateService.getResourceValue($scope.form.totalQuantity.resourceName);
+                       
                        $scope.orderLineDetail = {};
     
                        $scope.retailerId = 0;

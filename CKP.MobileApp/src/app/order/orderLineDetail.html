@@ -8,19 +8,42 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
     <kendo-mobile-content>
-
-        <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" data-collapsed="false" k-on-expand="OpenExpand()"
+        <kendo-mobile-list-view class="ck-no-border">
+            <li>
+                <h3 class="km-bold-font">{{orderLineDetail.OrderLine[0].__productName}}</h3>
+                <table class="ck-table">
+                    <tr>
+                        <td class="v-align">
+                            <h3>{{form.itemCode.resourceValue}} </h3>
+                        </td>
+                        <td class="v-align">
+                            <h3 class="km-bold-font">{{orderLineDetail.OrderLine[0].__productArticleNumber}}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="v-align">
+                            <h3>{{form.totalQuantity.resourceValue}}:</h3>
+                        </td>
+                        <td class="v-align">
+                            <h3 class="km-bold-font">100 </h3>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </kendo-mobile-list-view>
+        <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" data-collapsed="true" k-on-expand="OpenExpand()"
                                   ng-repeat="orderLine in orderLineDetail.OrderLine">
             <h4>
                 <table class="ck-table">
                     <tr>
                         <td>
-                            <span class="km-label-above" style="font-size:9px !important;">{{form.quantity.resourceValue}}:</span>
-                            <span>{{orderLine.__originalQuantity}}</span>
+                            {{form.lineNumber.resourceValue}} : {{orderLine.__originalQuantity}}
                         </td>
                         <td>
-                            <span class="km-label-above" style="font-size:9px !important;">{{form.adjustedQuantity.resourceValue}}:</span>
-                            <span>{{orderLine.__adjustedQuantity}}</span>
+                            {{form.quantity.resourceValue}}:{{orderLine.__originalQuantity}}
+                        </td>
+                        <td >
+                            ({{form.adjustedQuantity.resourceValue}}: {{orderLine.__adjustedQuantity}})
                         </td>
                     </tr>
 
@@ -28,9 +51,8 @@
                 </table>
             </h4>
             <table class="ck-table">
-                <tr class="" ng-repeat="column in orderLineDetail.Columns">
+                <tr class="pipe"  ng-repeat="column in orderLineDetail.Columns">
                     <td style="width:40%;">
-
                         <h4 class="km-bold-font" ng-if="column.Field == '__originalQuantity' ">{{form.quantity.resourceValue}}:</h4>
                         <h4 class="km-bold-font" ng-if="column.Field == '__adjustedQuantity' ">{{form.adjustedQuantity.resourceValue}}:</h4>
                         <h4 class="km-bold-font" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">{{column.Field}}:</h4>
