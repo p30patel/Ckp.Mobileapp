@@ -819,9 +819,9 @@ app.controller('homeController', [
                        }
                        var getUserSurvey = function () {
                            $timeout(function () {
-                               var title = "Survery";
+                               var title = "Survey";
                                var buttonLabels = buttonLabels ||  $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue ;
-                               navigator.notification.confirm("Are you sure you want to exit ?", onSurveyConfirm, title, buttonLabels);
+                               navigator.notification.confirm("Please give us your feedback.", onSurveyConfirm, title, buttonLabels);
                                surveyDataService.getSurvey().then(function (result) {
                               //     navigator.notification.confirm("Are you sure you want to exit ?", onSurveyConfirm, "Confirmation", "Yes,No");
                                }).catch(function (err) {
