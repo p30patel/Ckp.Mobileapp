@@ -585,6 +585,7 @@ app.controller('homeController', [
                            }
                            $rootScope.hasBackButton = true;
                            $rootScope.hasBackButtonList = false;
+                           $rootScope.hasBackButtonDetail = false;
                            var backUrl = 'home/home.html';
                            kendo.mobile.application.navigate("src/app/order/detail.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
                        }
@@ -762,6 +763,7 @@ app.controller('homeController', [
                        $scope.showOrderList = function (orderType, parameterId, parameterValue, retailerId) {
                            $rootScope.hasBackButton = true;
                            $rootScope.hasBackButtonList = false;
+                           $rootScope.hasBackButtonDetail = false;
                            var backUrl = 'home/home.html';
                            getSelectedList();
 
@@ -780,6 +782,7 @@ app.controller('homeController', [
                                if (typeof (window.navigator.simulator) === 'undefined') {
                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.home.orderList");
                                }
+                               
                                kendo.mobile.application.navigate("src/app/order/list.html?orderType=" + orderType + "&parameterId=" + parameterId + "&parameterValue=" + parameterValue + "&searchParameter=" + $scope.screen2SearchParameter + "&selectedList=" + selectedList + "&retailerId=" + retailerId + "&backUrl=" + backUrl);
                            }
                        }
@@ -845,7 +848,7 @@ app.controller('homeController', [
 
                        }
 
-                       getUserSurvey();
+                      // getUserSurvey();
 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);

@@ -280,6 +280,7 @@ app.controller('orderlistController', [
                        $scope.orderDetail = function (poctrlno) {
                            var backUrl = 'order/list.html';
                            $rootScope.hasBackButtonList = true;
+                           $rootScope.hasBackButtonDetail = false;
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderList.orderDetail");
                            }

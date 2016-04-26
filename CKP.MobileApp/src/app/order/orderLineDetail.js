@@ -48,6 +48,10 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                        $scope.form.adjustedQuantity.resourceName = "Adjusted Quantity";
                        $scope.form.adjustedQuantity.resourceValue = translateService.getResourceValue($scope.form.adjustedQuantity.resourceName);
 
+                       $scope.form.originalQuantity = {};
+                       $scope.form.originalQuantity.resourceName = "Original Quantity";
+                       $scope.form.originalQuantity.resourceValue = translateService.getResourceValue($scope.form.originalQuantity.resourceName);
+
                        $scope.form.lineNumber = {};
                        $scope.form.lineNumber.resourceName = "Line Number";
                        $scope.form.lineNumber.resourceValue = translateService.getResourceValue($scope.form.lineNumber.resourceName);
@@ -74,6 +78,7 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
     
                        $scope.retailerId = 0;
                        var orderLineId = 0;
+                       $scope.quantity = 0;
                        var init = function () {
                            if (!authService.authentication.isAuth) {
                                authService.logout();
@@ -85,7 +90,7 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
                        $scope.intShow = function (e) {                          
                            orderLineId = e.view.params.orderLineId;
                            $scope.retailerId = e.view.params.retailerId;
-                       
+                           $scope.quantity = e.view.params.quantity;
                            getOrderLineDetail(orderLineId);
 
                        }
