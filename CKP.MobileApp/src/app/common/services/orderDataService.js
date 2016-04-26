@@ -6,46 +6,6 @@ app.factory("orderDataService", [
                 function ($http, $q, localStorageService, ngAuthSettings, authService, $rootScope) {
                     var orderDataServiceFactory = {};
                     var date = kendo.toString(new Date(), "yyyy-MM-dd");
-                    
-                    var getOrderDetail = function (poctrlno, retailerId) {
-                   
-                        var deferred = $q.defer();
-
-                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
-
-                        var orgContext = '';
-                        var organizationDetail = localStorageService.get('organizationDetail');
-
-                        var orgId = getOrganization(retailerId);
-
-                        if (organizationDetail) {
-                            orgContext = organizationDetail.OrgContext;
-                        }
-                        orgContext.Id = orgId > 0 ? orgId : orgContext.Id;
-                        orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
-
-                        if (organizationDetail) {
-                            orgContext = organizationDetail;
-                        }
-
-                        var jsonIn = {
-                            ProductionOrderId: poctrlno,
-                            OrganizationDetail: orgContext
-                        }
-                        console.log(orgId);
-                      
-                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
-
-                     
-                        $http.post(url, jsonIn).success(function (result) {
-                      
-                            deferred.resolve(result);
-                        }).error(function (xhr, status, error) {
-                           
-                            deferred.reject(error);
-                        });
-                        return deferred.promise;
-                    };
              
                     var getOrderList = function (jsonIn) {
                         var deferred = $q.defer();
@@ -70,6 +30,47 @@ app.factory("orderDataService", [
                         });
                         return deferred.promise;
                     };
+
+                    var getOrderDetail = function (poctrlno, retailerId) {
+
+                        var deferred = $q.defer();
+
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
+
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        var orgId = getOrganization(retailerId);
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+                        orgContext.Id = orgId > 0 ? orgId : orgContext.Id;
+                        orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail;
+                        }
+
+                        var jsonIn = {
+                            ProductionOrderId: poctrlno,
+                            OrganizationDetail: orgContext
+                        }
+                        console.log(orgId);
+
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderDetailByPOCtrlNo";
+
+
+                        $http.post(url, jsonIn).success(function (result) {
+
+                            deferred.resolve(result);
+                        }).error(function (xhr, status, error) {
+
+                            deferred.reject(error);
+                        });
+                        return deferred.promise;
+                    };
+
                 
                     var approveDecline = function (jsonIn) {
                         var deferred = $q.defer();
@@ -154,7 +155,40 @@ app.factory("orderDataService", [
                         return deferred.promise;
                     };
 
-                    
+                    var getOrderLineDetail = function (orderLineId, retailerId) {
+                        var deferred = $q.defer();
+
+                        var orgContext = '';
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var orgId = getOrganization(retailerId);
+
+                        if (organizationDetail) {
+                            orgContext = organizationDetail.OrgContext;
+                        }
+                        orgContext.Id = orgId > 0 ? orgId : orgContext.Id;
+                        orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
+
+                        var data = {
+                            OrgContext: orgContext,
+                            OrderLineId: orderLineId
+                        };
+
+                        var url = authServiceBase + "webapi/api/core/MobileApp/GetOrderLine";
+                        $http.post(url, data).then(
+                            function successCallback(result) {
+                                deferred.resolve(result);
+                            }, function errorCallback(error) {
+                                deferred.reject(error);
+                            });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrderLineDetail.GetOrderLineDetail");
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrderLineDetail.OrderLineId." + orderLineId);
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("OrderLineDetail.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                        }
+                        return deferred.promise;
+                    };
+
 
                     orderDataServiceFactory.approveDecline = approveDecline;
                     
@@ -163,6 +197,8 @@ app.factory("orderDataService", [
                     orderDataServiceFactory.getConfirmationHtml = getConfirmationHtml;
 
                     orderDataServiceFactory.getOrderList = getOrderList;
+
+                    orderDataServiceFactory.getOrderLineDetail = getOrderLineDetail;
                    
                     return orderDataServiceFactory;
                 }
