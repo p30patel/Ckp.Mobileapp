@@ -835,8 +835,10 @@ app.controller('homeController', [
                                if (!hasCalledSurvey && hasHomePage) {
                                    hasCalledSurvey = true;
                                    surveyDataService.getSurvey().then(function (result) {
+                                      
                                        if (result !== null ){
                                            survey = result;
+                                           alert(survey.HasSubmitted);
                                            var title = result.Title || "Survey";
                                            var description = result.Details || '';
                                            var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
