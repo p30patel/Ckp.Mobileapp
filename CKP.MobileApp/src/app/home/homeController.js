@@ -24,7 +24,7 @@ app.controller('homeController', [
                            return false;
                        }
                        $scope.chk = {};
-                       var hasCalledSurvey = false;
+                      
                        var survey = {};
                        var setResources = function () {
                            $scope.form.attentionUser = {};
@@ -449,7 +449,7 @@ app.controller('homeController', [
                                    var currentOrders = $scope.orders;
                                    var nextNumber = $scope.orders.length + 1;
                                    angular.forEach(result, function (value, key) {
-                                       console.log(value);
+                                
                                        if (key <= result.length) {
                                            value["Id"] = -1 * nextNumber++;
                                            currentOrders.push(value);
@@ -634,7 +634,7 @@ app.controller('homeController', [
                        // selected list for approval - screen2
                        var getSalesOrderNumbers = function (orders) {
                            var salesOrders = [];
-                           console.log(orders);
+                         
                            angular.forEach(orders, function (value, key) {
 
                                salesOrders.push(value.SalesOrderNumber);
@@ -669,7 +669,7 @@ app.controller('homeController', [
                                                var orders = $filter('filter')($scope.orders, { VendorRef: item });
                                            }
                                            salesOrders = getSalesOrderNumbers(orders);
-                                           console.log('list : ' + salesOrders);
+                                         
                                            angular.forEach(salesOrders, function (value, key) {
 
                                                if (currentSelection.indexOf(value) == -1) {
@@ -681,7 +681,7 @@ app.controller('homeController', [
                                        }
                                        else {
                                            if (currentSelection.indexOf(item) == -1) {
-                                               console.log(item);
+                                             
                                                selectedList += item + ',';
                                                currentSelection.push(item);
                                            }
@@ -741,7 +741,7 @@ app.controller('homeController', [
                                    var salesOrderNumber = $('#' + id).attr('data-salesordernumber');
 
                                    var sameSalesOrders = $('.approve-chk').filter("[data-salesordernumber='" + salesOrderNumber + "']");
-                                   console.log(salesOrderNumber);
+                                  
                                    if (isChecked) {
                                        sameSalesOrders.prop('checked', true);
                                    }
@@ -771,7 +771,7 @@ app.controller('homeController', [
                            if (orderType == 1 && parameterValue.length == 0) {
 
                                $scope.message = $scope.form.selectAtleastOneItem.resoruceValue;
-                               console.log($scope.message);
+                              
                                $timeout(function () {
                                    $scope.message = "";
                                }, 7000);
@@ -824,25 +824,27 @@ app.controller('homeController', [
                                surveyDataService.updateSurveyStatus(survey.Id, 0);
                            }
                        }
+                       var surveyCounter = 1;
+                       var interval = 5000;
                        var getUserSurvey = function () {
-                           var view = kendo.mobile.application.view();
-                           var hasHomePage = false;
-                           if (view !== null) {
-                               hasHomePage = kendo.mobile.application.view().id == 'src/app/home/home.html';
-                           }
-                          
+                         
                            $timeout(function () {
-                               if (!hasCalledSurvey && hasHomePage) {
-                                   hasCalledSurvey = true;
+                             
+                               if (authService.authentication.isAuth && surveyCounter == 1) {
+                                   surveyCounter++;
+                                   interval = interval + 10000;
                                    surveyDataService.getSurvey().then(function (result) {
-                                      
+                                   
                                        if (result !== null ){
                                            survey = result;
-                                           alert(survey.HasSubmitted);
                                            var title = result.Title || "Survey";
                                            var description = result.Details || '';
-                                           var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
+                                           var buttonLabels = [];
 
+                                           buttonLabels.push($scope.form.surveyYes.resoruceValue);
+                                           buttonLabels.push($scope.form.remindMeLater.resoruceValue);
+                                           buttonLabels.push($scope.form.neverAskMe.resoruceValue);
+                                         
                                            if (!survey.HasSubmitted && survey.Active && description.length > 0) {
                                                navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
                                            }
@@ -850,7 +852,7 @@ app.controller('homeController', [
                                    }).catch(function (err) {
                                    });
                                }
-                           }, 5000);
+                           }, interval);
 
                        }
 

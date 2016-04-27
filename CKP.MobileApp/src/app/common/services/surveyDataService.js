@@ -37,7 +37,7 @@ app.factory('surveyDataService',
             }
 
             if (surveyData) {
-                console.log(surveyData);
+          
                 if (surveyData.PersistTime && new Date().getTime() > Number(surveyData.LastUpdated) + surveyData.PersistTime) {
                     forceReferesh = true;
                 }
