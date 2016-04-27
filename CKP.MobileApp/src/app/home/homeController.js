@@ -825,10 +825,14 @@ app.controller('homeController', [
                            }
                        }
                        var getUserSurvey = function () {
-                           
+                           var view = kendo.mobile.application.view();
+                           var hasHomePage = false;
+                           if (view !== null) {
+                               hasHomePage = kendo.mobile.application.view().id == 'src/app/home/home.html';
+                           }
+                          
                            $timeout(function () {
-                           
-                               if (!hasCalledSurvey) {
+                               if (!hasCalledSurvey && hasHomePage) {
                                    hasCalledSurvey = true;
                                    surveyDataService.getSurvey().then(function (result) {
                                        if (result !== null ){
@@ -844,7 +848,7 @@ app.controller('homeController', [
                                    }).catch(function (err) {
                                    });
                                }
-                           }, 10000);
+                           }, 5000);
 
                        }
 
