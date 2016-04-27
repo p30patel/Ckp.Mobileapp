@@ -23,7 +23,8 @@ app.factory('surveyDataService',
             var deferred = $q.defer();
             var forceReferesh = true;
             var surveyData = localStorageService.get('survey');
-            var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days
+           // var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days - in prod
+            var persistTime = 1000 * 60 * 2;    // Expiration in milliseconds; set to null to never  // curent is 5 min
 
             if (!surveyData) {
                 var data = {
@@ -81,32 +82,39 @@ app.factory('surveyDataService',
 
             if (status == 2) {
                 //mark as remind me later = 2  if status = 0 means declined and status = 1 then accpeted the survery
-
+                var surveyData = localStorageService.get('survey');
+                surveyData.Active = false;
+                setSurveyLocalStorage(surveyData, true);
                 deferred.resolve("Marked as Remind me Later");
 
             }
-            status = status == 0 ? false : true;
-            var url = authServiceBase + "webapi/api/core/MobileApp/UpdateSurveyStatus?userId=" + userId + "&surveyId=" + surveyId + "&status=" + status;
+            else {
+             
+                status = status == 0 ? false : true;
+                var url = authServiceBase + "webapi/api/core/MobileApp/UpdateSurveyStatus?userId=" + userId + "&surveyId=" + surveyId + "&status=" + status;
 
-            $http.post(url).success(function (result) {
-                deferred.resolve(result);
-            }).error(function (err, status) {
-                deferred.reject(err, status);
+                $http.post(url).success(function (result) {
+                    localStorageService.remove('survey');
+                    deferred.resolve(result);
+                }).error(function (err, status) {
+                    deferred.reject(err, status);
 
-            }).catch(function (err) {
-                deferred.reject(err);
+                }).catch(function (err) {
+                    deferred.reject(err);
 
-            });
+                });
+            }
             return deferred.promise;
         };
 
         var setSurveyLocalStorage = function (data, hasRemindMeLater) {
 
             var surveyData = localStorageService.get('survey');
+            
             surveyData.SurveyData = data;
             surveyData.HasRemindMeLater = hasRemindMeLater;
             surveyData.LastUpdated = new Date().getTime();
-
+            
             localStorageService.set('survey', surveyData);
             return true;
         }

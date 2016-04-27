@@ -814,30 +814,30 @@ app.controller('homeController', [
                            
                            if (buttonIndex == 1) {
                                window.open(survey.Url, '_blank', 'location=yes');
-                               surveyDataService.updateSurveyStatus(survey.surveyId, 1);
+                               surveyDataService.updateSurveyStatus(survey.Id, 1);
                              
                            }
                            else if (buttonIndex == 2) {
-                               surveyDataService.updateSurveyStatus(survey.surveyId, 0);
+                               surveyDataService.updateSurveyStatus(survey.Id, 2);
                            }
                            else {
-                               surveyDataService.updateSurveyStatus(survey.surveyId, 2);
+                               surveyDataService.updateSurveyStatus(survey.Id, 0);
                            }
                        }
                        var getUserSurvey = function () {
                            
                            $timeout(function () {
-                               console.log('suervy : '  + hasCalledSurvey);
+                           
                                if (!hasCalledSurvey) {
                                    hasCalledSurvey = true;
                                    surveyDataService.getSurvey().then(function (result) {
                                        if (result !== null ){
                                            survey = result;
                                            var title = result.Title || "Survey";
-                                           var description = result.Details || "Please take a moment to complete the survey!";
+                                           var description = result.Details || '';
                                            var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
 
-                                           if (!survey.HasSubmitted) {
+                                           if (!survey.HasSubmitted && survey.Active && description.length > 0) {
                                                navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
                                            }
                                        }
