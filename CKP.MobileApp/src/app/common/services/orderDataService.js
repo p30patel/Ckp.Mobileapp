@@ -169,7 +169,7 @@ app.factory("orderDataService", [
                         orgContext.RetailerId = retailerId > 0 ? retailerId : orgContext.RetailerId;
 
                         var data = {
-                            OrgContext: orgContext,
+                            OrganizationDetail: organizationDetail,
                             OrderLineId: orderLineId
                         };
 

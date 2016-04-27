@@ -13,8 +13,6 @@ app.controller('homeController', [
                            $("#right-drawer").data("kendoMobileDrawer").hide();
                        };
 
-
-
                        $scope.form = {};
                        $scope.form.title = {};
                        $scope.form.title.resoruceName = "Home";
@@ -829,17 +827,19 @@ app.controller('homeController', [
                        var getUserSurvey = function () {
                            
                            $timeout(function () {
-                               console.log(hasCalledSurvey);
+                               console.log('suervy : '  + hasCalledSurvey);
                                if (!hasCalledSurvey) {
                                    hasCalledSurvey = true;
                                    surveyDataService.getSurvey().then(function (result) {
-                                       var title = result.Title || "Survey";
-                                       var description = result.Details || "Please take a moment to complete the survey!";
-                                       var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
-                                  
-                                       if (result) {
+                                       if (result !== null ){
                                            survey = result;
-                                           navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
+                                           var title = result.Title || "Survey";
+                                           var description = result.Details || "Please take a moment to complete the survey!";
+                                           var buttonLabels = buttonLabels || $scope.form.surveyYes.resoruceValue + "," + $scope.form.remindMeLater.resoruceValue + "," + $scope.form.neverAskMe.resoruceValue;
+
+                                           if (!survey.HasSubmitted) {
+                                               navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
+                                           }
                                        }
                                    }).catch(function (err) {
                                    });
@@ -848,7 +848,7 @@ app.controller('homeController', [
 
                        }
 
-                      // getUserSurvey();
+                       getUserSurvey();
 
                        $scope.renderHtml = function (content) {
                            return $sce.trustAsHtml(content);
