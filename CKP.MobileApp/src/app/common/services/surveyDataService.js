@@ -23,8 +23,8 @@ app.factory('surveyDataService',
             var deferred = $q.defer();
             var forceReferesh = true;
             var surveyData = localStorageService.get('survey');
-           // var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days - in prod
-            var persistTime = 1000 * 60 * 3;    // Expiration in milliseconds; set to null to never  // curent is 5 min
+            var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days - in prod
+            //var persistTime = 1000 * 60 * 3;    // Expiration in milliseconds; set to null to never  // curent is 5 min
 
             if (!surveyData) {
                 var data = {

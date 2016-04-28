@@ -8,9 +8,6 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     $scope.form.title.resoruceName = "Inbox";
     $scope.form.title.resoruceValue = translateService.getResourceValue($scope.form.title.resoruceName);
 
-    $scope.form.viewAll = {};
-    $scope.form.viewAll.resoruceName = "View Next";
-    $scope.form.viewAll.resoruceValue = translateService.getResourceValue($scope.form.viewAll.resoruceName);
 
     $scope.beforeShow = function () {
         kendo.mobile.application.showLoading();
@@ -22,6 +19,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
     };
     $scope.message = "";
+    $scope.successMessage = "";
     $scope.notifications = new kendo.data.ObservableArray([]);
     $scope.PageSize = 20;
     $scope.CurrentPage = 1;
@@ -54,11 +52,21 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         $scope.form.noMessages.resoruceName = "No messages are found";
         $scope.form.noMessages.resoruceValue = translateService.getResourceValue($scope.form.noMessages.resoruceName);
 
+
+        $scope.form.viewAll = {};
+        $scope.form.viewAll.resoruceName = "View Next";
+        $scope.form.viewAll.resoruceValue = translateService.getResourceValue($scope.form.viewAll.resoruceName);
+
+        $scope.form.loading = {};
+        $scope.form.loading.resoruceName = "Loading";
+        $scope.form.loading.resoruceValue = translateService.getResourceValue($scope.form.loading.resoruceName);
     }
 
     setResources();
-
+    $scope.successMessage = $scope.form.loading.resoruceValue;
     var getInboxMessages = function (hasNext) {
+
+        $scope.successMessage = $scope.form.loading.resoruceValue;
         kendo.mobile.application.showLoading();
 
         if (hasNext) {
@@ -71,6 +79,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         };
         notificationDataService.getInboxMessages(jsonIn).then(function (result) {
             kendo.mobile.application.hideLoading();
+            $scope.successMessage = $scope.form.noMessages.resoruceValue;
             if (hasNext) {
                 var currentNotifications = $scope.notifications;
 
@@ -84,8 +93,6 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             else {
                 $scope.notifications = new kendo.data.ObservableArray(result);
             }
-            console.log($scope.notifications.length);
-
             $filter('orderBy')($scope.notifications, 'PushNotificationMessageQueueId', true);
             $scope.hasNext = result.length >= $scope.PageSize;
             $scope.total = $scope.notifications.length;
