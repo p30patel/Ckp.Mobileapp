@@ -50,11 +50,11 @@
 
                 <tr class="pipe" ng-repeat="column in orderLineDetail.data.Columns">
 
-                    <td style="width:40%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalQuantity'] != orderLine['__adjustedQuantity'] ">
-                        <h4 class="km-bold-font">{{form.originalquantity.resourceValue}}:</h4>
+                    <td style="width:40%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
+                        <h4 class="km-bold-font">{{form.originalQuantity.resourceValue}}:</h4>
                     </td>
-                    <td style="width:60%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalQuantity'] != orderLine['__adjustedQuantity'] ">
-                        <h4>{{orderLine[column.Field]}}</h4>
+                    <td style="width:60%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
+                        <h4>{{orderLine['__originalquantity']}}</h4>
                     </td>
                     <td style="width:40%;" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">
                         <h4 class="km-bold-font">{{column.Title}}:</h4>
