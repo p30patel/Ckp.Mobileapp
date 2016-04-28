@@ -76,8 +76,8 @@ app.factory('surveyDataService',
             if (typeof (window.navigator.simulator) === 'undefined') {
                 var statusText = status == 0 ? "Declined" : status == 1 ? "Accepted" : "RemindMeLater";
 
-                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Survey.Status." + status);
-                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Survey.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Survey.Id." + surveyId + "Status." + statusText);
+                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Survey.Id." + surveyId + "User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
             }
 
             if (status == 2) {

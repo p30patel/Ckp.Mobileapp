@@ -849,7 +849,6 @@ app.controller('homeController', [
                                                navigator.notification.confirm(description, onSurveyConfirm, title, buttonLabels);
                                            }
                                        }
-                                   }).catch(function (err) {
                                    });
                                }
                            }, interval);
