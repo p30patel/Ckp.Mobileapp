@@ -9,7 +9,7 @@
     </kendo-mobile-header>
     <kendo-mobile-content>
         
-        <kendo-mobile-list-view class="ck-no-border" style="margin-bottom:-20px;">
+        <kendo-mobile-list-view class="ck-no-border" style="margin-bottom:-20px;" ng-show="orderLineDetail.data.OrderLine">
             <li>
                 <h3 class="km-bold-font">{{orderLineDetail.data.OrderLine[0].__productname}}</h3>
                 <table class="ck-table">
