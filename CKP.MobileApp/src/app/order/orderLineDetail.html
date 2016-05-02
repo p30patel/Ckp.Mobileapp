@@ -1,4 +1,4 @@
-<kendo-mobile-view k-title="'{{form.title.resourceValue}}'" k-layout="'default'" ng-controller="orderLineDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow">
+<kendo-mobile-view k-title="'{{form.title.resourceValue}}'" k-layout="'default'" ng-controller="orderLineDetailController" k-on-show="intShow(kendoEvent)" k-after-show="afterShow" data-use-native-scrolling="true">
     <kendo-mobile-header>
         <kendo-mobile-nav-bar class="km-accent">
             <kendo-mobile-back-button k-align="'left'" style="margin-left:5px;" data-tap="myTouch.tap">
@@ -7,64 +7,67 @@
             <kendo-view-title>Order Line Detail</kendo-view-title>
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
-    <kendo-mobile-content>
-        
-        <kendo-mobile-list-view class="ck-no-border" style="margin-bottom:-20px;" ng-show="orderLineDetail.data.OrderLine">
-            <li>
-                <h3 class="km-bold-font">{{orderLineDetail.data.OrderLine[0].__productname}}</h3>
-                <table class="ck-table">
-                    <tr style="line-height:0.8px;">
-                        <td class="v-align">
-                            <h3>{{form.itemCode.resourceValue}}: </h3>
-                        </td>
-                        <td class="v-align">
-                            <h3 class="km-bold-font">{{orderLineDetail.data.OrderLine[0].__productarticlenumber}}</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="v-align">
-                            <h3>{{form.totalQuantity.resourceValue}}:</h3>
-                        </td>
-                        <td class="v-align">
-                            <h3 class="km-bold-font">{{quantity}} </h3>
-                        </td>
-                    </tr>
-                </table>
-            </li>
-        </kendo-mobile-list-view>
-        <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" data-collapsed="true" k-on-expand="OpenExpand()"
-                                  ng-repeat="orderLine in orderLineDetail.data.OrderLine">
-            <h4>
-                <table class="ck-table">
-                    <tr>
-                        <td>
-                            {{form.lineNumber.resourceValue}} : {{orderLine.__position}}
-                        </td>
-                        <td>
-                            {{form.quantity.resourceValue}}:{{orderLine.__adjustedquantity}}
-                        </td>
-                    </tr>
-                </table>
-            </h4>
+
+    <kendo-mobile-list-view class="ck-no-border" style="margin-bottom:-20px;" ng-show="orderLineDetail.data.OrderLine">
+        <li>
+            <h3 class="km-bold-font">{{orderLineDetail.data.OrderLine[0].__productname}}</h3>
             <table class="ck-table">
-
-                <tr class="pipe" ng-repeat="column in orderLineDetail.data.Columns">
-
-                    <td style="width:40%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
-                        <h4 class="km-bold-font">{{form.originalQuantity.resourceValue}}:</h4>
+                <tr style="line-height:0.8px;">
+                    <td class="v-align">
+                        <h3>{{form.itemCode.resourceValue}}: </h3>
                     </td>
-                    <td style="width:60%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
-                        <h4>{{orderLine['__originalquantity']}}</h4>
+                    <td class="v-align">
+                        <h3 class="km-bold-font">{{orderLineDetail.data.OrderLine[0].__productarticlenumber}}</h3>
                     </td>
-                    <td style="width:40%;" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">
-                        <h4 class="km-bold-font">{{column.Title}}:</h4>
+                </tr>
+                <tr>
+                    <td class="v-align">
+                        <h3>{{form.totalQuantity.resourceValue}}:</h3>
                     </td>
-                    <td style="width:60%;" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">
-                        <h4 ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">{{orderLine[column.Field]}}</h4>
+                    <td class="v-align">
+                        <h3 class="km-bold-font">{{quantity}} </h3>
                     </td>
                 </tr>
             </table>
-        </kendo-mobile-collapsible>
-    </kendo-mobile-content>
+        </li>
+    </kendo-mobile-list-view>
+    <kendo-mobile-collapsible k-icon-position="'right'" k-expand-icon="'plus'" k-collapse-icon="'minus'" data-collapsed="true" k-on-expand="OpenExpand()" data-animation="false"
+                              ng-repeat="orderLine in orderLineDetail.data.OrderLine">
+        <h4>
+            <table class="ck-table">
+                <tr>
+                    <td ng-show="orderLineDetail.data.CustomSkuColumn">
+                        {{customColumnTitle}} :{{orderLine[orderLineDetail.data.CustomSkuColumn]}}
+                    </td>
+                    <td ng-show="!orderLineDetail.data.CustomSkuColumn">
+                        {{form.lineNumber.resourceValue}} : {{orderLine.__position}}
+                    </td>
+                    <td>
+                        {{form.quantity.resourceValue}}:{{orderLine.__adjustedquantity}}
+                    </td>
+                </tr>
+            </table>
+        </h4>
+        <table class="ck-table">
+
+            <tr class="pipe" ng-repeat="column in orderLineDetail.data.Columns">
+
+                <td style="width:40%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
+                    <h4 class="km-bold-font">{{form.originalQuantity.resourceValue}}:</h4>
+                </td>
+                <td style="width:60%;" ng-if="column.Field == '__originalQuantity'  && orderLine['__originalquantity'] != orderLine['__adjustedquantity'] ">
+                    <h4>{{orderLine['__originalquantity']}}</h4>
+                </td>
+                <td style="width:40%;" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">
+                    <h4 class="km-bold-font">{{column.Title}}:</h4>
+                </td>
+                <td style="width:60%;" ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">
+                    <h4 ng-if="column.Field != '__originalQuantity' && column.Field != '__adjustedQuantity'">{{orderLine[column.Field]}}</h4>
+                </td>
+            </tr>
+        </table>
+    </kendo-mobile-collapsible>
+    {{orderLineDetail.data.Columns[_datfield1]}}
+
 </kendo-mobile-view>
 
