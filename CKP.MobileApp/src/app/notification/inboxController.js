@@ -81,19 +81,25 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             kendo.mobile.application.hideLoading();
             $scope.successMessage = $scope.form.noMessages.resoruceValue;
             if (hasNext) {
+                var nextNumber = $scope.notifications.length + 1;
                 var currentNotifications = $scope.notifications;
 
                 angular.forEach(result, function (value, key) {
                     if (key <= result.length) {
+                        value["Id"] = -1 * nextNumber++;
                         currentNotifications.push(value);
                     }
                 });
                 $scope.notifications = new kendo.data.ObservableArray(currentNotifications);
             }
             else {
+                var nextNumber = 1;
+                angular.forEach(result, function (value, key) {
+                    value["Id"] = -1 * nextNumber++;
+                });
                 $scope.notifications = new kendo.data.ObservableArray(result);
             }
-            $filter('orderBy')($scope.notifications, 'PushNotificationMessageQueueId', true);
+            $filter('orderBy')($scope.notifications, 'Id', true);
             $scope.hasNext = result.length >= $scope.PageSize;
             $scope.total = $scope.notifications.length;
         }).catch(function (error) {
