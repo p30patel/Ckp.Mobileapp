@@ -113,6 +113,30 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     }
     getInboxMessages(false);
 
+    var updateStatus = function (jsonIn) {
+        var hasFirstMatchFound = false;
+
+        var currentNotifications = $scope.notifications;
+
+
+        angular.forEach($scope.notifications, function (value, key) {
+            if (!hasFirstMatchFound && value.PushNotificationMessageQueueId == jsonIn.Id) {
+
+                if (jsonIn.HasDelete) {
+                    hasFirstMatchFound = true;
+                    $scope.notifications.splice(key, 1);
+                }
+                else {
+                    value["Status"] = 104;
+                }
+            }
+        });
+        if (!jsonIn.hasRead) {
+            console.log(currentNotifications);
+            $scope.notifications = new kendo.data.ObservableArray(currentNotifications);
+        }
+    }
+
     $scope.delete = function ($event, id) {
         // $event.stopPropagation();
         var jsonIn = {
@@ -122,7 +146,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         };
         $('#pushId-' + id).closest('li').hide('slow');
         $('#pushId-' + id).closest('li').remove();
-
+        updateStatus(jsonIn);
         updateInbox(jsonIn);
     }
 
@@ -134,12 +158,13 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
             Status: 104,
             HasDelete: false
         };
-
+        updateStatus(jsonIn);
         updateInbox(jsonIn);
         $('#pushTitleId-' + id).removeClass('km-bold-font');
         $('#pushDateId-' + id).removeClass('km-bold-font');
 
     }
+
 
     $scope.myTouch = {
         filter: ">li",
