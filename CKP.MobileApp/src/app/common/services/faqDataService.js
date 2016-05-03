@@ -29,7 +29,7 @@ app.factory("faqDataService", [
 
                     var addFaqs = function (cultureName, rowVersion, faqList) {
 
-                        var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
+                        var oldItems = JSON.parse(localStorage.getItem('faqs-' + cultureName)) || [];
 
                         var newItem = {
                             'Question': '',
@@ -51,7 +51,7 @@ app.factory("faqDataService", [
                             newResources.push(item);
                         });
 
-                        var engItems = JSON.parse(localStorage.getItem('faq-' +  'en-US')) || [];
+                        var engItems = JSON.parse(localStorage.getItem('faqs-' +  'en-US')) || [];
 
                         //new logic starts
                         if (oldItems.length == 1) // no items
@@ -60,7 +60,7 @@ app.factory("faqDataService", [
                             {
                                 console.log('new' + newResources.length + ' == eng ' + engItems.length);
                                 if (newResources.length == engItems.length || engItems.length == 0 || cultureName === 'en-US') {
-                                    localStorage.setItem('faq-' + cultureName, JSON.stringify(newResources));
+                                    localStorage.setItem('faqs-' + cultureName, JSON.stringify(newResources));
                                     console.log('set new list - no old - ' + newResources.length);
                                 }
                                 else {
@@ -86,14 +86,14 @@ app.factory("faqDataService", [
                                             }
                                         }
                                     });
-                                    localStorage.setItem('faq-' + cultureName, JSON.stringify(newResources));
+                                    localStorage.setItem('faqs-' + cultureName, JSON.stringify(newResources));
                                     console.log('set new list - no old - updated with eng ' + newResources.length);
                                 }
                             }
                             else {
                                 if (cultureName !== 'en-US') // no old - no new - not a en-US culture then copy en-US
                                 {
-                                    localStorage.setItem('faq-' + cultureName, JSON.stringify(engItems));
+                                    localStorage.setItem('faqs-' + cultureName, JSON.stringify(engItems));
 
                                     console.log('set default - eng:' + engItems.length);
                                 }
@@ -129,7 +129,7 @@ app.factory("faqDataService", [
                                     }
 
                                 });
-                                localStorage.setItem('faq-' + cultureName, JSON.stringify(oldItems));
+                                localStorage.setItem('faqs-' + cultureName, JSON.stringify(oldItems));
                             }
                             else {
                                 console.log('no changes keep same old  list');
@@ -138,7 +138,7 @@ app.factory("faqDataService", [
                         }
 
                         //update version
-                        var oldItems = JSON.parse(localStorage.getItem('faq-' + cultureName)) || [];
+                        var oldItems = JSON.parse(localStorage.getItem('faqs-' + cultureName)) || [];
 
                         var version = getFaqData(cultureName, rowVersion, oldItems, false, true);
                        
@@ -147,7 +147,7 @@ app.factory("faqDataService", [
 
                     var getFaqData = function (cultureName, rowVersion, faqList, refereshPeriod, hasUpdate) {
 
-                        var versions = JSON.parse(localStorage.getItem('faqs-version')) || [];
+                        var versions = JSON.parse(localStorage.getItem('faq-version')) || [];
 
                         var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // current is 1 days
                         var data = {
@@ -199,11 +199,11 @@ app.factory("faqDataService", [
 
                         if (!hasExitedItem) {
                             versions.push(data);
-                            localStorage.setItem('faqs-version', JSON.stringify(versions));
+                            localStorage.setItem('faq-version', JSON.stringify(versions));
                             //  console.log('New Version' + data.CultureName + data.RowVersion);
                         }
                         if (hasUpdate && hasExitedItem) {
-                            localStorage.setItem('faqs-version', JSON.stringify(versions));
+                            localStorage.setItem('faq-version', JSON.stringify(versions));
                             //    console.log('Update Version' + data.CultureName + data.RowVersion)
 
                         }
