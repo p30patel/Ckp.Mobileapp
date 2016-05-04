@@ -96,7 +96,7 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
 
     }
     var setCustomColumnTitle = function (field) {
-        var title = field;
+        var title = "";
         var hasFirstMatchFound = false;
         angular.forEach($scope.orderLineDetail.data.Columns, function (value, key) {
 
