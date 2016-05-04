@@ -23,12 +23,12 @@
                             <h3 class="km-bold-font order-detail-h3" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">{{form.orderDate.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span ng-show="order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.DateInSystem | date}}</span>
-                            <span ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">:{{order.detail.MobileOrderDetail.OrderDate | date}}</span>
+                            <span ng-show="order.detail.MobileOrderDetail.IsStagedOrder">{{order.detail.MobileOrderDetail.DateInSystem | date}}</span>
+                            <span ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">{{order.detail.MobileOrderDetail.OrderDate | date}}</span>
                         </td>
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;">
                             <div class="status open">
-                                <span style="font-size:x-small !important;">{{form.orderStatus.resourceValue}}:</span>
+                                <span style="font-size:x-small !important;">{{form.orderStatus.resourceValue}}</span>
                                 {{order.detail.MobileOrderDetail.StatusDisplay}}
                             </div>
 
@@ -39,7 +39,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.shoppingCart.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.ShoppingCartId}}</span>
+                            <span>{{order.detail.MobileOrderDetail.ShoppingCartId}}</span>
                         </td>
                     </tr>
 
@@ -48,7 +48,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.orderNumber.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.OrderNumber}}</span>
+                            <span>{{order.detail.MobileOrderDetail.OrderNumber}}</span>
                         </td>
 
                         <td class="v-align c-align" rowspan="2" style="width :27%; overflow-wrap: normal !important;">
@@ -65,7 +65,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.salesOrder.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.SalesOrderNumber}}</span>
+                            <span>{{order.detail.MobileOrderDetail.SalesOrderNumber}}</span>
                         </td>
                     </tr>
                     <tr>
@@ -73,7 +73,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.vendorRef.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.VendorRef}}</span>
+                            <span>{{order.detail.MobileOrderDetail.VendorRef}}</span>
                         </td>
                         <td class="v-align c-align" rowspan="3" style="width :27%; overflow-wrap: normal !important; line-height: 1 !important;"
                             ng-show="order.detail.MobileOrderDetail.ShoppingCartId > 0">
@@ -101,7 +101,7 @@
                             </span>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.DueDate | date}}</span>
+                            <span>{{order.detail.MobileOrderDetail.DueDate | date}}</span>
                         </td>
                     </tr>
                     <tr ng-show="showMore && order.detail.MobileOrderlineDetailList[0].DateShipped">
@@ -109,7 +109,7 @@
                             <p><h3 class="km-bold-font order-detail-h3">{{form.shipDate.resourceValue}}</h3></p>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderlineDetailList[0].DateShipped | date}}</span>
+                            <span>{{order.detail.MobileOrderlineDetailList[0].DateShipped | date}}</span>
                         </td>
                     </tr>
 
@@ -118,7 +118,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.deliveryDate.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderlineDetailList[0].DeliveryDate | date}}</span>
+                            <span>{{order.detail.MobileOrderlineDetailList[0].DeliveryDate | date}}</span>
                         </td>
                     </tr>
 
@@ -127,7 +127,7 @@
                             <h3 class="km-bold-font order-detail-h3">{{form.signedBy.resourceValue}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderlineDetailList[0].SignedBy}}</span>
+                            <span>{{order.detail.MobileOrderlineDetailList[0].SignedBy}}</span>
                         </td>
                     </tr>
 
@@ -136,7 +136,7 @@
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName">{{order.detail.OrgContext.SearchKeyName}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue}}</span>
+                            <span>{{order.detail.MobileOrderDetail.SearchKeyValue}}</span>
                         </td>
                     </tr>
 
@@ -146,7 +146,7 @@
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName2">{{order.detail.OrgContext.SearchKeyName2}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue2}}</span>
+                            <span>{{order.detail.MobileOrderDetail.SearchKeyValue2}}</span>
                         </td>
                     </tr>
 
@@ -156,7 +156,7 @@
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.SearchKeyName3">{{order.detail.OrgContext.SearchKeyName3}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.SearchKeyValue3}}</span>
+                            <span>{{order.detail.MobileOrderDetail.SearchKeyValue3}}</span>
                         </td>
                     </tr>
 
@@ -165,7 +165,7 @@
                             <h3 class="km-bold-font order-detail-h3" ng-show="order.detail.OrgContext.CutNumberLabel">{{order.detail.OrgContext.CutNumberLabel}}</h3>
                         </td>
                         <td class="v-align" style="width :40%">
-                            <span>:{{order.detail.MobileOrderDetail.CutNumber}}</span>
+                            <span>{{order.detail.MobileOrderDetail.CutNumber}}</span>
                         </td>
                     </tr>
 
@@ -276,16 +276,16 @@
             <table class="ck-table pad" ng-show="!order.detail.MobileOrderDetail.IsStagedOrder">
                 <tr class="pipe" style="background:#fff;">
                     <td style="width:25%">
-                        <h4>{{form.releasedBy.resourceValue}}</h4>
-                        <h4>{{form.email.resourceValue}}</h4>
-                        <h4>{{form.phone.resourceValue}}</h4>
-                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">{{form.apporvalCommnet.resourceValue}}</h4>
+                        <h4 class="km-bold-font">{{form.releasedBy.resourceValue}}</h4>
+                        <h4 class="km-bold-font">{{form.email.resourceValue}}</h4>
+                        <h4 class="km-bold-font">{{form.phone.resourceValue}}</h4>
+                        <h4 ng-show="order.detail.MobileOrderDetail.Comments" class="km-bold-font">{{form.apporvalCommnet.resourceValue}}</h4>
                     </td>
                     <td style="width:60%">
-                        <h4>:{{order.detail.MobileOrderDetail.OrderedBy}}</h4>
-                        <h4>:{{order.detail.MobileOrderDetail.EMailAddress}}</h4>
-                        <h4>:{{order.detail.MobileOrderDetail.PhoneNumber}}</h4>
-                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">:{{order.detail.MobileOrderDetail.Comments}}</h4>
+                        <h4>{{order.detail.MobileOrderDetail.OrderedBy}}</h4>
+                        <h4>{{order.detail.MobileOrderDetail.EMailAddress}}</h4>
+                        <h4>{{order.detail.MobileOrderDetail.PhoneNumber}}</h4>
+                        <h4 ng-show="order.detail.MobileOrderDetail.Comments">{{order.detail.MobileOrderDetail.Comments}}</h4>
                     </td>
                 </tr>
             </table>
