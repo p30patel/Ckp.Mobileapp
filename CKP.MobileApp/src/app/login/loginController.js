@@ -410,8 +410,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
             }).catch(function (err) {
                 kendo.mobile.application.hideLoading();
-                console.log(err);
-                $scope.passwordHint = $scope.form.errorWhileLogin.resoruceValue;
+               
+                $scope.passwordHint = typeof(err.error_description) === 'undefined' ? $scope.form.errorWhileLogin.resoruceValue : "<b>" + err.error_description + "</b>";;
                 $timeout(function () {
                     $scope.passwordHint = "";
             }, 7000);
