@@ -109,6 +109,10 @@ function ($scope, $http, authService, translateService, localStorageService, log
         $scope.form.connectinOfflineMsg.resoruceName = "Your connection is offline, Please connect to Wifi or Data";
         $scope.form.connectinOfflineMsg.resoruceValue = "Your connection is offline, Please connect to Wifi or Data";
 
+        $scope.form.errorWhileLogin = {};
+        $scope.form.errorWhileLogin.resoruceName = "Error while authentication, Please try later or contact customer service.";
+        $scope.form.errorWhileLogin.resoruceValue = translateService.getResourceValue($scope.form.errorWhileLogin.resoruceName);
+
     }
 
     setResources();
@@ -289,6 +293,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.form.newPasswordText.resoruceValue = translateService.getResourceValue($scope.form.newPasswordText.resoruceName);
             $scope.form.newPassword.resoruceValue = translateService.getResourceValue($scope.form.newPassword.resoruceName);
 
+            $scope.form.errorWhileLogin.resoruceValue = translateService.getResourceValue($scope.form.errorWhileLogin.resoruceName);
+
             kendo.mobile.application.hideLoading();
         });
     }
@@ -404,7 +410,8 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
             }).catch(function (err) {
                 kendo.mobile.application.hideLoading();
-                $scope.passwordHint = "<b>" + err.error_description + "</b>";
+                console.log(err);
+                $scope.passwordHint = $scope.form.errorWhileLogin.resoruceValue;
                 $timeout(function () {
                     $scope.passwordHint = "";
             }, 7000);
