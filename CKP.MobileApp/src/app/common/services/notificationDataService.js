@@ -101,6 +101,39 @@ app.factory("notificationDataService", [
                         return deferred.promise;
                     };
 
+                    var getUnReadMessageCount = function () {
+                        var deferred = $q.defer();
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
+                        var authentication = authService.authentication;
+
+                        var organizationDetail = localStorageService.get('organizationDetail');
+
+                        var orgContext = '';
+                        var userId = 0;
+                        if (!organizationDetail) {
+                            deferred.reject('Error while getting data');
+                        }
+
+                        userId = organizationDetail.UserId;
+                        
+                        $http.get(authServiceBase + 'webapi/api/mobile/Notification/GetInboxUnReadMessageCount?userId='  + userId).success(function (result) {
+
+                            deferred.resolve(result);
+                        })
+                            .error(function (err, status) {
+                                deferred.reject(err);
+                            });
+
+                        if (typeof (window.navigator.simulator) === 'undefined') {
+                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.GetUnReadInboxMessageCount");
+                            if (organizationDetail.UserName) {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                            }
+                        }
+
+                        return deferred.promise;
+                    };
+
                     notificationDataServiceFactory.updateNotification = updateNotification;
 
                     notificationDataServiceFactory.getUserNotifications = getUserNotifications;
@@ -108,6 +141,8 @@ app.factory("notificationDataService", [
                     notificationDataServiceFactory.updateInboxMessage = updateInboxMessage;
 
                     notificationDataServiceFactory.getInboxMessages = getInboxMessages;
+
+                    notificationDataServiceFactory.getUnReadMessageCount = getUnReadMessageCount;
                
                     return notificationDataServiceFactory;
                 }
