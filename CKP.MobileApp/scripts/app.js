@@ -43,6 +43,22 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             scheme: baasScheme
         });
 
+        var onAndroidPushReceived = function (args) {
+            var message = JSON.stringify(args);
+       
+        };
+
+        var onIosPushReceived = function (args) {
+            var message = JSON.stringify(args);
+         
+            
+        };
+
+        var onWP8PushReceived = function (args) {
+            var message = JSON.stringify(args);
+          
+        };
+
 
         var pushSettings = {
             android: {
@@ -51,13 +67,38 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             iOS: {
                 badge: "true",
                 sound: "true",
-                alert: "true"
+                alert: "true",
+                clearBadge: false,
+                interactiveSettings: {
+                    actions: [{
+                        identifier: 'READ_IDENTIFIER',
+                        title: 'Read',
+                        activationMode: window.plugins.pushNotification.UserNotificationActivationMode.Foreground,
+                        destructive: false,
+                        authenticationRequired: true
+                    }, {
+                        identifier: 'CANCEL_IDENTIFIER',
+                        title: 'Cancel',
+                        activationMode: window.plugins.pushNotification.UserNotificationActivationMode.Foreground,
+                        destructive: false,
+                        authenticationRequired: true
+                    }],
+                    categories: [{
+                        identifier: 'READ_CATEGORY',
+                        actionsForDefaultContext: ['READ_IDENTIFIER', 'CANCEL_IDENTIFIER'],
+                        actionsForMinimalContext: ['READ_IDENTIFIER']
+                    }]
+                },
+                notificationCallbackIOS: onIosPushReceived
             },
             wp8: {
                 channelName: 'EverlivePushChannel'
             },
+            notificationCallbackAndroid: onAndroidPushReceived,
+            notificationCallbackIOS: onIosPushReceived,
+            notificationCallbackWP8: onWP8PushReceived,
             customParameters: {
-
+                Age: 21
             }
         };
         el.push.register(pushSettings)
