@@ -114,8 +114,9 @@
                 <li ng-show="authentication.isAuth">
 
                     <a ng-click="mnuClick('inbox')" data-icon="ck-icon ck-messages-alt" data-tap="myTouch.tap">
-                        {{form.inbox.resoruceValue}}
+                        {{form.inbox.resoruceValue}} <span class="inbox-badge km-badge" id="inboxMessageCount"></span>
                     </a>
+                   
                 </li>
                 <li>
 

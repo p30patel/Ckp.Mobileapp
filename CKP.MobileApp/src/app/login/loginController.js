@@ -1,7 +1,8 @@
 'use strict';
 app.controller('loginController', [
                    '$scope', '$http', 'authService', 'translateService', 'localStorageService', 'loginDataService', '$q', '$timeout', '$filter', 'ngAuthSettings', '$sce', 'homeDataService', '$rootScope',
-function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, homeDataService, $rootScope) {
+                   'notificationDataService',
+function ($scope, $http, authService, translateService, localStorageService, loginDataService, $q, $timeout, $filter, ngAuthSettings, $sce, homeDataService, $rootScope, notificationDataService) {
     $scope.title = '';
 
     //login page html lables
@@ -405,6 +406,7 @@ function ($scope, $http, authService, translateService, localStorageService, log
                 }
                 else {
                     homeDataService.setDefaultNotifcations();
+                    notificationDataService.getUnReadMessageCount();
                     kendo.mobile.application.navigate("src/app/home/home.html");
             }
 

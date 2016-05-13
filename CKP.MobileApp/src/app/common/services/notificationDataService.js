@@ -89,7 +89,12 @@ app.factory("notificationDataService", [
                             });
 
                         var status = notifcationData.Status == 104 ? "MarkAsRead" : "MarkAsDelete";
-                     
+
+                        if (notifcationData.Status == 104)
+                        {
+                            //update badge count
+                            setBadgeCount(0, true);
+                        }
                         if (typeof (window.navigator.simulator) === 'undefined') {
                            
                             window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateInbox");
@@ -117,7 +122,8 @@ app.factory("notificationDataService", [
                         userId = organizationDetail.UserId;
                         
                         $http.get(authServiceBase + 'webapi/api/mobile/Notification/GetInboxUnReadMessageCount?userId='  + userId).success(function (result) {
-
+                            //set count
+                            setBadgeCount(result, false);
                             deferred.resolve(result);
                         })
                             .error(function (err, status) {
@@ -133,6 +139,40 @@ app.factory("notificationDataService", [
 
                         return deferred.promise;
                     };
+
+                    var setBadgeCount = function(count, hasMarkAsRead)
+                    {                        
+                        if (hasMarkAsRead)
+                        {
+                            var currentCount = $('#inboxMessageCount').html();
+                            if (currentCount > 0) {
+                                console.log('currentCount' + currentCount);
+                                count = $('#inboxMessageCount').html() - 1;
+                            }
+                        }
+                        if (!checkSimulator()) {                           
+                            cordova.plugins.notification.badge.set(count);
+                        }                        
+                        if (count > 0) {
+                            $('#inboxMessageCount').show();
+                            $('#inboxMessageCount').html(count);
+                        }
+                        else {
+                            $('#inboxMessageCount').hide();
+                        }
+                        return true;
+                    }
+
+                    var checkSimulator = function ()
+                    {
+                        if (window.navigator.simulator === true) {
+                            return true;
+                        } else if (window.cordova === undefined) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
 
                     notificationDataServiceFactory.updateNotification = updateNotification;
 
