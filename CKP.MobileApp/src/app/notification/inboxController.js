@@ -112,6 +112,11 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         });
     }
     getInboxMessages(false);
+    
+    var updateUnReadMessageCount = function() {
+        notificationDataService.getUnReadMessageCount();
+    }
+    updateUnReadMessageCount();
 
     var updateStatus = function (jsonIn) {
         var hasFirstMatchFound = false;
