@@ -164,7 +164,7 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 if (isOffline) {
                     onOffline();
                 }
-
+                window.plugins.EqatecAnalytics.Monitor.Start();
                 getDeviceInfo();
                 kendo.mobile.application.navigate("src/app/login/login.html");
                 navigator.splashscreen.hide(); //Hides the splash screen for your app.
