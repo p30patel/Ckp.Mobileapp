@@ -100,6 +100,10 @@ function ($rootScope, $scope, authService, orderDataService, $sce, translateServ
     $scope.form.orderInquiry.resourceName = "Order Inquiry";
     $scope.form.orderInquiry.resourceValue = translateService.getResourceValue($scope.form.orderInquiry.resourceName);
 
+    $scope.form.commnetValidation = {};
+    $scope.form.commnetValidation.resourceName = "Please enter a valid comment";
+    $scope.form.commnetValidation.resourceValue = translateService.getResourceValue($scope.form.commnetValidation.resourceName);
+
 
     $scope.form.sendInquiry = {};
     $scope.form.sendInquiry.resourceName = "Send Inquiry";
@@ -381,35 +385,48 @@ function ($rootScope, $scope, authService, orderDataService, $sce, translateServ
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.orderDetail.send");
         }
-        kendo.mobile.application.showLoading();
-        $scope.feedbackData.comment = $scope.inqueryComment + " Order Information: Order Number : " + $scope.order.OrderNumber + " Shopping Cart Id : " + $scope.order.ShoppingCart + " Sales Order No : " + $scope.order.SalesOrderNo;
-        feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
-            if (result === 'success') {
-                $scope.inqueryMessage = $scope.form.thankyou.resourceValue;
-                $timeout(function () {
-                    $scope.inqueryComment = "";
+        
+        $scope.feedbackData.comment = $scope.inqueryComment + "    ( * Order Information: Order Number : " + $scope.order.OrderNumber + ", Shopping Cart Id : " + $scope.order.ShoppingCart + ", Sales Order No : " + $scope.order.SalesOrderNo + " ) ";
+        if ($scope.inqueryComment !== '' && $scope.inqueryComment.length > 2) {
+            kendo.mobile.application.showLoading();
+
+            feedbackDataService.postFeedback($scope.feedbackData).then(function (result) {
+                if (result === 'success') {
+                    $scope.inqueryMessage = $scope.form.thankyou.resourceValue;
+                    $timeout(function () {
+                        $scope.inqueryComment = "";
+                        $scope.feedbackData.comment = "";
+                        $scope.inqueryMessage = "";
+                    }, 7000);
+
                     $scope.feedbackData.comment = "";
+                } else {
+                    $scope.feedbackData.comment = "";
+                    $scope.inqueryMessage = "";
+                    $timeout(function () {
+                        $scope.inqueryMessage = "";
+                    }, 7000);
+                }
+            }).catch(function (error) {
+
+
+                $scope.feedbackData.comment = "";
+                $scope.inqueryMessage = $scope.form.faildInquiry.resourceValue;
+                $timeout(function () {
                     $scope.inqueryMessage = "";
                 }, 7000);
 
-                $scope.feedbackData.comment = "";
-            } else {
-                $scope.feedbackData.comment = "";
-                $scope.inqueryMessage = "";
-                $timeout(function () {
-                    $scope.inqueryMessage = "";
-                }, 7000);
-            }
-        }).catch(function (error) {
-            $scope.feedbackData.comment = "";
-            $scope.inqueryMessage = $scope.form.faildInquiry.resourceValue;
+            }).finally(function () {
+                kendo.mobile.application.hideLoading();
+            });
+        }
+        else
+        {
+            $scope.inqueryMessage = $scope.form.commnetValidation.resourceValue;
             $timeout(function () {
                 $scope.inqueryMessage = "";
             }, 7000);
-
-        }).finally(function () {
-            kendo.mobile.application.hideLoading();
-        });
+        }
     }
 
     $scope.showConfirmationModel = function (shoppingCartId) {
