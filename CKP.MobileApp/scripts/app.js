@@ -164,8 +164,11 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                 if (isOffline) {
                     onOffline();
                 }
-                window.plugins.EqatecAnalytics.Monitor.Start();
+             
                 getDeviceInfo();
+
+                window.plugins.EqatecAnalytics.Monitor.Start();
+
                 kendo.mobile.application.navigate("src/app/login/login.html");
                 navigator.splashscreen.hide(); //Hides the splash screen for your app.
                 cordova.getAppVersion(function (version) {
@@ -182,6 +185,19 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
         startAnalyticsAndDeviceInfo();
 
     }, false);
+
+    document.addEventListener("pause", function () {
+               
+        window.plugins.EqatecAnalytics.Monitor.Stop();
+        window.plugins.EqatecAnalytics.Monitor.ForceSync();
+      
+    });
+    document.addEventListener("resume", function () {
+      
+        window.plugins.EqatecAnalytics.Monitor.Start();
+     
+    });
+ 
 
     document.addEventListener("offline", onOffline, false);
 
@@ -222,6 +238,8 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             if (hasLoginPage && !hasModalOpen) {
                 e.preventDefault();
                 //navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", "Yes,No");
+                window.plugins.EqatecAnalytics.Monitor.Stop();
+                window.plugins.EqatecAnalytics.Monitor.ForceSync();
                 navigator.app.exitApp();
             }
             else {

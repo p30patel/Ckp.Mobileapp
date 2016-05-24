@@ -11,7 +11,7 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "true",
-  "BundleVersion": "1.8.1",
+  "BundleVersion": "0.1.1",
   "iOSDeviceFamily": [
     "1",
     "2"
@@ -60,7 +60,7 @@
     "com.telerik.plugin.telerikanalytics": {
       "AUTO_TRACK_EXCEPTIONS": "True",
       "AUTO_TRACK_KENDO_EVENTS": "True",
-      "PRODUCT_ID": "bba73e3deeab4395bb17631456ebc0f3"
+      "PRODUCT_ID": "2c81c7fbee6640b08720250ae5651388"
     }
   }
 }

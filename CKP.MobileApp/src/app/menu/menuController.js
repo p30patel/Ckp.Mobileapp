@@ -86,6 +86,10 @@ app.controller('menuController', [
                            $scope.authentication.isAuth = false;
                            if (typeof (window.navigator.simulator) === 'undefined') {
                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.menu.logout");
+                           
+                               window.plugins.EqatecAnalytics.Monitor.Stop();
+                               window.plugins.EqatecAnalytics.Monitor.ForceSync();
+                              
                            }
 
                            kendo.mobile.application.navigate("src/app/login/login.html");

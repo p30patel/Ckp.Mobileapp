@@ -179,9 +179,11 @@ function ($scope, $http, authService, translateService, localStorageService, log
             }
         }
         if (typeof (window.navigator.simulator) === 'undefined') {
+            window.plugins.EqatecAnalytics.Monitor.Start();
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("view.login");
-
         }
+
+
         $('.k-header').css('background-color', 'white');
 
         setLoginData();
@@ -211,9 +213,9 @@ function ($scope, $http, authService, translateService, localStorageService, log
 
     var sendPassword = function () {
 
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.sendPassword");
-        }
+
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.sendPassword");
+
         kendo.mobile.application.showLoading();
         var username = $scope.loginData.userName;
         var email = $scope.loginData.email;
@@ -311,15 +313,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
     };
 
     $scope.translatePage = function () {
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.changeLanguage");
-        }
 
         translatePage();
     };
 
     $scope.key = function ($event) {
-         setRememberMe(true);
+        setRememberMe(true);
         if ($event.keyCode === 13) {
             $event.target.blur();
             var type = $($event.target).attr("type");
@@ -368,81 +367,90 @@ function ($scope, $http, authService, translateService, localStorageService, log
         var loginData = {
             userName: userName,
             password: password,
-                remmberme: $scope.loginData.useRefreshTokens
+            remmberme: $scope.loginData.useRefreshTokens
         };
 
         setRememberMe(true);
-
         if (userName !== '' && password !== '') {
             kendo.mobile.application.showLoading();
+            authService.login($scope.loginData)
+               .then(
+                   function (result) {
+                       var orgData = localStorageService.get('organizationDetail');
+                       kendo.mobile.application.hideLoading();
+                       if (orgData) {
 
-            $scope.passwordHint = "";
-            authService.login($scope.loginData).then(function (response) {
-
-                var data = localStorageService.get('organizationDetail');                
-               
-                kendo.mobile.application.hideLoading();
-                if (data) {
-                    hasNewPassword = data.HasNewPassword;
-                    var userId = data.UserId;
-                    var culture = $scope.selectedLanague;
-                    if ( userId > 0)
-                    {
-                        loginDataService.addLanguageLog(userId, culture);
-                    }
-                    if (typeof (window.navigator.simulator) === 'undefined') {
-                        if (data.UserName) {
-                            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + data.UserName + "-" + data.UserId);
-                        }
-                    }
-                }
-                if (hasNewPassword) {
-                    authService.authentication.isAuth = false;
-                    $("#modalview-newPassword").kendoMobileModalView("open");
-
-                    if (typeof (window.navigator.simulator) === 'undefined') {
-                        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.newPassword");
-                }
-                }
-                else {
-                    homeDataService.setDefaultNotifcations();
-                    notificationDataService.getUnReadMessageCount();
-                    kendo.mobile.application.navigate("src/app/home/home.html");
-            }
-
-            }).catch(function (err) {
-                kendo.mobile.application.hideLoading();
-               
-                $scope.passwordHint = typeof(err.error_description) === 'undefined' ? $scope.form.errorWhileLogin.resoruceValue : "<b>" + err.error_description + "</b>";;
-                $timeout(function () {
-                    $scope.passwordHint = "";
-            }, 7000);
+                           hasNewPassword = orgData.HasNewPassword;
+                           var userId = orgData.UserId;
+                           var culture = $scope.selectedLanague;
+                           if (userId > 0) {
+                               loginDataService.addLanguageLog(userId, culture);
+                           }
 
 
-        });
+                           var user = $filter('uppercase')(orgData.UserName) + "-" + orgData.UserId;
+                           var organization = $filter('uppercase')(orgData.OrgContext.Name) + "-" + orgData.OrgContext.Id;
+                           var retailer = $filter('uppercase')(orgData.RetailerName) + "-" + orgData.OrgContext.RetailerId;
+                     
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("User." + user);
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("Organization." + organization);
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("Retailer." + retailer);
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language.User." + user);
+                           if (hasNewPassword) {
+                               window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.newPassword");
+                           }
+
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language." + $scope.selectedLanague);
+                          
+                         
+                         //  window.plugins.EqatecAnalytics.Monitor.ForceSync();
+                          
+
+
+                       }
+                       if (hasNewPassword) {
+                           authService.authentication.isAuth = false;
+                           $("#modalview-newPassword").kendoMobileModalView("open");
+                       }
+                       else {
+                           homeDataService.setDefaultNotifcations();
+                           notificationDataService.getUnReadMessageCount();
+                           kendo.mobile.application.navigate("src/app/home/home.html");
+                       }
+
+                   },
+                   function (err) {
+                       kendo.mobile.application.hideLoading();
+                       $scope.passwordHint = typeof (err.error_description) === 'undefined' ? $scope.form.errorWhileLogin.resoruceValue : "<b>" + err.error_description + "</b>";;
+                       $timeout(function () {
+                           $scope.passwordHint = "";
+                       }, 7000);
+                   }
+                   );
+
         }
         else {
+            kendo.mobile.application.hideLoading();
             $scope.passwordHint = $scope.form.inputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
-        }, 5000);
+            }, 5000);
 
         }
-        }
+
+    };
+
+
     $scope.login = function () {
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.login");
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("Language." + $scope.selectedLanague);
-           
-        }
+
         login();
-        }
+    }
 
     $scope.showPasswordHint = function () {
 
-        if (typeof (window.navigator.simulator) === 'undefined') {
-            window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.passwordHint");
-        }
+        window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.login.passwordHint");
+    
 
         var username = $scope.loginData.userName;
         if (username !== '') {
@@ -452,15 +460,15 @@ function ($scope, $http, authService, translateService, localStorageService, log
                    function (result) {
 
                        kendo.mobile.application.hideLoading();
-                       $scope.passwordHint = "<b>" +$scope.form.hint.resoruceValue + ": </b>" +result.data;
+                       $scope.passwordHint = "<b>" + $scope.form.hint.resoruceValue + ": </b>" + result.data;
                        $timeout(function () {
                            $scope.passwordHint = "";
-                   }, 5000);
-            },
+                       }, 5000);
+                   },
                    function (err) {
                        $scope.passwordHint = $scope.form.passwordHintError.resoruceValue
                        kendo.mobile.application.hideLoading();
-            }
+                   }
                    );
 
         }
@@ -468,22 +476,22 @@ function ($scope, $http, authService, translateService, localStorageService, log
             $scope.passwordHint = $scope.form.passwordHintUserInputError.resoruceValue;
             $timeout(function () {
                 $scope.passwordHint = "";
-        }, 5000);
+            }, 5000);
 
-}
-};
+        }
+    };
     //new password    
     $scope.newPasswordModalClose = function () {
         $("#modalview-newPassword").kendoMobileModalView("close");
         authService.logout();
         kendo.mobile.application.navigate("src/app/login/login.html");
-        };
+    };
 
 
     $scope.show = function () {
         $("#right-drawer").data("kendoMobileDrawer").show();
         return false;
-        }
+    }
 
 
     $scope.renderHtml = function (content) {
