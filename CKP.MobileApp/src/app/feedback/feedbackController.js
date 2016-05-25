@@ -47,7 +47,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
     setResources();
 
     $scope.feedbackData = {};
-    $scope.feedbackData.webpage = "Mobile App Ver. ";
+    $scope.feedbackData.webpage = "Mobile App: Feedback - Ver. ";
     $scope.feedbackData.comment = "";
     $scope.feedbackData.version = "0.0";
     $scope.message = "";
@@ -85,7 +85,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
     $scope.send = function () {
         var deviceData = localStorageService.get('deviceData') || [];
-        $scope.feedbackData.webpage = "Mobile App Ver. " + $scope.feedbackData.version + " Device Info :" + deviceData;
+        $scope.feedbackData.webpage = "Mobile App: Feedback - Ver. " + $scope.feedbackData.version + ", Device Info : Device Id " + deviceData.result.Id + ", Platform " + deviceData.result.PlatformType;
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.feedback.send");
