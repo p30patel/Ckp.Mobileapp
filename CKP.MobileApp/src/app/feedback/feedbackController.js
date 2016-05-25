@@ -85,7 +85,7 @@ function ($scope, $http, $sce, feedbackDataService, authService, translateServic
 
     $scope.send = function () {
         var deviceData = localStorageService.get('deviceData') || [];
-        $scope.feedbackData.webpage = "Mobile App: Feedback - Ver. " + $scope.feedbackData.version + ", Device Id " + deviceData.result.Id + ", Platform " + deviceData.result.PlatformType;
+        $scope.feedbackData.webpage = "Mobile App: Feedback - Ver. " + $scope.feedbackData.version + ", Device Id: " + deviceData.result.Id + ", Platform: " + deviceData.result.PlatformType;
 
         if (typeof (window.navigator.simulator) === 'undefined') {
             window.plugins.EqatecAnalytics.Monitor.TrackFeature("event.feedback.send");
