@@ -237,7 +237,9 @@
                             <h4 class="km-bold-font">{{form.quantity.resourceValue}}</h4>
                         </td>
                         <td style="width:30%" ng-show="!hasHidePrice">
-                            <h4 class="km-bold-font">{{form.price.resourceValue}} ({{order.detail.MobileOrderDetail.DocumentCurrency.Code || 'USD'}})</h4>
+                            <h4 class="km-bold-font">{{form.price.resourceValue}}</h4>
+                            <h4 class="km-bold-font">({{order.detail.MobileOrderDetail.DocumentCurrency.Code || 'USD'}})</h4>
+                           
                         </td>
                         <td style="width:10%">
                         </td>
