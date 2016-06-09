@@ -19,7 +19,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     };
     $scope.message = "";
     $scope.notifications = [];
-
+    $scope.cleaBadgeCountStatus = false;
     $scope.afterShow = function (e) {
 
         var view = kendo.mobile.application.view();
@@ -102,6 +102,14 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         $scope.form.maintenanceDesc.resoruceName = "Maintenance Description";
         $scope.form.maintenanceDesc.resoruceValue = translateService.getResourceValue($scope.form.maintenanceDesc.resoruceName);
 
+        $scope.form.clearBadge = {};
+        $scope.form.clearBadge.resoruceName = "Clear Badge Count";
+        $scope.form.clearBadge.resoruceValue = translateService.getResourceValue($scope.form.clearBadge.resoruceName);
+
+        $scope.form.clearBadgeDesc = {};
+        $scope.form.clearBadgeDesc.resoruceName = "Will clear the badge counts";
+        $scope.form.clearBadgeDesc.resoruceValue = translateService.getResourceValue($scope.form.clearBadgeDesc.resoruceName);
+
     }
 
     setResources();
@@ -132,6 +140,16 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     }
     getNotifications();
 
+    var setClearBadgeCount = function () {
+        $scope.cleaBadgeCountStatus = notificationDataService.getClearBadgeCountStatus();
+    }
+
+    $scope.onChangeClearBadgeCount = function (e) {
+
+        notificationDataService.updateClearBadgeCountStatus(e.checked);
+    }
+
+    setClearBadgeCount();
         
 
     $scope.onChange = function (e) {

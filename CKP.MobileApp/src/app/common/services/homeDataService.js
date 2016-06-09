@@ -130,7 +130,8 @@ function ($http, $q, localStorageService, ngAuthSettings, authService, timeStamp
                             HasReadNote: true,
                             IsFirtTime: true,
                             HasTrunOnNotifcation: true,
-                            HasForceClearAll: false
+                            HasForceClearAll: false,
+                            HasClearBadgeCount : false
                         };
                         localStorageService.set('user-profile', userProfile);
                     }

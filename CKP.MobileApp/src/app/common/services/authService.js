@@ -159,6 +159,9 @@ app.factory('authService', [
                                 var userProfileData = localStorageService.get('user-profile');
                                 if (userProfileData) {
                                     userProfileData.HasTrunOnNotifcation = false;
+                                    if (typeof userProfileData.HasClearBadgeCount === 'undefined') {
+                                        userProfileData.HasClearBadgeCount = false;
+                                    }
                                     localStorageService.set('user-profile', userProfileData);
                                 }
 

@@ -1,6 +1,20 @@
 <kendo-mobile-view k-title="'{{form.title.resoruceValue}}'" k-layout="'default'" ng-controller="notificationController" k-after-show="afterShow" k-before-show="beforeShow" >
     <kendo-mobile-content>
         <div class="km-listview-wrapper">
+            <ul id="custom-listview" data-role="listview" class="km-widget km-listview km-listgroup">
+                <li class="km-group-container">
+                    <div class="ck-padfix-setting km-group-title"></div>
+                    <ul class="km-list ck-brd-setting ck-title-setting">
+                        <li>
+                            <input kendo-mobile-switch k-checked="cleaBadgeCountStatus" k-on-change="onChangeClearBadgeCount(kendoEvent)"/>
+                            <i class="ck-icon ck-close ck-icon-setting"></i>
+                            <h4 class="ck-title-setting">{{form.clearBadge.resoruceValue}}</h4>
+                            <p class="ck-descript-setting">{{form.clearBadgeDesc.resoruceValue}}</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
             <ul id="custom-listview"  data-role="listview" class="km-widget km-listview km-listgroup" ng-repeat="subscription in notifications | orderBy : 'SubscriptionType' ">
                 <li class="km-group-container">
                     <div class="ck-padfix-setting km-group-title"></div>

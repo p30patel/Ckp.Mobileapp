@@ -141,26 +141,71 @@ app.factory("notificationDataService", [
                     };
 
                     var setBadgeCount = function(count, hasMarkAsRead)
-                    {                        
-                        if (hasMarkAsRead)
-                        {
-                            var currentCount = $('#inboxMessageCount').html();
-                            if (currentCount > 0) {
-                                console.log('currentCount' + currentCount);
-                                count = $('#inboxMessageCount').html() - 1;
+                    {
+                        var hasClearBadgeCount = false;
+                        var userProfileData = localStorageService.get('user-profile');
+                        if (userProfileData) {
+                            hasClearBadgeCount = userProfileData.HasClearBadgeCount;
+                        }
+                        $('#inboxMessageCount').hide();
+                        //clear badge count then no to set
+                        if (hasClearBadgeCount) {
+                            if (!checkSimulator()) {
+                                cordova.plugins.notification.badge.set(0);
                             }
                         }
-                        if (!checkSimulator()) {                           
-                            cordova.plugins.notification.badge.set(count);
-                        }                        
-                        if (count > 0) {
-                            $('#inboxMessageCount').show();
-                            $('#inboxMessageCount').html(count);
-                        }
-                        else {
-                            $('#inboxMessageCount').hide();
+                        else{
+                            if (hasMarkAsRead) {
+                                var currentCount = $('#inboxMessageCount').html();
+                                if (currentCount > 0) {
+                                    console.log('currentCount' + currentCount);
+                                    count = $('#inboxMessageCount').html() - 1;
+                                }
+                            }
+                            if (!checkSimulator()) {
+                                cordova.plugins.notification.badge.set(count);
+                            }
+                            if (count > 0) {
+                                $('#inboxMessageCount').show();
+                                $('#inboxMessageCount').html(count);
+                            }
+                            else {
+                                $('#inboxMessageCount').hide();
+                            }
                         }
                         return true;
+                    }
+
+                    var updateClearBadgeCountStatus = function(status)
+                    {
+                      
+                        var userProfileData = localStorageService.get('user-profile');
+                        if (userProfileData) {
+                            userProfileData.HasClearBadgeCount = status;
+                            localStorageService.set('user-profile', userProfileData);
+
+                            var organizationDetail = localStorageService.get('organizationDetail');
+                            if (typeof (window.navigator.simulator) === 'undefined') {
+                                window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateClearBadgeCountStatus." + status);
+                                if (organizationDetail.UserName) {
+                                    window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateClearBadgeCountStatus.User." + organizationDetail.UserName + "-" + organizationDetail.UserId);
+                                }
+                            }
+                        }
+
+                        return false;
+                    }
+
+                    var getClearBadgeCountStatus = function () {
+
+                        var userProfileData = localStorageService.get('user-profile');
+                        var hasClearBadgeCount = false;
+                        if (userProfileData) {
+                            hasClearBadgeCount = userProfileData.HasClearBadgeCount;
+                            
+                        }
+
+                        return hasClearBadgeCount;
                     }
 
                     var checkSimulator = function ()
@@ -183,6 +228,10 @@ app.factory("notificationDataService", [
                     notificationDataServiceFactory.getInboxMessages = getInboxMessages;
 
                     notificationDataServiceFactory.getUnReadMessageCount = getUnReadMessageCount;
+
+                    notificationDataServiceFactory.updateClearBadgeCountStatus = updateClearBadgeCountStatus;
+
+                    notificationDataServiceFactory.getClearBadgeCountStatus = getClearBadgeCountStatus;
                
                     return notificationDataServiceFactory;
                 }

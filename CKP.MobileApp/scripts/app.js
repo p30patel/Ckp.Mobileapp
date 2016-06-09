@@ -89,7 +89,6 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
                         actionsForMinimalContext: ['READ_IDENTIFIER']
                     }]
                 },
-                notificationCallbackIOS: onIosPushReceived
             },
             wp8: {
                 channelName: 'EverlivePushChannel'
@@ -128,7 +127,8 @@ app.run(['authService', 'localStorageService', '$rootScope', function (authServi
             HasReadNote: true,
             IsFirtTime: true,
             HasTrunOnNotifcation: false,
-            HasForceClearAll: false
+            HasForceClearAll: false,
+            HasClearBadgeCount : false
         };
 
         if (!userProfileData) {
