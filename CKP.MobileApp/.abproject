@@ -20,9 +20,7 @@
   "AndroidVersionCode": "55",
   "FrameworkVersion": "4.0.0",
   "CorePlugins": [
-    "com.telerik.feedback@2.0.0",
     "com.telerik.plugin.telerikanalytics@3.4.1",
-    "com.telerik.plugins.nativepagetransitions@0.6.4",
     "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-dialogs",
@@ -33,7 +31,7 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
-    "de.appplant.cordova.plugin.badge@0.7.1",
+    "de.appplant.cordova.plugin.badge@0.7.2",
     "uk.co.whiteoctober.cordova.appversion@0.1.7"
   ],
   "WP8SupportedResolutions": [

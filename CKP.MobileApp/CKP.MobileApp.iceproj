@@ -152,7 +152,6 @@
     <Content Include="src\app\common\services\notificationDataService.js" />
     <Content Include="src\app\common\services\feedbackDataService.js" />
     <Content Include="src\app\common\services\homeDataService.js" />
-    <Content Include="src\app\common\services\indexDataService.js" />
     <Content Include="src\app\common\services\loginDataService.js" />
     <Content Include="src\app\common\services\messageDataService.js" />
     <Content Include="src\app\common\services\orderDataService.js" />
