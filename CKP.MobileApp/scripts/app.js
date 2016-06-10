@@ -29,20 +29,16 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-
+var emulatorMode = true;
+var el = new Everlive({
+    apiKey: baasApiKey,
+    scheme: baasScheme
+});
 app.run(['authService', 'localStorageService', '$rootScope', function (authService, localStorageService, $rootScope) {
 
     localStorageService.remove('authorizationData');
 
     var getDeviceInfo = function () {
-
-
-        var emulatorMode = true;
-        var el = new Everlive({
-            apiKey: baasApiKey,
-            scheme: baasScheme
-        });
-
         var onAndroidPushReceived = function (args) {
             var message = JSON.stringify(args);
        

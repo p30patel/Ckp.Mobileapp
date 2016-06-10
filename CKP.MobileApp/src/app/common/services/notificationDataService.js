@@ -152,6 +152,7 @@ app.factory("notificationDataService", [
                         if (hasClearBadgeCount) {
                             if (!checkSimulator()) {
                                 cordova.plugins.notification.badge.set(0);
+                                el.push.clearBadgeNumber();
                             }
                         }
                         else{
@@ -183,7 +184,12 @@ app.factory("notificationDataService", [
                         if (userProfileData) {
                             userProfileData.HasClearBadgeCount = status;
                             localStorageService.set('user-profile', userProfileData);
-
+                            if (status)
+                            {
+                              
+                                getUnReadMessageCount();
+                            }
+                            
                             var organizationDetail = localStorageService.get('organizationDetail');
                             if (typeof (window.navigator.simulator) === 'undefined') {
                                 window.plugins.EqatecAnalytics.Monitor.TrackFeature("Inbox.UpdateClearBadgeCountStatus." + status);
@@ -204,7 +210,7 @@ app.factory("notificationDataService", [
                             hasClearBadgeCount = userProfileData.HasClearBadgeCount;
                             
                         }
-
+                       
                         return hasClearBadgeCount;
                     }
 
