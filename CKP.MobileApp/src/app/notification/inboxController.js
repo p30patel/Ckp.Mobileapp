@@ -60,6 +60,34 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
         $scope.form.loading = {};
         $scope.form.loading.resoruceName = "Loading";
         $scope.form.loading.resoruceValue = translateService.getResourceValue($scope.form.loading.resoruceName);
+
+
+        $scope.form.markAllAsRead = {};
+        $scope.form.markAllAsRead.resoruceName = "Mark All As Read";
+        $scope.form.markAllAsRead.resoruceValue = translateService.getResourceValue($scope.form.markAllAsRead.resoruceName);
+
+
+        $scope.form.markAllAsDelete = {};
+        $scope.form.markAllAsDelete.resoruceName = "Delete All";
+        $scope.form.markAllAsDelete.resoruceValue = translateService.getResourceValue($scope.form.markAllAsDelete.resoruceName);
+
+        $scope.form.yes = {};
+        $scope.form.yes.resoruceName = "Yes";
+        $scope.form.yes.resoruceValue = translateService.getResourceValue($scope.form.yes.resoruceName);
+
+        $scope.form.no = {};
+        $scope.form.no.resoruceName = "No";
+        $scope.form.no.resoruceValue = translateService.getResourceValue($scope.form.no.resoruceName);
+
+        $scope.form.deleteConfirm = {};
+        $scope.form.deleteConfirm.resoruceName = "Are you sure want to Delete All?";
+        $scope.form.deleteConfirm.resoruceValue = translateService.getResourceValue($scope.form.deleteConfirm.resoruceName);
+
+        $scope.form.deleteConfirmTitle = {};
+        $scope.form.deleteConfirmTitle.resoruceName = "Delete Confirmation";
+        $scope.form.deleteConfirmTitle.resoruceValue = translateService.getResourceValue($scope.form.deleteConfirmTitle.resoruceName);
+
+        
     }
 
     setResources();
@@ -267,15 +295,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                     $scope.message = "";
                 }, 1000);
             }
-            else {
-
-                if (jsonIn.HasDelete) {
-                    //mark as delete
-
-
-                }
-
-            }
+          
         }).catch(function (error) {
 
             $scope.message = "Error while update the data.";
@@ -285,7 +305,64 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
 
         });
     }
+    var updateMessageStatusWithMarkAll = function(status)
+    {
+        var notifcationData = {
+            UserId: '',
+            Status: status
+        };
 
+        notificationDataService.updateMessageStatusWithMarkAll(notifcationData).then(function (result) {
+
+            if (result !== 'success') {
+                $scope.message = "Error while update the data, Please try later<br>";
+                $timeout(function () {
+                    $scope.message = "";
+                }, 1000);
+            }
+            else {
+                if (status == 104)
+                {
+                    $('.pushMessage').attr('data-status', 104);
+                    $('.ck-title-setting').removeClass('km-bold-font');
+                    $('.push-date').removeClass('km-bold-font');
+                }
+                if (status == 105) {
+                    $scope.notifications = {};
+                    $scope.hasNext = false;
+                    $scope.total = 0;
+                }
+            }
+           
+        }).catch(function (error) {
+
+            $scope.message = "Error while update the data.";
+            $timeout(function () {
+                $scope.message = "";
+            }, 1000);
+
+        });
+    }
+    $scope.markAllAsRead = function () {
+        var status = 104;
+        updateMessageStatusWithMarkAll(status);
+    }
+
+    $scope.markAllAsDelete = function () {
+        var buttons = [];
+        buttons.push($scope.form.yes.resoruceValue);
+        buttons.push($scope.form.no.resoruceValue);
+        
+        navigator.notification.confirm($scope.form.deleteConfirm.resoruceValue, onDeleteConfirm, $scope.form.deleteConfirmTitle.resoruceValue, buttons);
+    }
+    var onDeleteConfirm = function (buttonIndex) {
+       
+        if (buttonIndex == 1)
+        {
+            var status = 105;
+            updateMessageStatusWithMarkAll(status);
+        }
+    }
     $scope.ViewMore = function () {
         getInboxMessages(true);
     }

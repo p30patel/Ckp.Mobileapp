@@ -45,6 +45,24 @@ app.factory("notificationDataService", [
                         return deferred.promise;
                     };
 
+                    var updateMessageStatusWithMarkAll = function (notifcationData) {
+                        var deferred = $q.defer();
+                        var authServiceBase = ngAuthSettings.authServiceBaseUri;
+                        var authentication = authService.authentication;
+                        var organizationDetail = localStorageService.get('organizationDetail');
+                        var userId = organizationDetail.UserId;
+                        notifcationData.UserId = userId;
+
+                        $http.post(authServiceBase + 'webapi/api/core/Notification/UpdateMessageStatusWithMarkAll', notifcationData).success(function (result) {
+                            setBadgeCount(0, false);
+                            deferred.resolve(result);
+                        })
+                            .error(function (err, status) {
+                                deferred.reject(err);
+                            });
+                        return deferred.promise;
+                    };
+
                     var getInboxMessages = function (jsonIn) {
                         var deferred = $q.defer();
                         var authServiceBase = ngAuthSettings.authServiceBaseUri;
@@ -155,7 +173,7 @@ app.factory("notificationDataService", [
                                 el.push.clearBadgeNumber();
                             }
                         }
-                        else{
+                        
                             if (hasMarkAsRead) {
                                 var currentCount = $('#inboxMessageCount').html();
                                 if (currentCount > 0) {
@@ -163,7 +181,7 @@ app.factory("notificationDataService", [
                                     count = $('#inboxMessageCount').html() - 1;
                                 }
                             }
-                            if (!checkSimulator()) {
+                            if (!checkSimulator() && !hasClearBadgeCount) {
                                 cordova.plugins.notification.badge.set(count);
                             }
                             if (count > 0) {
@@ -173,7 +191,7 @@ app.factory("notificationDataService", [
                             else {
                                 $('#inboxMessageCount').hide();
                             }
-                        }
+                        
                         return true;
                     }
 
@@ -238,6 +256,9 @@ app.factory("notificationDataService", [
                     notificationDataServiceFactory.updateClearBadgeCountStatus = updateClearBadgeCountStatus;
 
                     notificationDataServiceFactory.getClearBadgeCountStatus = getClearBadgeCountStatus;
+
+                    notificationDataServiceFactory.updateMessageStatusWithMarkAll = updateMessageStatusWithMarkAll;
+                    
                
                     return notificationDataServiceFactory;
                 }
