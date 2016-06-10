@@ -326,6 +326,9 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                     $('.pushMessage').attr('data-status', 104);
                     $('.ck-title-setting').removeClass('km-bold-font');
                     $('.push-date').removeClass('km-bold-font');
+                    angular.forEach($scope.notifications, function (value, key) {
+                                value["Status"] = 104;
+                    });
                 }
                 if (status == 105) {
                     $scope.notifications = {};
