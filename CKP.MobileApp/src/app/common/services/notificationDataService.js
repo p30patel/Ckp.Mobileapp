@@ -202,11 +202,9 @@ app.factory("notificationDataService", [
                         if (userProfileData) {
                             userProfileData.HasClearBadgeCount = status;
                             localStorageService.set('user-profile', userProfileData);
-                            if (status)
-                            {
-                              
+                           
                                 getUnReadMessageCount();
-                            }
+                           
                             
                             var organizationDetail = localStorageService.get('organizationDetail');
                             if (typeof (window.navigator.simulator) === 'undefined') {
