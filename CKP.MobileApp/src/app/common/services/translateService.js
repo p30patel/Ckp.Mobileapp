@@ -152,7 +152,8 @@ app.factory('translateService',
         var getVersion = function (cultureName, rowVersion, resouceList, refereshPeriod, hasUpdate) {
 
             var versions = JSON.parse(localStorage.getItem('versions')) || [];
-            var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days
+            //var persistTime = 1000 * 60 * 1440;    // Expiration in milliseconds; set to null to never  // curent is 1 days
+            var persistTime = 1000 * 60 * 180;    // Expiration in milliseconds; set to null to never  // curent is 3 hours 
             var data = {
                 "CultureName": cultureName,
                 "RowVersion": '',
