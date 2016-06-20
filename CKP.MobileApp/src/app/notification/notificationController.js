@@ -19,7 +19,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     };
     $scope.message = "";
     $scope.notifications = [];
-    $scope.cleaBadgeCountStatus = false;
+    $scope.clearBadgeCountStatus = false;
     $scope.afterShow = function (e) {
 
         var view = kendo.mobile.application.view();
@@ -141,7 +141,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     getNotifications();
 
     var setClearBadgeCount = function () {
-        $scope.cleaBadgeCountStatus = notificationDataService.getClearBadgeCountStatus();
+        $scope.clearBadgeCountStatus = notificationDataService.getClearBadgeCountStatus();
     }
 
     $scope.onChangeClearBadgeCount = function (e) {
