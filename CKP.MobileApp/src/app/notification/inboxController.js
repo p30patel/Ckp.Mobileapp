@@ -24,7 +24,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     $scope.PageSize = 20;
     $scope.CurrentPage = 1;
     $scope.hasNext = false;
-
+    $scope.unReadMessageCount = 0;
     $scope.total = 0;
     $scope.afterShow = function (e) {
 
@@ -141,8 +141,13 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
     }
     getInboxMessages(false);
     
-    var updateUnReadMessageCount = function() {
-        notificationDataService.getUnReadMessageCount();
+    var updateUnReadMessageCount = function () {
+        
+        notificationDataService.getUnReadMessageCount().then(function (result) {
+            $scope.unReadMessageCount = result;
+        }).catch(function (error) {
+            $scope.unReadMessageCount = 0;
+        });
     }
     updateUnReadMessageCount();
 
@@ -329,6 +334,7 @@ function ($scope, $http, $sce, translateService, authService, notificationDataSe
                     angular.forEach($scope.notifications, function (value, key) {
                                 value["Status"] = 104;
                     });
+                    $scope.unReadMessageCount = 0;
                 }
                 if (status == 105) {
                     $scope.notifications = {};

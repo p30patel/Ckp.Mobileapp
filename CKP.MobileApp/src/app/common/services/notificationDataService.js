@@ -183,6 +183,8 @@ app.factory("notificationDataService", [
                             }
                             if (!checkSimulator() && !hasClearBadgeCount) {
                                 cordova.plugins.notification.badge.set(count);
+                                count = count > 0 ? count : 0;
+                                el.push.setBadgeNumber(count);
                             }
                             if (count > 0) {
                                 $('#inboxMessageCount').show();

@@ -41,7 +41,7 @@
             <tr>
                 <td>
                     <i></i>
-                    <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="markAllAsRead()">{{form.markAllAsRead.resoruceValue}}</kendo-mobile-button>
+                    <kendo-mobile-button class="km-secondary ck-btn-left" ng-click="markAllAsRead()" ng-disabled='unReadMessageCount == 0'>{{form.markAllAsRead.resoruceValue}}</kendo-mobile-button>
                     <i></i>
                     <kendo-mobile-button class="km-primary ck-btn-right" ng-click="markAllAsDelete()">{{form.markAllAsDelete.resoruceValue}}</kendo-mobile-button>
                 </td>
