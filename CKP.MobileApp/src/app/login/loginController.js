@@ -422,9 +422,12 @@ function ($scope, $http, authService, translateService, localStorageService, log
                    },
                    function (err) {
                        kendo.mobile.application.hideLoading();
-                       $scope.passwordHint = typeof (err.error_description) === 'undefined' ? $scope.form.errorWhileLogin.resoruceValue : "<b>" + err.error_description + "</b>";;
-                       $timeout(function () {
-                           $scope.passwordHint = "";
+                       $scope.passwordHint = typeof (err.error_description) === 'undefined' ? $scope.form.errorWhileLogin.resoruceValue : "<b>" + err.error_description + "</b>";
+                       if (typeof (window.navigator.simulator) === 'undefined') {
+                           window.plugins.EqatecAnalytics.Monitor.TrackFeature("login.username." + userName + '.error.' + err.error_description);
+                       }
+                       $timeout(function () {                          
+                           $scope.passwordHint = "";                        
                        }, 7000);
                    }
                    );
