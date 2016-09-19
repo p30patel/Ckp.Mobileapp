@@ -11,13 +11,13 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "true",
-  "BundleVersion": "0.1.1",
+  "BundleVersion": "1.8.4",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "55",
+  "AndroidVersionCode": "59",
   "FrameworkVersion": "4.0.0",
   "CorePlugins": [
     "com.telerik.plugin.telerikanalytics@3.4.1",

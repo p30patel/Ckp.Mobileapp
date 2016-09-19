@@ -74,6 +74,9 @@ function ($scope, authService, orderDataService, $sce, translateService, feedbac
     $scope.form.totalQuantity.resourceName = "Total Quantity";
     $scope.form.totalQuantity.resourceValue = translateService.getResourceValue($scope.form.totalQuantity.resourceName);
 
+ 
+
+
     $scope.orderLineDetail = {};
 
     $scope.retailerId = 0;

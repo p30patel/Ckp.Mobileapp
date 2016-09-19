@@ -84,6 +84,10 @@ app.controller('orderlistController', [
                        $scope.form.confirmation.resoruceName = "Order Confirmation";
                        $scope.form.confirmation.resoruceValue = translateService.getResourceValue($scope.form.confirmation.resoruceName);
 
+                       $scope.form.rushComment = {};
+                       $scope.form.rushComment.resoruceName = "Rush Comment";
+                       $scope.form.rushComment.resoruceValue = translateService.getResourceValue($scope.form.rushComment.resoruceName);
+
                        if (!$rootScope.hasBackButtonList) {
 
                            $scope.order = {};
